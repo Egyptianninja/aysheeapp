@@ -22,7 +22,7 @@ import notificationSub from '../../../graphql/mutation/notificationSub';
 
 import { Input, Button, Group, CheckBox, Title } from '../../../lib';
 
-import MessageModal from '../../../componenets/MessageModal';
+import {MessageModal} from "../../../componenets";
 import { getPureNumber } from '../../../utils/call';
 const { width } = Dimensions.get('window');
 

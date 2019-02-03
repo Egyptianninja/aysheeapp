@@ -5,8 +5,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
-  StyleSheet,
-  Share
+  StyleSheet
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -40,7 +39,7 @@ export default class Menu extends React.Component<any, any> {
           key={da.id}
           toggleModal={this.toggleModal}
           toggleReportModal={this.toggleReportModal}
-          favoritePost={this.props.favoritePost}
+          unFavoritePost={this.props.unFavoritePost}
           width={width}
           itemData={da}
           {...this.props}
@@ -73,11 +72,15 @@ export default class Menu extends React.Component<any, any> {
         <TouchableOpacity
           onPress={() => this.toggleModal()}
           style={{
-            paddingHorizontal: 10,
-            marginLeft: 30
+            position: 'absolute',
+            left: post.imageWidth - 40,
+            paddingHorizontal: 5,
+            paddingLeft: isrtl ? undefined : 15,
+            paddingRight: isrtl ? 15 : undefined,
+            zIndex: 100
           }}
         >
-          <Ionicons name="md-more" size={32} color="#6FA7D5" />
+          <Ionicons name="md-more" size={26} color="#aaa" />
         </TouchableOpacity>
 
         <Modal
@@ -102,7 +105,7 @@ export default class Menu extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <ScrollView>{this.renderOptions(word.itemmenu)}</ScrollView>
+            <ScrollView>{this.renderOptions(word.favmenu)}</ScrollView>
           </View>
         </Modal>
         <Modal
@@ -153,7 +156,8 @@ export default class Menu extends React.Component<any, any> {
                   <InputPhone
                     rtl={lang === 'ar' ? true : false}
                     name="body"
-                    label={word.body}
+                    // label={word.body}
+                    label="Note"
                     value={values.body}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -172,7 +176,8 @@ export default class Menu extends React.Component<any, any> {
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
-                    title={word.submit}
+                    title="Submit"
+                    // title={word.submit}
                     onPress={handleSubmit}
                     disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
@@ -192,15 +197,15 @@ const Option = ({
   toggleModal,
   toggleReportModal,
   lang,
-  favoritePost,
+  unFavoritePost,
   post
 }: any) => {
   return (
     <TouchableOpacity
       onPress={async () => {
         if (itemData.id === 1) {
-          favoritePost({
-            variables: { postId: post.id }
+          unFavoritePost({
+            variables: { postId: post._id }
           });
           toggleModal();
         } else if (itemData.id === 2) {

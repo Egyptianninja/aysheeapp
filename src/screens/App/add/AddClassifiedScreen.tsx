@@ -31,7 +31,7 @@ import {
   Title
 } from '../../../lib';
 
-import MessageModal from '../../../componenets/MessageModal';
+import {MessageModal} from "../../../componenets";
 const { width } = Dimensions.get('window');
 
 class AddClassifiedScreen extends React.Component<any, any> {

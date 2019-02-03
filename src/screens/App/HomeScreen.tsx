@@ -28,7 +28,7 @@ import {
 
 import { Loading, CategoriesScroll, ItemView } from '../../componenets';
 
-import FloatButton from '../../lib/elements/FloatButton';
+import { FloatButton } from '../../lib';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 

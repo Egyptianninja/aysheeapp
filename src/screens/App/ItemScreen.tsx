@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Query, graphql } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
-import KeyboardSpacer from '../../lib/elements/KeyboardSpacer';
+import {KeyboardSpacer} from '../../lib';
 import secrets from '../../constants/secrets';
 import { connect } from 'react-redux';
 import {

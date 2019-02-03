@@ -13,8 +13,11 @@ import {
   CountDownTimer,
   InputCode,
   InputName,
-  Message
-} from "./elements";
+  Message,
+  AutoInput,
+  FloatButton,
+  KeyboardSpacer
+} from './elements';
 export {
   Button,
   Input,
@@ -30,5 +33,8 @@ export {
   CountDownTimer,
   InputCode,
   InputName,
-  Message
+  Message,
+  AutoInput,
+  FloatButton,
+  KeyboardSpacer
 };

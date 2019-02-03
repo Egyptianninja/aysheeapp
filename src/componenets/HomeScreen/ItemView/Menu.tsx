@@ -11,8 +11,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Modal from "react-native-modal";
 import { Ionicons } from "@expo/vector-icons";
-import Input from "../../../lib/elements/InputPhone";
-import { Button } from "../../../lib";
+import { Button, InputPhone } from "../../../lib";
 import { onShare } from "../../../utils";
 
 const { width } = Dimensions.get("window");
@@ -154,7 +153,7 @@ export default class Menu extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Input
+                  <InputPhone
                     rtl={lang === "ar" ? true : false}
                     name="body"
                     label={word.body}

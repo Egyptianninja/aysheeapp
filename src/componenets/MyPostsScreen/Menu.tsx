@@ -11,9 +11,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
-import { InputPhone } from '../../lib/elements';
-import { Button } from '../../lib';
-import { onShare } from '../../utils';
+import { getLocation } from '../../utils';
+import { Button, InputPhone } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
@@ -22,15 +21,19 @@ export default class Menu extends React.Component<any, any> {
     super(props);
     this.state = {
       isModalVisible: false,
-      isReportModalVisible: false
+      isEditModalVisible: false,
+      isPriceModalVisible: false
     };
   }
 
   toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
-  toggleReportModal = () => {
-    this.setState({ isReportModalVisible: !this.state.isReportModalVisible });
+  toggleEditModal = () => {
+    this.setState({ isEditModalVisible: !this.state.isEditModalVisible });
+  };
+  togglePriceModal = () => {
+    this.setState({ isPriceModalVisible: !this.state.isPriceModalVisible });
   };
 
   renderOptions = (data: any) => {
@@ -39,8 +42,8 @@ export default class Menu extends React.Component<any, any> {
         <Option
           key={da.id}
           toggleModal={this.toggleModal}
-          toggleReportModal={this.toggleReportModal}
-          unFavoritePost={this.props.unFavoritePost}
+          toggleEditModal={this.toggleEditModal}
+          togglePriceModal={this.togglePriceModal}
           width={width}
           itemData={da}
           {...this.props}
@@ -50,20 +53,34 @@ export default class Menu extends React.Component<any, any> {
   };
 
   handleSubmit = async (values: any, bag: any) => {
-    this.toggleReportModal();
-    // const res = await this.props.editClassifieds({
-    //   variables: {
-    //     postId: this.props.post.id,
-    //     phone: values.phone
-    //   }
-    // });
-    // if (res.data.updatePost.ok) {
-    //   this.toggleReportModal();
-    // }
-    // if (!res.data.updatePost.ok) {
-    //   bag.setErrors({ title: res.data.updatePost.error });
-    // }
-    // bag.setSubmitting(false);
+    const res = await this.props.editClassifieds({
+      variables: {
+        postId: this.props.post.id,
+        phone: values.phone
+      }
+    });
+    if (res.data.updatePost.ok) {
+      this.toggleEditModal();
+    }
+    if (!res.data.updatePost.ok) {
+      bag.setErrors({ title: res.data.updatePost.error });
+    }
+    bag.setSubmitting(false);
+  };
+  handlePriceSubmit = async (values: any, bag: any) => {
+    const res = await this.props.editClassifieds({
+      variables: {
+        postId: this.props.post.id,
+        price: Number(values.price)
+      }
+    });
+    if (res.data.updatePost.ok) {
+      this.togglePriceModal();
+    }
+    if (!res.data.updatePost.ok) {
+      bag.setErrors({ title: res.data.updatePost.error });
+    }
+    bag.setSubmitting(false);
   };
 
   render() {
@@ -106,12 +123,12 @@ export default class Menu extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <ScrollView>{this.renderOptions(word.favmenu)}</ScrollView>
+            <ScrollView>{this.renderOptions(word.postmenu)}</ScrollView>
           </View>
         </Modal>
         <Modal
-          isVisible={this.state.isReportModalVisible}
-          onBackdropPress={() => this.setState({ isReportModalVisible: false })}
+          isVisible={this.state.isEditModalVisible}
+          onBackdropPress={() => this.setState({ isEditModalVisible: false })}
           backdropOpacity={0.2}
           useNativeDriver={true}
           animationIn="zoomInDown"
@@ -135,12 +152,12 @@ export default class Menu extends React.Component<any, any> {
           >
             <Formik
               initialValues={{
-                body: ''
+                phone: post.phone
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
-                body: Yup.string()
-                  .max(200)
+                phone: Yup.string()
+                  .max(25)
                   .required('Required')
               })}
               render={({
@@ -156,20 +173,18 @@ export default class Menu extends React.Component<any, any> {
                 <React.Fragment>
                   <InputPhone
                     rtl={lang === 'ar' ? true : false}
-                    name="body"
-                    // label={word.body}
-                    label="Note"
-                    value={values.body}
+                    num
+                    name="phone"
+                    label={word.phone}
+                    value={values.phone}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
                     outerStyle={styles.outerStyle}
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
-                    error={touched.body && errors.body}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    multiline={true}
-                    height={100}
+                    error={touched.phone && errors.phone}
+                    keyboardType="number-pad"
+                    height={40}
                   />
 
                   <Button
@@ -177,8 +192,83 @@ export default class Menu extends React.Component<any, any> {
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
-                    title="Submit"
-                    // title={word.submit}
+                    title={word.submit}
+                    onPress={handleSubmit}
+                    disabled={!isValid || isSubmitting}
+                    loading={isSubmitting}
+                  />
+                </React.Fragment>
+              )}
+            />
+          </View>
+        </Modal>
+        <Modal
+          isVisible={this.state.isPriceModalVisible}
+          onBackdropPress={() => this.setState({ isPriceModalVisible: false })}
+          backdropOpacity={0.2}
+          useNativeDriver={true}
+          animationIn="zoomInDown"
+          animationOut="zoomOutUp"
+          hideModalContentWhileAnimating={true}
+          style={{ flex: 1 }}
+        >
+          <View
+            style={{
+              backgroundColor: '#fff',
+              borderRadius: 10,
+              position: 'absolute',
+              bottom: 0,
+              margin: 0,
+              height: 350,
+              paddingTop: 10,
+              width: width - 40,
+              justifyContent: 'space-around',
+              alignItems: 'center'
+            }}
+          >
+            <Formik
+              initialValues={{
+                price: post.price.toString()
+              }}
+              onSubmit={this.handlePriceSubmit}
+              validationSchema={Yup.object().shape({
+                price: Yup.number()
+                  .positive('price must be number')
+                  .required('Required')
+              })}
+              render={({
+                values,
+                handleSubmit,
+                setFieldValue,
+                errors,
+                touched,
+                setFieldTouched,
+                isValid,
+                isSubmitting
+              }: any) => (
+                <React.Fragment>
+                  <InputPhone
+                    rtl={lang === 'ar' ? true : false}
+                    num
+                    name="price"
+                    label={word.price}
+                    value={values.price}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.price && errors.price}
+                    keyboardType="number-pad"
+                    height={40}
+                  />
+
+                  <Button
+                    lang={lang}
+                    background="#272727"
+                    style={styles.btnStyle}
+                    textStyle={styles.btnTextStyle}
+                    title={word.submit}
                     onPress={handleSubmit}
                     disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
@@ -196,32 +286,72 @@ export default class Menu extends React.Component<any, any> {
 const Option = ({
   itemData,
   toggleModal,
-  toggleReportModal,
+  toggleEditModal,
+  togglePriceModal,
   lang,
-  unFavoritePost,
-  post
+  editClassifieds,
+  post,
+  deletePost
 }: any) => {
   return (
     <TouchableOpacity
       onPress={async () => {
         if (itemData.id === 1) {
-          unFavoritePost({
-            variables: { postId: post._id }
-          });
+          if (post.updates) {
+            editClassifieds({
+              variables: {
+                postId: post.id,
+                updates: post.updates + 1
+              }
+            });
+          } else {
+            editClassifieds({
+              variables: {
+                postId: post.id,
+                updates: 1
+              }
+            });
+          }
+
           toggleModal();
         } else if (itemData.id === 2) {
-          const message = `
-          ${post.title}
-
-          ${post.body}
-
-          ${post.price}`;
-          onShare(message, toggleModal);
+          editClassifieds({
+            variables: {
+              postId: post.id,
+              islive: !post.islive
+            }
+          });
+          toggleModal();
         } else if (itemData.id === 3) {
+          const location: any = await getLocation();
+          const trueLocation = {
+            lat: location.coords.latitude.toFixed(6),
+            lon: location.coords.longitude.toFixed(6)
+          };
+          editClassifieds({
+            variables: {
+              postId: post.id,
+              trueLocation
+            }
+          });
+          toggleModal();
+        } else if (itemData.id === 4) {
           toggleModal();
           setTimeout(() => {
-            toggleReportModal();
+            toggleEditModal();
           }, 500);
+        } else if (itemData.id === 5) {
+          toggleModal();
+          setTimeout(() => {
+            togglePriceModal();
+          }, 500);
+        } else if (itemData.id === 6) {
+          deletePost({
+            variables: {
+              postId: post.id
+            }
+          });
+          toggleModal();
         }
       }}
       style={{

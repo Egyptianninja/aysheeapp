@@ -4,8 +4,7 @@ import { Query } from 'react-apollo';
 import { debounce } from 'lodash';
 import getMyNotifications from '../../graphql/query/getMyNotifications';
 import { getDBNextPosts } from '../../utils';
-import { NotificationItem } from '../../componenets';
-import Loading from '../../lib/elements/Loading';
+import { NotificationItem, Loading } from '../../componenets';
 import { connect } from 'react-redux';
 
 class NotificationsScreen extends React.Component<any, any> {
