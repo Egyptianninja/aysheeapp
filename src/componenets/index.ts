@@ -1,4 +1,4 @@
-import { AvatarPhone, AvatarName, Avatar } from './avatar';
+import { AvatarPhone, AvatarName, Avatar } from './Avatar';
 import ChoiseCategory from './ChoiseScreen/ChoiseCategory';
 import Drawer from './Drawer';
 import Loading from './Loading';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { StyleSheet, isArabic, since } from '../../../utils';
-import { AvatarPhone } from '../../avatar';
+import { AvatarPhone } from '../../Avatar';
 export default class MessageBubble extends React.Component<any, any> {
   render() {
     const { message, lang, width } = this.props;

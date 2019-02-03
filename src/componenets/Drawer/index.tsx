@@ -26,7 +26,7 @@ import logoutFromAll from '../../graphql/mutation/logoutFromAll';
 import { StyleSheet, pickImage } from '../../utils';
 import secrets from '../../constants/secrets';
 import { icons } from '../../load';
-import { Avatar } from '../avatar';
+import { Avatar } from '../Avatar';
 
 class Drawer extends React.Component<any, any> {
   state = {
