@@ -1,8 +1,8 @@
-import * as React from "react";
-import { View, Text, TouchableWithoutFeedback } from "react-native";
-import { StyleSheet } from "../../../utils";
-import { PostImage } from "./PostImage";
-import Menu from "./Menu";
+import * as React from 'react';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet } from '../../utils';
+import { PostImage } from './PostImage';
+import Menu from './Menu';
 
 const ItemView = (props: any) => {
   const {
@@ -28,8 +28,8 @@ const ItemView = (props: any) => {
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
         marginVertical: 1
       }}
     >
@@ -53,7 +53,7 @@ const ItemView = (props: any) => {
                   {
                     width: imageWidth - 2,
                     height: imageHeight,
-                    backgroundColor: "#eee"
+                    backgroundColor: '#eee'
                   }
                 ]}
               >
@@ -73,20 +73,20 @@ const ItemView = (props: any) => {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: "row",
-                    justifyContent: "space-between"
+                    flexDirection: 'row',
+                    justifyContent: 'space-between'
                   }}
                 >
                   {(price || price === 0) && (
                     <Text
                       style={{
-                        color: "#26A65B",
-                        fontWeight: "bold",
+                        color: '#26A65B',
+                        fontWeight: 'bold',
                         opacity: 0.9,
                         fontSize: 14
                       }}
                     >
-                      {currency} {price.toLocaleString("en")}
+                      {currency} {price.toLocaleString('en')}
                     </Text>
                   )}
                   {!price && price !== 0 && (
@@ -95,7 +95,7 @@ const ItemView = (props: any) => {
                   <Text
                     style={{
                       fontSize: 10,
-                      color: "#ababab"
+                      color: '#ababab'
                     }}
                   >
                     {time}
@@ -104,8 +104,8 @@ const ItemView = (props: any) => {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: isrtl ? "row-reverse" : "row",
-                    justifyContent: "space-between"
+                    flexDirection: isrtl ? 'row-reverse' : 'row',
+                    justifyContent: 'space-between'
                   }}
                 >
                   <Text
@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderRadius: 7,
     borderWidth: 1,
-    borderColor: "#e5e5e5"
+    borderColor: '#e5e5e5'
   },
   center: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

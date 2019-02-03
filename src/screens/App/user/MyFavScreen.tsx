@@ -1,14 +1,13 @@
-import * as React from "react";
-import { View } from "react-native";
-import { connect } from "react-redux";
-import { Query, graphql } from "react-apollo";
-import MasonryList from "@appandflow/masonry-list";
-import { debounce } from "lodash";
-import getMyFavoritePosts from "../../../graphql/query/getMyFavoritePosts";
-import { getDBNextPosts, readyUserPosts } from "../../../utils";
-import Loading from "../../../componenets/UserFavScreen/Loading";
-import Item from "../../../componenets/UserFavScreen/ItemFavView";
-import unFavoritePost from "../../../graphql/mutation/unFavoritePost";
+import * as React from 'react';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { Query, graphql } from 'react-apollo';
+import MasonryList from '@appandflow/masonry-list';
+import { debounce } from 'lodash';
+import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
+import { getDBNextPosts, readyUserPosts } from '../../../utils';
+import { ItemFavView, Loading } from '../../../componenets';
+import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
 
 class UserFavScreen extends React.Component<any, any> {
   flatListRef: any;
@@ -23,14 +22,14 @@ class UserFavScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate("ItemScreen", { post, word, lang });
+    this.props.navigation.navigate('ItemScreen', { post, word, lang });
   };
 
   render() {
     const { theme, lang, words } = this.props;
     const itemColors = theme.color.item;
     return (
-      <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Query
           query={getMyFavoritePosts}
           variables={{ cursor: 0 }}
@@ -54,14 +53,14 @@ class UserFavScreen extends React.Component<any, any> {
                 onEndReached={() =>
                   this.getDBNextPosts(
                     fetchMore,
-                    "getMyFavoritePosts",
+                    'getMyFavoritePosts',
                     rPosts.length
                   )
                 }
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <Item
+                  <ItemFavView
                     color={itemColors}
                     post={item}
                     unFavoritePost={this.props.unFavoritePost}
@@ -96,6 +95,6 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps)(
   graphql(unFavoritePost, {
-    name: "unFavoritePost"
+    name: 'unFavoritePost'
   })(UserFavScreen)
 );

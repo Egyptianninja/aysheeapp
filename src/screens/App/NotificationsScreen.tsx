@@ -1,12 +1,12 @@
-import * as React from "react";
-import { View, FlatList } from "react-native";
-import { Query } from "react-apollo";
-import { debounce } from "lodash";
-import getMyNotifications from "../../graphql/query/getMyNotifications";
-import { getDBNextPosts } from "../../utils";
-import Item from "../../componenets/NotificationScreen/item";
-import Loading from "../../lib/elements/Loading";
-import { connect } from "react-redux";
+import * as React from 'react';
+import { View, FlatList } from 'react-native';
+import { Query } from 'react-apollo';
+import { debounce } from 'lodash';
+import getMyNotifications from '../../graphql/query/getMyNotifications';
+import { getDBNextPosts } from '../../utils';
+import { NotificationItem } from '../../componenets';
+import Loading from '../../lib/elements/Loading';
+import { connect } from 'react-redux';
 
 class NotificationsScreen extends React.Component<any, any> {
   flatListRef: any;
@@ -46,14 +46,14 @@ class NotificationsScreen extends React.Component<any, any> {
                   onEndReached={() =>
                     this.getDBNextPosts(
                       fetchMore,
-                      "getMyNotifications",
+                      'getMyNotifications',
                       notis.length
                     )
                   }
                   refreshing={this.state.refreshing}
                   data={notis}
                   renderItem={({ item }: any) => (
-                    <Item
+                    <NotificationItem
                       navigation={this.props.navigation}
                       item={item}
                       lang={lang}

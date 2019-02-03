@@ -1,15 +1,14 @@
-import * as React from "react";
-import { View } from "react-native";
-import { connect } from "react-redux";
-import { Query, graphql } from "react-apollo";
-import MasonryList from "@appandflow/masonry-list";
-import { debounce } from "lodash";
-import getMyPosts from "../../../graphql/query/getMyPosts";
-import { getNextPosts, readyUserPosts } from "../../../utils";
-import Loading from "../../../componenets/UserPostsScreen/Loading";
-import Item from "../../../componenets/UserPostsScreen/ItemOwnerView";
-import editClassifieds from "../../../graphql/mutation/editClassifieds";
-import deletePost from "../../../graphql/mutation/deletePost";
+import * as React from 'react';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { Query, graphql } from 'react-apollo';
+import MasonryList from '@appandflow/masonry-list';
+import { debounce } from 'lodash';
+import getMyPosts from '../../../graphql/query/getMyPosts';
+import { getNextPosts, readyUserPosts } from '../../../utils';
+import { ItemOwnerView, Loading } from '../../../componenets';
+import editClassifieds from '../../../graphql/mutation/editClassifieds';
+import deletePost from '../../../graphql/mutation/deletePost';
 
 class UserPostsScreen extends React.Component<any, any> {
   flatListRef: any;
@@ -23,14 +22,14 @@ class UserPostsScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate("ItemScreen", { post, word, lang });
+    this.props.navigation.navigate('ItemScreen', { post, word, lang });
   };
 
   render() {
     const { theme, lang, words } = this.props;
     const itemColors = theme.color.item;
     return (
-      <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Query query={getMyPosts} fetchPolicy="network-only">
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
@@ -48,12 +47,12 @@ class UserPostsScreen extends React.Component<any, any> {
                 }}
                 onRefresh={() => refetch()}
                 onEndReached={() =>
-                  this.getNextPosts(data, fetchMore, "getMyPosts")
+                  this.getNextPosts(data, fetchMore, 'getMyPosts')
                 }
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <Item
+                  <ItemOwnerView
                     color={itemColors}
                     post={item}
                     navigation={this.props.navigation}
@@ -89,10 +88,10 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps)(
   graphql(editClassifieds, {
-    name: "editClassifieds"
+    name: 'editClassifieds'
   })(
     graphql(deletePost, {
-      name: "deletePost"
+      name: 'deletePost'
     })(UserPostsScreen)
   )
 );

@@ -1,5 +1,4 @@
-import CategoriesScroll from "./CategoriesScroll";
-import Loading from "./Loading";
-import ItemView from "./ItemView";
+import CategoriesScroll from './CategoriesScroll';
+import ItemView from './ItemView';
 
-export { CategoriesScroll, Loading, ItemView };
+export { CategoriesScroll, ItemView };

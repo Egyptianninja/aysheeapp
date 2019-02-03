@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   Text,
@@ -9,21 +9,21 @@ import {
   AsyncStorage,
   ScrollView,
   KeyboardAvoidingView
-} from "react-native";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { graphql } from "react-apollo";
-import { Permissions } from "expo";
-import { StyleSheet, pickImage, Avatar, parseJwt } from "../../../utils";
-import addHeaderPhoto from "../../../graphql/mutation/addHeaderPhoto";
-import updateProfile from "../../../graphql/mutation/updateProfile";
-import addAvatar from "../../../graphql/mutation/addAvatar";
-import { updateUser } from "../../../store/actions/userAtions";
-import { Ionicons } from "@expo/vector-icons";
-import { Input, Button } from "../../../lib";
-import { Formik } from "formik";
-
-const { width } = Dimensions.get("window");
+} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { graphql } from 'react-apollo';
+import { Permissions } from 'expo';
+import { StyleSheet, pickImage, parseJwt } from '../../../utils';
+import addHeaderPhoto from '../../../graphql/mutation/addHeaderPhoto';
+import updateProfile from '../../../graphql/mutation/updateProfile';
+import addAvatar from '../../../graphql/mutation/addAvatar';
+import { updateUser } from '../../../store/actions/userAtions';
+import { Ionicons } from '@expo/vector-icons';
+import { Input, Button } from '../../../lib';
+import { Formik } from 'formik';
+import { Avatar } from '../../../componenets';
+const { width } = Dimensions.get('window');
 
 class ProfileScreen extends React.Component<any, any> {
   static navigationOptions = {
@@ -32,7 +32,7 @@ class ProfileScreen extends React.Component<any, any> {
   tokenData: any;
 
   async componentDidMount() {
-    const token = await AsyncStorage.getItem("aysheetoken");
+    const token = await AsyncStorage.getItem('aysheetoken');
     this.tokenData = parseJwt(token);
   }
 
@@ -40,11 +40,11 @@ class ProfileScreen extends React.Component<any, any> {
     const permissions = Permissions.CAMERA_ROLL;
     const { status: existingStatus } = await Permissions.getAsync(permissions);
     let finalStatus = existingStatus;
-    if (finalStatus !== "granted") {
+    if (finalStatus !== 'granted') {
       const { status } = await Permissions.askAsync(permissions);
       finalStatus = status;
     }
-    if (finalStatus !== "granted") {
+    if (finalStatus !== 'granted') {
       return;
     }
 
@@ -60,7 +60,7 @@ class ProfileScreen extends React.Component<any, any> {
         return true;
       }
       if (!res.data.addHeaderPhoto.ok) {
-        console.log("Error", res.data.addHeaderPhoto.error);
+        console.log('Error', res.data.addHeaderPhoto.error);
         return false;
       }
     }
@@ -97,16 +97,16 @@ class ProfileScreen extends React.Component<any, any> {
       ? `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
           userData.avatar
         }`
-      : "https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png";
+      : 'https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png';
     const { lang, words } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <View style={[styles.container, { zIndex: 10 }]}>
           <TouchableOpacity
             style={{
-              position: "absolute",
-              right: lang === "ar" ? undefined : 20,
-              left: lang === "ar" ? 20 : undefined,
+              position: 'absolute',
+              right: lang === 'ar' ? undefined : 20,
+              left: lang === 'ar' ? 20 : undefined,
               top: 140,
               zIndex: 200
             }}
@@ -122,7 +122,7 @@ class ProfileScreen extends React.Component<any, any> {
                   this.props.updateUser({ avatar });
                 }
                 if (!res.data.addAvatar.ok) {
-                  console.log("Error", res.data.addAvatar.error);
+                  console.log('Error', res.data.addAvatar.error);
                 }
               }
             }}
@@ -142,7 +142,7 @@ class ProfileScreen extends React.Component<any, any> {
           {!userData.headerPhoto && (
             <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
               <View
-                style={{ width, height: 175, backgroundColor: "#6FA7D5" }}
+                style={{ width, height: 175, backgroundColor: '#6FA7D5' }}
               />
             </TouchableWithoutFeedback>
           )}
@@ -154,12 +154,12 @@ class ProfileScreen extends React.Component<any, any> {
                   flex: 1,
                   width,
                   height: 175,
-                  resizeMode: "cover"
+                  resizeMode: 'cover'
                 }}
               />
             </TouchableWithoutFeedback>
           )}
-          <View style={{ position: "absolute", left: 20, top: 40 }}>
+          <View style={{ position: 'absolute', left: 20, top: 40 }}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
               <Ionicons
                 name="ios-arrow-back"
@@ -169,12 +169,12 @@ class ProfileScreen extends React.Component<any, any> {
               />
             </TouchableOpacity>
           </View>
-          <View style={{ position: "absolute", alignSelf: "center", top: 75 }}>
+          <View style={{ position: 'absolute', alignSelf: 'center', top: 75 }}>
             {!userData.name && (
               <Text
                 style={{
-                  fontFamily: "cairo-regular",
-                  color: "#fff",
+                  fontFamily: 'cairo-regular',
+                  color: '#fff',
                   fontSize: 22
                 }}
               >
@@ -184,8 +184,8 @@ class ProfileScreen extends React.Component<any, any> {
             {userData.name && (
               <Text
                 style={{
-                  fontFamily: "cairo-regular",
-                  color: "#fff",
+                  fontFamily: 'cairo-regular',
+                  color: '#fff',
                   fontSize: 22
                 }}
               >
@@ -218,13 +218,13 @@ class ProfileScreen extends React.Component<any, any> {
                 <View
                   style={{
                     flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     marginTop: 40
                   }}
                 >
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="name"
                     label={words.name}
                     value={values.name}
@@ -239,7 +239,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="about"
                     label={words.about}
                     value={values.about}
@@ -255,7 +255,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={100}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="country"
                     label={words.country}
                     value={values.country}
@@ -270,7 +270,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="city"
                     label={words.city}
                     value={values.city}
@@ -285,7 +285,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="email"
                     label={words.email}
                     value={values.email}
@@ -300,7 +300,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="website"
                     label={words.website}
                     value={values.website}
@@ -356,13 +356,13 @@ export default connect(
   mapDispatchToProps
 )(
   graphql(addHeaderPhoto, {
-    name: "addHeaderPhoto"
+    name: 'addHeaderPhoto'
   })(
     graphql(updateProfile, {
-      name: "updateProfile"
+      name: 'updateProfile'
     })(
       graphql(addAvatar, {
-        name: "addAvatar"
+        name: 'addAvatar'
       })(ProfileScreen)
     )
   )
@@ -372,38 +372,38 @@ const styles = StyleSheet.create({
   container: {
     height: 175,
     width,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   image: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover"
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover'
   },
 
   button: {
     marginTop: 20,
-    width: "100%"
+    width: '100%'
   },
   outerStyle: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginVertical: 5
   },
   innerStyle: {
     width: width - 40,
     paddingHorizontal: 10,
-    backgroundColor: "#fff",
-    writingDirection: "auto",
+    backgroundColor: '#fff',
+    writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 5,
     zIndex: 1
   },
   labelStyle: {
-    color: "#6FA7D5",
+    color: '#6FA7D5',
     fontSize: 18,
     padding: 5
   },
@@ -411,14 +411,14 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 40,
     width: 120,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: 20,
     borderRadius: 5
   },
   btnTextStyle: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 20,
-    fontFamily: "cairo-regular"
+    fontFamily: 'cairo-regular'
   }
 });

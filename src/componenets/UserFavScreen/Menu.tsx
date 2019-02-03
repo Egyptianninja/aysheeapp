@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   Text,
@@ -6,16 +6,16 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet
-} from "react-native";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import Modal from "react-native-modal";
-import { Ionicons } from "@expo/vector-icons";
-import Input from "../../../lib/elements/InputPhone";
-import { Button } from "../../../lib";
-import { onShare } from "../../../utils";
+} from 'react-native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
+import { InputPhone } from '../../lib/elements';
+import { Button } from '../../lib';
+import { onShare } from '../../utils';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 export default class Menu extends React.Component<any, any> {
   constructor(props: any) {
@@ -73,7 +73,7 @@ export default class Menu extends React.Component<any, any> {
         <TouchableOpacity
           onPress={() => this.toggleModal()}
           style={{
-            position: "absolute",
+            position: 'absolute',
             left: post.imageWidth - 40,
             paddingHorizontal: 5,
             paddingLeft: isrtl ? undefined : 15,
@@ -94,16 +94,16 @@ export default class Menu extends React.Component<any, any> {
         >
           <View
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               borderRadius: 10,
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               margin: 0,
               height: 350,
               paddingTop: 10,
               width: width - 40,
-              justifyContent: "space-around",
-              alignItems: "center"
+              justifyContent: 'space-around',
+              alignItems: 'center'
             }}
           >
             <ScrollView>{this.renderOptions(word.favmenu)}</ScrollView>
@@ -121,27 +121,27 @@ export default class Menu extends React.Component<any, any> {
         >
           <View
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               borderRadius: 10,
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               margin: 0,
               height: 350,
               paddingTop: 10,
               width: width - 40,
-              justifyContent: "space-around",
-              alignItems: "center"
+              justifyContent: 'space-around',
+              alignItems: 'center'
             }}
           >
             <Formik
               initialValues={{
-                body: ""
+                body: ''
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
                 body: Yup.string()
                   .max(200)
-                  .required("Required")
+                  .required('Required')
               })}
               render={({
                 values,
@@ -154,8 +154,8 @@ export default class Menu extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Input
-                    rtl={lang === "ar" ? true : false}
+                  <InputPhone
+                    rtl={lang === 'ar' ? true : false}
                     name="body"
                     // label={word.body}
                     label="Note"
@@ -229,17 +229,17 @@ const Option = ({
         width: width - 80,
         padding: 3,
         margin: 7,
-        backgroundColor: "#eee",
+        backgroundColor: '#eee',
         borderWidth: 1,
-        borderColor: "#ddd",
+        borderColor: '#ddd',
         borderRadius: 5
       }}
     >
       <Text
         style={{
           fontSize: 18,
-          fontFamily: "cairo-regular",
-          textAlign: lang === "ar" ? "right" : "left",
+          fontFamily: 'cairo-regular',
+          textAlign: lang === 'ar' ? 'right' : 'left',
           paddingHorizontal: 10
         }}
       >
@@ -252,27 +252,27 @@ const Option = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   button: {
     marginTop: 20,
-    width: "100%"
+    width: '100%'
   },
   outerStyle: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginVertical: 5
   },
   innerStyle: {
     width: width - 40,
     paddingHorizontal: 10,
-    backgroundColor: "#fff",
-    writingDirection: "auto",
+    backgroundColor: '#fff',
+    writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 5
   },
   labelStyle: {
@@ -283,14 +283,14 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 60,
     width: width - 80,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: 20,
     borderRadius: 5
   },
   btnTextStyle: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 20,
-    fontFamily: "cairo-regular"
+    fontFamily: 'cairo-regular'
   }
 });

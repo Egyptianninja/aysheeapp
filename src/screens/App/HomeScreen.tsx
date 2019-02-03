@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   Modal,
@@ -6,33 +6,33 @@ import {
   Animated,
   Text,
   RefreshControl
-} from "react-native";
+} from 'react-native';
 
-import * as Animatable from "react-native-animatable";
-import { connect } from "react-redux";
-import { Query, graphql } from "react-apollo";
-import MasonryList from "@appandflow/masonry-list";
-import { debounce } from "lodash";
-import getTimeLine from "../../graphql/query/getTimeLine";
-import refreshToken from "../../graphql/mutation/refreshToken";
-import favoritePost from "../../graphql/mutation/favoritePost";
-import * as store from "../../store/getStore";
-import { appLoaded } from "../../store/actions/viewActions";
-import { setBuckets } from "../../store/actions/postActions";
-import { getNextPosts, readyPosts } from "../../utils";
-import { getBuckets, getCategoryBuckets } from "../../utils/apollo/aggs";
-
+import * as Animatable from 'react-native-animatable';
+import { connect } from 'react-redux';
+import { Query, graphql } from 'react-apollo';
+import MasonryList from '@appandflow/masonry-list';
+import { debounce } from 'lodash';
+import getTimeLine from '../../graphql/query/getTimeLine';
+import refreshToken from '../../graphql/mutation/refreshToken';
+import favoritePost from '../../graphql/mutation/favoritePost';
+import * as store from '../../store/getStore';
+import { appLoaded } from '../../store/actions/viewActions';
+import { setBuckets } from '../../store/actions/postActions';
 import {
-  CategoriesScroll,
-  Loading,
-  ItemView
-} from "../../componenets/HomeScreen";
+  getNextPosts,
+  readyPosts,
+  getBuckets,
+  getCategoryBuckets
+} from '../../utils';
 
-import FloatButton from "../../lib/elements/FloatButton";
+import { Loading, CategoriesScroll, ItemView } from '../../componenets';
+
+import FloatButton from '../../lib/elements/FloatButton';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 
-import { Notifications } from "expo";
+import { Notifications } from 'expo';
 
 class HomeScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
@@ -71,7 +71,7 @@ class HomeScreen extends React.Component<any, any> {
           scrollAnim.interpolate({
             inputRange: [0, 1],
             outputRange: [0, 1],
-            extrapolateLeft: "clamp"
+            extrapolateLeft: 'clamp'
           }),
           offsetAnim
         ),
@@ -141,7 +141,7 @@ class HomeScreen extends React.Component<any, any> {
     });
   };
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate("ItemScreen", { post, word, lang });
+    this.props.navigation.navigate('ItemScreen', { post, word, lang });
   };
 
   render() {
@@ -154,12 +154,12 @@ class HomeScreen extends React.Component<any, any> {
     const navbarTranslate = clampedScroll.interpolate({
       inputRange: [0, this.NAVBAR_HEIGHT],
       outputRange: [0, -this.NAVBAR_HEIGHT],
-      extrapolate: "clamp"
+      extrapolate: 'clamp'
     });
     const floatBtnTranslate = clampedScroll.interpolate({
       inputRange: [0, this.NAVBAR_HEIGHT],
       outputRange: [0, 84],
-      extrapolate: "clamp"
+      extrapolate: 'clamp'
     });
 
     const { rest } = this.state;
@@ -171,24 +171,24 @@ class HomeScreen extends React.Component<any, any> {
 
     if (this.state.modalVisible === true) {
       setTimeout(() => {
-        return <View style={{ flex: 1, backgroundColor: "#171717" }} />;
+        return <View style={{ flex: 1, backgroundColor: '#171717' }} />;
       }, 800);
     }
 
-    const query = this.props.navigation.getParam("query");
+    const query = this.props.navigation.getParam('query');
 
     return (
       <View
         style={{
           flex: 1,
-          backgroundColor: "#fff",
+          backgroundColor: '#fff',
           paddingHorizontal: 5
         }}
       >
         <Animated.View
           style={{
             zIndex: 100,
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
@@ -225,14 +225,14 @@ class HomeScreen extends React.Component<any, any> {
                 <View
                   style={{
                     flex: 1,
-                    backgroundColor: "#fff",
+                    backgroundColor: '#fff',
                     marginTop: 84,
                     paddingTop: 10,
                     paddingHorizontal: 10,
                     zIndex: 500
                   }}
                 >
-                  <Text style={{ textAlign: lang === "ar" ? "right" : "left" }}>
+                  <Text style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}>
                     {words.noresults}
                   </Text>
                 </View>
@@ -242,7 +242,7 @@ class HomeScreen extends React.Component<any, any> {
             const rPosts = readyPosts(posts, 200, 79, lang);
 
             if (rest.categoryId || rest.categoryId === 0) {
-              this.buckets = getBuckets(store, data, "getTimeLine").filter(
+              this.buckets = getBuckets(store, data, 'getTimeLine').filter(
                 (x: any) => x
               );
 
@@ -251,7 +251,7 @@ class HomeScreen extends React.Component<any, any> {
               this.buckets = getCategoryBuckets(
                 store,
                 data,
-                "getTimeLine"
+                'getTimeLine'
               ).filter((x: any) => x);
               this.props.setBuckets(this.buckets);
             }
@@ -294,7 +294,7 @@ class HomeScreen extends React.Component<any, any> {
                 }
                 // onRefresh={() => getNewPosts(data, fetchMore, "getTimeLine")}
                 onEndReached={() =>
-                  this.getNextPosts(data, fetchMore, "getTimeLine")
+                  this.getNextPosts(data, fetchMore, 'getTimeLine')
                 }
                 renderItem={({ item }: any) => (
                   <ItemView
@@ -332,9 +332,9 @@ class HomeScreen extends React.Component<any, any> {
             style={[
               {
                 flex: 1,
-                backgroundColor: "#171717",
-                alignItems: "center",
-                justifyContent: "center"
+                backgroundColor: '#171717',
+                alignItems: 'center',
+                justifyContent: 'center'
               },
               animatedStyle
             ]}
@@ -350,8 +350,8 @@ class HomeScreen extends React.Component<any, any> {
               }}
             >
               <Image
-                style={{ width: "100%", height: "100%" }}
-                source={require("../../../assets/logo.png")}
+                style={{ width: '100%', height: '100%' }}
+                source={require('../../../assets/logo.png')}
               />
             </Animatable.View>
           </Animated.View>
@@ -375,10 +375,10 @@ export default connect(
   { appLoaded, setBuckets }
 )(
   graphql(refreshToken, {
-    name: "refreshToken"
+    name: 'refreshToken'
   })(
     graphql(favoritePost, {
-      name: "favoritePost"
+      name: 'favoritePost'
     })(HomeScreen)
   )
 );

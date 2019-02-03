@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { Query, graphql } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
-import ItemHeader from '../../componenets/ItemScreen/ItemHeader';
 import KeyboardSpacer from '../../lib/elements/KeyboardSpacer';
 import secrets from '../../constants/secrets';
 import { connect } from 'react-redux';
@@ -23,22 +22,23 @@ import {
   call,
   ImageViewer
 } from '../../utils';
-import { AvatarName } from '../../componenets/avatar';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import createComment from '../../graphql/mutation/createComment';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
 import {
+  AvatarName,
   Properties,
   PriceView,
   BodyView,
   InputBar,
   ItemComment,
-  PhotoSlider
-} from '../../componenets/ItemScreen';
+  PhotoSlider,
+  ItemHeader,
+  Loading
+} from '../../componenets/';
 import Link from '../../utils/location/link';
-import { Loading } from '../../componenets/HomeScreen';
 
 const { width } = Dimensions.get('window');
 

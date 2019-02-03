@@ -1,14 +1,13 @@
-import * as React from "react";
-import { View, Dimensions, Image, Text } from "react-native";
-import { connect } from "react-redux";
-import { Query, graphql } from "react-apollo";
-import MasonryList from "@appandflow/masonry-list";
-import { debounce } from "lodash";
-import getUserPosts from "../../../graphql/query/getUserPosts";
-import { getNextPosts, readyUserPosts, Avatar } from "../../../utils";
-import Loading from "../../../componenets/UserPostsScreen/Loading";
-import Item from "../../../componenets/UserPostsScreen/ItemOwnerView";
-const { width } = Dimensions.get("window");
+import * as React from 'react';
+import { View, Dimensions, Image, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { Query, graphql } from 'react-apollo';
+import MasonryList from '@appandflow/masonry-list';
+import { debounce } from 'lodash';
+import getUserPosts from '../../../graphql/query/getUserPosts';
+import { getNextPosts, readyUserPosts } from '../../../utils';
+import { ItemOwnerView, Avatar, Loading } from '../../../componenets';
+const { width } = Dimensions.get('window');
 
 class UserProfileScreen extends React.Component<any, any> {
   flatListRef: any;
@@ -22,18 +21,18 @@ class UserProfileScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate("ItemScreen", { post, word, lang });
+    this.props.navigation.navigate('ItemScreen', { post, word, lang });
   };
 
   render() {
     const { theme, lang, words } = this.props;
-    const user = this.props.navigation.getParam("user");
+    const user = this.props.navigation.getParam('user');
     const itemColors = theme.color.item;
     return (
-      <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <View
           style={{
-            position: "absolute",
+            position: 'absolute',
             left: 20,
             top: 175 / 2 - 40,
             zIndex: 200
@@ -61,7 +60,7 @@ class UserProfileScreen extends React.Component<any, any> {
         </View>
         <View>
           {!user.headerPhoto && (
-            <View style={{ width, height: 175, backgroundColor: "#6FA7D5" }} />
+            <View style={{ width, height: 175, backgroundColor: '#6FA7D5' }} />
           )}
           {user.headerPhoto && (
             <Image
@@ -74,13 +73,13 @@ class UserProfileScreen extends React.Component<any, any> {
                 flex: 1,
                 width,
                 height: 175,
-                resizeMode: "cover"
+                resizeMode: 'cover'
               }}
             />
           )}
           <View
             style={{
-              position: "absolute",
+              position: 'absolute',
               left: 120,
               top: 175 / 2 - 20
             }}
@@ -88,8 +87,8 @@ class UserProfileScreen extends React.Component<any, any> {
             {!user.name && (
               <Text
                 style={{
-                  fontFamily: "cairo-regular",
-                  color: "#fff",
+                  fontFamily: 'cairo-regular',
+                  color: '#fff',
                   fontSize: 22
                 }}
               >
@@ -99,8 +98,8 @@ class UserProfileScreen extends React.Component<any, any> {
             {user.name && (
               <Text
                 style={{
-                  fontFamily: "cairo-regular",
-                  color: "#fff",
+                  fontFamily: 'cairo-regular',
+                  color: '#fff',
                   fontSize: 22
                 }}
               >
@@ -130,12 +129,12 @@ class UserProfileScreen extends React.Component<any, any> {
                 }}
                 onRefresh={() => refetch()}
                 onEndReached={() =>
-                  this.getNextPosts(data, fetchMore, "getUserPosts")
+                  this.getNextPosts(data, fetchMore, 'getUserPosts')
                 }
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <Item
+                  <ItemOwnerView
                     color={itemColors}
                     post={item}
                     navigation={this.props.navigation}

@@ -27,6 +27,7 @@ import { StyleSheet, pickImage } from '../../utils';
 import secrets from '../../constants/secrets';
 import { icons } from '../../load';
 import { Avatar } from '../avatar';
+
 class Drawer extends React.Component<any, any> {
   state = {
     avatar: null
