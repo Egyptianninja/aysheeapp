@@ -1,23 +1,21 @@
-import {
-  Button,
-  Input,
-  Group,
-  RadioButton,
-  CheckBox,
-  Select,
-  Option,
-  ErrorMessage,
-  CountDown,
-  InputPhone,
-  Title,
-  CountDownTimer,
-  InputCode,
-  InputName,
-  Message,
-  AutoInput,
-  FloatButton,
-  KeyboardSpacer
-} from './elements';
+import AutoInput from './elements/AutoInput';
+import Button from './elements/Button';
+import CheckBox from './elements/CheckBox';
+import CountDown from './elements/CountDown';
+import CountDownTimer from './elements/CountDownTimer';
+import FloatButton from './elements/FloatButton';
+import Group from './elements/Group';
+import Input from './elements/Input';
+import InputCode from './elements/InputCode';
+import InputName from './elements/InputName';
+import InputPhone from './elements/InputPhone';
+import KeyboardSpacer from './elements/KeyboardSpacer';
+import Logo from './elements/Logo';
+import Message from './elements/Message';
+import RadioButton from './elements/RadioButton';
+import Select from './elements/Select';
+import Title from './elements/Title';
+
 export {
   Button,
   Input,
@@ -25,16 +23,15 @@ export {
   RadioButton,
   CheckBox,
   Select,
-  Option,
-  ErrorMessage,
   CountDown,
-  InputPhone,
-  Title,
   CountDownTimer,
-  InputCode,
+  Title,
   InputName,
+  InputPhone,
+  InputCode,
   Message,
   AutoInput,
   FloatButton,
-  KeyboardSpacer
+  KeyboardSpacer,
+  Logo
 };

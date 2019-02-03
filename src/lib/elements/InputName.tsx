@@ -1,7 +1,7 @@
-import * as React from "react";
-import { View, Text, TextInput, ActivityIndicator } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import ErrorMessage from "./ErrorMessage";
+import * as React from 'react';
+import { View, Text, TextInput, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { ErrorMessage } from './Common';
 class InputName extends React.PureComponent<any, any> {
   state = {
     valid: true,
@@ -34,24 +34,24 @@ class InputName extends React.PureComponent<any, any> {
   render() {
     const { label, countryCode, placeholder, error, ...rest } = this.props;
     return (
-      <View style={[this.props.outerStyle, { alignItems: "center" }]}>
+      <View style={[this.props.outerStyle, { alignItems: 'center' }]}>
         <Text style={this.props.labelStyle}>{label}</Text>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <View
           style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
             borderBottomWidth: 1,
-            borderBottomColor: "#aaa",
+            borderBottomColor: '#aaa',
             marginVertical: 20
           }}
         >
           <Text
             style={{
               fontSize: 32,
-              fontWeight: "bold",
-              color: "#aaa",
+              fontWeight: 'bold',
+              color: '#aaa',
               height: 50,
               paddingVertical: 10,
               paddingLeft: 10,
@@ -71,12 +71,12 @@ class InputName extends React.PureComponent<any, any> {
               {
                 width: 250,
                 paddingTop: 10,
-                backgroundColor: "#fff",
-                writingDirection: "auto",
+                backgroundColor: '#fff',
+                writingDirection: 'auto',
                 letterSpacing: 1,
                 fontSize: 22,
-                color: "#777",
-                fontWeight: "bold"
+                color: '#777',
+                fontWeight: 'bold'
               }
             ]}
             {...rest}
@@ -86,8 +86,8 @@ class InputName extends React.PureComponent<any, any> {
               style={{
                 width: 40,
                 height: 40,
-                alignItems: "center",
-                justifyContent: "center",
+                alignItems: 'center',
+                justifyContent: 'center',
                 paddingTop: 10
               }}
             >
@@ -98,7 +98,7 @@ class InputName extends React.PureComponent<any, any> {
               )}
               {!this.state.loading && (
                 <Ionicons
-                  name={"ios-checkmark-circle"}
+                  name={'ios-checkmark-circle'}
                   size={28}
                   color="#26A65B"
                 />
@@ -110,8 +110,8 @@ class InputName extends React.PureComponent<any, any> {
               style={{
                 width: 40,
                 height: 40,
-                alignItems: "center",
-                justifyContent: "center",
+                alignItems: 'center',
+                justifyContent: 'center',
                 paddingTop: 10
               }}
             >
@@ -121,7 +121,7 @@ class InputName extends React.PureComponent<any, any> {
                 />
               )}
               {!this.state.loading && (
-                <Ionicons name={"ios-close-circle"} size={28} color="tomato" />
+                <Ionicons name={'ios-close-circle'} size={28} color="tomato" />
               )}
             </View>
           )}

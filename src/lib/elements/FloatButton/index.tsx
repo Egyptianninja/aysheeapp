@@ -21,7 +21,7 @@ const FloatButton = (props: any) => (
     }}
   >
     <ImageIcon
-      icon={require('../../../assets/icons/Up.png')}
+      icon={require('../../../../assets/icons/Up.png')}
       size={20}
       tintColor="#fff"
       margin={3}

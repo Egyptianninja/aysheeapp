@@ -1,15 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   Dimensions,
   ScrollView
-} from "react-native";
-import Modal from "react-native-modal";
-import { Ionicons } from "@expo/vector-icons";
-import { Option } from "./Option";
-const { width } = Dimensions.get("window");
+} from 'react-native';
+import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
+import { Option } from './Option';
+const { width } = Dimensions.get('window');
 
 export default class Select extends React.Component<any, any> {
   constructor(props: any) {
@@ -39,13 +39,13 @@ export default class Select extends React.Component<any, any> {
   };
 
   renderlabel = (value: any, label: any, required: any, lang: any) => {
-    if (required && value === "") {
+    if (required && value === '') {
       return (
         <View
           style={{
             flex: 1,
-            justifyContent: "space-between",
-            flexDirection: lang === "ar" ? "row-reverse" : "row"
+            justifyContent: 'space-between',
+            flexDirection: lang === 'ar' ? 'row-reverse' : 'row'
           }}
         >
           <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>{label}</Text>
@@ -53,30 +53,30 @@ export default class Select extends React.Component<any, any> {
             style={{
               fontSize: 16,
               paddingHorizontal: 10,
-              color: "#FF5959"
+              color: '#FF5959'
             }}
           >
             {this.props.words.require}
           </Text>
         </View>
       );
-    } else if (value === "") {
+    } else if (value === '') {
       return (
         <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>{label}</Text>
       );
-    } else if (value !== "") {
+    } else if (value !== '') {
       return (
         <View
           style={{
             flex: 1,
-            justifyContent: "space-between",
-            flexDirection: lang === "ar" ? "row-reverse" : "row"
+            justifyContent: 'space-between',
+            flexDirection: lang === 'ar' ? 'row-reverse' : 'row'
           }}
         >
           <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>
             {value.name && !value.en
               ? value.name
-              : lang === "ar"
+              : lang === 'ar'
               ? value.ar
               : value.en}
           </Text>
@@ -84,7 +84,7 @@ export default class Select extends React.Component<any, any> {
             style={{
               fontSize: 16,
               paddingHorizontal: 10,
-              color: "#ababab"
+              color: '#ababab'
             }}
           >
             {label}
@@ -100,18 +100,18 @@ export default class Select extends React.Component<any, any> {
       <View>
         <TouchableOpacity
           style={{
-            flexDirection: this.props.lang === "ar" ? "row-reverse" : "row",
+            flexDirection: this.props.lang === 'ar' ? 'row-reverse' : 'row',
             width: width - 40,
             height: 40,
             marginTop: 10,
             marginVertical: 10,
-            justifyContent: "flex-start",
-            alignItems: "center",
+            justifyContent: 'flex-start',
+            alignItems: 'center',
             paddingHorizontal: 10,
             borderWidth: 1,
-            borderColor: "#ddd",
+            borderColor: '#ddd',
             borderRadius: 5,
-            backgroundColor: "#eee"
+            backgroundColor: '#eee'
           }}
           onPress={() => this.toggleModal()}
         >
@@ -129,16 +129,16 @@ export default class Select extends React.Component<any, any> {
         >
           <View
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               borderRadius: 10,
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               margin: 0,
               height: 350,
               paddingTop: 10,
               width: width - 40,
-              justifyContent: "space-around",
-              alignItems: "center"
+              justifyContent: 'space-around',
+              alignItems: 'center'
             }}
           >
             <ScrollView>{this.renderOptions(this.props.data)}</ScrollView>

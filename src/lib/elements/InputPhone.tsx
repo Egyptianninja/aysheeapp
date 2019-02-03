@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
-import ErrorMessage from './ErrorMessage';
+import { ErrorMessage } from './Common';
 import { arabicToNum } from '../../utils';
 class InputPhone extends React.PureComponent<any, any> {
   handleChange = (value: any) => {
