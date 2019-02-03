@@ -1,9 +1,0 @@
-import { MessageBar, showMessage } from "../utils/message";
-
-<Button
-  title="message"
-  background="#e0364f"
-  onPress={() => showMessage("You are awesome!")}
-/>
-
-<MessageBar />

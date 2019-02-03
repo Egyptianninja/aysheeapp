@@ -12,16 +12,10 @@ import {
 } from 'react-native';
 import { Query, graphql } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
-import {KeyboardSpacer} from '../../lib';
+import { KeyboardSpacer } from '../../lib';
 import secrets from '../../constants/secrets';
 import { connect } from 'react-redux';
-import {
-  StyleSheet,
-  getproperties,
-  ItemLocation,
-  call,
-  ImageViewer
-} from '../../utils';
+import { StyleSheet, ItemLocation, call, ImageViewer } from '../../utils';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import createComment from '../../graphql/mutation/createComment';
 import getPostComments from '../../graphql/query/getPostComments';
@@ -36,7 +30,8 @@ import {
   ItemComment,
   PhotoSlider,
   ItemHeader,
-  Loading
+  Loading,
+  getproperties
 } from '../../componenets/';
 import Link from '../../utils/location/link';
 

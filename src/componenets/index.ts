@@ -9,7 +9,8 @@ import {
   BodyView,
   InputBar,
   ItemComment,
-  PhotoSlider
+  PhotoSlider,
+  getproperties
 } from './ItemScreen';
 import NotificationItem from './NotificationScreen/item';
 import ItemFavView from './MyFavScreen';
@@ -35,5 +36,6 @@ export {
   NotificationItem,
   ItemFavView,
   ItemOwnerView,
-  MessageModal
+  MessageModal,
+  getproperties
 };

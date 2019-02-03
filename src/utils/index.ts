@@ -5,11 +5,8 @@ import {
   getNextPosts,
   getDBNextPosts,
   getNewPosts,
-  average,
-  allEqual,
   readyPosts,
-  readyUserPosts,
-  Footer
+  readyUserPosts
 } from './apollo';
 import {
   uploadPhoto,
@@ -22,7 +19,6 @@ import {
 import {
   getLocation,
   parseJwt,
-  getproperties,
   StyleSheet,
   getCountryCode,
   isArabic,
@@ -49,12 +45,10 @@ export {
   compressImage,
   ImagePicker,
   since,
-  getproperties,
   getLocation,
   getNextPosts,
   getNewPosts,
   readyPosts,
-  Footer,
   readyUserPosts,
   getDBNextPosts,
   isArabic,
@@ -62,8 +56,6 @@ export {
   getCategoryBuckets,
   getBuckets,
   getNamedAggs,
-  average,
-  allEqual,
   arabicToNum,
   registerForPushNotificationsAsync,
   onShare,

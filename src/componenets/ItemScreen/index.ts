@@ -5,6 +5,7 @@ import InputBar from './comment/InputBar';
 import ItemComment from './comment/ItemComment';
 import PhotoSlider from './PhotoSlider';
 import ItemHeader from './ItemHeader';
+import { getproperties } from './getproperties';
 export {
   Properties,
   PriceView,
@@ -12,5 +13,6 @@ export {
   InputBar,
   ItemComment,
   PhotoSlider,
-  ItemHeader
+  ItemHeader,
+  getproperties
 };

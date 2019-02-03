@@ -1,14 +1,11 @@
-import { getCategoryBuckets, getBuckets, getNamedAggs } from "./aggs";
+import { getCategoryBuckets, getBuckets, getNamedAggs } from './buckets';
 import {
   getNextPosts,
   getDBNextPosts,
   getNewPosts,
-  average,
-  allEqual,
   readyPosts,
-  readyUserPosts,
-  Footer
-} from "./fetchMore";
+  readyUserPosts
+} from './fetchMore';
 
 export {
   getCategoryBuckets,
@@ -17,9 +14,6 @@ export {
   getNextPosts,
   getDBNextPosts,
   getNewPosts,
-  average,
-  allEqual,
   readyPosts,
-  readyUserPosts,
-  Footer
+  readyUserPosts
 };
