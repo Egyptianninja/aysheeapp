@@ -15,7 +15,7 @@ import {
 import NotificationItem from './NotificationScreen/item';
 import ItemFavView from './MyFavScreen';
 import ItemOwnerView from './MyPostsScreen';
-import { MessageModal, Loading } from './Common';
+import { MessageModal, Loading, Noresult } from './Common';
 
 export {
   AvatarPhone,
@@ -37,5 +37,6 @@ export {
   ItemFavView,
   ItemOwnerView,
   MessageModal,
-  getproperties
+  getproperties,
+  Noresult
 };

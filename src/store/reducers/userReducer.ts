@@ -10,7 +10,7 @@ import {
   INIT_TIME,
   CODE_SENT,
   INIT_CODE
-} from "../types";
+} from '../types';
 
 const initialState = {
   isAuthenticated: false,
@@ -42,8 +42,17 @@ export default function(state = initialState, action: any) {
         ...state,
         isAuthenticated: false,
         token: null,
-        user: null,
-        email: null
+        user: null as any,
+        phone: null,
+        name: null,
+        sms: {
+          nextTime: null,
+          qty: 0
+        },
+        code: {
+          nextTime: null,
+          qty: 0
+        }
       };
     case EMAIL_ADDED:
       return {

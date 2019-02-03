@@ -7,11 +7,11 @@ export function setLanguage(language: any, languageName: string) {
     languageName
   };
 }
-export function initApp(country: any, ccode: any) {
+export function initApp(country: any, code: any) {
   return {
     type: INIT_APP,
     country,
-    ccode
+    code
   };
 }
 

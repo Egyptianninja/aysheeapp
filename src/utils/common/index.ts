@@ -1,7 +1,7 @@
 import { getLocation } from './getLocation';
 import { parseJwt } from './parseJwt';
 import { StyleSheet } from './stylesheet';
-import { getCountryCode } from './getCountryCode';
+import { getCountryCode, getCountryCodeQatar } from './getCountryCode';
 import { isArabic, arabicToNum } from './arabic';
 
 export {
@@ -10,5 +10,6 @@ export {
   StyleSheet,
   isArabic,
   arabicToNum,
-  getCountryCode
+  getCountryCode,
+  getCountryCodeQatar
 };

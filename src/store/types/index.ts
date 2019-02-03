@@ -7,7 +7,6 @@ export const EMAIL_REMOVED = 'EMAIL_REMOVED';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_BRANDS = 'SET_BRANDS';
 export const SET_SUB_BRANDS = 'SET_SUB_BRANDS';
-export const LEFT_FLOOR_UPDATE = 'LEFT_FLOOR_UPDATE';
 export const GET_BUCKETS = 'GET_BUCKETS';
 export const PHONE_ADDED = 'PHONE_ADDED';
 export const PHOME_REMOVED = 'PHOME_REMOVED';

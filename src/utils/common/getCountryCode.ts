@@ -5,6 +5,16 @@ import { parseJwt } from '../common';
 export const getCountryCode = async () => {
   const token = await AsyncStorage.getItem('aysheetoken');
   const data = parseJwt(token);
+  const teleitem = telecode.filter((cc: any) => cc.name === data.country);
+  return {
+    country: data.country,
+    code: teleitem[0].tel
+  };
+};
+
+export const getCountryCodeQatar = async () => {
+  const token = await AsyncStorage.getItem('aysheetoken');
+  const data = parseJwt(token);
   const teleitem =
     data.country === ''
       ? telecode.filter((cc: any) => cc.name === 'Qatar')
@@ -12,9 +22,9 @@ export const getCountryCode = async () => {
   if (teleitem.length > 0) {
     return {
       country: data.country === '' ? 'Qatar' : data.country,
-      ccode: teleitem[0].tel
+      code: teleitem[0].tel
     };
   } else {
-    return { country: '', ccode: '' };
+    return { country: '', code: '' };
   }
 };

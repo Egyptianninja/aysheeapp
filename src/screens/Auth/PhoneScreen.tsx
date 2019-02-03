@@ -77,7 +77,7 @@ class PhoneScreen extends React.Component<any, any> {
   handleCodeSubmit = async (values: any, bag: any) => {
     try {
       const { phone } = values;
-      const phoneNumber = `${this.props.ccode}${phone}`;
+      const phoneNumber = `${this.props.code}${phone}`;
 
       const res = await this.props.smsRequestCode({
         variables: { phone: phoneNumber }
@@ -147,7 +147,7 @@ class PhoneScreen extends React.Component<any, any> {
             <Formik
               initialValues={{
                 phone: this.props.phone
-                  ? this.props.phone.replace(this.props.ccode, '')
+                  ? this.props.phone.replace(this.props.code, '')
                   : ''
               }}
               onSubmit={this.handleCodeSubmit}
@@ -179,7 +179,7 @@ class PhoneScreen extends React.Component<any, any> {
                     error={touched.phone && errors.phone}
                     keyboardType="number-pad"
                     height={50}
-                    countryCode={this.props.ccode}
+                    countryCode={this.props.code}
                   />
                   <Button
                     background="#272727"
@@ -249,7 +249,7 @@ const mapStateToProps = (state: any) => ({
   name: state.user.name,
   sms: state.user.sms,
   lang: state.glob.languageName,
-  ccode: state.glob.ccode,
+  code: state.glob.code,
   words: state.glob.language.words
 });
 

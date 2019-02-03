@@ -4,7 +4,7 @@ const initialState = {
   language: '',
   languageName: '',
   country: '',
-  ccode: '',
+  code: '',
   brands: '',
   subBrands: ''
 };
@@ -21,7 +21,7 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         country: action.country,
-        ccode: action.ccode
+        code: action.code
       };
     case SET_BRANDS:
       return {

@@ -1,23 +1,14 @@
 import * as React from 'react';
-import {
-  View,
-  Modal,
-  Image,
-  Animated,
-  Text,
-  RefreshControl
-} from 'react-native';
-
-import * as Animatable from 'react-native-animatable';
+import { View, Animated, RefreshControl } from 'react-native';
+import { debounce } from 'lodash';
+import { Notifications } from 'expo';
 import { connect } from 'react-redux';
 import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
-import { debounce } from 'lodash';
 import getTimeLine from '../../graphql/query/getTimeLine';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import * as store from '../../store/getStore';
-import { appLoaded } from '../../store/actions/viewActions';
 import { setBuckets } from '../../store/actions/postActions';
 import {
   getNextPosts,
@@ -25,38 +16,29 @@ import {
   getBuckets,
   getCategoryBuckets
 } from '../../utils';
-
-import { Loading, CategoriesScroll, ItemView } from '../../componenets';
-
+import {
+  Loading,
+  CategoriesScroll,
+  ItemView,
+  Noresult
+} from '../../componenets';
 import { FloatButton } from '../../lib';
-
-const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
-
-import { Notifications } from 'expo';
 
 class HomeScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
-  startAnim: any;
-  animatedValue: any;
   flatListRef: any;
   getNextPosts: any;
-  buckets: any;
-
   scrollEndTimer: any;
-
   clampedScrollValue = 0;
   offsetValue = 0;
   scrollValue = 0;
-  // NAVBAR_HEIGHT = 84;
   NAVBAR_HEIGHT = 134;
 
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
-
     const scrollAnim = new Animated.Value(0);
     const offsetAnim = new Animated.Value(0);
-
     this.state = {
       refreshing: false,
       modalVisible: false,
@@ -80,12 +62,9 @@ class HomeScreen extends React.Component<any, any> {
       )
     };
   }
-
   componentWillMount() {
-    this.animatedValue = new Animated.Value(0);
     Notifications.addListener(this.handleNotification);
   }
-
   componentDidMount() {
     this.state.scrollAnim.addListener(({ value }: any) => {
       const diff = value - this.scrollValue;
@@ -98,33 +77,17 @@ class HomeScreen extends React.Component<any, any> {
     this.state.offsetAnim.addListener(({ value }: any) => {
       this.offsetValue = value;
     });
-
-    this.startAnim = setTimeout(() => {
-      this.startAnimation();
-    }, 1000);
   }
-
   componentWillUnmount() {
     this.state.scrollAnim.removeAllListeners();
     this.state.offsetAnim.removeAllListeners();
-    clearTimeout(this.startAnim);
   }
-
   handleHome = () => {
     this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
   };
-
   handleNotification = (notification: any) => {
     this.setState({ notification });
   };
-
-  startAnimation = () => {
-    Animated.timing(this.animatedValue, {
-      toValue: 0,
-      duration: 800
-    }).start(() => this.setState({ modalVisible: false }));
-  };
-
   addFilter = (itemKind: any, value: any) => {
     this.setState({ rest: { ...this.state.rest, [itemKind]: value } });
   };
@@ -164,10 +127,6 @@ class HomeScreen extends React.Component<any, any> {
 
     const { rest } = this.state;
     const { lang, words } = this.props;
-    const animatedStyle = {
-      opacity: this.animatedValue
-    };
-
     if (this.state.modalVisible === true) {
       setTimeout(() => {
         return <View style={{ flex: 1, backgroundColor: '#171717' }} />;
@@ -219,75 +178,48 @@ class HomeScreen extends React.Component<any, any> {
 
             const posts = data.getTimeLine.posts;
             if (posts && posts.length === 0) {
-              return (
-                <View
-                  style={{
-                    flex: 1,
-                    backgroundColor: '#fff',
-                    marginTop: 84,
-                    paddingTop: 10,
-                    paddingHorizontal: 10,
-                    zIndex: 500
-                  }}
-                >
-                  <Text style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}>
-                    {words.noresults}
-                  </Text>
-                </View>
-              );
+              return <Noresult lang={lang} title={words.noresults} />;
             }
 
             const rPosts = readyPosts(posts, 200, 79, lang);
 
             if (rest.categoryId || rest.categoryId === 0) {
-              this.buckets = getBuckets(store, data, 'getTimeLine').filter(
+              const buckets = getBuckets(store, data, 'getTimeLine').filter(
                 (x: any) => x
               );
-
-              this.props.setBuckets(this.buckets);
+              this.props.setBuckets(buckets);
             } else {
-              this.buckets = getCategoryBuckets(
+              const buckets = getCategoryBuckets(
                 store,
                 data,
                 'getTimeLine'
               ).filter((x: any) => x);
-              this.props.setBuckets(this.buckets);
+              this.props.setBuckets(buckets);
             }
 
             return (
-              // <AnimatedListView
               <MasonryList
                 data={rPosts}
                 ref={(ref: any) => {
                   this.flatListRef = ref;
                 }}
-                // style={{ marginTop: this.NAVBAR_HEIGHT }}
                 contentContainerStyle={{
                   marginTop: this.NAVBAR_HEIGHT,
                   paddingBottom: 160
                 }}
-                // bounces={false}
                 scrollEventThrottle={16}
-                // onMomentumScrollBegin={this.momentumScrollBegin}
-                // onMomentumScrollEnd={this.momentumScrollEnd}
-                // onScrollEndDrag={this.scrollEndDrag}
-                onScroll={Animated.event(
-                  [
-                    {
-                      nativeEvent: {
-                        contentOffset: { y: this.state.scrollAnim }
-                      }
+                onScroll={Animated.event([
+                  {
+                    nativeEvent: {
+                      contentOffset: { y: this.state.scrollAnim }
                     }
-                  ]
-                  // { useNativeDriver: true }
-                )}
+                  }
+                ])}
                 refreshControl={
                   <RefreshControl
                     onRefresh={() => refetch()}
                     refreshing={this.state.refreshing}
                     tintColor="#6FA7D5"
-                    // refreshing={this.props.refreshing}
-                    // onRefresh={this._onRefresh.bind(this)}
                   />
                 }
                 // onRefresh={() => getNewPosts(data, fetchMore, "getTimeLine")}
@@ -320,55 +252,22 @@ class HomeScreen extends React.Component<any, any> {
         >
           <FloatButton opacity={0.8} action={this.handleHome} />
         </Animated.View>
-        <Modal
-          onRequestClose={() => null}
-          transparent={true}
-          visible={this.state.modalVisible}
-        >
-          <Animated.View
-            style={[
-              {
-                flex: 1,
-                backgroundColor: '#171717',
-                alignItems: 'center',
-                justifyContent: 'center'
-              },
-              animatedStyle
-            ]}
-          >
-            <Animatable.View
-              animation="zoomIn"
-              duration={800}
-              iterationCount={1}
-              useNativeDriver={true}
-              style={{
-                width: 175,
-                height: 175
-              }}
-            >
-              <Image
-                style={{ width: '100%', height: '100%' }}
-                source={require('../../../assets/logo.png')}
-              />
-            </Animatable.View>
-          </Animated.View>
-        </Modal>
       </View>
     );
   }
 }
+
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   categories: state.glob.language.category,
   words: state.glob.language.words,
   isAuthenticated: state.user.isAuthenticated,
-  ready: state.view.appLoaded,
   user: state.user.user
 });
 
 export default connect(
   mapStateToProps,
-  { appLoaded, setBuckets }
+  { setBuckets }
 )(
   graphql(refreshToken, {
     name: 'refreshToken'

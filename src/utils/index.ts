@@ -21,6 +21,7 @@ import {
   parseJwt,
   StyleSheet,
   getCountryCode,
+  getCountryCodeQatar,
   isArabic,
   arabicToNum
 } from './common';
@@ -69,5 +70,6 @@ export {
   getSendSmsInterval,
   getCountryCode,
   getPushToken,
-  ImageViewer
+  ImageViewer,
+  getCountryCodeQatar
 };
