@@ -1,4 +1,4 @@
-import { store } from "./";
+import { store } from './';
 
 export const user = () => store.getState().user;
 export const languageName = () => store.getState().glob.languageName;
@@ -11,9 +11,6 @@ export const electroBrands = () => store.getState().glob.language.electroBrands;
 export const menu = () => store.getState().glob.language.menu;
 export const words = () => store.getState().glob.language.words;
 export const post = () => store.getState().glob.language.post;
-
-export const themeName = () => store.getState().glob.themeName;
-export const theme = () => store.getState().glob.theme;
 
 export const brands = () => store.getState().glob.brands;
 export const subBrands = () => store.getState().glob.subBrands;

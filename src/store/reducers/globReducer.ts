@@ -1,20 +1,12 @@
-import {
-  SET_LANGUAGE,
-  SET_THEME,
-  SET_BRANDS,
-  SET_SUB_BRANDS,
-  INIT_APP
-} from "../types";
+import { SET_LANGUAGE, SET_BRANDS, SET_SUB_BRANDS, INIT_APP } from '../types';
 
 const initialState = {
-  language: "",
-  languageName: "",
-  country: "",
-  ccode: "",
-  theme: "",
-  themeName: "",
-  brands: "",
-  subBrands: ""
+  language: '',
+  languageName: '',
+  country: '',
+  ccode: '',
+  brands: '',
+  subBrands: ''
 };
 
 export default function(state = initialState, action: any) {
@@ -31,13 +23,6 @@ export default function(state = initialState, action: any) {
         country: action.country,
         ccode: action.ccode
       };
-    case SET_THEME:
-      return {
-        ...state,
-        theme: action.theme,
-        themeName: action.themeName
-      };
-
     case SET_BRANDS:
       return {
         ...state,

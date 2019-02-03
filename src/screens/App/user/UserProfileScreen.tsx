@@ -25,9 +25,8 @@ class UserProfileScreen extends React.Component<any, any> {
   };
 
   render() {
-    const { theme, lang, words } = this.props;
+    const { lang, words } = this.props;
     const user = this.props.navigation.getParam('user');
-    const itemColors = theme.color.item;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <View
@@ -135,7 +134,6 @@ class UserProfileScreen extends React.Component<any, any> {
                 data={rPosts}
                 renderItem={({ item }: any) => (
                   <ItemOwnerView
-                    color={itemColors}
                     post={item}
                     navigation={this.props.navigation}
                     editClassifieds={this.props.editClassifieds}
@@ -162,7 +160,6 @@ class UserProfileScreen extends React.Component<any, any> {
 }
 const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
-  theme: state.glob.theme,
   isAuthenticated: state.user.isAuthenticated,
   lang: state.glob.languageName,
   words: state.glob.language.words

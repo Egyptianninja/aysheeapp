@@ -110,7 +110,7 @@ const ItemView = (props: any) => {
                 >
                   <Text
                     style={{
-                      color: color.cardBody,
+                      color: '#555',
                       paddingTop: 5,
                       paddingHorizontal: 5
                     }}

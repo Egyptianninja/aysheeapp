@@ -300,7 +300,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
-  theme: state.glob.theme,
   service: state.glob.language.service,
   lang: state.glob.languageName,
   words: state.glob.language.words,

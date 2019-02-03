@@ -38,7 +38,7 @@ class CategoriesScroll extends React.Component<any, any> {
     };
   };
 
-  renderCategories = (categories: any, theme: any) => {
+  renderCategories = (categories: any) => {
     return categories.map((item: any) => {
       const iconFunc = icons.category.filter(ic => ic.id === item.id);
       const icon = iconFunc[0].icon();
@@ -49,8 +49,8 @@ class CategoriesScroll extends React.Component<any, any> {
           addFilter={this.props.addFilter}
           removeAllFilters={this.props.removeAllFilters}
           categoryId={this.props.rest.categoryId}
-          iconColor={theme.color.catIcon}
-          textColor={theme.color.catText}
+          iconColor="#777"
+          textColor="#777"
           item={item}
           key={item.id}
         />
@@ -129,7 +129,7 @@ class CategoriesScroll extends React.Component<any, any> {
 
   render() {
     const sortData = this.getSortBucket(this.props.lang);
-    const { theme, addFilter, removeFilter, activeItem, rest } = this.props;
+    const { addFilter, removeFilter, activeItem, rest } = this.props;
     const { buckets } = this.state;
     if (!buckets) {
       return <View />;
@@ -164,7 +164,7 @@ class CategoriesScroll extends React.Component<any, any> {
               backgroundColor: '#fff'
             }}
           >
-            {this.renderCategories(categories, theme)}
+            {this.renderCategories(categories)}
           </ScrollView>
         </View>
 

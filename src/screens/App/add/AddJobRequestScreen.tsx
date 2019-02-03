@@ -23,7 +23,7 @@ import notificationSub from '../../../graphql/mutation/notificationSub';
 
 import { Input, Button, Group, CheckBox, Title } from '../../../lib';
 
-import {MessageModal} from "../../../componenets";
+import { MessageModal } from '../../../componenets';
 const { width } = Dimensions.get('window');
 
 class AddJobRequestScreen extends React.Component<any, any> {
@@ -405,7 +405,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
-  theme: state.glob.theme,
   lang: state.glob.languageName,
   words: state.glob.language.words,
   user: state.user.user

@@ -22,7 +22,7 @@ import notificationSub from '../../../graphql/mutation/notificationSub';
 
 import { Input, Button, Group, CheckBox, Title } from '../../../lib';
 
-import {MessageModal} from "../../../componenets";
+import { MessageModal } from '../../../componenets';
 import { getPureNumber } from '../../../utils/call';
 const { width } = Dimensions.get('window');
 
@@ -403,7 +403,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
-  theme: state.glob.theme,
   lang: state.glob.languageName,
   words: state.glob.language.words,
   user: state.user.user

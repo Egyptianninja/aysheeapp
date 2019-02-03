@@ -344,7 +344,6 @@ const mapDispatchToProps = (dispatch: any) =>
   );
 
 const mapStateToProps = (state: any) => ({
-  theme: state.glob.theme,
   lang: state.glob.languageName,
   isAuthenticated: state.user.isAuthenticated,
   user: state.user.user,

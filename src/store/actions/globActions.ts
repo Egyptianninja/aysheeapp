@@ -1,10 +1,4 @@
-import {
-  SET_LANGUAGE,
-  SET_THEME,
-  SET_BRANDS,
-  SET_SUB_BRANDS,
-  INIT_APP
-} from "../types";
+import { SET_LANGUAGE, SET_BRANDS, SET_SUB_BRANDS, INIT_APP } from '../types';
 
 export function setLanguage(language: any, languageName: string) {
   return {
@@ -18,14 +12,6 @@ export function initApp(country: any, ccode: any) {
     type: INIT_APP,
     country,
     ccode
-  };
-}
-
-export function setTheme(theme: any, themeName: string) {
-  return {
-    type: SET_THEME,
-    theme,
-    themeName
   };
 }
 

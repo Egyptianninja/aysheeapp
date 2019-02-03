@@ -112,7 +112,7 @@ const ItemOwnerView = (props: any) => {
                 >
                   <Text
                     style={{
-                      color: color.cardBody,
+                      color: '#555',
                       writingDirection: isrtl ? 'rtl' : 'ltr',
                       paddingTop: 5,
                       paddingHorizontal: 5

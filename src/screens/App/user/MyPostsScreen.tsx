@@ -26,8 +26,7 @@ class UserPostsScreen extends React.Component<any, any> {
   };
 
   render() {
-    const { theme, lang, words } = this.props;
-    const itemColors = theme.color.item;
+    const { lang, words } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Query query={getMyPosts} fetchPolicy="network-only">
@@ -53,7 +52,6 @@ class UserPostsScreen extends React.Component<any, any> {
                 data={rPosts}
                 renderItem={({ item }: any) => (
                   <ItemOwnerView
-                    color={itemColors}
                     post={item}
                     navigation={this.props.navigation}
                     editClassifieds={this.props.editClassifieds}
@@ -80,7 +78,6 @@ class UserPostsScreen extends React.Component<any, any> {
 }
 const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
-  theme: state.glob.theme,
   isAuthenticated: state.user.isAuthenticated,
   lang: state.glob.languageName,
   words: state.glob.language.words

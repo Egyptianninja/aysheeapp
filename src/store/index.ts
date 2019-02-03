@@ -6,12 +6,7 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import reducers from './reducers';
 import { getLocale } from '../load';
-import {
-  setTheme,
-  setLanguage,
-  initBrands,
-  initSubBrands
-} from './actions/globActions';
+import { setLanguage, initBrands, initSubBrands } from './actions/globActions';
 const persistConfig = {
   key: 'root',
   storage,
@@ -41,7 +36,7 @@ export const store = createStore(
   enhancer(applyMiddleware(thunk))
 );
 export const persistor = persistStore(store, undefined, async () => {
-  const appVersion = '1.1.49';
+  const appVersion = '1.1.50';
   const localAppVersion = await AsyncStorage.getItem('appVersion');
   const languageName = store.getState().glob.languageName;
   const locale = getLocale();
@@ -53,10 +48,8 @@ export const persistor = persistStore(store, undefined, async () => {
     localAppVersion !== appVersion
   ) {
     const { ar, en, tr } = require('../../languages');
-    const { light } = require('../../themes');
     const { brands, subBrands } = require('../constants');
     const lang = systemLang === 'ar' ? ar : systemLang === 'tr' ? tr : en;
-    await store.dispatch(setTheme(light, 'light'));
     await store.dispatch(setLanguage(lang, systemLang || 'en'));
     await store.dispatch(initBrands(brands));
     await store.dispatch(initSubBrands(subBrands));

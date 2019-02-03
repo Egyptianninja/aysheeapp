@@ -31,7 +31,7 @@ import {
   Title
 } from '../../../lib';
 
-import {MessageModal} from "../../../componenets";
+import { MessageModal } from '../../../componenets';
 const { width } = Dimensions.get('window');
 
 class AddClassifiedScreen extends React.Component<any, any> {
@@ -451,7 +451,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
-  theme: state.glob.theme,
   kind: state.glob.language.kind,
   electroBrands: state.glob.language.electroBrands,
   lang: state.glob.languageName,

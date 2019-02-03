@@ -163,8 +163,7 @@ class HomeScreen extends React.Component<any, any> {
     });
 
     const { rest } = this.state;
-    const { theme, lang, words } = this.props;
-    const itemColors = theme.color.item;
+    const { lang, words } = this.props;
     const animatedStyle = {
       opacity: this.animatedValue
     };
@@ -198,7 +197,6 @@ class HomeScreen extends React.Component<any, any> {
         >
           <CategoriesScroll
             lang={lang}
-            theme={theme}
             addFilter={this.addFilter}
             removeFilter={this.removeFilter}
             removeAllFilters={this.removeAllFilters}
@@ -298,7 +296,6 @@ class HomeScreen extends React.Component<any, any> {
                 }
                 renderItem={({ item }: any) => (
                   <ItemView
-                    color={itemColors}
                     post={item}
                     navigation={this.props.navigation}
                     selectePost={this.selectePost}
@@ -364,7 +361,6 @@ const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   categories: state.glob.language.category,
   words: state.glob.language.words,
-  theme: state.glob.theme,
   isAuthenticated: state.user.isAuthenticated,
   ready: state.view.appLoaded,
   user: state.user.user

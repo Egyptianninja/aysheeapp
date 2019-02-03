@@ -491,7 +491,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
-  theme: state.glob.theme,
   lang: state.glob.languageName,
   brands: state.glob.brands,
   subBrands: state.glob.subBrands,

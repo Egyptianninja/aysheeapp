@@ -13,7 +13,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { graphql } from 'react-apollo';
-import { setTheme } from '../../store/actions/globActions';
 import {
   login,
   logout,
@@ -53,7 +52,7 @@ class Drawer extends React.Component<any, any> {
     }
   };
 
-  renderMenu = (menus: any, lng: any, color: any) => {
+  renderMenu = (menus: any, lng: any) => {
     return menus.map((menu: any) => {
       const iconFunc = icons.menu.filter(ic => ic.id === menu.id);
       const icon = iconFunc[0].icon;
@@ -73,13 +72,13 @@ class Drawer extends React.Component<any, any> {
             <Ionicons
               name={icon}
               size={33}
-              color={color.drawerText}
+              color="#000"
               style={{ marginHorizontal: 20 }}
             />
             <Text
               style={{
                 marginTop: 5,
-                color: color.drawerText,
+                color: '#000',
                 fontSize: 16,
                 fontFamily: lng === 'ar' ? 'cairo-light' : 'comfortaa-Regular'
               }}
@@ -92,14 +91,14 @@ class Drawer extends React.Component<any, any> {
     });
   };
 
-  renderHeader = (user: any, color: any) => {
+  renderHeader = (user: any) => {
     const uri = user.avatar
       ? `http://res.cloudinary.com/${
           secrets.upload.CLOUD_NAME
         }/image/upload/w_${100}/${user.avatar}`
       : 'https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png';
     return (
-      <View style={[styles.drawer, { borderBottomColor: color.drawerText }]}>
+      <View style={[styles.drawer, { borderBottomColor: '#000' }]}>
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('Profile');
@@ -142,7 +141,7 @@ class Drawer extends React.Component<any, any> {
             <Text
               style={{
                 fontSize: 16,
-                color: color.drawerText,
+                color: '#000',
                 paddingVertical: 10
               }}
             >
@@ -153,7 +152,7 @@ class Drawer extends React.Component<any, any> {
             <Text
               style={{
                 fontSize: 16,
-                color: color.drawerText,
+                color: '#000',
                 paddingVertical: 10
               }}
             >
@@ -165,7 +164,7 @@ class Drawer extends React.Component<any, any> {
     );
   };
 
-  nunLogedHeader = (color: any) => {
+  nunLogedHeader = () => {
     return (
       <View
         style={{
@@ -191,7 +190,7 @@ class Drawer extends React.Component<any, any> {
           <Text
             style={{
               fontSize: 18,
-              color: color.drawerText,
+              color: '#000',
               fontFamily: 'cairo-bold',
               paddingVertical: 10
             }}
@@ -205,7 +204,6 @@ class Drawer extends React.Component<any, any> {
 
   render() {
     const lang = this.props.languageName;
-    const { color } = this.props.theme;
     const menus = this.props.menu;
     const { user } = this.props;
 
@@ -213,16 +211,16 @@ class Drawer extends React.Component<any, any> {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: color.drawerBG
+          backgroundColor: '#fff'
         }}
         // forceInset={{ top: 'always', horizontal: 'never' }}
       >
         <ScrollView style={{ flex: 1 }} scrollEventThrottle={60}>
-          {!this.props.isAuthenticated && this.nunLogedHeader(color)}
+          {!this.props.isAuthenticated && this.nunLogedHeader()}
           {this.props.isAuthenticated && (
             <View style={{ flex: 3, marginTop: 20 }}>
-              {this.renderHeader(user, color)}
-              {this.renderMenu(menus, lang, color)}
+              {this.renderHeader(user)}
+              {this.renderMenu(menus, lang)}
             </View>
           )}
         </ScrollView>
@@ -265,7 +263,6 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
-      setTheme,
       login,
       logout,
       updateUser,
@@ -275,8 +272,6 @@ const mapDispatchToProps = (dispatch: any) =>
   );
 
 const mapStateToProps = (state: any) => ({
-  theme: state.glob.theme,
-  themeName: state.glob.themeName,
   languageName: state.glob.languageName,
   isAuthenticated: state.user.isAuthenticated,
   menu: state.glob.language.menu,
