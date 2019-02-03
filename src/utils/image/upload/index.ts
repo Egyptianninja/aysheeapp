@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { ImagePicker, ImageManipulator } from 'expo';
-
 import secrets from '../../../constants/secrets';
 
 export const uploadPhoto = async (
@@ -29,7 +28,7 @@ export const uploadPhotos = async (photos: any, selectedImage: any) => {
     const uploaders = photos.map(async (photo: any) => {
       const resizedImage = await compressImage(photo.file, 1080, 0.8);
       const { width, height } = resizedImage;
-      const ratio = (height / width).toFixed(2);
+      const ratio = (height / width).toFixed(4);
       const base64Img = `data:image/jpg;base64,${resizedImage.base64}`;
       await uploadPhoto(
         base64Img,
@@ -39,7 +38,6 @@ export const uploadPhotos = async (photos: any, selectedImage: any) => {
         const selected = photo.file === selectedImage ? 1 : 0;
         const { public_id } = response.data;
         const image = `${public_id}-${ratio}-${selected}`;
-        // newHeight = ratio * newWidth
         photoArray = photoArray.concat(image);
       });
     });
@@ -51,7 +49,6 @@ export const uploadPhotos = async (photos: any, selectedImage: any) => {
     const lastb = Number(b.charAt(b.length - 1));
     return lasta > lastb ? -1 : lasta < lastb ? 1 : 0;
   });
-
   return photoArray;
 };
 

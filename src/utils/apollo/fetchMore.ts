@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Dimensions, ActivityIndicator, View } from 'react-native';
+import { Dimensions } from 'react-native';
 import { since } from '../since';
 import secrets from '../../constants/secrets';
 const { width } = Dimensions.get('window');
@@ -71,7 +70,6 @@ export const getNewPosts = (
   return fetchMore({
     variables: {
       cursor,
-      // reverse: true,
       ...rest
     },
     updateQuery: (previousResult: any, { fetchMoreResult }: any) => {
@@ -97,7 +95,7 @@ export const allEqual = (arr: any) => arr.every((v: any) => v === arr[0]);
 
 const getFinalRatio = (photos: any) => {
   if (photos.length > 0) {
-    const ratios = photos.map((photo: any) => Number(photo.substring(21, 24)));
+    const ratios = photos.map((photo: any) => Number(photo.substring(21, 26)));
     const eq = allEqual(ratios);
     if (eq) {
       if (ratios[0] > 1 && ratios[0] < 2.5) {
@@ -123,8 +121,7 @@ export const readyPosts = (
 ) => {
   return posts.map((post: any) => {
     const ratio =
-      post.photos.length > 0 ? Number(post.photos[0].substring(21, 24)) : 0;
-
+      post.photos.length > 0 ? Number(post.photos[0].substring(21, 26)) : 0;
     const uri =
       post.photos.length > 0
         ? `http://res.cloudinary.com/${
@@ -159,7 +156,7 @@ export const readyUserPosts = (
 ) => {
   return posts.map((post: any) => {
     const ratio =
-      post.photos.length > 0 ? Number(post.photos[0].substring(21, 24)) : 0;
+      post.photos.length > 0 ? Number(post.photos[0].substring(21, 26)) : 0;
     const finalRatio = getFinalRatio(post.photos);
 
     const uri =
@@ -186,12 +183,4 @@ export const readyUserPosts = (
       finalRatio
     };
   });
-};
-
-export const Footer = () => {
-  return (
-    <View style={{ paddingVertical: 20 }}>
-      <ActivityIndicator animating size="small" color="#e0364f" />
-    </View>
-  );
 };

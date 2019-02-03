@@ -8,7 +8,6 @@ import Menu from './Menu';
 
 const ItemView = (props: any) => {
   const {
-    color,
     post,
     post: {
       imageWidth,

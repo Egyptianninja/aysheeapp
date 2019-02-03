@@ -9,16 +9,14 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default class PhotoSlider extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
       animatedScroll: new Animated.Value(0),
-      position: 0,
-      scrollEnabled: true,
-      longPress: false
+      position: 0
     };
   }
 
@@ -29,21 +27,6 @@ export default class PhotoSlider extends React.Component<any, any> {
     } else {
       this.setState({ position: Math.round(offset.x / width) });
     }
-  };
-
-  EnableScroll = () => {
-    this.setState({ scrollEnabled: true });
-    this.props.EnableScroll();
-  };
-  DisableScroll = () => {
-    this.setState({ scrollEnabled: false });
-    this.props.DisableScroll();
-  };
-  onLongPress = () => {
-    this.setState({ longPress: true });
-  };
-  onPressOut = () => {
-    this.setState({ longPress: false });
   };
 
   render() {
@@ -68,8 +51,6 @@ export default class PhotoSlider extends React.Component<any, any> {
             return (
               <TouchableWithoutFeedback
                 onPress={() => this.props.showModal(i)}
-                onLongPress={this.onLongPress}
-                onPressOut={this.onPressOut}
                 key={i}
               >
                 <Image
@@ -123,13 +104,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000'
-  },
-  separator: {
-    backgroundColor: '#000',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    width: 5
   },
   layoutIndicator: {
     height: 15,

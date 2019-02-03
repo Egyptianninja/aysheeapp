@@ -62,9 +62,7 @@ class HomeScreen extends React.Component<any, any> {
       )
     };
   }
-  componentWillMount() {
-    Notifications.addListener(this.handleNotification);
-  }
+
   componentDidMount() {
     this.state.scrollAnim.addListener(({ value }: any) => {
       const diff = value - this.scrollValue;
@@ -77,6 +75,7 @@ class HomeScreen extends React.Component<any, any> {
     this.state.offsetAnim.addListener(({ value }: any) => {
       this.offsetValue = value;
     });
+    Notifications.addListener(this.handleNotification);
   }
   componentWillUnmount() {
     this.state.scrollAnim.removeAllListeners();
@@ -108,10 +107,13 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   render() {
-    // console.disableYellowBox = true;
-    const { clampedScroll } = this.state;
+    const query = this.props.navigation.getParam('query');
+    const { clampedScroll, rest } = this.state;
+    const { lang, words } = this.props;
+
     const catSelected =
       this.state.rest.categoryId || this.state.rest.categoryId === 0;
+
     this.NAVBAR_HEIGHT = catSelected ? 134 : 84;
 
     const navbarTranslate = clampedScroll.interpolate({
@@ -119,21 +121,12 @@ class HomeScreen extends React.Component<any, any> {
       outputRange: [0, -this.NAVBAR_HEIGHT],
       extrapolate: 'clamp'
     });
+
     const floatBtnTranslate = clampedScroll.interpolate({
       inputRange: [0, this.NAVBAR_HEIGHT],
       outputRange: [0, 84],
       extrapolate: 'clamp'
     });
-
-    const { rest } = this.state;
-    const { lang, words } = this.props;
-    if (this.state.modalVisible === true) {
-      setTimeout(() => {
-        return <View style={{ flex: 1, backgroundColor: '#171717' }} />;
-      }, 800);
-    }
-
-    const query = this.props.navigation.getParam('query');
 
     return (
       <View
