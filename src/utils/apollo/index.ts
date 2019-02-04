@@ -1,4 +1,4 @@
-import { getCategoryBuckets, getBuckets, getNamedAggs } from './buckets';
+import { getTimeLineBuckets, getNamedAggs } from './buckets';
 import {
   getNextPosts,
   getDBNextPosts,
@@ -8,8 +8,7 @@ import {
 } from './fetchMore';
 
 export {
-  getCategoryBuckets,
-  getBuckets,
+  getTimeLineBuckets,
   getNamedAggs,
   getNextPosts,
   getDBNextPosts,

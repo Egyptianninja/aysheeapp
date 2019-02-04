@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Animated, RefreshControl } from 'react-native';
+import { View, Animated } from 'react-native';
 import { debounce } from 'lodash';
 import { Notifications } from 'expo';
 import { connect } from 'react-redux';
@@ -12,9 +12,9 @@ import * as store from '../../store/getStore';
 import { setBuckets } from '../../store/actions/postActions';
 import {
   getNextPosts,
+  getNewPosts,
   readyPosts,
-  getBuckets,
-  getCategoryBuckets
+  getTimeLineBuckets
 } from '../../utils';
 import {
   Loading,
@@ -121,6 +121,11 @@ class HomeScreen extends React.Component<any, any> {
       outputRange: [0, -this.NAVBAR_HEIGHT],
       extrapolate: 'clamp'
     });
+    const viewHeight = clampedScroll.interpolate({
+      inputRange: [0, this.NAVBAR_HEIGHT],
+      outputRange: [this.NAVBAR_HEIGHT, 0],
+      extrapolate: 'clamp'
+    });
 
     const floatBtnTranslate = clampedScroll.interpolate({
       inputRange: [0, this.NAVBAR_HEIGHT],
@@ -132,7 +137,6 @@ class HomeScreen extends React.Component<any, any> {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#fff',
           paddingHorizontal: 5
         }}
       >
@@ -169,74 +173,58 @@ class HomeScreen extends React.Component<any, any> {
               return `Error!: ${error}`;
             }
 
-            const posts = data.getTimeLine.posts;
-            if (posts && posts.length === 0) {
+            const postsQuery = data.getTimeLine.posts;
+            if (postsQuery && postsQuery.length === 0) {
               return <Noresult lang={lang} title={words.noresults} />;
             }
 
-            const rPosts = readyPosts(posts, 200, 79, lang);
-
-            if (rest.categoryId || rest.categoryId === 0) {
-              const buckets = getBuckets(store, data, 'getTimeLine').filter(
-                (x: any) => x
-              );
-              this.props.setBuckets(buckets);
-            } else {
-              const buckets = getCategoryBuckets(
-                store,
-                data,
-                'getTimeLine'
-              ).filter((x: any) => x);
-              this.props.setBuckets(buckets);
-            }
+            const posts = readyPosts(postsQuery, 200, 79, lang);
+            const buckets = getTimeLineBuckets(rest.categoryId, store, data);
+            // TODO: require fix side effect
+            this.props.setBuckets(buckets);
 
             return (
-              <MasonryList
-                data={rPosts}
-                ref={(ref: any) => {
-                  this.flatListRef = ref;
-                }}
-                contentContainerStyle={{
-                  marginTop: this.NAVBAR_HEIGHT,
-                  paddingBottom: 160
-                }}
-                scrollEventThrottle={16}
-                onScroll={Animated.event([
-                  {
-                    nativeEvent: {
-                      contentOffset: { y: this.state.scrollAnim }
+              <React.Fragment>
+                <Animated.View style={{ height: viewHeight }} />
+                <MasonryList
+                  data={posts}
+                  ref={(ref: any) => {
+                    this.flatListRef = ref;
+                  }}
+                  scrollEventThrottle={16}
+                  onScroll={Animated.event([
+                    {
+                      nativeEvent: {
+                        contentOffset: { y: this.state.scrollAnim }
+                      }
                     }
+                  ])}
+                  // TODO: need fix getNewPosts
+                  // onRefresh={() => getNewPosts(data, fetchMore, 'getTimeLine')}
+                  onRefresh={() => refetch()}
+                  refreshing={this.state.refreshing}
+                  onEndReached={() =>
+                    this.getNextPosts(data, fetchMore, 'getTimeLine')
                   }
-                ])}
-                refreshControl={
-                  <RefreshControl
-                    onRefresh={() => refetch()}
-                    refreshing={this.state.refreshing}
-                    tintColor="#6FA7D5"
-                  />
-                }
-                // onRefresh={() => getNewPosts(data, fetchMore, "getTimeLine")}
-                onEndReached={() =>
-                  this.getNextPosts(data, fetchMore, 'getTimeLine')
-                }
-                renderItem={({ item }: any) => (
-                  <ItemView
-                    post={item}
-                    navigation={this.props.navigation}
-                    selectePost={this.selectePost}
-                    favoritePost={this.props.favoritePost}
-                    word={this.props.words}
-                    lang={lang}
-                  />
-                )}
-                getHeightForItem={({ item }: any) => item.height}
-                numColumns={2}
-                keyExtractor={(item: any) => item.id}
-                removeClippedSubviews={true}
-                onEndReachedThreshold={0.5}
-                disableVirtualization={false}
-                windowSize={21}
-              />
+                  renderItem={({ item }: any) => (
+                    <ItemView
+                      post={item}
+                      navigation={this.props.navigation}
+                      selectePost={this.selectePost}
+                      favoritePost={this.props.favoritePost}
+                      word={this.props.words}
+                      lang={lang}
+                    />
+                  )}
+                  getHeightForItem={({ item }: any) => item.height}
+                  numColumns={2}
+                  keyExtractor={(item: any) => item.id}
+                  removeClippedSubviews={true}
+                  onEndReachedThreshold={0.5}
+                  disableVirtualization={false}
+                  windowSize={21}
+                />
+              </React.Fragment>
             );
           }}
         </Query>

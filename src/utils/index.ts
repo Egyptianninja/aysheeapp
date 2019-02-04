@@ -1,6 +1,5 @@
 import {
-  getCategoryBuckets,
-  getBuckets,
+  getTimeLineBuckets,
   getNamedAggs,
   getNextPosts,
   getDBNextPosts,
@@ -55,8 +54,7 @@ export {
   getDBNextPosts,
   isArabic,
   parseJwt,
-  getCategoryBuckets,
-  getBuckets,
+  getTimeLineBuckets,
   getNamedAggs,
   arabicToNum,
   registerForPushNotificationsAsync,

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import { icons } from '../../load';
 import CategoryIcon from './CategoryIcon';
 import HeaderFilter from './HeaderFilter';
-import FilterSelect from './filters/FilterSelect';
+import BottonAll from './BottonAll';
 
 class CategoriesScroll extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -16,7 +16,6 @@ class CategoriesScroll extends React.Component<any, any> {
     }
   }
   scrollView: any;
-  // scrollOffset: any;
 
   constructor(props: any) {
     super(props);
@@ -26,15 +25,11 @@ class CategoriesScroll extends React.Component<any, any> {
     };
   }
 
-  getSortBucket = (lang: any) => {
+  getSortBucket = () => {
     return {
-      buckets: [
-        { id: 1, name: lang === 'ar' ? 'الأحدث' : 'Recent' },
-        { id: 2, name: lang === 'ar' ? 'الأقل سعراً' : 'Less Price' },
-        { id: 3, name: lang === 'ar' ? 'الأقرب' : 'Nearest' }
-      ],
-      label: lang === 'ar' ? 'فرز' : 'Sort',
-      name: 'sortType'
+      name: 'sortType',
+      buckets: this.props.sort,
+      label: this.props.words.sort
     };
   };
 
@@ -68,59 +63,6 @@ class CategoriesScroll extends React.Component<any, any> {
     addFilter(itemKind, itemId);
   };
 
-  renderSort = (sortData: any, lang: any) => {
-    return (
-      <FilterSelect
-        lang={lang}
-        data={sortData}
-        icon="md-funnel"
-        itemKind="sortType"
-        addFilter={this.props.addFilter}
-        removeFilter={this.props.removeFilter}
-        rest={this.props.rest}
-        words={this.props.words}
-      />
-    );
-  };
-
-  renderAllBotton = () => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          this.props.lang === 'ar'
-            ? this.scrollView.scrollToEnd({ animated: true })
-            : this.scrollView.scrollTo({ animated: true, offset: 0 });
-          this.props.removeAllFilters();
-        }}
-        style={{
-          padding: 3,
-          paddingHorizontal: 4,
-          margin: 5,
-          borderWidth: 1,
-          borderColor: '#ddd',
-          backgroundColor: '#6FA7D5',
-          shadowOffset: { width: 2, height: 2 },
-          shadowColor: '#666',
-          shadowRadius: 3,
-          shadowOpacity: 0.2,
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 14,
-            color: '#fff',
-            fontFamily: 'cairo-regular',
-            transform: [{ rotateZ: '270deg' }]
-          }}
-        >
-          {this.props.words.all}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
-
   scrollListToStart = () => {
     if (this.props.lang === 'ar') {
       this.scrollView.scrollToEnd({ animated: false });
@@ -128,37 +70,43 @@ class CategoriesScroll extends React.Component<any, any> {
   };
 
   render() {
-    const sortData = this.getSortBucket(this.props.lang);
-    const { addFilter, removeFilter, activeItem, rest } = this.props;
-    const { buckets } = this.state;
-    if (!buckets) {
-      return <View />;
-    }
-    const categories = this.props.categories;
+    const sortData = this.getSortBucket();
+    const {
+      categories,
+      addFilter,
+      removeFilter,
+      removeAllFilters,
+      activeItem,
+      rest,
+      words,
+      lang
+    } = this.props;
 
     return (
       <View style={{ width: '100%' }}>
         <View
           style={{
-            flexDirection: this.props.lang === 'ar' ? 'row-reverse' : 'row',
+            flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
             paddingHorizontal: 5,
             backgroundColor: '#fff'
           }}
         >
-          {this.renderAllBotton()}
+          <BottonAll
+            lang={lang}
+            scrollView={this.scrollView}
+            removeAllFilters={removeAllFilters}
+            title={words.all}
+          />
           <ScrollView
             ref={(ref: any) => {
               this.scrollView = ref;
             }}
-            // onScroll={e => {
-            //   this.scrollOffset = e.nativeEvent.contentOffset.x;
-            // }}
             onContentSizeChange={this.scrollListToStart}
             scrollEventThrottle={16}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
-              flexDirection: this.props.lang === 'ar' ? 'row-reverse' : 'row'
+              flexDirection: lang === 'ar' ? 'row-reverse' : 'row'
             }}
             style={{
               backgroundColor: '#fff'
@@ -172,9 +120,8 @@ class CategoriesScroll extends React.Component<any, any> {
           <HeaderFilter
             lang={this.props.lang}
             rest={rest}
-            renderSort={this.renderSort}
             sortData={sortData}
-            buckets={buckets}
+            buckets={this.state.buckets}
             addFilter={addFilter}
             removeFilter={removeFilter}
             activeItem={activeItem}
@@ -189,6 +136,7 @@ class CategoriesScroll extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
   words: state.glob.language.words,
+  sort: state.glob.language.sort,
   buckets: state.post.buckets
 });
 

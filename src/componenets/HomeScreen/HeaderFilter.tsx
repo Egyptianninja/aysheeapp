@@ -1,303 +1,150 @@
-import * as React from "react";
-import { View, ScrollView } from "react-native";
-import FilterSelect from "./filters/FilterSelect";
+import * as React from 'react';
+import { View, ScrollView } from 'react-native';
+import FilterSelect from './filters/FilterSelect';
 
 const HeaderFilter: any = ({
   rest: { categoryId },
   rest,
   buckets,
   addFilter,
-  renderSort,
   sortData,
   removeFilter,
   lang,
   words
 }: any) => {
   if (categoryId === 0) {
-    const city = getItems(buckets, "city");
-    const realestate = getItems(buckets, "realestateId");
-    const isnew = getItems(buckets, "isnew");
-    const issale = getItems(buckets, "issale");
-    const isfurnishered = getItems(buckets, "isfurnishered");
-    const rooms = getItems(buckets, "rooms");
-    const bathrooms = getItems(buckets, "bathrooms");
-
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'realestate', data: getItems(buckets, 'realestateId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') },
+      { name: 'issale', data: getItems(buckets, 'issale') },
+      { name: 'isfurnishered', data: getItems(buckets, 'isfurnishered') },
+      { name: 'rooms', data: getItems(buckets, 'rooms') },
+      { name: 'bathrooms', data: getItems(buckets, 'bathrooms') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
             words,
             rest,
-            "city",
-            city,
+            filter.name,
+            filter.data,
             addFilter,
             removeFilter,
             lang
-          )}
-        {realestate &&
-          renderSelectRow(
-            words,
-            rest,
-            "realestateId",
-            realestate,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {rooms &&
-          renderSelectRow(
-            words,
-            rest,
-            "rooms",
-            rooms,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {bathrooms &&
-          renderSelectRow(
-            words,
-            rest,
-            "bathrooms",
-            bathrooms,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-
-        {isnew &&
-          renderSelectRow(
-            words,
-            rest,
-            "isnew",
-            isnew,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {issale &&
-          renderSelectRow(
-            words,
-            rest,
-            "issale",
-            issale,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {isfurnishered &&
-          renderSelectRow(
-            words,
-            rest,
-            "isfurnishered",
-            isfurnishered,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+          );
+        })}
       </RenderFilter>
     );
   } else if (categoryId === 1) {
-    const city = getItems(buckets, "city");
-    const kinds = getItems(buckets, "kindId");
-    const brands = getItems(buckets, "brandId");
-    const subBrands = getItems(buckets, "subBrandId");
-
     const brandId = rest.brandId;
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'brandId', data: getItems(buckets, 'brandId') },
+      { name: 'subBrandId', data: getItems(buckets, 'subBrandId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') },
+      { name: 'issale', data: getItems(buckets, 'issale') },
+      { name: 'year', data: getItems(buckets, 'year') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
 
-    const isnew = getItems(buckets, "isnew");
-    const issale = getItems(buckets, "issale");
-    const year = getItems(buckets, "year");
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
-            words,
-            rest,
-            "city",
-            city,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {kinds &&
-          renderSelectRow(
-            words,
-            rest,
-            "kindId",
-            kinds,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {brands &&
-          renderSelectRow(
-            words,
-            rest,
-            "brandId",
-            brands,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {subBrands &&
-          renderSelectRow(
-            words,
-            rest,
-            "subBrandId",
-            subBrands,
-            addFilter,
-            removeFilter,
-            lang,
-            !(brandId || brandId === 0),
-            { id: brandId, label: "Sub Brand", name: "subBrandId" }
-          )}
-        {isnew &&
-          renderSelectRow(
-            words,
-            rest,
-            "isnew",
-            isnew,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {issale &&
-          renderSelectRow(
-            words,
-            rest,
-            "issale",
-            issale,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {year &&
-          renderSelectRow(
-            words,
-            rest,
-            "year",
-            year,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          if (filter.name === 'subBrandId') {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              lang,
+              !(brandId || brandId === 0),
+              { id: brandId, label: 'Sub Brand', name: 'subBrandId' }
+            );
+          } else {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              lang
+            );
+          }
+        })}
       </RenderFilter>
     );
   } else if (categoryId === 2) {
-    const city = getItems(buckets, "city");
-    const kinds = getItems(buckets, "kindId");
-    const eBrands = getItems(buckets, "eBrandId");
     const kindId = rest.kindId;
-    const isnew = getItems(buckets, "isnew");
-    const issale = getItems(buckets, "issale");
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') },
+      { name: 'issale', data: getItems(buckets, 'issale') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
-            words,
-            rest,
-            "city",
-            city,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {kinds &&
-          renderSelectRow(
-            words,
-            rest,
-            "kindId",
-            kinds,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {eBrands &&
-          renderSelectRow(
-            words,
-            rest,
-            "eBrandId",
-            eBrands,
-            addFilter,
-            removeFilter,
-            lang,
-            !(kindId || kindId === 0),
-            { id: kindId, label: "Brand", name: "eBrandId" }
-          )}
-        {isnew &&
-          renderSelectRow(
-            words,
-            rest,
-            "isnew",
-            isnew,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {issale &&
-          renderSelectRow(
-            words,
-            rest,
-            "issale",
-            issale,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          if (filter.name === 'eBrandId') {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              lang,
+              !(kindId || kindId === 0),
+              { id: kindId, label: 'Brand', name: 'eBrandId' }
+            );
+          } else {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              lang
+            );
+          }
+        })}
       </RenderFilter>
     );
   } else if (categoryId === 3 || categoryId === 8 || categoryId === 16) {
-    const city = getItems(buckets, "city");
-    const kinds = getItems(buckets, "kindId");
-    const isnew = getItems(buckets, "isnew");
-    const issale = getItems(buckets, "issale");
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') },
+      { name: 'issale', data: getItems(buckets, 'issale') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
             words,
             rest,
-            "city",
-            city,
+            filter.name,
+            filter.data,
             addFilter,
             removeFilter,
             lang
-          )}
-        {kinds &&
-          renderSelectRow(
-            words,
-            rest,
-            "kindId",
-            kinds,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {isnew &&
-          renderSelectRow(
-            words,
-            rest,
-            "isnew",
-            isnew,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {issale &&
-          renderSelectRow(
-            words,
-            rest,
-            "issale",
-            issale,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+          );
+        })}
       </RenderFilter>
     );
   } else if (
@@ -307,137 +154,93 @@ const HeaderFilter: any = ({
     categoryId === 15 ||
     categoryId === 19
   ) {
-    const city = getItems(buckets, "city");
-    const isnew = getItems(buckets, "isnew");
-    const issale = getItems(buckets, "issale");
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') },
+      { name: 'issale', data: getItems(buckets, 'issale') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
             words,
             rest,
-            "city",
-            city,
+            filter.name,
+            filter.data,
             addFilter,
             removeFilter,
             lang
-          )}
-        {isnew &&
-          renderSelectRow(
-            words,
-            rest,
-            "isnew",
-            isnew,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {issale &&
-          renderSelectRow(
-            words,
-            rest,
-            "issale",
-            issale,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+          );
+        })}
       </RenderFilter>
     );
   } else if (categoryId === 9 || categoryId === 10) {
-    const city = getItems(buckets, "city");
-    const services = getItems(buckets, "serviceId");
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'serviceId', data: getItems(buckets, 'serviceId') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
             words,
             rest,
-            "city",
-            city,
+            filter.name,
+            filter.data,
             addFilter,
             removeFilter,
             lang
-          )}
-        {services &&
-          renderSelectRow(
-            words,
-            rest,
-            "serviceId",
-            services,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+          );
+        })}
       </RenderFilter>
     );
   } else if (categoryId === 17) {
-    const city = getItems(buckets, "city");
-    const kinds = getItems(buckets, "kindId");
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
             words,
             rest,
-            "city",
-            city,
+            filter.name,
+            filter.data,
             addFilter,
             removeFilter,
             lang
-          )}
-        {kinds &&
-          renderSelectRow(
-            words,
-            rest,
-            "kindId",
-            kinds,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+          );
+        })}
       </RenderFilter>
     );
   } else if (categoryId === 12 || categoryId === 13 || categoryId === 18) {
-    const city = getItems(buckets, "city");
-    const kinds = getItems(buckets, "kindId");
-    const isnew = getItems(buckets, "isnew");
+    const catFilters = [
+      { name: 'sort', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang}>
-        {renderSort(sortData, lang)}
-        {city &&
-          renderSelectRow(
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
             words,
             rest,
-            "city",
-            city,
+            filter.name,
+            filter.data,
             addFilter,
             removeFilter,
             lang
-          )}
-        {kinds &&
-          renderSelectRow(
-            words,
-            rest,
-            "kindId",
-            kinds,
-            addFilter,
-            removeFilter,
-            lang
-          )}
-        {isnew &&
-          renderSelectRow(
-            words,
-            rest,
-            "isnew",
-            isnew,
-            addFilter,
-            removeFilter,
-            lang
-          )}
+          );
+        })}
       </RenderFilter>
     );
   } else {
@@ -459,7 +262,7 @@ const renderSelectRow = (
   pid: any = null
 ) => {
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View key={itemKind} style={{ flexDirection: 'row' }}>
       <FilterSelect
         lang={lang}
         data={bucket}
@@ -490,25 +293,25 @@ const RenderFilter = (props: any) => {
         scrollView = ref;
       }}
       onContentSizeChange={
-        props.lang === "ar"
+        props.lang === 'ar'
           ? () => scrollView.scrollToEnd({ animated: false })
           : () => null
       }
       contentContainerStyle={{
-        justifyContent: "flex-start",
-        marginHorizontal: props.lang === "ar" ? -7 : 7
+        justifyContent: 'flex-start',
+        marginHorizontal: props.lang === 'ar' ? -7 : 7
       }}
       showsHorizontalScrollIndicator={false}
       style={{
         paddingLeft: 5,
-        backgroundColor: "#fff"
+        backgroundColor: '#fff'
       }}
     >
       <View
         style={{
-          flexDirection: props.lang === "ar" ? "row-reverse" : "row",
-          justifyContent: "center",
-          alignItems: "center"
+          flexDirection: props.lang === 'ar' ? 'row-reverse' : 'row',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
         {props.children}
