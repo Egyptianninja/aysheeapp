@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from '../../utils';
-import { Ionicons } from '@expo/vector-icons';
 
 const CategoryIcon = ({
   item,
@@ -23,11 +22,6 @@ const CategoryIcon = ({
       }}
     >
       <View style={styles.container}>
-        {/* {active && (
-          <View style={{ position: 'absolute', right: 5, top: -3 }}>
-            <Ionicons name="ios-close" size={28} color="#bbb" />
-          </View>
-        )} */}
         <View
           style={[
             styles.iconView,

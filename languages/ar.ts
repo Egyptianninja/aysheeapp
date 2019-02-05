@@ -261,9 +261,9 @@ export default {
     { id: 4, name: 'تسجيل خروج' }
   ],
   sort: [
-    { id: 0, name: 'الأحدث' },
-    { id: 1, name: 'الأقل سعراً' },
-    { id: 2, name: 'الأقرب' }
+    { id: 1, name: 'الأحدث' },
+    { id: 2, name: 'الأقل سعراً' },
+    { id: 3, name: 'الأقرب' }
   ],
 
   words: {

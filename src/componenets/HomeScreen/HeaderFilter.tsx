@@ -14,7 +14,7 @@ const HeaderFilter: any = ({
 }: any) => {
   if (categoryId === 0) {
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'realestate', data: getItems(buckets, 'realestateId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
@@ -42,7 +42,7 @@ const HeaderFilter: any = ({
   } else if (categoryId === 1) {
     const brandId = rest.brandId;
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'brandId', data: getItems(buckets, 'brandId') },
@@ -85,7 +85,7 @@ const HeaderFilter: any = ({
   } else if (categoryId === 2) {
     const kindId = rest.kindId;
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
@@ -125,7 +125,7 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 3 || categoryId === 8 || categoryId === 16) {
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
@@ -155,7 +155,7 @@ const HeaderFilter: any = ({
     categoryId === 19
   ) {
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
       { name: 'issale', data: getItems(buckets, 'issale') }
@@ -178,7 +178,7 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 9 || categoryId === 10) {
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'serviceId', data: getItems(buckets, 'serviceId') }
     ];
@@ -200,7 +200,7 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 17) {
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') }
     ];
@@ -222,7 +222,7 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 12 || categoryId === 13 || categoryId === 18) {
     const catFilters = [
-      { name: 'sort', data: sortData },
+      { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') }

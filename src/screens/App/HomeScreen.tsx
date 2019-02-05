@@ -107,6 +107,8 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   render() {
+    console.log(this.state.rest);
+
     const query = this.props.navigation.getParam('query');
     const { clampedScroll, rest } = this.state;
     const { lang, words } = this.props;
@@ -147,11 +149,15 @@ class HomeScreen extends React.Component<any, any> {
             left: 0,
             right: 0,
             height: this.NAVBAR_HEIGHT,
-            transform: [{ translateY: navbarTranslate }]
+            transform: [{ translateY: navbarTranslate }],
+            minHeight: 85,
+            borderBottomWidth: 1,
+            borderBottomColor: '#DEDBDD'
           }}
         >
           <CategoriesScroll
             lang={lang}
+            currentCategory={this.state.rest.categoryId}
             addFilter={this.addFilter}
             removeFilter={this.removeFilter}
             removeAllFilters={this.removeAllFilters}
@@ -191,6 +197,7 @@ class HomeScreen extends React.Component<any, any> {
                     this.flatListRef = ref;
                   }}
                   scrollEventThrottle={16}
+                  contentContainerStyle={{ marginTop: 5 }}
                   onScroll={Animated.event([
                     {
                       nativeEvent: {

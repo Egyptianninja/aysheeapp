@@ -106,26 +106,22 @@ export default class FilterSelect extends React.Component<any, any> {
         <TouchableOpacity
           style={{
             flexDirection: 'row',
-            padding: 4,
+            padding: 2,
             paddingLeft: 2,
-            height: 36,
-            minWidth: 75,
+            height: 32,
+            minWidth: 70,
             justifyContent: 'center',
             alignItems: 'center',
             marginRight: 7,
             marginVertical: 5,
-            borderWidth: 1,
-            borderColor: selected ? '#EEEDEE' : '#efefef',
-            shadowOffset: { width: 2, height: 2 },
-            shadowColor: '#666',
-            shadowRadius: 3,
-            shadowOpacity: 0.2,
-            borderRadius: 18,
+            borderWidth: selected ? 0 : 1,
+            borderColor: '#E7E4E6',
+            borderRadius: 16,
             backgroundColor: selected ? '#9C949A' : '#fff'
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
-          {this.props.icon && (
+          {/* {this.props.icon && (
             <Ionicons
               name={this.props.icon}
               size={22}
@@ -144,7 +140,7 @@ export default class FilterSelect extends React.Component<any, any> {
               }
               style={{ margin: 5 }}
             />
-          )}
+          )} */}
           <Text
             style={{
               color: selected
@@ -154,7 +150,8 @@ export default class FilterSelect extends React.Component<any, any> {
                 : '#6A6262',
               fontSize: this.props.lang === 'ar' ? 14 : 15,
               fontFamily: 'cairo-regular',
-              paddingHorizontal: this.props.icon ? undefined : 5
+              paddingHorizontal: this.props.icon ? undefined : 5,
+              marginTop: selected ? 5 : undefined
             }}
           >
             {selected
@@ -167,12 +164,18 @@ export default class FilterSelect extends React.Component<any, any> {
             <View
               style={{
                 position: 'absolute',
-                left: lang === 'ar' ? undefined : 10,
-                right: lang === 'ar' ? 10 : undefined,
-                top: 2
+                left: 10,
+                top: 0
               }}
             >
-              <Text style={{ fontSize: 10, color: '#fff' }}>{data.label}</Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: '#fff'
+                }}
+              >
+                {data.label}
+              </Text>
             </View>
           )}
         </TouchableOpacity>

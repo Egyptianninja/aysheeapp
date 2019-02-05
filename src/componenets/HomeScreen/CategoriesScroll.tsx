@@ -9,10 +9,21 @@ import BottonAll from './BottonAll';
 
 class CategoriesScroll extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    if (nextProps.buckets !== prevState.buckets) {
-      return { buckets: nextProps.buckets, showFilter: true };
+    if (nextProps.currentCategory !== prevState.currentCategory) {
+      if (nextProps.buckets !== prevState.buckets) {
+        return {
+          buckets: nextProps.buckets,
+          showFilter: false
+        };
+      } else {
+        return { showFilter: true };
+      }
     } else {
-      return { showFilter: false };
+      if (nextProps.buckets !== prevState.buckets) {
+        return { buckets: nextProps.buckets, showFilter: false };
+      } else {
+        return { showFilter: false };
+      }
     }
   }
   scrollView: any;
@@ -113,10 +124,9 @@ class CategoriesScroll extends React.Component<any, any> {
             }}
           >
             {this.renderCategories(categories)}
-            <View style={{ width: 50, height: 36 }} />
           </ScrollView>
         </View>
-        {/* {!this.state.showFilter && (
+        {/* {this.state.showFilter && (
           <View
             style={{
               height: 50,

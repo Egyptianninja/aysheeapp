@@ -252,9 +252,9 @@ export default {
     { id: 4, name: 'Logout' }
   ],
   sort: [
-    { id: 0, name: 'Recent' },
-    { id: 1, name: 'Less Price' },
-    { id: 2, name: 'Nearest' }
+    { id: 1, name: 'Recent' },
+    { id: 2, name: 'Less Price' },
+    { id: 3, name: 'Nearest' }
   ],
 
   words: {
