@@ -81,18 +81,18 @@ class CategoriesScroll extends React.Component<any, any> {
       words,
       lang
     } = this.props;
-
+    const allbtnactive = !(rest.categoryId || rest.categoryId === 0);
     return (
       <View style={{ width: '100%' }}>
         <View
           style={{
             flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
-            paddingHorizontal: 5,
-            backgroundColor: '#fff'
+            paddingHorizontal: 5
           }}
         >
           <BottonAll
             lang={lang}
+            allbtnactive={allbtnactive}
             scrollView={this.scrollView}
             removeAllFilters={removeAllFilters}
             title={words.all}
@@ -113,21 +113,33 @@ class CategoriesScroll extends React.Component<any, any> {
             }}
           >
             {this.renderCategories(categories)}
+            <View style={{ width: 50, height: 36 }} />
           </ScrollView>
         </View>
-
-        {this.state.showFilter && (
-          <HeaderFilter
-            lang={this.props.lang}
-            rest={rest}
-            sortData={sortData}
-            buckets={this.state.buckets}
-            addFilter={addFilter}
-            removeFilter={removeFilter}
-            activeItem={activeItem}
-            words={this.props.words}
+        {/* {!this.state.showFilter && (
+          <View
+            style={{
+              height: 50,
+              width: '100%',
+              backgroundColor: '#fff',
+              position: 'absolute',
+              left: 0,
+              top: 84,
+              zIndex: 601
+            }}
           />
-        )}
+        )} */}
+
+        <HeaderFilter
+          lang={this.props.lang}
+          rest={rest}
+          sortData={sortData}
+          buckets={this.state.buckets}
+          addFilter={addFilter}
+          removeFilter={removeFilter}
+          activeItem={activeItem}
+          words={this.props.words}
+        />
       </View>
     );
   }

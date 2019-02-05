@@ -33,7 +33,7 @@ class HomeHeader extends React.Component<any, any> {
               name="ios-menu"
               size={35}
               style={styles.icon}
-              color="#6FA7D5"
+              color="#5B4C57"
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -46,7 +46,7 @@ class HomeHeader extends React.Component<any, any> {
               marginTop: 3
             }}
           >
-            <Ionicons name="ios-notifications" size={30} color="#6FA7D5" />
+            <Ionicons name="ios-notifications" size={30} color="#5B4C57" />
           </TouchableOpacity>
         </View>
 
@@ -58,28 +58,26 @@ class HomeHeader extends React.Component<any, any> {
         >
           <TouchableOpacity
             style={{
-              height: 30,
+              height: 32,
               width: '90%',
-              backgroundColor: '#fff',
-              borderColor: '#6FA7D5',
-              borderWidth: 1,
+              backgroundColor: '#eee',
+
               justifyContent: 'center',
               alignItems: 'center',
-              borderRadius: 5,
+              borderRadius: 15,
               flexDirection: 'row'
             }}
-            onPress={
-              () =>
-                this.props.isAuthenticated
-                  ? this.props.navigation.navigate('ChoiseScreen')
-                  : this.props.navigation.navigate('Auth')
-              // : this.props.navigation.navigate("FastLoginScreen")
+            onPress={() =>
+              this.props.isAuthenticated
+                ? this.props.navigation.navigate('ChoiseScreen')
+                : this.props.navigation.navigate('Auth')
             }
           >
             <Text
               style={{
+                paddingHorizontal: 4,
                 fontSize: 14,
-                color: '#6FA7D5',
+                color: '#5B4C57',
                 fontWeight: 'bold',
                 fontFamily: 'cairo-regular'
               }}

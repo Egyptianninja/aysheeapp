@@ -1,9 +1,9 @@
-import * as React from "react";
-import { View, TouchableOpacity, Animated, Text } from "react-native";
-import { Constants } from "expo";
-import Menu from "./Menu";
-import { StyleSheet } from "../../utils";
-import { Ionicons } from "@expo/vector-icons";
+import * as React from 'react';
+import { View, TouchableOpacity, Animated, Text } from 'react-native';
+import { Constants } from 'expo';
+import Menu from './Menu';
+import { StyleSheet } from '../../utils';
+import { Ionicons } from '@expo/vector-icons';
 
 class ItemHeader extends React.Component<any, any> {
   render() {
@@ -15,9 +15,9 @@ class ItemHeader extends React.Component<any, any> {
           styles.container,
           {
             shadowOffset: { width: 3, height: 3 },
-            shadowColor: "#555",
+            shadowColor: '#555',
             shadowOpacity: 0.1,
-            backgroundColor: "#fff",
+            backgroundColor: '#fff',
             opacity: this.props.opacity
           }
         ]}
@@ -25,7 +25,7 @@ class ItemHeader extends React.Component<any, any> {
         <View
           style={[
             styles.leftIconView,
-            { flexDirection: "row", flex: 1, opacity: this.props.opacity }
+            { flexDirection: 'row', flex: 1, opacity: this.props.opacity }
           ]}
         >
           <TouchableOpacity
@@ -48,16 +48,16 @@ class ItemHeader extends React.Component<any, any> {
         <View
           style={{
             flex: 5,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
             opacity: this.props.opacity
           }}
         >
           <Text
             style={{
-              fontFamily: "cairo-regular",
+              fontFamily: 'cairo-regular',
               fontSize: 20,
-              color: "#373737"
+              color: '#373737'
             }}
           >
             {title}
@@ -78,12 +78,12 @@ class ItemHeader extends React.Component<any, any> {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingTop: Constants.statusBarHeight,
     height: Constants.statusBarHeight + 45,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     paddingHorizontal: 10,
-    alignItems: "center",
+    alignItems: 'center',
     zIndex: 2
   }
 });

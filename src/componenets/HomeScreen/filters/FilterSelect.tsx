@@ -1,15 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   Dimensions,
   ScrollView
-} from "react-native";
-import Modal from "react-native-modal";
-import { Ionicons } from "@expo/vector-icons";
-import { FilterOption } from "./FilterOption";
-const { width } = Dimensions.get("window");
+} from 'react-native';
+import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
+import { FilterOption } from './FilterOption';
+const { width } = Dimensions.get('window');
 
 export default class FilterSelect extends React.Component<any, any> {
   constructor(props: any) {
@@ -24,7 +24,9 @@ export default class FilterSelect extends React.Component<any, any> {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
   componentWillMount() {
-    this.setState({ label: this.props.data.label });
+    if (!this.state.lable) {
+      this.setState({ label: this.props.data.label });
+    }
   }
   handleLabel = (label: any) => {
     this.setState({ label });
@@ -36,13 +38,13 @@ export default class FilterSelect extends React.Component<any, any> {
           onPress={() => {
             const { itemKind, removeFilter } = this.props;
             removeFilter(itemKind);
-            if (itemKind === "brandId") {
-              removeFilter("subBrandId");
+            if (itemKind === 'brandId') {
+              removeFilter('subBrandId');
             }
-            if (itemKind === "kindId") {
-              removeFilter("eBrandId");
-              removeFilter("brandId");
-              removeFilter("subBrandId");
+            if (itemKind === 'kindId') {
+              removeFilter('eBrandId');
+              removeFilter('brandId');
+              removeFilter('subBrandId');
             }
             this.handleLabel(this.props.data.label);
             this.toggleModal();
@@ -51,19 +53,19 @@ export default class FilterSelect extends React.Component<any, any> {
             flex: 1,
             padding: 3,
             margin: 7,
-            backgroundColor: "#eee",
+            backgroundColor: '#eee',
             borderWidth: 1,
-            borderColor: "#ddd",
+            borderColor: '#ddd',
             borderRadius: 5
           }}
         >
           <Text
             style={{
               fontSize: 16,
-              fontFamily: "cairo-regular",
-              textAlign: this.props.lang === "ar" ? "right" : "left",
+              fontFamily: 'cairo-regular',
+              textAlign: this.props.lang === 'ar' ? 'right' : 'left',
               paddingHorizontal: 10,
-              color: "#ff5959"
+              color: '#ff5959'
             }}
           >
             {this.props.words.remove}
@@ -89,7 +91,6 @@ export default class FilterSelect extends React.Component<any, any> {
 
   render() {
     let data = this.props.data;
-
     if (this.props.pid) {
       if (this.props.pid.id || this.props.pid.id === 0) {
         const { id, label, name } = this.props.pid;
@@ -97,36 +98,30 @@ export default class FilterSelect extends React.Component<any, any> {
         data = { buckets, label, name };
       }
     }
-    const { rest, itemKind } = this.props;
+    const { rest, itemKind, lang } = this.props;
     const selected =
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
-    const selectedLable =
-      rest[itemKind] &&
-      rest[itemKind] !== 0 &&
-      rest[itemKind] !== false &&
-      rest[itemKind] !== true;
-
     return (
       <View>
         <TouchableOpacity
           style={{
-            flexDirection: "row",
+            flexDirection: 'row',
             padding: 4,
             paddingLeft: 2,
             height: 36,
-            justifyContent: "center",
-            alignItems: "center",
+            minWidth: 75,
+            justifyContent: 'center',
+            alignItems: 'center',
             marginRight: 7,
             marginVertical: 5,
             borderWidth: 1,
-            borderColor: "#D7E7F3",
+            borderColor: selected ? '#EEEDEE' : '#efefef',
             shadowOffset: { width: 2, height: 2 },
-            shadowColor: "#666",
+            shadowColor: '#666',
             shadowRadius: 3,
             shadowOpacity: 0.2,
-            // borderRadius: 17,
-            borderRadius: 5,
-            backgroundColor: this.props.disable ? "#eee" : "#fff"
+            borderRadius: 18,
+            backgroundColor: selected ? '#9C949A' : '#fff'
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
@@ -134,7 +129,9 @@ export default class FilterSelect extends React.Component<any, any> {
             <Ionicons
               name={this.props.icon}
               size={22}
-              color={selected ? "#6FA7D5" : "#777"}
+              color={
+                selected ? '#fff' : this.props.disable ? '#ccc' : '#6A6262'
+              }
               style={{ margin: 5 }}
             />
           )}
@@ -142,25 +139,42 @@ export default class FilterSelect extends React.Component<any, any> {
             <Ionicons
               name="ios-arrow-down"
               size={22}
-              color={selected ? "#6FA7D5" : "#777"}
+              color={
+                selected ? '#fff' : this.props.disable ? '#ccc' : '#6A6262'
+              }
               style={{ margin: 5 }}
             />
           )}
           <Text
             style={{
-              color: selected ? "#6FA7D5" : "#777",
-              fontSize: this.props.lang === "ar" ? 14 : 15,
-              fontFamily: "cairo-regular",
+              color: selected
+                ? '#fff'
+                : this.props.disable
+                ? '#ccc'
+                : '#6A6262',
+              fontSize: this.props.lang === 'ar' ? 14 : 15,
+              fontFamily: 'cairo-regular',
               paddingHorizontal: this.props.icon ? undefined : 5
             }}
           >
-            {selectedLable
-              ? // ? `${data.label} - ${this.state.label}`
-                `${this.state.label}`
+            {selected
+              ? `${this.state.label}`
               : this.props.icon || !this.props.rest[itemKind]
               ? data.label
               : this.state.label}
           </Text>
+          {selected && rest[itemKind] !== false && rest[itemKind] !== true && (
+            <View
+              style={{
+                position: 'absolute',
+                left: lang === 'ar' ? undefined : 10,
+                right: lang === 'ar' ? 10 : undefined,
+                top: 2
+              }}
+            >
+              <Text style={{ fontSize: 10, color: '#fff' }}>{data.label}</Text>
+            </View>
+          )}
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}
@@ -172,16 +186,16 @@ export default class FilterSelect extends React.Component<any, any> {
         >
           <View
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               borderRadius: 10,
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               margin: 0,
               height: 350,
               paddingTop: 10,
               width: width - 40,
-              justifyContent: "space-around",
-              alignItems: "center"
+              justifyContent: 'space-around',
+              alignItems: 'center'
             }}
           >
             <ScrollView>{this.renderOptions(data)}</ScrollView>

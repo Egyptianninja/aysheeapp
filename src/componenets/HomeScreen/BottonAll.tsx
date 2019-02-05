@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-const BottonAll = ({ lang, scrollView, removeAllFilters, title }: any) => (
+const BottonAll = ({
+  lang,
+  scrollView,
+  removeAllFilters,
+  title,
+  allbtnactive
+}: any) => (
   <TouchableOpacity
     onPress={() => {
       lang === 'ar'
@@ -11,23 +17,25 @@ const BottonAll = ({ lang, scrollView, removeAllFilters, title }: any) => (
     }}
     style={{
       padding: 3,
-      paddingHorizontal: 4,
+      height: 74,
+      paddingHorizontal: 3,
       margin: 5,
       borderWidth: 1,
-      borderColor: '#ddd',
-      backgroundColor: '#6FA7D5',
+      borderColor: '#DEDBDD',
+      backgroundColor: allbtnactive ? '#9C949A' : '#eee',
       shadowOffset: { width: 2, height: 2 },
       shadowColor: '#666',
       shadowRadius: 3,
       shadowOpacity: 0.2,
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      borderRadius: 20
     }}
   >
     <Text
       style={{
         fontSize: 14,
-        color: '#fff',
+        color: allbtnactive ? '#eee' : '#9C949A',
         fontFamily: 'cairo-regular',
         transform: [{ rotateZ: '270deg' }]
       }}

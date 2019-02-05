@@ -165,7 +165,29 @@ class ItemScreen extends React.Component<any, any> {
 
     return (
       <View style={styles.container}>
-        <ItemHeader
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{
+            position: 'absolute',
+            top: 50,
+            left: 40,
+            zIndex: 600,
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)'
+          }}
+        >
+          <Ionicons
+            name="ios-arrow-back"
+            size={30}
+            style={styles.icon}
+            color="#9C949A"
+          />
+        </TouchableOpacity>
+        {/* <ItemHeader
           navigation={this.props.navigation}
           title={post.title}
           opacity={this.state.opacity}
@@ -173,7 +195,7 @@ class ItemScreen extends React.Component<any, any> {
           favoritePost={this.props.favoritePost}
           word={word}
           lang={lang}
-        />
+        /> */}
         <ScrollView
           onContentSizeChange={this.getScrollLength}
           scrollEventThrottle={16}
@@ -487,24 +509,24 @@ class ItemScreen extends React.Component<any, any> {
               )}
             </Query>
           </View>
+          <InputBar
+            onSendPressed={(postID: any) =>
+              this.sendMessage(
+                postID,
+                post.userId,
+                post.title,
+                this.props.user.name
+              )
+            }
+            ref={this.childRef}
+            onChangeText={(text: string) => this.onChangeInputBarText(text)}
+            text={this.state.inputBarText}
+            autoFocus={true}
+            postId={postId}
+            placeholder={word.writecomment}
+            lang={lang}
+          />
         </ScrollView>
-        <InputBar
-          onSendPressed={(postID: any) =>
-            this.sendMessage(
-              postID,
-              post.userId,
-              post.title,
-              this.props.user.name
-            )
-          }
-          ref={this.childRef}
-          onChangeText={(text: string) => this.onChangeInputBarText(text)}
-          text={this.state.inputBarText}
-          autoFocus={true}
-          postId={postId}
-          placeholder={word.writecomment}
-          lang={lang}
-        />
 
         <KeyboardSpacer />
       </View>

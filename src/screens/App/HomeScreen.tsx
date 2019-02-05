@@ -132,7 +132,6 @@ class HomeScreen extends React.Component<any, any> {
       outputRange: [0, 84],
       extrapolate: 'clamp'
     });
-
     return (
       <View
         style={{
@@ -231,7 +230,7 @@ class HomeScreen extends React.Component<any, any> {
         <Animated.View
           style={{ transform: [{ translateY: floatBtnTranslate }] }}
         >
-          <FloatButton opacity={0.8} action={this.handleHome} />
+          <FloatButton opacity={0.6} action={this.handleHome} />
         </Animated.View>
       </View>
     );

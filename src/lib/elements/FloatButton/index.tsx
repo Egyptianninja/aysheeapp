@@ -12,7 +12,7 @@ const FloatButton = (props: any) => (
       right: 40,
       width: 40,
       height: 40,
-      backgroundColor: '#6FA7D5',
+      backgroundColor: '#5B4C57',
       borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',

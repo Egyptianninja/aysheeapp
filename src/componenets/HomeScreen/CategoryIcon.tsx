@@ -1,13 +1,11 @@
-import * as React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import { StyleSheet } from "../../utils";
-import { Ionicons } from "@expo/vector-icons";
+import * as React from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet } from '../../utils';
+import { Ionicons } from '@expo/vector-icons';
 
 const CategoryIcon = ({
   item,
   icon,
-  iconColor,
-  textColor,
   addFilter,
   removeAllFilters,
   categoryId
@@ -16,42 +14,42 @@ const CategoryIcon = ({
   return (
     <TouchableOpacity
       onPress={async () => {
-        // addFilter("categoryId", item.id);
         if (categoryId === item.id) {
           removeAllFilters();
         } else {
           await removeAllFilters();
-          addFilter("categoryId", item.id);
+          addFilter('categoryId', item.id);
         }
       }}
     >
-      <View style={[active ? styles.activeContainer : styles.container]}>
-        {active && (
-          <View style={{ position: "absolute", right: 7, top: -3 }}>
-            <Ionicons name="ios-close" size={28} color="#6FA7D5" />
+      <View style={styles.container}>
+        {/* {active && (
+          <View style={{ position: 'absolute', right: 5, top: -3 }}>
+            <Ionicons name="ios-close" size={28} color="#bbb" />
           </View>
-        )}
-        <View style={styles.iconView}>
+        )} */}
+        <View
+          style={[
+            styles.iconView,
+            { backgroundColor: active ? '#9C949A' : '#eee' }
+          ]}
+        >
           <View style={styles.imageView}>
             <Image
               style={[
                 {
                   flex: 1,
-                  width: "100%",
-                  height: "100%"
+                  width: '100%',
+                  height: '100%'
                 },
-                { tintColor: active ? "#6FA7D5" : iconColor }
+                { tintColor: active ? '#eee' : '#6A6262' }
               ]}
               source={icon}
             />
           </View>
         </View>
         <View style={styles.textView}>
-          <Text
-            style={[styles.text, { color: active ? "#6FA7D5" : textColor }]}
-          >
-            {item.name}
-          </Text>
+          <Text style={[styles.text, { color: '#6A6262' }]}>{item.name}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -62,49 +60,32 @@ const styles = StyleSheet.create({
   container: {
     padding: 5,
     paddingTop: 5,
-    marginVertical: 5,
-    borderWidth: 1,
-    borderColor: "#eee",
-    borderRadius: 5,
-    marginHorizontal: 4,
-    backgroundColor: "#fff",
-    shadowOffset: { width: 2, height: 2 },
-    shadowColor: "#666",
-    shadowRadius: 3,
-    shadowOpacity: 0.2
-  },
-  activeContainer: {
-    padding: 5,
-    paddingTop: 5,
-    marginVertical: 5,
-    borderWidth: 1,
-    borderColor: "#eee",
-    borderRadius: 5,
-    marginHorizontal: 4,
-    backgroundColor: "#eee"
+    marginTop: 5,
+    minWidth: 80,
+    backgroundColor: '#fff'
   },
   iconView: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    height: 50,
+    width: 50,
+    borderRadius: 25
   },
   imageView: {
-    width: 24,
-    height: 24
+    width: 26,
+    height: 26
   },
   image: {
     flex: 1,
-    width: "100%",
-    height: "100%"
+    width: '100%',
+    height: '100%'
   },
-  textView: {
-    paddingTop: 5
-  },
+  textView: {},
   text: {
-    textAlign: "center",
-    fontFamily: "cairo-regular",
-    paddingHorizontal: 5,
-    fontSize: 14
+    textAlign: 'center',
+    fontFamily: 'cairo-regular',
+    fontSize: 12
   }
 });
 

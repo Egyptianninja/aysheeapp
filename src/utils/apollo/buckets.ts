@@ -100,7 +100,7 @@ export const getOtherBuckets = (store: any, data: any, query: any) => {
       const namedBucket = agg.buckets.map((bk: any) => {
         return {
           id: bk.key,
-          name: bk.key === '0' ? words.sale : words.rent,
+          name: bk.key === '0' ? words.rent : words.sale,
           qty: bk.doc_count
         };
       });
