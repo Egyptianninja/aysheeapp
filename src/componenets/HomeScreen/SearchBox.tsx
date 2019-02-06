@@ -1,24 +1,18 @@
 import * as React from 'react';
 import { View, TextInput, Text, TouchableOpacity } from 'react-native';
-
+import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
+import { setQuery, delQuery } from '../../store/actions/postActions';
 import { StyleSheet, isArabic } from '../../utils';
 
 class SearchBox extends React.Component<any, any> {
   state = {
-    input: '',
-    close: null
+    query: ''
   };
-
-  componentDidMount() {
-    if (this.props.value) {
-      this.setState({ input: this.props.value });
-    }
-  }
-
   render() {
-    const rtl = isArabic(this.state.input);
-
+    const { query } = this.props;
+    const q = query !== '' ? query : this.state.query;
+    const rtl = q ? isArabic(q) : undefined;
     return (
       <View
         style={[
@@ -29,28 +23,28 @@ class SearchBox extends React.Component<any, any> {
           }
         ]}
       >
-        {this.state.input !== '' && (
+        {this.props.query !== '' && (
           <TouchableOpacity
             onPress={() => {
-              this.setState({ input: '' });
-              this.props.navigation.setParams({ query: '' });
+              this.props.delQuery();
+              this.setState({ query: '' });
             }}
             style={{
-              position: 'relative',
+              position: 'absolute',
               width: 26,
               height: 26,
               borderRadius: 13,
-              left: -12,
+              left: 20,
               top: 2,
-              backgroundColor: '#ddd',
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              zIndex: 200
             }}
           >
             <Text
               style={{
                 fontSize: 20,
-                color: '#FF5959',
+                color: '#fff',
                 fontWeight: 'bold',
                 left: 1,
                 bottom: 1
@@ -62,9 +56,9 @@ class SearchBox extends React.Component<any, any> {
         )}
         <TextInput
           style={[
+            query !== '' && styles.queryinput,
             styles.input,
             {
-              backgroundColor: '#f6f7f7',
               writingDirection: rtl ? 'rtl' : 'ltr'
             }
           ]}
@@ -73,20 +67,20 @@ class SearchBox extends React.Component<any, any> {
           autoCorrect={false}
           onFocus={this.props.onSearchSelect}
           onEndEditing={this.props.onSearchUnSelect}
-          value={this.state.input}
+          value={query === '' ? this.state.query : query}
           onChangeText={e => {
             {
-              this.setState({ input: e });
+              this.setState({ query: e });
               if (e === '') {
-                this.props.navigation.setParams({ query: '' });
+                this.props.delQuery();
+                this.setState({ query: '' });
               }
             }
           }}
           onSubmitEditing={() => {
-            this.props.navigation.setParams({ query: this.state.input });
+            this.props.setQuery(this.state.query);
           }}
         />
-
         <Ionicons
           style={[styles.icon, { color: '#777' }]}
           name="ios-search"
@@ -105,14 +99,22 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingLeft: 15,
     borderWidth: 1,
-    opacity: 0.8
+    opacity: 0.8,
+    alignItems: 'center'
   },
   input: {
     flex: 1,
     direction: 'rtl',
     fontSize: 16,
     fontWeight: '500',
-    height: 30
+    height: 26
+  },
+  queryinput: {
+    flex: 1,
+    backgroundColor: '#9C949A',
+    color: '#fff',
+    borderRadius: 13,
+    paddingHorizontal: 10
   },
   icon: {
     marginHorizontal: 10,
@@ -120,4 +122,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SearchBox;
+const mapStateToProps = (state: any) => ({
+  query: state.post.query
+});
+
+export default connect(
+  mapStateToProps,
+  { setQuery, delQuery }
+)(SearchBox);

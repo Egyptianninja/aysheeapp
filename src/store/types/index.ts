@@ -15,3 +15,5 @@ export const INIT_TIME = 'INIT_TIME';
 export const INIT_CODE = 'INIT_CODE';
 export const INIT_APP = 'INIT_APP';
 export const CODE_SENT = 'CODE_SENT';
+export const SET_QUERY = 'SET_QUERY';
+export const DEL_QUERY = 'DEL_QUERY';

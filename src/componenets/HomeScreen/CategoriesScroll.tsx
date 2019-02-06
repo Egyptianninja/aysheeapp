@@ -98,7 +98,8 @@ class CategoriesScroll extends React.Component<any, any> {
         <View
           style={{
             flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
-            paddingHorizontal: 5
+            paddingHorizontal: 5,
+            backgroundColor: '#fff'
           }}
         >
           <BottonAll
