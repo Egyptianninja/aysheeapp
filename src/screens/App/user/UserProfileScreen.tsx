@@ -23,7 +23,7 @@ class UserProfileScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate('ItemScreen', { post, word, lang });
+    this.props.navigation.navigate('UserItemScreen', { post, word, lang });
   };
 
   render() {
@@ -112,7 +112,7 @@ class UserProfileScreen extends React.Component<any, any> {
         <Query
           query={getUserPosts}
           variables={{ userId: user._id }}
-          fetchPolicy="network-only"
+          // fetchPolicy="network-only"
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {

@@ -117,7 +117,10 @@ export default class FilterSelect extends React.Component<any, any> {
             borderWidth: selected ? 0 : 1,
             borderColor: '#E7E4E6',
             borderRadius: 16,
-            backgroundColor: selected ? '#9C949A' : '#fff'
+            backgroundColor: selected ? '#9C949A' : '#fff',
+            shadowOffset: { width: 0, height: 0 },
+            shadowColor: '#555',
+            shadowOpacity: 0.2
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >

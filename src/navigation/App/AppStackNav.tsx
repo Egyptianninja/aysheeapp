@@ -17,7 +17,8 @@ import {
   AddCarScreen,
   AddRequestServiceScreen,
   AddJobRequestScreen,
-  UserProfileScreen
+  UserProfileScreen,
+  UserItemScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 
@@ -30,6 +31,15 @@ export const AppStackNavigator = createStackNavigator({
   },
   ItemScreen: {
     screen: ItemScreen,
+    navigationOptions: ({ navigation }: any) => ({
+      title: navigation.getParam('post').title,
+      headerStyle: styles.headerStyle,
+      headerTintColor: '#555',
+      headerTitleStyle: styles.headerTitleStyle
+    })
+  },
+  UserItemScreen: {
+    screen: UserItemScreen,
     navigationOptions: ({ navigation }: any) => ({
       title: navigation.getParam('post').title,
       headerStyle: styles.headerStyle,

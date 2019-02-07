@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   Keyboard,
@@ -6,17 +6,18 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Text
-} from "react-native";
-import { connect } from "react-redux";
-import { graphql } from "react-apollo";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { StyleSheet } from "../../utils";
-import { Button, InputName } from "../../lib";
-import addUniqueName from "../../graphql/mutation/addUniqueName";
-import isUniqueName from "../../graphql/mutation/isUniqueName";
+} from 'react-native';
+import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { StyleSheet } from '../../utils';
+import { Button, InputName } from '../../lib';
+import addUniqueName from '../../graphql/mutation/addUniqueName';
+import { addUniquename } from '../../store/actions/userAtions';
+import isUniqueName from '../../graphql/mutation/isUniqueName';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 class NameScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
@@ -29,7 +30,7 @@ class NameScreen extends React.Component<any, any> {
 
   componentDidMount() {
     if (this.props.phone) {
-      const name = this.props.navigation.getParam("name");
+      const name = this.props.navigation.getParam('name');
       this.setState({ name });
     }
   }
@@ -46,7 +47,8 @@ class NameScreen extends React.Component<any, any> {
         }
       });
       if (res.data.addUniqueName.ok) {
-        this.props.navigation.navigate("App");
+        this.props.addUniquename(this.state.name);
+        this.props.navigation.navigate('App');
       } else {
         bag.setErrors({ name: res.data.addUniqueName.error });
       }
@@ -58,7 +60,7 @@ class NameScreen extends React.Component<any, any> {
 
   handleUniqueName = async (name: string) => {
     this.setState({ loading: true });
-    if (name !== "") {
+    if (name !== '') {
       const isUnique = await this.props.isUniqueName({
         variables: { name }
       });
@@ -82,7 +84,7 @@ class NameScreen extends React.Component<any, any> {
 
   render() {
     const { lang, words } = this.props;
-    const name = this.props.navigation.getParam("name");
+    const name = this.props.navigation.getParam('name');
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -90,8 +92,8 @@ class NameScreen extends React.Component<any, any> {
           <KeyboardAvoidingView
             style={{
               flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
+              justifyContent: 'center',
+              alignItems: 'center'
             }}
             behavior="padding"
             enabled
@@ -119,7 +121,7 @@ class NameScreen extends React.Component<any, any> {
                 <React.Fragment>
                   <View>
                     <InputName
-                      rtl={lang === "ar" ? true : false}
+                      rtl={lang === 'ar' ? true : false}
                       name="name"
                       label={words.uniquename}
                       value={values.name}
@@ -141,11 +143,11 @@ class NameScreen extends React.Component<any, any> {
                   <View
                     style={{
                       height: 20,
-                      justifyContent: "center",
-                      alignItems: "flex-start"
+                      justifyContent: 'center',
+                      alignItems: 'flex-start'
                     }}
                   >
-                    <Text style={{ fontSize: 12, color: "#999" }}>
+                    <Text style={{ fontSize: 12, color: '#999' }}>
                       {words.validnamemessage}
                     </Text>
                   </View>
@@ -171,26 +173,26 @@ class NameScreen extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   button: {
     marginTop: 20,
-    width: "100%"
+    width: '100%'
   },
   outerStyle: {
-    justifyContent: "flex-start"
+    justifyContent: 'flex-start'
     // marginVertical: 5
   },
   innerStyle: {
     width: width - 80,
     paddingHorizontal: 10,
-    backgroundColor: "#fff",
-    writingDirection: "auto",
+    backgroundColor: '#fff',
+    writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 5
   },
   labelStyle: {
@@ -201,15 +203,15 @@ const styles = StyleSheet.create({
   btnStyle: {
     height: 40,
     width: 150,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: 20,
     borderRadius: 5
   },
   btnTextStyle: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
-    fontFamily: "cairo-regular"
+    fontFamily: 'cairo-regular'
   }
 });
 
@@ -219,12 +221,15 @@ const mapStateToProps = (state: any) => ({
   words: state.glob.language.words
 });
 
-export default connect(mapStateToProps)(
+export default connect(
+  mapStateToProps,
+  { addUniquename }
+)(
   graphql(addUniqueName, {
-    name: "addUniqueName"
+    name: 'addUniqueName'
   })(
     graphql(isUniqueName, {
-      name: "isUniqueName"
+      name: 'isUniqueName'
     })(NameScreen)
   )
 );

@@ -8,20 +8,19 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
-  Image,
-  Alert
+  Image
 } from 'react-native';
 import { Query, graphql } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
-import { KeyboardSpacer } from '../../lib';
-import secrets from '../../constants/secrets';
+import { KeyboardSpacer } from '../../../lib';
+import secrets from '../../../constants/secrets';
 import { connect } from 'react-redux';
-import { StyleSheet, ItemLocation, call, ImageViewer } from '../../utils';
-import favoritePost from '../../graphql/mutation/favoritePost';
-import createComment from '../../graphql/mutation/createComment';
-import getPostComments from '../../graphql/query/getPostComments';
-import getUser from '../../graphql/query/getUser';
-import commentAdded from '../../graphql/subscription/commentAdded';
+import { StyleSheet, ItemLocation, call, ImageViewer } from '../../../utils';
+import favoritePost from '../../../graphql/mutation/favoritePost';
+import createComment from '../../../graphql/mutation/createComment';
+import getPostComments from '../../../graphql/query/getPostComments';
+import getUser from '../../../graphql/query/getUser';
+import commentAdded from '../../../graphql/subscription/commentAdded';
 import {
   AvatarName,
   Properties,
@@ -33,12 +32,12 @@ import {
   ItemHeader,
   Loading,
   getproperties
-} from '../../componenets/';
-import Link from '../../utils/location/link';
+} from '../../../componenets/';
+import Link from '../../../utils/location/link';
 
 const { width } = Dimensions.get('window');
 
-class ItemScreen extends React.Component<any, any> {
+class UserItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
@@ -99,7 +98,6 @@ class ItemScreen extends React.Component<any, any> {
     if (this.state.inputBarText === '') {
       return null;
     }
-    console.log(userName);
 
     await this.props.createComment({
       variables: {
@@ -507,19 +505,15 @@ class ItemScreen extends React.Component<any, any> {
               )}
             </Query>
           </View>
-        </ScrollView>
-        {this.props.isAuthenticated && (
           <InputBar
-            onSendPressed={(postID: any) => {
+            onSendPressed={(postID: any) =>
               this.sendMessage(
                 postID,
                 post.userId,
                 post.title,
                 this.props.user.name
-                  ? this.props.user.name
-                  : this.props.user.uniquename
-              );
-            }}
+              )
+            }
             ref={this.childRef}
             onChangeText={(text: string) => this.onChangeInputBarText(text)}
             text={this.state.inputBarText}
@@ -528,7 +522,7 @@ class ItemScreen extends React.Component<any, any> {
             placeholder={word.writecomment}
             lang={lang}
           />
-        )}
+        </ScrollView>
 
         <KeyboardSpacer />
       </View>
@@ -551,8 +545,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   words: state.glob.language.words,
-  user: state.user.user,
-  isAuthenticated: state.user.isAuthenticated
+  user: state.user.user
 });
 
 export default connect(mapStateToProps)(
@@ -561,6 +554,6 @@ export default connect(mapStateToProps)(
   })(
     graphql(favoritePost, {
       name: 'favoritePost'
-    })(ItemScreen)
+    })(UserItemScreen)
   )
 );

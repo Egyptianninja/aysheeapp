@@ -17,3 +17,4 @@ export const INIT_APP = 'INIT_APP';
 export const CODE_SENT = 'CODE_SENT';
 export const SET_QUERY = 'SET_QUERY';
 export const DEL_QUERY = 'DEL_QUERY';
+export const ADD_UNIQUENAME = 'ADD_UNIQUENAME';

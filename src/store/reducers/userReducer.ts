@@ -9,7 +9,8 @@ import {
   SMS_SENT,
   INIT_TIME,
   CODE_SENT,
-  INIT_CODE
+  INIT_CODE,
+  ADD_UNIQUENAME
 } from '../types';
 
 const initialState = {
@@ -36,6 +37,14 @@ export default function(state = initialState, action: any) {
         isAuthenticated: true,
         token: action.token,
         user: action.data
+      };
+    case ADD_UNIQUENAME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          uniquename: action.name
+        }
       };
     case LOGOUT:
       return {

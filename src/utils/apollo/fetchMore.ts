@@ -174,7 +174,7 @@ export const readyUserPosts = (
     return {
       ...post,
       height,
-      ratio: ratio > 2 ? 2 : ratio,
+      ratio: ratio > 3 ? 3 : ratio,
       subTitle,
       time,
       uri,

@@ -9,8 +9,9 @@ import {
   SMS_SENT,
   INIT_TIME,
   CODE_SENT,
-  INIT_CODE
-} from "../types";
+  INIT_CODE,
+  ADD_UNIQUENAME
+} from '../types';
 
 export function login(token: string, data: any) {
   return {
@@ -22,6 +23,12 @@ export function login(token: string, data: any) {
 export function logout() {
   return {
     type: LOGOUT
+  };
+}
+export function addUniquename(name: any) {
+  return {
+    type: ADD_UNIQUENAME,
+    name
   };
 }
 export function emailAdded(email: string) {
