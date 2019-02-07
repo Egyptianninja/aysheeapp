@@ -148,11 +148,98 @@ class ItemScreen extends React.Component<any, any> {
     this.childRef.current.getFocus();
   };
 
+  renderUser = (user: any, callargs: any, word: any) => (
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#eee',
+        padding: 10
+      }}
+    >
+      <View style={{ flex: 2, flexDirection: 'row' }}>
+        {user.avatar && (
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate('UserProfileScreen', { user })
+            }
+          >
+            <Image
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 25
+              }}
+              source={{
+                uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
+                  user.avatar
+                }`
+              }}
+            />
+          </TouchableOpacity>
+        )}
+        {!user.avatar && (
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate('UserProfileScreen', { user })
+            }
+          >
+            <AvatarName name={user.uniquename} />
+          </TouchableOpacity>
+        )}
+
+        <View style={{ paddingLeft: 10 }}>
+          {user.name && <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>}
+          {user.uniquename && (
+            <Text style={{ fontSize: 12, color: '#888' }}>
+              @{user.uniquename}
+            </Text>
+          )}
+          {user.postsQty > 0 && (
+            <Text
+              style={{
+                fontSize: 12,
+                color: '#6FA7D5',
+                paddingTop: 5
+              }}
+            >
+              {user.postsQty} more ads
+            </Text>
+          )}
+        </View>
+      </View>
+
+      <TouchableOpacity
+        onPress={() => call(callargs)}
+        style={{
+          flex: 1,
+          height: 40,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderColor: '#6FA7D5',
+          borderWidth: 1
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 14,
+            color: '#6FA7D5',
+            fontWeight: 'bold'
+          }}
+        >
+          {word.calladvertiser}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   render() {
     const post = this.props.navigation.getParam('post');
     const postId = post.id ? post.id : post._id;
     const word = this.props.navigation.getParam('word');
     const lang = this.props.navigation.getParam('lang');
+    const myItem = this.props.navigation.getParam('myItem');
     const photos = this.getimageurls(post);
     const pdata = getproperties(post);
     const newObject = pdata.filter((a: any) => a.name === 'isnew')[0];
@@ -293,112 +380,21 @@ class ItemScreen extends React.Component<any, any> {
               time={post.time}
             />
             <View style={{ height: 20 }} />
-            <Query query={getUser} variables={{ userId: post.userId }}>
-              {({ loading, error, data }) => {
-                if (loading) {
-                  return <Loading />;
-                }
-                if (error) {
-                  return <Text>{error}</Text>;
-                }
-                const user = data.getUser;
-                return (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      backgroundColor: '#eee',
-                      padding: 10
-                    }}
-                  >
-                    <View style={{ flex: 2, flexDirection: 'row' }}>
-                      {user.avatar && (
-                        <TouchableOpacity
-                          onPress={() =>
-                            this.props.navigation.navigate(
-                              'UserProfileScreen',
-                              { user }
-                            )
-                          }
-                        >
-                          <Image
-                            style={{
-                              height: 50,
-                              width: 50,
-                              borderRadius: 25
-                            }}
-                            source={{
-                              uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-                                user.avatar
-                              }`
-                            }}
-                          />
-                        </TouchableOpacity>
-                      )}
-                      {!user.avatar && (
-                        <TouchableOpacity
-                          onPress={() =>
-                            this.props.navigation.navigate(
-                              'UserProfileScreen',
-                              { user }
-                            )
-                          }
-                        >
-                          <AvatarName name={user.uniquename} />
-                        </TouchableOpacity>
-                      )}
-
-                      <View style={{ paddingLeft: 10 }}>
-                        {user.name && (
-                          <Text style={{ fontWeight: 'bold' }}>
-                            {user.name}
-                          </Text>
-                        )}
-                        {user.uniquename && (
-                          <Text style={{ fontSize: 12, color: '#888' }}>
-                            @{user.uniquename}
-                          </Text>
-                        )}
-                        {user.postsQty > 0 && (
-                          <Text
-                            style={{
-                              fontSize: 12,
-                              color: '#6FA7D5',
-                              paddingTop: 5
-                            }}
-                          >
-                            {user.postsQty} more ads
-                          </Text>
-                        )}
-                      </View>
-                    </View>
-
-                    <TouchableOpacity
-                      onPress={() => call(callargs)}
-                      style={{
-                        flex: 1,
-                        height: 40,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderColor: '#6FA7D5',
-                        borderWidth: 1
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          color: '#6FA7D5',
-                          fontWeight: 'bold'
-                        }}
-                      >
-                        {word.calladvertiser}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                );
-              }}
-            </Query>
+            {myItem && this.renderUser(this.props.user, callargs, word)}
+            {!myItem && (
+              <Query query={getUser} variables={{ userId: post.userId }}>
+                {({ loading, error, data }) => {
+                  if (loading) {
+                    return <Loading />;
+                  }
+                  if (error) {
+                    return <Text>{error}</Text>;
+                  }
+                  const user = data.getUser;
+                  return this.renderUser(user, callargs, word);
+                }}
+              </Query>
+            )}
           </View>
           <View style={{ height: 20 }} />
           <Properties lang={lang} words={word} data={pdata} />

@@ -228,7 +228,7 @@ export default class Menu extends React.Component<any, any> {
           >
             <Formik
               initialValues={{
-                price: post.price.toString()
+                price: post.price ? post.price.toString() : ''
               }}
               onSubmit={this.handlePriceSubmit}
               validationSchema={Yup.object().shape({

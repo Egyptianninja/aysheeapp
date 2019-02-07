@@ -6,7 +6,9 @@ import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import getUserPosts from '../../../graphql/query/getUserPosts';
 import { getNextPosts, readyUserPosts } from '../../../utils';
-import { ItemOwnerView, Avatar, Loading } from '../../../componenets';
+import { ItemOwnerView, Avatar, Loading, ItemView } from '../../../componenets';
+import favoritePost from '../../../graphql/mutation/favoritePost';
+
 const { width } = Dimensions.get('window');
 
 class UserProfileScreen extends React.Component<any, any> {
@@ -133,12 +135,11 @@ class UserProfileScreen extends React.Component<any, any> {
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <ItemOwnerView
+                  <ItemView
                     post={item}
                     navigation={this.props.navigation}
-                    editClassifieds={this.props.editClassifieds}
-                    deletePost={this.props.deletePost}
                     selectePost={this.selectePost}
+                    favoritePost={this.props.favoritePost}
                     word={words}
                     lang={lang}
                   />
@@ -165,4 +166,8 @@ const mapStateToProps = (state: any) => ({
   words: state.glob.language.words
 });
 
-export default connect(mapStateToProps)(UserProfileScreen);
+export default connect(mapStateToProps)(
+  graphql(favoritePost, {
+    name: 'favoritePost'
+  })(UserProfileScreen)
+);

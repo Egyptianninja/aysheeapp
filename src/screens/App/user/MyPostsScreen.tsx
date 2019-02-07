@@ -22,7 +22,12 @@ class UserPostsScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate('ItemScreen', { post, word, lang });
+    this.props.navigation.navigate('ItemScreen', {
+      post,
+      word,
+      lang,
+      myItem: true
+    });
   };
 
   render() {

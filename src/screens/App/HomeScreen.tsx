@@ -135,7 +135,6 @@ class HomeScreen extends React.Component<any, any> {
   render() {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query } = this.props;
-
     const catSelected =
       this.state.rest.categoryId || this.state.rest.categoryId === 0;
 

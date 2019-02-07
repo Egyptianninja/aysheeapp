@@ -16,7 +16,7 @@ const HeaderFilter: any = ({
     const catFilters = [
       { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'realestate', data: getItems(buckets, 'realestateId') },
+      { name: 'realestateId', data: getItems(buckets, 'realestateId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
       { name: 'issale', data: getItems(buckets, 'issale') },
       { name: 'isfurnishered', data: getItems(buckets, 'isfurnishered') },

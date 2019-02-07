@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query getMyFavoritePosts($cursor: Int!) {
-    getMyFavoritePosts(cursor: $cursor) {
+  query getPost($postId: String!) {
+    getPost(postId: $postId) {
       ok
       data {
         _id
