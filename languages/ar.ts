@@ -1,64 +1,99 @@
 export default {
   category: [
-    { id: 0, name: 'عقارات', nameGlob: 'عقارات, Real Estate, Real Estate' },
-    { id: 1, name: 'سيارات', nameGlob: 'سيارات, Cars, Cars' },
+    {
+      id: 0,
+      sort: 1,
+      name: 'عقارات',
+      nameGlob: 'عقارات, Real Estate, Real Estate'
+    },
+    { id: 1, sort: 0, name: 'سيارات', nameGlob: 'سيارات, Cars, Cars' },
     {
       id: 2,
-      name: 'الكترونيات',
-      nameGlob: 'الكترونيات, Electronics, Electronics'
+      sort: 4,
+      name: 'أجهزة منزلية',
+      nameGlob: 'أجهزة منزلية, Electronics, Electronics'
     },
-    { id: 3, name: 'اثاث منزلي', nameGlob: 'اثاث منزلي, Furniture, Furniture' },
+    {
+      id: 3,
+      sort: 3,
+      name: 'اثاث منزلي',
+      nameGlob: 'اثاث منزلي, Furniture, Furniture'
+    },
     {
       id: 4,
-      name: 'مستلزمات اطفال',
-      nameGlob: "مستلزمات اطفال, Child's Needs, Child's Needs"
+      sort: 7,
+      name: 'احتياجات أطفال',
+      nameGlob: "احتياجات أطفال, Child's Needs, Child's Needs"
     },
     {
       id: 5,
+      sort: 9,
       name: 'يبحث عن عمل',
       nameGlob: 'يبحث عن عمل, Look for Job, Look for Job'
     },
     {
       id: 6,
+      sort: 10,
       name: 'وظائف شاغرة',
       nameGlob: 'وظائف شاغرة, Job Opportunities, Job Opportunities'
     },
     {
       id: 7,
-      name: 'معدات رياضية',
-      nameGlob: 'معدات رياضية, Sport Equipment, Sport Equipment'
+      sort: 14,
+      name: 'اللياقة والصحة',
+      nameGlob: 'اللياقة والصحة, Sport Equipment, Sport Equipment'
     },
     {
       id: 8,
-      name: 'اكسسوارات',
-      nameGlob: 'اكسسوارات, Accessories, Accessories'
+      sort: 5,
+      name: 'الموضة والجمال',
+      nameGlob: 'الموضة والجمال, Accessories, Accessories'
     },
     {
       id: 9,
-      name: 'يعرض خدمة',
-      nameGlob: 'يعرض خدمة, Offer Service, Offer Service'
+      sort: 11,
+      name: 'عرض خدمة',
+      nameGlob: 'عرض خدمة, Offer Service, Offer Service'
     },
     {
       id: 10,
-      name: 'يطلب خدمة',
-      nameGlob: 'يطلب خدمة, Request Sercvice, Request Sercvice'
+      sort: 12,
+      name: 'طلب خدمة',
+      nameGlob: 'طلب خدمة, Request Sercvice, Request Sercvice'
     },
-    { id: 11, name: 'الات موسيقية', nameGlob: 'الات موسيقية, Music, Music' },
-    { id: 12, name: 'كتب', nameGlob: 'كتب, Books, Books' },
-    { id: 13, name: 'ملابس', nameGlob: 'ملابس, Clothes, Clothes' },
-    { id: 14, name: 'أرقام مميزة', nameGlob: 'أرقام مميزة, Numbers, Numbers' },
-    { id: 15, name: 'تبرعات عينية', nameGlob: 'تبرعات عينية' },
+    {
+      id: 11,
+      sort: 15,
+      name: 'الات موسيقية',
+      nameGlob: 'الات موسيقية, Music, Music'
+    },
+    { id: 12, sort: 16, name: 'كتب', nameGlob: 'كتب, Books, Books' },
+    { id: 13, sort: 6, name: 'ملابس', nameGlob: 'ملابس, Clothes, Clothes' },
+    { id: 14, sort: 2, name: 'جوالات', nameGlob: 'جوالات, Mobile, Mobile' },
+    {
+      id: 15,
+      sort: 17,
+      name: 'قطع غيار',
+      nameGlob: 'قطع غيار, Spare Parts, Spare Parts'
+    },
     {
       id: 16,
+      sort: 8,
       name: 'معدات بحرية',
       nameGlob: 'معدات بحرية, Navy Equipment, Navy Equipment'
     },
     {
       id: 17,
+      sort: 18,
       name: 'حيوانات اليفة',
       nameGlob: 'حيوانات اليفة, Animals, Animals'
     },
-    { id: 18, name: 'أطعمة', nameGlob: 'أطعمة, Food, Food' },
+    {
+      id: 18,
+      sort: 13,
+      name: 'مواد غذائية',
+      nameGlob: 'مواد غذائية, Food, Food'
+    },
     { id: 19, name: 'اخرى', nameGlob: 'اخرى, Other, Other' }
   ],
   kind: [
@@ -74,12 +109,12 @@ export default {
 
     { pid: 2, id: 5, name: 'كاميرا', nameGlob: 'كاميرا' },
     { pid: 2, id: 6, name: 'إلكترونيات منزلية', nameGlob: 'إلكترونيات منزلية' },
-    {
-      pid: 2,
-      id: 7,
-      name: 'جوالات & واكسسواراتها',
-      nameGlob: 'جوالات & واكسسواراتها'
-    },
+    // {
+    //   pid: 2,
+    //   id: 7,
+    //   name: 'جوالات & واكسسواراتها',
+    //   nameGlob: 'جوالات & واكسسواراتها'
+    // },
     {
       pid: 2,
       id: 8,
@@ -190,15 +225,15 @@ export default {
     { pid: 6, id: 20, name: 'جي في سي', nameGlob: 'جي في سي' },
     { pid: 6, id: 21, name: 'أخرى', nameGlob: 'أخرى' },
 
-    { pid: 7, id: 22, name: 'سامسونج', nameGlob: 'سامسونج' },
-    { pid: 7, id: 23, name: 'أبل', nameGlob: 'أبل' },
-    { pid: 7, id: 24, name: 'هواوي', nameGlob: 'هواوي ' },
-    { pid: 7, id: 25, name: 'نوكيا', nameGlob: 'نوكيا' },
-    { pid: 7, id: 26, name: 'أل جي', nameGlob: 'أل جي' },
-    { pid: 7, id: 27, name: 'تي سي أل', nameGlob: 'تي سي أل' },
-    { pid: 7, id: 28, name: 'لينوفو', nameGlob: 'لينوفو' },
-    { pid: 7, id: 29, name: 'سوني', nameGlob: 'سوني' },
-    { pid: 7, id: 30, name: 'أخرى', nameGlob: 'أخرى' },
+    // { pid: 7, id: 22, name: 'سامسونج', nameGlob: 'سامسونج' },
+    // { pid: 7, id: 23, name: 'أبل', nameGlob: 'أبل' },
+    // { pid: 7, id: 24, name: 'هواوي', nameGlob: 'هواوي ' },
+    // { pid: 7, id: 25, name: 'نوكيا', nameGlob: 'نوكيا' },
+    // { pid: 7, id: 26, name: 'أل جي', nameGlob: 'أل جي' },
+    // { pid: 7, id: 27, name: 'تي سي أل', nameGlob: 'تي سي أل' },
+    // { pid: 7, id: 28, name: 'لينوفو', nameGlob: 'لينوفو' },
+    // { pid: 7, id: 29, name: 'سوني', nameGlob: 'سوني' },
+    // { pid: 7, id: 30, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 8, id: 31, name: 'لينوفو', nameGlob: 'لينوفو' },
     { pid: 8, id: 32, name: 'أتش بي', nameGlob: 'أتش بي ' },
@@ -233,6 +268,19 @@ export default {
     { id: 4, name: 'مستودع', nameGlob: 'مستودع, Store, Store' },
     { id: 5, name: 'ارض', nameGlob: 'ارض, Land, Land' }
   ],
+
+  mobile: [
+    { id: 0, name: 'سامسونج', nameGlob: 'سامسونج' },
+    { id: 1, name: 'أبل', nameGlob: 'أبل' },
+    { id: 2, name: 'هواوي', nameGlob: 'هواوي ' },
+    { id: 3, name: 'نوكيا', nameGlob: 'نوكيا' },
+    { id: 4, name: 'أل جي', nameGlob: 'أل جي' },
+    { id: 5, name: 'تي سي أل', nameGlob: 'تي سي أل' },
+    { id: 6, name: 'لينوفو', nameGlob: 'لينوفو' },
+    { id: 7, name: 'سوني', nameGlob: 'سوني' },
+    { id: 8, name: 'أخرى', nameGlob: 'أخرى' }
+  ],
+
   service: [
     { id: 0, name: 'نجارة', nameGlob: 'نجارة, Carpenter, Carpenter' },
     { id: 1, name: 'كهرباء', nameGlob: 'كهرباء, Electrical, Electrical' },

@@ -1,14 +1,14 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   Dimensions,
   ScrollView,
   KeyboardAvoidingView
-} from "react-native";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { connect } from "react-redux";
-import { graphql } from "react-apollo";
+} from 'react-native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
 import {
   StyleSheet,
   ImagePicker,
@@ -17,9 +17,9 @@ import {
   getPureNumber,
   isArabic,
   registerForPushNotificationsAsync
-} from "../../../utils";
-import addClassifiedMutation from "../../../graphql/mutation/addClassified";
-import notificationSub from "../../../graphql/mutation/notificationSub";
+} from '../../../utils';
+import addClassifiedMutation from '../../../graphql/mutation/addClassified';
+import notificationSub from '../../../graphql/mutation/notificationSub';
 
 import {
   Input,
@@ -29,9 +29,9 @@ import {
   Select,
   RadioButton,
   Title
-} from "../../../lib";
-import {MessageModal} from "../../../componenets";
-const { width } = Dimensions.get("window");
+} from '../../../lib';
+import { MessageModal } from '../../../componenets';
+const { width } = Dimensions.get('window');
 
 class AddCarScreen extends React.Component<any, any> {
   constructor(props: any) {
@@ -70,7 +70,8 @@ class AddCarScreen extends React.Component<any, any> {
 
   handleSubmit = async (values: any, bag: any) => {
     const photos = await uploadPhotos(values.photos, this.state.selectedImage);
-    const category = this.props.navigation.getParam("item");
+    const category = this.props.navigation.getParam('item');
+    delete category.sort;
     const {
       title,
       body,
@@ -130,7 +131,7 @@ class AddCarScreen extends React.Component<any, any> {
       }
       this.showMessage();
       setTimeout(() => {
-        this.props.navigation.navigate("HomeScreen");
+        this.props.navigation.navigate('HomeScreen');
       }, 2500);
     }
     if (!res.data.createPost.ok) {
@@ -144,7 +145,7 @@ class AddCarScreen extends React.Component<any, any> {
     const subBrands = this.props.subBrands.filter(
       (sb: any) => sb.pid === this.state.selectedBrand
     );
-    const category = this.props.navigation.getParam("item");
+    const category = this.props.navigation.getParam('item');
 
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
@@ -159,46 +160,46 @@ class AddCarScreen extends React.Component<any, any> {
           <View style={styles.container}>
             <Formik
               initialValues={{
-                title: "",
-                body: "",
+                title: '',
+                body: '',
                 photos: [],
-                price: "",
+                price: '',
                 isnew: false,
                 isold: true,
                 issale: true,
                 isrent: false,
                 iswarranty: false,
                 phone: getPureNumber(user.phone),
-                year: "",
-                color: "",
-                km: "",
-                brand: "",
-                subBrand: "",
-                kind: "",
+                year: '',
+                color: '',
+                km: '',
+                brand: '',
+                subBrand: '',
+                kind: '',
                 location: false
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
-                kind: Yup.string().required("Required"),
-                brand: Yup.string().required("Required"),
-                subBrand: Yup.string().required("Required"),
+                kind: Yup.string().required('Required'),
+                brand: Yup.string().required('Required'),
+                subBrand: Yup.string().required('Required'),
                 title: Yup.string()
                   .max(100)
-                  .required("Required"),
+                  .required('Required'),
                 body: Yup.string()
                   .max(1000)
-                  .required("Required"),
+                  .required('Required'),
                 price: Yup.number()
-                  .positive("price must be number")
-                  .required("Required"),
+                  .positive('price must be number')
+                  .required('Required'),
                 year: Yup.number()
-                  .positive("price must be number")
-                  .required("Required"),
-                km: Yup.number().positive("price must be number"),
+                  .positive('price must be number')
+                  .required('Required'),
+                km: Yup.number().positive('price must be number'),
                 color: Yup.string().max(100),
                 phone: Yup.string()
                   .max(25)
-                  .required("Required")
+                  .required('Required')
               })}
               render={({
                 values,
@@ -214,7 +215,7 @@ class AddCarScreen extends React.Component<any, any> {
                   <Title width={width - 40}>{word.addnewad}</Title>
                   <React.Fragment>
                     <Input
-                      rtl={lang === "ar" ? true : false}
+                      rtl={lang === 'ar' ? true : false}
                       name="title"
                       label={word.title}
                       value={values.title}
@@ -264,7 +265,7 @@ class AddCarScreen extends React.Component<any, any> {
                   </React.Fragment>
 
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="body"
                     label={word.body}
                     value={values.body}
@@ -292,7 +293,7 @@ class AddCarScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                   >
                     <RadioButton
                       name="isnew"
@@ -311,7 +312,7 @@ class AddCarScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                   >
                     <RadioButton
                       name="issale"
@@ -328,7 +329,7 @@ class AddCarScreen extends React.Component<any, any> {
                   </Group>
 
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     num
                     name="year"
                     label={word.year}
@@ -343,7 +344,7 @@ class AddCarScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     name="color"
                     label={word.color}
                     value={values.color}
@@ -358,7 +359,7 @@ class AddCarScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     num
                     name="km"
                     label={word.km}
@@ -373,7 +374,7 @@ class AddCarScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     num
                     name="price"
                     label={word.price}
@@ -388,7 +389,7 @@ class AddCarScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                     num
                     name="phone"
                     label={word.phone}
@@ -406,7 +407,7 @@ class AddCarScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === "ar" ? true : false}
+                    rtl={lang === 'ar' ? true : false}
                   >
                     <CheckBox
                       name="location"
@@ -447,27 +448,27 @@ class AddCarScreen extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   button: {
     marginTop: 20,
-    width: "100%"
+    width: '100%'
   },
   outerStyle: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginVertical: 5
   },
   innerStyle: {
     width: width - 40,
     paddingHorizontal: 10,
-    backgroundColor: "#fff",
-    writingDirection: "auto",
+    backgroundColor: '#fff',
+    writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 5
   },
   labelStyle: {
@@ -478,15 +479,15 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 60,
     width: width - 80,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: 20,
     borderRadius: 5
   },
   btnTextStyle: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 20,
-    fontFamily: "cairo-regular"
+    fontFamily: 'cairo-regular'
   }
 });
 
@@ -501,10 +502,10 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps)(
   graphql(addClassifiedMutation, {
-    name: "addClassifiedMutation"
+    name: 'addClassifiedMutation'
   })(
     graphql(notificationSub, {
-      name: "notificationSub"
+      name: 'notificationSub'
     })(AddCarScreen)
   )
 );

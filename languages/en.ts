@@ -2,63 +2,88 @@ export default {
   category: [
     {
       id: 0,
+      sort: 1,
       name: 'Real Estate',
       nameGlob: 'عقارات, Real Estate, Real Estate'
     },
-    { id: 1, name: 'Cars', nameGlob: 'سيارات, Cars, Cars' },
+    { id: 1, sort: 0, name: 'Cars', nameGlob: 'سيارات, Cars, Cars' },
     {
       id: 2,
+      sort: 4,
       name: 'Electronics',
       nameGlob: 'الكترونيات, Electronics, Electronics'
     },
-    { id: 3, name: 'Furniture', nameGlob: 'اثاث منزلي, Furniture, Furniture' },
+    {
+      id: 3,
+      sort: 3,
+      name: 'Furniture',
+      nameGlob: 'اثاث منزلي, Furniture, Furniture'
+    },
     {
       id: 4,
+      sort: 7,
       name: "Child's Needs",
       nameGlob: "مستلزمات اطفال, Child's Needs, Child's Needs"
     },
     {
       id: 5,
+      sort: 9,
       name: 'Look for Job',
       nameGlob: 'يبحث عن عمل, Look for Job, Look for Job'
     },
     {
       id: 6,
+      sort: 10,
       name: 'Job Opportunities',
       nameGlob: 'وظائف شاغرة, Job Opportunities, Job Opportunities'
     },
     {
       id: 7,
+      sort: 14,
       name: 'Sport Equipment',
       nameGlob: 'معدات رياضية, Sport Equipment, Sport Equipment'
     },
     {
       id: 8,
+      sort: 5,
       name: 'Accessories',
       nameGlob: 'اكسسوارات, Accessories, Accessories'
     },
     {
       id: 9,
+      sort: 11,
       name: 'Offer Service',
       nameGlob: 'يعرض خدمة, Offer Service, Offer Service'
     },
     {
       id: 10,
+      sort: 12,
       name: 'Request Sercvice',
       nameGlob: 'يطلب خدمة, Request Sercvice, Request Sercvice'
     },
-    { id: 11, name: 'Music', nameGlob: 'الات موسيقية, Music, Music' },
-    { id: 12, name: 'Books', nameGlob: 'كتب, Books, Books' },
-    { id: 13, name: 'Clothes', nameGlob: 'ملابس, Clothes, Clothes' },
-    { id: 14, name: 'Numbers', nameGlob: 'أرقام مميزة, Numbers, Numbers' },
-    { id: 15, name: 'Baots', nameGlob: 'قوارب, Baots, Baots' },
+    { id: 11, sort: 15, name: 'Music', nameGlob: 'الات موسيقية, Music, Music' },
+    { id: 12, sort: 16, name: 'Books', nameGlob: 'كتب, Books, Books' },
+    { id: 13, sort: 6, name: 'Clothes', nameGlob: 'ملابس, Clothes, Clothes' },
+    { id: 14, sort: 2, name: 'Mobile', nameGlob: 'جوالات, Mobile, Mobile' },
+    {
+      id: 15,
+      sort: 17,
+      name: 'Spare Parts',
+      nameGlob: 'قطع غيار, Spare Parts, Spare Parts'
+    },
     {
       id: 16,
-      name: 'Industrial',
-      nameGlob: 'معدات صناعية, Industrial, Industrial'
+      sort: 8,
+      name: 'Navy Equipment',
+      nameGlob: 'معدات بحرية, Navy Equipment, Navy Equipment'
     },
-    { id: 17, name: 'Animals', nameGlob: 'حيوانات اليفة, Animals, Animals' },
-    { id: 18, name: 'Gifts', nameGlob: 'هدايا, Gifts, Gifts' },
+    {
+      id: 17,
+      sort: 18,
+      name: 'Animals',
+      nameGlob: 'حيوانات اليفة, Animals, Animals'
+    },
+    { id: 18, sort: 13, name: 'Food', nameGlob: 'مواد غذائية, Food, Food' },
     { id: 19, name: 'Other', nameGlob: 'اخرى, Other, Other' }
   ],
   kind: [
@@ -74,12 +99,12 @@ export default {
 
     { pid: 2, id: 5, name: 'Camera', nameGlob: 'Camera' },
     { pid: 2, id: 6, name: 'Home Electronics', nameGlob: 'Home Electronics' },
-    {
-      pid: 2,
-      id: 7,
-      name: 'Mobile & Accessories',
-      nameGlob: 'Mobile & Accessories'
-    },
+    // {
+    //   pid: 2,
+    //   id: 7,
+    //   name: 'Mobile & Accessories',
+    //   nameGlob: 'Mobile & Accessories'
+    // },
     { pid: 2, id: 8, name: 'PC & Accessories', nameGlob: 'PC & Accessories' },
     { pid: 2, id: 9, name: 'Sounds Systems', nameGlob: 'Sounds Systems' },
     { pid: 2, id: 10, name: 'Video Games', nameGlob: 'Video Games' },
@@ -179,15 +204,15 @@ export default {
     { pid: 6, id: 20, name: 'JVC', nameGlob: 'JVC' },
     { pid: 6, id: 21, name: 'Other', nameGlob: 'Other' },
 
-    { pid: 7, id: 22, name: 'Samsung', nameGlob: 'Samsung' },
-    { pid: 7, id: 23, name: 'Apple', nameGlob: 'Apple' },
-    { pid: 7, id: 24, name: 'Huawei', nameGlob: 'Huawei ' },
-    { pid: 7, id: 25, name: 'Nokia', nameGlob: 'Nokia' },
-    { pid: 7, id: 26, name: 'LG', nameGlob: 'LG' },
-    { pid: 7, id: 27, name: 'TCL', nameGlob: 'TCL' },
-    { pid: 7, id: 28, name: 'Lenovo', nameGlob: 'Lenovo' },
-    { pid: 7, id: 29, name: 'Sony', nameGlob: 'Sony' },
-    { pid: 7, id: 30, name: 'Other', nameGlob: 'Other' },
+    // { pid: 7, id: 22, name: 'Samsung', nameGlob: 'Samsung' },
+    // { pid: 7, id: 23, name: 'Apple', nameGlob: 'Apple' },
+    // { pid: 7, id: 24, name: 'Huawei', nameGlob: 'Huawei ' },
+    // { pid: 7, id: 25, name: 'Nokia', nameGlob: 'Nokia' },
+    // { pid: 7, id: 26, name: 'LG', nameGlob: 'LG' },
+    // { pid: 7, id: 27, name: 'TCL', nameGlob: 'TCL' },
+    // { pid: 7, id: 28, name: 'Lenovo', nameGlob: 'Lenovo' },
+    // { pid: 7, id: 29, name: 'Sony', nameGlob: 'Sony' },
+    // { pid: 7, id: 30, name: 'Other', nameGlob: 'Other' },
 
     { pid: 8, id: 31, name: 'Lenovo', nameGlob: 'Lenovo' },
     { pid: 8, id: 32, name: 'HP', nameGlob: 'HP ' },
@@ -222,6 +247,17 @@ export default {
     { id: 3, name: 'Shop', nameGlob: 'محل تجاري, Shop, Shop' },
     { id: 4, name: 'Store', nameGlob: 'مستودع, Store, Store' },
     { id: 5, name: 'Land', nameGlob: 'ارض, Land, Land' }
+  ],
+  mobile: [
+    { id: 0, name: 'Samsung', nameGlob: 'Samsung' },
+    { id: 1, name: 'Apple', nameGlob: 'Apple' },
+    { id: 2, name: 'Huawei', nameGlob: 'Huawei ' },
+    { id: 3, name: 'Nokia', nameGlob: 'Nokia' },
+    { id: 4, name: 'LG', nameGlob: 'LG' },
+    { id: 5, name: 'TCL', nameGlob: 'TCL' },
+    { id: 6, name: 'Lenovo', nameGlob: 'Lenovo' },
+    { id: 7, name: 'Sony', nameGlob: 'Sony' },
+    { id: 8, name: 'Other', nameGlob: 'Other' }
   ],
 
   service: [

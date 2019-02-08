@@ -57,6 +57,7 @@ class AddServiceScreen extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const photos = await uploadPhotos(values.photos, this.state.selectedImage);
     const category = this.props.navigation.getParam('item');
+    delete category.sort;
     const { title, body, phone, service, location } = values;
     const isrtl = isArabic(title);
     const loc: any = location ? this.state.location : null;

@@ -58,7 +58,7 @@ class AddJobRequestScreen extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const photos = await uploadPhotos(values.photos, this.state.selectedImage);
     const category = this.props.navigation.getParam('item');
-
+    delete category.sort;
     const {
       title,
       body,

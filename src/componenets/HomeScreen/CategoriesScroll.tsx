@@ -45,6 +45,9 @@ class CategoriesScroll extends React.Component<any, any> {
   };
 
   renderCategories = (categories: any) => {
+    categories.sort((a: any, b: any) =>
+      a.sort > b.sort ? 1 : b.sort > a.sort ? -1 : 0
+    );
     return categories.map((item: any) => {
       const iconFunc = icons.category.filter(ic => ic.id === item.id);
       const icon = iconFunc[0].icon();
