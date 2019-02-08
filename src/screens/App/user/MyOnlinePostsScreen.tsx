@@ -10,7 +10,7 @@ import { ItemOwnerView, Loading } from '../../../componenets';
 import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import deletePost from '../../../graphql/mutation/deletePost';
 
-class UserPostsScreen extends React.Component<any, any> {
+class MyOnlinePostsScreen extends React.Component<any, any> {
   flatListRef: any;
   getNextPosts: any;
   constructor(p: any) {
@@ -34,7 +34,11 @@ class UserPostsScreen extends React.Component<any, any> {
     const { lang, words } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Query query={getMyPosts} fetchPolicy="network-only">
+        <Query
+          query={getMyPosts}
+          variables={{ islive: true }}
+          fetchPolicy="network-only"
+        >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
               return <Loading />;
@@ -51,7 +55,9 @@ class UserPostsScreen extends React.Component<any, any> {
                 }}
                 onRefresh={() => refetch()}
                 onEndReached={() =>
-                  this.getNextPosts(data, fetchMore, 'getMyPosts')
+                  this.getNextPosts(data, fetchMore, 'getMyPosts', {
+                    islive: true
+                  })
                 }
                 refreshing={this.state.refreshing}
                 data={rPosts}
@@ -94,6 +100,6 @@ export default connect(mapStateToProps)(
   })(
     graphql(deletePost, {
       name: 'deletePost'
-    })(UserPostsScreen)
+    })(MyOnlinePostsScreen)
   )
 );

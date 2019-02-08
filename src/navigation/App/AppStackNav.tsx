@@ -18,7 +18,8 @@ import {
   AddRequestServiceScreen,
   AddJobRequestScreen,
   UserProfileScreen,
-  UserItemScreen
+  UserItemScreen,
+  MyFavScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 
@@ -47,6 +48,7 @@ export const AppStackNavigator = createStackNavigator({
       headerTitleStyle: styles.headerTitleStyle
     })
   },
+
   ChoiseScreen: {
     screen: ChoiseScreen,
     navigationOptions: ({ navigation }: any) => ({
@@ -123,6 +125,13 @@ export const AppStackNavigator = createStackNavigator({
     screen: PostTabsStack,
     navigationOptions: () => ({
       title: 'منشوراتي',
+      headerTintColor: '#555'
+    })
+  },
+  MyFavScreen: {
+    screen: MyFavScreen,
+    navigationOptions: ({ navigation }: any) => ({
+      title: 'المفضلة',
       headerTintColor: '#555'
     })
   },

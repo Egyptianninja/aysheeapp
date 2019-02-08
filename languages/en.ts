@@ -267,9 +267,10 @@ export default {
   menu: [
     { id: 0, name: 'Profile' },
     { id: 1, name: 'Your Ads' },
-    { id: 2, name: 'Options & privacy' },
-    { id: 3, name: 'Help Center' },
-    { id: 4, name: 'Logout' }
+    { id: 2, name: 'Favorites' },
+    { id: 3, name: 'Options & privacy' },
+    { id: 4, name: 'Help Center' },
+    { id: 5, name: 'Logout' }
   ],
   sort: [
     { id: 1, name: 'Recent' },

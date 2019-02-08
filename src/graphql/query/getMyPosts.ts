@@ -1,8 +1,8 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
-  query getMyPosts($cursor: [Float]) {
-    getMyPosts(cursor: $cursor) {
+  query getMyPosts($islive: Boolean!, $cursor: [Float]) {
+    getMyPosts(islive: $islive, cursor: $cursor) {
       ok
       took
       total

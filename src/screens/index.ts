@@ -13,7 +13,8 @@ import PhoneScreen from './Auth/PhoneScreen';
 import CodeScreen from './Auth/CodeScreen';
 import NameScreen from './Auth/NameScreen';
 import LoadScreen from './Load/LoadScreen';
-import MyPostsScreen from './App/user/MyPostsScreen';
+import MyOnlinePostsScreen from './App/user/MyOnlinePostsScreen';
+import MyOfflinePostsScreen from './App/user/MyOfflinePostsScreen';
 import MyFavScreen from './App/user/MyFavScreen';
 import MyProfileScreen from './App/user/MyProfileScreen';
 import UserProfileScreen from './App/user/UserProfileScreen';
@@ -34,7 +35,8 @@ export {
   AddJobRequestScreen,
   PhoneScreen,
   LoadScreen,
-  MyPostsScreen,
+  MyOnlinePostsScreen,
+  MyOfflinePostsScreen,
   MyFavScreen,
   CodeScreen,
   NameScreen,

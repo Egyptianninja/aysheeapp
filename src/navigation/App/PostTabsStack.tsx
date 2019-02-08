@@ -1,42 +1,42 @@
 import {
   createMaterialTopTabNavigator,
   createStackNavigator
-} from "react-navigation";
-import { MyPostsScreen, MyFavScreen } from "../../screens";
+} from 'react-navigation';
+import { MyOnlinePostsScreen, MyOfflinePostsScreen } from '../../screens';
 const PostTabs = createMaterialTopTabNavigator(
   {
-    UserPostsScreen: {
-      screen: MyPostsScreen,
+    MyOnlinePostsScreen: {
+      screen: MyOnlinePostsScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: "posts",
-        headerStyle: { backgroundColor: "#fff" },
-        headerTintColor: "#777",
-        headerTitleStyle: { fontSize: 20, color: "#000" }
+        title: 'online posts',
+        headerStyle: { backgroundColor: '#fff' },
+        headerTintColor: '#777',
+        headerTitleStyle: { fontSize: 20, color: '#000' }
       })
     },
-    UserFavScreen: {
-      screen: MyFavScreen,
+    MyOfflinePostsScreen: {
+      screen: MyOfflinePostsScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: "favorite",
-        headerStyle: { backgroundColor: "#fff" },
-        headerTintColor: "#777",
-        headerTitleStyle: { fontSize: 20, color: "#000" }
+        title: 'offline posts',
+        headerStyle: { backgroundColor: '#fff' },
+        headerTintColor: '#777',
+        headerTitleStyle: { fontSize: 20, color: '#000' }
       })
     }
   },
   {
     lazy: true,
     tabBarOptions: {
-      activeTintColor: "#6FA7D5",
-      inactiveTintColor: "#777",
+      activeTintColor: '#6FA7D5',
+      inactiveTintColor: '#777',
       labelStyle: {
         fontSize: 16
       },
       indicatorStyle: {
-        backgroundColor: "#6FA7D5"
+        backgroundColor: '#6FA7D5'
       },
       style: {
-        backgroundColor: "#efefef"
+        backgroundColor: '#efefef'
       }
     }
   }

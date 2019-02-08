@@ -20,12 +20,20 @@ class HomeHeader extends React.Component<any, any> {
           }
         ]}
       >
-        <View style={[styles.leftIconView, { flexDirection: 'row' }]}>
+        <View
+          style={[
+            styles.leftIconView,
+            {
+              flexDirection: 'row',
+              flex: this.props.isAuthenticated ? 2.8 : 1.5
+            }
+          ]}
+        >
           <TouchableOpacity
             onPress={() => this.props.navigation.toggleDrawer()}
             style={{
               paddingHorizontal: 2,
-              marginLeft: 10,
+              marginLeft: 5,
               marginTop: 3
             }}
           >
@@ -43,7 +51,7 @@ class HomeHeader extends React.Component<any, any> {
               }}
               style={{
                 paddingHorizontal: 5,
-                marginLeft: 2,
+                marginLeft: 5,
                 marginTop: 3
               }}
             >
@@ -56,12 +64,15 @@ class HomeHeader extends React.Component<any, any> {
           <SearchBox navigation={this.props.navigation} />
         </View>
         <View
-          style={[styles.rightIconView, { flex: 2.7, paddingHorizontal: 3 }]}
+          style={[
+            styles.rightIconView,
+            { flex: 2.5, paddingHorizontal: 3, marginHorizontal: 3 }
+          ]}
         >
           <TouchableOpacity
             style={{
               height: 32,
-              width: '90%',
+              width: '100%',
               backgroundColor: '#eee',
 
               justifyContent: 'center',

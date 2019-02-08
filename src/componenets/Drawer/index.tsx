@@ -38,7 +38,9 @@ class Drawer extends React.Component<any, any> {
         return this.props.navigation.navigate('Profile');
       case 1:
         return this.props.navigation.navigate('MyPostsScreen');
-      case 4: {
+      case 2:
+        return this.props.navigation.navigate('MyFavScreen');
+      case 5: {
         // TODO: uncomment to logout from all
         // await this.props.logoutFromAll();
         AsyncStorage.removeItem('aysheetoken');
@@ -65,20 +67,31 @@ class Drawer extends React.Component<any, any> {
             style={{
               flex: 1,
               marginHorizontal: 10,
-              marginVertical: 5,
-              flexDirection: lng === 'ar' ? 'row-reverse' : 'row'
+              marginVertical: 10,
+              flexDirection: lng === 'ar' ? 'row-reverse' : 'row',
+              alignItems: 'center',
+              justifyContent: 'flex-start'
             }}
           >
-            <Ionicons
-              name={icon}
-              size={33}
-              color="#000"
-              style={{ marginHorizontal: 20 }}
-            />
+            <View
+              style={{
+                width: 50,
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <Ionicons
+                name={icon}
+                size={33}
+                color="#5B4C57"
+                style={{ marginHorizontal: 5 }}
+              />
+            </View>
+
             <Text
               style={{
                 marginTop: 5,
-                color: '#000',
+                color: '#5B4C57',
                 fontSize: 16,
                 fontFamily: lng === 'ar' ? 'cairo-light' : 'comfortaa-Regular'
               }}
@@ -98,7 +111,7 @@ class Drawer extends React.Component<any, any> {
         }/image/upload/w_${100}/${user.avatar}`
       : 'https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png';
     return (
-      <View style={[styles.drawer, { borderBottomColor: '#000' }]}>
+      <View style={[styles.drawer, { borderBottomColor: '#5B4C57' }]}>
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('Profile');
@@ -141,7 +154,7 @@ class Drawer extends React.Component<any, any> {
             <Text
               style={{
                 fontSize: 16,
-                color: '#000',
+                color: '#5B4C57',
                 paddingVertical: 10
               }}
             >
@@ -152,7 +165,7 @@ class Drawer extends React.Component<any, any> {
             <Text
               style={{
                 fontSize: 16,
-                color: '#000',
+                color: '#5B4C57',
                 paddingVertical: 10
               }}
             >
@@ -190,7 +203,7 @@ class Drawer extends React.Component<any, any> {
           <Text
             style={{
               fontSize: 18,
-              color: '#000',
+              color: '#5B4C57',
               fontFamily: 'cairo-bold',
               paddingVertical: 10
             }}
@@ -220,6 +233,7 @@ class Drawer extends React.Component<any, any> {
           {this.props.isAuthenticated && (
             <View style={{ flex: 3, marginTop: 20 }}>
               {this.renderHeader(user)}
+              <View style={{ height: 20 }} />
               {this.renderMenu(menus, lang)}
             </View>
           )}

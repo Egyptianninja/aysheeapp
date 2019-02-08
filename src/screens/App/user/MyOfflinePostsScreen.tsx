@@ -4,25 +4,30 @@ import { connect } from 'react-redux';
 import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
-import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
-import { getDBNextPosts, readyUserPosts } from '../../../utils';
-import { ItemFavView, Loading } from '../../../componenets';
-import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
+import getMyPosts from '../../../graphql/query/getMyPosts';
+import { getNextPosts, readyUserPosts } from '../../../utils';
+import { ItemOwnerView, Loading } from '../../../componenets';
+import editClassifieds from '../../../graphql/mutation/editClassifieds';
+import deletePost from '../../../graphql/mutation/deletePost';
 
-class MyFavScreen extends React.Component<any, any> {
+class MyOfflinePostsScreen extends React.Component<any, any> {
   flatListRef: any;
-  getDBNextPosts: any;
-
+  getNextPosts: any;
   constructor(p: any) {
     super(p);
-    this.getDBNextPosts = debounce(getDBNextPosts, 100);
+    this.getNextPosts = debounce(getNextPosts, 100);
     this.state = {
       refreshing: false
     };
   }
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate('ItemScreen', { post, word, lang });
+    this.props.navigation.navigate('ItemScreen', {
+      post,
+      word,
+      lang,
+      myItem: true
+    });
   };
 
   render() {
@@ -30,8 +35,8 @@ class MyFavScreen extends React.Component<any, any> {
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Query
-          query={getMyFavoritePosts}
-          variables={{ cursor: 0 }}
+          query={getMyPosts}
+          variables={{ islive: false }}
           fetchPolicy="network-only"
         >
           {({ loading, error, data, fetchMore, refetch }) => {
@@ -39,9 +44,9 @@ class MyFavScreen extends React.Component<any, any> {
               return <Loading />;
             }
             if (error) {
-              return `Error!: ${error}`;
+              console.log(`Error!: ${error}`);
             }
-            const posts = data.getMyFavoritePosts.data;
+            const { posts } = data.getMyPosts;
             const rPosts = readyUserPosts(posts, 200, 79, lang);
             return (
               <MasonryList
@@ -50,19 +55,18 @@ class MyFavScreen extends React.Component<any, any> {
                 }}
                 onRefresh={() => refetch()}
                 onEndReached={() =>
-                  this.getDBNextPosts(
-                    fetchMore,
-                    'getMyFavoritePosts',
-                    rPosts.length
-                  )
+                  this.getNextPosts(data, fetchMore, 'getMyPosts', {
+                    islive: false
+                  })
                 }
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <ItemFavView
+                  <ItemOwnerView
                     post={item}
-                    unFavoritePost={this.props.unFavoritePost}
                     navigation={this.props.navigation}
+                    editClassifieds={this.props.editClassifieds}
+                    deletePost={this.props.deletePost}
                     selectePost={this.selectePost}
                     word={words}
                     lang={lang}
@@ -70,7 +74,7 @@ class MyFavScreen extends React.Component<any, any> {
                 )}
                 getHeightForItem={({ item }: any) => item.height}
                 numColumns={2}
-                keyExtractor={(item: any) => item._id}
+                keyExtractor={(item: any) => item.id}
                 removeClippedSubviews={true}
                 windowSize={21}
                 disableVirtualization={false}
@@ -91,7 +95,11 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect(mapStateToProps)(
-  graphql(unFavoritePost, {
-    name: 'unFavoritePost'
-  })(MyFavScreen)
+  graphql(editClassifieds, {
+    name: 'editClassifieds'
+  })(
+    graphql(deletePost, {
+      name: 'deletePost'
+    })(MyOfflinePostsScreen)
+  )
 );
