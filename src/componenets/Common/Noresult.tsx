@@ -34,8 +34,7 @@ const Noresult = ({ lang, title }: any) => (
         textAlign: lang === 'ar' ? 'right' : 'left',
         fontWeight: 'bold',
         fontSize: 20,
-        color: '#6FA7D5',
-        opacity: 0.8
+        color: '#9C949A'
       }}
     >
       {title}

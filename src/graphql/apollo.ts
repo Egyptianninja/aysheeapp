@@ -12,11 +12,11 @@ import { logout, phoneRemoved } from '../store/actions/userAtions';
 import secrets from '../constants/secrets';
 import { store } from '../store';
 
-const host = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.host;
-const uri = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.uri;
+// const host = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.host;
+// const uri = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.uri;
 
-// const host = secrets.host;
-// const uri = secrets.uri;
+const host = secrets.host;
+const uri = secrets.uri;
 
 const httpLink = createHttpLink({
   uri: host

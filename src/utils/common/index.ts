@@ -3,6 +3,7 @@ import { parseJwt } from './parseJwt';
 import { StyleSheet } from './stylesheet';
 import { getCountryCode, getCountryCodeQatar } from './getCountryCode';
 import { isArabic, arabicToNum } from './arabic';
+import { nameToColor } from './color';
 
 export {
   getLocation,
@@ -11,5 +12,6 @@ export {
   isArabic,
   arabicToNum,
   getCountryCode,
-  getCountryCodeQatar
+  getCountryCodeQatar,
+  nameToColor
 };

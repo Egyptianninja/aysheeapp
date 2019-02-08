@@ -28,7 +28,15 @@ export default class MessageBubble extends React.Component<any, any> {
               justifyContent: 'center'
             }}
           >
-            {!message.user.avatar && <AvatarPhone phone={message.user.phone} />}
+            {!message.user.avatar && (
+              <AvatarPhone
+                name={
+                  message.user.name
+                    ? message.user.name
+                    : message.user.uniquename
+                }
+              />
+            )}
             {message.user.avatar && (
               <Image
                 style={{

@@ -14,7 +14,8 @@ import {
   getNextPosts,
   getNewPosts,
   readyPosts,
-  getTimeLineBuckets
+  getTimeLineBuckets,
+  nameToColor
 } from '../../utils';
 import {
   Loading,

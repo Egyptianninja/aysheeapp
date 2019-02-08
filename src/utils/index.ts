@@ -22,7 +22,8 @@ import {
   getCountryCode,
   getCountryCodeQatar,
   isArabic,
-  arabicToNum
+  arabicToNum,
+  nameToColor
 } from './common';
 import { since } from './since';
 import {
@@ -69,5 +70,6 @@ export {
   getCountryCode,
   getPushToken,
   ImageViewer,
-  getCountryCodeQatar
+  getCountryCodeQatar,
+  nameToColor
 };
