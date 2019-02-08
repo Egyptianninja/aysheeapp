@@ -99,12 +99,7 @@ export default {
 
     { pid: 2, id: 5, name: 'Camera', nameGlob: 'Camera' },
     { pid: 2, id: 6, name: 'Home Electronics', nameGlob: 'Home Electronics' },
-    // {
-    //   pid: 2,
-    //   id: 7,
-    //   name: 'Mobile & Accessories',
-    //   nameGlob: 'Mobile & Accessories'
-    // },
+
     { pid: 2, id: 8, name: 'PC & Accessories', nameGlob: 'PC & Accessories' },
     { pid: 2, id: 9, name: 'Sounds Systems', nameGlob: 'Sounds Systems' },
     { pid: 2, id: 10, name: 'Video Games', nameGlob: 'Video Games' },
@@ -177,7 +172,17 @@ export default {
     { pid: 8, id: 55, name: 'Makeup', nameGlob: 'Makeup' },
     { pid: 8, id: 56, name: 'Jewelry', nameGlob: 'Jewelry' },
     { pid: 8, id: 57, name: 'Gifts', nameGlob: 'Gifts' },
-    { pid: 8, id: 58, name: 'Other', nameGlob: 'Other' }
+    { pid: 8, id: 58, name: 'Other', nameGlob: 'Other' },
+
+    { pid: 14, id: 70, name: 'Samsung', nameGlob: 'Samsung' },
+    { pid: 14, id: 71, name: 'Apple', nameGlob: 'Apple' },
+    { pid: 14, id: 72, name: 'Huawei', nameGlob: 'Huawei ' },
+    { pid: 14, id: 73, name: 'Nokia', nameGlob: 'Nokia' },
+    { pid: 14, id: 74, name: 'LG', nameGlob: 'LG' },
+    { pid: 14, id: 75, name: 'TCL', nameGlob: 'TCL' },
+    { pid: 14, id: 76, name: 'Lenovo', nameGlob: 'Lenovo' },
+    { pid: 14, id: 77, name: 'Sony', nameGlob: 'Sony' },
+    { pid: 14, id: 78, name: 'Other', nameGlob: 'Other' }
   ],
   electroBrands: [
     { pid: 5, id: 0, name: 'Canon', nameGlob: 'Canon' },
@@ -203,16 +208,6 @@ export default {
     { pid: 6, id: 19, name: 'Sanyo', nameGlob: 'Sanyo' },
     { pid: 6, id: 20, name: 'JVC', nameGlob: 'JVC' },
     { pid: 6, id: 21, name: 'Other', nameGlob: 'Other' },
-
-    // { pid: 7, id: 22, name: 'Samsung', nameGlob: 'Samsung' },
-    // { pid: 7, id: 23, name: 'Apple', nameGlob: 'Apple' },
-    // { pid: 7, id: 24, name: 'Huawei', nameGlob: 'Huawei ' },
-    // { pid: 7, id: 25, name: 'Nokia', nameGlob: 'Nokia' },
-    // { pid: 7, id: 26, name: 'LG', nameGlob: 'LG' },
-    // { pid: 7, id: 27, name: 'TCL', nameGlob: 'TCL' },
-    // { pid: 7, id: 28, name: 'Lenovo', nameGlob: 'Lenovo' },
-    // { pid: 7, id: 29, name: 'Sony', nameGlob: 'Sony' },
-    // { pid: 7, id: 30, name: 'Other', nameGlob: 'Other' },
 
     { pid: 8, id: 31, name: 'Lenovo', nameGlob: 'Lenovo' },
     { pid: 8, id: 32, name: 'HP', nameGlob: 'HP ' },
@@ -247,17 +242,6 @@ export default {
     { id: 3, name: 'Shop', nameGlob: 'محل تجاري, Shop, Shop' },
     { id: 4, name: 'Store', nameGlob: 'مستودع, Store, Store' },
     { id: 5, name: 'Land', nameGlob: 'ارض, Land, Land' }
-  ],
-  mobile: [
-    { id: 0, name: 'Samsung', nameGlob: 'Samsung' },
-    { id: 1, name: 'Apple', nameGlob: 'Apple' },
-    { id: 2, name: 'Huawei', nameGlob: 'Huawei ' },
-    { id: 3, name: 'Nokia', nameGlob: 'Nokia' },
-    { id: 4, name: 'LG', nameGlob: 'LG' },
-    { id: 5, name: 'TCL', nameGlob: 'TCL' },
-    { id: 6, name: 'Lenovo', nameGlob: 'Lenovo' },
-    { id: 7, name: 'Sony', nameGlob: 'Sony' },
-    { id: 8, name: 'Other', nameGlob: 'Other' }
   ],
 
   service: [

@@ -109,12 +109,7 @@ export default {
 
     { pid: 2, id: 5, name: 'كاميرا', nameGlob: 'كاميرا' },
     { pid: 2, id: 6, name: 'إلكترونيات منزلية', nameGlob: 'إلكترونيات منزلية' },
-    // {
-    //   pid: 2,
-    //   id: 7,
-    //   name: 'جوالات & واكسسواراتها',
-    //   nameGlob: 'جوالات & واكسسواراتها'
-    // },
+
     {
       pid: 2,
       id: 8,
@@ -197,7 +192,17 @@ export default {
     { pid: 8, id: 55, name: 'إدوات تجميل', nameGlob: 'إدوات تجميل' },
     { pid: 8, id: 56, name: 'مجوهرات', nameGlob: 'مجوهرات' },
     { pid: 8, id: 57, name: 'هدايا', nameGlob: 'هدايا' },
-    { pid: 8, id: 58, name: 'أخرى', nameGlob: 'أخرى' }
+    { pid: 8, id: 58, name: 'أخرى', nameGlob: 'أخرى' },
+
+    { pid: 14, id: 70, name: 'سامسونج', nameGlob: 'سامسونج' },
+    { pid: 14, id: 71, name: 'أبل', nameGlob: 'أبل' },
+    { pid: 14, id: 72, name: 'هواوي', nameGlob: 'هواوي ' },
+    { pid: 14, id: 73, name: 'نوكيا', nameGlob: 'نوكيا' },
+    { pid: 14, id: 74, name: 'أل جي', nameGlob: 'أل جي' },
+    { pid: 14, id: 75, name: 'تي سي أل', nameGlob: 'تي سي أل' },
+    { pid: 14, id: 76, name: 'لينوفو', nameGlob: 'لينوفو' },
+    { pid: 14, id: 77, name: 'سوني', nameGlob: 'سوني' },
+    { pid: 14, id: 78, name: 'أخرى', nameGlob: 'أخرى' }
   ],
 
   electroBrands: [
@@ -224,16 +229,6 @@ export default {
     { pid: 6, id: 19, name: 'سانيو', nameGlob: 'سانيو' },
     { pid: 6, id: 20, name: 'جي في سي', nameGlob: 'جي في سي' },
     { pid: 6, id: 21, name: 'أخرى', nameGlob: 'أخرى' },
-
-    // { pid: 7, id: 22, name: 'سامسونج', nameGlob: 'سامسونج' },
-    // { pid: 7, id: 23, name: 'أبل', nameGlob: 'أبل' },
-    // { pid: 7, id: 24, name: 'هواوي', nameGlob: 'هواوي ' },
-    // { pid: 7, id: 25, name: 'نوكيا', nameGlob: 'نوكيا' },
-    // { pid: 7, id: 26, name: 'أل جي', nameGlob: 'أل جي' },
-    // { pid: 7, id: 27, name: 'تي سي أل', nameGlob: 'تي سي أل' },
-    // { pid: 7, id: 28, name: 'لينوفو', nameGlob: 'لينوفو' },
-    // { pid: 7, id: 29, name: 'سوني', nameGlob: 'سوني' },
-    // { pid: 7, id: 30, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 8, id: 31, name: 'لينوفو', nameGlob: 'لينوفو' },
     { pid: 8, id: 32, name: 'أتش بي', nameGlob: 'أتش بي ' },
@@ -267,18 +262,6 @@ export default {
     { id: 3, name: 'محل تجاري', nameGlob: 'محل تجاري, Shop, Shop' },
     { id: 4, name: 'مستودع', nameGlob: 'مستودع, Store, Store' },
     { id: 5, name: 'ارض', nameGlob: 'ارض, Land, Land' }
-  ],
-
-  mobile: [
-    { id: 0, name: 'سامسونج', nameGlob: 'سامسونج' },
-    { id: 1, name: 'أبل', nameGlob: 'أبل' },
-    { id: 2, name: 'هواوي', nameGlob: 'هواوي ' },
-    { id: 3, name: 'نوكيا', nameGlob: 'نوكيا' },
-    { id: 4, name: 'أل جي', nameGlob: 'أل جي' },
-    { id: 5, name: 'تي سي أل', nameGlob: 'تي سي أل' },
-    { id: 6, name: 'لينوفو', nameGlob: 'لينوفو' },
-    { id: 7, name: 'سوني', nameGlob: 'سوني' },
-    { id: 8, name: 'أخرى', nameGlob: 'أخرى' }
   ],
 
   service: [

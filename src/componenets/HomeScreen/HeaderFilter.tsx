@@ -123,7 +123,12 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
-  } else if (categoryId === 3 || categoryId === 8 || categoryId === 16) {
+  } else if (
+    categoryId === 3 ||
+    categoryId === 8 ||
+    categoryId === 14 ||
+    categoryId === 16
+  ) {
     const catFilters = [
       { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },

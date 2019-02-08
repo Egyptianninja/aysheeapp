@@ -375,11 +375,14 @@ class ItemScreen extends React.Component<any, any> {
             )}
             <BodyView
               favoritePost={this.props.favoritePost}
+              post={post}
               postId={postId}
               title={post.title}
               body={post.body}
               isrtl={post.isrtl}
               time={post.time}
+              word={word}
+              lang={lang}
             />
             <View style={{ height: 20 }} />
             {myItem && this.renderUser(this.props.user, callargs, word)}

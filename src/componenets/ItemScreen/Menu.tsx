@@ -73,11 +73,10 @@ export default class Menu extends React.Component<any, any> {
         <TouchableOpacity
           onPress={() => this.toggleModal()}
           style={{
-            paddingHorizontal: 10,
-            marginLeft: 30
+            paddingHorizontal: 10
           }}
         >
-          <Ionicons name="md-more" size={32} color="#6FA7D5" />
+          <Ionicons name="md-more" size={32} color="#9C949A" />
         </TouchableOpacity>
 
         <Modal

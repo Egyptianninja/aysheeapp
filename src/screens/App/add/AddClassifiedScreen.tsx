@@ -43,10 +43,10 @@ class AddClassifiedScreen extends React.Component<any, any> {
     location: null,
     pushToken: null
   };
-  noSale = [2, 3, 4, 7, 8, 13, 14, 15, 17, 18];
-  noNew = [18, 17, 14];
+  noSale = [2, 3, 4, 7, 8, 13, 15, 17, 18];
+  noNew = [18, 17];
   noPrice = [15];
-  noWaranty = [18, 17, 15, 14, 13, 12];
+  noWaranty = [18, 17, 15, 13, 12];
 
   async componentWillMount() {
     const pushToken = await registerForPushNotificationsAsync();

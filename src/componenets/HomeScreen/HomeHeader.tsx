@@ -36,18 +36,20 @@ class HomeHeader extends React.Component<any, any> {
               color="#5B4C57"
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate('NotificationsScreen');
-            }}
-            style={{
-              paddingHorizontal: 5,
-              marginLeft: 2,
-              marginTop: 3
-            }}
-          >
-            <Ionicons name="ios-notifications" size={30} color="#5B4C57" />
-          </TouchableOpacity>
+          {this.props.isAuthenticated && (
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate('NotificationsScreen');
+              }}
+              style={{
+                paddingHorizontal: 5,
+                marginLeft: 2,
+                marginTop: 3
+              }}
+            >
+              <Ionicons name="ios-notifications" size={30} color="#5B4C57" />
+            </TouchableOpacity>
+          )}
         </View>
 
         <View style={[styles.searchView, { flex: 10 }]}>
