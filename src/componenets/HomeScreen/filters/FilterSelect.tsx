@@ -101,6 +101,8 @@ export default class FilterSelect extends React.Component<any, any> {
     const { rest, itemKind, lang } = this.props;
     const selected =
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
+    const selectedLable =
+      selected && rest[itemKind] !== false && rest[itemKind] !== true;
     return (
       <View>
         <TouchableOpacity
@@ -124,26 +126,6 @@ export default class FilterSelect extends React.Component<any, any> {
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
-          {/* {this.props.icon && (
-            <Ionicons
-              name={this.props.icon}
-              size={22}
-              color={
-                selected ? '#fff' : this.props.disable ? '#ccc' : '#6A6262'
-              }
-              style={{ margin: 5 }}
-            />
-          )}
-          {!this.props.icon && (
-            <Ionicons
-              name="ios-arrow-down"
-              size={22}
-              color={
-                selected ? '#fff' : this.props.disable ? '#ccc' : '#6A6262'
-              }
-              style={{ margin: 5 }}
-            />
-          )} */}
           <Text
             style={{
               color: selected
@@ -154,16 +136,16 @@ export default class FilterSelect extends React.Component<any, any> {
               fontSize: this.props.lang === 'ar' ? 14 : 15,
               fontFamily: 'cairo-regular',
               paddingHorizontal: this.props.icon ? undefined : 5,
-              marginTop: selected ? 5 : undefined
+              marginTop: selectedLable ? 5 : undefined
             }}
           >
             {selected
               ? `${this.state.label}`
-              : this.props.icon || !this.props.rest[itemKind]
+              : !this.props.rest[itemKind]
               ? data.label
               : this.state.label}
           </Text>
-          {selected && rest[itemKind] !== false && rest[itemKind] !== true && (
+          {selectedLable && (
             <View
               style={{
                 position: 'absolute',

@@ -66,7 +66,7 @@ const HeaderFilter: any = ({
               removeFilter,
               lang,
               !(brandId || brandId === 0),
-              { id: brandId, label: 'Sub Brand', name: 'subBrandId' }
+              { id: brandId, label: words.subBrand, name: 'subBrandId' }
             );
           } else {
             return renderSelectRow(
@@ -107,7 +107,7 @@ const HeaderFilter: any = ({
               removeFilter,
               lang,
               !(kindId || kindId === 0),
-              { id: kindId, label: 'Brand', name: 'eBrandId' }
+              { id: kindId, label: words.brand, name: 'eBrandId' }
             );
           } else {
             return renderSelectRow(
