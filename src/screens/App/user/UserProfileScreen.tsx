@@ -41,7 +41,10 @@ class UserProfileScreen extends React.Component<any, any> {
         >
           {!user.avatar && (
             <View>
-              <Avatar name={user.uniquename} />
+              <Avatar
+                name={user.name ? user.name : user.uniquename}
+                size={80}
+              />
             </View>
           )}
           {user.avatar && (

@@ -248,6 +248,27 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
+  } else if (categoryId === 5 || categoryId === 6) {
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            lang
+          );
+        })}
+      </RenderFilter>
+    );
   } else {
     return <View />;
   }

@@ -1,4 +1,4 @@
-import { AvatarPhone, AvatarName, Avatar } from './Avatar';
+import { Avatar } from './Avatar';
 import ChoiseCategory from './ChoiseScreen/ChoiseCategory';
 import Drawer from './Drawer';
 import { CategoriesScroll, ItemView } from './HomeScreen';
@@ -20,8 +20,6 @@ import ItemOwnerView from './MyPostsScreen';
 import { MessageModal, Loading, Noresult } from './Common';
 
 export {
-  AvatarPhone,
-  AvatarName,
   Avatar,
   ChoiseCategory,
   Drawer,

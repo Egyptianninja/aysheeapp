@@ -133,7 +133,9 @@ class Drawer extends React.Component<any, any> {
             }
           }}
         >
-          {!user.avatar && <Avatar name={user.name} />}
+          {!user.avatar && (
+            <Avatar name={user.name ? user.name : user.uniquename} size={80} />
+          )}
           {user.avatar && (
             <Image
               style={{

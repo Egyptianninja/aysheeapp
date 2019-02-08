@@ -23,7 +23,7 @@ import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
 import {
-  AvatarName,
+  Avatar,
   Properties,
   PriceView,
   BodyView,
@@ -188,7 +188,7 @@ class ItemScreen extends React.Component<any, any> {
               this.props.navigation.navigate('UserProfileScreen', { user })
             }
           >
-            <AvatarName name={user.uniquename} />
+            <Avatar name={user.name ? user.name : user.uniquename} size={50} />
           </TouchableOpacity>
         )}
 

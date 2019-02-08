@@ -1,5 +1,3 @@
-import { AvatarPhone } from "./AvatarPhone";
-import { AvatarName } from "./AvatarName";
-import { Avatar } from "./Avatar";
+import { Avatar } from './Avatar';
 
-export { AvatarPhone, AvatarName, Avatar };
+export { Avatar };

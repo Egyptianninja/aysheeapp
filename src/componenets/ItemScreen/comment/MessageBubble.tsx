@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { StyleSheet, isArabic, since } from '../../../utils';
-import { AvatarPhone } from '../../Avatar';
+import { Avatar } from '../../Avatar';
 export default class MessageBubble extends React.Component<any, any> {
   render() {
     const { message, lang, width } = this.props;
@@ -29,12 +29,13 @@ export default class MessageBubble extends React.Component<any, any> {
             }}
           >
             {!message.user.avatar && (
-              <AvatarPhone
+              <Avatar
                 name={
                   message.user.name
                     ? message.user.name
                     : message.user.uniquename
                 }
+                size={40}
               />
             )}
             {message.user.avatar && (

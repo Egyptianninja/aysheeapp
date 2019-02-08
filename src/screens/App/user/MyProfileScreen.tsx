@@ -127,7 +127,12 @@ class ProfileScreen extends React.Component<any, any> {
               }
             }}
           >
-            {!userData.avatar && <Avatar name={userData.name} />}
+            {!userData.avatar && (
+              <Avatar
+                name={userData.name ? userData.name : userData.uniquename}
+                size={80}
+              />
+            )}
             {userData.avatar && (
               <Image
                 style={{
