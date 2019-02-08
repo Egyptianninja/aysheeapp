@@ -361,6 +361,8 @@ export default {
     namenotvalid: 'Not valid name',
     noresults: 'No results',
     sort: 'Sort',
+    onlineposts: 'Online Posts',
+    offlineposts: 'Offline Posts',
 
     labels: {
       categoryId: 'Category',
@@ -390,6 +392,13 @@ export default {
     postmenu: [
       { id: 1, name: 'Refresh' },
       { id: 2, name: 'Unpublish' },
+      { id: 3, name: 'Add Location' },
+      { id: 4, name: 'Edit Phone Number' },
+      { id: 5, name: 'Edit Price' },
+      { id: 6, name: 'Delete' }
+    ],
+    offlinepostmenu: [
+      { id: 2, name: 'Publish' },
       { id: 3, name: 'Add Location' },
       { id: 4, name: 'Edit Phone Number' },
       { id: 5, name: 'Edit Price' },

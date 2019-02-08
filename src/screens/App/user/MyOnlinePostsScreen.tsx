@@ -63,6 +63,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
                 data={rPosts}
                 renderItem={({ item }: any) => (
                   <ItemOwnerView
+                    offline={false}
                     post={item}
                     navigation={this.props.navigation}
                     editClassifieds={this.props.editClassifieds}

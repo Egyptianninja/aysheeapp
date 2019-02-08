@@ -32,9 +32,12 @@ import {
   PhotoSlider,
   ItemHeader,
   Loading,
-  getproperties
+  getproperties,
+  getJobProperties,
+  FullTimeView
 } from '../../componenets/';
 import Link from '../../utils/location/link';
+import { words } from '../../store/getStore';
 
 const { width } = Dimensions.get('window');
 
@@ -99,8 +102,6 @@ class ItemScreen extends React.Component<any, any> {
     if (this.state.inputBarText === '') {
       return null;
     }
-    console.log(userName);
-
     await this.props.createComment({
       variables: {
         postId,
@@ -244,9 +245,11 @@ class ItemScreen extends React.Component<any, any> {
     const myItem = this.props.navigation.getParam('myItem');
     const photos = this.getimageurls(post);
     const pdata = getproperties(post);
+    const jdata = getJobProperties(post);
     const newObject = pdata.filter((a: any) => a.name === 'isnew')[0];
     const saleObject = pdata.filter((a: any) => a.name === 'issale')[0];
     const furntObject = pdata.filter((a: any) => a.name === 'isfurnishered')[0];
+    const fulltimeObject = pdata.filter((a: any) => a.name === 'isfullTime')[0];
     const callargs = {
       number: post.phone, // Use commas to add time between digits.
       prompt: false
@@ -363,6 +366,9 @@ class ItemScreen extends React.Component<any, any> {
             </View>
           )}
           <View style={{ paddingHorizontal: 10 }}>
+            {post.isfullTime && (
+              <FullTimeView words={word} fulltimeObject={fulltimeObject} />
+            )}
             {(post.price || post.price === 0) && (
               <PriceView
                 words={word}
@@ -403,6 +409,9 @@ class ItemScreen extends React.Component<any, any> {
           </View>
           <View style={{ height: 20 }} />
           <Properties lang={lang} words={word} data={pdata} />
+          {(post.categoryId === 5 || post.categoryId === 6) && (
+            <Properties lang={lang} words={word} data={jdata} />
+          )}
           {post.trueLocation && (
             <ItemLocation
               latitude={post.trueLocation.lat}

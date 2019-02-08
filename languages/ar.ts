@@ -384,6 +384,8 @@ export default {
     namenotvalid: 'الاسم التعريفي غير صالح',
     noresults: 'لا توجد نتائج',
     sort: 'فرز',
+    onlineposts: 'الاعلانات المنشورة',
+    offlineposts: 'الاعلانات غير المنشورة',
 
     labels: {
       categoryId: 'المجموعة',
@@ -413,6 +415,13 @@ export default {
     postmenu: [
       { id: 1, name: 'تحديث الاعلان' },
       { id: 2, name: 'الغاء نشر الاعلان' },
+      { id: 3, name: 'تعديل الموقع' },
+      { id: 4, name: 'تعديل رقم الهاتف' },
+      { id: 5, name: 'تعديل السعر' },
+      { id: 6, name: 'حذف الاعلان' }
+    ],
+    offlinepostmenu: [
+      { id: 2, name: 'اعادة نشر الاعلان' },
       { id: 3, name: 'تعديل الموقع' },
       { id: 4, name: 'تعديل رقم الهاتف' },
       { id: 5, name: 'تعديل السعر' },

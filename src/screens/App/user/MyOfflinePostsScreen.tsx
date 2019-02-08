@@ -63,6 +63,7 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
                 data={rPosts}
                 renderItem={({ item }: any) => (
                   <ItemOwnerView
+                    offline={true}
                     post={item}
                     navigation={this.props.navigation}
                     editClassifieds={this.props.editClassifieds}

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 const PriceView = ({
   price,
@@ -27,24 +27,23 @@ const PriceView = ({
       : furntObject.value === false
       ? words.unfurnishered
       : undefined;
-
   return (
     <View
       style={{
         paddingVertical: 15,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        borderBottomColor: "#ddd",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomColor: '#ddd',
         borderBottomWidth: 1,
-        alignItems: "center"
+        alignItems: 'center'
       }}
     >
       <View>
-        <Text style={{ fontSize: 22, fontWeight: "bold", color: "#26A65B" }}>
-          {currency} {price.toLocaleString("en")}
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#26A65B' }}>
+          {currency} {price.toLocaleString('en')}
         </Text>
       </View>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: 'row' }}>
         {newtype && (
           <View style={styles.botton}>
             <Text style={styles.txt}>{newtype}</Text>
@@ -71,17 +70,17 @@ const styles = StyleSheet.create({
     padding: 5,
     marginHorizontal: 3,
 
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderColor: "#ddd",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderColor: '#ddd',
     borderWidth: 1,
     marginVertical: 5
   },
   txt: {
     fontSize: 12,
-    color: "#ababab",
-    fontWeight: "bold",
+    color: '#ababab',
+    fontWeight: 'bold',
     paddingHorizontal: 5
   }
 });

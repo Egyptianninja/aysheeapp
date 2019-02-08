@@ -6,11 +6,13 @@ import {
   ItemHeader,
   Properties,
   PriceView,
+  FullTimeView,
   BodyView,
   InputBar,
   ItemComment,
   PhotoSlider,
-  getproperties
+  getproperties,
+  getJobProperties
 } from './ItemScreen';
 import NotificationItem from './NotificationScreen/item';
 import ItemFavView from './MyFavScreen';
@@ -26,6 +28,7 @@ export {
   Loading,
   CategoriesScroll,
   ItemView,
+  FullTimeView,
   ItemHeader,
   Properties,
   PriceView,
@@ -38,5 +41,6 @@ export {
   ItemOwnerView,
   MessageModal,
   getproperties,
+  getJobProperties,
   Noresult
 };

@@ -4,6 +4,7 @@ import { StyleSheet } from './stylesheet';
 import { getCountryCode, getCountryCodeQatar } from './getCountryCode';
 import { isArabic, arabicToNum } from './arabic';
 import { nameToColor } from './color';
+import { getLang, getLocale } from './getlang';
 
 export {
   getLocation,
@@ -13,5 +14,7 @@ export {
   arabicToNum,
   getCountryCode,
   getCountryCodeQatar,
-  nameToColor
+  nameToColor,
+  getLang,
+  getLocale
 };

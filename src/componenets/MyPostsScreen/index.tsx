@@ -7,6 +7,7 @@ import Menu from './Menu';
 
 const ItemOwnerView = (props: any) => {
   const {
+    offline,
     color,
     post,
     post: {
@@ -121,6 +122,7 @@ const ItemOwnerView = (props: any) => {
                     {subTitle}
                   </Text>
                   <Menu
+                    offline={offline}
                     post={post}
                     isrtl={isrtl}
                     editClassifieds={editClassifieds}

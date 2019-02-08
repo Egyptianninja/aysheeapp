@@ -84,7 +84,7 @@ export default class Menu extends React.Component<any, any> {
   };
 
   render() {
-    const { isrtl, post, word, lang } = this.props;
+    const { isrtl, post, word, lang, offline } = this.props;
     return (
       <React.Fragment>
         <TouchableOpacity
@@ -123,7 +123,11 @@ export default class Menu extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <ScrollView>{this.renderOptions(word.postmenu)}</ScrollView>
+            <ScrollView>
+              {this.renderOptions(
+                offline ? word.offlinepostmenu : word.postmenu
+              )}
+            </ScrollView>
           </View>
         </Modal>
         <Modal
