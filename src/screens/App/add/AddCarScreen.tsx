@@ -32,7 +32,6 @@ import {
   RadioButton,
   Title
 } from '../../../lib';
-import { MessageModal } from '../../../componenets';
 const { width } = Dimensions.get('window');
 
 class AddCarScreen extends React.Component<any, any> {
@@ -153,7 +152,7 @@ class AddCarScreen extends React.Component<any, any> {
         });
       }
       this.updateProgressBar(1 / (3 + photos.length));
-      this.showMessage({ seconds: 1, screen: 'HomeScreen' });
+      this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
