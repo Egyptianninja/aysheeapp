@@ -8,6 +8,7 @@ import {
   Image,
   TouchableWithoutFeedback
 } from 'react-native';
+import { ProgressiveImage } from '../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -53,7 +54,8 @@ export default class PhotoSlider extends React.Component<any, any> {
                 onPress={() => this.props.showModal(i)}
                 key={i}
               >
-                <Image
+                <ProgressiveImage
+                  thumbnailSource={{ uri: image.thumb }}
                   source={{ uri: image.url }}
                   resizeMode="contain"
                   style={{

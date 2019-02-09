@@ -14,7 +14,8 @@ import {
   pickImage,
   compressImage,
   ImagePicker,
-  ImageViewer
+  ImageViewer,
+  ProgressiveImage
 } from './image';
 import {
   getLocation,
@@ -77,5 +78,6 @@ export {
   getCountryCodeQatar,
   nameToColor,
   getLang,
-  getLocale
+  getLocale,
+  ProgressiveImage
 };

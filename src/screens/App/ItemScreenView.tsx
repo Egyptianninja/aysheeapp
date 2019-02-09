@@ -87,7 +87,10 @@ class ItemScreen extends React.Component<any, any> {
       return {
         url: `http://res.cloudinary.com/${
           secrets.upload.CLOUD_NAME
-        }/image/upload/w_960/${photo.substring(0, 20)}`
+        }/image/upload/w_960/${photo.substring(0, 20)}`,
+        thumb: `http://res.cloudinary.com/${
+          secrets.upload.CLOUD_NAME
+        }/image/upload/w_50/${photo.substring(0, 20)}`
       };
     });
   };

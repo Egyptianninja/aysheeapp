@@ -112,7 +112,7 @@ class HomeScreen extends React.Component<any, any> {
   };
   handleNotification = (notification: any) => {
     const postId = notification.data.postId;
-    this.props.navigation.navigate('ItemScreenById', {
+    this.props.navigation.navigate('ItemScreen', {
       postId,
       word: this.props.words,
       lang: this.props.lang
