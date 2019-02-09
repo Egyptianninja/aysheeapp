@@ -105,7 +105,7 @@ export default class PhotoSlider extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000'
+    backgroundColor: '#171717'
   },
   layoutIndicator: {
     height: 15,

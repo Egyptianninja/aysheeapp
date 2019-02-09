@@ -7,7 +7,6 @@ import ItemScreenView from './ItemScreenView';
 import { connect } from 'react-redux';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import createComment from '../../graphql/mutation/createComment';
-
 class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null

@@ -22,7 +22,11 @@ export const uploadPhoto = async (
   );
 };
 
-export const uploadPhotos = async (photos: any, selectedImage: any) => {
+export const uploadPhotos = async (
+  photos: any,
+  selectedImage: any,
+  updateProgressBar: any
+) => {
   let photoArray: any[] = [];
   if (photos) {
     const uploaders = photos.map(async (photo: any) => {
@@ -40,6 +44,7 @@ export const uploadPhotos = async (photos: any, selectedImage: any) => {
         const image = `${public_id}-${ratio}-${selected}`;
         photoArray = photoArray.concat(image);
       });
+      updateProgressBar(1 / (3 + photos.length));
     });
     await axios.all(uploaders);
   }

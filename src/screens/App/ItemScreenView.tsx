@@ -382,6 +382,7 @@ class ItemScreen extends React.Component<any, any> {
                 furntObject={furntObject}
               />
             )}
+
             <BodyView
               favoritePost={this.props.favoritePost}
               post={post}
@@ -394,6 +395,7 @@ class ItemScreen extends React.Component<any, any> {
               lang={lang}
             />
             <View style={{ height: 20 }} />
+
             {myItem && this.renderUser(this.props.user, callargs, word)}
             {!myItem && (
               <Query query={getUser} variables={{ userId: post.userId }}>

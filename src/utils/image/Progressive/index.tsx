@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     top: 0
   },
   container: {
-    backgroundColor: '#DBD8DA'
+    backgroundColor: '#171717'
   }
 });
 

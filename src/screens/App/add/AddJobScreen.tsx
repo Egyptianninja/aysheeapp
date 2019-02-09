@@ -9,6 +9,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
+import * as Progress from 'react-native-progress';
 import {
   StyleSheet,
   ImagePicker,
@@ -31,7 +32,8 @@ class AddJobScreen extends React.Component<any, any> {
     selectedImage: null,
     isMessageModal: false,
     location: null,
-    pushToken: null
+    pushToken: null,
+    bar: 0
   };
 
   async componentWillMount() {
@@ -47,15 +49,23 @@ class AddJobScreen extends React.Component<any, any> {
     setTimeout(() => {
       this.setState({ isMessageModal: false });
       return true;
-    }, 2000);
+    }, 1000);
   };
 
   getCurrentLocation = (location: any) => {
     this.setState({ location });
   };
 
+  updateProgressBar = (value: any) => {
+    this.setState({ bar: this.state.bar + value });
+  };
+
   handleSubmit = async (values: any, bag: any) => {
-    const photos = await uploadPhotos(values.photos, this.state.selectedImage);
+    const photos = await uploadPhotos(
+      values.photos,
+      this.state.selectedImage,
+      this.updateProgressBar
+    );
     const category = this.props.navigation.getParam('item');
     delete category.sort;
     const {
@@ -80,6 +90,7 @@ class AddJobScreen extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
+    this.updateProgressBar(1 / (3 + photos.length));
     const res = await this.props.addClassifiedMutation({
       variables: {
         title,
@@ -99,6 +110,7 @@ class AddJobScreen extends React.Component<any, any> {
     });
 
     if (res.data.createPost.ok) {
+      this.updateProgressBar(1 / (3 + photos.length));
       if (this.state.pushToken) {
         this.props.notificationSub({
           variables: {
@@ -107,10 +119,11 @@ class AddJobScreen extends React.Component<any, any> {
           }
         });
       }
+      this.updateProgressBar(1 / (3 + photos.length));
       this.showMessage();
       setTimeout(() => {
         this.props.navigation.navigate('HomeScreen');
-      }, 2500);
+      }, 1500);
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -346,6 +359,16 @@ class AddJobScreen extends React.Component<any, any> {
                     disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
                   />
+                  {this.state.bar > 0 && (
+                    <View style={{ flex: 1, marginVertical: 20 }}>
+                      <Progress.Bar
+                        progress={this.state.bar}
+                        width={width - 20}
+                        color="#26A65B"
+                        borderColor="#eee"
+                      />
+                    </View>
+                  )}
                 </React.Fragment>
               )}
             />
