@@ -1,23 +1,31 @@
-import * as React from "react";
-import { View, Text, TouchableWithoutFeedback } from "react-native";
-import { StyleSheet, since } from "../../utils";
+import * as React from 'react';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, since } from '../../utils';
 
 const Item = (props: any) => {
   const { item, lang, navigation } = props;
   const time = since(item.createdAt, lang);
   const postId = JSON.parse(item.data).postId;
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}>
+    <TouchableWithoutFeedback
+      onPress={() =>
+        navigation.navigate('ItemScreenById', {
+          postId,
+          word: props.words,
+          lang
+        })
+      }
+    >
       <View
         style={{
           flex: 1,
-          justifyContent: "center",
-          alignItems: lang === "ar" ? "flex-end" : "flex-start",
+          justifyContent: 'center',
+          alignItems: lang === 'ar' ? 'flex-end' : 'flex-start',
           padding: 10,
           marginHorizontal: 16,
           marginVertical: 8,
-          borderColor: "#ddd",
-          backgroundColor: "#f7f7f7",
+          borderColor: '#ddd',
+          backgroundColor: '#f7f7f7',
           borderWidth: 1,
           borderRadius: 5
         }}
@@ -26,14 +34,14 @@ const Item = (props: any) => {
           <Text
             style={{
               paddingHorizontal: 10,
-              fontWeight: "bold"
+              fontWeight: 'bold'
             }}
           >
             {item.title}
           </Text>
           <Text
             style={{
-              color: "#999",
+              color: '#999',
               fontSize: 12,
               paddingHorizontal: 15
             }}
@@ -56,12 +64,12 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderRadius: 7,
     borderWidth: 1,
-    borderColor: "#e5e5e5"
+    borderColor: '#e5e5e5'
   },
   center: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

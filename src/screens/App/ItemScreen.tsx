@@ -238,10 +238,16 @@ class ItemScreen extends React.Component<any, any> {
   );
 
   render() {
-    const post = this.props.navigation.getParam('post');
+    const post = this.props.post
+      ? this.props.post
+      : this.props.navigation.getParam('post');
     const postId = post.id ? post.id : post._id;
-    const word = this.props.navigation.getParam('word');
-    const lang = this.props.navigation.getParam('lang');
+    const word = this.props.word
+      ? this.props.word
+      : this.props.navigation.getParam('word');
+    const lang = this.props.lang
+      ? this.props.lang
+      : this.props.navigation.getParam('lang');
     const myItem = this.props.navigation.getParam('myItem');
     const photos = this.getimageurls(post);
     const pdata = getproperties(post);

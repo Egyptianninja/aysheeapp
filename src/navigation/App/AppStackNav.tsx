@@ -19,7 +19,8 @@ import {
   AddJobRequestScreen,
   UserProfileScreen,
   UserItemScreen,
-  MyFavScreen
+  MyFavScreen,
+  ItemScreenById
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 
@@ -34,6 +35,14 @@ export const AppStackNavigator = createStackNavigator({
     screen: ItemScreen,
     navigationOptions: ({ navigation }: any) => ({
       title: navigation.getParam('post').title,
+      headerStyle: styles.headerStyle,
+      headerTintColor: '#555',
+      headerTitleStyle: styles.headerTitleStyle
+    })
+  },
+  ItemScreenById: {
+    screen: ItemScreenById,
+    navigationOptions: ({ navigation }: any) => ({
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
       headerTitleStyle: styles.headerTitleStyle
