@@ -5,11 +5,9 @@ import {
   ScrollView,
   Dimensions,
   Animated,
-  Image,
   TouchableWithoutFeedback
 } from 'react-native';
-import { ProgressiveImage } from '../../utils';
-
+import { Image } from 'react-native-expo-image-cache';
 const { width } = Dimensions.get('window');
 
 export default class PhotoSlider extends React.Component<any, any> {
@@ -54,15 +52,16 @@ export default class PhotoSlider extends React.Component<any, any> {
                 onPress={() => this.props.showModal(i)}
                 key={i}
               >
-                <ProgressiveImage
-                  thumbnailSource={{ uri: image.thumb }}
-                  source={{ uri: image.url }}
+                <Image
+                  // thumbnailSource={{ uri: image.thumb }}
+                  // source={{ uri: image.url }}
                   resizeMode="contain"
                   style={{
                     width,
                     height: this.props.ratio ? width * this.props.ratio : width,
                     zIndex: 10
                   }}
+                  {...{ preview: image.thumb, uri: image.url }}
                 />
               </TouchableWithoutFeedback>
             );

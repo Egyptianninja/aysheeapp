@@ -28,6 +28,7 @@
     "react": "16.5.0",
     "react-apollo": "^2.4.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-expo-image-cache": "^3.2.0",
     "react-native-map-link": "^2.1.6",
     "react-native-modal": "^7.0.2",
     "react-native-progress": "^3.5.0",

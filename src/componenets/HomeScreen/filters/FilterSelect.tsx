@@ -7,7 +7,6 @@ import {
   ScrollView
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Ionicons } from '@expo/vector-icons';
 import { FilterOption } from './FilterOption';
 const { width } = Dimensions.get('window');
 
