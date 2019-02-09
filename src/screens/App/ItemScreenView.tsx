@@ -12,12 +12,12 @@ import {
 } from 'react-native';
 import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
-import { KeyboardSpacer } from '../../../lib';
-import secrets from '../../../constants/secrets';
-import { StyleSheet, ItemLocation, call, ImageViewer } from '../../../utils';
-import getPostComments from '../../../graphql/query/getPostComments';
-import getUser from '../../../graphql/query/getUser';
-import commentAdded from '../../../graphql/subscription/commentAdded';
+import { KeyboardSpacer } from '../../lib';
+import secrets from '../../constants/secrets';
+import { StyleSheet, ItemLocation, call, ImageViewer } from '../../utils';
+import getPostComments from '../../graphql/query/getPostComments';
+import getUser from '../../graphql/query/getUser';
+import commentAdded from '../../graphql/subscription/commentAdded';
 import {
   Avatar,
   Properties,
@@ -30,12 +30,12 @@ import {
   getproperties,
   getJobProperties,
   FullTimeView
-} from '../../../componenets';
-import Link from '../../../utils/location/link';
+} from '../../componenets';
+import Link from '../../utils/location/link';
 
 const { width } = Dimensions.get('window');
 
-class UserItemScreen extends React.Component<any, any> {
+class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
@@ -560,4 +560,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserItemScreen;
+export default ItemScreen;

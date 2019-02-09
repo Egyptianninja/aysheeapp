@@ -1,6 +1,5 @@
 import HomeScreen from './App/HomeScreen';
 import ItemScreen from './App/ItemScreen';
-import ItemScreenById from './App/ItemScreenById';
 import ChoiseScreen from './App/ChoiseScreen';
 import NotificationsScreen from './App/NotificationsScreen';
 import AddClassifiedScreen from './App/add/AddClassifiedScreen';
@@ -42,6 +41,5 @@ export {
   CodeScreen,
   NameScreen,
   UserProfileScreen,
-  UserItemScreen,
-  ItemScreenById
+  UserItemScreen
 };

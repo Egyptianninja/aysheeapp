@@ -9,7 +9,7 @@ const Item = (props: any) => {
   return (
     <TouchableWithoutFeedback
       onPress={() =>
-        navigation.navigate('ItemScreenById', {
+        navigation.navigate('ItemScreen', {
           postId,
           word: props.words,
           lang
