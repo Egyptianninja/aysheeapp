@@ -4,6 +4,7 @@ import {
   getDBNextPosts,
   getNewPosts,
   readyPosts,
+  readyPost,
   readyUserPosts
 } from './fetchMore';
 
@@ -14,5 +15,6 @@ export {
   getDBNextPosts,
   getNewPosts,
   readyPosts,
+  readyPost,
   readyUserPosts
 };

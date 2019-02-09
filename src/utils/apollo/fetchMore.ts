@@ -147,6 +147,16 @@ export const readyPosts = (
     };
   });
 };
+export const readyPost = (post: any, languageName: any) => {
+  const ratio =
+    post.photos.length > 0 ? Number(post.photos[0].substring(21, 26)) : 0;
+  const time = since(post.updatedAt, languageName);
+  return {
+    ...post,
+    ratio: ratio > 3 ? 3 : ratio,
+    time
+  };
+};
 
 export const readyUserPosts = (
   posts: any,

@@ -5,6 +5,7 @@ import {
   getDBNextPosts,
   getNewPosts,
   readyPosts,
+  readyPost,
   readyUserPosts
 } from './apollo';
 import {
@@ -53,6 +54,7 @@ export {
   getNextPosts,
   getNewPosts,
   readyPosts,
+  readyPost,
   readyUserPosts,
   getDBNextPosts,
   isArabic,

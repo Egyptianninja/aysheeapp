@@ -8,8 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
-  Image,
-  Alert
+  Image
 } from 'react-native';
 import { Query, graphql } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
@@ -30,14 +29,12 @@ import {
   InputBar,
   ItemComment,
   PhotoSlider,
-  ItemHeader,
   Loading,
   getproperties,
   getJobProperties,
   FullTimeView
 } from '../../componenets/';
 import Link from '../../utils/location/link';
-import { words } from '../../store/getStore';
 
 const { width } = Dimensions.get('window');
 
