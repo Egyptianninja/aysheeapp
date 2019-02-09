@@ -111,7 +111,12 @@ class HomeScreen extends React.Component<any, any> {
     this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
   };
   handleNotification = (notification: any) => {
-    this.setState({ notification });
+    const postId = notification.data.postId;
+    this.props.navigation.navigate('ItemScreenById', {
+      postId,
+      word: this.props.words,
+      lang: this.props.lang
+    });
   };
   addFilter = (itemKind: any, value: any) => {
     this.setState({ rest: { ...this.state.rest, [itemKind]: value } });
