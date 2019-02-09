@@ -17,7 +17,8 @@ import {
   uploadPhotos,
   getPureNumber,
   isArabic,
-  registerForPushNotificationsAsync
+  registerForPushNotificationsAsync,
+  Message
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
@@ -40,7 +41,7 @@ class AddCarScreen extends React.Component<any, any> {
     this.state = {
       selectedImage: null,
       selectedBrand: null,
-      isMessageModal: false,
+      isShowMessage: false,
       location: null,
       pushToken: null,
       bar: 0
@@ -58,20 +59,30 @@ class AddCarScreen extends React.Component<any, any> {
 
   onSelectBrand = (id: number) => this.setState({ selectedBrand: id });
 
-  showMessage = () => {
-    this.setState({ isMessageModal: true });
-    setTimeout(() => {
-      this.setState({ isMessageModal: false });
-      return true;
-    }, 1000);
-  };
-
   getCurrentLocation = (location: any) => {
     this.setState({ location });
   };
 
   updateProgressBar = (value: any) => {
     this.setState({ bar: this.state.bar + value });
+  };
+
+  showMessage = ({ seconds, screen }: any) => {
+    this.setState({ isShowMessage: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessage = () => {
+    this.setState({ isShowMessage: false });
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -142,10 +153,7 @@ class AddCarScreen extends React.Component<any, any> {
         });
       }
       this.updateProgressBar(1 / (3 + photos.length));
-      this.showMessage();
-      setTimeout(() => {
-        this.props.navigation.navigate('HomeScreen');
-      }, 1500);
+      this.showMessage({ seconds: 1, screen: 'HomeScreen' });
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -163,11 +171,13 @@ class AddCarScreen extends React.Component<any, any> {
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-        <MessageModal
-          isVisible={this.state.isMessageModal}
-          message={word.successadded}
+        <Message
+          isVisible={this.state.isShowMessage}
+          title={word.successadded}
+          icon="ios-checkmark-circle"
           lang={lang}
           width={width}
+          height={120}
         />
         <ScrollView>
           <View style={styles.container}>
@@ -445,13 +455,19 @@ class AddCarScreen extends React.Component<any, any> {
                     title={word.submit}
                     onPress={handleSubmit}
                     disabled={!isValid || isSubmitting}
-                    loading={isSubmitting}
                   />
-                  {this.state.bar > 0 && (
-                    <View style={{ flex: 1, marginVertical: 20 }}>
-                      <Progress.Bar
+                  {isSubmitting && (
+                    <View
+                      style={{
+                        position: 'relative',
+                        left: 65,
+                        bottom: 65
+                      }}
+                    >
+                      <Progress.Circle
+                        indeterminate={this.state.bar === 0 ? true : false}
                         progress={this.state.bar}
-                        width={width - 20}
+                        size={30}
                         color="#26A65B"
                         borderColor="#eee"
                       />

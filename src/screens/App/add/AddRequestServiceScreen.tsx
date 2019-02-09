@@ -255,13 +255,19 @@ class AddRequestServiceScreen extends React.Component<any, any> {
                     title={word.submit}
                     onPress={handleSubmit}
                     disabled={!isValid || isSubmitting}
-                    loading={isSubmitting}
                   />
-                  {this.state.bar > 0 && (
-                    <View style={{ flex: 1, marginVertical: 20 }}>
-                      <Progress.Bar
+                  {isSubmitting && (
+                    <View
+                      style={{
+                        position: 'relative',
+                        left: 65,
+                        bottom: 65
+                      }}
+                    >
+                      <Progress.Circle
+                        indeterminate={this.state.bar === 0 ? true : false}
                         progress={this.state.bar}
-                        width={width - 20}
+                        size={30}
                         color="#26A65B"
                         borderColor="#eee"
                       />

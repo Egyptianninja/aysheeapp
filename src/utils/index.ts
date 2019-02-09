@@ -42,7 +42,7 @@ import {
   getSecondsDistance,
   getSendSmsInterval
 } from './interval';
-
+import Message from './message';
 export {
   StyleSheet,
   uploadPhoto,
@@ -79,5 +79,6 @@ export {
   nameToColor,
   getLang,
   getLocale,
-  ProgressiveImage
+  ProgressiveImage,
+  Message
 };
