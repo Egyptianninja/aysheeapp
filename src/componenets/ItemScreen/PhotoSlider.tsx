@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
+import { preview } from '../../constants';
 const { width } = Dimensions.get('window');
 
 export default class PhotoSlider extends React.Component<any, any> {
@@ -66,7 +67,7 @@ export default class PhotoSlider extends React.Component<any, any> {
                       height: '100%',
                       resizeMode: 'cover'
                     }}
-                    {...{ preview: image.thumb, uri: image.url }}
+                    {...{ preview, uri: image.url }}
                   />
                 </View>
               </TouchableWithoutFeedback>

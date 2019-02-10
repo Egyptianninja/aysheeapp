@@ -38,9 +38,27 @@ const PriceView = ({
         alignItems: 'center'
       }}
     >
-      <View>
-        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#26A65B' }}>
-          {currency} {price.toLocaleString('en')}
+      <View style={{ flexDirection: 'row' }}>
+        <Text
+          style={{
+            color: '#26A65B',
+            fontWeight: 'bold',
+            opacity: 0.9,
+            fontSize: 22
+          }}
+        >
+          {price.toLocaleString('en')}
+        </Text>
+        <Text
+          style={{
+            color: '#777',
+            paddingTop: 10,
+            fontSize: 14,
+            fontWeight: '200'
+          }}
+        >
+          {' '}
+          {currency}
         </Text>
       </View>
       <View style={{ flexDirection: 'row' }}>

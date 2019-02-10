@@ -36,6 +36,10 @@ class CategoriesScroll extends React.Component<any, any> {
     };
   }
 
+  componentDidMount() {
+    this.props.setHome(this.handleHome);
+  }
+
   getSortBucket = () => {
     return {
       name: 'sortType',
@@ -83,6 +87,13 @@ class CategoriesScroll extends React.Component<any, any> {
     }
   };
 
+  handleHome = () => {
+    this.props.lang === 'ar'
+      ? this.scrollView.scrollToEnd({ animated: true })
+      : this.scrollView.scrollTo({ animated: true, offset: 0 });
+    this.props.removeAllFilters();
+  };
+
   render() {
     const sortData = this.getSortBucket();
     const {
@@ -110,7 +121,9 @@ class CategoriesScroll extends React.Component<any, any> {
             allbtnactive={allbtnactive}
             scrollView={this.scrollView}
             removeAllFilters={removeAllFilters}
-            title={words.all}
+            isAuthenticated={this.props.isAuthenticated}
+            navigation={this.props.navigation}
+            title={words.listfree}
           />
           <ScrollView
             ref={(ref: any) => {
@@ -163,7 +176,8 @@ const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
   words: state.glob.language.words,
   sort: state.glob.language.sort,
-  buckets: state.post.buckets
+  buckets: state.post.buckets,
+  isAuthenticated: state.user.isAuthenticated
 });
 
 export default connect(mapStateToProps)(CategoriesScroll);

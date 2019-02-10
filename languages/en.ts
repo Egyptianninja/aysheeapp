@@ -319,6 +319,7 @@ export default {
     title: 'Title',
     body: 'Description',
     price: 'Price',
+    currency: 'Currency',
     phone: 'Phone',
     location: 'Location',
     locationmsg: 'Add your current location for the Ad',

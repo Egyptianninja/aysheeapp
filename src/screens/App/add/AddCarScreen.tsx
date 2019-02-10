@@ -20,6 +20,7 @@ import {
   registerForPushNotificationsAsync,
   Message
 } from '../../../utils';
+import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 
@@ -96,6 +97,7 @@ class AddCarScreen extends React.Component<any, any> {
       title,
       body,
       price,
+      currency,
       issale,
       phone,
       isnew,
@@ -132,6 +134,7 @@ class AddCarScreen extends React.Component<any, any> {
         issale,
         phone,
         price: Number(price),
+        currency: currency.name,
         year: Number(year),
         km: Number(km),
         color,
@@ -186,6 +189,7 @@ class AddCarScreen extends React.Component<any, any> {
                 body: '',
                 photos: [],
                 price: '',
+                currency: '',
                 isnew: false,
                 isold: true,
                 issale: true,
@@ -395,21 +399,42 @@ class AddCarScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
-                  <Input
-                    rtl={lang === 'ar' ? true : false}
-                    num
-                    name="price"
-                    label={word.price}
-                    value={values.price}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.price && errors.price}
-                    keyboardType="number-pad"
-                    height={40}
-                  />
+                  <View
+                    style={{
+                      flexDirection: 'row-reverse',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <Input
+                      rtl={lang === 'ar' ? true : false}
+                      num
+                      name="price"
+                      label={word.price}
+                      value={values.price}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      outerStyle={styles.outerStyle}
+                      innerStyle={[
+                        styles.innerStyle,
+                        { width: (width - 40) / 2 }
+                      ]}
+                      labelStyle={styles.labelStyle}
+                      error={touched.price && errors.price}
+                      keyboardType="number-pad"
+                      height={40}
+                    />
+                    <Select
+                      name="currency"
+                      width={(width - 40) / 2}
+                      value={values.currency}
+                      data={currencyTypes}
+                      label={word.currency}
+                      onChange={setFieldValue}
+                      words={this.props.words}
+                      lang={this.props.lang}
+                    />
+                  </View>
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     num

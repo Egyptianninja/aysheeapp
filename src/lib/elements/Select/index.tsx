@@ -101,7 +101,7 @@ export default class Select extends React.Component<any, any> {
         <TouchableOpacity
           style={{
             flexDirection: this.props.lang === 'ar' ? 'row-reverse' : 'row',
-            width: width - 40,
+            width: this.props.width ? this.props.width : width - 40,
             height: 40,
             marginTop: 10,
             marginVertical: 10,
@@ -136,7 +136,7 @@ export default class Select extends React.Component<any, any> {
               margin: 0,
               height: 350,
               paddingTop: 10,
-              width: width - 40,
+              width: this.props.width ? this.props.width : width - 40,
               justifyContent: 'space-around',
               alignItems: 'center'
             }}

@@ -66,37 +66,20 @@ class HomeHeader extends React.Component<any, any> {
         <View
           style={[
             styles.rightIconView,
-            { flex: 2.5, paddingHorizontal: 3, marginHorizontal: 3 }
+            { flex: 1.5, paddingHorizontal: 3, marginHorizontal: 3 }
           ]}
         >
           <TouchableOpacity
-            style={{
-              height: 32,
-              width: '100%',
-              backgroundColor: '#eee',
-
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 15,
-              flexDirection: 'row'
+            onPress={() => {
+              const handleHome = this.props.navigation.getParam('handleHome');
+              handleHome();
             }}
-            onPress={() =>
-              this.props.isAuthenticated
-                ? this.props.navigation.navigate('ChoiseScreen')
-                : this.props.navigation.navigate('Auth')
-            }
+            style={{
+              paddingHorizontal: 5,
+              marginTop: 3
+            }}
           >
-            <Text
-              style={{
-                paddingHorizontal: 4,
-                fontSize: 14,
-                color: '#5B4C57',
-                fontWeight: 'bold',
-                fontFamily: 'cairo-regular'
-              }}
-            >
-              {this.props.words.listfree} ╋
-            </Text>
+            <Ionicons name="ios-home" size={33} color="#5B4C57" />
           </TouchableOpacity>
         </View>
       </View>

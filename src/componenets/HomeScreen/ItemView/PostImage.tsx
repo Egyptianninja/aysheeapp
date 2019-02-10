@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
-
+import { preview } from '../../../constants';
 export const PostImage = ({ uri, width, height }: any) => {
-  const preview = {
-    uri:
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcM2VWPQAF6QJLM6nfcQAAAABJRU5ErkJggg=='
-  };
   return (
     <View style={{ flex: 1 }}>
       <View

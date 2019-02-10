@@ -92,16 +92,29 @@ const ItemView = (props: any) => {
                   }}
                 >
                   {(price || price === 0) && (
-                    <Text
-                      style={{
-                        color: '#26A65B',
-                        fontWeight: 'bold',
-                        opacity: 0.9,
-                        fontSize: 14
-                      }}
-                    >
-                      {currency} {price.toLocaleString('en')}
-                    </Text>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text
+                        style={{
+                          color: '#26A65B',
+                          fontWeight: 'bold',
+                          opacity: 0.9,
+                          fontSize: 14
+                        }}
+                      >
+                        {price.toLocaleString('en')}
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#777',
+                          paddingTop: 5,
+                          fontSize: 10,
+                          fontWeight: '200'
+                        }}
+                      >
+                        {' '}
+                        {currency}
+                      </Text>
+                    </View>
                   )}
                   {!price && price !== 0 && (
                     <View style={{ height: 16, width: 100 }} />
@@ -125,7 +138,6 @@ const ItemView = (props: any) => {
                   <Text
                     style={{
                       color: '#555',
-                      paddingTop: 5,
                       paddingHorizontal: 5
                     }}
                   >

@@ -27,6 +27,7 @@ const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 
 class HomeScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
+  catScrollHome: any;
   flatListRef: any;
   getNextPosts: any;
   scrollEndTimer: any;
@@ -78,6 +79,7 @@ class HomeScreen extends React.Component<any, any> {
       this.offsetValue = value;
     });
     Notifications.addListener(this.handleNotification);
+    this.props.navigation.setParams({ handleHome: this.handleHome });
   }
 
   componentWillUnmount() {
@@ -107,9 +109,32 @@ class HomeScreen extends React.Component<any, any> {
     }).start();
   };
 
-  handleHome = () => {
+  handleTop = () => {
     this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
   };
+
+  handleHome = () => {
+    if (this.state.rest.categoryId || this.state.rest.categoryId === 0) {
+      if (this.scrollValue > 0) {
+        this.flatListRef
+          .getNode()
+          .scrollToOffset({ offset: 0, animated: true });
+      } else {
+        this.catScrollHome();
+      }
+    } else {
+      if (this.scrollValue > 0) {
+        this.flatListRef
+          .getNode()
+          .scrollToOffset({ offset: 0, animated: true });
+      } else {
+        this.state.rest.publish
+          ? this.setState({ rest: { publish: undefined } })
+          : this.setState({ rest: { publish: true } });
+      }
+    }
+  };
+
   handleNotification = (notification: any) => {
     const postId = notification.data.postId;
     this.props.navigation.navigate('ItemScreen', {
@@ -178,11 +203,13 @@ class HomeScreen extends React.Component<any, any> {
           }}
         >
           <CategoriesScroll
+            setHome={(click: any) => (this.catScrollHome = click)}
             lang={lang}
             currentCategory={this.state.rest.categoryId}
             addFilter={this.addFilter}
             removeFilter={this.removeFilter}
             removeAllFilters={this.removeAllFilters}
+            navigation={this.props.navigation}
             {...this.state}
           />
         </Animated.View>
@@ -260,11 +287,11 @@ class HomeScreen extends React.Component<any, any> {
             );
           }}
         </Query>
-        <Animated.View
+        {/* <Animated.View
           style={{ transform: [{ translateY: floatBtnTranslate }] }}
         >
-          <FloatButton opacity={0.6} action={this.handleHome} />
-        </Animated.View>
+          <FloatButton opacity={0.6} action={this.handleTop} />
+        </Animated.View> */}
       </View>
     );
   }
