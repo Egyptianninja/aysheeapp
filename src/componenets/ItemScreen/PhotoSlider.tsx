@@ -52,17 +52,23 @@ export default class PhotoSlider extends React.Component<any, any> {
                 onPress={() => this.props.showModal(i)}
                 key={i}
               >
-                <Image
-                  // thumbnailSource={{ uri: image.thumb }}
-                  // source={{ uri: image.url }}
-                  resizeMode="contain"
+                <View
                   style={{
                     width,
                     height: this.props.ratio ? width * this.props.ratio : width,
-                    zIndex: 10
+                    overflow: 'hidden'
                   }}
-                  {...{ preview: image.thumb, uri: image.url }}
-                />
+                >
+                  <Image
+                    resizeMode="contain"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      resizeMode: 'cover'
+                    }}
+                    {...{ preview: image.thumb, uri: image.url }}
+                  />
+                </View>
               </TouchableWithoutFeedback>
             );
           })}

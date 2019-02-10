@@ -8,6 +8,7 @@ import AddRealEstateScreen from './App/add/AddRealEstateScreen';
 import AddServiceScreen from './App/add/AddServiceScreen';
 import AddJobScreen from './App/add/AddJobScreen';
 import AddCarScreen from './App/add/AddCarScreen';
+import AddPartsScreen from './App/add/AddPartsScreen';
 import AddJobRequestScreen from './App/add/AddJobRequestScreen';
 import PhoneScreen from './Auth/PhoneScreen';
 import CodeScreen from './Auth/CodeScreen';
@@ -31,6 +32,7 @@ export {
   AddServiceScreen,
   AddJobScreen,
   AddCarScreen,
+  AddPartsScreen,
   AddRequestServiceScreen,
   AddJobRequestScreen,
   PhoneScreen,

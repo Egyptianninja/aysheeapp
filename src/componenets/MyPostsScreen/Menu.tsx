@@ -237,7 +237,7 @@ export default class Menu extends React.Component<any, any> {
               onSubmit={this.handlePriceSubmit}
               validationSchema={Yup.object().shape({
                 price: Yup.number()
-                  .positive('price must be number')
+                  .integer('price must be number')
                   .required('Required')
               })}
               render={({

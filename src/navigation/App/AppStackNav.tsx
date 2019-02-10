@@ -15,6 +15,7 @@ import {
   AddServiceScreen,
   AddJobScreen,
   AddCarScreen,
+  AddPartsScreen,
   AddRequestServiceScreen,
   AddJobRequestScreen,
   UserProfileScreen,
@@ -96,6 +97,15 @@ export const AppStackNavigator = createStackNavigator({
   },
   AddCarScreen: {
     screen: AddCarScreen,
+    navigationOptions: ({ navigation }: any) => ({
+      title: navigation.getParam('item').name,
+      headerStyle: styles.headerStyle,
+      headerTintColor: '#555',
+      headerTitleStyle: styles.headerTitleStyle
+    })
+  },
+  AddPartsScreen: {
+    screen: AddPartsScreen,
     navigationOptions: ({ navigation }: any) => ({
       title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,

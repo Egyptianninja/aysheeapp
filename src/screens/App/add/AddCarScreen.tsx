@@ -212,12 +212,12 @@ class AddCarScreen extends React.Component<any, any> {
                   .max(1000)
                   .required('Required'),
                 price: Yup.number()
-                  .positive('price must be number')
+                  .integer('price must be number')
                   .required('Required'),
                 year: Yup.number()
-                  .positive('price must be number')
+                  .integer('price must be number')
                   .required('Required'),
-                km: Yup.number().positive('price must be number'),
+                km: Yup.number().integer('price must be number'),
                 color: Yup.string().max(100),
                 phone: Yup.string()
                   .max(25)

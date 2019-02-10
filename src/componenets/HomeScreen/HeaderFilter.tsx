@@ -82,6 +82,48 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
+  } else if (categoryId === 15) {
+    const brandId = rest.brandId;
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'brandId', data: getItems(buckets, 'brandId') },
+      { name: 'subBrandId', data: getItems(buckets, 'subBrandId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') },
+      { name: 'issale', data: getItems(buckets, 'issale') },
+      { name: 'year', data: getItems(buckets, 'year') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+
+    return (
+      <RenderFilter lang={lang} filters={filters}>
+        {filters.map((filter: any) => {
+          if (filter.name === 'subBrandId') {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              lang,
+              !(brandId || brandId === 0),
+              { id: brandId, label: words.subBrand, name: 'subBrandId' }
+            );
+          } else {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              lang
+            );
+          }
+        })}
+      </RenderFilter>
+    );
   } else if (categoryId === 2) {
     const kindId = rest.kindId;
     const catFilters = [
@@ -156,7 +198,6 @@ const HeaderFilter: any = ({
     categoryId === 4 ||
     categoryId === 7 ||
     categoryId === 11 ||
-    categoryId === 15 ||
     categoryId === 19
   ) {
     const catFilters = [

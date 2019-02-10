@@ -2,83 +2,83 @@ export default {
   category: [
     {
       id: 0,
-      sort: 1,
+      sort: 0,
       name: 'عقارات',
       nameGlob: 'عقارات, Real Estate, Real Estate'
     },
-    { id: 1, sort: 0, name: 'سيارات', nameGlob: 'سيارات, Cars, Cars' },
+    { id: 1, sort: 1, name: 'سيارات', nameGlob: 'سيارات, Cars, Cars' },
     {
       id: 2,
-      sort: 4,
+      sort: 5,
       name: 'أجهزة منزلية',
       nameGlob: 'أجهزة منزلية, Electronics, Electronics'
     },
     {
       id: 3,
-      sort: 3,
+      sort: 4,
       name: 'اثاث منزلي',
       nameGlob: 'اثاث منزلي, Furniture, Furniture'
     },
     {
       id: 4,
-      sort: 7,
+      sort: 8,
       name: 'احتياجات أطفال',
       nameGlob: "احتياجات أطفال, Child's Needs, Child's Needs"
     },
     {
       id: 5,
-      sort: 9,
+      sort: 10,
       name: 'يبحث عن عمل',
       nameGlob: 'يبحث عن عمل, Look for Job, Look for Job'
     },
     {
       id: 6,
-      sort: 10,
+      sort: 11,
       name: 'وظائف شاغرة',
       nameGlob: 'وظائف شاغرة, Job Opportunities, Job Opportunities'
     },
     {
       id: 7,
-      sort: 14,
+      sort: 15,
       name: 'اللياقة والصحة',
       nameGlob: 'اللياقة والصحة, Sport Equipment, Sport Equipment'
     },
     {
       id: 8,
-      sort: 5,
+      sort: 6,
       name: 'الموضة والجمال',
       nameGlob: 'الموضة والجمال, Accessories, Accessories'
     },
     {
       id: 9,
-      sort: 11,
+      sort: 12,
       name: 'عرض خدمة',
       nameGlob: 'عرض خدمة, Offer Service, Offer Service'
     },
     {
       id: 10,
-      sort: 12,
+      sort: 13,
       name: 'طلب خدمة',
       nameGlob: 'طلب خدمة, Request Sercvice, Request Sercvice'
     },
     {
       id: 11,
-      sort: 15,
+      sort: 16,
       name: 'الات موسيقية',
       nameGlob: 'الات موسيقية, Music, Music'
     },
-    { id: 12, sort: 16, name: 'كتب', nameGlob: 'كتب, Books, Books' },
-    { id: 13, sort: 6, name: 'ملابس', nameGlob: 'ملابس, Clothes, Clothes' },
-    { id: 14, sort: 2, name: 'جوالات', nameGlob: 'جوالات, Mobile, Mobile' },
+    { id: 12, sort: 17, name: 'كتب', nameGlob: 'كتب, Books, Books' },
+    { id: 13, sort: 7, name: 'ملابس', nameGlob: 'ملابس, Clothes, Clothes' },
+    { id: 14, sort: 3, name: 'جوالات', nameGlob: 'جوالات, Mobile, Mobile' },
     {
       id: 15,
-      sort: 17,
+      sort: 2,
       name: 'قطع غيار',
       nameGlob: 'قطع غيار, Spare Parts, Spare Parts'
     },
     {
       id: 16,
-      sort: 8,
+      sort: 9,
       name: 'معدات بحرية',
       nameGlob: 'معدات بحرية, Navy Equipment, Navy Equipment'
     },
@@ -90,20 +90,20 @@ export default {
     },
     {
       id: 18,
-      sort: 13,
+      sort: 14,
       name: 'مواد غذائية',
       nameGlob: 'مواد غذائية, Food, Food'
     },
-    { id: 19, name: 'اخرى', nameGlob: 'اخرى, Other, Other' }
+    { id: 19, sort: 19, name: 'اخرى', nameGlob: 'اخرى, Other, Other' }
   ],
   kind: [
-    { pid: 1, id: 0, name: 'سيدان', nameGlob: 'سيدان' },
+    { pid: 1, id: 0, name: 'صالون / سيدان', nameGlob: 'صالون سيدان' },
     { pid: 1, id: 1, name: 'دفع رباعي', nameGlob: 'دفع رباعي' },
     { pid: 1, id: 2, name: 'فان', nameGlob: 'فان' },
     { pid: 1, id: 3, name: 'بيك أب', nameGlob: 'بيك أب' },
     { pid: 1, id: 4, name: 'شاحنة', nameGlob: 'شاحنة' },
     { pid: 1, id: 59, name: 'باص', nameGlob: 'باص' },
-    { pid: 1, id: 60, name: 'ميكرو باص', nameGlob: 'ميكرو باص' },
+    // { pid: 1, id: 60, name: 'ميكرو باص', nameGlob: 'ميكرو باص' },
     { pid: 1, id: 61, name: 'دراجة نارية', nameGlob: 'دراجة نارية' },
     { pid: 1, id: 62, name: 'أخرى', nameGlob: 'أخرى' },
 

@@ -45,7 +45,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
     pushToken: null,
     bar: 0
   };
-  noSale = [2, 3, 4, 7, 8, 13, 15, 17, 18];
+  noSale = [2, 3, 7, 8, 13, 15, 17, 18];
   noNew = [18, 17];
   noPrice = [15];
   noWaranty = [18, 17, 15, 13, 12];
@@ -202,7 +202,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                   .max(1000)
                   .required('Required'),
                 price: Yup.number()
-                  .positive('price must be number')
+                  .integer('price must be number')
                   .required('Required'),
                 phone: Yup.string().max(25)
               })}

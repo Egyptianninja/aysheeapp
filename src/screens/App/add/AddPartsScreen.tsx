@@ -14,9 +14,11 @@ import {
   StyleSheet,
   ImagePicker,
   UserLocation,
-  registerForPushNotificationsAsync,
   uploadPhotos,
-  isArabic
+  getPureNumber,
+  isArabic,
+  registerForPushNotificationsAsync,
+  Message
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
@@ -25,37 +27,25 @@ import {
   Input,
   Button,
   Group,
-  RadioButton,
   CheckBox,
   Select,
+  RadioButton,
   Title
 } from '../../../lib';
-
-import { MessageModal } from '../../../componenets';
-import { getPureNumber } from '../../../utils/call';
 const { width } = Dimensions.get('window');
 
-const roomsData = [
-  { id: 1, name: '1' },
-  { id: 2, name: '2' },
-  { id: 3, name: '3' },
-  { id: 4, name: '4' },
-  { id: 5, name: '5' },
-  { id: 6, name: '6' },
-  { id: 7, name: '7' },
-  { id: 8, name: '8' },
-  { id: 9, name: '9' },
-  { id: 10, name: '10' }
-];
-
-class AddRealEstateScreen extends React.Component<any, any> {
-  state = {
-    selectedImage: null,
-    isMessageModal: false,
-    location: null,
-    pushToken: null,
-    bar: 0
-  };
+class AddPartsScreen extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      selectedImage: null,
+      selectedBrand: null,
+      isShowMessage: false,
+      location: null,
+      pushToken: null,
+      bar: 0
+    };
+  }
 
   async componentWillMount() {
     const pushToken = await registerForPushNotificationsAsync();
@@ -65,13 +55,8 @@ class AddRealEstateScreen extends React.Component<any, any> {
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
   };
-  showMessage = () => {
-    this.setState({ isMessageModal: true });
-    setTimeout(() => {
-      this.setState({ isMessageModal: false });
-      return true;
-    }, 1000);
-  };
+
+  onSelectBrand = (id: number) => this.setState({ selectedBrand: id });
 
   getCurrentLocation = (location: any) => {
     this.setState({ location });
@@ -79,6 +64,24 @@ class AddRealEstateScreen extends React.Component<any, any> {
 
   updateProgressBar = (value: any) => {
     this.setState({ bar: this.state.bar + value });
+  };
+
+  showMessage = ({ seconds, screen }: any) => {
+    this.setState({ isShowMessage: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessage = () => {
+    this.setState({ isShowMessage: false });
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -92,19 +95,21 @@ class AddRealEstateScreen extends React.Component<any, any> {
     const {
       title,
       body,
-      realestate,
       price,
       issale,
       phone,
-      space,
-      rooms,
-      bathrooms,
-      isfurnishered,
+      isnew,
+      iswarranty,
+      year,
+      km,
+      color,
+      brand,
+      subBrand,
       location
     } = values;
-
     const isrtl = isArabic(title);
-    const loc: any = location ? this.state.location : null;
+    const loc = location ? this.state.location : null;
+
     let trueLocation = null;
 
     if (loc) {
@@ -119,20 +124,21 @@ class AddRealEstateScreen extends React.Component<any, any> {
         title,
         body,
         category,
-        realestate,
         photos,
         isrtl,
+        isnew,
+        iswarranty,
         issale,
-        isfurnishered,
         phone,
-        space: Number(space),
-        rooms: Number(rooms.name),
-        bathrooms: Number(bathrooms.name),
         price: Number(price),
+        year: Number(year),
+        km: Number(km),
+        color,
+        brand,
+        subBrand,
         trueLocation
       }
     });
-
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + photos.length));
       if (this.state.pushToken) {
@@ -144,10 +150,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
         });
       }
       this.updateProgressBar(1 / (3 + photos.length));
-      this.showMessage();
-      setTimeout(() => {
-        this.props.navigation.navigate('HomeScreen');
-      }, 1500);
+      this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -157,13 +160,21 @@ class AddRealEstateScreen extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { lang, user } = this.props;
+    const subBrands = this.props.subBrands.filter(
+      (sb: any) => sb.pid === this.state.selectedBrand
+    );
+    const category = this.props.navigation.getParam('item');
+
+    const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-        <MessageModal
-          isVisible={this.state.isMessageModal}
-          message={word.successadded}
+        <Message
+          isVisible={this.state.isShowMessage}
+          title={word.successadded}
+          icon="ios-checkmark-circle"
           lang={lang}
           width={width}
+          height={120}
         />
         <ScrollView>
           <View style={styles.container}>
@@ -173,19 +184,23 @@ class AddRealEstateScreen extends React.Component<any, any> {
                 body: '',
                 photos: [],
                 price: '',
-                isfurnishered: false,
-                isUnfurnishered: true,
-                issale: false,
-                isrent: true,
-                realestate: '',
+                isnew: false,
+                isold: true,
+                issale: true,
+                isrent: false,
+                iswarranty: false,
                 phone: getPureNumber(user.phone),
-                space: '',
-                rooms: '',
-                bathrooms: '',
+                year: '',
+                color: '',
+                km: '',
+                brand: '',
+                subBrand: '',
                 location: false
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
+                brand: Yup.string().required('Required'),
+                subBrand: Yup.string().required('Required'),
                 title: Yup.string()
                   .max(100)
                   .required('Required'),
@@ -195,6 +210,11 @@ class AddRealEstateScreen extends React.Component<any, any> {
                 price: Yup.number()
                   .integer('price must be number')
                   .required('Required'),
+                year: Yup.number()
+                  .integer('price must be number')
+                  .required('Required'),
+                km: Yup.number().integer('price must be number'),
+                color: Yup.string().max(100),
                 phone: Yup.string()
                   .max(25)
                   .required('Required')
@@ -211,31 +231,46 @@ class AddRealEstateScreen extends React.Component<any, any> {
               }: any) => (
                 <React.Fragment>
                   <Title width={width - 40}>{word.addnewad}</Title>
-                  <Input
-                    rtl={lang === 'ar' ? true : false}
-                    name="title"
-                    label={word.title}
-                    value={values.title}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.title && errors.title}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    height={40}
-                  />
-                  <Select
-                    words={this.props.words}
-                    required
-                    lang={this.props.lang}
-                    name="realestate"
-                    data={this.props.realestate}
-                    label={word.realestate}
-                    value={values.realestate}
-                    onChange={setFieldValue}
-                  />
+                  <React.Fragment>
+                    <Input
+                      rtl={lang === 'ar' ? true : false}
+                      name="title"
+                      label={word.title}
+                      value={values.title}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      outerStyle={styles.outerStyle}
+                      innerStyle={styles.innerStyle}
+                      labelStyle={styles.labelStyle}
+                      error={touched.title && errors.title}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      height={40}
+                    />
+                    <Select
+                      name="brand"
+                      required
+                      words={this.props.words}
+                      lang={this.props.lang}
+                      data={this.props.brands}
+                      label={word.brand}
+                      value={values.brand}
+                      onChange={setFieldValue}
+                      onSelectBrand={this.onSelectBrand}
+                    />
+                    <Select
+                      name="subBrand"
+                      required
+                      disable={this.state.selectedBrand === null}
+                      words={this.props.words}
+                      data={subBrands}
+                      label={word.subBrand}
+                      value={values.subBrand}
+                      onChange={setFieldValue}
+                      lang={this.props.lang}
+                    />
+                  </React.Fragment>
+
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     name="body"
@@ -254,13 +289,32 @@ class AddRealEstateScreen extends React.Component<any, any> {
                   />
                   <ImagePicker
                     name="photos"
-                    value={values.photos}
                     label={word.photos}
                     lang={lang}
                     sublabel={word.subphotos}
+                    value={values.photos}
                     onChange={setFieldValue}
                     hendleSelectedImage={this.hendleSelectedImage}
                   />
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={lang === 'ar' ? true : false}
+                  >
+                    <RadioButton
+                      name="isnew"
+                      label={word.isnew}
+                      value={values.isnew}
+                      selected={values.isnew}
+                    />
+                    <RadioButton
+                      name="isold"
+                      label={word.isold}
+                      value={values.isold}
+                      selected={values.isold}
+                    />
+                  </Group>
                   <Group
                     color="#444"
                     size={24}
@@ -280,57 +334,36 @@ class AddRealEstateScreen extends React.Component<any, any> {
                       selected={values.isrent}
                     />
                   </Group>
-                  <Group
-                    color="#444"
-                    size={24}
-                    onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
-                  >
-                    <RadioButton
-                      name="isfurnishered"
-                      label={word.furnishered}
-                      value={values.isfurnishered}
-                      selected={values.isfurnishered}
-                    />
-                    <RadioButton
-                      name="isUnfurnishered"
-                      label={word.unfurnishered}
-                      value={values.isUnfurnishered}
-                      selected={values.isUnfurnishered}
-                    />
-                  </Group>
+
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     num
-                    name="space"
-                    label={word.space}
-                    value={values.space}
+                    name="year"
+                    label={word.year}
+                    value={values.year}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
                     outerStyle={styles.outerStyle}
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
-                    error={touched.space && errors.space}
+                    error={touched.year && errors.year}
                     keyboardType="number-pad"
                     height={40}
                   />
-                  <Select
-                    name="rooms"
-                    words={this.props.words}
-                    lang={this.props.lang}
-                    data={roomsData}
-                    label={word.rooms}
-                    value={values.rooms}
+                  <Input
+                    rtl={lang === 'ar' ? true : false}
+                    name="color"
+                    label={word.color}
+                    value={values.color}
                     onChange={setFieldValue}
-                  />
-                  <Select
-                    name="bathrooms"
-                    words={this.props.words}
-                    lang={this.props.lang}
-                    data={roomsData}
-                    label={word.bathrooms}
-                    value={values.bathrooms}
-                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.color && errors.color}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    height={40}
                   />
                   <Input
                     rtl={lang === 'ar' ? true : false}
@@ -379,6 +412,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
                   {values.location && (
                     <UserLocation
                       getCurrentLocation={this.getCurrentLocation}
+                      onChange={setFieldValue}
                       width={width}
                     />
                   )}
@@ -466,8 +500,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
-  realestate: state.glob.language.realestate,
   lang: state.glob.languageName,
+  brands: state.glob.brands,
+  subBrands: state.glob.subBrands,
+  kind: state.glob.language.kind,
   words: state.glob.language.words,
   user: state.user.user
 });
@@ -478,6 +514,6 @@ export default connect(mapStateToProps)(
   })(
     graphql(notificationSub, {
       name: 'notificationSub'
-    })(AddRealEstateScreen)
+    })(AddPartsScreen)
   )
 );

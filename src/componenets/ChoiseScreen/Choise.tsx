@@ -17,6 +17,8 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
           navigation.navigate('AddServiceScreen', { item });
         } else if (item.id === 10) {
           navigation.navigate('AddRequestServiceScreen', { item });
+        } else if (item.id === 15) {
+          navigation.navigate('AddPartsScreen', { item });
         } else {
           navigation.navigate('AddClassifiedScreen', { item });
         }
