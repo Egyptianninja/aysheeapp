@@ -327,6 +327,7 @@ export default {
     space: 'Space Area',
     successadded: 'Successfully Added',
     fullTime: 'FullTime',
+    parttime: 'Part Time',
     warranty: 'Warranty',
     salary: 'Salary',
     jobtitle: 'Job Title',

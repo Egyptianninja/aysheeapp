@@ -152,16 +152,22 @@ class ItemScreen extends React.Component<any, any> {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
-        padding: 10
+        backgroundColor: '#f1f1f1',
+        padding: 10,
+        borderBottomLeftRadius: 35,
+        borderTopLeftRadius: 35
       }}
     >
       <View style={{ flex: 2, flexDirection: 'row' }}>
         {user.avatar && (
           <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate('UserProfileScreen', { user })
-            }
+            onPress={() => {
+              const screen =
+                user._id === this.props.user._id
+                  ? 'MyPostsScreen'
+                  : 'UserProfileScreen';
+              this.props.navigation.navigate(screen, { user });
+            }}
           >
             <Image
               style={{
@@ -179,18 +185,26 @@ class ItemScreen extends React.Component<any, any> {
         )}
         {!user.avatar && (
           <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate('UserProfileScreen', { user })
-            }
+            onPress={() => {
+              const screen =
+                user._id === this.props.user._id
+                  ? 'MyPostsScreen'
+                  : 'UserProfileScreen';
+              this.props.navigation.navigate(screen, { user });
+            }}
           >
             <Avatar name={user.name ? user.name : user.uniquename} size={50} />
           </TouchableOpacity>
         )}
         <View style={{ paddingLeft: 10 }}>
           <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate('UserProfileScreen', { user })
-            }
+            onPress={() => {
+              const screen =
+                user._id === this.props.user._id
+                  ? 'MyPostsScreen'
+                  : 'UserProfileScreen';
+              this.props.navigation.navigate(screen, { user });
+            }}
           >
             {user.name && (
               <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>
@@ -265,6 +279,7 @@ class ItemScreen extends React.Component<any, any> {
     const saleObject = pdata.filter((a: any) => a.name === 'issale')[0];
     const furntObject = pdata.filter((a: any) => a.name === 'isfurnishered')[0];
     const fulltimeObject = pdata.filter((a: any) => a.name === 'isfullTime')[0];
+    const warrantyObject = pdata.filter((a: any) => a.name === 'iswarranty')[0];
     const callargs = {
       number: post.phone, // Use commas to add time between digits.
       prompt: false
@@ -317,7 +332,7 @@ class ItemScreen extends React.Component<any, any> {
               zIndex: 850,
               shadowOffset: { width: 3, height: 3 },
               shadowColor: '#555',
-              shadowOpacity: 0.1,
+              shadowOpacity: 0.2,
               backgroundColor: '#fff',
               opacity: opacityStyle
             }
@@ -424,7 +439,7 @@ class ItemScreen extends React.Component<any, any> {
             </View>
           )}
           <View style={{ paddingHorizontal: 10 }}>
-            {post.isfullTime && (
+            {(post.isfullTime === true || post.isfullTime === false) && (
               <FullTimeView words={word} fulltimeObject={fulltimeObject} />
             )}
             {(post.price || post.price === 0) && (
@@ -435,6 +450,7 @@ class ItemScreen extends React.Component<any, any> {
                 newObject={newObject}
                 saleObject={saleObject}
                 furntObject={furntObject}
+                warrantyObject={warrantyObject}
               />
             )}
 
@@ -529,6 +545,7 @@ class ItemScreen extends React.Component<any, any> {
                   lang={this.props.lang}
                   words={word}
                   width={width}
+                  user={this.props.user}
                   replayComment={this.replayComment}
                   word={word}
                   subscribeToNewComments={() =>

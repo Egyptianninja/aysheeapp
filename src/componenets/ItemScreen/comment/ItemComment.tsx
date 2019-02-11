@@ -37,6 +37,7 @@ class ItemComment extends React.PureComponent<any, any> {
       messages.push(
         <MessageBubble
           navigation={this.props.navigation}
+          user={this.props.user}
           words={this.props.words}
           lang={this.props.lang}
           message={message}

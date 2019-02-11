@@ -349,6 +349,7 @@ export default {
     successadded: 'تمت الاضافة بنجاح',
     warranty: 'تحت الضمان',
     fullTime: 'ساعات عمل كاملة',
+    parttime: 'دوام جزئي',
     salary: 'راتب شهري',
     jobtitle: 'الوظيفة',
     jobindustry: 'مجال العمل',
@@ -388,7 +389,7 @@ export default {
     onlineposts: 'الاعلانات المنشورة',
     offlineposts: 'الاعلانات غير المنشورة',
     replay: 'اكتب رداً',
-    moreads: "اعلانات اخرى",
+    moreads: 'اعلانات اخرى',
 
     labels: {
       categoryId: 'المجموعة',

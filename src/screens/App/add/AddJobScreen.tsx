@@ -21,7 +21,14 @@ import {
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 
-import { Input, Button, Group, CheckBox, Title } from '../../../lib';
+import {
+  Input,
+  Button,
+  Group,
+  CheckBox,
+  Title,
+  RadioButton
+} from '../../../lib';
 
 import { MessageModal } from '../../../componenets';
 import { getPureNumber } from '../../../utils/call';
@@ -152,6 +159,7 @@ class AddJobScreen extends React.Component<any, any> {
                 jobTitle: '',
                 jobIndustry: '',
                 isfullTime: true,
+                isPartTime: false,
                 education: '',
                 experience: '',
                 salary: '',
@@ -232,11 +240,17 @@ class AddJobScreen extends React.Component<any, any> {
                     onChange={setFieldValue}
                     rtl={lang === 'ar' ? true : false}
                   >
-                    <CheckBox
+                    <RadioButton
                       name="isfullTime"
                       label={word.fullTime}
                       value={values.isfullTime}
                       selected={values.isfullTime}
+                    />
+                    <RadioButton
+                      name="isPartTime"
+                      label={word.parttime}
+                      value={values.isPartTime}
+                      selected={values.isPartTime}
                     />
                   </Group>
                   <Input

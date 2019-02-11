@@ -20,7 +20,7 @@ export const getproperties = (post: any) => {
   return [
     { name: 'isnew', value: isnew },
     { name: 'issale', value: issale },
-    { name: 'warranty', value: iswarranty },
+    { name: 'iswarranty', value: iswarranty },
     { name: 'realestate', value: realestate },
     { name: 'space', value: space },
     { name: 'rooms', value: rooms },

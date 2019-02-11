@@ -2,11 +2,12 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const FullTimeView = ({ fulltimeObject, words }: any) => {
-  const fulltimetype = fulltimeObject
-    ? fulltimeObject.value === true
+  const fulltimetype =
+    fulltimeObject.value === true
       ? words.fullTime
-      : undefined
-    : undefined;
+      : fulltimeObject.value === false
+      ? words.parttime
+      : undefined;
 
   return (
     <View

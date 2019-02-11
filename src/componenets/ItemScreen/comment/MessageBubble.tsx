@@ -23,11 +23,13 @@ export default class MessageBubble extends React.Component<any, any> {
           }}
         >
           <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate('UserProfileScreen', {
-                user: message.user
-              })
-            }
+            onPress={() => {
+              const screen =
+                message.user._id === this.props.user._id
+                  ? 'MyPostsScreen'
+                  : 'UserProfileScreen';
+              this.props.navigation.navigate(screen, { user: message.user });
+            }}
           >
             <View
               style={{
@@ -59,11 +61,13 @@ export default class MessageBubble extends React.Component<any, any> {
           </TouchableOpacity>
           <View style={styles.messageBubble}>
             <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate('UserProfileScreen', {
-                  user: message.user
-                })
-              }
+              onPress={() => {
+                const screen =
+                  message.user._id === this.props.user._id
+                    ? 'MyPostsScreen'
+                    : 'UserProfileScreen';
+                this.props.navigation.navigate(screen, { user: message.user });
+              }}
             >
               <View
                 style={{

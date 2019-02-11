@@ -7,6 +7,7 @@ const PriceView = ({
   newObject,
   saleObject,
   furntObject,
+  warrantyObject,
   words
 }: any) => {
   const newtype =
@@ -27,6 +28,12 @@ const PriceView = ({
       : furntObject.value === false
       ? words.unfurnishered
       : undefined;
+  const warrantyType =
+    warrantyObject && warrantyObject.value === true
+      ? words.warranty
+      : undefined;
+  console.log(warrantyObject);
+
   return (
     <View
       style={{
@@ -75,6 +82,11 @@ const PriceView = ({
         {furntype && (
           <View style={styles.botton}>
             <Text style={styles.txt}>{furntype}</Text>
+          </View>
+        )}
+        {warrantyType && (
+          <View style={styles.botton}>
+            <Text style={styles.txt}>{warrantyType}</Text>
           </View>
         )}
       </View>
