@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import MessageBubble from "./MessageBubble";
+import * as React from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
+import MessageBubble from './MessageBubble';
 
 class ItemComment extends React.PureComponent<any, any> {
   unsubscribe: any;
@@ -36,6 +36,8 @@ class ItemComment extends React.PureComponent<any, any> {
     comments.forEach((message: any) => {
       messages.push(
         <MessageBubble
+          navigation={this.props.navigation}
+          words={this.props.words}
           lang={this.props.lang}
           message={message}
           key={message._id}
@@ -47,7 +49,7 @@ class ItemComment extends React.PureComponent<any, any> {
 
     return (
       <View
-        style={{ paddingBottom: 4, borderTopColor: "#ddd", borderTopWidth: 1 }}
+        style={{ paddingBottom: 4, borderTopColor: '#ddd', borderTopWidth: 1 }}
       >
         <TouchableOpacity
           onPress={async () => {
@@ -59,12 +61,12 @@ class ItemComment extends React.PureComponent<any, any> {
             borderRadius: 10,
             margin: 5,
             width: 150,
-            backgroundColor: "#fff",
-            alignItems: "center",
-            alignSelf: "center"
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            alignSelf: 'center'
           }}
         >
-          <Text style={{ color: "#6FA7D5" }}>
+          <Text style={{ color: '#6FA7D5' }}>
             {this.props.word.morecomments}
           </Text>
         </TouchableOpacity>

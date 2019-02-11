@@ -1,22 +1,22 @@
-import * as C from "./constant";
+import * as C from './constant';
 
 export default (_: any, c: any, d: any) => {
   const proto = c.prototype;
   d.en.relativeTime = {
-    future: "بعد %s",
+    future: 'بعد %s',
     // past: "%s",
-    past: "منذ %s",
-    s: "ثواني",
-    m: "دقيقة",
-    mm: "%d دقيقة",
-    h: "ساعة",
-    hh: "%d ساعة",
-    d: "يوم",
-    dd: "%d يوم",
-    M: "شهر",
-    MM: "%d شهر",
-    y: "سنة",
-    yy: "%d سنة"
+    past: '%s',
+    s: 'ثواني',
+    m: '1 دقيقة',
+    mm: '%d دقيقة',
+    h: '1 ساعة',
+    hh: '%d ساعة',
+    d: '1 يوم',
+    dd: '%d يوم',
+    M: '1 شهر',
+    MM: '%d شهر',
+    y: 'سنة',
+    yy: '%d سنة'
   };
   const fromTo = (
     input: any,
@@ -26,17 +26,17 @@ export default (_: any, c: any, d: any) => {
   ) => {
     const loc = instance.$locale().relativeTime;
     const T = [
-      { l: "s", r: 44, d: C.S },
-      { l: "m", r: 89 },
-      { l: "mm", r: 44, d: C.MIN },
-      { l: "h", r: 89 },
-      { l: "hh", r: 21, d: C.H },
-      { l: "d", r: 35 },
-      { l: "dd", r: 25, d: C.D },
-      { l: "M", r: 45 },
-      { l: "MM", r: 10, d: C.M },
-      { l: "y", r: 17 },
-      { l: "yy", d: C.Y }
+      { l: 's', r: 44, d: C.S },
+      { l: 'm', r: 89 },
+      { l: 'mm', r: 44, d: C.MIN },
+      { l: 'h', r: 89 },
+      { l: 'hh', r: 21, d: C.H },
+      { l: 'd', r: 35 },
+      { l: 'dd', r: 25, d: C.D },
+      { l: 'M', r: 45 },
+      { l: 'MM', r: 10, d: C.M },
+      { l: 'y', r: 17 },
+      { l: 'yy', d: C.Y }
     ];
     const Tl = T.length;
     let result;
@@ -52,7 +52,7 @@ export default (_: any, c: any, d: any) => {
       const abs = Math.ceil(Math.abs(result));
       if (t.r) {
         if (abs <= t.r || !t.r) {
-          out = loc[t.l].replace("%d", abs);
+          out = loc[t.l].replace('%d', abs);
           break;
         }
       }
@@ -61,7 +61,7 @@ export default (_: any, c: any, d: any) => {
     if (withoutSuffix) {
       return out;
     }
-    return (result > 0 ? loc.future : loc.past).replace("%s", out);
+    return (result > 0 ? loc.future : loc.past).replace('%s', out);
   };
   proto.to = function(input: any, withoutSuffix: any) {
     return fromTo(input, withoutSuffix, this, true);

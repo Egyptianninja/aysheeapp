@@ -5,11 +5,12 @@ export const isArabic = (text: string, length: number = 20) => {
     .substring(0, text.length > length ? length : text.length)
     .split('')
     .map((char: any) => {
-      if (inRange(char.charCodeAt(0), 1539, 1791)) {
+      const charNum = char.charCodeAt(0);
+      if (inRange(charNum, 1539, 1791)) {
         rtl++;
       }
     });
-  return rtl > text.length / 2 ? true : false;
+  return rtl > length / 2 ? true : false;
 };
 
 const inRange = (num: number, start: number, end: number) => {

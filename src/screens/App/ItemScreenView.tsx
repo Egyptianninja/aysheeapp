@@ -29,7 +29,8 @@ import {
   Loading,
   getproperties,
   getJobProperties,
-  FullTimeView
+  FullTimeView,
+  ItemHeader
 } from '../../componenets';
 import Link from '../../utils/location/link';
 
@@ -151,7 +152,7 @@ class ItemScreen extends React.Component<any, any> {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#eee',
+        backgroundColor: '#f5f5f5',
         padding: 10
       }}
     >
@@ -185,14 +186,21 @@ class ItemScreen extends React.Component<any, any> {
             <Avatar name={user.name ? user.name : user.uniquename} size={50} />
           </TouchableOpacity>
         )}
-
         <View style={{ paddingLeft: 10 }}>
-          {user.name && <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>}
-          {user.uniquename && (
-            <Text style={{ fontSize: 12, color: '#888' }}>
-              @{user.uniquename}
-            </Text>
-          )}
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate('UserProfileScreen', { user })
+            }
+          >
+            {user.name && (
+              <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>
+            )}
+            {user.uniquename && (
+              <Text style={{ fontSize: 12, color: '#888' }}>
+                {user.uniquename}
+              </Text>
+            )}
+          </TouchableOpacity>
           {user.postsQty > 0 && (
             <Text
               style={{
@@ -201,7 +209,7 @@ class ItemScreen extends React.Component<any, any> {
                 paddingTop: 5
               }}
             >
-              {user.postsQty} more ads
+              {user.postsQty} {word.moreads}
             </Text>
           )}
         </View>
@@ -210,19 +218,26 @@ class ItemScreen extends React.Component<any, any> {
       <TouchableOpacity
         onPress={() => call(callargs)}
         style={{
-          flex: 1,
-          height: 40,
+          width: 85,
+          height: 36,
+          borderRadius: 18,
           justifyContent: 'center',
           alignItems: 'center',
-          borderColor: '#6FA7D5',
-          borderWidth: 1
+          backgroundColor: '#6FA7D5',
+          flexDirection: 'row'
         }}
       >
+        <Ionicons
+          name="ios-call"
+          size={26}
+          style={{ paddingRight: 10 }}
+          color="#fff"
+        />
+
         <Text
           style={{
             fontSize: 14,
-            color: '#6FA7D5',
-            fontWeight: 'bold'
+            color: '#fff'
           }}
         >
           {word.calladvertiser}
@@ -255,47 +270,89 @@ class ItemScreen extends React.Component<any, any> {
       prompt: false
     };
 
+    const opacityStyle = this.state.scrollY.interpolate({
+      inputRange: [0, 200],
+      outputRange: [0, 1]
+    });
+    console.log(opacityStyle);
+
     return (
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: 50,
-            left: 40,
-            zIndex: 600,
-            width: 40,
-            height: 40,
-            borderRadius: 20,
+            top: 45,
+            left: 15,
+            zIndex: 860,
+            width: 36,
+            height: 36,
+            borderRadius: 18,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)'
+            backgroundColor: 'rgba(255, 255, 255, 0.1)'
           }}
         >
           <Ionicons
             name="ios-arrow-back"
-            size={30}
+            size={33}
             style={styles.icon}
             color="#9C949A"
           />
         </TouchableOpacity>
-        {/* <ItemHeader
-          navigation={this.props.navigation}
-          title={post.title}
-          opacity={this.state.opacity}
-          post={post}
-          favoritePost={this.props.favoritePost}
-          word={word}
-          lang={lang}
-        /> */}
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              flexDirection: 'row',
+              paddingTop: 25,
+              height: 84,
+              justifyContent: 'space-between',
+              paddingHorizontal: 10,
+              alignItems: 'center',
+              zIndex: 850,
+              shadowOffset: { width: 3, height: 3 },
+              shadowColor: '#555',
+              shadowOpacity: 0.1,
+              backgroundColor: '#fff',
+              opacity: opacityStyle
+            }
+          ]}
+        >
+          <View
+            style={{
+              flex: 5,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'cairo-regular',
+                fontSize: 20,
+                color: '#373737'
+              }}
+            >
+              {post.title.substring(0, 20)}
+            </Text>
+          </View>
+        </Animated.View>
+
         <ScrollView
           onContentSizeChange={this.getScrollLength}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: '#fff' }}
-          onScroll={(e: any) => {
-            this.scrollOffset = e.nativeEvent.contentOffset.y;
-          }}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: { y: this.state.scrollY }
+              }
+            }
+          ])}
           ref={ref => {
             this.scrollView = ref;
           }}
@@ -467,7 +524,9 @@ class ItemScreen extends React.Component<any, any> {
                 <ItemComment
                   {...result}
                   updateCursor={this.updateCursor}
+                  navigation={this.props.navigation}
                   lang={this.props.lang}
+                  words={word}
                   width={width}
                   replayComment={this.replayComment}
                   word={word}

@@ -318,7 +318,7 @@ export default {
     forrent: 'للايجار',
     furnishered: 'مفروش',
     unfurnishered: 'غير مفروش',
-    calladvertiser: 'اتصل بالمعلن',
+    calladvertiser: 'اتصل',
     messageadvertiser: 'رسالة للمعلن',
     brand: 'الفئة',
     subBrand: 'الفئة الفرعية',
@@ -387,6 +387,8 @@ export default {
     sort: 'فرز',
     onlineposts: 'الاعلانات المنشورة',
     offlineposts: 'الاعلانات غير المنشورة',
+    replay: 'اكتب رداً',
+    moreads: "اعلانات اخرى",
 
     labels: {
       categoryId: 'المجموعة',

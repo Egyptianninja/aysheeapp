@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, isArabic, since } from '../../../utils';
 import { Avatar } from '../../Avatar';
 export default class MessageBubble extends React.Component<any, any> {
   render() {
-    const { message, lang, width } = this.props;
+    const { message, lang, width, words } = this.props;
     const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
       message.user.avatar
     }`;
 
-    const rtl = isArabic(message.body, 50);
+    const rtl = isArabic(message.body);
     const time = since(message.updatedAt, lang);
+
     return (
       <View>
         <View
@@ -21,58 +22,64 @@ export default class MessageBubble extends React.Component<any, any> {
             borderRadius: 10
           }}
         >
-          <View
-            style={{
-              width: 65,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate('UserProfileScreen', {
+                user: message.user
+              })
+            }
           >
-            {!message.user.avatar && (
-              <Avatar
-                name={
-                  message.user.name
-                    ? message.user.name
-                    : message.user.uniquename
-                }
-                size={40}
-              />
-            )}
-            {message.user.avatar && (
-              <Image
-                style={{
-                  height: 40,
-                  width: 40,
-                  borderRadius: 20
-                }}
-                source={{ uri }}
-              />
-            )}
-            <Text
+            <View
               style={{
-                fontSize: 9,
-                color: '#575757',
-                fontWeight: 'bold',
-                paddingVertical: 5
+                width: 65,
+                alignItems: 'center'
               }}
             >
-              {time}
-            </Text>
-          </View>
+              {!message.user.avatar && (
+                <Avatar
+                  name={
+                    message.user.name
+                      ? message.user.name
+                      : message.user.uniquename
+                  }
+                  size={40}
+                />
+              )}
+              {message.user.avatar && (
+                <Image
+                  style={{
+                    height: 40,
+                    width: 40,
+                    borderRadius: 20
+                  }}
+                  source={{ uri }}
+                />
+              )}
+            </View>
+          </TouchableOpacity>
           <View style={styles.messageBubble}>
-            <View style={{ flexDirection: 'row' }}>
+            <View
+              style={{ alignItems: lang === 'ar' ? 'flex-end' : 'flex-start' }}
+            >
               <Text
                 style={{
                   fontSize: 14,
                   fontWeight: 'bold',
                   color: '#000',
-                  paddingBottom: 5,
                   textAlign: lang === 'ar' ? 'right' : 'left'
                 }}
               >
-                {message.user.name
-                  ? message.user.name
-                  : message.user.uniquename}
+                {message.user.name}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: '#777',
+                  textAlign: lang === 'ar' ? 'right' : 'left',
+                  paddingBottom: 5
+                }}
+              >
+                {message.user.uniquename}
               </Text>
             </View>
 
@@ -89,31 +96,51 @@ export default class MessageBubble extends React.Component<any, any> {
             </Text>
           </View>
         </View>
-        <TouchableOpacity
-          onPress={() => this.props.replayComment(message.user.uniquename)}
+        <View
           style={{
-            justifyContent: 'center',
-            alignItems: 'center'
+            flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
+            paddingHorizontal: 50
           }}
         >
           <Text
             style={{
               fontSize: 12,
-              paddingLeft: lang === 'ar' ? 5 : 10,
-              paddingRight: lang === 'ar' ? 10 : 5,
-              color: '#999',
-              textAlign: lang === 'ar' ? 'right' : 'left'
+              color: '#777',
+              paddingHorizontal: 20
             }}
           >
-            رد على التعليق
+            {time}
           </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.replayComment(message.user.uniquename)}
+            style={{
+              flexDirection: lang === 'ar' ? 'row' : 'row-reverse'
+            }}
+          >
+            <Ionicons
+              name="ios-repeat"
+              size={22}
+              style={{ paddingHorizontal: 5 }}
+              color="#777"
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                paddingLeft: lang === 'ar' ? 5 : 10,
+                paddingRight: lang === 'ar' ? 10 : 5,
+                color: '#777',
+                textAlign: lang === 'ar' ? 'right' : 'left'
+              }}
+            >
+              {words.replay}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
         <View
           style={{
             flex: 1,
-            padding: 10,
-            borderBottomColor: '#eee',
-            borderBottomWidth: 1
+            padding: 5
           }}
         />
       </View>
@@ -123,10 +150,10 @@ export default class MessageBubble extends React.Component<any, any> {
 
 const styles = StyleSheet.create({
   messageBubble: {
-    // flex: 1,
+    // flex: 1, // full width bubble
     borderRadius: 10,
     paddingHorizontal: 10,
-    paddingVertical: 10,
-    backgroundColor: '#F7F7F7'
+    paddingVertical: 5,
+    backgroundColor: '#EEE'
   }
 });

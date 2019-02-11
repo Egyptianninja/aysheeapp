@@ -294,7 +294,7 @@ export default {
     forrent: 'For Rent',
     furnishered: 'Furnishered',
     unfurnishered: 'Un Furnishered',
-    calladvertiser: 'Call Advertiser',
+    calladvertiser: 'Call',
     messageadvertiser: 'Message Advertiser',
     brand: 'Brand',
     subBrand: 'Sub Brand',
@@ -364,6 +364,8 @@ export default {
     sort: 'Sort',
     onlineposts: 'Online Posts',
     offlineposts: 'Offline Posts',
+    replay: 'Replay',
+    moreads: 'more ads',
 
     labels: {
       categoryId: 'Category',
