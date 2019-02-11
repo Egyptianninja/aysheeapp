@@ -1,24 +1,12 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import Menu from './Menu';
 
 export default class BodyView extends React.Component<any, any> {
   state = {
     fav: false
   };
   render() {
-    const {
-      title,
-      body,
-      time,
-      isrtl,
-      favoritePost,
-      postId,
-      post,
-      word,
-      lang
-    } = this.props;
+    const { title, body, time, isrtl } = this.props;
     return (
       <View
         style={{
@@ -42,12 +30,6 @@ export default class BodyView extends React.Component<any, any> {
           >
             {title}
           </Text>
-          <Menu
-            post={post}
-            favoritePost={favoritePost}
-            word={word}
-            lang={lang}
-          />
         </View>
         <View
           style={{

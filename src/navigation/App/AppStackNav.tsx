@@ -20,8 +20,7 @@ import {
   AddJobRequestScreen,
   UserProfileScreen,
   UserItemScreen,
-  MyFavScreen,
-  UserProfile
+  MyFavScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 

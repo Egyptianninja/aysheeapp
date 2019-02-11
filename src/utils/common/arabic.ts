@@ -10,7 +10,8 @@ export const isArabic = (text: string, length: number = 20) => {
         rtl++;
       }
     });
-  return rtl > length / 2 ? true : false;
+  const x = text.length < length ? text.length : length;
+  return rtl > x / 2 ? true : false;
 };
 
 const inRange = (num: number, start: number, end: number) => {

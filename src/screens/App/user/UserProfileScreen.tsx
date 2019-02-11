@@ -1,9 +1,18 @@
 import * as React from 'react';
-import { View, Dimensions, Animated, Image, Text } from 'react-native';
+import {
+  View,
+  Dimensions,
+  Animated,
+  Image,
+  Text,
+  TouchableOpacity
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
+import { Ionicons } from '@expo/vector-icons';
+import { Constants } from 'expo';
 import getUserPosts from '../../../graphql/query/getUserPosts';
 import { getNextPosts, readyUserPosts } from '../../../utils';
 import { ItemOwnerView, Avatar, Loading, ItemView } from '../../../componenets';
@@ -51,6 +60,11 @@ class UserProfileScreen extends React.Component<any, any> {
       outputRange: [HEADER_MAX_HEIGHT - PROFILE_IMAGE_MAX_HEIGHT / 2, 40],
       extrapolate: 'clamp'
     });
+    const imageMarginLeft = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [10, 60],
+      extrapolate: 'clamp'
+    });
     const nameMarginTop = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
       outputRange: [-75, 40],
@@ -59,6 +73,23 @@ class UserProfileScreen extends React.Component<any, any> {
     const user = this.props.navigation.getParam('user');
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{
+            position: 'absolute',
+            top: Constants.statusBarHeight + 25,
+            left: 10,
+            zIndex: 860,
+            width: 32,
+            height: 32,
+            borderRadius: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+          }}
+        >
+          <Ionicons name="ios-arrow-back" size={30} color="#9C949A" />
+        </TouchableOpacity>
         <Animated.View
           style={{
             position: 'absolute',
@@ -78,7 +109,7 @@ class UserProfileScreen extends React.Component<any, any> {
               borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
               overflow: 'hidden',
               marginTop: imageMarginTop,
-              marginLeft: 10
+              marginLeft: imageMarginLeft
             }}
           >
             {!user.avatar && (

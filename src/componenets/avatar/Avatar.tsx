@@ -17,7 +17,9 @@ export const Avatar = ({ name, size }: any) => {
         backgroundColor: bgcolor
       }}
     >
-      <Text style={{ fontSize: size / 2, color: '#fff' }}>{fletters}</Text>
+      <Animated.Text style={{ fontSize: size / 2, color: '#fff' }}>
+        {fletters}
+      </Animated.Text>
     </Animated.View>
   );
 };

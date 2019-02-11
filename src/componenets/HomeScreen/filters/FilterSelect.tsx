@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { FilterOption } from './FilterOption';
+import { Ionicons } from '@expo/vector-icons';
+
 const { width } = Dimensions.get('window');
 
 export default class FilterSelect extends React.Component<any, any> {
@@ -109,22 +111,30 @@ export default class FilterSelect extends React.Component<any, any> {
             flexDirection: 'row',
             padding: 2,
             paddingLeft: 2,
-            height: 32,
+            height: 40,
             minWidth: 70,
             justifyContent: 'center',
             alignItems: 'center',
             marginRight: 7,
+            marginTop: 5,
             marginVertical: 5,
             borderWidth: selected ? 0 : 1,
             borderColor: '#E7E4E6',
-            borderRadius: 16,
+            borderRadius: 10,
             backgroundColor: selected ? '#9C949A' : '#fff',
             shadowOffset: { width: 0, height: 0 },
             shadowColor: '#555',
-            shadowOpacity: 0.2
+            shadowOpacity: 0.2,
+            paddingHorizontal: 10
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
+          <Ionicons
+            name="ios-arrow-down"
+            size={22}
+            color={selected ? '#fff' : '#777'}
+            style={{ paddingHorizontal: 5, marginTop: 5 }}
+          />
           <Text
             style={{
               color: selected
@@ -134,7 +144,7 @@ export default class FilterSelect extends React.Component<any, any> {
                 : '#6A6262',
               fontSize: this.props.lang === 'ar' ? 14 : 15,
               fontFamily: 'cairo-regular',
-              paddingHorizontal: this.props.icon ? undefined : 5,
+              paddingHorizontal: 5,
               marginTop: selectedLable ? 5 : undefined
             }}
           >

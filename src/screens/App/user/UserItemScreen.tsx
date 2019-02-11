@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
+import { Constants } from 'expo';
 import { KeyboardSpacer } from '../../../lib';
 import secrets from '../../../constants/secrets';
 import { StyleSheet, ItemLocation, call, ImageViewer } from '../../../utils';
@@ -35,7 +36,7 @@ import Link from '../../../utils/location/link';
 
 const { width } = Dimensions.get('window');
 
-class UserItemScreen extends React.Component<any, any> {
+class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
@@ -151,16 +152,26 @@ class UserItemScreen extends React.Component<any, any> {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#eee',
-        padding: 10
+        backgroundColor: '#f1f1f1',
+        padding: 10,
+        borderBottomLeftRadius: 35,
+        borderTopLeftRadius: 35
       }}
     >
       <View style={{ flex: 2, flexDirection: 'row' }}>
         {user.avatar && (
           <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate('UserProfileScreen', { user })
-            }
+            onPress={() => {
+              if (this.props.isAuthenticated) {
+                const screen =
+                  user._id === this.props.user._id
+                    ? 'MyPostsScreen'
+                    : 'UserProfileScreen';
+                this.props.navigation.navigate(screen, { user });
+              } else {
+                this.props.navigation.navigate('UserProfileScreen', { user });
+              }
+            }}
           >
             <Image
               style={{
@@ -178,21 +189,44 @@ class UserItemScreen extends React.Component<any, any> {
         )}
         {!user.avatar && (
           <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate('UserProfileScreen', { user })
-            }
+            onPress={() => {
+              if (this.props.isAuthenticated) {
+                const screen =
+                  user._id === this.props.user._id
+                    ? 'MyPostsScreen'
+                    : 'UserProfileScreen';
+                this.props.navigation.navigate(screen, { user });
+              } else {
+                this.props.navigation.navigate('UserProfileScreen', { user });
+              }
+            }}
           >
             <Avatar name={user.name ? user.name : user.uniquename} size={50} />
           </TouchableOpacity>
         )}
-
         <View style={{ paddingLeft: 10 }}>
-          {user.name && <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>}
-          {user.uniquename && (
-            <Text style={{ fontSize: 12, color: '#888' }}>
-              @{user.uniquename}
-            </Text>
-          )}
+          <TouchableOpacity
+            onPress={() => {
+              if (this.props.isAuthenticated) {
+                const screen =
+                  user._id === this.props.user._id
+                    ? 'MyPostsScreen'
+                    : 'UserProfileScreen';
+                this.props.navigation.navigate(screen, { user });
+              } else {
+                this.props.navigation.navigate('UserProfileScreen', { user });
+              }
+            }}
+          >
+            {user.name && (
+              <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>
+            )}
+            {user.uniquename && (
+              <Text style={{ fontSize: 12, color: '#888' }}>
+                {user.uniquename}
+              </Text>
+            )}
+          </TouchableOpacity>
           {user.postsQty > 0 && (
             <Text
               style={{
@@ -201,7 +235,7 @@ class UserItemScreen extends React.Component<any, any> {
                 paddingTop: 5
               }}
             >
-              {user.postsQty} more ads
+              {user.postsQty} {word.moreads}
             </Text>
           )}
         </View>
@@ -210,19 +244,26 @@ class UserItemScreen extends React.Component<any, any> {
       <TouchableOpacity
         onPress={() => call(callargs)}
         style={{
-          flex: 1,
-          height: 40,
+          width: 85,
+          height: 36,
+          borderRadius: 18,
           justifyContent: 'center',
           alignItems: 'center',
-          borderColor: '#6FA7D5',
-          borderWidth: 1
+          backgroundColor: '#6FA7D5',
+          flexDirection: 'row'
         }}
       >
+        <Ionicons
+          name="ios-call"
+          size={26}
+          style={{ paddingRight: 10 }}
+          color="#fff"
+        />
+
         <Text
           style={{
             fontSize: 14,
-            color: '#6FA7D5',
-            fontWeight: 'bold'
+            color: '#fff'
           }}
         >
           {word.calladvertiser}
@@ -250,10 +291,16 @@ class UserItemScreen extends React.Component<any, any> {
     const saleObject = pdata.filter((a: any) => a.name === 'issale')[0];
     const furntObject = pdata.filter((a: any) => a.name === 'isfurnishered')[0];
     const fulltimeObject = pdata.filter((a: any) => a.name === 'isfullTime')[0];
+    const warrantyObject = pdata.filter((a: any) => a.name === 'iswarranty')[0];
     const callargs = {
       number: post.phone, // Use commas to add time between digits.
       prompt: false
     };
+
+    const opacityStyle = this.state.scrollY.interpolate({
+      inputRange: [0, 200],
+      outputRange: [0, 1]
+    });
 
     return (
       <View style={styles.container}>
@@ -261,15 +308,15 @@ class UserItemScreen extends React.Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: 50,
-            left: 40,
-            zIndex: 600,
-            width: 40,
-            height: 40,
-            borderRadius: 20,
+            top: Constants.statusBarHeight + 10,
+            left: 10,
+            zIndex: 860,
+            width: 32,
+            height: 32,
+            borderRadius: 16,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)'
+            backgroundColor: 'rgba(255, 255, 255, 0.1)'
           }}
         >
           <Ionicons
@@ -279,23 +326,60 @@ class UserItemScreen extends React.Component<any, any> {
             color="#9C949A"
           />
         </TouchableOpacity>
-        {/* <ItemHeader
-          navigation={this.props.navigation}
-          title={post.title}
-          opacity={this.state.opacity}
-          post={post}
-          favoritePost={this.props.favoritePost}
-          word={word}
-          lang={lang}
-        /> */}
+        {/* header */}
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              flexDirection: 'row',
+              paddingTop: Constants.statusBarHeight,
+              height: Constants.statusBarHeight + 45,
+              justifyContent: 'space-between',
+              paddingHorizontal: 10,
+              alignItems: 'center',
+              zIndex: 850,
+              shadowOffset: { width: 3, height: 3 },
+              shadowColor: '#555',
+              shadowOpacity: 0.2,
+              backgroundColor: '#fff',
+              opacity: opacityStyle
+            }
+          ]}
+        >
+          <View
+            style={{
+              flex: 5,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'cairo-regular',
+                fontSize: 20,
+                color: '#373737'
+              }}
+            >
+              {post.title.substring(0, 20)}
+            </Text>
+          </View>
+        </Animated.View>
+
         <ScrollView
           onContentSizeChange={this.getScrollLength}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: '#fff' }}
-          onScroll={(e: any) => {
-            this.scrollOffset = e.nativeEvent.contentOffset.y;
-          }}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: { y: this.state.scrollY }
+              }
+            }
+          ])}
           ref={ref => {
             this.scrollView = ref;
           }}
@@ -366,7 +450,7 @@ class UserItemScreen extends React.Component<any, any> {
             </View>
           )}
           <View style={{ paddingHorizontal: 10 }}>
-            {post.isfullTime && (
+            {(post.isfullTime === true || post.isfullTime === false) && (
               <FullTimeView words={word} fulltimeObject={fulltimeObject} />
             )}
             {(post.price || post.price === 0) && (
@@ -377,8 +461,10 @@ class UserItemScreen extends React.Component<any, any> {
                 newObject={newObject}
                 saleObject={saleObject}
                 furntObject={furntObject}
+                warrantyObject={warrantyObject}
               />
             )}
+
             <BodyView
               favoritePost={this.props.favoritePost}
               post={post}
@@ -391,6 +477,7 @@ class UserItemScreen extends React.Component<any, any> {
               lang={lang}
             />
             <View style={{ height: 20 }} />
+
             {myItem && this.renderUser(this.props.user, callargs, word)}
             {!myItem && (
               <Query query={getUser} variables={{ userId: post.userId }}>
@@ -465,8 +552,12 @@ class UserItemScreen extends React.Component<any, any> {
                 <ItemComment
                   {...result}
                   updateCursor={this.updateCursor}
+                  navigation={this.props.navigation}
+                  isAuthenticated={this.props.isAuthenticated}
                   lang={this.props.lang}
+                  words={word}
                   width={width}
+                  user={this.props.user}
                   replayComment={this.replayComment}
                   word={word}
                   subscribeToNewComments={() =>
@@ -560,4 +651,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserItemScreen;
+export default ItemScreen;

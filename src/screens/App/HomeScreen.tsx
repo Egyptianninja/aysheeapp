@@ -22,7 +22,6 @@ import {
   ItemView,
   Noresult
 } from '../../componenets';
-import { FloatButton } from '../../lib';
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 
 class HomeScreen extends React.Component<any, any> {
@@ -165,10 +164,8 @@ class HomeScreen extends React.Component<any, any> {
   render() {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query } = this.props;
-    const catSelected =
-      this.state.rest.categoryId || this.state.rest.categoryId === 0;
 
-    this.NAVBAR_HEIGHT = catSelected ? 134 : 84;
+    this.NAVBAR_HEIGHT = 84;
 
     const navbarTranslate = clampedScroll.interpolate({
       inputRange: [0, this.NAVBAR_HEIGHT],
@@ -176,11 +173,8 @@ class HomeScreen extends React.Component<any, any> {
       extrapolate: 'clamp'
     });
 
-    const floatBtnTranslate = clampedScroll.interpolate({
-      inputRange: [0, this.NAVBAR_HEIGHT],
-      outputRange: [0, 84],
-      extrapolate: 'clamp'
-    });
+    console.log(this.state.rest);
+
     return (
       <View
         style={{
@@ -287,11 +281,6 @@ class HomeScreen extends React.Component<any, any> {
             );
           }}
         </Query>
-        {/* <Animated.View
-          style={{ transform: [{ translateY: floatBtnTranslate }] }}
-        >
-          <FloatButton opacity={0.6} action={this.handleTop} />
-        </Animated.View> */}
       </View>
     );
   }

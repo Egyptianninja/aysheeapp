@@ -19,6 +19,8 @@ import { StyleSheet, ItemLocation, call, ImageViewer } from '../../utils';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
+import Menu from '../../componenets/ItemScreen/Menu';
+
 import {
   Avatar,
   Properties,
@@ -308,7 +310,7 @@ class ItemScreen extends React.Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: Constants.statusBarHeight + 10,
+            top: Constants.statusBarHeight + 6,
             left: 10,
             zIndex: 860,
             width: 32,
@@ -366,6 +368,12 @@ class ItemScreen extends React.Component<any, any> {
               {post.title.substring(0, 20)}
             </Text>
           </View>
+          <Menu
+            post={post}
+            favoritePost={this.props.favoritePost}
+            word={word}
+            lang={lang}
+          />
         </Animated.View>
 
         <ScrollView
@@ -464,20 +472,14 @@ class ItemScreen extends React.Component<any, any> {
                 warrantyObject={warrantyObject}
               />
             )}
-
             <BodyView
-              favoritePost={this.props.favoritePost}
-              post={post}
-              postId={postId}
               title={post.title}
               body={post.body}
               isrtl={post.isrtl}
               time={post.time}
               word={word}
-              lang={lang}
             />
             <View style={{ height: 20 }} />
-
             {myItem && this.renderUser(this.props.user, callargs, word)}
             {!myItem && (
               <Query query={getUser} variables={{ userId: post.userId }}>

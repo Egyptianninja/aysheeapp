@@ -19,7 +19,6 @@ import MyOfflinePostsScreen from './App/user/MyOfflinePostsScreen';
 import MyFavScreen from './App/user/MyFavScreen';
 import MyProfileScreen from './App/user/MyProfileScreen';
 import UserProfileScreen from './App/user/UserProfileScreen';
-import UserProfile from './App/user/UserProfile';
 import UserItemScreen from './App/user/UserItemScreen';
 
 export {
@@ -45,5 +44,4 @@ export {
   NameScreen,
   UserProfileScreen,
   UserItemScreen,
-  UserProfile
 };

@@ -335,6 +335,7 @@ const renderSelectRow = (
         data={bucket}
         disable={disable}
         pid={pid}
+        icon
         value={[itemKind]}
         itemKind={itemKind}
         addFilter={addFilter}
@@ -370,8 +371,8 @@ const RenderFilter = (props: any) => {
       }}
       showsHorizontalScrollIndicator={false}
       style={{
-        paddingLeft: 5,
-        backgroundColor: '#fff'
+        paddingLeft: 5
+        // backgroundColor: '#fff'
       }}
     >
       <View
