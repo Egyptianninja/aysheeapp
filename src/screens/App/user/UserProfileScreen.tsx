@@ -11,7 +11,13 @@ import favoritePost from '../../../graphql/mutation/favoritePost';
 
 const { width } = Dimensions.get('window');
 
+const HEADER_MAX_HEIGHT = 175;
+const HEADER_MIN_HEIGHT = 90;
+const PROFILE_IMAGE_MAX_HEIGHT = 80;
+const PROFILE_IMAGE_MIN_HEIGHT = 40;
+
 class UserProfileScreen extends React.Component<any, any> {
+  static navigationOptions = { header: null };
   flatListRef: any;
   getNextPosts: any;
   constructor(p: any) {
@@ -29,90 +35,104 @@ class UserProfileScreen extends React.Component<any, any> {
 
   render() {
     const { lang, words } = this.props;
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+      extrapolate: 'clamp'
+    });
+    const profileImageHeight = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [PROFILE_IMAGE_MAX_HEIGHT, PROFILE_IMAGE_MIN_HEIGHT],
+      extrapolate: 'clamp'
+    });
+
+    const imageMarginTop = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [HEADER_MAX_HEIGHT - PROFILE_IMAGE_MAX_HEIGHT / 2, 40],
+      extrapolate: 'clamp'
+    });
+    const nameMarginTop = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [-75, 40],
+      extrapolate: 'clamp'
+    });
     const user = this.props.navigation.getParam('user');
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <View
+        <Animated.View
           style={{
             position: 'absolute',
-            left: 20,
-            top: 175 / 2 - 40,
-            zIndex: 200
+            top: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: 'lightskyblue',
+            height: headerHeight,
+            zIndex: 200,
+            flexDirection: 'row'
           }}
         >
-          {!user.avatar && (
-            <View>
+          <Animated.View
+            style={{
+              height: profileImageHeight,
+              width: profileImageHeight,
+              borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
+              overflow: 'hidden',
+              marginTop: imageMarginTop,
+              marginLeft: 10
+            }}
+          >
+            {!user.avatar && (
               <Avatar
                 name={user.name ? user.name : user.uniquename}
-                size={80}
+                size={profileImageHeight}
               />
-            </View>
-          )}
-          {user.avatar && (
-            <Image
-              style={{
-                height: 80,
-                width: 80,
-                borderRadius: 40
-              }}
-              source={{
-                uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-                  user.avatar
-                }`
-              }}
-            />
-          )}
-        </View>
-        <View>
-          {!user.headerPhoto && (
-            <View style={{ width, height: 175, backgroundColor: '#6FA7D5' }} />
-          )}
-          {user.headerPhoto && (
-            <Image
-              source={{
-                uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-                  user.avatar
-                }`
-              }}
-              style={{
-                flex: 1,
-                width,
-                height: 175,
-                resizeMode: 'cover'
-              }}
-            />
-          )}
-          <View
+            )}
+            {user.avatar && (
+              <Image
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  height: '100%'
+                }}
+                source={{
+                  uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
+                    user.avatar
+                  }`
+                }}
+              />
+            )}
+          </Animated.View>
+          <Animated.View
             style={{
-              position: 'absolute',
-              left: 120,
-              top: 175 / 2 - 20
+              marginTop: imageMarginTop,
+              marginLeft: 20,
+              zIndex: 210
             }}
           >
             {!user.name && (
               <Text
                 style={{
                   fontFamily: 'cairo-regular',
-                  color: '#fff',
-                  fontSize: 22
+                  fontSize: 22,
+                  color: '#fff'
                 }}
               >
-                @{user.uniquename}
+                {user.uniquename}
               </Text>
             )}
             {user.name && (
               <Text
                 style={{
                   fontFamily: 'cairo-regular',
-                  color: '#fff',
-                  fontSize: 22
+                  fontSize: 22,
+                  color: '#fff'
                 }}
               >
                 {user.name}
               </Text>
             )}
-          </View>
-        </View>
+          </Animated.View>
+        </Animated.View>
         <Query
           query={getUserPosts}
           variables={{ userId: user._id }}
@@ -140,6 +160,10 @@ class UserProfileScreen extends React.Component<any, any> {
                 onEndReached={() =>
                   this.getNextPosts(data, fetchMore, 'getUserPosts')
                 }
+                contentContainerStyle={{
+                  marginTop: HEADER_MAX_HEIGHT,
+                  paddingBottom: 160
+                }}
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (

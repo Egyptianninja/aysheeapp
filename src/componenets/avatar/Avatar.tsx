@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Animated } from 'react-native';
 import { nameToColor } from '../../utils';
 
 export const Avatar = ({ name, size }: any) => {
@@ -7,7 +7,7 @@ export const Avatar = ({ name, size }: any) => {
   const bgcolor = nameToColor(name);
 
   return (
-    <View
+    <Animated.View
       style={{
         width: size,
         height: size,
@@ -18,6 +18,6 @@ export const Avatar = ({ name, size }: any) => {
       }}
     >
       <Text style={{ fontSize: size / 2, color: '#fff' }}>{fletters}</Text>
-    </View>
+    </Animated.View>
   );
 };
