@@ -162,11 +162,15 @@ class ItemScreen extends React.Component<any, any> {
         {user.avatar && (
           <TouchableOpacity
             onPress={() => {
-              const screen =
-                user._id === this.props.user._id
-                  ? 'MyPostsScreen'
-                  : 'UserProfileScreen';
-              this.props.navigation.navigate(screen, { user });
+              if (this.props.isAuthenticated) {
+                const screen =
+                  user._id === this.props.user._id
+                    ? 'MyPostsScreen'
+                    : 'UserProfileScreen';
+                this.props.navigation.navigate(screen, { user });
+              } else {
+                this.props.navigation.navigate('UserProfileScreen', { user });
+              }
             }}
           >
             <Image
@@ -186,11 +190,15 @@ class ItemScreen extends React.Component<any, any> {
         {!user.avatar && (
           <TouchableOpacity
             onPress={() => {
-              const screen =
-                user._id === this.props.user._id
-                  ? 'MyPostsScreen'
-                  : 'UserProfileScreen';
-              this.props.navigation.navigate(screen, { user });
+              if (this.props.isAuthenticated) {
+                const screen =
+                  user._id === this.props.user._id
+                    ? 'MyPostsScreen'
+                    : 'UserProfileScreen';
+                this.props.navigation.navigate(screen, { user });
+              } else {
+                this.props.navigation.navigate('UserProfileScreen', { user });
+              }
             }}
           >
             <Avatar name={user.name ? user.name : user.uniquename} size={50} />
@@ -199,11 +207,15 @@ class ItemScreen extends React.Component<any, any> {
         <View style={{ paddingLeft: 10 }}>
           <TouchableOpacity
             onPress={() => {
-              const screen =
-                user._id === this.props.user._id
-                  ? 'MyPostsScreen'
-                  : 'UserProfileScreen';
-              this.props.navigation.navigate(screen, { user });
+              if (this.props.isAuthenticated) {
+                const screen =
+                  user._id === this.props.user._id
+                    ? 'MyPostsScreen'
+                    : 'UserProfileScreen';
+                this.props.navigation.navigate(screen, { user });
+              } else {
+                this.props.navigation.navigate('UserProfileScreen', { user });
+              }
             }}
           >
             {user.name && (

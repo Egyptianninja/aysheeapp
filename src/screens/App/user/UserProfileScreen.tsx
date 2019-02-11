@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Dimensions, Image, Text } from 'react-native';
+import { View, Dimensions, Animated, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
@@ -18,6 +18,7 @@ class UserProfileScreen extends React.Component<any, any> {
     super(p);
     this.getNextPosts = debounce(getNextPosts, 100);
     this.state = {
+      scrollY: new Animated.Value(0),
       refreshing: false
     };
   }
@@ -131,6 +132,10 @@ class UserProfileScreen extends React.Component<any, any> {
                 ref={(ref: any) => {
                   this.flatListRef = ref;
                 }}
+                onScroll={Animated.event([
+                  { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+                ])}
+                scrollEventThrottle={16}
                 onRefresh={() => refetch()}
                 onEndReached={() =>
                   this.getNextPosts(data, fetchMore, 'getUserPosts')
