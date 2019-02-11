@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
+import { Constants } from 'expo';
 import { KeyboardSpacer } from '../../lib';
 import secrets from '../../constants/secrets';
 import { StyleSheet, ItemLocation, call, ImageViewer } from '../../utils';
@@ -29,8 +30,7 @@ import {
   Loading,
   getproperties,
   getJobProperties,
-  FullTimeView,
-  ItemHeader
+  FullTimeView
 } from '../../componenets';
 import Link from '../../utils/location/link';
 
@@ -282,12 +282,12 @@ class ItemScreen extends React.Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: 45,
-            left: 15,
+            top: Constants.statusBarHeight + 10,
+            left: 10,
             zIndex: 860,
-            width: 36,
-            height: 36,
-            borderRadius: 18,
+            width: 32,
+            height: 32,
+            borderRadius: 16,
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: 'rgba(255, 255, 255, 0.1)'
@@ -295,11 +295,12 @@ class ItemScreen extends React.Component<any, any> {
         >
           <Ionicons
             name="ios-arrow-back"
-            size={33}
+            size={30}
             style={styles.icon}
             color="#9C949A"
           />
         </TouchableOpacity>
+        {/* header */}
         <Animated.View
           style={[
             {
@@ -308,8 +309,8 @@ class ItemScreen extends React.Component<any, any> {
               left: 0,
               right: 0,
               flexDirection: 'row',
-              paddingTop: 25,
-              height: 84,
+              paddingTop: Constants.statusBarHeight,
+              height: Constants.statusBarHeight + 45,
               justifyContent: 'space-between',
               paddingHorizontal: 10,
               alignItems: 'center',

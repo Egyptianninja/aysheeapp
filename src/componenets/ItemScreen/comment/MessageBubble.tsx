@@ -58,30 +58,40 @@ export default class MessageBubble extends React.Component<any, any> {
             </View>
           </TouchableOpacity>
           <View style={styles.messageBubble}>
-            <View
-              style={{ alignItems: lang === 'ar' ? 'flex-end' : 'flex-start' }}
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate('UserProfileScreen', {
+                  user: message.user
+                })
+              }
             >
-              <Text
+              <View
                 style={{
-                  fontSize: 14,
-                  fontWeight: 'bold',
-                  color: '#000',
-                  textAlign: lang === 'ar' ? 'right' : 'left'
+                  alignItems: lang === 'ar' ? 'flex-end' : 'flex-start'
                 }}
               >
-                {message.user.name}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: '#777',
-                  textAlign: lang === 'ar' ? 'right' : 'left',
-                  paddingBottom: 5
-                }}
-              >
-                {message.user.uniquename}
-              </Text>
-            </View>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    color: '#000',
+                    textAlign: lang === 'ar' ? 'right' : 'left'
+                  }}
+                >
+                  {message.user.name}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: '#777',
+                    textAlign: lang === 'ar' ? 'right' : 'left',
+                    paddingBottom: 5
+                  }}
+                >
+                  {message.user.uniquename}
+                </Text>
+              </View>
+            </TouchableOpacity>
 
             <Text
               style={{
