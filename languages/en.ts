@@ -266,11 +266,12 @@ export default {
   ],
   menu: [
     { id: 0, name: 'Profile' },
-    { id: 1, name: 'Your Ads' },
-    { id: 2, name: 'Favorites' },
-    { id: 3, name: 'Options & privacy' },
-    { id: 4, name: 'Help Center' },
-    { id: 5, name: 'Logout' }
+    { id: 1, name: 'New Ad' },
+    { id: 2, name: 'Your Ads' },
+    { id: 3, name: 'Favorites' },
+    { id: 4, name: 'Options & privacy' },
+    { id: 5, name: 'Help Center' },
+    { id: 6, name: 'Logout' }
   ],
   sort: [
     { id: 1, name: 'Recent' },

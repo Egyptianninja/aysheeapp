@@ -37,10 +37,12 @@ class Drawer extends React.Component<any, any> {
       case 0:
         return this.props.navigation.navigate('Profile');
       case 1:
-        return this.props.navigation.navigate('MyPostsScreen');
+        return this.props.navigation.navigate('ChoiseScreen');
       case 2:
+        return this.props.navigation.navigate('MyPostsScreen');
+      case 3:
         return this.props.navigation.navigate('MyFavScreen');
-      case 5: {
+      case 6: {
         // TODO: uncomment to logout from all
         // await this.props.logoutFromAll();
         AsyncStorage.removeItem('aysheetoken');

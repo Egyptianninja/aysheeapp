@@ -25,10 +25,11 @@ export const icons = {
   ],
   menu: [
     { id: 0, icon: 'ios-person' },
-    { id: 1, icon: 'ios-calendar' },
-    { id: 2, icon: 'ios-bookmark' },
-    { id: 3, icon: 'ios-settings' },
-    { id: 4, icon: 'ios-help-circle' },
-    { id: 5, icon: 'ios-exit' }
+    { id: 1, icon: 'md-add' },
+    { id: 2, icon: 'ios-calendar' },
+    { id: 3, icon: 'ios-bookmark' },
+    { id: 4, icon: 'ios-settings' },
+    { id: 5, icon: 'ios-help-circle' },
+    { id: 6, icon: 'ios-exit' }
   ]
 };
