@@ -36,16 +36,18 @@ const styles = StyleSheet.create({
   botton: {
     padding: 5,
     marginHorizontal: 3,
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#ddd',
+    backgroundColor: '#f7f7f7',
+    borderColor: '#eee',
     borderWidth: 1,
     marginVertical: 5
   },
   txt: {
     fontSize: 12,
-    color: '#ababab',
+    color: '#96BFE0',
     fontWeight: 'bold',
     paddingHorizontal: 5
   }
