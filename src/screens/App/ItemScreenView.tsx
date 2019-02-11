@@ -541,6 +541,7 @@ class ItemScreen extends React.Component<any, any> {
                   {...result}
                   updateCursor={this.updateCursor}
                   navigation={this.props.navigation}
+                  isAuthenticated={this.props.isAuthenticated}
                   lang={this.props.lang}
                   words={word}
                   width={width}

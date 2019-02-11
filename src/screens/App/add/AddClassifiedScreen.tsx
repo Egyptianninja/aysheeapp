@@ -259,7 +259,6 @@ class AddClassifiedScreen extends React.Component<any, any> {
                         lang={lang}
                       />
                     )}
-
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     name="body"

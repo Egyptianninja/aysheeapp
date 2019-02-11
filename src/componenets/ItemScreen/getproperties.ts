@@ -14,7 +14,9 @@ export const getproperties = (post: any) => {
     km,
     color,
     service,
-    isfullTime
+    isfullTime,
+    kind,
+    eBrand
   } = post;
 
   return [
@@ -32,7 +34,10 @@ export const getproperties = (post: any) => {
     { name: 'km', value: km },
     { name: 'color', value: color },
     { name: 'service', value: service },
-    { name: 'isfullTime', value: isfullTime }
+    { name: 'isfullTime', value: isfullTime },
+    // TODO:
+    { name: 'type', value: kind },
+    { name: 'eBrand', value: eBrand }
   ];
 };
 export const getJobProperties = (post: any) => {

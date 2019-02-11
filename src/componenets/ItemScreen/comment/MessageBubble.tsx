@@ -5,7 +5,7 @@ import { StyleSheet, isArabic, since } from '../../../utils';
 import { Avatar } from '../../Avatar';
 export default class MessageBubble extends React.Component<any, any> {
   render() {
-    const { message, lang, width, words } = this.props;
+    const { message, lang, width, words, isAuthenticated } = this.props;
     const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
       message.user.avatar
     }`;
@@ -125,30 +125,32 @@ export default class MessageBubble extends React.Component<any, any> {
           >
             {time}
           </Text>
-          <TouchableOpacity
-            onPress={() => this.props.replayComment(message.user.uniquename)}
-            style={{
-              flexDirection: lang === 'ar' ? 'row' : 'row-reverse'
-            }}
-          >
-            <Ionicons
-              name="ios-repeat"
-              size={22}
-              style={{ paddingHorizontal: 5 }}
-              color="#777"
-            />
-            <Text
+          {isAuthenticated && (
+            <TouchableOpacity
+              onPress={() => this.props.replayComment(message.user.uniquename)}
               style={{
-                fontSize: 12,
-                paddingLeft: lang === 'ar' ? 5 : 10,
-                paddingRight: lang === 'ar' ? 10 : 5,
-                color: '#777',
-                textAlign: lang === 'ar' ? 'right' : 'left'
+                flexDirection: lang === 'ar' ? 'row' : 'row-reverse'
               }}
             >
-              {words.replay}
-            </Text>
-          </TouchableOpacity>
+              <Ionicons
+                name="ios-repeat"
+                size={22}
+                style={{ paddingHorizontal: 5 }}
+                color="#777"
+              />
+              <Text
+                style={{
+                  fontSize: 12,
+                  paddingLeft: lang === 'ar' ? 5 : 10,
+                  paddingRight: lang === 'ar' ? 10 : 5,
+                  color: '#777',
+                  textAlign: lang === 'ar' ? 'right' : 'left'
+                }}
+              >
+                {words.replay}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
 
         <View
