@@ -10,7 +10,8 @@ import {
   INIT_TIME,
   CODE_SENT,
   INIT_CODE,
-  ADD_UNIQUENAME
+  ADD_UNIQUENAME,
+  ADD_PUSH_TOKEN
 } from '../types';
 
 export function login(token: string, data: any) {
@@ -29,6 +30,12 @@ export function addUniquename(name: any) {
   return {
     type: ADD_UNIQUENAME,
     name
+  };
+}
+export function addPushToken(pushToken: any) {
+  return {
+    type: ADD_PUSH_TOKEN,
+    pushToken
   };
 }
 export function emailAdded(email: string) {

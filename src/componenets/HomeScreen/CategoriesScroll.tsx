@@ -152,6 +152,26 @@ class CategoriesScroll extends React.Component<any, any> {
             />
           )}
           {selected && this.renderSelectedCategory(this.props.currentCategory)}
+          {selected && (
+            <View
+              style={{
+                position: 'absolute',
+                left: 5,
+                top: 10,
+                height: 64,
+                width: 32,
+                backgroundColor: '#eee',
+                borderBottomRightRadius: lang === 'ar' ? 32 : undefined,
+                borderTopRightRadius: lang === 'ar' ? 32 : undefined,
+                borderTopLeftRadius: lang === 'ar' ? undefined : 32,
+                borderBottomLeftRadius: lang === 'ar' ? undefined : 32,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingVertical: 10,
+                zIndex: 240
+              }}
+            />
+          )}
           <ScrollView
             ref={(ref: any) => {
               this.scrollView = ref;
@@ -161,12 +181,18 @@ class CategoriesScroll extends React.Component<any, any> {
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
-              flexDirection: lang === 'ar' ? 'row-reverse' : 'row'
+              flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
+              paddingLeft: selected ? 64 : 0
             }}
             style={{
-              backgroundColor: selected ? '#ddd' : '#fff',
+              backgroundColor: selected ? '#eee' : '#fff',
               height: selected ? 64 : 84,
-              marginVertical: selected ? 10 : undefined
+              marginVertical: selected ? 10 : undefined,
+              borderBottomRightRadius:
+                selected && lang === 'ar' ? 32 : undefined,
+              borderTopRightRadius: selected && lang === 'ar' ? 32 : undefined,
+              borderTopLeftRadius: selected && lang === 'ar' ? undefined : 32,
+              borderBottomLeftRadius: selected && lang === 'ar' ? undefined : 32
             }}
           >
             {!selected && this.renderCategories(categories)}

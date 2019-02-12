@@ -111,16 +111,16 @@ export default class FilterSelect extends React.Component<any, any> {
             flexDirection: 'row',
             padding: 2,
             paddingLeft: 2,
-            height: 40,
+            height: selected ? 34 : 36,
             minWidth: 70,
             justifyContent: 'center',
             alignItems: 'center',
             marginRight: 7,
-            marginTop: 5,
+            marginTop: 15,
             marginVertical: 5,
             borderWidth: selected ? 0 : 1,
             borderColor: '#E7E4E6',
-            borderRadius: 10,
+            borderRadius: 18,
             backgroundColor: selected ? '#9C949A' : '#fff',
             shadowOffset: { width: 0, height: 0 },
             shadowColor: '#555',
@@ -131,7 +131,7 @@ export default class FilterSelect extends React.Component<any, any> {
         >
           <Ionicons
             name="ios-arrow-down"
-            size={22}
+            size={18}
             color={selected ? '#fff' : '#777'}
             style={{ paddingHorizontal: 5, marginTop: 5 }}
           />
@@ -142,10 +142,9 @@ export default class FilterSelect extends React.Component<any, any> {
                 : this.props.disable
                 ? '#ccc'
                 : '#6A6262',
-              fontSize: this.props.lang === 'ar' ? 14 : 15,
+              fontSize: 14,
               fontFamily: 'cairo-regular',
-              paddingHorizontal: 5,
-              marginTop: selectedLable ? 5 : undefined
+              paddingHorizontal: 5
             }}
           >
             {selected
@@ -158,14 +157,16 @@ export default class FilterSelect extends React.Component<any, any> {
             <View
               style={{
                 position: 'absolute',
-                left: 10,
-                top: 0
+                left: lang === 'ar' ? undefined : 10,
+                right: lang === 'ar' ? 10 : undefined,
+                top: -20
               }}
             >
               <Text
                 style={{
-                  fontSize: 10,
-                  color: '#fff'
+                  fontSize: 12,
+                  fontFamily: 'cairo-regular',
+                  color: '#6A6262'
                 }}
               >
                 {data.label}

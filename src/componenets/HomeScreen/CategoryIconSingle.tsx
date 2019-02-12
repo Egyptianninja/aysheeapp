@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from '../../utils';
 
 const CategoryIconSingle = ({
@@ -14,17 +14,17 @@ const CategoryIconSingle = ({
   return (
     <View
       style={{
-        height: 64,
-        width: 64,
-        marginTop: 10,
-        backgroundColor: '#ddd',
-        borderBottomRightRadius: lang === 'ar' ? 32 : undefined,
-        borderTopRightRadius: lang === 'ar' ? 32 : undefined,
-        borderTopLeftRadius: lang === 'ar' ? undefined : 32,
-        borderBottomLeftRadius: lang === 'ar' ? undefined : 32,
+        position: 'absolute',
+        left: 12,
+        top: 16,
+        height: 50,
+        width: 50,
+        overflow: 'hidden',
+        borderRadius: 25,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 10
+        paddingVertical: 10,
+        zIndex: 300
       }}
     >
       <TouchableOpacity
@@ -37,12 +37,7 @@ const CategoryIconSingle = ({
           }
         }}
       >
-        <View
-          style={[
-            styles.iconView,
-            { backgroundColor: active ? '#9C949A' : '#eee' }
-          ]}
-        >
+        <View style={[styles.iconView, { backgroundColor: '#eee' }]}>
           <View style={styles.imageView}>
             <Image
               style={[
@@ -50,8 +45,7 @@ const CategoryIconSingle = ({
                   flex: 1,
                   width: '100%',
                   height: '100%'
-                },
-                { tintColor: active ? '#eee' : '#6A6262' }
+                }
               ]}
               source={icon}
             />
@@ -64,8 +58,10 @@ const CategoryIconSingle = ({
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 5,
+    paddingTop: 5,
+    marginTop: 5,
+    minWidth: 80,
     backgroundColor: '#fff'
   },
   iconView: {
@@ -77,8 +73,8 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   imageView: {
-    width: 26,
-    height: 26
+    width: 50,
+    height: 50
   },
   image: {
     flex: 1,

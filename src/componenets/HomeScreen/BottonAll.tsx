@@ -25,7 +25,7 @@ const BottonAll = ({
       margin: 5,
       borderWidth: 1,
       borderColor: '#DEDBDD',
-      backgroundColor: '#9C949A',
+      backgroundColor: '#6D86FA',
       shadowOffset: { width: 2, height: 2 },
       shadowColor: '#666',
       shadowRadius: 3,

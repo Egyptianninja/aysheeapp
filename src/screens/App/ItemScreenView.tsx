@@ -375,7 +375,6 @@ class ItemScreen extends React.Component<any, any> {
             lang={lang}
           />
         </Animated.View>
-
         <ScrollView
           onContentSizeChange={this.getScrollLength}
           scrollEventThrottle={16}
@@ -424,13 +423,12 @@ class ItemScreen extends React.Component<any, any> {
                   onPress={() => this.hideModal()}
                   style={{
                     position: 'absolute',
-                    right: 50,
-                    top: 50,
-                    paddingVertical: 10,
+                    right: 20,
+                    top: Constants.statusBarHeight + 6,
                     paddingHorizontal: 20
                   }}
                 >
-                  <Ionicons name="ios-close" size={36} color="#fff" />
+                  <Ionicons name="ios-close" size={40} color="#fff" />
                 </TouchableOpacity>
               </Modal>
             </View>

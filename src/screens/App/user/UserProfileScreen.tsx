@@ -77,7 +77,7 @@ class UserProfileScreen extends React.Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: Constants.statusBarHeight + 25,
+            top: Constants.statusBarHeight + 10,
             left: 10,
             zIndex: 860,
             width: 32,

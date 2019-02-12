@@ -10,12 +10,14 @@ import {
   INIT_TIME,
   CODE_SENT,
   INIT_CODE,
-  ADD_UNIQUENAME
+  ADD_UNIQUENAME,
+  ADD_PUSH_TOKEN
 } from '../types';
 
 const initialState = {
   isAuthenticated: false,
   token: null,
+  pushToken: null,
   user: null as any,
   phone: null,
   name: null,
@@ -67,6 +69,11 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         email: action.email
+      };
+    case ADD_PUSH_TOKEN:
+      return {
+        ...state,
+        pushToken: action.pushToken
       };
     case EMAIL_REMOVED:
       return {

@@ -12,7 +12,7 @@ import { graphql } from 'react-apollo';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from '../../utils';
+import { StyleSheet, registerForPushNotificationsAsync } from '../../utils';
 import { Button, InputPhone, CountDownTimer } from '../../lib';
 import {
   login,
@@ -22,6 +22,8 @@ import {
   initTime
 } from '../../store/actions/userAtions';
 import smsRequestCode from '../../graphql/mutation/smsRequestCode';
+import notificationSub from '../../graphql/mutation/notificationSub';
+
 import { smsTimes } from '../../constants';
 
 const { width } = Dimensions.get('window');
@@ -31,10 +33,24 @@ class PhoneScreen extends React.Component<any, any> {
     phone: null,
     name: null,
     loading: false,
+    pushToken: null,
     interval: 0
   };
 
+  async componentWillMount() {
+    const pushToken = await registerForPushNotificationsAsync();
+    await this.setState({ pushToken });
+  }
+
   componentDidMount() {
+    if (this.state.pushToken) {
+      this.props.notificationSub({
+        variables: {
+          userId: this.props.user._id,
+          pushToken: this.state.pushToken
+        }
+      });
+    }
     if (this.props.phone) {
       this.setState({ phone: this.props.phone, name: this.props.name });
       this.props.navigation.navigate('CodeScreen', {
@@ -265,5 +281,9 @@ export default connect(
 )(
   graphql(smsRequestCode, {
     name: 'smsRequestCode'
-  })(PhoneScreen)
+  })(
+    graphql(notificationSub, {
+      name: 'notificationSub'
+    })(PhoneScreen)
+  )
 );

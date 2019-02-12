@@ -352,27 +352,13 @@ const getItems = (buckets: any, item: any) => {
 };
 
 const RenderFilter = (props: any) => {
-  let scrollView: any;
   return (
     <ScrollView
       scrollEventThrottle={16}
       horizontal
-      ref={(ref: any) => {
-        scrollView = ref;
-      }}
-      onContentSizeChange={
-        props.lang === 'ar'
-          ? () => scrollView.scrollToEnd({ animated: false })
-          : () => null
-      }
-      contentContainerStyle={{
-        justifyContent: 'flex-start',
-        marginHorizontal: props.lang === 'ar' ? -7 : 7
-      }}
       showsHorizontalScrollIndicator={false}
       style={{
         paddingLeft: 5
-        // backgroundColor: '#fff'
       }}
     >
       <View
