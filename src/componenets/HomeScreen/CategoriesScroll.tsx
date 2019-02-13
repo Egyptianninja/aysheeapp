@@ -185,13 +185,21 @@ class CategoriesScroll extends React.Component<any, any> {
             }}
             style={{
               backgroundColor: selected ? '#eee' : '#fff',
-              height: selected ? 64 : 84,
+              height: selected ? 64 : 90,
               marginVertical: selected ? 10 : undefined,
               borderBottomRightRadius:
                 selected && lang === 'ar' ? 32 : undefined,
               borderTopRightRadius: selected && lang === 'ar' ? 32 : undefined,
-              borderTopLeftRadius: selected && lang === 'ar' ? undefined : 32,
-              borderBottomLeftRadius: selected && lang === 'ar' ? undefined : 32
+              borderTopLeftRadius: !selected
+                ? undefined
+                : selected && lang === 'ar'
+                ? undefined
+                : 32,
+              borderBottomLeftRadius: !selected
+                ? undefined
+                : selected && lang === 'ar'
+                ? undefined
+                : 32
             }}
           >
             {!selected && this.renderCategories(categories)}

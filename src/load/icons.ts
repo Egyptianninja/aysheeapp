@@ -39,6 +39,9 @@ export const icons = {
     { id: 'bathrooms', icon: () => images.bathrooms },
     { id: 'year', icon: () => images.year }
   ],
+  itemmenuicon: { id: 'year', icon: () => images.itemmenuicon },
+  itemmenuiconup: { id: 'year', icon: () => images.itemmenuiconup },
+
   menu: [
     { id: 0, icon: 'ios-person' },
     { id: 1, icon: 'md-add' },

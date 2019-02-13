@@ -17,12 +17,14 @@ const CategoryIconSingle = ({
         position: 'absolute',
         left: 7,
         top: 11,
-        height: 60,
-        width: 60,
+        height: 62,
+        width: 62,
         overflow: 'hidden',
-        borderRadius: 30,
+        borderRadius: 31,
         justifyContent: 'center',
         alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#7678ED',
         // paddingVertical: 10,
         zIndex: 300
       }}

@@ -43,7 +43,7 @@ export const images = {
   sortType: require('../../assets/icons/filtericons/Sort.jpg'),
   city: require('../../assets/icons/filtericons/City.jpg'),
   kindId: require('../../assets/icons/filtericons/Kind.jpg'),
-  realestateId: require('../../assets/icons/filtericons/Sort.jpg'),
+  realestateId: require('../../assets/icons/filtericons/Kind.jpg'),
   serviceId: require('../../assets/icons/filtericons/Servics.jpg'),
   brandId: require('../../assets/icons/filtericons/Brand.jpg'),
   subBrandId: require('../../assets/icons/filtericons/Subbrand.jpg'),
@@ -53,5 +53,8 @@ export const images = {
   isfurnishered: require('../../assets/icons/filtericons/Furniture.jpg'),
   rooms: require('../../assets/icons/filtericons/room.jpg'),
   bathrooms: require('../../assets/icons/filtericons/Bathroom.jpg'),
-  year: require('../../assets/icons/filtericons/Year.jpg')
+  year: require('../../assets/icons/filtericons/Year.jpg'),
+
+  itemmenuiconup: require('../../assets/icons/point-menu.png'),
+  itemmenuicon: require('../../assets/icons/points.png')
 };

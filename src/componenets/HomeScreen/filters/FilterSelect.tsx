@@ -111,7 +111,7 @@ export default class FilterSelect extends React.Component<any, any> {
       <View>
         <TouchableOpacity
           style={{
-            flexDirection: 'row',
+            flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
             padding: 2,
             paddingLeft: 2,
             height: 42,
@@ -122,7 +122,8 @@ export default class FilterSelect extends React.Component<any, any> {
             marginRight: 7,
             // marginTop: 15,
             borderWidth: 1,
-            borderColor: selected ? '#7678ED' : '#E7E4E6',
+            borderColor: '#E7E4E6',
+            // borderColor: selected ? '#7678ED' : '#E7E4E6',
             // backgroundColor: selected ? '#9C949A' : '#fff',
             backgroundColor: '#fff',
             shadowOffset: { width: 0, height: 0 },
@@ -132,17 +133,20 @@ export default class FilterSelect extends React.Component<any, any> {
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
+          <View style={{ paddingHorizontal: 7 }}>
+            <FilterIcon icon={icon} size={20} />
+          </View>
           <Text
             style={{
               color: selected
-                ? '#7678ED'
+                ? '#ff5959'
                 : this.props.disable
                 ? '#ccc'
                 : '#272727',
-              fontSize: 14,
+              fontSize: 16,
               fontFamily: 'cairo-regular',
               fontWeight: selected ? 'bold' : '300',
-              paddingHorizontal: 10
+              paddingHorizontal: 5
             }}
           >
             {selected
@@ -171,7 +175,6 @@ export default class FilterSelect extends React.Component<any, any> {
               </Text>
             </View>
           )} */}
-          <FilterIcon icon={icon} size={20} />
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}

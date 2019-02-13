@@ -198,7 +198,7 @@ class HomeScreen extends React.Component<any, any> {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query } = this.props;
 
-    this.NAVBAR_HEIGHT = 84;
+    this.NAVBAR_HEIGHT = 90;
 
     const navbarTranslate = clampedScroll.interpolate({
       inputRange: [0, this.NAVBAR_HEIGHT],

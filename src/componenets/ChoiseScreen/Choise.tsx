@@ -44,8 +44,10 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
 
       <View
         style={{
-          width: 25,
-          height: 26,
+          width: 40,
+          height: 40,
+          borderRadius: 20,
+          overflow: 'hidden',
           marginHorizontal: 10
         }}
       >
@@ -53,8 +55,7 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
           style={{
             flex: 1,
             width: '100%',
-            height: '100%',
-            tintColor: '#777'
+            height: '100%'
           }}
           source={icon}
         />

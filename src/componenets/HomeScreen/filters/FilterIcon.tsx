@@ -5,13 +5,11 @@ export const FilterIcon = ({ icon, size }: any) => {
   return (
     <View style={{ width: size, height: size }}>
       <Image
-        style={[
-          {
-            flex: 1,
-            width: '100%',
-            height: '100%'
-          }
-        ]}
+        style={{
+          flex: 1,
+          width: '100%',
+          height: '100%'
+        }}
         source={icon}
       />
     </View>

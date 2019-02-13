@@ -38,12 +38,21 @@ const ItemView = (props: any) => {
           style={{
             position: 'absolute',
             left: 10,
-            top: 7,
+            width: 20,
+            hieght: 20,
+            top: 10,
             zIndex: 120,
-            opacity: 0.8
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+            backgroundColor: 'rgba(255, 255, 255, 0.3)'
           }}
         >
-          <Ionicons name={'md-globe'} size={18} color="#B0CFE8" />
+          <Ionicons
+            name={'md-globe'}
+            size={18}
+            color="rgba(118, 120, 237, 0.6)"
+          />
         </View>
       )}
       <View style={{ width: imageWidth }}>
@@ -142,17 +151,17 @@ const ItemView = (props: any) => {
                   >
                     {subTitle}
                   </Text>
-                  <MenuIcon
-                    showMenuModal={showMenuModal}
-                    post={post}
-                    imageWidth={post.imageWidth}
-                    isrtl={lang === 'ar' ? true : false}
-                  />
                 </View>
               </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
+        <MenuIcon
+          showMenuModal={showMenuModal}
+          post={post}
+          imageWidth={post.imageWidth}
+          isrtl={lang === 'ar' ? true : false}
+        />
       </View>
     </View>
   );
