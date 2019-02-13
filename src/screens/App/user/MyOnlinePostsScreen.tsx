@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import getMyPosts from '../../../graphql/query/getMyPosts';
-import { getNextPosts, readyUserPosts } from '../../../utils';
+import { getNextPosts, readyUserPosts, Message } from '../../../utils';
 import { ItemOwnerView, Loading } from '../../../componenets';
 import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import deletePost from '../../../graphql/mutation/deletePost';
+import Menu from '../../../componenets/MyPostsScreen/Menu';
+import Edit from '../../../componenets/MyPostsScreen/Edit';
+const { width } = Dimensions.get('window');
 
 class MyOnlinePostsScreen extends React.Component<any, any> {
   flatListRef: any;
@@ -17,7 +20,10 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
     super(p);
     this.getNextPosts = debounce(getNextPosts, 100);
     this.state = {
-      refreshing: false
+      refreshing: false,
+      isMenuModalVisible: false,
+      isEditModalVisible: false,
+      isMessageVisible: false
     };
   }
 
@@ -30,10 +36,66 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
     });
   };
 
+  showMenuModal = (post: any) => {
+    this.setState({ isMenuModalVisible: true, modalPost: post });
+  };
+  hideMenuModal = () => {
+    this.setState({ isMenuModalVisible: false, modalPost: null });
+  };
+  showEditModal = () => {
+    this.setState({ isEditModalVisible: true });
+  };
+  hideEditModal = () => {
+    this.setState({ isEditModalVisible: false });
+  };
+  showMessageModal = ({ seconds, screen }: any) => {
+    this.setState({ isMessageVisible: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
+  };
+
   render() {
     const { lang, words } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <Menu
+          post={this.state.modalPost}
+          deletePost={this.props.deletePost}
+          editClassifieds={this.props.editClassifieds}
+          isMenuModalVisible={this.state.isMenuModalVisible}
+          hideMenuModal={this.hideMenuModal}
+          showEditModal={this.showEditModal}
+          showMessageModal={this.showMessageModal}
+          word={words}
+          lang={lang}
+        />
+        <Edit
+          isEditModalVisible={this.state.isEditModalVisible}
+          editClassifieds={this.props.editClassifieds}
+          hideEditModal={this.hideEditModal}
+          word={words}
+          lang={lang}
+        />
+        <Message
+          isVisible={this.state.isMessageVisible}
+          title={words.successadded}
+          icon="ios-checkmark-circle"
+          lang={lang}
+          width={width}
+          height={120}
+        />
         <Query
           query={getMyPosts}
           variables={{ islive: true }}
@@ -69,6 +131,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
                     editClassifieds={this.props.editClassifieds}
                     deletePost={this.props.deletePost}
                     selectePost={this.selectePost}
+                    showMenuModal={this.showMenuModal}
                     word={words}
                     lang={lang}
                   />

@@ -2,11 +2,11 @@ import * as React from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import { StyleSheet } from '../../utils';
 import { PostImage } from './PostImage';
-import Menu from './Menu';
+import { MenuIcon } from './MenuIcon';
 
 const ItemView = (props: any) => {
   const {
-    color,
+    showMenuModal,
     post,
     post: {
       imageWidth,
@@ -117,12 +117,11 @@ const ItemView = (props: any) => {
                   >
                     {subTitle}
                   </Text>
-                  <Menu
+                  <MenuIcon
+                    showMenuModal={showMenuModal}
                     post={post}
-                    isrtl={isrtl}
-                    unFavoritePost={unFavoritePost}
-                    word={word}
-                    lang={lang}
+                    imageWidth={post.imageWidth}
+                    isrtl={lang === 'ar' ? true : false}
                   />
                 </View>
               </View>

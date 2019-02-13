@@ -5,6 +5,7 @@ import { getCountryCode, getCountryCodeQatar } from './getCountryCode';
 import { isArabic, arabicToNum } from './arabic';
 import { nameToColor } from './color';
 import { getLang, getLocale } from './getlang';
+import { filterOptions } from './general';
 
 export {
   getLocation,
@@ -16,5 +17,6 @@ export {
   getCountryCodeQatar,
   nameToColor,
   getLang,
-  getLocale
+  getLocale,
+  filterOptions
 };

@@ -15,11 +15,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import { KeyboardSpacer } from '../../lib';
 import secrets from '../../constants/secrets';
-import { StyleSheet, ItemLocation, call, ImageViewer } from '../../utils';
+import {
+  StyleSheet,
+  ItemLocation,
+  call,
+  ImageViewer,
+  Message
+} from '../../utils';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
-import Menu from '../../componenets/ItemScreen/Menu';
+import { MenuIcon, Menu } from '../../componenets/ItemScreen';
 
 import {
   Avatar,
@@ -35,6 +41,7 @@ import {
   FullTimeView
 } from '../../componenets';
 import Link from '../../utils/location/link';
+import { Report } from '../../componenets/HomeScreen';
 
 const { width } = Dimensions.get('window');
 
@@ -50,7 +57,9 @@ class ItemScreen extends React.Component<any, any> {
   childRef: any = React.createRef();
   state = {
     isImageViewVisible: true,
-    modalVisible: false,
+    isMenuModalVisible: false,
+    isReportModalVisible: false,
+    isMessageVisible: false,
     isScrollEnable: true,
     isModelVisible: false,
     imageIndex: 0,
@@ -76,6 +85,36 @@ class ItemScreen extends React.Component<any, any> {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
   }
+
+  showMenuModal = () => {
+    this.setState({ isMenuModalVisible: true });
+  };
+  hideMenuModal = () => {
+    this.setState({ isMenuModalVisible: false });
+  };
+  showReportModal = () => {
+    this.setState({ isReportModalVisible: true });
+  };
+  hideReportModal = () => {
+    this.setState({ isReportModalVisible: false });
+  };
+  showMessageModal = ({ seconds, screen }: any) => {
+    this.setState({ isMessageVisible: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
+  };
 
   keyboardDidShow(e: any) {
     this.scrollView.scrollToEnd();
@@ -306,6 +345,33 @@ class ItemScreen extends React.Component<any, any> {
 
     return (
       <View style={styles.container}>
+        <Menu
+          postId={postId}
+          post={post}
+          favoritePost={this.props.favoritePost}
+          unFavoritePost={this.props.unFavoritePost}
+          fav={this.props.fav}
+          isMenuModalVisible={this.state.isMenuModalVisible}
+          hideMenuModal={this.hideMenuModal}
+          showReportModal={this.showReportModal}
+          showMessageModal={this.showMessageModal}
+          word={word}
+          lang={lang}
+        />
+        <Report
+          isReportModalVisible={this.state.isReportModalVisible}
+          hideReportModal={this.hideReportModal}
+          word={word}
+          lang={lang}
+        />
+        <Message
+          isVisible={this.state.isMessageVisible}
+          title={word.successadded}
+          icon="ios-checkmark-circle"
+          lang={lang}
+          width={width}
+          height={120}
+        />
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
           style={{
@@ -368,9 +434,10 @@ class ItemScreen extends React.Component<any, any> {
               {post.title.substring(0, 20)}
             </Text>
           </View>
-          <Menu
+          <MenuIcon
             post={post}
             favoritePost={this.props.favoritePost}
+            showMenuModal={this.showMenuModal}
             word={word}
             lang={lang}
           />

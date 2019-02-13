@@ -3,11 +3,11 @@ import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../../../utils';
 import { PostImage } from './PostImage';
-
-import Menu from './Menu';
+import { MenuIcon } from './MenuIcon';
 
 const ItemView = (props: any) => {
   const {
+    showMenuModal,
     post,
     post: {
       imageWidth,
@@ -20,7 +20,6 @@ const ItemView = (props: any) => {
       currency
     },
     selectePost,
-    favoritePost,
     word,
     lang
   } = props;
@@ -143,12 +142,11 @@ const ItemView = (props: any) => {
                   >
                     {subTitle}
                   </Text>
-                  <Menu
+                  <MenuIcon
+                    showMenuModal={showMenuModal}
                     post={post}
-                    isrtl={isrtl}
-                    favoritePost={favoritePost}
-                    word={word}
-                    lang={lang}
+                    imageWidth={post.imageWidth}
+                    isrtl={lang === 'ar' ? true : false}
                   />
                 </View>
               </View>

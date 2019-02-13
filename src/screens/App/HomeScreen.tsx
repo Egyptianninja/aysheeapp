@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Animated } from 'react-native';
+import { View, Text, Animated, Dimensions } from 'react-native';
 import { debounce } from 'lodash';
 import { Notifications } from 'expo';
 import { connect } from 'react-redux';
@@ -14,7 +14,8 @@ import {
   getNextPosts,
   getNewPosts,
   readyPosts,
-  getTimeLineBuckets
+  getTimeLineBuckets,
+  Message
 } from '../../utils';
 import {
   Loading,
@@ -22,8 +23,9 @@ import {
   ItemView,
   Noresult
 } from '../../componenets';
+import { Menu, Report } from '../../componenets/HomeScreen';
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
-
+const { width } = Dimensions.get('window');
 class HomeScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
   catScrollHome: any;
@@ -41,12 +43,13 @@ class HomeScreen extends React.Component<any, any> {
     const scrollAnim = new Animated.Value(0);
     const offsetAnim = new Animated.Value(0);
     this.state = {
-      query: null,
+      isMenuModalVisible: false,
+      isReportModalVisible: false,
+      isMessageVisible: false,
+      modalPost: null,
       refreshing: false,
-      modalVisible: false,
-      itemModalVisable: false,
       notification: null,
-      pushToken: null,
+      query: null,
       rest: {},
       scrollAnim,
       offsetAnim,
@@ -106,6 +109,36 @@ class HomeScreen extends React.Component<any, any> {
       duration: 350,
       useNativeDriver: true
     }).start();
+  };
+
+  showMenuModal = (post: any) => {
+    this.setState({ isMenuModalVisible: true, modalPost: post });
+  };
+  hideMenuModal = () => {
+    this.setState({ isMenuModalVisible: false, modalPost: null });
+  };
+  showReportModal = () => {
+    this.setState({ isReportModalVisible: true });
+  };
+  hideReportModal = () => {
+    this.setState({ isReportModalVisible: false });
+  };
+  showMessageModal = ({ seconds, screen }: any) => {
+    this.setState({ isMessageVisible: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
   };
 
   handleTop = () => {
@@ -179,6 +212,30 @@ class HomeScreen extends React.Component<any, any> {
           paddingHorizontal: 5
         }}
       >
+        <Menu
+          post={this.state.modalPost}
+          favoritePost={this.props.favoritePost}
+          isMenuModalVisible={this.state.isMenuModalVisible}
+          hideMenuModal={this.hideMenuModal}
+          showReportModal={this.showReportModal}
+          showMessageModal={this.showMessageModal}
+          word={words}
+          lang={lang}
+        />
+        <Report
+          isReportModalVisible={this.state.isReportModalVisible}
+          hideReportModal={this.hideReportModal}
+          word={words}
+          lang={lang}
+        />
+        <Message
+          isVisible={this.state.isMessageVisible}
+          title={words.successadded}
+          icon="ios-checkmark-circle"
+          lang={lang}
+          width={width}
+          height={120}
+        />
         <Animated.View
           style={{
             zIndex: 100,
@@ -201,7 +258,7 @@ class HomeScreen extends React.Component<any, any> {
             removeFilter={this.removeFilter}
             removeAllFilters={this.removeAllFilters}
             navigation={this.props.navigation}
-            {...this.state}
+            rest={this.state.rest}
           />
         </Animated.View>
 
@@ -261,8 +318,8 @@ class HomeScreen extends React.Component<any, any> {
                     <ItemView
                       post={item}
                       navigation={this.props.navigation}
+                      showMenuModal={this.showMenuModal}
                       selectePost={this.selectePost}
-                      favoritePost={this.props.favoritePost}
                       word={this.props.words}
                       lang={lang}
                     />

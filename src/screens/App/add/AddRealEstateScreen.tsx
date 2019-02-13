@@ -16,7 +16,8 @@ import {
   UserLocation,
   registerForPushNotificationsAsync,
   uploadPhotos,
-  isArabic
+  isArabic,
+  Message
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
@@ -31,7 +32,6 @@ import {
   Title
 } from '../../../lib';
 
-import { MessageModal } from '../../../componenets';
 import { getPureNumber } from '../../../utils/call';
 const { width } = Dimensions.get('window');
 
@@ -51,7 +51,7 @@ const roomsData = [
 class AddRealEstateScreen extends React.Component<any, any> {
   state = {
     selectedImage: null,
-    isMessageModal: false,
+    isShowMessage: false,
     location: null,
     pushToken: null,
     bar: 0
@@ -65,12 +65,22 @@ class AddRealEstateScreen extends React.Component<any, any> {
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
   };
-  showMessage = () => {
-    this.setState({ isMessageModal: true });
-    setTimeout(() => {
-      this.setState({ isMessageModal: false });
-      return true;
-    }, 1000);
+  showMessage = ({ seconds, screen }: any) => {
+    this.setState({ isShowMessage: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessage = () => {
+    this.setState({ isShowMessage: false });
   };
 
   getCurrentLocation = (location: any) => {
@@ -144,10 +154,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
         });
       }
       this.updateProgressBar(1 / (3 + photos.length));
-      this.showMessage();
-      setTimeout(() => {
-        this.props.navigation.navigate('HomeScreen');
-      }, 1500);
+      this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -159,11 +166,13 @@ class AddRealEstateScreen extends React.Component<any, any> {
     const { lang, user } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-        <MessageModal
-          isVisible={this.state.isMessageModal}
-          message={word.successadded}
+        <Message
+          isVisible={this.state.isShowMessage}
+          title={word.successadded}
+          icon="ios-checkmark-circle"
           lang={lang}
           width={width}
+          height={120}
         />
         <ScrollView>
           <View style={styles.container}>

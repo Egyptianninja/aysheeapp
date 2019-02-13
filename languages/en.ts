@@ -368,6 +368,16 @@ export default {
     offlineposts: 'Offline Posts',
     replay: 'Replay',
     moreads: 'more ads',
+    addedtovafavorites: 'Successfully added to favorites',
+    removeedtovafavorites: 'Successfully removed to favorites',
+    adrefreshed: 'Successfully refreshed',
+    adunpupished: 'Successfully unpublished',
+    adpublished: 'Successfully published',
+    adlocationchanged: 'Location changed successfully',
+    phonechanged: 'Phone changed successfully',
+    pricechanged: 'Price changed successfully',
+    deleteareyousure: 'Are you sure to delete?',
+    addeleted: 'Successfully deleted',
 
     labels: {
       categoryId: 'Category',
@@ -384,6 +394,19 @@ export default {
       bathrooms: 'Bathroom',
       year: 'Year'
     },
+    popmenu: [
+      { id: 1, name: 'Add to favorite' },
+      { id: 2, name: 'Remove from favorite' },
+      { id: 3, name: 'Share' },
+      { id: 4, name: 'Report' },
+      { id: 5, name: 'Refresh' },
+      { id: 6, name: 'Publish' },
+      { id: 7, name: 'Unpublish' },
+      { id: 8, name: 'Add Location' },
+      { id: 9, name: 'Edit Phone Number' },
+      { id: 10, name: 'Edit Price' },
+      { id: 11, name: 'Delete' }
+    ],
     itemmenu: [
       { id: 1, name: 'Add to favorite' },
       { id: 2, name: 'Share' },

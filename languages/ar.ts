@@ -391,6 +391,16 @@ export default {
     offlineposts: 'الاعلانات غير المنشورة',
     replay: 'اكتب رداً',
     moreads: 'اعلانات اخرى',
+    addedtovafavorites: 'تم اضافة الاعلان الى المفضلة',
+    removeedtovafavorites: 'تم ازالة الاعلان من المفضلة',
+    adrefreshed: 'تم تحديث تاريخ الأعلان بنجاح',
+    adunpupished: 'تم إلغاء نشر الأعلان بنجاح',
+    adpublished: 'تم أعادة نشر الأعلان بنجاح',
+    adlocationchanged: 'تم تعديل موقع الإعلان الجغرافي بنجاح',
+    phonechanged: 'تم تعديل رقم الهاتف بنجاح',
+    pricechanged: 'تم تعديل سعر الإعلان بنجاح',
+    deleteareyousure: 'هل أنت متأكد من حذف الإعلان',
+    addeleted: 'تم حذف الإعلان بنجاح',
 
     labels: {
       categoryId: 'المجموعة',
@@ -407,6 +417,19 @@ export default {
       bathrooms: 'الحمامات',
       year: 'سنة الصنع'
     },
+    popmenu: [
+      { id: 1, name: 'اضافة الى المفضلة' },
+      { id: 2, name: 'ازالة من المفضلة' },
+      { id: 3, name: 'مشاركة الاعلان' },
+      { id: 4, name: 'التبليغ عن الاعلان' },
+      { id: 5, name: 'تحديث الاعلان' },
+      { id: 6, name: 'اعادة نشر الاعلان' },
+      { id: 7, name: 'الغاء نشر الاعلان' },
+      { id: 8, name: 'تعديل الموقع الجغرافي' },
+      { id: 9, name: 'تعديل رقم الهاتف' },
+      { id: 10, name: 'تعديل السعر' },
+      { id: 11, name: 'حذف الاعلان' }
+    ],
     itemmenu: [
       { id: 1, name: 'اضافة الى المفضلة' },
       { id: 2, name: 'مشاركة الاعلان' },

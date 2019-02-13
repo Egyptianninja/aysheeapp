@@ -69,8 +69,8 @@ class Drawer extends React.Component<any, any> {
             style={{
               flex: 1,
               marginHorizontal: 10,
-              marginVertical: 10,
-              flexDirection: lng === 'ar' ? 'row-reverse' : 'row',
+              marginVertical: 7,
+              flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'flex-start'
             }}
@@ -92,7 +92,6 @@ class Drawer extends React.Component<any, any> {
 
             <Text
               style={{
-                marginTop: 5,
                 color: '#5B4C57',
                 fontSize: 16,
                 fontFamily: lng === 'ar' ? 'cairo-light' : 'comfortaa-Regular'

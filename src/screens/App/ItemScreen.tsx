@@ -6,6 +6,7 @@ import { readyPost } from '../../utils';
 import ItemScreenView from './ItemScreenView';
 import { connect } from 'react-redux';
 import favoritePost from '../../graphql/mutation/favoritePost';
+import unFavoritePost from '../../graphql/mutation/unFavoritePost';
 import createComment from '../../graphql/mutation/createComment';
 class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
@@ -16,15 +17,18 @@ class ItemScreen extends React.Component<any, any> {
     const postId = this.props.navigation.getParam('postId');
     const word = this.props.navigation.getParam('word');
     const lang = this.props.navigation.getParam('lang');
+    const fav = this.props.navigation.getParam('fav');
     if (post) {
       return (
         <ItemScreenView
           post={post}
           word={word}
           lang={lang}
+          fav={fav}
           navigation={this.props.navigation}
           createComment={this.props.createComment}
           favoritePost={this.props.favoritePost}
+          unFavoritePost={this.props.unFavoritePost}
           user={this.props.user}
           isAuthenticated={this.props.isAuthenticated}
         />
@@ -48,6 +52,7 @@ class ItemScreen extends React.Component<any, any> {
                 navigation={this.props.navigation}
                 createComment={this.props.createComment}
                 favoritePost={this.props.favoritePost}
+                unFavoritePost={this.props.unFavoritePost}
                 user={this.props.user}
                 isAuthenticated={this.props.isAuthenticated}
               />
@@ -72,6 +77,10 @@ export default connect(mapStateToProps)(
   })(
     graphql(favoritePost, {
       name: 'favoritePost'
-    })(ItemScreen)
+    })(
+      graphql(unFavoritePost, {
+        name: 'unFavoritePost'
+      })(ItemScreen)
+    )
   )
 );

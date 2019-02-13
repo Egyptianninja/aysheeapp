@@ -3,7 +3,7 @@ import { View, Text, TouchableWithoutFeedback } from 'react-native';
 
 import { StyleSheet } from '../../utils';
 import { PostImage } from './PostImage';
-import Menu from './Menu';
+import { MenuIcon } from './MenuIcon';
 
 const ItemOwnerView = (props: any) => {
   const {
@@ -21,10 +21,10 @@ const ItemOwnerView = (props: any) => {
       currency
     },
     selectePost,
-    editClassifieds,
     word,
     lang,
-    deletePost
+    deletePost,
+    showMenuModal
   } = props;
 
   return (
@@ -121,14 +121,13 @@ const ItemOwnerView = (props: any) => {
                   >
                     {subTitle}
                   </Text>
-                  <Menu
-                    offline={offline}
-                    post={post}
+                  <MenuIcon
                     isrtl={isrtl}
-                    editClassifieds={editClassifieds}
-                    deletePost={deletePost}
                     word={word}
                     lang={lang}
+                    showMenuModal={showMenuModal}
+                    post={post}
+                    imageWidth={post.imageWidth}
                   />
                 </View>
               </View>

@@ -38,7 +38,8 @@ const Message = ({
       <View
         style={{
           position: 'absolute',
-          right: 20,
+          right: lang === 'ar' ? undefined : 20,
+          left: lang === 'ar' ? 20 : undefined,
           top: height / 2 - 30,
           width: 40,
           height: 40,

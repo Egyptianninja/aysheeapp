@@ -123,7 +123,6 @@ class CategoriesScroll extends React.Component<any, any> {
       addFilter,
       removeFilter,
       removeAllFilters,
-      activeItem,
       rest,
       words,
       lang
@@ -204,7 +203,6 @@ class CategoriesScroll extends React.Component<any, any> {
               buckets={this.state.buckets}
               addFilter={addFilter}
               removeFilter={removeFilter}
-              activeItem={activeItem}
               words={this.props.words}
             />
           </ScrollView>

@@ -163,9 +163,6 @@ class AddPartsScreen extends React.Component<any, any> {
     const subBrands = this.props.subBrands.filter(
       (sb: any) => sb.pid === this.state.selectedBrand
     );
-    const category = this.props.navigation.getParam('item');
-
-    const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message

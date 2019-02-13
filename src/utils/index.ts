@@ -27,7 +27,8 @@ import {
   arabicToNum,
   nameToColor,
   getLang,
-  getLocale
+  getLocale,
+  filterOptions
 } from './common';
 import { since } from './since';
 import {
@@ -80,5 +81,6 @@ export {
   getLang,
   getLocale,
   ProgressiveImage,
-  Message
+  Message,
+  filterOptions
 };
