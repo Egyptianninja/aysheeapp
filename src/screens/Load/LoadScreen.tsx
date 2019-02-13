@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { View, AsyncStorage } from 'react-native';
+import { View, AsyncStorage, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import { initApp } from '../../store/actions/globActions';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import { getCountryCode, getCountryCodeQatar } from '../../utils';
-
+import { images } from '../../load';
+const { width, height } = Dimensions.get('window');
 class LoadScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
@@ -32,7 +33,22 @@ class LoadScreen extends React.Component<any, any> {
   };
 
   render() {
-    return <View style={{ flex: 1, backgroundColor: '#474747' }} />;
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#171717',
+          width,
+          height
+        }}
+      >
+        <Image
+          source={images.load}
+          style={{ flex: 1, width: '100%', height: '100%' }}
+          resizeMode="cover"
+        />
+      </View>
+    );
   }
 }
 

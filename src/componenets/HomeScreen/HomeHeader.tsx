@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { Constants } from 'expo';
 import { connect } from 'react-redux';
 import { StyleSheet } from '../../utils';
 import SearchBox from './SearchBox';
-import { Ionicons } from '@expo/vector-icons';
-
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { icons } from '../../load';
+const icon = icons.home.icon();
 class HomeHeader extends React.Component<any, any> {
   render() {
     return (
@@ -41,7 +42,7 @@ class HomeHeader extends React.Component<any, any> {
               name="ios-menu"
               size={35}
               style={styles.icon}
-              color="#5B4C57"
+              color="#272727"
             />
           </TouchableOpacity>
           {this.props.isAuthenticated && (
@@ -55,7 +56,11 @@ class HomeHeader extends React.Component<any, any> {
                 marginTop: 3
               }}
             >
-              <Ionicons name="ios-notifications" size={30} color="#5B4C57" />
+              <Ionicons
+                name="ios-notifications-outline"
+                size={33}
+                color="#272727"
+              />
             </TouchableOpacity>
           )}
         </View>
@@ -76,10 +81,27 @@ class HomeHeader extends React.Component<any, any> {
             }}
             style={{
               paddingHorizontal: 5,
-              marginTop: 3
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingBottom: 3
             }}
           >
-            <Ionicons name="ios-home" size={33} color="#5B4C57" />
+            {/* <Ionicons name="ios-home" size={33} color="#272727" /> */}
+            <View
+              style={{
+                width: 31,
+                height: 31
+              }}
+            >
+              <Image
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  height: '100%'
+                }}
+                source={icon}
+              />
+            </View>
           </TouchableOpacity>
         </View>
       </View>

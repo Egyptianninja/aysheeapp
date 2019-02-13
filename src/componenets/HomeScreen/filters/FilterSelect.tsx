@@ -114,7 +114,7 @@ export default class FilterSelect extends React.Component<any, any> {
             flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
             padding: 2,
             paddingLeft: 2,
-            height: 42,
+            height: 40,
             minWidth: 70,
             borderRadius: 10,
             justifyContent: 'center',
@@ -139,12 +139,12 @@ export default class FilterSelect extends React.Component<any, any> {
           <Text
             style={{
               color: selected
-                ? '#ff5959'
+                ? '#7678ED'
                 : this.props.disable
                 ? '#ccc'
                 : '#272727',
               fontSize: 16,
-              fontFamily: 'cairo-regular',
+              // fontFamily: 'cairo-regular',
               fontWeight: selected ? 'bold' : '300',
               paddingHorizontal: 5
             }}

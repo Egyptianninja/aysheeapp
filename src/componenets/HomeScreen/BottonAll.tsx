@@ -21,8 +21,9 @@ const BottonAll = ({
         : navigation.navigate('Auth');
     }}
     style={{
-      height: 74,
-      margin: 5,
+      height: 70,
+      marginVertical: 10,
+      marginLeft: 5,
       borderWidth: 1,
       borderColor: '#DEDBDD',
       backgroundColor: '#7678ED',

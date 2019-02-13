@@ -45,14 +45,10 @@ const ItemView = (props: any) => {
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 10,
-            backgroundColor: 'rgba(255, 255, 255, 0.3)'
+            backgroundColor: 'rgba(255, 255, 255, 0.2)'
           }}
         >
-          <Ionicons
-            name={'md-globe'}
-            size={18}
-            color="rgba(118, 120, 237, 0.6)"
-          />
+          <Ionicons name={'md-globe'} size={18} color="rgba(0, 0, 0, 0.6)" />
         </View>
       )}
       <View style={{ width: imageWidth }}>
@@ -75,7 +71,7 @@ const ItemView = (props: any) => {
                   {
                     width: imageWidth - 2,
                     height: imageHeight,
-                    backgroundColor: '#eee'
+                    backgroundColor: '#f1f1f1'
                   }
                 ]}
               >

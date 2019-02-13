@@ -135,8 +135,8 @@ class CategoriesScroll extends React.Component<any, any> {
         <View
           style={{
             flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
-            paddingHorizontal: 5,
-            backgroundColor: '#fff'
+            paddingHorizontal: 5
+            // backgroundColor: '#fff'
           }}
         >
           {!selected && (
@@ -157,13 +157,13 @@ class CategoriesScroll extends React.Component<any, any> {
                 position: 'absolute',
                 left: 5,
                 top: 10,
-                height: 64,
-                width: 32,
-                backgroundColor: '#eee',
-                borderBottomRightRadius: lang === 'ar' ? 32 : undefined,
-                borderTopRightRadius: lang === 'ar' ? 32 : undefined,
-                borderTopLeftRadius: lang === 'ar' ? undefined : 32,
-                borderBottomLeftRadius: lang === 'ar' ? undefined : 32,
+                height: 70,
+                width: 35,
+                backgroundColor: '#f1f1f1',
+                borderBottomRightRadius: lang === 'ar' ? 35 : undefined,
+                borderTopRightRadius: lang === 'ar' ? 35 : undefined,
+                borderTopLeftRadius: lang === 'ar' ? undefined : 35,
+                borderBottomLeftRadius: lang === 'ar' ? undefined : 35,
                 justifyContent: 'center',
                 alignItems: 'center',
                 paddingVertical: 10,
@@ -181,25 +181,25 @@ class CategoriesScroll extends React.Component<any, any> {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
               flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
-              paddingLeft: selected ? 70 : 0
+              paddingLeft: selected ? 75 : 0
             }}
             style={{
-              backgroundColor: selected ? '#eee' : '#fff',
-              height: selected ? 64 : 90,
+              backgroundColor: selected ? '#f1f1f1' : '#fff',
+              height: selected ? 70 : 90,
               marginVertical: selected ? 10 : undefined,
               borderBottomRightRadius:
-                selected && lang === 'ar' ? 32 : undefined,
-              borderTopRightRadius: selected && lang === 'ar' ? 32 : undefined,
+                selected && lang === 'ar' ? 40 : undefined,
+              borderTopRightRadius: selected && lang === 'ar' ? 40 : undefined,
               borderTopLeftRadius: !selected
                 ? undefined
                 : selected && lang === 'ar'
                 ? undefined
-                : 32,
+                : 40,
               borderBottomLeftRadius: !selected
                 ? undefined
                 : selected && lang === 'ar'
                 ? undefined
-                : 32
+                : 40
             }}
           >
             {!selected && this.renderCategories(categories)}

@@ -10,50 +10,63 @@ const CategoryIconSingle = ({
   categoryId,
   lang
 }: any) => {
-  const active = categoryId === item.id;
   return (
     <View
       style={{
         position: 'absolute',
-        left: 7,
-        top: 11,
-        height: 62,
-        width: 62,
+        left: 10,
+        top: 15,
+        height: 60,
+        width: 60,
         overflow: 'hidden',
-        borderRadius: 31,
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
+        backgroundColor: '#fff',
         borderColor: '#7678ED',
         // paddingVertical: 10,
         zIndex: 300
       }}
     >
-      <TouchableOpacity
-        onPress={async () => {
-          if (categoryId === item.id) {
-            removeAllFilters();
-          } else {
-            await removeAllFilters();
-            addFilter('categoryId', item.id);
-          }
+      <View
+        style={{
+          height: 52,
+          width: 52,
+          overflow: 'hidden',
+          borderRadius: 26,
+          justifyContent: 'center',
+          alignItems: 'center',
+          // paddingVertical: 10,
+          zIndex: 300
         }}
       >
-        <View style={[styles.iconView, { backgroundColor: '#eee' }]}>
-          <View style={styles.imageView}>
-            <Image
-              style={[
-                {
-                  flex: 1,
-                  width: '100%',
-                  height: '100%'
-                }
-              ]}
-              source={icon}
-            />
+        <TouchableOpacity
+          onPress={async () => {
+            if (categoryId === item.id) {
+              removeAllFilters();
+            } else {
+              await removeAllFilters();
+              addFilter('categoryId', item.id);
+            }
+          }}
+        >
+          <View style={[styles.iconView, { backgroundColor: '#eee' }]}>
+            <View style={styles.imageView}>
+              <Image
+                style={[
+                  {
+                    flex: 1,
+                    width: '100%',
+                    height: '100%'
+                  }
+                ]}
+                source={icon}
+              />
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -67,13 +80,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    height: 70,
-    width: 70,
-    borderRadius: 35
+    height: 52,
+    width: 52,
+    borderRadius: 26
   },
   imageView: {
-    width: 80,
-    height: 80
+    width: 52,
+    height: 52
   },
   image: {
     flex: 1,

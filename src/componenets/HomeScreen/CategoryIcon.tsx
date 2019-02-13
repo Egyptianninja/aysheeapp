@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   imageView: {
-    width: 65,
-    height: 65
+    width: 52,
+    height: 52
   },
   text: {
     textAlign: 'center',

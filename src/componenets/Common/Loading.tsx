@@ -1,17 +1,6 @@
-import * as React from "react";
-import { View, ActivityIndicator } from "react-native";
+import * as React from 'react';
+import { DotIndicator } from 'react-native-indicators';
 
-const Loading = () => (
-  <View
-    style={{
-      flex: 1,
-      justifyContent: "flex-start",
-      alignItems: "center",
-      paddingTop: 140
-    }}
-  >
-    <ActivityIndicator size="small" color="#000" />
-  </View>
-);
+const Loading = () => <DotIndicator count={3} size={10} color="#7678ED" />;
 
 export default Loading;

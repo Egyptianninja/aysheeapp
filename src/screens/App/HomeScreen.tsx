@@ -243,9 +243,10 @@ class HomeScreen extends React.Component<any, any> {
             top: 0,
             left: 0,
             right: 0,
+            backgroundColor: '#fff',
             height: this.NAVBAR_HEIGHT,
             transform: [{ translateY: navbarTranslate }],
-            minHeight: 85,
+            minHeight: 91,
             borderBottomWidth: 1,
             borderBottomColor: '#DEDBDD'
           }}
