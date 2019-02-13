@@ -15,15 +15,15 @@ const CategoryIconSingle = ({
     <View
       style={{
         position: 'absolute',
-        left: 12,
-        top: 16,
-        height: 50,
-        width: 50,
+        left: 7,
+        top: 11,
+        height: 60,
+        width: 60,
         overflow: 'hidden',
-        borderRadius: 25,
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 10,
+        // paddingVertical: 10,
         zIndex: 300
       }}
     >
@@ -58,9 +58,6 @@ const CategoryIconSingle = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
-    paddingTop: 5,
-    marginTop: 5,
     minWidth: 80,
     backgroundColor: '#fff'
   },
@@ -68,13 +65,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    height: 50,
-    width: 50,
-    borderRadius: 25
+    height: 70,
+    width: 70,
+    borderRadius: 35
   },
   imageView: {
-    width: 50,
-    height: 50
+    width: 80,
+    height: 80
   },
   image: {
     flex: 1,

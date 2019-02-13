@@ -23,6 +23,22 @@ export const icons = {
     { id: 18, icon: () => images.icon15 },
     { id: 19, icon: () => images.icon18 }
   ],
+  filterIcons: [
+    { id: 'sortType', icon: () => images.sortType },
+    { id: 'city', icon: () => images.city },
+    { id: 'kindId', icon: () => images.kindId },
+    { id: 'realestateId', icon: () => images.realestateId },
+    { id: 'serviceId', icon: () => images.serviceId },
+    { id: 'brandId', icon: () => images.brandId },
+    { id: 'subBrandId', icon: () => images.subBrandId },
+    { id: 'eBrandId', icon: () => images.eBrandId },
+    { id: 'isnew', icon: () => images.isnew },
+    { id: 'issale', icon: () => images.issale },
+    { id: 'isfurnishered', icon: () => images.isfurnishered },
+    { id: 'rooms', icon: () => images.rooms },
+    { id: 'bathrooms', icon: () => images.bathrooms },
+    { id: 'year', icon: () => images.year }
+  ],
   menu: [
     { id: 0, icon: 'ios-person' },
     { id: 1, icon: 'md-add' },

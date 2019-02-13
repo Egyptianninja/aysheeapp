@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { FilterOption } from './FilterOption';
-import { Ionicons } from '@expo/vector-icons';
+import { FilterIcon } from './FilterIcon';
+import { icons } from '../../../load';
 
 const { width } = Dimensions.get('window');
 
@@ -104,6 +105,8 @@ export default class FilterSelect extends React.Component<any, any> {
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
     const selectedLable =
       selected && rest[itemKind] !== false && rest[itemKind] !== true;
+    const iconFunc = icons.filterIcons.filter(ic => ic.id === itemKind);
+    const icon = iconFunc[0].icon();
     return (
       <View>
         <TouchableOpacity
@@ -111,40 +114,35 @@ export default class FilterSelect extends React.Component<any, any> {
             flexDirection: 'row',
             padding: 2,
             paddingLeft: 2,
-            height: selected ? 34 : 36,
+            height: 42,
             minWidth: 70,
+            borderRadius: 10,
             justifyContent: 'center',
             alignItems: 'center',
             marginRight: 7,
-            marginTop: 15,
-            marginVertical: 5,
-            borderWidth: selected ? 0 : 1,
-            borderColor: '#E7E4E6',
-            borderRadius: 18,
-            backgroundColor: selected ? '#9C949A' : '#fff',
+            // marginTop: 15,
+            borderWidth: 1,
+            borderColor: selected ? '#7678ED' : '#E7E4E6',
+            // backgroundColor: selected ? '#9C949A' : '#fff',
+            backgroundColor: '#fff',
             shadowOffset: { width: 0, height: 0 },
             shadowColor: '#555',
-            shadowOpacity: 0.2,
+            shadowOpacity: 0.3,
             paddingHorizontal: 10
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
-          <Ionicons
-            name="ios-arrow-down"
-            size={18}
-            color={selected ? '#fff' : '#777'}
-            style={{ paddingHorizontal: 5, marginTop: 5 }}
-          />
           <Text
             style={{
               color: selected
-                ? '#fff'
+                ? '#7678ED'
                 : this.props.disable
                 ? '#ccc'
-                : '#6A6262',
+                : '#272727',
               fontSize: 14,
               fontFamily: 'cairo-regular',
-              paddingHorizontal: 5
+              fontWeight: selected ? 'bold' : '300',
+              paddingHorizontal: 10
             }}
           >
             {selected
@@ -153,26 +151,27 @@ export default class FilterSelect extends React.Component<any, any> {
               ? data.label
               : this.state.label}
           </Text>
-          {selectedLable && (
+          {/* {selectedLable && (
             <View
               style={{
                 position: 'absolute',
-                left: lang === 'ar' ? undefined : 10,
-                right: lang === 'ar' ? 10 : undefined,
-                top: -20
+                left: lang === 'ar' ? undefined : 30,
+                right: lang === 'ar' ? 30 : undefined,
+                top: -5
               }}
             >
               <Text
                 style={{
                   fontSize: 12,
-                  fontFamily: 'cairo-regular',
-                  color: '#6A6262'
+                  fontFamily: 'cairo-regular'
+                  // color: '#fff'
                 }}
               >
                 {data.label}
               </Text>
             </View>
-          )}
+          )} */}
+          <FilterIcon icon={icon} size={20} />
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}

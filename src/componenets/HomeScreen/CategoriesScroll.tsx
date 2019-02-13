@@ -181,7 +181,7 @@ class CategoriesScroll extends React.Component<any, any> {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
               flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
-              paddingLeft: selected ? 64 : 0
+              paddingLeft: selected ? 70 : 0
             }}
             style={{
               backgroundColor: selected ? '#eee' : '#fff',
