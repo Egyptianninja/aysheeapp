@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import FilterSelect from './filters/FilterSelect';
+
+const { width } = Dimensions.get('window');
 
 const HeaderFilter: any = ({
   rest: { categoryId },
@@ -357,7 +359,12 @@ const RenderFilter = (props: any) => {
       scrollEventThrottle={16}
       horizontal
       showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{
+        flex: 1,
+        justifyContent: props.lang === 'ar' ? 'flex-end' : 'flex-start'
+      }}
       style={{
+        minWidth: width - 70,
         paddingLeft: 5
       }}
     >

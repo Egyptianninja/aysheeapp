@@ -115,7 +115,7 @@ export default class FilterSelect extends React.Component<any, any> {
             padding: 2,
             paddingLeft: 2,
             height: 40,
-            minWidth: 70,
+            minWidth: 65,
             borderRadius: 10,
             justifyContent: 'center',
             alignItems: 'center',
@@ -129,11 +129,11 @@ export default class FilterSelect extends React.Component<any, any> {
             shadowOffset: { width: 0, height: 0 },
             shadowColor: '#555',
             shadowOpacity: 0.3,
-            paddingHorizontal: 10
+            paddingHorizontal: 5
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
-          <View style={{ paddingHorizontal: 7 }}>
+          <View style={{ paddingHorizontal: 5 }}>
             <FilterIcon icon={icon} size={20} />
           </View>
           <Text
