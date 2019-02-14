@@ -119,7 +119,7 @@ export default class FilterSelect extends React.Component<any, any> {
             borderRadius: 10,
             justifyContent: 'center',
             alignItems: 'center',
-            marginRight: 7,
+            marginRight: 5,
             // marginTop: 15,
             borderWidth: 1,
             borderColor: '#E7E4E6',

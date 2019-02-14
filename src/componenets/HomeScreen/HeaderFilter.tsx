@@ -364,8 +364,7 @@ const RenderFilter = (props: any) => {
         justifyContent: props.lang === 'ar' ? 'flex-end' : 'flex-start'
       }}
       style={{
-        minWidth: width - 70,
-        paddingLeft: 5
+        minWidth: width - 85
       }}
     >
       <View
