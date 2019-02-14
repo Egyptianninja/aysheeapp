@@ -135,16 +135,10 @@ const ItemView = (props: any) => {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: isrtl ? 'row-reverse' : 'row',
-                    justifyContent: 'space-between'
+                    flexDirection: isrtl ? 'row-reverse' : 'row'
                   }}
                 >
-                  <Text
-                    style={{
-                      color: '#555',
-                      paddingHorizontal: 5
-                    }}
-                  >
+                  <Text style={{ color: '#555', fontSize: 16 }}>
                     {subTitle}
                   </Text>
                 </View>

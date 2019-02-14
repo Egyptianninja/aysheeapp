@@ -44,6 +44,7 @@ import {
   getSendSmsInterval
 } from './interval';
 import Message from './message';
+import DotIndicator from './loading';
 export {
   StyleSheet,
   uploadPhoto,
@@ -82,5 +83,6 @@ export {
   getLocale,
   ProgressiveImage,
   Message,
-  filterOptions
+  filterOptions,
+  DotIndicator
 };
