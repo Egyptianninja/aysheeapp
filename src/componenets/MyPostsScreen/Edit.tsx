@@ -66,8 +66,6 @@ export default class Edit extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
-    console.log(values);
-
     const res = await this.props.editClassifieds({
       variables: {
         postId: this.props.post.id,
@@ -95,6 +93,12 @@ export default class Edit extends React.Component<any, any> {
     });
     if (res.data.updatePost.ok) {
       this.props.hideEditModal();
+      setTimeout(() => {
+        this.props.showMessageModal({
+          seconds: 1,
+          message: this.props.word.adupdated
+        });
+      }, 1000);
     }
     if (!res.data.updatePost.ok) {
       bag.setErrors({ title: res.data.updatePost.error });

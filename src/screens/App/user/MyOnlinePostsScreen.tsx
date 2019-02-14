@@ -117,6 +117,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
             isEditModalVisible={this.state.isEditModalVisible}
             editClassifieds={this.props.editClassifieds}
             hideEditModal={this.hideEditModal}
+            showMessageModal={this.showMessageModal}
             word={words}
             lang={lang}
             post={this.state.modalPost}

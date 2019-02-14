@@ -150,7 +150,7 @@ const Option = ({
           hideMenuModal();
           setTimeout(() => {
             showEditModal();
-          }, 2000);
+          }, 1000);
           // Delete
         } else if (itemData.id === 9) {
           hideMenuModal();
