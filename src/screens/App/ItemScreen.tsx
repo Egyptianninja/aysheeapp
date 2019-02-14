@@ -49,6 +49,7 @@ class ItemScreen extends React.Component<any, any> {
                 post={getedPost}
                 word={word}
                 lang={lang}
+                fav={fav}
                 navigation={this.props.navigation}
                 createComment={this.props.createComment}
                 favoritePost={this.props.favoritePost}

@@ -15,7 +15,8 @@ const Message = ({
   isVisible,
   lang,
   width,
-  height
+  height,
+  iconColor
 }: any) => (
   <Modal
     isVisible={isVisible}
@@ -40,14 +41,18 @@ const Message = ({
           position: 'absolute',
           right: lang === 'ar' ? undefined : 20,
           left: lang === 'ar' ? 20 : undefined,
-          top: height / 2 - 30,
+          top: 30,
           width: 40,
           height: 40,
           alignItems: 'center',
           justifyContent: 'center'
         }}
       >
-        <Ionicons name={icon} size={36} color="#26A65B" />
+        <Ionicons
+          name={icon}
+          size={36}
+          color={iconColor ? iconColor : '#26A65B'}
+        />
       </View>
       <View
         style={{
@@ -65,18 +70,16 @@ const Message = ({
           style={{
             textAlign: lang === 'ar' ? 'right' : 'left',
             paddingHorizontal: 20,
-            fontSize: 14,
-            fontWeight: '300',
-            color: '#777'
+            fontSize: 16
           }}
         >
           {body}
         </Text>
       </View>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: lang === 'ar' ? 'row-reverse' : 'row' }}>
         {okbtnTitle && (
           <Button
-            background="#373737"
+            background="#E85255"
             style={styles.btnStyle}
             textStyle={styles.btnTextStyle}
             title={okbtnTitle}

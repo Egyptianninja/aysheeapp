@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   mutation updatePost(
@@ -10,6 +10,22 @@ export default gql`
     $islive: Boolean
     $trueLocation: LocationInput
     $updates: Int
+    $isnew: Boolean
+    $issale: Boolean
+    $iswarranty: Boolean
+    $space: Int
+    $rooms: Int
+    $bathrooms: Int
+    $isfurnishered: Boolean
+    $year: Int
+    $km: Int
+    $color: String
+    $jobTitle: String
+    $jobIndustry: String
+    $isfullTime: Boolean
+    $education: String
+    $experience: String
+    $salary: Int
   ) {
     updatePost(
       postId: $postId
@@ -20,6 +36,22 @@ export default gql`
       islive: $islive
       trueLocation: $trueLocation
       updates: $updates
+      isnew: $isnew
+      issale: $issale
+      iswarranty: $iswarranty
+      space: $space
+      rooms: $rooms
+      bathrooms: $bathrooms
+      isfurnishered: $isfurnishered
+      year: $year
+      km: $km
+      color: $color
+      jobTitle: $jobTitle
+      jobIndustry: $jobIndustry
+      isfullTime: $isfullTime
+      education: $education
+      experience: $experience
+      salary: $salary
     ) {
       ok
       message

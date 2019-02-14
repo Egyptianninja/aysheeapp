@@ -26,7 +26,8 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
       post,
       word,
       lang,
-      myItem: true
+      myItem: true,
+      live: false
     });
   };
 

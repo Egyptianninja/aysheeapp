@@ -7,7 +7,7 @@ import {
   ScrollView
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { onShare, filterOptions, getLocation } from '../../utils';
+import { filterOptions, getLocation } from '../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -33,11 +33,13 @@ export default class Menu extends React.Component<any, any> {
           key={da.id}
           showMenuModal={this.props.showMenuModal}
           showMessageModal={this.props.showMessageModal}
+          showCheckMessageModal={this.props.showCheckMessageModal}
           hideMenuModal={this.props.hideMenuModal}
           showEditModal={this.props.showEditModal}
           deletePost={this.props.deletePost}
           editClassifieds={this.props.editClassifieds}
           post={this.props.post}
+          word={this.props.word}
           width={width}
           itemData={da}
           {...this.props}
@@ -47,8 +49,11 @@ export default class Menu extends React.Component<any, any> {
   };
 
   render() {
-    const { word } = this.props;
-    const options = filterOptions(word.popmenu, [5, 7, 8, 9, 10, 11]);
+    const { word, live } = this.props;
+    const options = filterOptions(
+      word.popmenu,
+      live ? [5, 7, 8, 9] : [5, 6, 8, 9]
+    );
     return (
       <Modal
         isVisible={this.state.isMenuModalVisible}
@@ -83,7 +88,9 @@ const Option = ({
   itemData,
   hideMenuModal,
   lang,
+  word,
   showMessageModal,
+  showCheckMessageModal,
   post,
   deletePost,
   editClassifieds,
@@ -92,6 +99,7 @@ const Option = ({
   return (
     <TouchableOpacity
       onPress={async () => {
+        // refresh
         if (itemData.id === 5) {
           if (post.updates) {
             editClassifieds({
@@ -110,6 +118,22 @@ const Option = ({
           }
 
           hideMenuModal();
+          setTimeout(() => {
+            showMessageModal({ seconds: 1, message: word.adrefreshed });
+          }, 1000);
+          // Publish
+        } else if (itemData.id === 6) {
+          editClassifieds({
+            variables: {
+              postId: post.id,
+              islive: !post.islive
+            }
+          });
+          hideMenuModal();
+          setTimeout(() => {
+            showMessageModal({ seconds: 1, message: word.adpublished });
+          }, 1000);
+          // Unpublish
         } else if (itemData.id === 7) {
           editClassifieds({
             variables: {
@@ -118,36 +142,21 @@ const Option = ({
             }
           });
           hideMenuModal();
+          setTimeout(() => {
+            showMessageModal({ seconds: 1, message: word.adunpupished });
+          }, 1000);
+          // Edit
         } else if (itemData.id === 8) {
-          const location: any = await getLocation();
-          const trueLocation = {
-            lat: location.coords.latitude,
-            lon: location.coords.longitude
-          };
-          editClassifieds({
-            variables: {
-              postId: post.id,
-              trueLocation
-            }
-          });
           hideMenuModal();
+          setTimeout(() => {
+            showEditModal();
+          }, 2000);
+          // Delete
         } else if (itemData.id === 9) {
           hideMenuModal();
           setTimeout(() => {
-            showEditModal();
+            showCheckMessageModal();
           }, 1000);
-        } else if (itemData.id === 10) {
-          hideMenuModal();
-          setTimeout(() => {
-            showEditModal();
-          }, 1000);
-        } else if (itemData.id === 11) {
-          deletePost({
-            variables: {
-              postId: post.id
-            }
-          });
-          hideMenuModal();
         }
       }}
       style={{

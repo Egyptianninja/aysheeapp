@@ -36,8 +36,10 @@ import {
 const { width } = Dimensions.get('window');
 
 class AddCarScreen extends React.Component<any, any> {
+  timer: any;
   constructor(props: any) {
     super(props);
+    this.timer = null;
     this.state = {
       selectedImage: null,
       selectedBrand: null,
@@ -51,6 +53,10 @@ class AddCarScreen extends React.Component<any, any> {
   async componentWillMount() {
     const pushToken = await registerForPushNotificationsAsync();
     await this.setState({ pushToken });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   hendleSelectedImage = (selectedImage: any) => {
@@ -70,12 +76,12 @@ class AddCarScreen extends React.Component<any, any> {
   showMessage = ({ seconds, screen }: any) => {
     this.setState({ isShowMessage: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);

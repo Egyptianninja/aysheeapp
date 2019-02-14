@@ -366,7 +366,9 @@ class ItemScreen extends React.Component<any, any> {
         />
         <Message
           isVisible={this.state.isMessageVisible}
-          title={word.successadded}
+          title={
+            this.props.fav ? word.removeedtovafavorites : word.successadded
+          }
           icon="ios-checkmark-circle"
           lang={lang}
           width={width}

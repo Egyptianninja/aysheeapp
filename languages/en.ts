@@ -281,7 +281,7 @@ export default {
 
   words: {
     createAd: 'List Item',
-    cancel: 'cancel',
+
     searchResult: 'Result',
     categories: 'Categories',
     submit: 'Submit',
@@ -373,11 +373,12 @@ export default {
     adrefreshed: 'Successfully refreshed',
     adunpupished: 'Successfully unpublished',
     adpublished: 'Successfully published',
-    adlocationchanged: 'Location changed successfully',
-    phonechanged: 'Phone changed successfully',
-    pricechanged: 'Price changed successfully',
+    adupdated: 'Updated successfully',
     deleteareyousure: 'Are you sure to delete?',
-    addeleted: 'Successfully deleted',
+    yes: 'Yes',
+    delete: 'Delete',
+    cancel: 'Cancel',
+    addeleted: 'Item deleted',
 
     labels: {
       categoryId: 'Category',
@@ -402,10 +403,8 @@ export default {
       { id: 5, name: 'Refresh' },
       { id: 6, name: 'Publish' },
       { id: 7, name: 'Unpublish' },
-      { id: 8, name: 'Add Location' },
-      { id: 9, name: 'Edit Phone Number' },
-      { id: 10, name: 'Edit Price' },
-      { id: 11, name: 'Delete' }
+      { id: 8, name: 'Edit' },
+      { id: 9, name: 'Delete' }
     ],
     itemmenu: [
       { id: 1, name: 'Add to favorite' },

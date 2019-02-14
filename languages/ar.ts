@@ -301,7 +301,6 @@ export default {
 
   words: {
     createAd: 'أضف اعلان',
-    cancel: 'الغاء',
     searchResult: 'نتائج البحث',
     categories: 'تصنيفات',
     submit: 'اضافة',
@@ -396,11 +395,12 @@ export default {
     adrefreshed: 'تم تحديث تاريخ الأعلان بنجاح',
     adunpupished: 'تم إلغاء نشر الأعلان بنجاح',
     adpublished: 'تم أعادة نشر الأعلان بنجاح',
-    adlocationchanged: 'تم تعديل موقع الإعلان الجغرافي بنجاح',
-    phonechanged: 'تم تعديل رقم الهاتف بنجاح',
-    pricechanged: 'تم تعديل سعر الإعلان بنجاح',
+    adupdated: 'تم تعديل الاعلان بنجاح',
     deleteareyousure: 'هل أنت متأكد من حذف الإعلان',
-    addeleted: 'تم حذف الإعلان بنجاح',
+    yes: 'نعم',
+    delete: 'حذف',
+    cancel: 'الغاء',
+    addeleted: 'تم حذف الإعلان',
 
     labels: {
       categoryId: 'المجموعة',
@@ -425,10 +425,8 @@ export default {
       { id: 5, name: 'تحديث الاعلان' },
       { id: 6, name: 'اعادة نشر الاعلان' },
       { id: 7, name: 'الغاء نشر الاعلان' },
-      { id: 8, name: 'تعديل الموقع الجغرافي' },
-      { id: 9, name: 'تعديل رقم الهاتف' },
-      { id: 10, name: 'تعديل السعر' },
-      { id: 11, name: 'حذف الاعلان' }
+      { id: 8, name: 'تعديل الاعلان' },
+      { id: 9, name: 'حذف الاعلان' }
     ],
     itemmenu: [
       { id: 1, name: 'اضافة الى المفضلة' },

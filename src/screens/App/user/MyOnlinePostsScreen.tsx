@@ -23,7 +23,10 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
       refreshing: false,
       isMenuModalVisible: false,
       isEditModalVisible: false,
-      isMessageVisible: false
+      isMessageVisible: false,
+      isCheckMessaheVisible: false,
+      modalPost: null,
+      message: null
     };
   }
 
@@ -32,7 +35,8 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
       post,
       word,
       lang,
-      myItem: true
+      myItem: true,
+      live: true
     });
   };
 
@@ -40,7 +44,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
     this.setState({ isMenuModalVisible: true, modalPost: post });
   };
   hideMenuModal = () => {
-    this.setState({ isMenuModalVisible: false, modalPost: null });
+    this.setState({ isMenuModalVisible: false });
   };
   showEditModal = () => {
     this.setState({ isEditModalVisible: true });
@@ -48,7 +52,8 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
   hideEditModal = () => {
     this.setState({ isEditModalVisible: false });
   };
-  showMessageModal = ({ seconds, screen }: any) => {
+  showMessageModal = async ({ seconds, screen, message }: any) => {
+    await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
       setTimeout(() => {
@@ -65,6 +70,30 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
   hideMessageModal = () => {
     this.setState({ isMessageVisible: false });
   };
+  showCheckMessageModal = async () => {
+    this.setState({ isCheckMessaheVisible: true });
+  };
+  hideCheckMessageModal = () => {
+    this.setState({ isCheckMessaheVisible: false });
+  };
+
+  deletePost = async () => {
+    await this.props.deletePost({
+      variables: {
+        postId: this.state.modalPost.id
+      }
+    });
+    this.hideCheckMessageModal();
+    setTimeout(() => {
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.addeleted
+      });
+    }, 1000);
+  };
+  canceldeletePost = async () => {
+    this.hideCheckMessageModal();
+  };
 
   render() {
     const { lang, words } = this.props;
@@ -78,23 +107,41 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
           hideMenuModal={this.hideMenuModal}
           showEditModal={this.showEditModal}
           showMessageModal={this.showMessageModal}
+          showCheckMessageModal={this.showCheckMessageModal}
+          live={true}
           word={words}
           lang={lang}
         />
-        <Edit
-          isEditModalVisible={this.state.isEditModalVisible}
-          editClassifieds={this.props.editClassifieds}
-          hideEditModal={this.hideEditModal}
-          word={words}
-          lang={lang}
-        />
+        {this.state.isEditModalVisible && (
+          <Edit
+            isEditModalVisible={this.state.isEditModalVisible}
+            editClassifieds={this.props.editClassifieds}
+            hideEditModal={this.hideEditModal}
+            word={words}
+            lang={lang}
+            post={this.state.modalPost}
+          />
+        )}
         <Message
           isVisible={this.state.isMessageVisible}
-          title={words.successadded}
+          title={this.state.message}
           icon="ios-checkmark-circle"
           lang={lang}
           width={width}
           height={120}
+        />
+        <Message
+          isVisible={this.state.isCheckMessaheVisible}
+          body={words.deleteareyousure}
+          icon="ios-information-circle"
+          width={width}
+          okbtnTitle={words.yes}
+          cancelbtnTitle={words.cancel}
+          okAction={this.deletePost}
+          cancelAction={this.canceldeletePost}
+          lang={lang}
+          iconColor="#E85255"
+          height={200}
         />
         <Query
           query={getMyPosts}
