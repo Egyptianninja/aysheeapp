@@ -44,8 +44,9 @@ class LoadScreen extends React.Component<any, any> {
       >
         <Image
           source={images.load}
-          style={{ flex: 1, width: '100%', height: '100%' }}
+          style={{ flex: 1, width: undefined, height: undefined }}
           resizeMode="cover"
+          fadeDuration={0}
         />
       </View>
     );

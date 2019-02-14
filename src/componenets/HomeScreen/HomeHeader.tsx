@@ -4,7 +4,7 @@ import { Constants } from 'expo';
 import { connect } from 'react-redux';
 import { StyleSheet } from '../../utils';
 import SearchBox from './SearchBox';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { icons } from '../../load';
 const icon = icons.home.icon();
 class HomeHeader extends React.Component<any, any> {
@@ -26,24 +26,18 @@ class HomeHeader extends React.Component<any, any> {
             styles.leftIconView,
             {
               flexDirection: 'row',
-              flex: this.props.isAuthenticated ? 2.8 : 1.5
+              flex: this.props.isAuthenticated ? 2.8 : 1.3
             }
           ]}
         >
           <TouchableOpacity
             onPress={() => this.props.navigation.toggleDrawer()}
             style={{
-              paddingHorizontal: 2,
               marginLeft: 5,
-              marginTop: 3
+              marginTop: 4
             }}
           >
-            <Ionicons
-              name="ios-menu"
-              size={35}
-              style={styles.icon}
-              color="#272727"
-            />
+            <Ionicons name="ios-menu" size={37} color="#272727" />
           </TouchableOpacity>
           {this.props.isAuthenticated && (
             <TouchableOpacity
@@ -51,8 +45,8 @@ class HomeHeader extends React.Component<any, any> {
                 this.props.navigation.navigate('NotificationsScreen');
               }}
               style={{
-                paddingHorizontal: 5,
-                marginLeft: 5,
+                paddingHorizontal: 4,
+                marginLeft: 7,
                 marginTop: 3
               }}
             >
@@ -65,7 +59,7 @@ class HomeHeader extends React.Component<any, any> {
           )}
         </View>
 
-        <View style={[styles.searchView, { flex: 10 }]}>
+        <View style={[styles.searchView, { flex: 11 }]}>
           <SearchBox navigation={this.props.navigation} />
         </View>
         <View
@@ -86,7 +80,6 @@ class HomeHeader extends React.Component<any, any> {
               paddingBottom: 3
             }}
           >
-            {/* <Ionicons name="ios-home" size={33} color="#272727" /> */}
             <View
               style={{
                 width: 31,
