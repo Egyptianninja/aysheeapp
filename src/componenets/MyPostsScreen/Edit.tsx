@@ -179,7 +179,7 @@ export default class Edit extends React.Component<any, any> {
               }: any) => (
                 <React.Fragment>
                   <Title>
-                    <Text>Update</Text>
+                    <Text>{word.editadd}</Text>
                   </Title>
                   {!this.noPrice.includes(categoryId) && (
                     <Input
@@ -358,7 +358,7 @@ export default class Edit extends React.Component<any, any> {
                     </React.Fragment>
                   )}
 
-                  {this.car.includes(categoryId) && (
+                  {this.job.includes(categoryId) && (
                     <React.Fragment>
                       <Input
                         rtl={lang === 'ar' ? true : false}

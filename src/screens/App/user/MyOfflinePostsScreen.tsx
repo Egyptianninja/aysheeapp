@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import getMyPosts from '../../../graphql/query/getMyPosts';
-import { getNextPosts, readyUserPosts } from '../../../utils';
+import { getNextPosts, readyUserPosts, Message } from '../../../utils';
 import { ItemOwnerView, Loading } from '../../../componenets';
 import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import deletePost from '../../../graphql/mutation/deletePost';
+import Menu from '../../../componenets/MyPostsScreen/Menu';
+import Edit from '../../../componenets/MyPostsScreen/Edit';
+const { width } = Dimensions.get('window');
 
 class MyOfflinePostsScreen extends React.Component<any, any> {
   flatListRef: any;
@@ -17,7 +20,13 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
     super(p);
     this.getNextPosts = debounce(getNextPosts, 100);
     this.state = {
-      refreshing: false
+      refreshing: false,
+      isMenuModalVisible: false,
+      isEditModalVisible: false,
+      isMessageVisible: false,
+      isCheckMessaheVisible: false,
+      modalPost: null,
+      message: null
     };
   }
 
@@ -31,10 +40,110 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
     });
   };
 
+  showMenuModal = (post: any) => {
+    this.setState({ isMenuModalVisible: true, modalPost: post });
+  };
+  hideMenuModal = () => {
+    this.setState({ isMenuModalVisible: false });
+  };
+  showEditModal = () => {
+    this.setState({ isEditModalVisible: true });
+  };
+  hideEditModal = () => {
+    this.setState({ isEditModalVisible: false });
+  };
+  showMessageModal = async ({ seconds, screen, message }: any) => {
+    await this.setState({ message });
+    this.setState({ isMessageVisible: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
+  };
+  showCheckMessageModal = async () => {
+    this.setState({ isCheckMessaheVisible: true });
+  };
+  hideCheckMessageModal = () => {
+    this.setState({ isCheckMessaheVisible: false });
+  };
+
+  deletePost = async () => {
+    await this.props.deletePost({
+      variables: {
+        postId: this.state.modalPost.id
+      }
+    });
+    this.hideCheckMessageModal();
+    setTimeout(() => {
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.addeleted
+      });
+    }, 1000);
+  };
+  canceldeletePost = async () => {
+    this.hideCheckMessageModal();
+  };
+
   render() {
     const { lang, words } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <Menu
+          post={this.state.modalPost}
+          deletePost={this.props.deletePost}
+          editClassifieds={this.props.editClassifieds}
+          isMenuModalVisible={this.state.isMenuModalVisible}
+          hideMenuModal={this.hideMenuModal}
+          showEditModal={this.showEditModal}
+          showMessageModal={this.showMessageModal}
+          showCheckMessageModal={this.showCheckMessageModal}
+          live={false}
+          word={words}
+          lang={lang}
+        />
+        {this.state.isEditModalVisible && (
+          <Edit
+            isEditModalVisible={this.state.isEditModalVisible}
+            editClassifieds={this.props.editClassifieds}
+            hideEditModal={this.hideEditModal}
+            showMessageModal={this.showMessageModal}
+            word={words}
+            lang={lang}
+            post={this.state.modalPost}
+          />
+        )}
+        <Message
+          isVisible={this.state.isMessageVisible}
+          title={this.state.message}
+          icon="ios-checkmark-circle"
+          lang={lang}
+          width={width}
+          height={120}
+        />
+        <Message
+          isVisible={this.state.isCheckMessaheVisible}
+          body={words.deleteareyousure}
+          icon="ios-information-circle"
+          width={width}
+          okbtnTitle={words.yes}
+          cancelbtnTitle={words.cancel}
+          okAction={this.deletePost}
+          cancelAction={this.canceldeletePost}
+          lang={lang}
+          iconColor="#E85255"
+          height={200}
+        />
         <Query
           query={getMyPosts}
           variables={{ islive: false }}
@@ -70,6 +179,7 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
                     editClassifieds={this.props.editClassifieds}
                     deletePost={this.props.deletePost}
                     selectePost={this.selectePost}
+                    showMenuModal={this.showMenuModal}
                     word={words}
                     lang={lang}
                   />

@@ -26,7 +26,7 @@ import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
 import { MenuIcon, Menu } from '../../componenets/ItemScreen';
-
+import Edit from '../../componenets/MyPostsScreen/Edit';
 import {
   Avatar,
   Properties,
@@ -59,9 +59,12 @@ class ItemScreen extends React.Component<any, any> {
     isImageViewVisible: true,
     isMenuModalVisible: false,
     isReportModalVisible: false,
+    isEditModalVisible: false,
     isMessageVisible: false,
+    isCheckMessaheVisible: false,
     isScrollEnable: true,
     isModelVisible: false,
+    message: null,
     imageIndex: 0,
     scrollY: new Animated.Value(0),
 
@@ -98,7 +101,8 @@ class ItemScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = ({ seconds, screen }: any) => {
+  showMessageModal = async ({ seconds, screen, message }: any) => {
+    await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
       setTimeout(() => {
@@ -114,6 +118,36 @@ class ItemScreen extends React.Component<any, any> {
   };
   hideMessageModal = () => {
     this.setState({ isMessageVisible: false });
+  };
+  showEditModal = () => {
+    this.setState({ isEditModalVisible: true });
+  };
+  hideEditModal = () => {
+    this.setState({ isEditModalVisible: false });
+  };
+  showCheckMessageModal = async () => {
+    this.setState({ isCheckMessaheVisible: true });
+  };
+  hideCheckMessageModal = () => {
+    this.setState({ isCheckMessaheVisible: false });
+  };
+
+  deletePost = async () => {
+    await this.props.deletePost({
+      variables: {
+        postId: this.props.post.id
+      }
+    });
+    this.hideCheckMessageModal();
+    setTimeout(() => {
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.word.addeleted
+      });
+    }, 1000);
+  };
+  canceldeletePost = async () => {
+    this.hideCheckMessageModal();
   };
 
   keyboardDidShow(e: any) {
@@ -324,7 +358,6 @@ class ItemScreen extends React.Component<any, any> {
     const lang = this.props.lang
       ? this.props.lang
       : this.props.navigation.getParam('lang');
-    const myItem = this.props.navigation.getParam('myItem');
     const photos = this.getimageurls(post);
     const pdata = getproperties(post);
     const jdata = getJobProperties(post);
@@ -337,7 +370,7 @@ class ItemScreen extends React.Component<any, any> {
       number: post.phone, // Use commas to add time between digits.
       prompt: false
     };
-
+    const { fav, myItem, live } = this.props;
     const opacityStyle = this.state.scrollY.interpolate({
       inputRange: [0, 200],
       outputRange: [0, 1]
@@ -348,15 +381,20 @@ class ItemScreen extends React.Component<any, any> {
         <Menu
           postId={postId}
           post={post}
-          favoritePost={this.props.favoritePost}
-          unFavoritePost={this.props.unFavoritePost}
-          fav={this.props.fav}
-          isMenuModalVisible={this.state.isMenuModalVisible}
-          hideMenuModal={this.hideMenuModal}
-          showReportModal={this.showReportModal}
-          showMessageModal={this.showMessageModal}
+          live={live}
           word={word}
           lang={lang}
+          fav={fav}
+          myItem={myItem}
+          favoritePost={this.props.favoritePost}
+          unFavoritePost={this.props.unFavoritePost}
+          editClassifieds={this.props.editClassifieds}
+          isMenuModalVisible={this.state.isMenuModalVisible}
+          hideMenuModal={this.hideMenuModal}
+          showEditModal={this.showEditModal}
+          showReportModal={this.showReportModal}
+          showMessageModal={this.showMessageModal}
+          showCheckMessageModal={this.showCheckMessageModal}
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
@@ -364,15 +402,43 @@ class ItemScreen extends React.Component<any, any> {
           word={word}
           lang={lang}
         />
+        {this.state.isEditModalVisible && (
+          <Edit
+            isEditModalVisible={this.state.isEditModalVisible}
+            editClassifieds={this.props.editClassifieds}
+            hideEditModal={this.hideEditModal}
+            showMessageModal={this.showMessageModal}
+            showEditModal={this.showEditModal}
+            showCheckMessageModal={this.showCheckMessageModal}
+            word={word}
+            lang={lang}
+            post={post}
+          />
+        )}
         <Message
           isVisible={this.state.isMessageVisible}
-          title={
-            this.props.fav ? word.removeedtovafavorites : word.successadded
-          }
+          title={this.state.message}
+          word={word}
+          // title={
+          //   this.props.fav ? word.removeedtovafavorites : word.successadded
+          // }
           icon="ios-checkmark-circle"
           lang={lang}
           width={width}
           height={120}
+        />
+        <Message
+          isVisible={this.state.isCheckMessaheVisible}
+          body={word.deleteareyousure}
+          icon="ios-information-circle"
+          width={width}
+          okbtnTitle={word.yes}
+          cancelbtnTitle={word.cancel}
+          okAction={this.deletePost}
+          cancelAction={this.canceldeletePost}
+          lang={lang}
+          iconColor="#E85255"
+          height={200}
         />
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}

@@ -395,6 +395,7 @@ export default {
     adrefreshed: 'تم تحديث تاريخ الأعلان بنجاح',
     adunpupished: 'تم إلغاء نشر الأعلان بنجاح',
     adpublished: 'تم أعادة نشر الأعلان بنجاح',
+    editadd: 'تعديل الاعلان',
     adupdated: 'تم تعديل الاعلان بنجاح',
     deleteareyousure: 'هل أنت متأكد من حذف الإعلان',
     yes: 'نعم',

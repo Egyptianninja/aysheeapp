@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import unFavoritePost from '../../graphql/mutation/unFavoritePost';
 import createComment from '../../graphql/mutation/createComment';
+import editClassifieds from '../../graphql/mutation/editClassifieds';
+import deletePost from '../../graphql/mutation/deletePost';
 class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
@@ -18,6 +20,8 @@ class ItemScreen extends React.Component<any, any> {
     const word = this.props.navigation.getParam('word');
     const lang = this.props.navigation.getParam('lang');
     const fav = this.props.navigation.getParam('fav');
+    const myItem = this.props.navigation.getParam('myItem');
+    const live = this.props.navigation.getParam('live');
     if (post) {
       return (
         <ItemScreenView
@@ -25,8 +29,12 @@ class ItemScreen extends React.Component<any, any> {
           word={word}
           lang={lang}
           fav={fav}
+          myItem={myItem}
+          live={live}
           navigation={this.props.navigation}
           createComment={this.props.createComment}
+          editClassifieds={this.props.editClassifieds}
+          deletePost={this.props.deletePost}
           favoritePost={this.props.favoritePost}
           unFavoritePost={this.props.unFavoritePost}
           user={this.props.user}
@@ -50,6 +58,10 @@ class ItemScreen extends React.Component<any, any> {
                 word={word}
                 lang={lang}
                 fav={fav}
+                myItem={myItem}
+                live={live}
+                editClassifieds={this.props.editClassifieds}
+                deletePost={this.props.deletePost}
                 navigation={this.props.navigation}
                 createComment={this.props.createComment}
                 favoritePost={this.props.favoritePost}
@@ -81,7 +93,15 @@ export default connect(mapStateToProps)(
     })(
       graphql(unFavoritePost, {
         name: 'unFavoritePost'
-      })(ItemScreen)
+      })(
+        graphql(editClassifieds, {
+          name: 'editClassifieds'
+        })(
+          graphql(deletePost, {
+            name: 'deletePost'
+          })(ItemScreen)
+        )
+      )
     )
   )
 );

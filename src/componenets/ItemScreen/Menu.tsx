@@ -38,8 +38,12 @@ export default class Menu extends React.Component<any, any> {
           hideReportModal={this.props.hideReportModal}
           favoritePost={this.props.favoritePost}
           unFavoritePost={this.props.unFavoritePost}
+          editClassifieds={this.props.editClassifieds}
+          showEditModal={this.props.showEditModal}
+          showCheckMessageModal={this.props.showCheckMessageModal}
           postId={this.props.postId}
           post={this.props.post}
+          word={this.props.word}
           width={width}
           itemData={da}
           {...this.props}
@@ -49,10 +53,16 @@ export default class Menu extends React.Component<any, any> {
   };
 
   render() {
-    const { word } = this.props;
+    const { word, myItem, live, fav } = this.props;
     const options = filterOptions(
       word.popmenu,
-      this.props.fav ? [2, 3, 4] : [1, 3, 4]
+      myItem
+        ? live
+          ? [5, 7, 8, 9]
+          : [5, 6, 8, 9]
+        : fav
+        ? [2, 3, 4]
+        : [1, 3, 4]
     );
     return (
       <Modal
@@ -92,7 +102,11 @@ const Option = ({
   favoritePost,
   unFavoritePost,
   showMessageModal,
+  editClassifieds,
+  showEditModal,
+  showCheckMessageModal,
   postId,
+  word,
   post
 }: any) => {
   return (
@@ -104,7 +118,7 @@ const Option = ({
           });
           await hideMenuModal();
           setTimeout(() => {
-            showMessageModal({ seconds: 1 });
+            showMessageModal({ seconds: 1, message: word.successadded });
           }, 1000);
         } else if (itemData.id === 2) {
           await unFavoritePost({
@@ -112,7 +126,10 @@ const Option = ({
           });
           await hideMenuModal();
           setTimeout(() => {
-            showMessageModal({ seconds: 1 });
+            showMessageModal({
+              seconds: 1,
+              message: word.removeedtovafavorites
+            });
           }, 1000);
         } else if (itemData.id === 3) {
           const message = `
@@ -126,6 +143,63 @@ const Option = ({
           await hideMenuModal();
           setTimeout(() => {
             showReportModal();
+          }, 1000);
+        } else if (itemData.id === 5) {
+          if (post.updates) {
+            editClassifieds({
+              variables: {
+                postId: post.id,
+                updates: post.updates + 1
+              }
+            });
+          } else {
+            editClassifieds({
+              variables: {
+                postId: post.id,
+                updates: 1
+              }
+            });
+          }
+
+          hideMenuModal();
+          setTimeout(() => {
+            showMessageModal({ seconds: 1, message: word.adrefreshed });
+          }, 1000);
+          // Publish
+        } else if (itemData.id === 6) {
+          editClassifieds({
+            variables: {
+              postId: post.id,
+              islive: !post.islive
+            }
+          });
+          hideMenuModal();
+          setTimeout(() => {
+            showMessageModal({ seconds: 1, message: word.adpublished });
+          }, 1000);
+          // Unpublish
+        } else if (itemData.id === 7) {
+          editClassifieds({
+            variables: {
+              postId: post.id,
+              islive: !post.islive
+            }
+          });
+          hideMenuModal();
+          setTimeout(() => {
+            showMessageModal({ seconds: 1, message: word.adunpupished });
+          }, 1000);
+          // Edit
+        } else if (itemData.id === 8) {
+          hideMenuModal();
+          setTimeout(() => {
+            showEditModal();
+          }, 1000);
+          // Delete
+        } else if (itemData.id === 9) {
+          hideMenuModal();
+          setTimeout(() => {
+            showCheckMessageModal();
           }, 1000);
         }
       }}

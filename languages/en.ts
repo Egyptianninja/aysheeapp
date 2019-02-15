@@ -373,6 +373,7 @@ export default {
     adrefreshed: 'Successfully refreshed',
     adunpupished: 'Successfully unpublished',
     adpublished: 'Successfully published',
+    editadd: 'Edit',
     adupdated: 'Updated successfully',
     deleteareyousure: 'Are you sure to delete?',
     yes: 'Yes',
