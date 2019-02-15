@@ -121,19 +121,19 @@ const ItemOwnerView = (props: any) => {
                   >
                     {subTitle}
                   </Text>
-                  <MenuIcon
-                    isrtl={isrtl}
-                    word={word}
-                    lang={lang}
-                    showMenuModal={showMenuModal}
-                    post={post}
-                    imageWidth={post.imageWidth}
-                  />
                 </View>
               </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
+        <MenuIcon
+          isrtl={isrtl}
+          word={word}
+          lang={lang}
+          showMenuModal={showMenuModal}
+          post={post}
+          imageWidth={post.imageWidth}
+        />
       </View>
     </View>
   );

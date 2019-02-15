@@ -56,13 +56,7 @@ export default class Menu extends React.Component<any, any> {
     const { word, myItem, live, fav } = this.props;
     const options = filterOptions(
       word.popmenu,
-      myItem
-        ? live
-          ? [5, 7, 8, 9]
-          : [5, 6, 8, 9]
-        : fav
-        ? [2, 3, 4]
-        : [1, 3, 4]
+      myItem ? (live ? [5, 7, 8, 9] : [6, 8, 9]) : fav ? [2, 3, 4] : [1, 3, 4]
     );
     return (
       <Modal

@@ -1,13 +1,29 @@
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
-
-import { Ionicons } from '@expo/vector-icons';
+import { View, Image, TouchableOpacity } from 'react-native';
+import { icons } from '../../load';
+const icon = icons.itemmenuiconup.icon();
 
 export const MenuIcon = ({ showMenuModal, post }: any) => (
   <TouchableOpacity
     onPress={() => showMenuModal()}
     style={{ paddingHorizontal: 10 }}
   >
-    <Ionicons name="md-more" size={32} color="#aaa" />
+    <View
+      style={{
+        width: 10,
+        height: 35,
+        paddingVertical: 4
+      }}
+    >
+      <Image
+        style={{
+          flex: 1,
+          width: '100%',
+          height: '100%',
+          resizeMode: 'contain'
+        }}
+        source={icon}
+      />
+    </View>
   </TouchableOpacity>
 );

@@ -117,17 +117,17 @@ const ItemView = (props: any) => {
                   >
                     {subTitle}
                   </Text>
-                  <MenuIcon
-                    showMenuModal={showMenuModal}
-                    post={post}
-                    imageWidth={post.imageWidth}
-                    isrtl={lang === 'ar' ? true : false}
-                  />
                 </View>
               </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
+        <MenuIcon
+          showMenuModal={showMenuModal}
+          post={post}
+          imageWidth={post.imageWidth}
+          isrtl={lang === 'ar' ? true : false}
+        />
       </View>
     </View>
   );
