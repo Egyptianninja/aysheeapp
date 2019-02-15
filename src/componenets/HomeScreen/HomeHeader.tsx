@@ -7,6 +7,7 @@ import SearchBox from './SearchBox';
 import { Ionicons } from '@expo/vector-icons';
 import { icons } from '../../load';
 const icon = icons.home.icon();
+const mainmenu = icons.mainmenu.icon();
 class HomeHeader extends React.Component<any, any> {
   render() {
     return (
@@ -26,18 +27,33 @@ class HomeHeader extends React.Component<any, any> {
             styles.leftIconView,
             {
               flexDirection: 'row',
-              flex: this.props.isAuthenticated ? 2.8 : 1.3
+              flex: this.props.isAuthenticated ? 3 : 1.7
             }
           ]}
         >
           <TouchableOpacity
             onPress={() => this.props.navigation.toggleDrawer()}
             style={{
-              marginLeft: 5,
-              marginTop: 4
+              marginLeft: 7,
+              marginTop: 1,
+              padding: 1
             }}
           >
-            <Ionicons name="ios-menu" size={37} color="#272727" />
+            <View
+              style={{
+                width: 35,
+                height: 25
+              }}
+            >
+              <Image
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  height: '100%'
+                }}
+                source={mainmenu}
+              />
+            </View>
           </TouchableOpacity>
           {this.props.isAuthenticated && (
             <TouchableOpacity
@@ -46,14 +62,14 @@ class HomeHeader extends React.Component<any, any> {
               }}
               style={{
                 paddingHorizontal: 4,
-                marginLeft: 7,
-                marginTop: 3
+                marginLeft: 4,
+                marginTop: 5
               }}
             >
               <Ionicons
                 name="ios-notifications-outline"
                 size={33}
-                color="#272727"
+                color="#777"
               />
             </TouchableOpacity>
           )}
@@ -82,15 +98,16 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 31,
-                height: 31
+                width: 32,
+                height: 32
               }}
             >
               <Image
                 style={{
                   flex: 1,
                   width: '100%',
-                  height: '100%'
+                  height: '100%',
+                  tintColor: '#777'
                 }}
                 source={icon}
               />

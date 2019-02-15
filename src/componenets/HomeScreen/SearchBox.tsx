@@ -19,7 +19,7 @@ class SearchBox extends React.Component<any, any> {
           styles.container,
           {
             backgroundColor: '#fafafa',
-            borderColor: '#555'
+            borderColor: '#aaa'
           }
         ]}
       >
@@ -82,7 +82,7 @@ class SearchBox extends React.Component<any, any> {
           }}
         />
         <Ionicons
-          style={[styles.icon, { color: '#555' }]}
+          style={[styles.icon, { color: '#777' }]}
           name="ios-search"
           size={22}
         />

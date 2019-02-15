@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { telecode } from '../../constants';
-import { parseJwt } from '../common';
+import { parseJwt } from './parseJwt';
 
 export const getCountryCode = async () => {
   const token = await AsyncStorage.getItem('aysheetoken');

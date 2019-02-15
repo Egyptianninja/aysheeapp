@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import Button from './Button';
-import { StyleSheet } from '../../utils';
+import { StyleSheet } from '../common';
 const Message = ({
   title,
   body,

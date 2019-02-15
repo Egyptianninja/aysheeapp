@@ -25,7 +25,7 @@ const Noresult = ({ lang, title }: any) => (
           width: '100%',
           height: '100%'
         }}
-        source={require('../../../assets/icons/searchbook.png')}
+        source={require('../../../assets/icons/main/searchbook.png')}
       />
     </View>
 

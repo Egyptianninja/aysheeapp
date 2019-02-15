@@ -40,6 +40,7 @@ export const icons = {
     { id: 'year', icon: () => images.year }
   ],
   home: { id: 'home', icon: () => images.home },
+  mainmenu: { id: 'menu', icon: () => images.menu },
   itemmenuicon: { id: 'itemmenuicon', icon: () => images.itemmenuicon },
   itemmenuiconup: { id: 'itemmenuiconup', icon: () => images.itemmenuiconup },
 
