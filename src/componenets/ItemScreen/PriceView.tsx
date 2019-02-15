@@ -101,15 +101,14 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f7f7f7',
-    borderColor: '#eee',
+    backgroundColor: '#eee',
+    borderColor: '#ddd',
     borderWidth: 1,
     marginVertical: 5
   },
   txt: {
     fontSize: 12,
-    color: '#96BFE0',
-    fontWeight: 'bold',
+    color: '#7678ED',
     paddingHorizontal: 5
   }
 });

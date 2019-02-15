@@ -6,8 +6,11 @@ import { StyleSheet } from '../../utils';
 import SearchBox from './SearchBox';
 import { Ionicons } from '@expo/vector-icons';
 import { icons } from '../../load';
-const icon = icons.home.icon();
+const home = icons.home.icon();
 const mainmenu = icons.mainmenu.icon();
+const namelogo = icons.namelogo.icon();
+const search = icons.search.icon();
+
 class HomeHeader extends React.Component<any, any> {
   render() {
     return (
@@ -17,7 +20,7 @@ class HomeHeader extends React.Component<any, any> {
           {
             backgroundColor: '#fff',
             shadowOffset: { width: 3, height: 3 },
-            shadowColor: '#555',
+            shadowColor: '#777',
             shadowOpacity: 0.1
           }
         ]}
@@ -26,8 +29,9 @@ class HomeHeader extends React.Component<any, any> {
           style={[
             styles.leftIconView,
             {
+              flex: 3,
               flexDirection: 'row',
-              flex: this.props.isAuthenticated ? 3 : 1.7
+              justifyContent: 'flex-start'
             }
           ]}
         >
@@ -41,15 +45,15 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 35,
-                height: 25
+                width: 34,
+                height: 23
               }}
             >
               <Image
                 style={{
                   flex: 1,
-                  width: '100%',
-                  height: '100%'
+                  width: undefined,
+                  height: undefined
                 }}
                 source={mainmenu}
               />
@@ -61,8 +65,8 @@ class HomeHeader extends React.Component<any, any> {
                 this.props.navigation.navigate('NotificationsScreen');
               }}
               style={{
-                paddingHorizontal: 4,
-                marginLeft: 4,
+                paddingHorizontal: 5,
+                marginLeft: 7,
                 marginTop: 5
               }}
             >
@@ -75,22 +79,53 @@ class HomeHeader extends React.Component<any, any> {
           )}
         </View>
 
-        <View style={[styles.searchView, { flex: 11 }]}>
-          <SearchBox navigation={this.props.navigation} />
+        <View style={[styles.searchView, { flex: 11, flexDirection: 'row' }]}>
+          {/* <View style={{ flex: 1 }}>
+            <SearchBox navigation={this.props.navigation} />
+          </View> */}
+          <View
+            style={{
+              flex: 9.5,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <View
+              style={{
+                width: 90,
+                height: 22
+              }}
+            >
+              <Image
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  height: '100%'
+                }}
+                source={namelogo}
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              flex: 1.5,
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingTop: 4,
+              paddingRight: 3
+            }}
+          >
+            <Ionicons style={{ color: '#777' }} name="ios-search" size={31} />
+          </View>
         </View>
-        <View
-          style={[
-            styles.rightIconView,
-            { flex: 1.5, paddingHorizontal: 3, marginHorizontal: 3 }
-          ]}
-        >
+        <View style={[styles.rightIconView, { flex: 1.5 }]}>
           <TouchableOpacity
             onPress={() => {
               const handleHome = this.props.navigation.getParam('handleHome');
               handleHome();
             }}
             style={{
-              paddingHorizontal: 5,
+              paddingRight: 5,
               justifyContent: 'center',
               alignItems: 'center',
               paddingBottom: 3
@@ -98,8 +133,8 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 32,
-                height: 32
+                width: 30,
+                height: 30
               }}
             >
               <Image
@@ -109,7 +144,7 @@ class HomeHeader extends React.Component<any, any> {
                   height: '100%',
                   tintColor: '#777'
                 }}
-                source={icon}
+                source={home}
               />
             </View>
           </TouchableOpacity>

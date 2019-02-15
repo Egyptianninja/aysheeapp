@@ -20,6 +20,8 @@ export const images = {
   search: require('../../assets/icons/header/search.png'),
   menu: require('../../assets/icons/header/menu.png'),
 
+  namelogo: require('../../assets/icons/header/namelogo.png'),
+
   itemmenuiconup: require('../../assets/icons/header/pointsv.png'),
   itemmenuicon: require('../../assets/icons/header/pointsh.png'),
 

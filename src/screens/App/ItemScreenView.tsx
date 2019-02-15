@@ -306,7 +306,7 @@ class ItemScreen extends React.Component<any, any> {
             <Text
               style={{
                 fontSize: 12,
-                color: '#6FA7D5',
+                color: '#7678ED',
                 paddingTop: 5
               }}
             >
@@ -324,7 +324,7 @@ class ItemScreen extends React.Component<any, any> {
           borderRadius: 18,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#6FA7D5',
+          backgroundColor: '#7678ED',
           flexDirection: 'row'
         }}
       >
@@ -574,7 +574,7 @@ class ItemScreen extends React.Component<any, any> {
               style={{
                 width,
                 height: width,
-                backgroundColor: '#6FA7D5',
+                backgroundColor: '#A7A9F3',
                 justifyContent: 'center',
                 alignItems: 'center'
               }}
