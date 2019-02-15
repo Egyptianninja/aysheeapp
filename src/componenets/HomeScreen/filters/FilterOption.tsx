@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-
+import { getUserLocation } from '../../../utils';
 export const FilterOption = ({
   itemData,
   toggleModal,
@@ -15,7 +15,7 @@ export const FilterOption = ({
 }: any) => {
   return (
     <TouchableOpacity
-      onPress={() => {
+      onPress={async () => {
         if (itemKind === 'brandId') {
           removeFilter('subBrandId');
         }
@@ -32,6 +32,18 @@ export const FilterOption = ({
           const value = Number(itemData.id) === 1 ? true : false;
           addFilter(itemKind, value);
         } else if (itemKind === 'city') {
+          addFilter(itemKind, itemData.id);
+        } else if (itemKind === 'sortType') {
+          if (itemData.id === 3) {
+            const userLocation = await getUserLocation();
+            if (userLocation) {
+              const trueLocation = {
+                lat: userLocation.coords.latitude,
+                lon: userLocation.coords.longitude
+              };
+              addFilter('trueLocation', trueLocation);
+            }
+          }
           addFilter(itemKind, itemData.id);
         } else {
           addFilter(itemKind, Number(itemData.id));

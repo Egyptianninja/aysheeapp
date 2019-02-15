@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { icons } from '../../load';
 import CategoryIcon from './CategoryIcon';
 import HeaderFilter from './HeaderFilter';
-import BottonAll from './BottonAll';
+import BottonNew from './BottonNew';
 import CategoryIconSingle from './CategoryIconSingle';
 
 class CategoriesScroll extends React.Component<any, any> {
@@ -140,7 +140,7 @@ class CategoriesScroll extends React.Component<any, any> {
           }}
         >
           {!selected && (
-            <BottonAll
+            <BottonNew
               lang={lang}
               allbtnactive={allbtnactive}
               scrollView={this.scrollView}

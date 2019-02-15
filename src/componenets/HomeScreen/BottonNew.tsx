@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-const BottonAll = ({
+const BottonNew = ({
   lang,
   scrollView,
   removeAllFilters,
@@ -21,9 +21,9 @@ const BottonAll = ({
         : navigation.navigate('Auth');
     }}
     style={{
-      height: 70,
-      marginVertical: 10,
-      marginLeft: 5,
+      height: 75,
+      marginVertical: 7,
+      marginHorizontal: 5,
       borderWidth: 1,
       borderColor: '#DEDBDD',
       backgroundColor: '#7678ED',
@@ -50,4 +50,4 @@ const BottonAll = ({
   </TouchableOpacity>
 );
 
-export default BottonAll;
+export default BottonNew;

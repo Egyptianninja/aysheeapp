@@ -49,18 +49,18 @@ export const images = {
   icon21: require('../../assets/icons/main/offer-services.jpg'),
 
   // FILTER ICONS
-  sortType: require('../../assets/icons/filtericons/Sort.jpg'),
-  city: require('../../assets/icons/filtericons/City.jpg'),
-  kindId: require('../../assets/icons/filtericons/Kind.jpg'),
-  realestateId: require('../../assets/icons/filtericons/Kind.jpg'),
-  serviceId: require('../../assets/icons/filtericons/Servics.jpg'),
-  brandId: require('../../assets/icons/filtericons/Brand.jpg'),
-  subBrandId: require('../../assets/icons/filtericons/Subbrand.jpg'),
-  eBrandId: require('../../assets/icons/filtericons/Brand.jpg'),
-  isnew: require('../../assets/icons/filtericons/new-old.jpg'),
-  issale: require('../../assets/icons/filtericons/Sale-Buy.jpg'),
-  isfurnishered: require('../../assets/icons/filtericons/Furniture.jpg'),
-  rooms: require('../../assets/icons/filtericons/room.jpg'),
-  bathrooms: require('../../assets/icons/filtericons/Bathroom.jpg'),
-  year: require('../../assets/icons/filtericons/Year.jpg')
+  sortType: require('../../assets/icons/filtericons/Sort.png'),
+  city: require('../../assets/icons/filtericons/City.png'),
+  kindId: require('../../assets/icons/filtericons/Kind.png'),
+  realestateId: require('../../assets/icons/filtericons/Kind.png'),
+  serviceId: require('../../assets/icons/filtericons/Servics.png'),
+  brandId: require('../../assets/icons/filtericons/Brand.png'),
+  subBrandId: require('../../assets/icons/filtericons/Subbrand.png'),
+  eBrandId: require('../../assets/icons/filtericons/Brand.png'),
+  isnew: require('../../assets/icons/filtericons/new-old.png'),
+  issale: require('../../assets/icons/filtericons/Sale-Buy.png'),
+  isfurnishered: require('../../assets/icons/filtericons/Furniture.png'),
+  rooms: require('../../assets/icons/filtericons/room.png'),
+  bathrooms: require('../../assets/icons/filtericons/Bathroom.png'),
+  year: require('../../assets/icons/filtericons/Year.png')
 };

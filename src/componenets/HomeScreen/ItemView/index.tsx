@@ -33,7 +33,7 @@ const ItemView = (props: any) => {
         marginVertical: 1
       }}
     >
-      {post.trueLocation && (
+      {/* {post.trueLocation && (
         <View
           style={{
             position: 'absolute',
@@ -50,7 +50,7 @@ const ItemView = (props: any) => {
         >
           <Ionicons name={'md-globe'} size={18} color="rgba(0, 0, 0, 0.6)" />
         </View>
-      )}
+      )} */}
       <View style={{ width: imageWidth }}>
         <TouchableWithoutFeedback
           onPress={() => {

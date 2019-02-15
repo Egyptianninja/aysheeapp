@@ -134,7 +134,7 @@ export default class FilterSelect extends React.Component<any, any> {
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
           <View style={{ paddingHorizontal: 5 }}>
-            <FilterIcon icon={icon} size={20} />
+            <FilterIcon icon={icon} size={16} color="#aaa" />
           </View>
           <Text
             style={{

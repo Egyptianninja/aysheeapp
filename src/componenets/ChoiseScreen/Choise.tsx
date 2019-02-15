@@ -25,7 +25,7 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
       }}
       style={{
         flexDirection: lang === 'ar' ? 'row' : 'row-reverse',
-        margin: 10,
+        margin: 7,
         alignItems: 'flex-end',
         justifyContent: 'flex-end'
       }}
@@ -41,24 +41,37 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
       >
         {item.name}
       </Text>
-
       <View
         style={{
-          width: 40,
-          height: 40,
-          borderRadius: 20,
+          width: 48,
+          height: 48,
+          borderRadius: 24,
           overflow: 'hidden',
-          marginHorizontal: 10
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderWidth: 2,
+          backgroundColor: '#fff',
+          borderColor: '#7678ED'
         }}
       >
-        <Image
+        <View
           style={{
-            flex: 1,
-            width: '100%',
-            height: '100%'
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            overflow: 'hidden',
+            marginHorizontal: 10
           }}
-          source={icon}
-        />
+        >
+          <Image
+            style={{
+              flex: 1,
+              width: '100%',
+              height: '100%'
+            }}
+            source={icon}
+          />
+        </View>
       </View>
     </TouchableOpacity>
   );

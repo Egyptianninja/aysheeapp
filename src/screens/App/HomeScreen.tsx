@@ -206,12 +206,7 @@ class HomeScreen extends React.Component<any, any> {
       extrapolate: 'clamp'
     });
     return (
-      <View
-        style={{
-          flex: 1,
-          paddingHorizontal: 5
-        }}
-      >
+      <View style={{ flex: 1, paddingHorizontal: 5 }}>
         <Menu
           post={this.state.modalPost}
           favoritePost={this.props.favoritePost}

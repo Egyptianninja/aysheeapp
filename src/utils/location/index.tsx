@@ -1,4 +1,5 @@
-import UserLocation from "./userLocation";
-import ItemLocation from "./itemLocation";
+import UserLocation from './userLocation';
+import ItemLocation from './itemLocation';
+import { getUserLocation } from './getUserLocation';
 
-export { UserLocation, ItemLocation };
+export { UserLocation, ItemLocation, getUserLocation };

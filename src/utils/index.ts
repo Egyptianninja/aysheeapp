@@ -36,7 +36,7 @@ import {
   getPushToken
 } from './notifications';
 import { onShare } from './share';
-import { UserLocation, ItemLocation } from './location';
+import { UserLocation, ItemLocation, getUserLocation } from './location';
 import { getPureNumber, call } from './call';
 import {
   getDateDistance,
@@ -84,5 +84,6 @@ export {
   ProgressiveImage,
   Message,
   filterOptions,
-  DotIndicator
+  DotIndicator,
+  getUserLocation
 };

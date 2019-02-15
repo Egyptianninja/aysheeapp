@@ -96,7 +96,7 @@ class UserProfileScreen extends React.Component<any, any> {
             top: 0,
             left: 0,
             right: 0,
-            backgroundColor: 'lightskyblue',
+            backgroundColor: '#A7A9F3',
             height: headerHeight,
             zIndex: 200,
             flexDirection: 'row'
