@@ -111,6 +111,18 @@ class ProfileScreen extends React.Component<any, any> {
               zIndex: 200
             }}
             onPress={async () => {
+              const permissions = Permissions.CAMERA_ROLL;
+              const { status: existingStatus } = await Permissions.getAsync(
+                permissions
+              );
+              let finalStatus = existingStatus;
+              if (finalStatus !== 'granted') {
+                const { status } = await Permissions.askAsync(permissions);
+                finalStatus = status;
+              }
+              if (finalStatus !== 'granted') {
+                return;
+              }
               const avatar = await pickImage(true, 400, 0.8);
               if (avatar) {
                 const res = await this.props.addAvatar({
