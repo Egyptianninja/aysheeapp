@@ -32,7 +32,6 @@ class ItemComment extends React.PureComponent<any, any> {
       }
       return 0;
     });
-
     comments.forEach((message: any) => {
       messages.push(
         <MessageBubble

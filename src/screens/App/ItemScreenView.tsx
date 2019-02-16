@@ -168,7 +168,7 @@ class ItemScreen extends React.Component<any, any> {
     });
   };
 
-  async sendMessage(postId: any, ownerId: any, postTitle: any, userName: any) {
+  async sendMessage({ postId, ownerId, postTitle, userName }: any) {
     if (this.state.inputBarText === '') {
       return null;
     }
@@ -749,14 +749,14 @@ class ItemScreen extends React.Component<any, any> {
         {this.props.isAuthenticated && (
           <InputBar
             onSendPressed={(postID: any) => {
-              this.sendMessage(
-                postID,
-                post.userId,
-                post.title,
-                this.props.user.name
+              this.sendMessage({
+                postId: postID,
+                ownerId: post.userId,
+                postTitle: post.title,
+                userName: this.props.user.name
                   ? this.props.user.name
                   : this.props.user.uniquename
-              );
+              });
             }}
             ref={this.childRef}
             onChangeText={(text: string) => this.onChangeInputBarText(text)}
