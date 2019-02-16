@@ -14,10 +14,10 @@ import { debounce } from 'lodash';
 import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import getUserPosts from '../../../graphql/query/getUserPosts';
-import { getNextPosts, readyUserPosts } from '../../../utils';
+import { getNextPosts, readyUserPosts, Message } from '../../../utils';
 import { ItemOwnerView, Avatar, Loading, ItemView } from '../../../componenets';
 import favoritePost from '../../../graphql/mutation/favoritePost';
-
+import { Menu, Report } from '../../../componenets/HomeScreen';
 const { width } = Dimensions.get('window');
 
 const HEADER_MAX_HEIGHT = 175;
@@ -34,12 +34,46 @@ class UserProfileScreen extends React.Component<any, any> {
     this.getNextPosts = debounce(getNextPosts, 100);
     this.state = {
       scrollY: new Animated.Value(0),
-      refreshing: false
+      refreshing: false,
+      isMenuModalVisible: false,
+      isReportModalVisible: false,
+      isMessageVisible: false,
+      modalPost: null
     };
   }
 
   selectePost = (post: any, word: any, lang: any) => {
     this.props.navigation.navigate('UserItemScreen', { post, word, lang });
+  };
+
+  showMenuModal = (post: any) => {
+    this.setState({ isMenuModalVisible: true, modalPost: post });
+  };
+  hideMenuModal = () => {
+    this.setState({ isMenuModalVisible: false, modalPost: null });
+  };
+  showReportModal = () => {
+    this.setState({ isReportModalVisible: true });
+  };
+  hideReportModal = () => {
+    this.setState({ isReportModalVisible: false });
+  };
+  showMessageModal = ({ seconds, screen }: any) => {
+    this.setState({ isMessageVisible: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isMessageVisible: false });
+        this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
   };
 
   render() {
@@ -73,6 +107,30 @@ class UserProfileScreen extends React.Component<any, any> {
     const user = this.props.navigation.getParam('user');
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <Menu
+          post={this.state.modalPost}
+          favoritePost={this.props.favoritePost}
+          isMenuModalVisible={this.state.isMenuModalVisible}
+          hideMenuModal={this.hideMenuModal}
+          showReportModal={this.showReportModal}
+          showMessageModal={this.showMessageModal}
+          word={words}
+          lang={lang}
+        />
+        <Report
+          isReportModalVisible={this.state.isReportModalVisible}
+          hideReportModal={this.hideReportModal}
+          word={words}
+          lang={lang}
+        />
+        <Message
+          isVisible={this.state.isMessageVisible}
+          title={words.successadded}
+          icon="ios-checkmark-circle"
+          lang={lang}
+          width={width}
+          height={120}
+        />
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
           style={{
@@ -203,6 +261,7 @@ class UserProfileScreen extends React.Component<any, any> {
                     navigation={this.props.navigation}
                     selectePost={this.selectePost}
                     favoritePost={this.props.favoritePost}
+                    showMenuModal={this.showMenuModal}
                     word={words}
                     lang={lang}
                   />
