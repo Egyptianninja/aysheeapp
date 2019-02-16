@@ -1,20 +1,46 @@
 import * as React from 'react';
-import { View, Animated, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
-import { StyleSheet } from '../../utils';
 
-class ItemHeader extends React.Component<any, any> {
-  render() {
-    const title = this.props.title.substring(0, 20);
-    return (
-      <Animated.View
+const ItemHeader = ({ title, navigation }: any) => {
+  return (
+    <React.Fragment>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={{
+          position: 'absolute',
+          top: Constants.statusBarHeight + 6,
+          left: 10,
+          zIndex: 860,
+          width: 32,
+          height: 32,
+          borderRadius: 16,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)'
+        }}
+      >
+        <Ionicons name="ios-arrow-back" size={30} color="#9C949A" />
+      </TouchableOpacity>
+      <View
         style={[
-          styles.container,
           {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            flexDirection: 'row',
+            paddingTop: Constants.statusBarHeight,
+            height: Constants.statusBarHeight + 45,
+            justifyContent: 'space-between',
+            paddingHorizontal: 10,
+            alignItems: 'center',
+            zIndex: 850,
             shadowOffset: { width: 3, height: 3 },
             shadowColor: '#555',
-            shadowOpacity: 0.1,
-            opacity: this.props.opacity
+            shadowOpacity: 0.2,
+            backgroundColor: '#fff'
           }
         ]}
       >
@@ -22,8 +48,7 @@ class ItemHeader extends React.Component<any, any> {
           style={{
             flex: 5,
             justifyContent: 'center',
-            alignItems: 'center',
-            opacity: this.props.opacity
+            alignItems: 'center'
           }}
         >
           <Text
@@ -36,21 +61,9 @@ class ItemHeader extends React.Component<any, any> {
             {title}
           </Text>
         </View>
-      </Animated.View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    paddingTop: Constants.statusBarHeight,
-    height: Constants.statusBarHeight + 45,
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    zIndex: 2
-  }
-});
+      </View>
+    </React.Fragment>
+  );
+};
 
 export default ItemHeader;

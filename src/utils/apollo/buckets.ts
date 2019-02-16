@@ -82,7 +82,14 @@ export const getOtherBuckets = (store: any, data: any, query: any) => {
       );
     }
     if (agg.name === 'serviceId') {
-      return getNamedAggs(store, 'service', agg, 'serviceId', lang, 'Service');
+      return getNamedAggs(
+        store,
+        'service',
+        agg,
+        'serviceId',
+        lang,
+        words.service
+      );
     } else if (agg.name === 'isnew') {
       const namedBucket = agg.buckets.map((bk: any) => {
         return {

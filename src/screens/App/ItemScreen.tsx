@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View } from 'react-native';
 import { Query, graphql } from 'react-apollo';
 import getPost from '../../graphql/query/getPost';
 import { Loading } from '../../componenets';
@@ -10,6 +11,7 @@ import unFavoritePost from '../../graphql/mutation/unFavoritePost';
 import createComment from '../../graphql/mutation/createComment';
 import editClassifieds from '../../graphql/mutation/editClassifieds';
 import deletePost from '../../graphql/mutation/deletePost';
+import ItemHeader from '../../componenets/ItemScreen/ItemHeader';
 class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
@@ -50,6 +52,15 @@ class ItemScreen extends React.Component<any, any> {
             }
             if (error) {
               console.log(error);
+            }
+
+            if (!data.getPost.data) {
+              return (
+                <ItemHeader
+                  title="not found"
+                  navigation={this.props.navigation}
+                />
+              );
             }
             const getedPost = readyPost(data.getPost.data, lang);
             return (
