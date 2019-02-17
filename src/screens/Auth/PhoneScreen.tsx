@@ -33,33 +33,11 @@ class PhoneScreen extends React.Component<any, any> {
     phone: null,
     name: null,
     loading: false,
-    pushToken: null,
     interval: 0
   };
 
-  async componentWillMount() {
-    const pushToken = await registerForPushNotificationsAsync();
-    await this.setState({ pushToken });
-  }
-
   componentDidMount() {
-    if (this.state.pushToken) {
-      this.props.notificationSub({
-        variables: {
-          userId: this.props.user._id,
-          pushToken: this.state.pushToken
-        }
-      });
-    }
-    if (this.props.phone) {
-      this.setState({ phone: this.props.phone, name: this.props.name });
-      this.props.navigation.navigate('CodeScreen', {
-        phone: this.props.phone,
-        name: this.props.name
-      });
-    }
     this.setInterval();
-
     this.subs = [
       this.props.navigation.addListener('didFocus', () => {
         this.setInterval();

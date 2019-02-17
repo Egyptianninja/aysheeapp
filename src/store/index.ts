@@ -40,6 +40,7 @@ export const persistor = persistStore(store, undefined, async () => {
   const localAppVersion = await AsyncStorage.getItem('appVersion');
   const languageName = store.getState().glob.languageName;
   const locale = getLocale();
+
   const systemLang = locale.lang.substring(0, 2);
   if (
     !languageName ||

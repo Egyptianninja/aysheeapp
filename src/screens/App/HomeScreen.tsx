@@ -8,6 +8,7 @@ import MasonryList from '@appandflow/masonry-list';
 import getTimeLine from '../../graphql/query/getTimeLine';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import favoritePost from '../../graphql/mutation/favoritePost';
+import notificationSub from '../../graphql/mutation/notificationSub';
 import * as store from '../../store/getStore';
 import { setBuckets } from '../../store/actions/postActions';
 import {
@@ -15,7 +16,8 @@ import {
   getNewPosts,
   readyPosts,
   getTimeLineBuckets,
-  Message
+  Message,
+  registerForPushNotificationsAsync
 } from '../../utils';
 import {
   Loading,
@@ -53,6 +55,7 @@ class HomeScreen extends React.Component<any, any> {
       rest: {},
       scrollAnim,
       offsetAnim,
+      pushToken: null,
       clampedScroll: Animated.diffClamp(
         Animated.add(
           scrollAnim.interpolate({
@@ -68,7 +71,19 @@ class HomeScreen extends React.Component<any, any> {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    if (this.props.isAuthenticated) {
+      const pushToken = await registerForPushNotificationsAsync();
+      await this.setState({ pushToken });
+    }
+    if (this.state.pushToken) {
+      await this.props.notificationSub({
+        variables: {
+          userId: this.props.user._id,
+          pushToken: this.state.pushToken
+        }
+      });
+    }
     this.state.scrollAnim.addListener(({ value }: any) => {
       const diff = value - this.scrollValue;
       this.scrollValue = value;
@@ -354,6 +369,10 @@ export default connect(
   })(
     graphql(favoritePost, {
       name: 'favoritePost'
-    })(HomeScreen)
+    })(
+      graphql(notificationSub, {
+        name: 'notificationSub'
+      })(HomeScreen)
+    )
   )
 );
