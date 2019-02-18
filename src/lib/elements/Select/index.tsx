@@ -10,6 +10,8 @@ import {
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import { Option } from './Option';
+import { icons } from '../../../load';
+
 const { width } = Dimensions.get('window');
 
 export default class Select extends React.Component<any, any> {
@@ -26,9 +28,15 @@ export default class Select extends React.Component<any, any> {
 
   renderOptions = (data: any) => {
     return data.map((da: any) => {
+      const iconFunc = da.icon
+        ? icons.brands.filter(ic => ic.id === da.id)
+        : null;
+      const icon = iconFunc ? iconFunc[0].icon() : null;
+
       return (
         <Option
           key={da.id}
+          icon={icon}
           toggleModal={this.toggleModal}
           onChange={this.props.onChange}
           width={width}

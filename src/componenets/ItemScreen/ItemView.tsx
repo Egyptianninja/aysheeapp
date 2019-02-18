@@ -255,8 +255,6 @@ class ItemView extends React.Component<any, any> {
       inputRange: [0, 200],
       outputRange: [0, 1]
     });
-    console.log(postId);
-
     return (
       <View style={styles.container}>
         <Menu
