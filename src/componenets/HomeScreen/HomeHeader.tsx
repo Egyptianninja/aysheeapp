@@ -122,7 +122,7 @@ class HomeHeader extends React.Component<any, any> {
               justifyContent: 'center',
               alignItems: 'center',
               paddingTop: 4,
-              paddingRight: 3
+              paddingHorizontal: 3
             }}
           >
             <Ionicons style={{ color: '#777' }} name="ios-search" size={31} />
@@ -135,7 +135,7 @@ class HomeHeader extends React.Component<any, any> {
               handleHome();
             }}
             style={{
-              paddingRight: 5,
+              paddingHorizontal: 5,
               justifyContent: 'center',
               alignItems: 'center',
               paddingBottom: 3

@@ -10,6 +10,7 @@ import Modal from 'react-native-modal';
 import { FilterOption } from './FilterOption';
 import { FilterIcon } from './FilterIcon';
 import { icons } from '../../../load';
+import { Platform } from 'expo-core';
 
 const { width } = Dimensions.get('window');
 
@@ -65,7 +66,10 @@ export default class FilterSelect extends React.Component<any, any> {
             style={{
               fontSize: 16,
               fontFamily: 'cairo-regular',
-              textAlign: this.props.lang === 'ar' ? 'right' : 'left',
+              textAlign:
+                this.props.lang === 'ar' && Platform.OS !== 'android'
+                  ? 'right'
+                  : 'left',
               paddingHorizontal: 10,
               color: '#ff5959'
             }}
@@ -111,7 +115,10 @@ export default class FilterSelect extends React.Component<any, any> {
       <View>
         <TouchableOpacity
           style={{
-            flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
+            flexDirection:
+              lang === 'ar' && Platform.OS !== 'android'
+                ? 'row-reverse'
+                : 'row',
             padding: 2,
             paddingLeft: 2,
             height: 40,

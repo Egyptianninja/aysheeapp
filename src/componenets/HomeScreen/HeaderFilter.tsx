@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions, Platform } from 'react-native';
 import FilterSelect from './filters/FilterSelect';
 
 const { width } = Dimensions.get('window');
@@ -361,7 +361,10 @@ const RenderFilter = (props: any) => {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{
         flex: 1,
-        justifyContent: props.lang === 'ar' ? 'flex-end' : 'flex-start'
+        justifyContent:
+          props.lang === 'ar' && Platform.OS !== 'android'
+            ? 'flex-end'
+            : 'flex-start'
       }}
       style={{
         minWidth: width - 85
@@ -369,7 +372,10 @@ const RenderFilter = (props: any) => {
     >
       <View
         style={{
-          flexDirection: props.lang === 'ar' ? 'row-reverse' : 'row',
+          flexDirection:
+            props.lang === 'ar' && Platform.OS !== 'android'
+              ? 'row-reverse'
+              : 'row',
           justifyContent: 'center',
           alignItems: 'center'
         }}

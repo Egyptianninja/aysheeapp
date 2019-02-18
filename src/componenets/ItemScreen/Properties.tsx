@@ -1,14 +1,14 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import * as React from 'react';
+import { Text, View } from 'react-native';
 
-const Properties = ({ data, words, lang }: any) => (
+const Properties = ({ data, words, lang, android }: any) => (
   <View
     style={{
       flex: 1,
-      alignItems: "center",
-      justifyContent: "flex-start",
-      flexDirection: lang === "ar" ? "row-reverse" : "row",
-      flexWrap: "wrap"
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      flexDirection: lang === 'ar' && !android ? 'row-reverse' : 'row',
+      flexWrap: 'wrap'
     }}
   >
     {data.map((dt: any) => {
@@ -17,17 +17,17 @@ const Properties = ({ data, words, lang }: any) => (
           <View
             style={{
               padding: 10,
-              width: "33%",
-              alignItems: lang === "ar" ? "flex-end" : "flex-start",
-              justifyContent: "center"
+              width: '33%',
+              alignItems: lang === 'ar' && !android ? 'flex-end' : 'flex-start',
+              justifyContent: 'center'
             }}
             key={dt.name}
           >
             <Text
               style={{
                 fontSize: 12,
-                fontWeight: "bold",
-                color: "#ababab",
+                fontWeight: 'bold',
+                color: '#ababab',
                 paddingHorizontal: 10
               }}
             >
@@ -36,7 +36,7 @@ const Properties = ({ data, words, lang }: any) => (
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "bold",
+                fontWeight: 'bold',
                 paddingHorizontal: 10
               }}
             >

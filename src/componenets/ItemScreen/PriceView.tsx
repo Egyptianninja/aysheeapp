@@ -8,7 +8,8 @@ const PriceView = ({
   saleObject,
   furntObject,
   warrantyObject,
-  words
+  words,
+  ardroid
 }: any) => {
   const newtype =
     newObject.value === true
@@ -36,14 +37,14 @@ const PriceView = ({
     <View
       style={{
         paddingVertical: 15,
-        flexDirection: 'row',
+        flexDirection: ardroid ? 'row-reverse' : 'row',
         justifyContent: 'space-between',
         borderBottomColor: '#ddd',
         borderBottomWidth: 1,
         alignItems: 'center'
       }}
     >
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: ardroid ? 'row-reverse' : 'row' }}>
         <Text
           style={{
             color: '#26A65B',
@@ -66,7 +67,7 @@ const PriceView = ({
           {currency}
         </Text>
       </View>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: ardroid ? 'row-reverse' : 'row' }}>
         {newtype && (
           <View style={styles.botton}>
             <Text style={styles.txt}>{newtype}</Text>

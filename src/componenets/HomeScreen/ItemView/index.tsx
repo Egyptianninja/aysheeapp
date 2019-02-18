@@ -141,11 +141,9 @@ const ItemView = (props: any) => {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: isrtl
-                      ? Platform.OS === 'android'
-                        ? 'row'
-                        : 'row-reverse'
-                      : 'row'
+
+                    alignSelf:
+                      isrtl && Platform.OS !== 'android' ? 'flex-end' : 'auto'
                   }}
                 >
                   <Text style={{ color: '#555', fontSize: 16 }}>

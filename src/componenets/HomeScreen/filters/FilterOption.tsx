@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, Platform } from 'react-native';
 import { getUserLocation } from '../../../utils';
 export const FilterOption = ({
   itemData,
@@ -69,7 +69,10 @@ export const FilterOption = ({
           fontSize: 16,
           fontFamily: 'cairo-regular',
           paddingHorizontal: 10,
-          alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start'
+          alignSelf:
+            lang === 'ar' && Platform.OS !== 'android'
+              ? 'flex-end'
+              : 'flex-start'
         }}
       >
         {itemData.name}

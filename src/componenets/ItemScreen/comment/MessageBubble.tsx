@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, isArabic, since } from '../../../utils';
 import { Avatar } from '../../Avatar';
@@ -17,7 +17,10 @@ export default class MessageBubble extends React.Component<any, any> {
       <View>
         <View
           style={{
-            flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
+            flexDirection:
+              lang === 'ar' && Platform.OS !== 'android'
+                ? 'row-reverse'
+                : 'row',
             paddingVertical: 10,
             borderRadius: 10
           }}
@@ -85,7 +88,10 @@ export default class MessageBubble extends React.Component<any, any> {
             >
               <View
                 style={{
-                  alignItems: lang === 'ar' ? 'flex-end' : 'flex-start'
+                  alignItems:
+                    lang === 'ar' && Platform.OS !== 'android'
+                      ? 'flex-end'
+                      : 'flex-start'
                 }}
               >
                 <Text
@@ -93,7 +99,10 @@ export default class MessageBubble extends React.Component<any, any> {
                     fontSize: 14,
                     fontWeight: 'bold',
                     color: '#000',
-                    textAlign: lang === 'ar' ? 'right' : 'left'
+                    textAlign:
+                      lang === 'ar' && Platform.OS !== 'android'
+                        ? 'right'
+                        : 'left'
                   }}
                 >
                   {message.user.name}
@@ -102,7 +111,10 @@ export default class MessageBubble extends React.Component<any, any> {
                   style={{
                     fontSize: 12,
                     color: '#777',
-                    textAlign: lang === 'ar' ? 'right' : 'left',
+                    textAlign:
+                      lang === 'ar' && Platform.OS !== 'android'
+                        ? 'right'
+                        : 'left',
                     paddingBottom: 5
                   }}
                 >
@@ -115,7 +127,7 @@ export default class MessageBubble extends React.Component<any, any> {
               style={{
                 color: '#272727',
                 fontSize: 14,
-                textAlign: rtl ? 'right' : 'left',
+                textAlign: rtl && Platform.OS !== 'android' ? 'right' : 'left',
                 maxWidth: width - 130,
                 flexWrap: 'wrap'
               }}
@@ -126,7 +138,10 @@ export default class MessageBubble extends React.Component<any, any> {
         </View>
         <View
           style={{
-            flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
+            flexDirection:
+              lang === 'ar' && Platform.OS !== 'android'
+                ? 'row-reverse'
+                : 'row',
             paddingHorizontal: 50
           }}
         >
@@ -143,7 +158,10 @@ export default class MessageBubble extends React.Component<any, any> {
             <TouchableOpacity
               onPress={() => this.props.replayComment(message.user.uniquename)}
               style={{
-                flexDirection: lang === 'ar' ? 'row' : 'row-reverse'
+                flexDirection:
+                  lang === 'ar' && Platform.OS !== 'android'
+                    ? 'row'
+                    : 'row-reverse'
               }}
             >
               <Ionicons
@@ -158,7 +176,10 @@ export default class MessageBubble extends React.Component<any, any> {
                   paddingLeft: lang === 'ar' ? 5 : 10,
                   paddingRight: lang === 'ar' ? 10 : 5,
                   color: '#777',
-                  textAlign: lang === 'ar' ? 'right' : 'left'
+                  textAlign:
+                    lang === 'ar' && Platform.OS !== 'android'
+                      ? 'right'
+                      : 'left'
                 }}
               >
                 {words.replay}

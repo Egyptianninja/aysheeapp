@@ -11,11 +11,12 @@ export const renderUser = ({
   word,
   isAuthenticated,
   userId,
-  navigation
+  navigation,
+  ardroid
 }: any) => (
   <View
     style={{
-      flexDirection: 'row',
+      flexDirection: ardroid ? 'row-reverse' : 'row',
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#f1f1f1',
@@ -24,7 +25,7 @@ export const renderUser = ({
       borderTopLeftRadius: 35
     }}
   >
-    <View style={{ flex: 2, flexDirection: 'row' }}>
+    <View style={{ flex: 2, flexDirection: ardroid ? 'row-reverse' : 'row' }}>
       {user.avatar && (
         <TouchableOpacity
           onPress={() => {
@@ -66,7 +67,7 @@ export const renderUser = ({
           <Avatar name={user.name ? user.name : user.uniquename} size={50} />
         </TouchableOpacity>
       )}
-      <View style={{ paddingLeft: 10 }}>
+      <View style={{ paddingLeft: 10, alignItems: 'center' }}>
         <TouchableOpacity
           onPress={() => {
             if (isAuthenticated) {
@@ -108,7 +109,7 @@ export const renderUser = ({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#7678ED',
-        flexDirection: 'row'
+        flexDirection: ardroid ? 'row-reverse' : 'row'
       }}
     >
       <Ionicons

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const FullTimeView = ({ fulltimeObject, words }: any) => {
+const FullTimeView = ({ fulltimeObject, words, ardroid }: any) => {
   const fulltimetype =
     fulltimeObject.value === true
       ? words.fullTime
@@ -13,14 +13,14 @@ const FullTimeView = ({ fulltimeObject, words }: any) => {
     <View
       style={{
         paddingVertical: 15,
-        flexDirection: 'row',
+        flexDirection: ardroid ? 'row-reverse' : 'row',
         justifyContent: 'flex-end',
         borderBottomColor: '#ddd',
         borderBottomWidth: 1,
         alignItems: 'center'
       }}
     >
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: ardroid ? 'row-reverse' : 'row' }}>
         {fulltimetype && (
           <View style={styles.botton}>
             <Text style={styles.txt}>{fulltimetype}</Text>

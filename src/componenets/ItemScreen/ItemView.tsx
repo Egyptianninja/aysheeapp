@@ -8,7 +8,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
-  Image
+  Image,
+  Platform
 } from 'react-native';
 import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
@@ -49,6 +50,7 @@ class ItemView extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
+  ardroid = Platform.OS === 'android' && this.props.lang === 'ar';
   keyboardDidShowListener: any;
   keyboardDidHideListener: any;
   scrollView: any;
@@ -321,7 +323,8 @@ class ItemView extends React.Component<any, any> {
           style={{
             position: 'absolute',
             top: Constants.statusBarHeight + 6,
-            left: 10,
+            left: this.ardroid ? undefined : 10,
+            right: this.ardroid ? 10 : undefined,
             zIndex: 860,
             width: 32,
             height: 32,
@@ -346,7 +349,7 @@ class ItemView extends React.Component<any, any> {
               top: 0,
               left: 0,
               right: 0,
-              flexDirection: 'row',
+              flexDirection: this.ardroid ? 'row-reverse' : 'row',
               paddingTop: Constants.statusBarHeight,
               height: Constants.statusBarHeight + 45,
               justifyContent: 'space-between',
@@ -416,7 +419,7 @@ class ItemView extends React.Component<any, any> {
               <Modal
                 visible={this.state.isModelVisible}
                 onRequestClose={() => this.hideModal()}
-                transparent={true}
+                transparent={false}
               >
                 <ImageViewer
                   imageUrls={photos}
@@ -468,10 +471,15 @@ class ItemView extends React.Component<any, any> {
           )}
           <View style={{ paddingHorizontal: 10 }}>
             {(post.isfullTime === true || post.isfullTime === false) && (
-              <FullTimeView words={word} fulltimeObject={fulltimeObject} />
+              <FullTimeView
+                ardroid={this.ardroid}
+                words={word}
+                fulltimeObject={fulltimeObject}
+              />
             )}
             {(post.price || post.price === 0) && (
               <PriceView
+                ardroid={this.ardroid}
                 words={word}
                 price={post.price}
                 currency={post.currency}
@@ -482,6 +490,7 @@ class ItemView extends React.Component<any, any> {
               />
             )}
             <BodyView
+              ardroid={this.ardroid}
               title={post.title}
               body={post.body}
               isrtl={post.isrtl}
@@ -497,7 +506,8 @@ class ItemView extends React.Component<any, any> {
                 word,
                 isAuthenticated: this.props.isAuthenticated,
                 userId: this.props.user._id,
-                navigation: this.props.navigation
+                navigation: this.props.navigation,
+                ardroid: this.ardroid
               })}
             {!myItem && (
               <Query query={getUser} variables={{ userId: post.userId }}>
@@ -515,16 +525,27 @@ class ItemView extends React.Component<any, any> {
                     word,
                     isAuthenticated: this.props.isAuthenticated,
                     userId: this.props.user._id,
-                    navigation: this.props.navigation
+                    navigation: this.props.navigation,
+                    ardroid: this.ardroid
                   });
                 }}
               </Query>
             )}
           </View>
           <View style={{ height: 20 }} />
-          <Properties lang={lang} words={word} data={pdata} />
+          <Properties
+            android={Platform.OS === 'android'}
+            lang={lang}
+            words={word}
+            data={pdata}
+          />
           {(post.categoryId === 5 || post.categoryId === 6) && (
-            <Properties lang={lang} words={word} data={jdata} />
+            <Properties
+              android={Platform.OS === 'android'}
+              lang={lang}
+              words={word}
+              data={jdata}
+            />
           )}
           {post.trueLocation && (
             <ItemLocation
@@ -546,7 +567,10 @@ class ItemView extends React.Component<any, any> {
               marginHorizontal: 20,
               marginTop: 20,
               marginBottom: 5,
-              alignItems: lang === 'ar' ? 'flex-end' : 'flex-start',
+              alignItems:
+                lang === 'ar' && Platform.OS !== 'android'
+                  ? 'flex-end'
+                  : 'flex-start',
               justifyContent: 'center'
             }}
           >
