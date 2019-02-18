@@ -1,15 +1,17 @@
 import * as React from 'react';
+import { View } from 'react-native';
 import { Query, graphql } from 'react-apollo';
-import getPost from '../../../graphql/query/getPost';
-import { Loading } from '../../../componenets';
-import { readyPost } from '../../../utils';
-import UserItemScreenView from './UserItemScreenView';
+import getPost from '../../graphql/query/getPost';
+import { Loading } from '../../componenets';
+import { readyPost } from '../../utils';
+import ItemView from '../../componenets/ItemScreen/ItemView';
 import { connect } from 'react-redux';
-import favoritePost from '../../../graphql/mutation/favoritePost';
-import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
-import createComment from '../../../graphql/mutation/createComment';
-import editClassifieds from '../../../graphql/mutation/editClassifieds';
-import deletePost from '../../../graphql/mutation/deletePost';
+import favoritePost from '../../graphql/mutation/favoritePost';
+import unFavoritePost from '../../graphql/mutation/unFavoritePost';
+import createComment from '../../graphql/mutation/createComment';
+import editClassifieds from '../../graphql/mutation/editClassifieds';
+import deletePost from '../../graphql/mutation/deletePost';
+import ItemHeader from '../../componenets/ItemScreen/ItemHeader';
 class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
@@ -24,8 +26,9 @@ class ItemScreen extends React.Component<any, any> {
     const live = this.props.navigation.getParam('live');
     if (post) {
       return (
-        <UserItemScreenView
+        <ItemView
           post={post}
+          postId={post.id ? post.id : post._id}
           word={word}
           lang={lang}
           fav={fav}
@@ -51,10 +54,20 @@ class ItemScreen extends React.Component<any, any> {
             if (error) {
               console.log(error);
             }
+
+            if (!data.getPost.data) {
+              return (
+                <ItemHeader
+                  title="not found"
+                  navigation={this.props.navigation}
+                />
+              );
+            }
             const getedPost = readyPost(data.getPost.data, lang);
             return (
-              <UserItemScreenView
+              <ItemView
                 post={getedPost}
+                postId={getedPost.id}
                 word={word}
                 lang={lang}
                 fav={fav}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { icons } from '../../load';
 import CategoryIcon from './CategoryIcon';
@@ -134,9 +134,11 @@ class CategoriesScroll extends React.Component<any, any> {
       <View style={{ width: '100%' }}>
         <View
           style={{
-            flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
+            flexDirection:
+              lang === 'ar' && Platform.OS !== 'android'
+                ? 'row-reverse'
+                : 'row',
             paddingHorizontal: 5
-            // backgroundColor: '#fff'
           }}
         >
           {!selected && (
@@ -180,7 +182,10 @@ class CategoriesScroll extends React.Component<any, any> {
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
-              flexDirection: lang === 'ar' ? 'row-reverse' : 'row',
+              flexDirection:
+                lang === 'ar' && Platform.OS !== 'android'
+                  ? 'row-reverse'
+                  : 'row',
               paddingLeft: selected ? 75 : 0
             }}
             style={{

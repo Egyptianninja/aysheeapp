@@ -1,5 +1,6 @@
 import HomeScreen from './App/HomeScreen';
 import ItemScreen from './App/ItemScreen';
+import ItemScreenUser from './App/ItemScreenUser';
 import ChoiseScreen from './App/ChoiseScreen';
 import NotificationsScreen from './App/NotificationsScreen';
 import AddClassifiedScreen from './App/add/AddClassifiedScreen';
@@ -19,11 +20,11 @@ import MyOfflinePostsScreen from './App/user/MyOfflinePostsScreen';
 import MyFavScreen from './App/user/MyFavScreen';
 import MyProfileScreen from './App/user/MyProfileScreen';
 import UserProfileScreen from './App/user/UserProfileScreen';
-import UserItemScreen from './App/user/UserItemScreen';
 
 export {
   HomeScreen,
   ItemScreen,
+  ItemScreenUser,
   MyProfileScreen,
   ChoiseScreen,
   NotificationsScreen,
@@ -42,6 +43,5 @@ export {
   MyFavScreen,
   CodeScreen,
   NameScreen,
-  UserProfileScreen,
-  UserItemScreen,
+  UserProfileScreen
 };

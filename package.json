@@ -38,6 +38,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "subscriptions-transport-ws": "^0.9.15",
+    "which-country": "^1.0.0",
     "yup": "^0.26.10"
   },
   "devDependencies": {

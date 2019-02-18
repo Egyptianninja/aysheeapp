@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../../../utils';
 import { PostImage } from './PostImage';
@@ -91,12 +91,18 @@ const ItemView = (props: any) => {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: 'row',
+                    flexDirection:
+                      Platform.OS === 'android' ? 'row-reverse' : 'row',
                     justifyContent: 'space-between'
                   }}
                 >
                   {(price || price === 0) && (
-                    <View style={{ flexDirection: 'row' }}>
+                    <View
+                      style={{
+                        flexDirection:
+                          Platform.OS === 'android' ? 'row-reverse' : 'row'
+                      }}
+                    >
                       <Text
                         style={{
                           color: '#26A65B',
@@ -135,7 +141,11 @@ const ItemView = (props: any) => {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: isrtl ? 'row-reverse' : 'row'
+                    flexDirection: isrtl
+                      ? Platform.OS === 'android'
+                        ? 'row'
+                        : 'row-reverse'
+                      : 'row'
                   }}
                 >
                   <Text style={{ color: '#555', fontSize: 16 }}>

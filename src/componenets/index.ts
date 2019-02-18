@@ -17,7 +17,7 @@ import {
 import NotificationItem from './NotificationScreen/item';
 import ItemFavView from './MyFavScreen';
 import ItemOwnerView from './MyPostsScreen';
-import { MessageModal, Loading, Noresult } from './Common';
+import { MessageModal, Loading, Noresult, LoadingSmall } from './Common';
 
 export {
   Avatar,
@@ -40,5 +40,6 @@ export {
   MessageModal,
   getproperties,
   getJobProperties,
-  Noresult
+  Noresult,
+  LoadingSmall
 };

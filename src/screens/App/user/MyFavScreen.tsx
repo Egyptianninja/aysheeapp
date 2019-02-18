@@ -60,7 +60,7 @@ class MyFavScreen extends React.Component<any, any> {
   };
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate('ItemScreen', {
+    this.props.navigation.navigate('ItemScreenUser', {
       post,
       word,
       lang,

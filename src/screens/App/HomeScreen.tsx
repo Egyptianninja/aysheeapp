@@ -17,15 +17,18 @@ import {
   readyPosts,
   getTimeLineBuckets,
   Message,
-  registerForPushNotificationsAsync
+  registerForPushNotificationsAsync,
+  getCountryFromLatLon
 } from '../../utils';
 import {
   Loading,
+  LoadingSmall,
   CategoriesScroll,
   ItemView,
   Noresult
 } from '../../componenets';
 import { Menu, Report } from '../../componenets/HomeScreen';
+
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
 class HomeScreen extends React.Component<any, any> {
@@ -52,6 +55,7 @@ class HomeScreen extends React.Component<any, any> {
       refreshing: false,
       notification: null,
       query: null,
+      loading: false,
       rest: {},
       scrollAnim,
       offsetAnim,
@@ -209,6 +213,8 @@ class HomeScreen extends React.Component<any, any> {
     this.props.navigation.navigate('ItemScreen', { post, word, lang });
   };
 
+  renderFooter = () => <LoadingSmall />;
+
   render() {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query } = this.props;
@@ -322,9 +328,9 @@ class HomeScreen extends React.Component<any, any> {
                   onScrollEndDrag={this._onScrollEndDrag}
                   onRefresh={() => refetch()}
                   refreshing={this.state.refreshing}
-                  onEndReached={() =>
-                    this.getNextPosts(data, fetchMore, 'getTimeLine')
-                  }
+                  onEndReached={async () => {
+                    this.getNextPosts(data, fetchMore, 'getTimeLine');
+                  }}
                   renderItem={({ item }: any) => (
                     <ItemView
                       post={item}

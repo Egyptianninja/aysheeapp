@@ -43,7 +43,7 @@ class UserProfileScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate('UserItemScreen', { post, word, lang });
+    this.props.navigation.navigate('ItemScreenUser', { post, word, lang });
   };
 
   showMenuModal = (post: any) => {

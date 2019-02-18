@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   Text,
   Dimensions,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
@@ -45,7 +46,8 @@ export default class Select extends React.Component<any, any> {
           style={{
             flex: 1,
             justifyContent: 'space-between',
-            flexDirection: lang === 'ar' ? 'row-reverse' : 'row'
+            flexDirection:
+              lang === 'ar' && Platform.OS !== 'android' ? 'row-reverse' : 'row'
           }}
         >
           <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>{label}</Text>

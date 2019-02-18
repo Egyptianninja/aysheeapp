@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View, Dimensions } from "react-native";
-const { width } = Dimensions.get("window");
+import * as React from 'react';
+import { View, Dimensions, Platform } from 'react-native';
+const { width } = Dimensions.get('window');
 
 const Group = (props: any) => {
   const { children, ...rest } = props;
@@ -12,11 +12,12 @@ const Group = (props: any) => {
     <View
       style={{
         width: width - 40,
-        alignItems: "center",
-        flexDirection: props.rtl ? "row-reverse" : "row",
+        alignItems: 'center',
+        flexDirection:
+          props.rtl && Platform.OS !== 'android' ? 'row-reverse' : 'row',
         marginVertical: 5,
         padding: 10,
-        borderColor: "#eee",
+        borderColor: '#eee',
         borderWidth: 1,
         borderRadius: 5
       }}

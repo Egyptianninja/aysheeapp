@@ -154,7 +154,8 @@ export const readyPost = (post: any, languageName: any) => {
   return {
     ...post,
     ratio: ratio > 3 ? 3 : ratio,
-    time
+    time,
+    id: post._id
   };
 };
 

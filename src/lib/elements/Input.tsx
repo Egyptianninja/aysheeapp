@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Platform } from 'react-native';
 import { ErrorMessage } from './Common';
 import { arabicToNum } from '../../utils';
 class Input extends React.PureComponent<any, any> {
@@ -28,7 +28,12 @@ class Input extends React.PureComponent<any, any> {
       <View
         style={[
           this.props.outerStyle,
-          { alignItems: this.props.rtl ? 'flex-end' : 'flex-start' }
+          {
+            alignItems:
+              this.props.rtl && Platform.OS !== 'android'
+                ? 'flex-end'
+                : 'flex-start'
+          }
         ]}
       >
         <Text style={this.props.labelStyle}>{label}</Text>

@@ -4,7 +4,7 @@ import { Query, graphql } from 'react-apollo';
 import getPost from '../../graphql/query/getPost';
 import { Loading } from '../../componenets';
 import { readyPost } from '../../utils';
-import ItemScreenView from './ItemScreenView';
+import ItemView from '../../componenets/ItemScreen/ItemView';
 import { connect } from 'react-redux';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import unFavoritePost from '../../graphql/mutation/unFavoritePost';
@@ -26,8 +26,9 @@ class ItemScreen extends React.Component<any, any> {
     const live = this.props.navigation.getParam('live');
     if (post) {
       return (
-        <ItemScreenView
+        <ItemView
           post={post}
+          postId={post.id ? post.id : post._id}
           word={word}
           lang={lang}
           fav={fav}
@@ -64,8 +65,9 @@ class ItemScreen extends React.Component<any, any> {
             }
             const getedPost = readyPost(data.getPost.data, lang);
             return (
-              <ItemScreenView
+              <ItemView
                 post={getedPost}
+                postId={getedPost.id}
                 word={word}
                 lang={lang}
                 fav={fav}

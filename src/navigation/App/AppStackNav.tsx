@@ -7,6 +7,7 @@ import PostTabsStack from './PostTabsStack';
 import {
   HomeScreen,
   ItemScreen,
+  ItemScreenUser,
   MyProfileScreen,
   ChoiseScreen,
   NotificationsScreen,
@@ -19,7 +20,6 @@ import {
   AddRequestServiceScreen,
   AddJobRequestScreen,
   UserProfileScreen,
-  UserItemScreen,
   MyFavScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
@@ -40,8 +40,8 @@ export const AppStackNavigator = createStackNavigator({
     })
   },
 
-  UserItemScreen: {
-    screen: UserItemScreen,
+  ItemScreenUser: {
+    screen: ItemScreenUser,
     navigationOptions: ({ navigation }: any) => ({
       title: navigation.getParam('post').title,
       headerStyle: styles.headerStyle,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, Platform } from 'react-native';
 import { Constants } from 'expo';
 import { connect } from 'react-redux';
 import { StyleSheet } from '../../utils';
@@ -12,12 +12,14 @@ const namelogo = icons.namelogo.icon();
 const search = icons.search.icon();
 
 class HomeHeader extends React.Component<any, any> {
+  ardroid = Platform.OS === 'android' && this.props.lang === 'ar';
   render() {
     return (
       <View
         style={[
           styles.container,
           {
+            flexDirection: this.ardroid ? 'row-reverse' : 'row',
             backgroundColor: '#fff',
             shadowOffset: { width: 3, height: 3 },
             shadowColor: '#777',
@@ -30,7 +32,7 @@ class HomeHeader extends React.Component<any, any> {
             styles.leftIconView,
             {
               flex: 3,
-              flexDirection: 'row',
+              flexDirection: this.ardroid ? 'row-reverse' : 'row',
               justifyContent: 'flex-start'
             }
           ]}
@@ -79,7 +81,15 @@ class HomeHeader extends React.Component<any, any> {
           )}
         </View>
 
-        <View style={[styles.searchView, { flex: 11, flexDirection: 'row' }]}>
+        <View
+          style={[
+            styles.searchView,
+            {
+              flex: 11,
+              flexDirection: this.ardroid ? 'row-reverse' : 'row'
+            }
+          ]}
+        >
           {/* <View style={{ flex: 1 }}>
             <SearchBox navigation={this.props.navigation} />
           </View> */}
@@ -156,7 +166,6 @@ class HomeHeader extends React.Component<any, any> {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     paddingTop: Constants.statusBarHeight,
     height: Constants.statusBarHeight + 45,
     justifyContent: 'center',
@@ -181,6 +190,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: any) => ({
   words: state.glob.language.words,
+  lang: state.glob.languageName,
   isAuthenticated: state.user.isAuthenticated
 });
 

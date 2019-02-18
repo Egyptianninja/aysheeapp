@@ -12,3 +12,4 @@ declare module 'seedrandom';
 declare module '@expo/vector-icons';
 declare module 'react-native-expo-image-cache';
 declare module 'react-native-indicators';
+declare module 'which-country';

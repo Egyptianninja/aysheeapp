@@ -33,6 +33,7 @@ import {
   RadioButton,
   Title
 } from '../../../lib';
+import { Platform } from 'expo-core';
 const { width } = Dimensions.get('window');
 
 class AddCarScreen extends React.Component<any, any> {
@@ -407,7 +408,8 @@ class AddCarScreen extends React.Component<any, any> {
                   />
                   <View
                     style={{
-                      flexDirection: 'row-reverse',
+                      flexDirection:
+                        Platform.OS === 'android' ? 'row' : 'row-reverse',
                       justifyContent: 'center',
                       alignItems: 'center'
                     }}

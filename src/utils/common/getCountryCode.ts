@@ -1,7 +1,8 @@
+import wc from 'which-country';
+
 import { AsyncStorage } from 'react-native';
 import { telecode } from '../../constants';
 import { parseJwt } from './parseJwt';
-
 export const getCountryCode = async () => {
   const token = await AsyncStorage.getItem('aysheetoken');
   const data = parseJwt(token);
@@ -26,5 +27,15 @@ export const getCountryCodeQatar = async () => {
     };
   } else {
     return { country: '', code: '' };
+  }
+};
+
+export const getCountryFromLatLon = (lat: any, lon: any) => {
+  const iso3 = wc([lon, lat]);
+  const country = telecode.filter((cc: any) => cc.iso3 === iso3);
+  if (country.length > 0) {
+    return country[0].name;
+  } else {
+    return null;
   }
 };

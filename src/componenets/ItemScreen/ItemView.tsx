@@ -13,20 +13,20 @@ import {
 import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
-import { KeyboardSpacer } from '../../../lib';
-import secrets from '../../../constants/secrets';
+import { KeyboardSpacer } from '../../lib';
+import secrets from '../../constants/secrets';
 import {
   StyleSheet,
   ItemLocation,
   call,
   ImageViewer,
   Message
-} from '../../../utils';
-import getPostComments from '../../../graphql/query/getPostComments';
-import getUser from '../../../graphql/query/getUser';
-import commentAdded from '../../../graphql/subscription/commentAdded';
-import { MenuIcon, Menu } from '../../../componenets/ItemScreen';
-import Edit from '../../../componenets/MyPostsScreen/Edit';
+} from '../../utils';
+import getPostComments from '../../graphql/query/getPostComments';
+import getUser from '../../graphql/query/getUser';
+import commentAdded from '../../graphql/subscription/commentAdded';
+import { MenuIcon, Menu } from '.';
+import Edit from '../MyPostsScreen/Edit';
 import {
   Avatar,
   Properties,
@@ -39,13 +39,13 @@ import {
   getproperties,
   getJobProperties,
   FullTimeView
-} from '../../../componenets';
-import Link from '../../../utils/location/link';
-import { Report } from '../../../componenets/HomeScreen';
-
+} from '..';
+import Link from '../../utils/location/link';
+import { Report } from '../HomeScreen';
+import { renderUser } from '../User';
 const { width } = Dimensions.get('window');
 
-class ItemScreen extends React.Component<any, any> {
+class ItemView extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
@@ -168,7 +168,7 @@ class ItemScreen extends React.Component<any, any> {
     });
   };
 
-  async sendMessage(postId: any, ownerId: any, postTitle: any, userName: any) {
+  async sendMessage({ postId, ownerId, postTitle, userName }: any) {
     if (this.state.inputBarText === '') {
       return null;
     }
@@ -221,171 +221,50 @@ class ItemScreen extends React.Component<any, any> {
     this.childRef.current.getFocus();
   };
 
-  renderUser = (user: any, callargs: any, word: any) => (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f1f1f1',
-        padding: 10,
-        borderBottomLeftRadius: 35,
-        borderTopLeftRadius: 35
-      }}
-    >
-      <View style={{ flex: 2, flexDirection: 'row' }}>
-        {user.avatar && (
-          <TouchableOpacity
-            onPress={() => {
-              if (this.props.isAuthenticated) {
-                const screen =
-                  user._id === this.props.user._id
-                    ? 'MyPostsScreen'
-                    : 'UserProfileScreen';
-                this.props.navigation.navigate(screen, { user });
-              } else {
-                this.props.navigation.navigate('UserProfileScreen', { user });
-              }
-            }}
-          >
-            <Image
-              style={{
-                height: 50,
-                width: 50,
-                borderRadius: 25
-              }}
-              source={{
-                uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-                  user.avatar
-                }`
-              }}
-            />
-          </TouchableOpacity>
-        )}
-        {!user.avatar && (
-          <TouchableOpacity
-            onPress={() => {
-              if (this.props.isAuthenticated) {
-                const screen =
-                  user._id === this.props.user._id
-                    ? 'MyPostsScreen'
-                    : 'UserProfileScreen';
-                this.props.navigation.navigate(screen, { user });
-              } else {
-                this.props.navigation.navigate('UserProfileScreen', { user });
-              }
-            }}
-          >
-            <Avatar name={user.name ? user.name : user.uniquename} size={50} />
-          </TouchableOpacity>
-        )}
-        <View style={{ paddingLeft: 10 }}>
-          <TouchableOpacity
-            onPress={() => {
-              if (this.props.isAuthenticated) {
-                const screen =
-                  user._id === this.props.user._id
-                    ? 'MyPostsScreen'
-                    : 'UserProfileScreen';
-                this.props.navigation.navigate(screen, { user });
-              } else {
-                this.props.navigation.navigate('UserProfileScreen', { user });
-              }
-            }}
-          >
-            {user.name && (
-              <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>
-            )}
-            {user.uniquename && (
-              <Text style={{ fontSize: 12, color: '#888' }}>
-                {user.uniquename}
-              </Text>
-            )}
-          </TouchableOpacity>
-          {user.postsQty > 0 && (
-            <Text
-              style={{
-                fontSize: 12,
-                color: '#7678ED',
-                paddingTop: 5
-              }}
-            >
-              {user.postsQty} {word.moreads}
-            </Text>
-          )}
-        </View>
-      </View>
-
-      <TouchableOpacity
-        onPress={() => call(callargs)}
-        style={{
-          width: 85,
-          height: 36,
-          borderRadius: 18,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#7678ED',
-          flexDirection: 'row'
-        }}
-      >
-        <Ionicons
-          name="ios-call"
-          size={26}
-          style={{ paddingRight: 10 }}
-          color="#fff"
-        />
-
-        <Text
-          style={{
-            fontSize: 14,
-            color: '#fff'
-          }}
-        >
-          {word.calladvertiser}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+  getTags = (data: any) => {
+    const newObject = data.filter((a: any) => a.name === 'isnew')[0];
+    const saleObject = data.filter((a: any) => a.name === 'issale')[0];
+    const furntObject = data.filter((a: any) => a.name === 'isfurnishered')[0];
+    const fulltimeObject = data.filter((a: any) => a.name === 'isfullTime')[0];
+    const warrantyObject = data.filter((a: any) => a.name === 'iswarranty')[0];
+    return {
+      newObject,
+      saleObject,
+      furntObject,
+      fulltimeObject,
+      warrantyObject
+    };
+  };
 
   render() {
-    const post = this.props.post
-      ? this.props.post
-      : this.props.navigation.getParam('post');
-    const postId = post.id ? post.id : post._id;
-    const word = this.props.word
-      ? this.props.word
-      : this.props.navigation.getParam('word');
-    const lang = this.props.lang
-      ? this.props.lang
-      : this.props.navigation.getParam('lang');
+    const { post, myItem, fav, live, word, lang, postId } = this.props;
     const photos = this.getimageurls(post);
     const pdata = getproperties(post);
     const jdata = getJobProperties(post);
-    const newObject = pdata.filter((a: any) => a.name === 'isnew')[0];
-    const saleObject = pdata.filter((a: any) => a.name === 'issale')[0];
-    const furntObject = pdata.filter((a: any) => a.name === 'isfurnishered')[0];
-    const fulltimeObject = pdata.filter((a: any) => a.name === 'isfullTime')[0];
-    const warrantyObject = pdata.filter((a: any) => a.name === 'iswarranty')[0];
-    const callargs = {
-      number: post.phone, // Use commas to add time between digits.
-      prompt: false
-    };
-    const { fav, myItem, live } = this.props;
+    const {
+      newObject,
+      saleObject,
+      furntObject,
+      fulltimeObject,
+      warrantyObject
+    } = this.getTags(pdata);
+    const callargs = { number: post.phone, prompt: false };
     const opacityStyle = this.state.scrollY.interpolate({
       inputRange: [0, 200],
       outputRange: [0, 1]
     });
+    console.log(postId);
 
     return (
       <View style={styles.container}>
         <Menu
           postId={postId}
           post={post}
+          myItem={myItem}
           live={live}
+          fav={fav}
           word={word}
           lang={lang}
-          fav={fav}
-          myItem={myItem}
           favoritePost={this.props.favoritePost}
           unFavoritePost={this.props.unFavoritePost}
           editClassifieds={this.props.editClassifieds}
@@ -419,9 +298,6 @@ class ItemScreen extends React.Component<any, any> {
           isVisible={this.state.isMessageVisible}
           title={this.state.message}
           word={word}
-          // title={
-          //   this.props.fav ? word.removeedtovafavorites : word.successadded
-          // }
           icon="ios-checkmark-circle"
           lang={lang}
           width={width}
@@ -613,7 +489,16 @@ class ItemScreen extends React.Component<any, any> {
               word={word}
             />
             <View style={{ height: 20 }} />
-            {myItem && this.renderUser(this.props.user, callargs, word)}
+
+            {myItem &&
+              renderUser({
+                user: this.props.user,
+                callargs,
+                word,
+                isAuthenticated: this.props.isAuthenticated,
+                userId: this.props.user._id,
+                navigation: this.props.navigation
+              })}
             {!myItem && (
               <Query query={getUser} variables={{ userId: post.userId }}>
                 {({ loading, error, data }) => {
@@ -624,7 +509,14 @@ class ItemScreen extends React.Component<any, any> {
                     return <Text>{error}</Text>;
                   }
                   const user = data.getUser;
-                  return this.renderUser(user, callargs, word);
+                  return renderUser({
+                    user,
+                    callargs,
+                    word,
+                    isAuthenticated: this.props.isAuthenticated,
+                    userId: this.props.user._id,
+                    navigation: this.props.navigation
+                  });
                 }}
               </Query>
             )}
@@ -749,14 +641,14 @@ class ItemScreen extends React.Component<any, any> {
         {this.props.isAuthenticated && (
           <InputBar
             onSendPressed={(postID: any) => {
-              this.sendMessage(
-                postID,
-                post.userId,
-                post.title,
-                this.props.user.name
+              this.sendMessage({
+                postId: postID,
+                ownerId: post.userId,
+                postTitle: post.title,
+                userName: this.props.user.name
                   ? this.props.user.name
                   : this.props.user.uniquename
-              );
+              });
             }}
             ref={this.childRef}
             onChangeText={(text: string) => this.onChangeInputBarText(text)}
@@ -786,4 +678,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ItemScreen;
+export default ItemView;

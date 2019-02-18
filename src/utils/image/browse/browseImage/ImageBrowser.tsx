@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,10 +7,10 @@ import {
   FlatList,
   Dimensions,
   Button
-} from "react-native";
-import { FileSystem } from "expo";
-import ImageTile from "./ImageTile";
-const { width } = Dimensions.get("window");
+} from 'react-native';
+import { FileSystem } from 'expo';
+import ImageTile from './ImageTile';
+const { width } = Dimensions.get('window');
 
 export default class ImageBrowser extends React.Component<any, any> {
   constructor(props: any) {
@@ -44,8 +44,8 @@ export default class ImageBrowser extends React.Component<any, any> {
   };
 
   getPhotos = () => {
-    // const params = { first: 50, mimeTypes: ["image/jpeg"] }; // TODO: Android
-    const params: any = { first: 300, mimeTypes: ["image/jpeg"] };
+    const params: any = { first: 50, mimeTypes: ['image/jpeg'] }; // TODO: Android
+    // const params: any = { first: 300, mimeTypes: ['image/jpeg'] };
     if (this.state.after) {
       params.after = this.state.after;
     }
@@ -81,8 +81,8 @@ export default class ImageBrowser extends React.Component<any, any> {
       return selected[index];
     });
     const files = selectedPhotos.map(
-      (i: any) => FileSystem.getInfoAsync(i, { md5: "true", size: true })
-      // (i: any) => FileSystem.getInfoAsync(i, { md5: true }) // TODO: Android
+      // (i: any) => FileSystem.getInfoAsync(i, { md5: "true", size: true })
+      (i: any) => FileSystem.getInfoAsync(i, { md5: true, size: true }) // TODO: Android
     );
     const callbackResult = Promise.all(files).then(imageData => {
       return imageData.map((data, i) => {
@@ -94,9 +94,9 @@ export default class ImageBrowser extends React.Component<any, any> {
 
   renderHeader = () => {
     const selectedCount = Object.keys(this.state.selected).length;
-    let headerText = " محدد " + selectedCount;
+    let headerText = ' محدد ' + selectedCount;
     if (selectedCount === this.props.max) {
-      headerText = headerText + " (الحد الاقصى)";
+      headerText = headerText + ' (الحد الاقصى)';
     }
     return (
       <View style={styles.header}>
@@ -154,15 +154,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 40,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff'
   },
   header: {
     padding: 10,
     height: 60,
     width: width - 40,
-    justifyContent: "space-between",
-    flexDirection: "row",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 10
   }
 });

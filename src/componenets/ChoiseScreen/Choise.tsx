@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableOpacity, Text, View, Image } from 'react-native';
+import { TouchableOpacity, Text, View, Image, Platform } from 'react-native';
 
 export const Choise = ({ item, icon, navigation, lang }: any) => {
   return (
@@ -24,7 +24,8 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
         }
       }}
       style={{
-        flexDirection: lang === 'ar' ? 'row' : 'row-reverse',
+        flexDirection:
+          lang === 'ar' && Platform.OS !== 'android' ? 'row' : 'row-reverse',
         margin: 7,
         alignItems: 'flex-end',
         justifyContent: 'flex-end'

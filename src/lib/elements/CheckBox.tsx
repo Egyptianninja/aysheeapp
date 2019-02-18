@@ -1,5 +1,6 @@
-import * as React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import * as React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform } from 'expo-core';
 
 const CheckBox = (props: any) => {
   const {
@@ -19,7 +20,7 @@ const CheckBox = (props: any) => {
       style={{
         marginHorizontal: 10,
         marginVertical: 5,
-        flexDirection: rtl ? "row-reverse" : "row"
+        flexDirection: rtl && Platform.OS !== 'android' ? 'row-reverse' : 'row'
       }}
       onPress={() => {
         props.onChange(name, !value);
@@ -33,7 +34,7 @@ const CheckBox = (props: any) => {
             width: size,
             height: size,
             borderRadius: 5,
-            alignSelf: "center"
+            alignSelf: 'center'
           }
         ]}
       >
@@ -51,7 +52,8 @@ const CheckBox = (props: any) => {
       <View>
         <Text
           style={{
-            alignSelf: rtl ? "flex-end" : "flex-start",
+            alignSelf:
+              rtl && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
             color: labelColor,
             marginHorizontal: 10
           }}
@@ -61,8 +63,9 @@ const CheckBox = (props: any) => {
         {msg && (
           <Text
             style={{
-              alignSelf: rtl ? "flex-end" : "flex-start",
-              color: "#999",
+              alignSelf:
+                rtl && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
+              color: '#999',
               marginHorizontal: 10,
               fontSize: 12
             }}
@@ -77,8 +80,8 @@ const CheckBox = (props: any) => {
 const styles = StyleSheet.create({
   border: {
     borderWidth: 2,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

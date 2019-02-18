@@ -1,9 +1,16 @@
-import * as React from "react";
-import { Text, View, TouchableOpacity, Dimensions, Image } from "react-native";
-import { Permissions } from "expo";
-import { Ionicons } from "@expo/vector-icons";
-const { width } = Dimensions.get("window");
-import ImageModal from "./ImageModal";
+import * as React from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+  Platform
+} from 'react-native';
+import { Permissions } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
+const { width } = Dimensions.get('window');
+import ImageModal from './ImageModal';
 
 class ImagePicker extends React.PureComponent<any, any> {
   constructor(props: any) {
@@ -23,11 +30,11 @@ class ImagePicker extends React.PureComponent<any, any> {
     const permissions = Permissions.CAMERA_ROLL;
     const { status: existingStatus } = await Permissions.getAsync(permissions);
     let finalStatus = existingStatus;
-    if (finalStatus !== "granted") {
+    if (finalStatus !== 'granted') {
       const { status } = await Permissions.askAsync(permissions);
       finalStatus = status;
     }
-    if (finalStatus !== "granted") {
+    if (finalStatus !== 'granted') {
       return;
     }
     this.setState({ imageBrowserOpen: true });
@@ -79,7 +86,7 @@ class ImagePicker extends React.PureComponent<any, any> {
             margin: 2,
             borderWidth: 2,
             borderColor:
-              photo.file === this.state.selectedImage ? "#e0364f" : "#eee"
+              photo.file === this.state.selectedImage ? '#e0364f' : '#eee'
           }}
           source={{ uri: photo.file }}
           key={i}
@@ -97,7 +104,10 @@ class ImagePicker extends React.PureComponent<any, any> {
             paddingHorizontal: 8,
             marginBottom: 8,
             marginTop: 16,
-            alignItems: rest.lang === "ar" ? "flex-end" : "flex-start"
+            alignItems:
+              rest.lang === 'ar' && Platform.OS !== 'android'
+                ? 'flex-end'
+                : 'flex-start'
           }}
         >
           <Text style={{ fontSize: 18 }}>{label}</Text>
@@ -107,12 +117,12 @@ class ImagePicker extends React.PureComponent<any, any> {
           style={{
             width: width - 40,
             height: 120,
-            backgroundColor: "#eee",
+            backgroundColor: '#eee',
             borderRadius: 5,
             marginBottom: 10
           }}
         >
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: 'row' }}>
             {this.state.photos.map((photo: any, i: any) =>
               this.renderImage(photo, i)
             )}
@@ -120,34 +130,34 @@ class ImagePicker extends React.PureComponent<any, any> {
           <View
             style={{
               flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center"
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
             <TouchableOpacity
               onPress={this.pickImage}
               style={{
-                flexDirection: "row",
+                flexDirection: 'row',
                 flex: 2,
-                justifyContent: "flex-end",
-                alignItems: "center"
+                justifyContent: 'flex-end',
+                alignItems: 'center'
               }}
             >
               <Ionicons name="ios-camera" size={60} color="#fff" />
-              <Text style={{ fontSize: 40, color: "#fff" }}> + </Text>
+              <Text style={{ fontSize: 40, color: '#fff' }}> + </Text>
             </TouchableOpacity>
             <View
               style={{
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "flex-end"
+                justifyContent: 'center',
+                alignItems: 'flex-end'
               }}
             >
               <Text
                 style={{
                   fontSize: 12,
-                  color: "#777",
+                  color: '#777',
                   paddingHorizontal: 10
                 }}
               >

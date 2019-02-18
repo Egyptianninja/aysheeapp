@@ -38,13 +38,15 @@ export const FilterOption = ({
             const userLocation = await getUserLocation();
             if (userLocation) {
               const trueLocation = {
-                lat: userLocation.coords.latitude,
-                lon: userLocation.coords.longitude
+                lat: Number(userLocation.coords.latitude),
+                lon: Number(userLocation.coords.longitude)
               };
+              addFilter(itemKind, itemData.id);
               addFilter('trueLocation', trueLocation);
             }
+          } else {
+            addFilter(itemKind, Number(itemData.id));
           }
-          addFilter(itemKind, itemData.id);
         } else {
           addFilter(itemKind, Number(itemData.id));
         }

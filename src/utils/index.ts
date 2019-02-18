@@ -28,7 +28,8 @@ import {
   nameToColor,
   getLang,
   getLocale,
-  filterOptions
+  filterOptions,
+  getCountryFromLatLon
 } from './common';
 import { since } from './since';
 import {
@@ -45,6 +46,7 @@ import {
 } from './interval';
 import Message from './message';
 import DotIndicator from './loading';
+import DotIndicatorSmall from './loading/small';
 export {
   StyleSheet,
   uploadPhoto,
@@ -85,5 +87,7 @@ export {
   Message,
   filterOptions,
   DotIndicator,
-  getUserLocation
+  getUserLocation,
+  getCountryFromLatLon,
+  DotIndicatorSmall
 };

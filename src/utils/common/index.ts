@@ -1,7 +1,11 @@
 import { getLocation } from './getLocation';
 import { parseJwt } from './parseJwt';
 import { StyleSheet } from './stylesheet';
-import { getCountryCode, getCountryCodeQatar } from './getCountryCode';
+import {
+  getCountryCode,
+  getCountryCodeQatar,
+  getCountryFromLatLon
+} from './getCountryCode';
 import { isArabic, arabicToNum } from './arabic';
 import { nameToColor } from './color';
 import { getLang, getLocale } from './getlang';
@@ -18,5 +22,6 @@ export {
   nameToColor,
   getLang,
   getLocale,
-  filterOptions
+  filterOptions,
+  getCountryFromLatLon
 };
