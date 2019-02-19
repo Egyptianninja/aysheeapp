@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   query getTimeLine(
@@ -13,6 +13,8 @@ export default gql`
     $isnew: Boolean
     $issale: Boolean
     $iswarranty: Boolean
+    $isforman: Boolean
+    $areaunit: String
     $realestateId: Int
     $space: Int
     $rooms: Int
@@ -41,6 +43,8 @@ export default gql`
       isnew: $isnew
       issale: $issale
       iswarranty: $iswarranty
+      isforman: $isforman
+      areaunit: $areaunit
       realestateId: $realestateId
       space: $space
       rooms: $rooms
@@ -80,6 +84,8 @@ export default gql`
         isnew
         issale
         iswarranty
+        isforman
+        areaunit
         space
         rooms
         bathrooms

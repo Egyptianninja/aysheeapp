@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   mutation updateProfile(
@@ -10,6 +10,7 @@ export default gql`
     $city: String
     $email: String
     $website: String
+    $location: Location
   ) {
     updateProfile(
       name: $name
@@ -20,6 +21,7 @@ export default gql`
       city: $city
       email: $email
       website: $website
+      location: $location
     ) {
       ok
       message

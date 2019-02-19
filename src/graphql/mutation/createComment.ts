@@ -5,6 +5,7 @@ export default gql`
     $postId: String!
     $body: String!
     $ownerId: String!
+    $replayto: CommentRepalyInput
     $postTitle: String
     $userName: String
   ) {
@@ -12,6 +13,7 @@ export default gql`
       postId: $postId
       body: $body
       ownerId: $ownerId
+      replayto: $replayto
       postTitle: $postTitle
       userName: $userName
     ) {

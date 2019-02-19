@@ -13,6 +13,8 @@ export default gql`
     $isnew: Boolean
     $issale: Boolean
     $iswarranty: Boolean
+    $isforman: Boolean
+    $areaunit: String
     $space: Int
     $rooms: Int
     $bathrooms: Int
@@ -39,6 +41,8 @@ export default gql`
       isnew: $isnew
       issale: $issale
       iswarranty: $iswarranty
+      isforman: $isforman
+      areaunit: $areaunit
       space: $space
       rooms: $rooms
       bathrooms: $bathrooms

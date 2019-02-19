@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   query getUser($userId: String!) {
@@ -7,6 +7,13 @@ export default gql`
       name
       uniquename
       avatar
+      offersLimit
+      onlineLimit
+      offlineLimit
+      location {
+        lat
+        lon
+      }
       postsQty
     }
   }

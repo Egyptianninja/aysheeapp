@@ -5,6 +5,10 @@ export default gql`
     getPostComments(postId: $postId, cursor: $cursor) {
       _id
       body
+      replayto {
+        name
+        body
+      }
       updatedAt
       user {
         _id

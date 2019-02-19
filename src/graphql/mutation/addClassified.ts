@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   mutation createPost(
@@ -18,6 +18,8 @@ export default gql`
     $addressCity: String
     $addressArea: String
     $trueLocation: LocationInput
+    $isforman: Boolean
+    $areaunit: String
     $realestate: NameInput
     $space: Int
     $rooms: Int
@@ -54,6 +56,8 @@ export default gql`
       addressCity: $addressCity
       addressArea: $addressArea
       trueLocation: $trueLocation
+      isforman: $isforman
+      areaunit: $areaunit
       realestate: $realestate
       space: $space
       rooms: $rooms

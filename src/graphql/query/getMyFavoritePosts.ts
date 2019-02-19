@@ -16,6 +16,8 @@ export default gql`
         isnew
         issale
         iswarranty
+        isforman
+        areaunit
         space
         rooms
         bathrooms
