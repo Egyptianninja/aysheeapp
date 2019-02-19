@@ -237,6 +237,15 @@ class HomeScreen extends React.Component<any, any> {
           postId={postId}
           word={words}
           lang={lang}
+          // TODO:
+          onModalHide={
+            this.state.isMessageVisible
+              ? this.showMessageModal({
+                  seconds: 1,
+                  message: this.state.message
+                })
+              : undefined
+          }
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}

@@ -5,7 +5,8 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TouchableOpacity,
-  Text
+  Text,
+  Image
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -65,6 +66,32 @@ class AddCarScreen extends React.Component<any, any> {
 
   returnData = (images: any) => {
     this.setState({ images });
+  };
+  renderImages = () => {
+    return this.state.images.map((img: any) => {
+      return (
+        <View
+          key={img.uri}
+          style={{
+            width: 50,
+            height: 70,
+            margin: 4,
+            borderColor: '#aaa',
+            borderWidth: 1
+          }}
+        >
+          <Image
+            style={{
+              flex: 1,
+              width: '100%',
+              height: '100%',
+              resizeMode: 'cover'
+            }}
+            source={{ uri: img.uri }}
+          />
+        </View>
+      );
+    });
   };
 
   hendleSelectedImage = (selectedImage: any) => {
@@ -339,12 +366,20 @@ class AddCarScreen extends React.Component<any, any> {
                     onChange={setFieldValue}
                     hendleSelectedImage={this.hendleSelectedImage}
                   />
+                  <View style={{ flexDirection: 'row' }}>
+                    {this.state.images.length > 0 && this.renderImages()}
+                  </View>
                   <TouchableOpacity
                     onPress={() =>
                       this.props.navigation.navigate('CameraScreen', {
                         returnData: this.returnData
                       })
                     }
+                    style={{
+                      padding: 10,
+                      backgroundColor: '#eee',
+                      borderRadius: 20
+                    }}
                   >
                     <Text>Camera</Text>
                   </TouchableOpacity>

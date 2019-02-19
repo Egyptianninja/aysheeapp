@@ -30,7 +30,11 @@ export const uploadPhotos = async (
   let photoArray: any[] = [];
   if (photos) {
     const uploaders = photos.map(async (photo: any) => {
-      const resizedImage = await compressImage(photo.file, 1080, 0.8);
+      const resizedImage = await compressImage(
+        photo.file ? photo.file : photo.uri,
+        1080,
+        0.8
+      );
       const { width, height } = resizedImage;
       const ratio = (height / width).toFixed(4);
       const base64Img = `data:image/jpg;base64,${resizedImage.base64}`;

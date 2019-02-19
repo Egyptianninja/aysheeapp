@@ -3,7 +3,10 @@ import {
   View,
   Dimensions,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  Text,
+  Image
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -43,6 +46,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
     isShowMessage: false,
     location: null,
     pushToken: null,
+    images: [],
     bar: 0
   };
   noSale = [2, 3, 7, 8, 13, 15, 17, 18];
@@ -61,6 +65,38 @@ class AddClassifiedScreen extends React.Component<any, any> {
       this.setState({ isElectronics: true });
     }
   }
+
+  returnData = (images: any) => {
+    this.setState({ images });
+  };
+
+  renderImages = () => {
+    return this.state.images.map((img: any) => {
+      return (
+        <View
+          key={img.uri}
+          style={{
+            width: 50,
+            height: 70,
+            margin: 4,
+            borderColor: '#aaa',
+            borderWidth: 1
+          }}
+        >
+          <Image
+            style={{
+              flex: 1,
+              width: '100%',
+              height: '100%',
+              resizeMode: 'cover'
+            }}
+            source={{ uri: img.uri }}
+          />
+        </View>
+      );
+    });
+  };
+
   onSelecteOption = (id: number) => this.setState({ selectedElectronics: id });
 
   hendleSelectedImage = (selectedImage: any) => {
@@ -94,11 +130,20 @@ class AddClassifiedScreen extends React.Component<any, any> {
   };
 
   handleSubmit = async (values: any, bag: any) => {
-    const photos = await uploadPhotos(
-      values.photos,
-      this.state.selectedImage,
-      this.updateProgressBar
-    );
+    let photos;
+    if (this.state.images.length > 0) {
+      photos = await uploadPhotos(
+        this.state.images,
+        this.state.selectedImage,
+        this.updateProgressBar
+      );
+    } else {
+      photos = await uploadPhotos(
+        values.photos,
+        this.state.selectedImage,
+        this.updateProgressBar
+      );
+    }
     const category = this.props.navigation.getParam('item');
     delete category.sort;
     const {
@@ -293,6 +338,23 @@ class AddClassifiedScreen extends React.Component<any, any> {
                     onChange={setFieldValue}
                     hendleSelectedImage={this.hendleSelectedImage}
                   />
+                  <View style={{ flexDirection: 'row' }}>
+                    {this.state.images.length > 0 && this.renderImages()}
+                  </View>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('CameraScreen', {
+                        returnData: this.returnData
+                      })
+                    }
+                    style={{
+                      padding: 10,
+                      backgroundColor: '#eee',
+                      borderRadius: 20
+                    }}
+                  >
+                    <Text>Camera</Text>
+                  </TouchableOpacity>
                   {!this.noNew.includes(category.id) && (
                     <Group
                       color="#444"

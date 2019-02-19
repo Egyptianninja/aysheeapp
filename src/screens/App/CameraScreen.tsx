@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-
+const { width } = Dimensions.get('window');
 export default class CameraScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
@@ -21,10 +21,10 @@ export default class CameraScreen extends React.Component<any, any> {
   }
 
   snap = async () => {
-    if (this.camera) {
+    if (this.camera && this.state.images.length < 6) {
       const photo = await this.camera.takePictureAsync({
-        quality: 0.8,
-        base64: true
+        // quality: 0.8
+        // base64: true
       });
       const images: any = this.state.images;
       images.push(photo);
@@ -98,9 +98,10 @@ export default class CameraScreen extends React.Component<any, any> {
             ref={ref => {
               this.camera = ref;
             }}
-            style={{ flex: 1 }}
+            style={{ width, height: width * 1.7778 }}
             type={this.state.type}
             flashMode={this.state.flash}
+            ratio="16:9"
           >
             <View
               style={{
