@@ -6,11 +6,12 @@ import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import getMyPosts from '../../../graphql/query/getMyPosts';
 import { getNextPosts, readyUserPosts, Message } from '../../../utils';
-import { ItemOwnerView, Loading } from '../../../componenets';
+import { Loading } from '../../../componenets';
 import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import deletePost from '../../../graphql/mutation/deletePost';
-import Menu from '../../../componenets/MyPostsScreen/Menu';
-import Edit from '../../../componenets/MyPostsScreen/Edit';
+import { Menu, Edit } from '../../../componenets/Menu';
+import ItemViewSmall from '../../../componenets/ItemViewSmall';
+
 const { width } = Dimensions.get('window');
 
 class MyOfflinePostsScreen extends React.Component<any, any> {
@@ -97,6 +98,11 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
 
   render() {
     const { lang, words } = this.props;
+    const postId = this.state.modalPost
+      ? this.state.modalPost.id
+        ? this.state.modalPost.id
+        : this.state.modalPost._id
+      : null;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -108,6 +114,8 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
           showEditModal={this.showEditModal}
           showMessageModal={this.showMessageModal}
           showCheckMessageModal={this.showCheckMessageModal}
+          postId={postId}
+          myItem={true}
           live={false}
           word={words}
           lang={lang}
@@ -121,6 +129,7 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
             word={words}
             lang={lang}
             post={this.state.modalPost}
+            postId={postId}
           />
         )}
         <Message
@@ -172,7 +181,7 @@ class MyOfflinePostsScreen extends React.Component<any, any> {
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <ItemOwnerView
+                  <ItemViewSmall
                     offline={true}
                     post={item}
                     navigation={this.props.navigation}

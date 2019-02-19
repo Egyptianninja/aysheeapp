@@ -26,8 +26,8 @@ import {
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
-import { MenuIcon, Menu } from '.';
-import Edit from '../MyPostsScreen/Edit';
+import { MenuIconHeader } from './MenuIconHeader';
+import { Menu, Report, Edit } from '../Menu';
 import {
   Avatar,
   Properties,
@@ -42,7 +42,6 @@ import {
   FullTimeView
 } from '..';
 import Link from '../../utils/location/link';
-import { Report } from '../HomeScreen';
 import { renderUser } from '../User';
 const { width } = Dimensions.get('window');
 
@@ -379,7 +378,7 @@ class ItemView extends React.Component<any, any> {
               {post.title.substring(0, 20)}
             </Text>
           </View>
-          <MenuIcon
+          <MenuIconHeader
             post={post}
             favoritePost={this.props.favoritePost}
             showMenuModal={this.showMenuModal}

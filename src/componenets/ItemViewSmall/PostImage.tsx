@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
-import { preview } from '../../../constants';
+import { preview } from '../../constants';
 export const PostImage = ({ uri, width, height }: any) => {
   return (
     <View style={{ flex: 1 }}>

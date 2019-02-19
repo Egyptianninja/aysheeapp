@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { View, Text, TouchableWithoutFeedback, Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from '../../../utils';
+import { StyleSheet } from '../../utils';
 import { PostImage } from './PostImage';
 import { MenuIcon } from './MenuIcon';
 
-const ItemView = (props: any) => {
+const ItemViewSmall = (props: any) => {
   const {
-    showMenuModal,
     post,
     post: {
       imageWidth,
@@ -19,9 +17,10 @@ const ItemView = (props: any) => {
       price,
       currency
     },
-    selectePost,
+    lang,
     word,
-    lang
+    showMenuModal,
+    selectePost
   } = props;
 
   return (
@@ -33,24 +32,6 @@ const ItemView = (props: any) => {
         marginVertical: 1
       }}
     >
-      {/* {post.trueLocation && (
-        <View
-          style={{
-            position: 'absolute',
-            left: 10,
-            width: 20,
-            hieght: 20,
-            top: 10,
-            zIndex: 120,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-            backgroundColor: 'rgba(255, 255, 255, 0.2)'
-          }}
-        >
-          <Ionicons name={'md-globe'} size={18} color="rgba(0, 0, 0, 0.6)" />
-        </View>
-      )} */}
       <View style={{ width: imageWidth }}>
         <TouchableWithoutFeedback
           onPress={() => {
@@ -154,12 +135,7 @@ const ItemView = (props: any) => {
             </View>
           </View>
         </TouchableWithoutFeedback>
-        <MenuIcon
-          showMenuModal={showMenuModal}
-          post={post}
-          imageWidth={post.imageWidth}
-          isrtl={lang === 'ar' ? true : false}
-        />
+        <MenuIcon post={post} showMenuModal={showMenuModal} />
       </View>
     </View>
   );
@@ -181,4 +157,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ItemView;
+export default ItemViewSmall;

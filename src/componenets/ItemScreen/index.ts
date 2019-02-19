@@ -6,8 +6,7 @@ import InputBar from './comment/InputBar';
 import ItemComment from './comment/ItemComment';
 import PhotoSlider from './PhotoSlider';
 import ItemHeader from './ItemHeader';
-import { MenuIcon } from './MenuIcon';
-import Menu from './Menu';
+import { MenuIconHeader } from './MenuIconHeader';
 import { getproperties, getJobProperties } from './getproperties';
 export {
   Properties,
@@ -20,6 +19,5 @@ export {
   ItemHeader,
   getproperties,
   getJobProperties,
-  MenuIcon,
-  Menu
+  MenuIconHeader
 };

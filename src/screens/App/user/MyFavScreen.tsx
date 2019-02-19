@@ -6,10 +6,10 @@ import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
 import { getDBNextPosts, readyUserPosts, Message } from '../../../utils';
-import { ItemFavView, Loading } from '../../../componenets';
+import { Loading } from '../../../componenets';
 import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
-import Menu from '../../../componenets/MyFavScreen/Menu';
-import Report from '../../../componenets/MyFavScreen/Report';
+import { Menu, Report } from '../../../componenets/Menu';
+import ItemViewSmall from '../../../componenets/ItemViewSmall';
 
 const { width } = Dimensions.get('window');
 
@@ -25,7 +25,8 @@ class MyFavScreen extends React.Component<any, any> {
       isMenuModalVisible: false,
       isReportModalVisible: false,
       isMessageVisible: false,
-      modalPost: null
+      modalPost: null,
+      message: null
     };
   }
 
@@ -41,7 +42,8 @@ class MyFavScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = ({ seconds, screen }: any) => {
+  showMessageModal = async ({ seconds, screen, message }: any) => {
+    await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
       setTimeout(() => {
@@ -70,6 +72,11 @@ class MyFavScreen extends React.Component<any, any> {
 
   render() {
     const { lang, words } = this.props;
+    const postId = this.state.modalPost
+      ? this.state.modalPost.id
+        ? this.state.modalPost.id
+        : this.state.modalPost._id
+      : null;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -79,8 +86,10 @@ class MyFavScreen extends React.Component<any, any> {
           hideMenuModal={this.hideMenuModal}
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
+          postId={postId}
           word={words}
           lang={lang}
+          fav={true}
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
@@ -126,7 +135,7 @@ class MyFavScreen extends React.Component<any, any> {
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <ItemFavView
+                  <ItemViewSmall
                     post={item}
                     unFavoritePost={this.props.unFavoritePost}
                     navigation={this.props.navigation}

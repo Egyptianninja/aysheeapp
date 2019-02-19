@@ -17,17 +17,11 @@ import {
   readyPosts,
   getTimeLineBuckets,
   Message,
-  registerForPushNotificationsAsync,
-  getCountryFromLatLon
+  registerForPushNotificationsAsync
 } from '../../utils';
-import {
-  Loading,
-  LoadingSmall,
-  CategoriesScroll,
-  ItemView,
-  Noresult
-} from '../../componenets';
-import { Menu, Report } from '../../componenets/HomeScreen';
+import { Loading, CategoriesScroll, Noresult } from '../../componenets';
+import ItemViewSmall from '../../componenets/ItemViewSmall';
+import { Menu, Report } from '../../componenets/Menu';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -60,6 +54,7 @@ class HomeScreen extends React.Component<any, any> {
       scrollAnim,
       offsetAnim,
       pushToken: null,
+      message: null,
       clampedScroll: Animated.diffClamp(
         Animated.add(
           scrollAnim.interpolate({
@@ -142,7 +137,8 @@ class HomeScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = ({ seconds, screen }: any) => {
+  showMessageModal = async ({ seconds, screen, message }: any) => {
+    await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
       setTimeout(() => {
@@ -156,6 +152,7 @@ class HomeScreen extends React.Component<any, any> {
       }, seconds * 1000);
     }
   };
+
   hideMessageModal = () => {
     this.setState({ isMessageVisible: false });
   };
@@ -213,12 +210,14 @@ class HomeScreen extends React.Component<any, any> {
     this.props.navigation.navigate('ItemScreen', { post, word, lang });
   };
 
-  renderFooter = () => <LoadingSmall />;
-
   render() {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query } = this.props;
-
+    const postId = this.state.modalPost
+      ? this.state.modalPost.id
+        ? this.state.modalPost.id
+        : this.state.modalPost._id
+      : null;
     this.NAVBAR_HEIGHT = 90;
 
     const navbarTranslate = clampedScroll.interpolate({
@@ -235,6 +234,7 @@ class HomeScreen extends React.Component<any, any> {
           hideMenuModal={this.hideMenuModal}
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
+          postId={postId}
           word={words}
           lang={lang}
         />
@@ -332,7 +332,7 @@ class HomeScreen extends React.Component<any, any> {
                     this.getNextPosts(data, fetchMore, 'getTimeLine');
                   }}
                   renderItem={({ item }: any) => (
-                    <ItemView
+                    <ItemViewSmall
                       post={item}
                       navigation={this.props.navigation}
                       showMenuModal={this.showMenuModal}
