@@ -20,6 +20,7 @@ import MyOfflinePostsScreen from './App/user/MyOfflinePostsScreen';
 import MyFavScreen from './App/user/MyFavScreen';
 import MyProfileScreen from './App/user/MyProfileScreen';
 import UserProfileScreen from './App/user/UserProfileScreen';
+import CameraScreen from './App/CameraScreen';
 
 export {
   HomeScreen,
@@ -43,5 +44,6 @@ export {
   MyFavScreen,
   CodeScreen,
   NameScreen,
-  UserProfileScreen
+  UserProfileScreen,
+  CameraScreen
 };

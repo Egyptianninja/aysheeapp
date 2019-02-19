@@ -20,7 +20,8 @@ import {
   AddRequestServiceScreen,
   AddJobRequestScreen,
   UserProfileScreen,
-  MyFavScreen
+  MyFavScreen,
+  CameraScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 
@@ -153,6 +154,12 @@ export const AppStackNavigator = createStackNavigator({
   },
   NotificationsScreen: {
     screen: NotificationsScreen,
+    navigationOptions: () => ({
+      headerTintColor: '#555'
+    })
+  },
+  CameraScreen: {
+    screen: CameraScreen,
     navigationOptions: () => ({
       headerTintColor: '#555'
     })

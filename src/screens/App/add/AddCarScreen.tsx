@@ -3,7 +3,9 @@ import {
   View,
   Dimensions,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  Text
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -47,6 +49,7 @@ class AddCarScreen extends React.Component<any, any> {
       isShowMessage: false,
       location: null,
       pushToken: null,
+      images: [],
       bar: 0
     };
   }
@@ -59,6 +62,10 @@ class AddCarScreen extends React.Component<any, any> {
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
+
+  returnData = (images: any) => {
+    this.setState({ images });
+  };
 
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
@@ -93,11 +100,21 @@ class AddCarScreen extends React.Component<any, any> {
   };
 
   handleSubmit = async (values: any, bag: any) => {
-    const photos = await uploadPhotos(
-      values.photos,
-      this.state.selectedImage,
-      this.updateProgressBar
-    );
+    let photos;
+    if (this.state.images.length > 0) {
+      photos = await uploadPhotos(
+        this.state.images,
+        this.state.selectedImage,
+        this.updateProgressBar
+      );
+    } else {
+      photos = await uploadPhotos(
+        values.photos,
+        this.state.selectedImage,
+        this.updateProgressBar
+      );
+    }
+
     const category = this.props.navigation.getParam('item');
     delete category.sort;
     const {
@@ -322,6 +339,15 @@ class AddCarScreen extends React.Component<any, any> {
                     onChange={setFieldValue}
                     hendleSelectedImage={this.hendleSelectedImage}
                   />
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('CameraScreen', {
+                        returnData: this.returnData
+                      })
+                    }
+                  >
+                    <Text>Camera</Text>
+                  </TouchableOpacity>
                   <Group
                     color="#444"
                     size={24}
