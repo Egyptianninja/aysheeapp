@@ -267,7 +267,7 @@ export default {
   menu: [
     { id: 0, name: 'Profile' },
     { id: 1, name: 'New Ad' },
-    { id: 2, name: 'Your Ads' },
+    { id: 2, name: 'My Ads' },
     { id: 3, name: 'Favorites' },
     { id: 4, name: 'Options & privacy' },
     { id: 5, name: 'Help Center' },
