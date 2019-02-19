@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
-import { preview } from '../../constants';
+// import { preview } from '../../constants';
 const { width } = Dimensions.get('window');
 
 export default class PhotoSlider extends React.Component<any, any> {
@@ -31,7 +31,7 @@ export default class PhotoSlider extends React.Component<any, any> {
 
   render() {
     const { photos } = this.props;
-
+    const height = this.props.ratio ? width * this.props.ratio : width;
     return (
       <View style={styles.container}>
         <ScrollView
@@ -48,6 +48,9 @@ export default class PhotoSlider extends React.Component<any, any> {
           ])}
         >
           {photos.map((image: any, i: any) => {
+            const preview = { uri: image.preview };
+            const uri = image.url;
+
             return (
               <TouchableWithoutFeedback
                 onPress={() => this.props.showModal(i)}
@@ -56,18 +59,19 @@ export default class PhotoSlider extends React.Component<any, any> {
                 <View
                   style={{
                     width,
-                    height: this.props.ratio ? width * this.props.ratio : width,
+                    height,
                     overflow: 'hidden'
                   }}
                 >
                   <Image
                     resizeMode="contain"
+                    transitionDuration={300}
                     style={{
-                      width: '100%',
-                      height: '100%',
+                      width,
+                      height,
                       resizeMode: 'cover'
                     }}
-                    {...{ preview, uri: image.url }}
+                    {...{ preview, uri }}
                   />
                 </View>
               </TouchableWithoutFeedback>

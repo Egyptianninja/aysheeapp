@@ -43,7 +43,7 @@ import {
 } from '..';
 import Link from '../../utils/location/link';
 import { renderUser } from '../User';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class ItemView extends React.Component<any, any> {
   static navigationOptions = {
@@ -164,7 +164,10 @@ class ItemView extends React.Component<any, any> {
       return {
         url: `http://res.cloudinary.com/${
           secrets.upload.CLOUD_NAME
-        }/image/upload/w_960/${photo.substring(0, 20)}`
+        }/image/upload/w_1080/${photo.substring(0, 20)}`,
+        preview: `http://res.cloudinary.com/${
+          secrets.upload.CLOUD_NAME
+        }/image/upload/w_108/${photo.substring(0, 20)}`
       };
     });
   };
@@ -421,6 +424,18 @@ class ItemView extends React.Component<any, any> {
                 <ImageViewer
                   imageUrls={photos}
                   index={this.state.imageIndex}
+                  loadingRender={() => (
+                    <View
+                      style={{
+                        position: 'absolute',
+                        top: height / 2 - 15,
+                        left: width / 2 - 30,
+                        zIndex: 100
+                      }}
+                    >
+                      <Loading />
+                    </View>
+                  )}
                   enableSwipeDown={true}
                   swipeDownThreshold={100}
                   flipThreshold={60}

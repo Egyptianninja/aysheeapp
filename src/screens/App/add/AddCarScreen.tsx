@@ -372,7 +372,8 @@ class AddCarScreen extends React.Component<any, any> {
                   <TouchableOpacity
                     onPress={() =>
                       this.props.navigation.navigate('CameraScreen', {
-                        returnData: this.returnData
+                        returnData: this.returnData,
+                        lang
                       })
                     }
                     style={{

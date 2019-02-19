@@ -164,7 +164,7 @@ class Drawer extends React.Component<any, any> {
               + {user.phone}
             </Text>
           )}
-          {user.name && (
+          {user.name !== '' && (
             <Text
               style={{
                 fontSize: 16,

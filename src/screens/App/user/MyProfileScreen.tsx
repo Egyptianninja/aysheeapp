@@ -198,7 +198,7 @@ class ProfileScreen extends React.Component<any, any> {
                 + {userData.phone}
               </Text>
             )}
-            {userData.name && (
+            {userData.name !== '' && (
               <Text
                 style={{
                   fontFamily: 'cairo-regular',

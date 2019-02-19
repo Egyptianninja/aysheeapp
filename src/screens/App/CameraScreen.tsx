@@ -1,6 +1,14 @@
 import * as React from 'react';
-import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  Platform,
+  StatusBar
+} from 'react-native';
+import { Camera, Permissions, Constants } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 const { width } = Dimensions.get('window');
 export default class CameraScreen extends React.Component<any, any> {
@@ -48,8 +56,8 @@ export default class CameraScreen extends React.Component<any, any> {
           key={img.uri}
           style={{
             width: 50,
-            height: 70,
-            margin: 4,
+            height: 67,
+            margin: 2,
             borderColor: '#aaa',
             borderWidth: 1
           }}
@@ -70,6 +78,9 @@ export default class CameraScreen extends React.Component<any, any> {
 
   render() {
     const { hasCameraPermission } = this.state;
+    const lang = this.props.navigation.getParam('lang');
+    const ardroid = Platform.OS === 'android' && lang === 'ar';
+
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
@@ -77,125 +88,131 @@ export default class CameraScreen extends React.Component<any, any> {
     } else {
       return (
         <View style={{ flex: 1 }}>
+          <StatusBar backgroundColor="#000" barStyle="dark-content" />
           <TouchableOpacity
             onPress={() => this.back()}
             style={{
               position: 'absolute',
-              top: 20,
-              left: 20,
+              top: 15,
+              left: ardroid ? undefined : 20,
+              right: ardroid ? 20 : undefined,
               zIndex: 860,
-              width: 42,
-              height: 45,
+              width: 30,
+              height: 40,
               borderRadius: 16,
               justifyContent: 'center',
-              alignItems: 'center',
-              padding: 10
+              alignItems: 'center'
             }}
           >
             <Ionicons name="ios-arrow-back" size={30} color="#fff" />
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({
+                flash:
+                  this.state.flash === Camera.Constants.FlashMode.off
+                    ? Camera.Constants.FlashMode.on
+                    : Camera.Constants.FlashMode.off
+              });
+            }}
+            style={{
+              position: 'absolute',
+              top: 18,
+              right: ardroid ? undefined : 35,
+              left: ardroid ? 35 : undefined,
+              zIndex: 860,
+              width: 30,
+              height: 40,
+              borderRadius: 16,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Ionicons
+              name={
+                this.state.flash === Camera.Constants.FlashMode.off
+                  ? 'ios-flash-off'
+                  : 'ios-flash'
+              }
+              size={26}
+              color="#fff"
+            />
+          </TouchableOpacity>
+
+          <View
+            style={{
+              width,
+              height: Constants.statusBarHeight + 30,
+              backgroundColor: '#000'
+            }}
+          />
           <Camera
             ref={ref => {
               this.camera = ref;
             }}
-            style={{ width, height: width * 1.7778 }}
+            style={{ width, height: width * 1.333 }}
             type={this.state.type}
             flashMode={this.state.flash}
-            ratio="16:9"
+            ratio="4:3"
+            autoFocus="on"
+          />
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#000'
+            }}
           >
-            <View
+            <TouchableOpacity
+              onPress={() => {
+                this.snap();
+              }}
+              style={{ paddingBottom: 25, zIndex: 100 }}
+            >
+              <Ionicons name="ios-radio-button-off" size={86} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity
               style={{
-                flex: 1,
-                backgroundColor: 'transparent'
+                position: 'absolute',
+                padding: 15,
+                top: -35,
+                right: ardroid ? undefined : 50,
+                left: ardroid ? 50 : undefined
+              }}
+              onPress={() => {
+                this.setState({
+                  type:
+                    this.state.type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back
+                });
               }}
             >
-              <View
-                style={{
-                  flex: 2,
-                  alignItems: 'flex-end',
-                  paddingHorizontal: 20,
-                  justifyContent: 'flex-end',
-                  flexDirection: 'row'
+              <Ionicons name="ios-reverse-camera" size={46} color="#fff" />
+            </TouchableOpacity>
+            <View
+              style={{
+                top: -40,
+                width: '100%',
+                height: 75,
+                flexDirection: ardroid ? 'row-reverse' : 'row',
+                backgroundColor: '#000',
+                justifyContent: 'flex-start',
+                alignItems: 'center'
+              }}
+            >
+              {this.renderImages()}
+              <TouchableOpacity
+                onPress={() => {
+                  this.proceed();
                 }}
+                style={{ padding: 5 }}
               >
-                <TouchableOpacity
-                  style={{ padding: 15, paddingBottom: 20 }}
-                  onPress={() => {
-                    this.setState({
-                      flash:
-                        this.state.flash === Camera.Constants.FlashMode.off
-                          ? Camera.Constants.FlashMode.on
-                          : Camera.Constants.FlashMode.off
-                    });
-                  }}
-                >
-                  <Ionicons
-                    name={
-                      this.state.flash === Camera.Constants.FlashMode.off
-                        ? 'ios-flash-off'
-                        : 'ios-flash'
-                    }
-                    size={26}
-                    color="#fff"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{ padding: 15 }}
-                  onPress={() => {
-                    this.setState({
-                      type:
-                        this.state.type === Camera.Constants.Type.back
-                          ? Camera.Constants.Type.front
-                          : Camera.Constants.Type.back
-                    });
-                  }}
-                >
-                  <Ionicons name="ios-reverse-camera" size={36} color="#fff" />
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  flex: 10
-                }}
-              />
-              <View
-                style={{
-                  flex: 4.5,
-                  justifyContent: 'flex-start',
-                  alignItems: 'center'
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => {
-                    this.snap();
-                  }}
-                >
-                  <Ionicons
-                    name="ios-radio-button-off"
-                    size={86}
-                    color="#fff"
-                  />
-                </TouchableOpacity>
-                <View
-                  style={{
-                    width: '100%',
-                    height: 75,
-                    flexDirection: 'row'
-                  }}
-                >
-                  {this.renderImages()}
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.proceed();
-                    }}
-                    style={{ padding: 5 }}
-                  >
-                    <Ionicons name="md-attach" size={36} color="#fff" />
-                  </TouchableOpacity>
-                </View>
-              </View>
+                <Ionicons name="md-attach" size={33} color="#fff" />
+              </TouchableOpacity>
             </View>
-          </Camera>
+          </View>
         </View>
       );
     }
