@@ -15,9 +15,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import getUserPosts from '../../../graphql/query/getUserPosts';
 import { getNextPosts, readyUserPosts, Message } from '../../../utils';
-import { ItemOwnerView, Avatar, Loading, ItemView } from '../../../componenets';
+import ItemViewSmall from '../../../componenets/ItemViewSmall';
+import { Avatar, Loading } from '../../../componenets';
 import favoritePost from '../../../graphql/mutation/favoritePost';
-import { Menu, Report } from '../../../componenets/HomeScreen';
+import { Menu, Report } from '../../../componenets/Menu';
 const { width } = Dimensions.get('window');
 
 const HEADER_MAX_HEIGHT = 175;
@@ -256,7 +257,7 @@ class UserProfileScreen extends React.Component<any, any> {
                 refreshing={this.state.refreshing}
                 data={rPosts}
                 renderItem={({ item }: any) => (
-                  <ItemView
+                  <ItemViewSmall
                     post={item}
                     navigation={this.props.navigation}
                     selectePost={this.selectePost}
