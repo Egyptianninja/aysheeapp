@@ -28,14 +28,14 @@ export default {
     {
       id: 5,
       sort: 10,
-      name: 'يبحث عن عمل',
-      nameGlob: 'يبحث عن عمل, Look for Job, Look for Job'
+      name: 'عمل',
+      nameGlob: 'عمل, Job, Job'
     },
     {
       id: 6,
       sort: 11,
-      name: 'وظائف شاغرة',
-      nameGlob: 'وظائف شاغرة, Job Opportunities, Job Opportunities'
+      name: 'كمبيوتر وكاميرات',
+      nameGlob: 'كمبيوتر وكاميرات, PC & Camera, PC & Camera'
     },
     {
       id: 7,
@@ -52,14 +52,14 @@ export default {
     {
       id: 9,
       sort: 12,
-      name: 'عرض خدمة',
-      nameGlob: 'عرض خدمة, Offer Service, Offer Service'
+      name: 'خدمات',
+      nameGlob: 'خدمات, Services, Services'
     },
     {
       id: 10,
       sort: 13,
-      name: 'طلب خدمة',
-      nameGlob: 'طلب خدمة, Request Sercvice, Request Sercvice'
+      name: 'مواد بناء',
+      nameGlob: 'مواد بناء, Building Materials, Building Materials'
     },
     {
       id: 11,
@@ -136,6 +136,49 @@ export default {
     { pid: 3, id: 15, name: 'طاولات وكراسي', nameGlob: 'طاولات وكراسي' },
     { pid: 3, id: 16, name: 'غرف نوم', nameGlob: 'غرف نوم' },
     { pid: 3, id: 17, name: 'أخرى', nameGlob: 'أخرى' },
+
+    {
+      pid: 5,
+      id: 79,
+      name: ' يبحث عن عمل',
+      nameGlob: 'Look for Job, يبحث عن عمل'
+    },
+    {
+      pid: 5,
+      id: 80,
+      name: 'وظائف شاغرة',
+      nameGlob: 'Job Opportunities, وظائف شاغرة'
+    },
+
+    { pid: 6, id: 83, name: 'حاسوب ولوازمه', nameGlob: 'حاسوب ولوازمه' },
+    { pid: 6, id: 84, name: 'كاميرات', nameGlob: 'كاميرات' },
+    { pid: 6, id: 85, name: 'أنظمة صوت', nameGlob: 'أنظمة صوت' },
+    { pid: 6, id: 86, name: 'أجهزة ألعاب', nameGlob: 'أجهزة ألعاب' },
+    { pid: 6, id: 87, name: 'أخرى', nameGlob: 'أخرى' },
+
+    {
+      pid: 9,
+      id: 81,
+      name: 'عرض خدمة',
+      nameGlob: 'Offer Service, عرض خدمة'
+    },
+    {
+      pid: 9,
+      id: 82,
+      name: 'طلب خدمة',
+      nameGlob: 'Request Sercvice, طلب خدمة'
+    },
+
+    { pid: 10, id: 88, name: 'خرسانة', nameGlob: 'خرسانة' },
+    { pid: 10, id: 89, name: 'حديد', nameGlob: 'حديد' },
+    { pid: 10, id: 90, name: 'حجر ورخام', nameGlob: 'حجر ورخام' },
+    { pid: 10, id: 91, name: 'سيراميك وانترلوك', nameGlob: 'سيراميك وانترلوك' },
+    { pid: 10, id: 92, name: 'أخشاب', nameGlob: 'أخشاب' },
+    { pid: 10, id: 93, name: 'بلوك - طابوق', nameGlob: 'بلوك - طابوق' },
+    { pid: 10, id: 94, name: 'رمل وحصى', nameGlob: 'رمل وحصى' },
+    { pid: 10, id: 95, name: 'جبس ودهانات', nameGlob: 'جبس ودهانات' },
+    { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
+    { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 12, id: 18, name: 'كتب أطفال', nameGlob: 'كتب أطفال' },
     {
@@ -261,7 +304,13 @@ export default {
     { id: 2, name: 'فيلا', nameGlob: 'فيلا, Villa, Villa' },
     { id: 3, name: 'محل تجاري', nameGlob: 'محل تجاري, Shop, Shop' },
     { id: 4, name: 'مستودع', nameGlob: 'مستودع, Store, Store' },
-    { id: 5, name: 'ارض', nameGlob: 'ارض, Land, Land' }
+    { id: 5, name: 'ارض زراعية', nameGlob: 'ارض زراعية, Land, Land' },
+    {
+      id: 6,
+      name: 'ارض تجارية',
+      nameGlob: 'ارض تجارية, Commercial Land , Commercial Land '
+    },
+    { id: 7, name: 'مصنع', nameGlob: 'مصنع, Factory, Factory' }
   ],
 
   service: [

@@ -153,7 +153,7 @@ export const AppStackNavigator = createStackNavigator({
     })
   },
   NotificationsScreen: {
-    screen: NotificationsScreen,
+    screen: CameraScreen,
     navigationOptions: () => ({
       headerTintColor: '#555'
     })

@@ -6,11 +6,12 @@ import {
   Image,
   Dimensions,
   Platform,
-  StatusBar
+  StatusBar,
+  Slider
 } from 'react-native';
-import { Camera, Permissions, Constants } from 'expo';
+import { Camera, Permissions, Constants, ScreenOrientation } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-const { width } = Dimensions.get('window');
+const SCREEN_WIDTH = Dimensions.get('window').width;
 export default class CameraScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
@@ -20,20 +21,23 @@ export default class CameraScreen extends React.Component<any, any> {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     flash: Camera.Constants.FlashMode.off,
-    images: []
+    images: [],
+    landscape: false,
+    zoom: 0
   };
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
+    ScreenOrientation.allowAsync(ScreenOrientation.Orientation.ALL);
+  }
+  componentWillUnmount() {
+    ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   snap = async () => {
     if (this.camera && this.state.images.length < 6) {
-      const photo = await this.camera.takePictureAsync({
-        // quality: 0.8
-        // base64: true
-      });
+      const photo = await this.camera.takePictureAsync({});
       const images: any = this.state.images;
       images.push(photo);
       this.setState({ images });
@@ -76,6 +80,19 @@ export default class CameraScreen extends React.Component<any, any> {
     });
   };
 
+  onLayout = (e: any) => {
+    const { width, height } = Dimensions.get('window');
+    this.setState({ landscape: width > height ? true : false });
+  };
+
+  change = (zoom: any) => {
+    this.setState(() => {
+      return {
+        zoom: parseFloat(zoom)
+      };
+    });
+  };
+
   render() {
     const { hasCameraPermission } = this.state;
     const lang = this.props.navigation.getParam('lang');
@@ -87,7 +104,7 @@ export default class CameraScreen extends React.Component<any, any> {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
+        <View onLayout={this.onLayout} style={{ flex: 1 }}>
           <StatusBar backgroundColor="#000" barStyle="dark-content" />
           <TouchableOpacity
             onPress={() => this.back()}
@@ -141,7 +158,7 @@ export default class CameraScreen extends React.Component<any, any> {
 
           <View
             style={{
-              width,
+              width: SCREEN_WIDTH,
               height: Constants.statusBarHeight + 30,
               backgroundColor: '#000'
             }}
@@ -150,11 +167,26 @@ export default class CameraScreen extends React.Component<any, any> {
             ref={ref => {
               this.camera = ref;
             }}
-            style={{ width, height: width * 1.333 }}
+            style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.333 }}
             type={this.state.type}
             flashMode={this.state.flash}
             ratio="4:3"
             autoFocus="on"
+            zoom={this.state.zoom}
+          />
+          <Slider
+            step={0.01}
+            maximumValue={0.25}
+            onValueChange={this.change}
+            value={this.state.zoom}
+            style={{
+              position: 'absolute',
+              bottom: 140,
+              width: 250,
+              left: SCREEN_WIDTH / 2 - 125,
+              zIndex: 250,
+              backgroundColor: 'transparent'
+            }}
           />
           <View
             style={{
@@ -168,7 +200,10 @@ export default class CameraScreen extends React.Component<any, any> {
               onPress={() => {
                 this.snap();
               }}
-              style={{ paddingBottom: 25, zIndex: 100 }}
+              style={{
+                paddingBottom: 25,
+                zIndex: 100
+              }}
             >
               <Ionicons name="ios-radio-button-off" size={86} color="#fff" />
             </TouchableOpacity>

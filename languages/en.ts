@@ -28,14 +28,14 @@ export default {
     {
       id: 5,
       sort: 10,
-      name: 'Look for Job',
-      nameGlob: 'يبحث عن عمل, Look for Job, Look for Job'
+      name: 'Job',
+      nameGlob: 'عمل, Job, Job'
     },
     {
       id: 6,
       sort: 11,
-      name: 'Job Opportunities',
-      nameGlob: 'وظائف شاغرة, Job Opportunities, Job Opportunities'
+      name: 'PC & Camera',
+      nameGlob: 'كمبيوتر وكاميرات, PC & Camera, PC & Camera'
     },
     {
       id: 7,
@@ -52,15 +52,16 @@ export default {
     {
       id: 9,
       sort: 12,
-      name: 'Offer Service',
-      nameGlob: 'يعرض خدمة, Offer Service, Offer Service'
+      name: 'Services',
+      nameGlob: 'خدمات, Services, Services'
     },
     {
       id: 10,
       sort: 13,
-      name: 'Request Sercvice',
-      nameGlob: 'يطلب خدمة, Request Sercvice, Request Sercvice'
+      name: 'Building Materials',
+      nameGlob: 'مواد بناء, Building Materials, Building Materials'
     },
+
     { id: 11, sort: 16, name: 'Music', nameGlob: 'الات موسيقية, Music, Music' },
     { id: 12, sort: 17, name: 'Books', nameGlob: 'كتب, Books, Books' },
     { id: 13, sort: 7, name: 'Clothes', nameGlob: 'ملابس, Clothes, Clothes' },
@@ -116,6 +117,48 @@ export default {
     { pid: 3, id: 15, name: 'Tables & Chairs', nameGlob: 'Tables & Chairs' },
     { pid: 3, id: 16, name: 'Bedrooms', nameGlob: 'Bedrooms' },
     { pid: 3, id: 17, name: 'Other', nameGlob: 'Other' },
+    {
+      pid: 5,
+      id: 79,
+      name: 'Look for Job',
+      nameGlob: 'Look for Job, يبحث عن عمل'
+    },
+    {
+      pid: 5,
+      id: 80,
+      name: 'Job Opportunities',
+      nameGlob: 'Job Opportunities, وظائف شاغرة'
+    },
+
+    { pid: 6, id: 83, name: 'PC', nameGlob: 'حاسوب ولوازمه' },
+    { pid: 6, id: 84, name: 'Camera', nameGlob: 'كاميرات' },
+    { pid: 6, id: 85, name: 'Sound System', nameGlob: 'أنظمة صوت' },
+    { pid: 6, id: 86, name: 'Game Console', nameGlob: 'أجهزة ألعاب' },
+    { pid: 6, id: 87, name: 'Other', nameGlob: 'أخرى' },
+
+    {
+      pid: 9,
+      id: 81,
+      name: 'Offer Service',
+      nameGlob: 'Offer Service, عرض خدمة'
+    },
+    {
+      pid: 9,
+      id: 82,
+      name: 'Request Sercvice',
+      nameGlob: 'Request Sercvice, طلب خدمة'
+    },
+
+    { pid: 10, id: 88, name: 'خرسانة', nameGlob: 'خرسانة' },
+    { pid: 10, id: 89, name: 'حديد', nameGlob: 'حديد' },
+    { pid: 10, id: 90, name: 'حجر ورخام', nameGlob: 'حجر ورخام' },
+    { pid: 10, id: 91, name: 'سيراميك وانترلوك', nameGlob: 'سيراميك وانترلوك' },
+    { pid: 10, id: 92, name: 'أخشاب', nameGlob: 'أخشاب' },
+    { pid: 10, id: 93, name: 'بلوك - طابوق', nameGlob: 'بلوك - طابوق' },
+    { pid: 10, id: 94, name: 'رمل وحصى', nameGlob: 'رمل وحصى' },
+    { pid: 10, id: 95, name: 'جبس ودهانات', nameGlob: 'جبس ودهانات' },
+    { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
+    { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 12, id: 18, name: 'Kids Books', nameGlob: 'Kids Books' },
     {
@@ -241,7 +284,13 @@ export default {
     { id: 2, name: 'Villa', nameGlob: 'فيلا, Villa, Villa' },
     { id: 3, name: 'Shop', nameGlob: 'محل تجاري, Shop, Shop' },
     { id: 4, name: 'Store', nameGlob: 'مستودع, Store, Store' },
-    { id: 5, name: 'Land', nameGlob: 'ارض, Land, Land' }
+    { id: 5, name: 'Land', nameGlob: 'ارض زراعية, Land, Land' },
+    {
+      id: 6,
+      name: 'Commercial Land',
+      nameGlob: 'ارض تجارية, Commercial Land , Commercial Land '
+    },
+    { id: 7, name: 'Factory', nameGlob: 'مصنع, Factory, Factory' }
   ],
 
   service: [
