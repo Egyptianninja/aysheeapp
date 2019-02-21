@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { TouchableOpacity, Text, View, Image } from 'react-native';
+import { TouchableOpacity, Text, View, Image, Dimensions } from 'react-native';
 import { Platform } from 'expo-core';
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export const Option = ({
   itemData,
@@ -45,7 +46,7 @@ export const Option = ({
       }}
       style={{
         flex: 1,
-        width: width - 80,
+        width: SCREEN_WIDTH - 80,
         padding: 3,
         margin: 7,
         backgroundColor: '#eee',

@@ -5,6 +5,11 @@ export default gql`
     commentAdded(postId: $postId) {
       _id
       body
+      replayto {
+        id
+        name
+        body
+      }
       updatedAt
       user {
         _id

@@ -6,7 +6,8 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Text,
-  Image
+  Image,
+  Platform
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -25,7 +26,6 @@ import {
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-
 import {
   Input,
   Button,
@@ -35,6 +35,7 @@ import {
   Select,
   Title
 } from '../../../lib';
+import { currencyTypes } from '../../../constants';
 
 const { width } = Dimensions.get('window');
 
@@ -153,6 +154,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
       kind,
       eBrand,
       price,
+      currency,
       isforman,
       isnew,
       issale,
@@ -184,6 +186,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
         isforman: this.acc.includes(category.id) ? isforman : undefined,
         isnew: this.noNew.includes(category.id) ? undefined : isnew,
         price: this.noPrice.includes(category.id) ? 0 : Number(price),
+        currency: currency.name,
         iswarranty: this.noWaranty.includes(category.id)
           ? undefined
           : iswarranty,
@@ -242,6 +245,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                 eBrand: '',
                 photos: [],
                 price: '',
+                currency: '',
                 isforman: false,
                 isforwomen: true,
                 isnew: false,
@@ -426,21 +430,61 @@ class AddClassifiedScreen extends React.Component<any, any> {
                   )}
 
                   {!this.noPrice.includes(category.id) && (
-                    <Input
-                      rtl={lang === 'ar' ? true : false}
-                      num
-                      name="price"
-                      label={word.price}
-                      value={values.price}
-                      onChange={setFieldValue}
-                      onTouch={setFieldTouched}
-                      outerStyle={styles.outerStyle}
-                      innerStyle={styles.innerStyle}
-                      labelStyle={styles.labelStyle}
-                      error={touched.price && errors.price}
-                      keyboardType="number-pad"
-                      height={40}
-                    />
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection:
+                          lang === 'ar' && Platform.OS !== 'android'
+                            ? 'row-reverse'
+                            : 'row',
+                        justifyContent: 'center',
+                        alignItems: 'flex-end'
+                      }}
+                    >
+                      <View
+                        style={{
+                          flex: 1,
+                          alignItems: 'center'
+                        }}
+                      >
+                        <Input
+                          rtl={lang === 'ar' ? true : false}
+                          num
+                          name="price"
+                          label={word.price}
+                          value={values.price}
+                          onChange={setFieldValue}
+                          onTouch={setFieldTouched}
+                          outerStyle={[styles.outerStyle, { paddingBottom: 5 }]}
+                          innerStyle={[
+                            styles.innerStyle,
+                            { width: (width - 40) / 2 - 20 }
+                          ]}
+                          labelStyle={styles.labelStyle}
+                          error={touched.price && errors.price}
+                          keyboardType="number-pad"
+                          height={40}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flex: 1,
+                          alignItems: 'center'
+                        }}
+                      >
+                        <Select
+                          name="currency"
+                          nosubLabel={true}
+                          width={(width - 40) / 2 - 20}
+                          value={values.currency}
+                          data={currencyTypes}
+                          label={word.currency}
+                          onChange={setFieldValue}
+                          words={this.props.words}
+                          lang={this.props.lang}
+                        />
+                      </View>
+                    </View>
                   )}
                   <Input
                     rtl={lang === 'ar' ? true : false}

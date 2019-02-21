@@ -39,7 +39,6 @@ export default class Select extends React.Component<any, any> {
           icon={icon}
           toggleModal={this.toggleModal}
           onChange={this.props.onChange}
-          width={width}
           itemData={da}
           {...this.props}
         />
@@ -90,15 +89,17 @@ export default class Select extends React.Component<any, any> {
               ? value.ar
               : value.en}
           </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              paddingHorizontal: 10,
-              color: '#ababab'
-            }}
-          >
-            {label}
-          </Text>
+          {!this.props.nosubLabel && (
+            <Text
+              style={{
+                fontSize: 16,
+                paddingHorizontal: 10,
+                color: '#ababab'
+              }}
+            >
+              {label}
+            </Text>
+          )}
         </View>
       );
     }
@@ -146,7 +147,7 @@ export default class Select extends React.Component<any, any> {
               margin: 0,
               height: 350,
               paddingTop: 10,
-              width: this.props.width ? this.props.width : width - 40,
+              width: width - 40,
               justifyContent: 'space-around',
               alignItems: 'center'
             }}

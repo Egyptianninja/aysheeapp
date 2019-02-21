@@ -470,40 +470,58 @@ class AddCarScreen extends React.Component<any, any> {
                   />
                   <View
                     style={{
+                      flex: 1,
                       flexDirection:
-                        Platform.OS === 'android' ? 'row' : 'row-reverse',
+                        lang === 'ar' && Platform.OS !== 'android'
+                          ? 'row-reverse'
+                          : 'row',
                       justifyContent: 'center',
-                      alignItems: 'center'
+                      alignItems: 'flex-end'
                     }}
                   >
-                    <Input
-                      rtl={lang === 'ar' ? true : false}
-                      num
-                      name="price"
-                      label={word.price}
-                      value={values.price}
-                      onChange={setFieldValue}
-                      onTouch={setFieldTouched}
-                      outerStyle={styles.outerStyle}
-                      innerStyle={[
-                        styles.innerStyle,
-                        { width: (width - 40) / 2 }
-                      ]}
-                      labelStyle={styles.labelStyle}
-                      error={touched.price && errors.price}
-                      keyboardType="number-pad"
-                      height={40}
-                    />
-                    <Select
-                      name="currency"
-                      width={(width - 40) / 2}
-                      value={values.currency}
-                      data={currencyTypes}
-                      label={word.currency}
-                      onChange={setFieldValue}
-                      words={this.props.words}
-                      lang={this.props.lang}
-                    />
+                    <View
+                      style={{
+                        flex: 1,
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Input
+                        rtl={lang === 'ar' ? true : false}
+                        num
+                        name="price"
+                        label={word.price}
+                        value={values.price}
+                        onChange={setFieldValue}
+                        onTouch={setFieldTouched}
+                        outerStyle={[styles.outerStyle, { paddingBottom: 5 }]}
+                        innerStyle={[
+                          styles.innerStyle,
+                          { width: (width - 40) / 2 - 20 }
+                        ]}
+                        labelStyle={styles.labelStyle}
+                        error={touched.price && errors.price}
+                        keyboardType="number-pad"
+                        height={40}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        flex: 1,
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Select
+                        name="currency"
+                        nosubLabel={true}
+                        width={(width - 40) / 2 - 20}
+                        value={values.currency}
+                        data={currencyTypes}
+                        label={word.currency}
+                        onChange={setFieldValue}
+                        words={this.props.words}
+                        lang={this.props.lang}
+                      />
+                    </View>
                   </View>
                   <Input
                     rtl={lang === 'ar' ? true : false}

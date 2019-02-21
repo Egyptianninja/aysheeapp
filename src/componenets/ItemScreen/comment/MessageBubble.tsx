@@ -21,7 +21,7 @@ export default class MessageBubble extends React.Component<any, any> {
               lang === 'ar' && Platform.OS !== 'android'
                 ? 'row-reverse'
                 : 'row',
-            paddingVertical: 10,
+            padding: 10,
             borderRadius: 10
           }}
         >
@@ -107,7 +107,7 @@ export default class MessageBubble extends React.Component<any, any> {
                 >
                   {message.user.name}
                 </Text>
-                <Text
+                {/* <Text
                   style={{
                     fontSize: 12,
                     color: '#777',
@@ -119,16 +119,57 @@ export default class MessageBubble extends React.Component<any, any> {
                   }}
                 >
                   {message.user.uniquename}
-                </Text>
+                </Text> */}
               </View>
             </TouchableOpacity>
-
+            {message.replayto &&
+              // message.replayto.id &&
+              message.replayto.name &&
+              message.replayto.body && (
+                <View
+                  style={{
+                    borderLeftWidth: lang === 'ar' ? undefined : 3,
+                    borderLeftColor: lang === 'ar' ? undefined : '#555',
+                    borderRightWidth: lang === 'ar' ? 3 : undefined,
+                    borderRightColor: lang === 'ar' ? '#555' : undefined,
+                    marginHorizontal: 10,
+                    padding: 5,
+                    backgroundColor: '#ddd',
+                    maxWidth: width - 160
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 16,
+                      textAlign:
+                        isArabic(message.replayto.name) &&
+                        Platform.OS !== 'android'
+                          ? 'right'
+                          : 'left'
+                    }}
+                  >
+                    {message.replayto.name}
+                  </Text>
+                  <Text
+                    style={{
+                      textAlign:
+                        isArabic(message.replayto.body) &&
+                        Platform.OS !== 'android'
+                          ? 'right'
+                          : 'left'
+                    }}
+                  >
+                    {message.replayto.body}
+                  </Text>
+                </View>
+              )}
             <Text
               style={{
                 color: '#272727',
                 fontSize: 14,
                 textAlign: rtl && Platform.OS !== 'android' ? 'right' : 'left',
-                maxWidth: width - 130,
+                maxWidth: width - 140,
                 flexWrap: 'wrap'
               }}
             >
@@ -156,7 +197,15 @@ export default class MessageBubble extends React.Component<any, any> {
           </Text>
           {isAuthenticated && (
             <TouchableOpacity
-              onPress={() => this.props.replayComment(message.user.uniquename)}
+              onPress={() =>
+                this.props.replayComment({
+                  id: message.user._id,
+                  name: message.user.name
+                    ? message.user.name
+                    : message.user.uniquename,
+                  body: message.body
+                })
+              }
               style={{
                 flexDirection:
                   lang === 'ar' && Platform.OS !== 'android'
@@ -166,16 +215,16 @@ export default class MessageBubble extends React.Component<any, any> {
             >
               <Ionicons
                 name="ios-repeat"
-                size={22}
+                size={24}
                 style={{ paddingHorizontal: 5 }}
-                color="#777"
+                color="#7678ED"
               />
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 14,
                   paddingLeft: lang === 'ar' ? 5 : 10,
                   paddingRight: lang === 'ar' ? 10 : 5,
-                  color: '#777',
+                  color: '#7678ED',
                   textAlign:
                     lang === 'ar' && Platform.OS !== 'android'
                       ? 'right'

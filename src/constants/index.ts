@@ -2,7 +2,7 @@ import { brands, subBrands } from './brands';
 import { telecode } from './telecode';
 import { preview } from './image';
 import { smsTimes, codeTimes } from './login';
-import { currencyTypes, spaceUnits } from './units';
+import { currencyTypes, areaUnits } from './units';
 export {
   brands,
   subBrands,
@@ -11,5 +11,5 @@ export {
   telecode,
   preview,
   currencyTypes,
-  spaceUnits
+  areaUnits
 };

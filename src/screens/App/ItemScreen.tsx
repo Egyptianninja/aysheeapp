@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View } from 'react-native';
 import { Query, graphql } from 'react-apollo';
 import getPost from '../../graphql/query/getPost';
 import { Loading } from '../../componenets';

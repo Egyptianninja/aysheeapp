@@ -6,6 +6,7 @@ export default gql`
       _id
       body
       replayto {
+        id
         name
         body
       }

@@ -3,7 +3,8 @@ import {
   View,
   Dimensions,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -21,7 +22,7 @@ import {
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-
+import { currencyTypes, areaUnits } from '../../../constants';
 import {
   Input,
   Button,
@@ -31,8 +32,8 @@ import {
   Select,
   Title
 } from '../../../lib';
-
 import { getPureNumber } from '../../../utils/call';
+
 const { width } = Dimensions.get('window');
 
 const roomsData = [
@@ -104,6 +105,8 @@ class AddRealEstateScreen extends React.Component<any, any> {
       body,
       realestate,
       price,
+      currency,
+      ism,
       issale,
       phone,
       space,
@@ -133,12 +136,14 @@ class AddRealEstateScreen extends React.Component<any, any> {
         photos,
         isrtl,
         issale,
+        areaunit: ism ? areaUnits[0] : areaUnits[1],
         isfurnishered,
         phone,
         space: Number(space),
         rooms: Number(rooms.name),
         bathrooms: Number(bathrooms.name),
         price: Number(price),
+        currency: currency.name,
         trueLocation
       }
     });
@@ -182,6 +187,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
                 body: '',
                 photos: [],
                 price: '',
+                currency: '',
                 isfurnishered: false,
                 isUnfurnishered: true,
                 issale: false,
@@ -189,6 +195,8 @@ class AddRealEstateScreen extends React.Component<any, any> {
                 realestate: '',
                 phone: getPureNumber(user.phone),
                 space: '',
+                ism: true,
+                isft: false,
                 rooms: '',
                 bathrooms: '',
                 location: false
@@ -323,6 +331,25 @@ class AddRealEstateScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={lang === 'ar' ? true : false}
+                  >
+                    <RadioButton
+                      name="ism"
+                      label={areaUnits[0]}
+                      value={values.ism}
+                      selected={values.ism}
+                    />
+                    <RadioButton
+                      name="isft"
+                      label={areaUnits[1]}
+                      value={values.isft}
+                      selected={values.isft}
+                    />
+                  </Group>
                   <Select
                     name="rooms"
                     words={this.props.words}
@@ -341,21 +368,61 @@ class AddRealEstateScreen extends React.Component<any, any> {
                     value={values.bathrooms}
                     onChange={setFieldValue}
                   />
-                  <Input
-                    rtl={lang === 'ar' ? true : false}
-                    num
-                    name="price"
-                    label={word.price}
-                    value={values.price}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.price && errors.price}
-                    keyboardType="number-pad"
-                    height={40}
-                  />
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection:
+                        lang === 'ar' && Platform.OS !== 'android'
+                          ? 'row-reverse'
+                          : 'row',
+                      justifyContent: 'center',
+                      alignItems: 'flex-end'
+                    }}
+                  >
+                    <View
+                      style={{
+                        flex: 1,
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Input
+                        rtl={lang === 'ar' ? true : false}
+                        num
+                        name="price"
+                        label={word.price}
+                        value={values.price}
+                        onChange={setFieldValue}
+                        onTouch={setFieldTouched}
+                        outerStyle={[styles.outerStyle, { paddingBottom: 5 }]}
+                        innerStyle={[
+                          styles.innerStyle,
+                          { width: (width - 40) / 2 - 20 }
+                        ]}
+                        labelStyle={styles.labelStyle}
+                        error={touched.price && errors.price}
+                        keyboardType="number-pad"
+                        height={40}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        flex: 1,
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Select
+                        name="currency"
+                        nosubLabel={true}
+                        width={(width - 40) / 2 - 20}
+                        value={values.currency}
+                        data={currencyTypes}
+                        label={word.currency}
+                        onChange={setFieldValue}
+                        words={this.props.words}
+                        lang={this.props.lang}
+                      />
+                    </View>
+                  </View>
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     num

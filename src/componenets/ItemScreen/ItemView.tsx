@@ -66,6 +66,9 @@ class ItemView extends React.Component<any, any> {
     isScrollEnable: true,
     isModelVisible: false,
     message: null,
+    id: null,
+    name: null,
+    body: null,
     imageIndex: 0,
     scrollY: new Animated.Value(0),
 
@@ -169,21 +172,43 @@ class ItemView extends React.Component<any, any> {
     });
   };
 
+  closeReplay = () => {
+    this.setState({
+      inputBarText: '',
+      id: null,
+      name: null,
+      body: null
+    });
+    this.scrollView.scrollToEnd({ animated: true });
+  };
+
   async sendMessage({ postId, ownerId, postTitle, userName }: any) {
     if (this.state.inputBarText === '') {
       return null;
     }
+    const replayto =
+      this.state.name && this.state.body
+        ? {
+            id: this.state.id,
+            name: this.state.name,
+            body: this.state.body
+          }
+        : undefined;
     await this.props.createComment({
       variables: {
         postId,
         body: this.state.inputBarText,
+        replayto,
         ownerId,
         postTitle,
         userName
       }
     });
     this.setState({
-      inputBarText: ''
+      inputBarText: '',
+      id: null,
+      name: null,
+      body: null
     });
     this.scrollView.scrollToEnd({ animated: true });
   }
@@ -217,8 +242,8 @@ class ItemView extends React.Component<any, any> {
     this.setState({ isModelVisible: true, imageIndex: i });
   };
 
-  replayComment = (uname: any) => {
-    this.setState({ inputBarText: `@${uname} ` });
+  replayComment = ({ id, name, body }: any) => {
+    this.setState({ id, name, body });
     this.childRef.current.getFocus();
   };
 
@@ -407,10 +432,7 @@ class ItemView extends React.Component<any, any> {
             <View>
               <PhotoSlider
                 photos={photos}
-                finalRatio={post.finalRatio}
                 ratio={post.ratio}
-                EnableScroll={this.EnableScroll}
-                DisableScroll={this.DisableScroll}
                 showModal={this.showModal}
               />
               <Modal
@@ -674,7 +696,13 @@ class ItemView extends React.Component<any, any> {
                   : this.props.user.uniquename
               });
             }}
+            replay={{
+              id: this.state.id,
+              name: this.state.name,
+              body: this.state.body
+            }}
             ref={this.childRef}
+            closeReplay={this.closeReplay}
             onChangeText={(text: string) => this.onChangeInputBarText(text)}
             text={this.state.inputBarText}
             autoFocus={true}

@@ -8,4 +8,4 @@ export const currencyTypes = [
   { id: 7, name: 'AED' },
   { id: 8, name: 'EURO' }
 ];
-export const spaceUnits = [{ id: 1, name: 'm' }, { id: 2, name: 'ft' }];
+export const areaUnits = ['m', 'ft'];
