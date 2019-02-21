@@ -28,7 +28,8 @@ import {
   Group,
   CheckBox,
   Title,
-  RadioButton
+  RadioButton,
+  Select
 } from '../../../lib';
 
 import { getPureNumber } from '../../../utils/call';
@@ -87,6 +88,7 @@ class AddJobScreen extends React.Component<any, any> {
     const {
       title,
       body,
+      kind,
       phone,
       jobTitle,
       jobIndustry,
@@ -112,6 +114,7 @@ class AddJobScreen extends React.Component<any, any> {
         title,
         body,
         category,
+        kind,
         photos,
         isrtl,
         phone,
@@ -146,6 +149,9 @@ class AddJobScreen extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { lang, user } = this.props;
+    const category = this.props.navigation.getParam('item');
+    const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
+
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message
@@ -162,6 +168,7 @@ class AddJobScreen extends React.Component<any, any> {
               initialValues={{
                 title: '',
                 body: '',
+                kind: '',
                 photos: [],
                 phone: getPureNumber(user.phone),
                 jobTitle: '',
@@ -202,6 +209,19 @@ class AddJobScreen extends React.Component<any, any> {
               }: any) => (
                 <React.Fragment>
                   <Title width={width - 40}>{word.addnewad}</Title>
+                  {kinds.length > 0 && (
+                    <Select
+                      name="kind"
+                      required
+                      value={values.kind}
+                      data={kinds}
+                      label={word.type}
+                      onChange={setFieldValue}
+                      words={this.props.words}
+                      values={values}
+                      lang={lang}
+                    />
+                  )}
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     name="title"
@@ -457,6 +477,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   words: state.glob.language.words,
+  kind: state.glob.language.kind,
   user: state.user.user
 });
 

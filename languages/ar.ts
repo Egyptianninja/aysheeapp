@@ -10,8 +10,8 @@ export default {
     {
       id: 2,
       sort: 5,
-      name: 'أجهزة منزلية',
-      nameGlob: 'أجهزة منزلية, Electronics, Electronics'
+      name: 'كمبيوتر وكاميرات',
+      nameGlob: 'كمبيوتر وكاميرات, PC & Camera, PC & Camera'
     },
     {
       id: 3,
@@ -34,8 +34,8 @@ export default {
     {
       id: 6,
       sort: 11,
-      name: 'كمبيوتر وكاميرات',
-      nameGlob: 'كمبيوتر وكاميرات, PC & Camera, PC & Camera'
+      name: 'أجهزة منزلية',
+      nameGlob: 'أجهزة منزلية, Electronics, Electronics'
     },
     {
       id: 7,
@@ -108,8 +108,6 @@ export default {
     { pid: 1, id: 62, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 2, id: 5, name: 'كاميرا', nameGlob: 'كاميرا' },
-    { pid: 2, id: 6, name: 'إلكترونيات منزلية', nameGlob: 'إلكترونيات منزلية' },
-
     {
       pid: 2,
       id: 8,
@@ -150,12 +148,6 @@ export default {
       nameGlob: 'Job Opportunities, وظائف شاغرة'
     },
 
-    { pid: 6, id: 83, name: 'حاسوب ولوازمه', nameGlob: 'حاسوب ولوازمه' },
-    { pid: 6, id: 84, name: 'كاميرات', nameGlob: 'كاميرات' },
-    { pid: 6, id: 85, name: 'أنظمة صوت', nameGlob: 'أنظمة صوت' },
-    { pid: 6, id: 86, name: 'أجهزة ألعاب', nameGlob: 'أجهزة ألعاب' },
-    { pid: 6, id: 87, name: 'أخرى', nameGlob: 'أخرى' },
-
     {
       pid: 9,
       id: 81,
@@ -179,6 +171,20 @@ export default {
     { pid: 10, id: 95, name: 'جبس ودهانات', nameGlob: 'جبس ودهانات' },
     { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
     { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
+
+    { pid: 6, id: 98, name: 'أل جي', nameGlob: 'أل جي' },
+    { pid: 6, id: 99, name: 'سامسونج', nameGlob: 'سامسونج' },
+    { pid: 6, id: 100, name: 'سوني', nameGlob: 'سوني' },
+    { pid: 6, id: 101, name: 'باناسونيك', nameGlob: 'باناسونيك' },
+    { pid: 6, id: 102, name: 'فيزيو', nameGlob: 'فيزيو' },
+    { pid: 6, id: 103, name: 'هنسز', nameGlob: 'هنسز' },
+    { pid: 6, id: 104, name: 'باناسونيك ', nameGlob: 'باناسونيك ' },
+    { pid: 6, id: 105, name: 'توشيبا', nameGlob: 'توشيبا' },
+    { pid: 6, id: 106, name: 'فيليبس', nameGlob: 'فيليبس' },
+    { pid: 6, id: 107, name: 'شارب', nameGlob: 'شارب' },
+    { pid: 6, id: 108, name: 'سانيو', nameGlob: 'سانيو' },
+    { pid: 6, id: 109, name: 'جي في سي', nameGlob: 'جي في سي' },
+    { pid: 6, id: 110, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 12, id: 18, name: 'كتب أطفال', nameGlob: 'كتب أطفال' },
     {
@@ -228,14 +234,15 @@ export default {
     { pid: 18, id: 49, name: 'حبوب', nameGlob: 'حبوب' },
     { pid: 18, id: 50, name: 'أخرى', nameGlob: 'أخرى' },
 
-    { pid: 8, id: 51, name: 'رجالي', nameGlob: 'رجالي' },
-    { pid: 8, id: 52, name: 'نسائي', nameGlob: 'نسائي' },
+    { pid: 8, id: 51, name: 'ساعات', nameGlob: 'ساعات' },
+    { pid: 8, id: 52, name: 'نظارات', nameGlob: 'نظارات' },
     { pid: 8, id: 53, name: 'شنط', nameGlob: 'شنط' },
     { pid: 8, id: 54, name: 'عطورات', nameGlob: 'عطورات' },
     { pid: 8, id: 55, name: 'إدوات تجميل', nameGlob: 'إدوات تجميل' },
     { pid: 8, id: 56, name: 'مجوهرات', nameGlob: 'مجوهرات' },
     { pid: 8, id: 57, name: 'هدايا', nameGlob: 'هدايا' },
-    { pid: 8, id: 58, name: 'أخرى', nameGlob: 'أخرى' },
+    { pid: 8, id: 58, name: 'ادوات زينة', nameGlob: 'ادوات زينة' },
+    { pid: 8, id: 111, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 14, id: 70, name: 'سامسونج', nameGlob: 'سامسونج' },
     { pid: 14, id: 71, name: 'أبل', nameGlob: 'أبل' },
@@ -258,20 +265,6 @@ export default {
     { pid: 5, id: 6, name: 'غو برو', nameGlob: 'غو برو' },
     { pid: 5, id: 7, name: 'ليسيا', nameGlob: 'ليسيا' },
     { pid: 5, id: 8, name: 'أخرى', nameGlob: 'أخرى' },
-
-    { pid: 6, id: 9, name: 'أل جي', nameGlob: 'أل جي' },
-    { pid: 6, id: 10, name: 'سامسونج', nameGlob: 'سامسونج' },
-    { pid: 6, id: 11, name: 'سوني', nameGlob: 'سوني' },
-    { pid: 6, id: 12, name: 'باناسونيك', nameGlob: 'باناسونيك' },
-    { pid: 6, id: 13, name: 'فيزيو', nameGlob: 'فيزيو' },
-    { pid: 6, id: 14, name: 'هنسز', nameGlob: 'هنسز' },
-    { pid: 6, id: 15, name: 'باناسونيك ', nameGlob: 'باناسونيك ' },
-    { pid: 6, id: 16, name: 'توشيبا', nameGlob: 'توشيبا' },
-    { pid: 6, id: 17, name: 'فيليبس', nameGlob: 'فيليبس' },
-    { pid: 6, id: 18, name: 'شارب', nameGlob: 'شارب' },
-    { pid: 6, id: 19, name: 'سانيو', nameGlob: 'سانيو' },
-    { pid: 6, id: 20, name: 'جي في سي', nameGlob: 'جي في سي' },
-    { pid: 6, id: 21, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 8, id: 31, name: 'لينوفو', nameGlob: 'لينوفو' },
     { pid: 8, id: 32, name: 'أتش بي', nameGlob: 'أتش بي ' },
@@ -451,6 +444,8 @@ export default {
     delete: 'حذف',
     cancel: 'الغاء',
     addeleted: 'تم حذف الإعلان',
+    isforwomen: 'نسائي',
+    isforman: 'رجالي',
 
     labels: {
       categoryId: 'المجموعة',

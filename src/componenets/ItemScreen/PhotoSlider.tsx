@@ -2,12 +2,14 @@ import * as React from 'react';
 import {
   StyleSheet,
   View,
+  Image,
   ScrollView,
   Dimensions,
   Animated,
   TouchableWithoutFeedback
 } from 'react-native';
-import { Image } from 'react-native-expo-image-cache';
+import { Photo } from '../../lib';
+// import { Image } from 'react-native-expo-image-cache';
 // import { preview } from '../../constants';
 const { width } = Dimensions.get('window');
 
@@ -16,7 +18,8 @@ export default class PhotoSlider extends React.Component<any, any> {
     super(props);
     this.state = {
       animatedScroll: new Animated.Value(0),
-      position: 0
+      position: 0,
+      loading: false
     };
   }
 
@@ -48,30 +51,19 @@ export default class PhotoSlider extends React.Component<any, any> {
           ])}
         >
           {photos.map((image: any, i: any) => {
-            const preview = { uri: image.preview };
             const uri = image.url;
-
             return (
               <TouchableWithoutFeedback
                 onPress={() => this.props.showModal(i)}
                 key={i}
               >
-                <View
-                  style={{
-                    width,
-                    height,
-                    overflow: 'hidden'
-                  }}
-                >
-                  <Image
+                <View>
+                  <Photo
+                    uri={uri}
+                    width={width}
+                    height={height}
+                    overflow="hidden"
                     resizeMode="contain"
-                    transitionDuration={300}
-                    style={{
-                      width,
-                      height,
-                      resizeMode: 'cover'
-                    }}
-                    {...{ preview, uri }}
                   />
                 </View>
               </TouchableWithoutFeedback>

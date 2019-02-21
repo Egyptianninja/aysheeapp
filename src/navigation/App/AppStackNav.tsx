@@ -17,8 +17,6 @@ import {
   AddJobScreen,
   AddCarScreen,
   AddPartsScreen,
-  AddRequestServiceScreen,
-  AddJobRequestScreen,
   UserProfileScreen,
   MyFavScreen,
   CameraScreen
@@ -78,15 +76,6 @@ export const AppStackNavigator = createStackNavigator({
       headerTitleStyle: styles.headerTitleStyle
     })
   },
-  AddRequestServiceScreen: {
-    screen: AddRequestServiceScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
-    })
-  },
   AddRealEstateScreen: {
     screen: AddRealEstateScreen,
     navigationOptions: ({ navigation }: any) => ({
@@ -123,15 +112,6 @@ export const AppStackNavigator = createStackNavigator({
       headerTitleStyle: styles.headerTitleStyle
     })
   },
-  AddJobRequestScreen: {
-    screen: AddJobRequestScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
-    })
-  },
   MyPostsScreen: {
     screen: PostTabsStack,
     navigationOptions: () => ({
@@ -153,7 +133,7 @@ export const AppStackNavigator = createStackNavigator({
     })
   },
   NotificationsScreen: {
-    screen: CameraScreen,
+    screen: NotificationsScreen,
     navigationOptions: () => ({
       headerTintColor: '#555'
     })

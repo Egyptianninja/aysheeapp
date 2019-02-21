@@ -15,6 +15,8 @@ import Message from './elements/Message';
 import RadioButton from './elements/RadioButton';
 import Select from './elements/Select';
 import Title from './elements/Title';
+import Photo from './elements/Photo';
+import LoadingView from './elements/Common/LoadingView';
 
 export {
   Button,
@@ -33,5 +35,7 @@ export {
   AutoInput,
   FloatButton,
   KeyboardSpacer,
-  Logo
+  Logo,
+  Photo,
+  LoadingView
 };

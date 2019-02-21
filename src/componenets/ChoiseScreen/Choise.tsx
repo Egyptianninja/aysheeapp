@@ -10,13 +10,9 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
         } else if (item.id === 1) {
           navigation.navigate('AddCarScreen', { item });
         } else if (item.id === 5) {
-          navigation.navigate('AddJobRequestScreen', { item });
-        } else if (item.id === 6) {
           navigation.navigate('AddJobScreen', { item });
         } else if (item.id === 9) {
           navigation.navigate('AddServiceScreen', { item });
-        } else if (item.id === 10) {
-          navigation.navigate('AddRequestServiceScreen', { item });
         } else if (item.id === 15) {
           navigation.navigate('AddPartsScreen', { item });
         } else {

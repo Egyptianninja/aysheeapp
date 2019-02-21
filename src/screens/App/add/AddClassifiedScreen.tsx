@@ -53,6 +53,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
   noNew = [18, 17];
   noPrice = [15];
   noWaranty = [18, 17, 15, 13, 12];
+  acc = [8];
 
   async componentWillMount() {
     const pushToken = await registerForPushNotificationsAsync();
@@ -152,6 +153,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
       kind,
       eBrand,
       price,
+      isforman,
       isnew,
       issale,
       iswarranty,
@@ -179,6 +181,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
         photos,
         isrtl,
         issale,
+        isforman: this.acc.includes(category.id) ? isforman : undefined,
         isnew: this.noNew.includes(category.id) ? undefined : isnew,
         price: this.noPrice.includes(category.id) ? 0 : Number(price),
         iswarranty: this.noWaranty.includes(category.id)
@@ -239,6 +242,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
                 eBrand: '',
                 photos: [],
                 price: '',
+                isforman: false,
+                isforwomen: true,
                 isnew: false,
                 isold: true,
                 issale: true,
@@ -287,6 +292,27 @@ class AddClassifiedScreen extends React.Component<any, any> {
                     autoCorrect={false}
                     height={40}
                   />
+                  {this.acc.includes(category.id) && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={lang === 'ar' ? true : false}
+                    >
+                      <RadioButton
+                        name="isforwomen"
+                        label={word.isforwomen}
+                        value={values.isforwomen}
+                        selected={values.isforwomen}
+                      />
+                      <RadioButton
+                        name="isforman"
+                        label={word.isforman}
+                        value={values.isforman}
+                        selected={values.isforman}
+                      />
+                    </Group>
+                  )}
                   {kinds.length > 0 && (
                     <Select
                       name="kind"

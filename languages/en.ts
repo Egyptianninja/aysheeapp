@@ -10,8 +10,8 @@ export default {
     {
       id: 2,
       sort: 5,
-      name: 'Electronics',
-      nameGlob: 'الكترونيات, Electronics, Electronics'
+      name: 'PC & Camera',
+      nameGlob: 'كمبيوتر وكاميرات, PC & Camera, PC & Camera'
     },
     {
       id: 3,
@@ -34,8 +34,8 @@ export default {
     {
       id: 6,
       sort: 11,
-      name: 'PC & Camera',
-      nameGlob: 'كمبيوتر وكاميرات, PC & Camera, PC & Camera'
+      name: 'Electronics',
+      nameGlob: 'أجهزة منزلية, Electronics, Electronics'
     },
     {
       id: 7,
@@ -47,7 +47,7 @@ export default {
       id: 8,
       sort: 6,
       name: 'Accessories',
-      nameGlob: 'اكسسوارات, Accessories, Accessories'
+      nameGlob: 'الموضة والجمال, Accessories, Accessories'
     },
     {
       id: 9,
@@ -99,8 +99,6 @@ export default {
     { pid: 1, id: 62, name: 'Other', nameGlob: 'Other' },
 
     { pid: 2, id: 5, name: 'Camera', nameGlob: 'Camera' },
-    { pid: 2, id: 6, name: 'Home Electronics', nameGlob: 'Home Electronics' },
-
     { pid: 2, id: 8, name: 'PC & Accessories', nameGlob: 'PC & Accessories' },
     { pid: 2, id: 9, name: 'Sounds Systems', nameGlob: 'Sounds Systems' },
     { pid: 2, id: 10, name: 'Video Games', nameGlob: 'Video Games' },
@@ -129,13 +127,6 @@ export default {
       name: 'Job Opportunities',
       nameGlob: 'Job Opportunities, وظائف شاغرة'
     },
-
-    { pid: 6, id: 83, name: 'PC', nameGlob: 'حاسوب ولوازمه' },
-    { pid: 6, id: 84, name: 'Camera', nameGlob: 'كاميرات' },
-    { pid: 6, id: 85, name: 'Sound System', nameGlob: 'أنظمة صوت' },
-    { pid: 6, id: 86, name: 'Game Console', nameGlob: 'أجهزة ألعاب' },
-    { pid: 6, id: 87, name: 'Other', nameGlob: 'أخرى' },
-
     {
       pid: 9,
       id: 81,
@@ -159,6 +150,20 @@ export default {
     { pid: 10, id: 95, name: 'جبس ودهانات', nameGlob: 'جبس ودهانات' },
     { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
     { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
+
+    { pid: 6, id: 98, name: 'LG', nameGlob: 'LG' },
+    { pid: 6, id: 99, name: 'Samsung', nameGlob: 'Samsung' },
+    { pid: 6, id: 100, name: 'Sony', nameGlob: 'Sony' },
+    { pid: 6, id: 101, name: 'Panasonic', nameGlob: 'Panasonic' },
+    { pid: 6, id: 102, name: 'Vizio', nameGlob: 'Vizio' },
+    { pid: 6, id: 103, name: 'Hisense', nameGlob: 'Hisense' },
+    { pid: 6, id: 104, name: 'Panasonic ', nameGlob: 'Panasonic ' },
+    { pid: 6, id: 105, name: 'Toshiba', nameGlob: 'Toshiba' },
+    { pid: 6, id: 106, name: 'Philips', nameGlob: 'Philips' },
+    { pid: 6, id: 107, name: 'Sharp', nameGlob: 'Sharp' },
+    { pid: 6, id: 108, name: 'Sanyo', nameGlob: 'Sanyo' },
+    { pid: 6, id: 109, name: 'JVC', nameGlob: 'JVC' },
+    { pid: 6, id: 110, name: 'Other', nameGlob: 'Other' },
 
     { pid: 12, id: 18, name: 'Kids Books', nameGlob: 'Kids Books' },
     {
@@ -208,14 +213,15 @@ export default {
     { pid: 18, id: 49, name: 'Cereals', nameGlob: 'Cereals' },
     { pid: 18, id: 50, name: 'Other', nameGlob: 'Other' },
 
-    { pid: 8, id: 51, name: 'Man', nameGlob: 'Man' },
-    { pid: 8, id: 52, name: 'Woman', nameGlob: 'Woman' },
+    { pid: 8, id: 51, name: 'ساعات', nameGlob: 'ساعات' },
+    { pid: 8, id: 52, name: 'نظارات', nameGlob: 'نظارات' },
     { pid: 8, id: 53, name: 'Bags', nameGlob: 'Bags' },
     { pid: 8, id: 54, name: 'Perfumes', nameGlob: 'Perfumes' },
     { pid: 8, id: 55, name: 'Makeup', nameGlob: 'Makeup' },
     { pid: 8, id: 56, name: 'Jewelry', nameGlob: 'Jewelry' },
     { pid: 8, id: 57, name: 'Gifts', nameGlob: 'Gifts' },
-    { pid: 8, id: 58, name: 'Other', nameGlob: 'Other' },
+    { pid: 8, id: 58, name: 'ادوات زينة', nameGlob: 'ادوات زينة' },
+    { pid: 8, id: 111, name: 'Other', nameGlob: 'Other' },
 
     { pid: 14, id: 70, name: 'Samsung', nameGlob: 'Samsung' },
     { pid: 14, id: 71, name: 'Apple', nameGlob: 'Apple' },
@@ -237,20 +243,6 @@ export default {
     { pid: 5, id: 6, name: 'GoPro', nameGlob: 'GoPro' },
     { pid: 5, id: 7, name: 'Leica', nameGlob: 'Leica' },
     { pid: 5, id: 8, name: 'Other', nameGlob: 'Other' },
-
-    { pid: 6, id: 9, name: 'LG', nameGlob: 'LG' },
-    { pid: 6, id: 10, name: 'Samsung', nameGlob: 'Samsung' },
-    { pid: 6, id: 11, name: 'Sony', nameGlob: 'Sony' },
-    { pid: 6, id: 12, name: 'Panasonic', nameGlob: 'Panasonic' },
-    { pid: 6, id: 13, name: 'Vizio', nameGlob: 'Vizio' },
-    { pid: 6, id: 14, name: 'Hisense', nameGlob: 'Hisense' },
-    { pid: 6, id: 15, name: 'Panasonic ', nameGlob: 'Panasonic ' },
-    { pid: 6, id: 16, name: 'Toshiba', nameGlob: 'Toshiba' },
-    { pid: 6, id: 17, name: 'Philips', nameGlob: 'Philips' },
-    { pid: 6, id: 18, name: 'Sharp', nameGlob: 'Sharp' },
-    { pid: 6, id: 19, name: 'Sanyo', nameGlob: 'Sanyo' },
-    { pid: 6, id: 20, name: 'JVC', nameGlob: 'JVC' },
-    { pid: 6, id: 21, name: 'Other', nameGlob: 'Other' },
 
     { pid: 8, id: 31, name: 'Lenovo', nameGlob: 'Lenovo' },
     { pid: 8, id: 32, name: 'HP', nameGlob: 'HP ' },
@@ -429,6 +421,8 @@ export default {
     delete: 'Delete',
     cancel: 'Cancel',
     addeleted: 'Item deleted',
+    isforwomen: 'Women',
+    isforman: 'Man',
 
     labels: {
       categoryId: 'Category',

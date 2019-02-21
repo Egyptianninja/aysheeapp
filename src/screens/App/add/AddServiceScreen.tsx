@@ -78,7 +78,7 @@ class AddServiceScreen extends React.Component<any, any> {
     );
     const category = this.props.navigation.getParam('item');
     delete category.sort;
-    const { title, body, phone, service, location } = values;
+    const { title, body, phone, service, kind, location } = values;
     const isrtl = isArabic(title);
     const loc: any = location ? this.state.location : null;
     let trueLocation = null;
@@ -95,6 +95,7 @@ class AddServiceScreen extends React.Component<any, any> {
         title,
         body,
         category,
+        kind,
         photos,
         isrtl,
         phone,
@@ -124,6 +125,8 @@ class AddServiceScreen extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { lang, user } = this.props;
+    const category = this.props.navigation.getParam('item');
+    const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message
@@ -140,6 +143,7 @@ class AddServiceScreen extends React.Component<any, any> {
               initialValues={{
                 title: '',
                 body: '',
+                kind: '',
                 photos: [],
                 phone: getPureNumber(user.phone),
                 service: '',
@@ -169,6 +173,7 @@ class AddServiceScreen extends React.Component<any, any> {
               }: any) => (
                 <React.Fragment>
                   <Title width={width - 40}>{word.addnewad}</Title>
+
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     name="title"
@@ -184,6 +189,19 @@ class AddServiceScreen extends React.Component<any, any> {
                     autoCorrect={false}
                     height={40}
                   />
+                  {kinds.length > 0 && (
+                    <Select
+                      name="kind"
+                      required
+                      value={values.kind}
+                      data={kinds}
+                      label={word.type}
+                      onChange={setFieldValue}
+                      words={this.props.words}
+                      values={values}
+                      lang={lang}
+                    />
+                  )}
                   <Select
                     name="service"
                     required
@@ -342,6 +360,7 @@ const mapStateToProps = (state: any) => ({
   service: state.glob.language.service,
   lang: state.glob.languageName,
   words: state.glob.language.words,
+  kind: state.glob.language.kind,
   user: state.user.user
 });
 

@@ -14,7 +14,7 @@ import {
 import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
-import { KeyboardSpacer } from '../../lib';
+import { KeyboardSpacer, LoadingView } from '../../lib';
 import secrets from '../../constants/secrets';
 import {
   StyleSheet,
@@ -164,10 +164,7 @@ class ItemView extends React.Component<any, any> {
       return {
         url: `http://res.cloudinary.com/${
           secrets.upload.CLOUD_NAME
-        }/image/upload/w_1080/${photo.substring(0, 20)}`,
-        preview: `http://res.cloudinary.com/${
-          secrets.upload.CLOUD_NAME
-        }/image/upload/w_108/${photo.substring(0, 20)}`
+        }/image/upload/w_1080/${photo.substring(0, 20)}`
       };
     });
   };
@@ -425,16 +422,7 @@ class ItemView extends React.Component<any, any> {
                   imageUrls={photos}
                   index={this.state.imageIndex}
                   loadingRender={() => (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        top: height / 2 - 15,
-                        left: width / 2 - 30,
-                        zIndex: 100
-                      }}
-                    >
-                      <Loading />
-                    </View>
+                    <LoadingView width={width} height={height} />
                   )}
                   enableSwipeDown={true}
                   swipeDownThreshold={100}
