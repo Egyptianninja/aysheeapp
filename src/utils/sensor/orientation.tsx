@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Accelerometer } from 'expo';
 
-export default class Orientation extends React.Component<any, any> {
+export default class AccelerometerSensor extends React.Component<any, any> {
   subscription: any;
   state = {
     orientation: null
