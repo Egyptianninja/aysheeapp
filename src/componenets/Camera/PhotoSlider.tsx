@@ -49,7 +49,7 @@ export default class PhotoSlider extends React.Component<any, any> {
           {photos.map((image: any, i: any) => {
             const uri = image.uri;
             return (
-              <View>
+              <View key={image.uri}>
                 <Photo
                   uri={uri}
                   width={this.props.width}

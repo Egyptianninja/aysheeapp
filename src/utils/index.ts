@@ -29,7 +29,8 @@ import {
   getLang,
   getLocale,
   filterOptions,
-  getCountryFromLatLon
+  getCountryFromLatLon,
+  Orientation
 } from './common';
 import { since } from './since';
 import {
@@ -89,5 +90,6 @@ export {
   DotIndicator,
   getUserLocation,
   getCountryFromLatLon,
-  DotIndicatorSmall
+  DotIndicatorSmall,
+  Orientation
 };

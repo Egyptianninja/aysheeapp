@@ -10,6 +10,7 @@ import { isArabic, arabicToNum } from './arabic';
 import { nameToColor } from './color';
 import { getLang, getLocale } from './getlang';
 import { filterOptions } from './general';
+import Orientation from './orientation';
 
 export {
   getLocation,
@@ -23,5 +24,6 @@ export {
   getLang,
   getLocale,
   filterOptions,
-  getCountryFromLatLon
+  getCountryFromLatLon,
+  Orientation
 };

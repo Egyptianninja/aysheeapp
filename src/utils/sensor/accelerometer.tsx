@@ -36,17 +36,9 @@ export default class AccelerometerSensor extends React.Component<any, any> {
       const a = round(x);
       const b = round(y);
       const c = round(z);
-      if (x > -ac && x < ac && y < 0 && this.state.orientation !== 'pu') {
+      if (x > -ac && x < ac && y < -ac && this.state.orientation !== 'pu') {
         this.setState({ orientation: 'pu' });
         // this.props.orientation('pu');
-      } else if (
-        x > -ac &&
-        x < ac &&
-        y > 0 &&
-        this.state.orientation !== 'pd'
-      ) {
-        this.setState({ orientation: 'pd' });
-        // this.props.orientation('pd');
       } else if (x < -ac && this.state.orientation !== 'll') {
         this.setState({ orientation: 'll' });
         // this.props.orientation('ll');

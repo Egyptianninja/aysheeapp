@@ -8,13 +8,15 @@ import {
   Platform,
   StatusBar,
   Slider,
-  ScrollView
+  ScrollView,
+  Animated,
+  Easing
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Camera, Permissions, Constants } from 'expo';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Camera, Permissions, ImageManipulator, Constants } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
-
+import { Orientation } from '../../utils';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
 
@@ -22,6 +24,7 @@ export default class CameraScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
+  spinValue = new Animated.Value(0);
   camera: any;
   state = {
     isModalVisible: false,
@@ -29,7 +32,9 @@ export default class CameraScreen extends React.Component<any, any> {
     type: Camera.Constants.Type.back,
     flash: Camera.Constants.FlashMode.auto,
     images: [],
-    zoom: 0
+    orientation: null,
+    zoom: 0,
+    angle: 0
   };
 
   async componentDidMount() {
@@ -38,11 +43,31 @@ export default class CameraScreen extends React.Component<any, any> {
   }
 
   snap = async () => {
+    const { orientation } = this.state;
     if (this.camera && this.state.images.length < 6) {
-      const photo = await this.camera.takePictureAsync({});
-      const images: any = this.state.images;
-      images.push(photo);
-      this.setState({ images });
+      if (orientation === 'll') {
+        const photo = await this.camera.takePictureAsync({});
+        const image = await ImageManipulator.manipulateAsync(photo.uri, [
+          { rotate: -90 }
+        ]);
+        const images: any = this.state.images;
+        images.push(image);
+        this.setState({ images });
+      }
+      if (orientation === 'lr') {
+        const photo = await this.camera.takePictureAsync({});
+        const image = await ImageManipulator.manipulateAsync(photo.uri, [
+          { rotate: 90 }
+        ]);
+        const images: any = this.state.images;
+        images.push(image);
+        this.setState({ images });
+      } else if (orientation === 'pu') {
+        const photo = await this.camera.takePictureAsync({});
+        const images: any = this.state.images;
+        images.push(photo);
+        this.setState({ images });
+      }
     }
   };
 
@@ -109,12 +134,36 @@ export default class CameraScreen extends React.Component<any, any> {
     });
   };
 
-  render() {
-    console.log(this.state.images);
+  orientation = async (orientation: any) => {
+    await this.setState({ orientation });
+    if (orientation === 'pu') {
+      this.setState({ angle: 0 });
+      this.spinIcon(0);
+    } else if (orientation === 'll') {
+      this.spinIcon(1);
+    } else if (orientation === 'lr') {
+      this.spinIcon(-1);
+    }
+  };
 
+  spinIcon = (angle: any) => {
+    Animated.timing(this.spinValue, {
+      toValue: angle,
+      duration: 500,
+      easing: Easing.linear
+    }).start();
+  };
+
+  render() {
     const { hasCameraPermission } = this.state;
     const lang = this.props.navigation.getParam('lang');
     const ardroid = Platform.OS === 'android' && lang === 'ar';
+
+    const spin = this.spinValue.interpolate({
+      inputRange: [-1, 0, 1],
+      outputRange: ['-90deg', '0deg', '90deg']
+    });
+
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
@@ -123,6 +172,7 @@ export default class CameraScreen extends React.Component<any, any> {
       return (
         <View style={{ flex: 1, backgroundColor: '#000' }}>
           <StatusBar backgroundColor="#000" barStyle="dark-content" />
+          <Orientation accuracy={0.8} orientation={this.orientation} />
           <View
             style={{
               width: '100%',
@@ -139,7 +189,9 @@ export default class CameraScreen extends React.Component<any, any> {
               onPress={() => this.back()}
               style={{ paddingHorizontal: 20 }}
             >
-              <Ionicons name="ios-arrow-back" size={30} color="#fff" />
+              <Animated.View style={{ transform: [{ rotate: spin }] }}>
+                <Ionicons name="ios-arrow-back" size={30} color="#fff" />
+              </Animated.View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
@@ -152,7 +204,9 @@ export default class CameraScreen extends React.Component<any, any> {
               }}
               style={{ paddingHorizontal: 20 }}
             >
-              <Ionicons name="ios-reverse-camera" size={40} color="#fff" />
+              <Animated.View style={{ transform: [{ rotate: spin }] }}>
+                <Ionicons name="ios-reverse-camera" size={40} color="#fff" />
+              </Animated.View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
@@ -167,19 +221,21 @@ export default class CameraScreen extends React.Component<any, any> {
               }}
               style={{ paddingHorizontal: 20 }}
             >
-              <Ionicons
-                name={
-                  this.state.flash === Camera.Constants.FlashMode.off
-                    ? 'ios-flash-off'
-                    : 'ios-flash'
-                }
-                size={26}
-                color={
-                  this.state.flash === Camera.Constants.FlashMode.on
-                    ? 'gold'
-                    : '#fff'
-                }
-              />
+              <Animated.View style={{ transform: [{ rotate: spin }] }}>
+                <Ionicons
+                  name={
+                    this.state.flash === Camera.Constants.FlashMode.off
+                      ? 'ios-flash-off'
+                      : 'ios-flash'
+                  }
+                  size={26}
+                  color={
+                    this.state.flash === Camera.Constants.FlashMode.on
+                      ? 'gold'
+                      : '#fff'
+                  }
+                />
+              </Animated.View>
             </TouchableOpacity>
           </View>
           <Camera
@@ -245,9 +301,24 @@ export default class CameraScreen extends React.Component<any, any> {
                 onPress={() => {
                   this.snap();
                 }}
-                style={{ paddingHorizontal: 20 }}
+                style={{ padding: 10 }}
               >
-                <Ionicons name="ios-radio-button-on" size={86} color="#fff" />
+                <Animated.View style={{ transform: [{ rotate: spin }] }}>
+                  <View
+                    style={{
+                      width: 80,
+                      height: 80,
+                      backgroundColor: '#000',
+                      borderRadius: 40,
+                      borderWidth: 5,
+                      borderColor: '#fff',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <Ionicons name="ios-camera" size={55} color="#fff" />
+                  </View>
+                </Animated.View>
               </TouchableOpacity>
             </View>
 
@@ -262,9 +333,11 @@ export default class CameraScreen extends React.Component<any, any> {
                 onPress={() => {
                   this.proceed();
                 }}
-                style={{ paddingHorizontal: 20 }}
+                style={{ padding: 10 }}
               >
-                <Ionicons name="ios-share-alt" size={40} color="#fff" />
+                <Animated.View style={{ transform: [{ rotate: spin }] }}>
+                  <Ionicons name="ios-share-alt" size={40} color="#fff" />
+                </Animated.View>
               </TouchableOpacity>
             </View>
           </View>
@@ -302,7 +375,7 @@ export default class CameraScreen extends React.Component<any, any> {
                 >
                   <TouchableOpacity
                     onPress={() => this.setState({ isModalVisible: false })}
-                    style={{ paddingHorizontal: 20 }}
+                    style={{ paddingHorizontal: 10 }}
                   >
                     <Ionicons name="ios-close-circle" size={33} color="#fff" />
                   </TouchableOpacity>
@@ -310,13 +383,13 @@ export default class CameraScreen extends React.Component<any, any> {
                     onPress={() => {
                       //
                     }}
-                    style={{ paddingHorizontal: 20 }}
+                    style={{ paddingHorizontal: 10 }}
                   >
                     <Ionicons name="ios-refresh" size={33} color="#fff" />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => this.setState({ isModalVisible: false })}
-                    style={{ paddingHorizontal: 20 }}
+                    style={{ paddingHorizontal: 10 }}
                   >
                     <Ionicons
                       name="ios-checkmark-circle"
