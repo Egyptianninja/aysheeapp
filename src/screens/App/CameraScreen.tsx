@@ -10,7 +10,8 @@ import {
   Slider,
   ScrollView,
   Animated,
-  Easing
+  Easing,
+  CameraRoll
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { Camera, Permissions, ImageManipulator, Constants } from 'expo';
@@ -34,7 +35,7 @@ export default class CameraScreen extends React.Component<any, any> {
     images: [],
     orientation: null,
     zoom: 0,
-    angle: 0
+    position: 0
   };
 
   async componentDidMount() {
@@ -84,9 +85,14 @@ export default class CameraScreen extends React.Component<any, any> {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
 
+  getPhotoPosition = (position: any) => {
+    this.setState({ position });
+  };
+
   renderSliderImages = (images: any) => {
     return (
       <PhotoSlider
+        getPhotoPosition={this.getPhotoPosition}
         photos={images}
         width={SCREEN_WIDTH - 40}
         ratio={1.3333}
@@ -137,7 +143,6 @@ export default class CameraScreen extends React.Component<any, any> {
   orientation = async (orientation: any) => {
     await this.setState({ orientation });
     if (orientation === 'pu') {
-      this.setState({ angle: 0 });
       this.spinIcon(0);
     } else if (orientation === 'll') {
       this.spinIcon(1);
@@ -146,12 +151,18 @@ export default class CameraScreen extends React.Component<any, any> {
     }
   };
 
-  spinIcon = (angle: any) => {
+  spinIcon = (side: any) => {
     Animated.timing(this.spinValue, {
-      toValue: angle,
+      toValue: side,
       duration: 500,
       easing: Easing.linear
     }).start();
+  };
+
+  savePhotos = async (images: any) => {
+    images.map(async (image: any) => {
+      await CameraRoll.saveToCameraRoll(image.uri, 'photo');
+    });
   };
 
   render() {
@@ -257,11 +268,19 @@ export default class CameraScreen extends React.Component<any, any> {
             value={this.state.zoom}
             style={{
               position: 'absolute',
-              bottom: 100,
-              zIndex: 100,
-              width: 250,
+              bottom: SCREEN_HEGHT / 2 - 100,
+              right: SCREEN_WIDTH / 2 - 20,
+              zIndex: 150,
+              padding: 20,
+              width: 350,
               backgroundColor: 'transparent',
-              alignSelf: 'center'
+              alignSelf: 'center',
+              opacity: 0.5,
+              transform: [
+                { scaleX: 0.7 },
+                { scaleY: 0.7 },
+                { rotate: '-90deg' }
+              ]
             }}
           />
 
@@ -333,12 +352,21 @@ export default class CameraScreen extends React.Component<any, any> {
                 onPress={() => {
                   this.proceed();
                 }}
-                style={{ padding: 10 }}
               >
                 <Animated.View style={{ transform: [{ rotate: spin }] }}>
-                  <Ionicons name="ios-share-alt" size={40} color="#fff" />
+                  <Ionicons name="ios-return-right" size={65} color="#fff" />
                 </Animated.View>
               </TouchableOpacity>
+              {this.state.images.length > 0 && (
+                <TouchableOpacity
+                  onPress={async () => this.savePhotos(this.state.images)}
+                  style={{ paddingHorizontal: 5 }}
+                >
+                  <Animated.View style={{ transform: [{ rotate: spin }] }}>
+                    <Ionicons name="ios-save" size={26} color="#fff" />
+                  </Animated.View>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
           <Modal
@@ -351,7 +379,6 @@ export default class CameraScreen extends React.Component<any, any> {
           >
             <View
               style={{
-                // backgroundColor: 'red',
                 position: 'absolute',
                 bottom: 0,
                 margin: 0,
@@ -374,14 +401,34 @@ export default class CameraScreen extends React.Component<any, any> {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => this.setState({ isModalVisible: false })}
+                    onPress={() => {
+                      const images = this.state.images;
+                      if (this.state.images.length === 1) {
+                        this.setState({
+                          images: [],
+                          position: 0,
+                          isModalVisible: false
+                        });
+                      }
+                      images.splice(this.state.position, 1);
+                      this.setState({ images });
+                    }}
                     style={{ paddingHorizontal: 10 }}
                   >
-                    <Ionicons name="ios-close-circle" size={33} color="#fff" />
+                    <Ionicons name="ios-remove-circle" size={33} color="#fff" />
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => {
-                      //
+                    onPress={async () => {
+                      const currentImage: any = this.state.images[
+                        this.state.position
+                      ];
+                      const image = await ImageManipulator.manipulateAsync(
+                        currentImage.uri,
+                        [{ rotate: 90 }]
+                      );
+                      const images: any = this.state.images;
+                      images.splice(this.state.position, 1, image);
+                      this.setState({ images });
                     }}
                     style={{ paddingHorizontal: 10 }}
                   >

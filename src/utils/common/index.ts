@@ -11,6 +11,7 @@ import { nameToColor } from './color';
 import { getLang, getLocale } from './getlang';
 import { filterOptions } from './general';
 import Orientation from './orientation';
+import ZoomView from './zoomView';
 
 export {
   getLocation,
@@ -25,5 +26,6 @@ export {
   getLocale,
   filterOptions,
   getCountryFromLatLon,
-  Orientation
+  Orientation,
+  ZoomView
 };

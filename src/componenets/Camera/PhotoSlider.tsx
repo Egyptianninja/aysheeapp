@@ -23,8 +23,11 @@ export default class PhotoSlider extends React.Component<any, any> {
     const offset = e.nativeEvent.contentOffset;
     if (offset.x === 0) {
       this.setState({ position: 0 });
+      this.props.getPhotoPosition(0);
     } else {
-      this.setState({ position: Math.round(offset.x / this.props.width) });
+      const position = Math.round(offset.x / this.props.width);
+      this.setState({ position });
+      this.props.getPhotoPosition(position);
     }
   };
 

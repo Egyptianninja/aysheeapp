@@ -15,7 +15,8 @@ import {
   compressImage,
   ImagePicker,
   ImageViewer,
-  ProgressiveImage
+  ProgressiveImage,
+  flipImage
 } from './image';
 import {
   getLocation,
@@ -30,7 +31,8 @@ import {
   getLocale,
   filterOptions,
   getCountryFromLatLon,
-  Orientation
+  Orientation,
+  ZoomView
 } from './common';
 import { since } from './since';
 import {
@@ -91,5 +93,7 @@ export {
   getUserLocation,
   getCountryFromLatLon,
   DotIndicatorSmall,
-  Orientation
+  Orientation,
+  ZoomView,
+  flipImage
 };
