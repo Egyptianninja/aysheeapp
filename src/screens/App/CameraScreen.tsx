@@ -35,7 +35,8 @@ export default class CameraScreen extends React.Component<any, any> {
     images: [],
     orientation: null,
     zoom: 0,
-    position: 0
+    position: 0,
+    saved: false
   };
 
   async componentDidMount() {
@@ -43,31 +44,36 @@ export default class CameraScreen extends React.Component<any, any> {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
-  snap = async () => {
+  snap = () => {
     const { orientation } = this.state;
     if (this.camera && this.state.images.length < 6) {
       if (orientation === 'll') {
-        const photo = await this.camera.takePictureAsync({});
-        const image = await ImageManipulator.manipulateAsync(photo.uri, [
-          { rotate: -90 }
-        ]);
-        const images: any = this.state.images;
-        images.push(image);
-        this.setState({ images });
+        this.camera.takePictureAsync({}).then((ab: any) => {
+          ImageManipulator.manipulateAsync(ab.uri, [{ rotate: -90 }]).then(
+            cd => {
+              const images: any = this.state.images;
+              images.push(cd);
+              this.setState({ images });
+            }
+          );
+        });
       }
       if (orientation === 'lr') {
-        const photo = await this.camera.takePictureAsync({});
-        const image = await ImageManipulator.manipulateAsync(photo.uri, [
-          { rotate: 90 }
-        ]);
-        const images: any = this.state.images;
-        images.push(image);
-        this.setState({ images });
+        this.camera.takePictureAsync({}).then((ab: any) => {
+          ImageManipulator.manipulateAsync(ab.uri, [{ rotate: 90 }]).then(
+            cd => {
+              const images: any = this.state.images;
+              images.push(cd);
+              this.setState({ images });
+            }
+          );
+        });
       } else if (orientation === 'pu') {
-        const photo = await this.camera.takePictureAsync({});
-        const images: any = this.state.images;
-        images.push(photo);
-        this.setState({ images });
+        this.camera.takePictureAsync({}).then((ab: any) => {
+          const images: any = this.state.images;
+          images.push(ab);
+          this.setState({ images });
+        });
       }
     }
   };
@@ -163,6 +169,7 @@ export default class CameraScreen extends React.Component<any, any> {
     images.map(async (image: any) => {
       await CameraRoll.saveToCameraRoll(image.uri, 'photo');
     });
+    this.setState({ saved: true });
   };
 
   render() {
@@ -357,7 +364,7 @@ export default class CameraScreen extends React.Component<any, any> {
                   <Ionicons name="ios-return-right" size={65} color="#fff" />
                 </Animated.View>
               </TouchableOpacity>
-              {this.state.images.length > 0 && (
+              {this.state.images.length > 0 && !this.state.saved && (
                 <TouchableOpacity
                   onPress={async () => this.savePhotos(this.state.images)}
                   style={{ paddingHorizontal: 5 }}
@@ -401,7 +408,7 @@ export default class CameraScreen extends React.Component<any, any> {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => {
+                    onPress={async () => {
                       const images = this.state.images;
                       if (this.state.images.length === 1) {
                         this.setState({
@@ -411,7 +418,18 @@ export default class CameraScreen extends React.Component<any, any> {
                         });
                       }
                       images.splice(this.state.position, 1);
-                      this.setState({ images });
+                      await this.setState({ images });
+                      if (this.state.position === images.length) {
+                        if (images.length === 0) {
+                          await this.setState({
+                            position: 0
+                          });
+                        } else {
+                          await this.setState({
+                            position: this.state.position - 1
+                          });
+                        }
+                      }
                     }}
                     style={{ paddingHorizontal: 10 }}
                   >
