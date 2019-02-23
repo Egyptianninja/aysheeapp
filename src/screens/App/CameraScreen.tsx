@@ -44,36 +44,42 @@ export default class CameraScreen extends React.Component<any, any> {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
-  snap = () => {
+  snap = async () => {
     const { orientation } = this.state;
     if (this.camera && this.state.images.length < 6) {
-      if (orientation === 'll') {
-        this.camera.takePictureAsync({}).then((ab: any) => {
-          ImageManipulator.manipulateAsync(ab.uri, [{ rotate: -90 }]).then(
-            cd => {
-              const images: any = this.state.images;
-              images.push(cd);
-              this.setState({ images });
-            }
-          );
+      if (orientation === 'pu') {
+        // this.camera.pausePreview();
+        const image = await this.camera.takePictureAsync({
+          skipProcessing: true
         });
-      }
-      if (orientation === 'lr') {
-        this.camera.takePictureAsync({}).then((ab: any) => {
-          ImageManipulator.manipulateAsync(ab.uri, [{ rotate: 90 }]).then(
-            cd => {
-              const images: any = this.state.images;
-              images.push(cd);
-              this.setState({ images });
-            }
-          );
+        // this.camera.resumePreview();
+        const images: any = this.state.images;
+        images.push(image);
+        this.setState({ images });
+      } else if (orientation === 'll') {
+        // this.camera.pausePreview();
+        const image = await this.camera.takePictureAsync({
+          skipProcessing: true
         });
-      } else if (orientation === 'pu') {
-        this.camera.takePictureAsync({}).then((ab: any) => {
-          const images: any = this.state.images;
-          images.push(ab);
-          this.setState({ images });
+        // this.camera.resumePreview();
+        const photo = await ImageManipulator.manipulateAsync(image.uri, [
+          { rotate: -90 }
+        ]);
+        const images: any = this.state.images;
+        images.push(photo);
+        this.setState({ images });
+      } else if (orientation === 'lr') {
+        // this.camera.pausePreview();
+        const image = await this.camera.takePictureAsync({
+          skipProcessing: true
         });
+        // this.camera.resumePreview();
+        const photo = await ImageManipulator.manipulateAsync(image.uri, [
+          { rotate: 90 }
+        ]);
+        const images: any = this.state.images;
+        images.push(photo);
+        this.setState({ images });
       }
     }
   };
@@ -263,6 +269,7 @@ export default class CameraScreen extends React.Component<any, any> {
             style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.3333 }}
             type={this.state.type}
             flashMode={this.state.flash}
+            whiteBalance="auto"
             ratio="4:3"
             autoFocus="on"
             zoom={this.state.zoom}
@@ -328,6 +335,7 @@ export default class CameraScreen extends React.Component<any, any> {
                   this.snap();
                 }}
                 style={{ padding: 10 }}
+                disabled={!(this.state.images.length < 6)}
               >
                 <Animated.View style={{ transform: [{ rotate: spin }] }}>
                   <View
