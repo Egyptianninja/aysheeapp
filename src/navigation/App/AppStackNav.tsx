@@ -22,7 +22,6 @@ import {
   CameraScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
-import Orientation from '../../utils/sensor';
 export const AppStackNavigator = createStackNavigator({
   HomeScreen: {
     screen: HomeScreen,

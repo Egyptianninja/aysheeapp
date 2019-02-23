@@ -23,14 +23,11 @@ const Message = ({
     backdropOpacity={0.2}
     useNativeDriver={true}
     hideModalContentWhileAnimating={true}
-    style={{ flex: 1 }}
+    style={{ justifyContent: 'flex-end', margin: 0 }}
   >
     <View
       style={{
-        borderRadius: 10,
         height,
-        padding: 10,
-        width: width - 40,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff'

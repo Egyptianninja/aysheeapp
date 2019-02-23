@@ -54,9 +54,7 @@ export default class CameraScreen extends React.Component<any, any> {
 
   takeImage = async (deg?: any) => {
     this.timer = setTimeout(() => this.setState({ isTakingImage: true }), 1);
-    let image = await this.camera.takePictureAsync({
-      skipProcessing: true
-    });
+    let image = await this.camera.takePictureAsync({});
     if (deg) {
       image = await ImageManipulator.manipulateAsync(image.uri, [
         { rotate: deg }
@@ -99,7 +97,7 @@ export default class CameraScreen extends React.Component<any, any> {
       <PhotoSlider
         getPhotoPosition={this.getPhotoPosition}
         photos={images}
-        width={SCREEN_WIDTH - 40}
+        width={SCREEN_WIDTH - 40 - 10}
         ratio={1.3333}
         showModal={this.toggleModal}
       />
@@ -362,7 +360,7 @@ export default class CameraScreen extends React.Component<any, any> {
                 }}
               >
                 <Animated.View style={{ transform: [{ rotate: spin }] }}>
-                  <Ionicons name="ios-return-right" size={65} color="#fff" />
+                  <Ionicons name="md-arrow-forward" size={50} color="#fff" />
                 </Animated.View>
               </TouchableOpacity>
               {this.state.images.length > 0 && !this.state.saved && (
@@ -434,7 +432,7 @@ export default class CameraScreen extends React.Component<any, any> {
                     }}
                     style={{ paddingHorizontal: 10 }}
                   >
-                    <Ionicons name="ios-remove-circle" size={33} color="#fff" />
+                    <Ionicons name="ios-trash" size={33} color="#fff" />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={async () => {
