@@ -25,6 +25,7 @@ export default class CameraScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
+  timer: any;
   spinValue = new Animated.Value(0);
   camera: any;
   state = {
@@ -44,42 +45,36 @@ export default class CameraScreen extends React.Component<any, any> {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
+  componentWillUnmount = () => {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = 0;
+    }
+  };
+
+  takeImage = async (deg?: any) => {
+    this.timer = setTimeout(() => this.setState({ isTakingImage: true }), 1);
+    let image = await this.camera.takePictureAsync({
+      skipProcessing: true
+    });
+    if (deg) {
+      image = await ImageManipulator.manipulateAsync(image.uri, [
+        { rotate: deg }
+      ]);
+    }
+    const images: any = this.state.images;
+    images.push(image);
+    this.setState({ images });
+    this.setState({ isTakingImage: false });
+  };
+
   snap = async () => {
     const { orientation } = this.state;
-    if (orientation === 'll') {
-      await this.camera.pausePreview();
-      const image = await this.camera.takePictureAsync({
-        skipProcessing: true
-      });
-      await this.camera.resumePreview();
-      const photo = await ImageManipulator.manipulateAsync(image.uri, [
-        { rotate: -90 }
-      ]);
-      const images: any = this.state.images;
-      images.push(photo);
-      this.setState({ images });
-    } else if (orientation === 'lr') {
-      await this.camera.pausePreview();
-      const image = await this.camera.takePictureAsync({
-        skipProcessing: true
-      });
-      await this.camera.resumePreview();
-      const photo = await ImageManipulator.manipulateAsync(image.uri, [
-        { rotate: 90 }
-      ]);
-      const images: any = this.state.images;
-      images.push(photo);
-      this.setState({ images });
-    } else {
-      await this.camera.pausePreview();
-      const image = await this.camera.takePictureAsync({
-        skipProcessing: true
-      });
-      await this.camera.resumePreview();
-      const images: any = this.state.images;
-      images.push(image);
-      this.setState({ images });
-    }
+    orientation === 'll'
+      ? this.takeImage(-90)
+      : orientation === 'lr'
+      ? this.takeImage(90)
+      : this.takeImage();
   };
 
   proceed = async () => {
@@ -158,8 +153,6 @@ export default class CameraScreen extends React.Component<any, any> {
       this.spinIcon(1);
     } else if (orientation === 'lr') {
       this.spinIcon(-1);
-    } else {
-      this.spinIcon(0);
     }
   };
 
@@ -289,7 +282,7 @@ export default class CameraScreen extends React.Component<any, any> {
               width: 350,
               backgroundColor: 'transparent',
               alignSelf: 'center',
-              opacity: 0.5,
+              opacity: 0.8,
               transform: [
                 { scaleX: 0.7 },
                 { scaleY: 0.7 },
