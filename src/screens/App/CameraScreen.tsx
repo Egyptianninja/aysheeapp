@@ -46,41 +46,39 @@ export default class CameraScreen extends React.Component<any, any> {
 
   snap = async () => {
     const { orientation } = this.state;
-    if (this.camera && this.state.images.length < 6) {
-      if (orientation === 'pu') {
-        // this.camera.pausePreview();
-        const image = await this.camera.takePictureAsync({
-          skipProcessing: true
-        });
-        // this.camera.resumePreview();
-        const images: any = this.state.images;
-        images.push(image);
-        this.setState({ images });
-      } else if (orientation === 'll') {
-        // this.camera.pausePreview();
-        const image = await this.camera.takePictureAsync({
-          skipProcessing: true
-        });
-        // this.camera.resumePreview();
-        const photo = await ImageManipulator.manipulateAsync(image.uri, [
-          { rotate: -90 }
-        ]);
-        const images: any = this.state.images;
-        images.push(photo);
-        this.setState({ images });
-      } else if (orientation === 'lr') {
-        // this.camera.pausePreview();
-        const image = await this.camera.takePictureAsync({
-          skipProcessing: true
-        });
-        // this.camera.resumePreview();
-        const photo = await ImageManipulator.manipulateAsync(image.uri, [
-          { rotate: 90 }
-        ]);
-        const images: any = this.state.images;
-        images.push(photo);
-        this.setState({ images });
-      }
+    if (orientation === 'll') {
+      await this.camera.pausePreview();
+      const image = await this.camera.takePictureAsync({
+        skipProcessing: true
+      });
+      await this.camera.resumePreview();
+      const photo = await ImageManipulator.manipulateAsync(image.uri, [
+        { rotate: -90 }
+      ]);
+      const images: any = this.state.images;
+      images.push(photo);
+      this.setState({ images });
+    } else if (orientation === 'lr') {
+      await this.camera.pausePreview();
+      const image = await this.camera.takePictureAsync({
+        skipProcessing: true
+      });
+      await this.camera.resumePreview();
+      const photo = await ImageManipulator.manipulateAsync(image.uri, [
+        { rotate: 90 }
+      ]);
+      const images: any = this.state.images;
+      images.push(photo);
+      this.setState({ images });
+    } else {
+      await this.camera.pausePreview();
+      const image = await this.camera.takePictureAsync({
+        skipProcessing: true
+      });
+      await this.camera.resumePreview();
+      const images: any = this.state.images;
+      images.push(image);
+      this.setState({ images });
     }
   };
 
@@ -160,6 +158,8 @@ export default class CameraScreen extends React.Component<any, any> {
       this.spinIcon(1);
     } else if (orientation === 'lr') {
       this.spinIcon(-1);
+    } else {
+      this.spinIcon(0);
     }
   };
 
