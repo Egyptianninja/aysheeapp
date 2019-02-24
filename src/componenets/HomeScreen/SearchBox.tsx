@@ -81,11 +81,13 @@ class SearchBox extends React.Component<any, any> {
             this.props.setQuery(this.state.query);
           }}
         />
-        <Ionicons
-          style={[styles.icon, { color: '#777' }]}
-          name="ios-search"
-          size={22}
-        />
+        <TouchableOpacity onPress={() => this.props.hideSearch()}>
+          <Ionicons
+            style={[styles.icon, { color: '#7678ED' }]}
+            name="ios-search"
+            size={22}
+          />
+        </TouchableOpacity>
       </View>
     );
   }

@@ -209,15 +209,17 @@ class CategoriesScroll extends React.Component<any, any> {
           >
             {!selected && this.renderCategories(categories)}
 
-            <HeaderFilter
-              lang={this.props.lang}
-              rest={rest}
-              sortData={sortData}
-              buckets={this.state.buckets}
-              addFilter={addFilter}
-              removeFilter={removeFilter}
-              words={this.props.words}
-            />
+            {this.props.buckets && (
+              <HeaderFilter
+                lang={this.props.lang}
+                rest={rest}
+                sortData={sortData}
+                buckets={this.state.buckets}
+                addFilter={addFilter}
+                removeFilter={removeFilter}
+                words={this.props.words}
+              />
+            )}
           </ScrollView>
         </View>
       </View>

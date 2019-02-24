@@ -61,10 +61,12 @@ export default class Edit extends React.Component<any, any> {
     const loc: any = location ? this.state.location : null;
     let trueLocation = values.trueLocation;
     if (loc) {
-      trueLocation = {
-        lat: loc.coords.latitude,
-        lon: loc.coords.longitude
-      };
+      trueLocation = [
+        {
+          lat: loc.coords.latitude,
+          lon: loc.coords.longitude
+        }
+      ];
     }
     const res = await this.props.editClassifieds({
       variables: {

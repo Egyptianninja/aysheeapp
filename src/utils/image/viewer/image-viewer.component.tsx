@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
   Animated,
@@ -14,10 +14,10 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle
-} from "react-native";
-import ImageZoom from "./image-zoom.component";
-import styles from "./image-viewer.style";
-import { IImageInfo, IImageSize, Props, State } from "./image-viewer.type";
+} from 'react-native';
+import ImageZoom from './image-zoom.component';
+import styles from './image-viewer.style';
+import { IImageInfo, IImageSize, Props, State } from './image-viewer.type';
 
 export default class ImageViewer extends React.Component<Props, State> {
   public static defaultProps = new Props();
@@ -36,7 +36,7 @@ export default class ImageViewer extends React.Component<Props, State> {
   private width = 0;
   private height = 0;
 
-  private styles = styles(0, 0, "transparent");
+  private styles = styles(0, 0, 'transparent');
 
   // 是否执行过 layout. fix 安卓不断触发 onLayout 的 bug
   private hasLayout = false;
@@ -90,7 +90,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       imageSizes.push({
         width: imageUrl.width || 0,
         height: imageUrl.height || 0,
-        status: "loading"
+        status: 'loading'
       });
     });
 
@@ -153,7 +153,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       // 如果已经 success 了，就不做处理
       if (
         this!.state!.imageSizes![index] &&
-        this!.state!.imageSizes![index].status !== "loading"
+        this!.state!.imageSizes![index].status !== 'loading'
       ) {
         return;
       }
@@ -163,7 +163,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       this.setState({ imageSizes });
     };
 
-    if (this!.state!.imageSizes![index].status === "success") {
+    if (this!.state!.imageSizes![index].status === 'success') {
       // 已经加载过就不会加载了
       return;
     }
@@ -173,7 +173,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       this!.state!.imageSizes![index].width > 0 &&
       this!.state!.imageSizes![index].height > 0
     ) {
-      imageStatus.status = "success";
+      imageStatus.status = 'success';
       saveImageSize();
       return;
     }
@@ -195,7 +195,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       }
       imageStatus.width = image.width;
       imageStatus.height = image.height;
-      imageStatus.status = "success";
+      imageStatus.status = 'success';
       saveImageSize();
       return;
     }
@@ -205,7 +205,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       (width: number, height: number) => {
         imageStatus.width = width;
         imageStatus.height = height;
-        imageStatus.status = "success";
+        imageStatus.status = 'success';
         saveImageSize();
       },
       () => {
@@ -213,11 +213,11 @@ export default class ImageViewer extends React.Component<Props, State> {
           const data = (Image as any).resolveAssetSource(image.props.source);
           imageStatus.width = data.width;
           imageStatus.height = data.height;
-          imageStatus.status = "success";
+          imageStatus.status = 'success';
           saveImageSize();
         } catch (newError) {
           // Give up..
-          imageStatus.status = "fail";
+          imageStatus.status = 'fail';
         }
       }
     );
@@ -433,7 +433,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       this.styles = styles(
         this.width,
         this.height,
-        this.props.backgroundColor || "transparent"
+        this.props.backgroundColor || 'transparent'
       );
 
       // 强制刷新
@@ -523,7 +523,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       );
 
       switch (imageInfo.status) {
-        case "loading":
+        case 'loading':
           return (
             <Wrapper
               key={index}
@@ -539,7 +539,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               </View>
             </Wrapper>
           );
-        case "success":
+        case 'success':
           if (!image.props) {
             image.props = {};
           }
@@ -554,7 +554,7 @@ export default class ImageViewer extends React.Component<Props, State> {
             height
           };
 
-          if (typeof image.props.source === "number") {
+          if (typeof image.props.source === 'number') {
             // source = require(..), doing nothing
           } else {
             if (!image.props.source) {
@@ -592,7 +592,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               {this!.props!.renderImage!(image.props)}
             </ImageZoom>
           );
-        case "fail":
+        case 'fail':
           return (
             <Wrapper
               key={index}
@@ -669,7 +669,7 @@ export default class ImageViewer extends React.Component<Props, State> {
             )}
           <View
             style={[
-              { bottom: 0, position: "absolute", zIndex: 9 },
+              { bottom: 0, position: 'absolute', zIndex: 9 },
               this.props.footerContainerStyle
             ]}
           >
@@ -756,7 +756,7 @@ export default class ImageViewer extends React.Component<Props, State> {
         onLayout={this.handleLayout}
         style={{
           flex: 1,
-          overflow: "hidden",
+          overflow: 'hidden',
           ...this.props.style
         }}
       >

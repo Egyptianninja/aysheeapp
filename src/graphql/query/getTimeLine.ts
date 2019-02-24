@@ -4,7 +4,7 @@ export default gql`
   query getTimeLine(
     $query: String
     $cursor: [Float]
-    $trueLocation: LocationInput
+    $trueLocation: [LocationInput]
     $distance: Int
     $categoryId: Int
     $kindId: Int

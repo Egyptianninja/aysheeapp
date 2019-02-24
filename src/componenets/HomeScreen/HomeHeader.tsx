@@ -12,7 +12,17 @@ const namelogo = icons.namelogo.icon();
 const search = icons.search.icon();
 
 class HomeHeader extends React.Component<any, any> {
+  state = {
+    isSearch: false
+  };
   ardroid = Platform.OS === 'android' && this.props.lang === 'ar';
+
+  showSearch = () => {
+    this.setState({ isSearch: true });
+  };
+  hideSearch = () => {
+    this.setState({ isSearch: false });
+  };
   render() {
     return (
       <View
@@ -90,48 +100,63 @@ class HomeHeader extends React.Component<any, any> {
             }
           ]}
         >
-          {/* <View style={{ flex: 1 }}>
-            <SearchBox navigation={this.props.navigation} />
-          </View> */}
-          <View
-            style={{
-              flex: 9.5,
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <View
-              style={{
-                width: 90,
-                height: 22
-              }}
-            >
-              <Image
-                style={{
-                  flex: 1,
-                  width: '100%',
-                  height: '100%'
-                }}
-                source={namelogo}
+          {this.state.isSearch && (
+            <View style={{ flex: 1, paddingHorizontal: 10 }}>
+              <SearchBox
+                navigation={this.props.navigation}
+                hideSearch={this.hideSearch}
               />
             </View>
-          </View>
-          <View
-            style={{
-              flex: 1.5,
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingTop: 4,
-              paddingHorizontal: 3
-            }}
-          >
-            <Ionicons style={{ color: '#777' }} name="ios-search" size={31} />
-          </View>
+          )}
+          {!this.state.isSearch && (
+            <React.Fragment>
+              <View
+                style={{
+                  flex: 9.5,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <View
+                  style={{
+                    width: 90,
+                    height: 22
+                  }}
+                >
+                  <Image
+                    style={{
+                      flex: 1,
+                      width: '100%',
+                      height: '100%'
+                    }}
+                    source={namelogo}
+                  />
+                </View>
+              </View>
+              <TouchableOpacity
+                onPress={() => this.showSearch()}
+                style={{
+                  flex: 1.5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingTop: 4,
+                  paddingHorizontal: 3
+                }}
+              >
+                <Ionicons
+                  style={{ color: '#7678ED' }}
+                  name="ios-search"
+                  size={30}
+                />
+              </TouchableOpacity>
+            </React.Fragment>
+          )}
         </View>
         <View style={[styles.rightIconView, { flex: 1.5 }]}>
           <TouchableOpacity
             onPress={() => {
               const handleHome = this.props.navigation.getParam('handleHome');
+              this.hideSearch();
               handleHome();
             }}
             style={{

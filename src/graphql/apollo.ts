@@ -12,6 +12,9 @@ import { logout, phoneRemoved } from '../store/actions/userAtions';
 import secrets from '../constants/secrets';
 import { store } from '../store';
 
+// const host = 'http://192.168.100.22:4000/';
+// const uri = 'http://192.168.100.22:4000/';
+
 // const host = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.host;
 // const uri = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.uri;
 

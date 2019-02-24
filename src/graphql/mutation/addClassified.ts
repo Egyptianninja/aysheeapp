@@ -17,7 +17,7 @@ export default gql`
     $iswarranty: Boolean
     $addressCity: String
     $addressArea: String
-    $trueLocation: LocationInput
+    $trueLocation: [LocationInput]
     $isforman: Boolean
     $areaunit: String
     $realestate: NameInput

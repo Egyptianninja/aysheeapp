@@ -8,7 +8,7 @@ export default gql`
     $currency: String
     $phone: String
     $islive: Boolean
-    $trueLocation: LocationInput
+    $trueLocation: [LocationInput]
     $updates: Int
     $isnew: Boolean
     $issale: Boolean

@@ -7,10 +7,11 @@ import {
   Keyboard,
   ScrollView,
   TouchableOpacity,
-  Modal,
   Image,
   Platform
 } from 'react-native';
+import Modal from 'react-native-modal';
+
 import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
@@ -436,9 +437,11 @@ class ItemView extends React.Component<any, any> {
                 showModal={this.showModal}
               />
               <Modal
-                visible={this.state.isModelVisible}
-                onRequestClose={() => this.hideModal()}
-                transparent={false}
+                isVisible={this.state.isModelVisible}
+                onBackdropPress={() => this.hideModal()}
+                useNativeDriver={true}
+                hideModalContentWhileAnimating={true}
+                style={{ margin: 0 }}
               >
                 <ImageViewer
                   imageUrls={photos}

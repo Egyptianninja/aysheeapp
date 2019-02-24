@@ -301,11 +301,9 @@ class HomeScreen extends React.Component<any, any> {
               return <Text>{error}</Text>;
             }
             const postsQuery = data.getTimeLine.posts;
-
             if (postsQuery && postsQuery.length === 0) {
               return <Noresult lang={lang} title={words.noresults} />;
             }
-
             const posts = readyPosts(postsQuery, 200, 79, lang);
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
             this.props.setBuckets(buckets);
