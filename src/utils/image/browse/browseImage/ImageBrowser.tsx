@@ -94,10 +94,8 @@ export default class ImageBrowser extends React.Component<any, any> {
 
   renderHeader = () => {
     const selectedCount = Object.keys(this.state.selected).length;
-    let headerText = ' محدد ' + selectedCount;
-    if (selectedCount === this.props.max) {
-      headerText = headerText + ' (الحد الاقصى)';
-    }
+    const headerText = selectedCount + '/' + this.props.max;
+
     return (
       <View style={styles.header}>
         <Button

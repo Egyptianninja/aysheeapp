@@ -1,8 +1,8 @@
-import * as React from "react";
-import { View } from "react-native";
+import * as React from 'react';
+import { View } from 'react-native';
 
-import Modal from "react-native-modal";
-import ImageBrowser from "./browseImage/ImageBrowser";
+import Modal from 'react-native-modal';
+import ImageBrowser from './browseImage/ImageBrowser';
 
 class ImageModal extends React.PureComponent<any, any> {
   handleChange = (value: any) => {
@@ -24,7 +24,10 @@ class ImageModal extends React.PureComponent<any, any> {
         style={{ flex: 1 }}
       >
         <View style={{ flex: 1 }}>
-          <ImageBrowser max={6} callback={this.props.imageBrowserCallback} />
+          <ImageBrowser
+            max={6 - this.props.imgqty}
+            callback={this.props.imageBrowserCallback}
+          />
         </View>
       </Modal>
     );

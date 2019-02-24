@@ -12,12 +12,8 @@ import { Photo } from '../../lib';
 
 export default class PhotoSlider extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    if (
-      nextProps.position !== prevState.position ||
-      nextProps.selectedImage !== prevState.selectedImage
-    ) {
+    if (nextProps.selectedImage !== prevState.selectedImage) {
       return {
-        position: nextProps.position,
         selectedImage: nextProps.selectedImage
       };
     } else {
@@ -53,11 +49,15 @@ export default class PhotoSlider extends React.Component<any, any> {
     const offset = e.nativeEvent.contentOffset;
     if (offset.x === 0) {
       this.setState({ position: 0 });
-      this.props.setPhotoPosition(0);
+      if (this.props.setPhotoPosition) {
+        this.props.setPhotoPosition(0);
+      }
     } else {
       const position = Math.round(offset.x / this.props.width);
       this.setState({ position });
-      this.props.setPhotoPosition(position);
+      if (this.props.setPhotoPosition) {
+        this.props.setPhotoPosition(position);
+      }
     }
   };
 
@@ -96,7 +96,7 @@ export default class PhotoSlider extends React.Component<any, any> {
                       zIndex: 270
                     }}
                   >
-                    <Ionicons name="md-bookmark" size={50} color="#00B77C" />
+                    <Ionicons name="ios-bookmark" size={50} color="#00B77C" />
                   </View>
                 )}
                 <Photo

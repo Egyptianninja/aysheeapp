@@ -11,8 +11,13 @@ class ImagePicker extends React.PureComponent<any, any> {
       photos: [],
       imageBrowserOpen: false,
       isPhotoModalVisible: false,
-      selectedImage: 0
+      selectedImage: 0,
+      imgqty: 0
     };
+  }
+
+  componentDidMount() {
+    this.setState({ imgqty: this.props.imgqty });
   }
 
   togglePhotoModal = () =>
@@ -64,6 +69,7 @@ class ImagePicker extends React.PureComponent<any, any> {
           width={width}
         />
         <ImageModal
+          imgqty={this.props.imgqty}
           imageBrowserCallback={this.imageBrowserCallback}
           isPhotoModalVisible={this.state.isPhotoModalVisible}
         />

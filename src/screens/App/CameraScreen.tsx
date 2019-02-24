@@ -172,6 +172,7 @@ export default class CameraScreen extends React.Component<any, any> {
   render() {
     const { hasCameraPermission } = this.state;
     const lang = this.props.navigation.getParam('lang');
+    const imgqty = this.props.navigation.getParam('imgqty');
     const ardroid = Platform.OS === 'android' && lang === 'ar';
 
     const spin = this.spinValue.interpolate({
@@ -309,7 +310,7 @@ export default class CameraScreen extends React.Component<any, any> {
               <Text
                 style={{ color: '#fff', alignSelf: 'flex-end', padding: 10 }}
               >
-                {this.state.images.length}
+                {this.state.images.length} / {6 - imgqty}
               </Text>
               {this.renderImages()}
             </TouchableOpacity>
@@ -326,7 +327,7 @@ export default class CameraScreen extends React.Component<any, any> {
                   this.snap();
                 }}
                 style={{ padding: 10 }}
-                disabled={!(this.state.images.length < 6)}
+                disabled={!(this.state.images.length < 6 - imgqty)}
               >
                 <Animated.View style={{ transform: [{ rotate: spin }] }}>
                   <View

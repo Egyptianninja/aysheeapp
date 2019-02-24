@@ -72,46 +72,6 @@ class AddCarScreen extends React.Component<any, any> {
   updateImagesList = (images: any) => {
     this.setState({ images });
   };
-  renderImages = () => {
-    return (
-      <View
-        style={{
-          flex: 1,
-          width: width - 40,
-          flexWarp: 'warp',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          flexWrap: 'wrap'
-        }}
-      >
-        {this.state.images.map((img: any) => {
-          const size = (width - 70) / 3;
-          return (
-            <View
-              key={img.file ? img.file : img.uri}
-              style={{
-                width: size,
-                height: size,
-                margin: 5
-              }}
-            >
-              <Image
-                style={{
-                  flex: 1,
-                  width: '100%',
-                  height: '100%',
-                  resizeMode: 'cover'
-                }}
-                source={{ uri: img.file ? img.file : img.uri }}
-              />
-            </View>
-          );
-        })}
-        <View />
-      </View>
-    );
-  };
 
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
@@ -148,7 +108,8 @@ class AddCarScreen extends React.Component<any, any> {
   pickCameraImage = () => {
     this.props.navigation.navigate('CameraScreen', {
       returnData: this.returnData,
-      lang: this.props.lang
+      lang: this.props.lang,
+      imgqty: this.state.images.length
     });
   };
 

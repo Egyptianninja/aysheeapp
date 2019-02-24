@@ -33,6 +33,7 @@ import {
   Title
 } from '../../../lib';
 import { getPureNumber } from '../../../utils/call';
+import PhotoView from '../../../componenets/Add/PhotoView';
 
 const { width } = Dimensions.get('window');
 
@@ -55,6 +56,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
     isShowMessage: false,
     location: null,
     pushToken: null,
+    images: [],
     bar: 0
   };
 
@@ -92,12 +94,32 @@ class AddRealEstateScreen extends React.Component<any, any> {
     this.setState({ bar: this.state.bar + value });
   };
 
+  returnData = (imgs: any) => {
+    const stateImages = this.state.images;
+    const images = [...stateImages, ...imgs];
+    this.setState({ images });
+  };
+
+  updateImagesList = (images: any) => {
+    this.setState({ images });
+  };
+  pickCameraImage = () => {
+    this.props.navigation.navigate('CameraScreen', {
+      returnData: this.returnData,
+      lang: this.props.lang,
+      imgqty: this.state.images.length
+    });
+  };
+
   handleSubmit = async (values: any, bag: any) => {
-    const photos = await uploadPhotos(
-      values.photos,
-      this.state.selectedImage,
-      this.updateProgressBar
-    );
+    let photos;
+    if (this.state.images.length > 0) {
+      photos = await uploadPhotos(
+        this.state.images,
+        this.state.selectedImage,
+        this.updateProgressBar
+      );
+    }
     const category = this.props.navigation.getParam('item');
     delete category.sort;
     const {
@@ -126,7 +148,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
-    this.updateProgressBar(1 / (3 + photos.length));
+    this.updateProgressBar(1 / (3 + this.state.images.length));
     const res = await this.props.addClassifiedMutation({
       variables: {
         title,
@@ -149,7 +171,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
     });
 
     if (res.data.createPost.ok) {
-      this.updateProgressBar(1 / (3 + photos.length));
+      this.updateProgressBar(1 / (3 + this.state.images.length));
       if (this.state.pushToken) {
         this.props.notificationSub({
           variables: {
@@ -158,7 +180,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
           }
         });
       }
-      this.updateProgressBar(1 / (3 + photos.length));
+      this.updateProgressBar(1 / (3 + this.state.images.length));
       this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
     if (!res.data.createPost.ok) {
@@ -185,7 +207,6 @@ class AddRealEstateScreen extends React.Component<any, any> {
               initialValues={{
                 title: '',
                 body: '',
-                photos: [],
                 price: '',
                 currency: '',
                 isfurnishered: false,
@@ -269,13 +290,14 @@ class AddRealEstateScreen extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
-                  <ImagePicker
-                    name="photos"
-                    value={values.photos}
-                    label={word.photos}
+                  <PhotoView
+                    word={word}
                     lang={lang}
-                    sublabel={word.subphotos}
-                    onChange={setFieldValue}
+                    images={this.state.images}
+                    selectedImage={this.state.selectedImage}
+                    returnData={this.returnData}
+                    pickCameraImage={this.pickCameraImage}
+                    updateImagesList={this.updateImagesList}
                     hendleSelectedImage={this.hendleSelectedImage}
                   />
                   <Group

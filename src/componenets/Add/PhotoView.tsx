@@ -4,7 +4,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Text
 } from 'react-native';
 import { ImagePicker as ImageAlbumPicker } from '../../utils';
 import { PhotoPicker } from './photoPicker';
@@ -39,8 +40,31 @@ class PhotoView extends React.Component<any, any> {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
 
-  getPhotoPosition = (position: any) => {
+  setPhotoPosition = (position: any) => {
     this.setState({ position });
+  };
+  deleteImage = async (position: any) => {
+    const images = this.state.images;
+    if (this.state.images.length === 1) {
+      this.props.updateImagesList([]);
+      this.setState({
+        position: 0,
+        isModalVisible: false
+      });
+    }
+    images.splice(position, 1);
+    this.props.updateImagesList(images);
+    if (position === images.length) {
+      if (images.length === 0) {
+        await this.setState({
+          position: 0
+        });
+      } else {
+        await this.setState({
+          position: position - 1
+        });
+      }
+    }
   };
 
   renderSliderImages = (images: any) => {
@@ -48,7 +72,7 @@ class PhotoView extends React.Component<any, any> {
       <PhotoSlider
         selectedImage={this.state.selectedImage}
         position={this.state.position}
-        setPhotoPosition={this.getPhotoPosition}
+        setPhotoPosition={this.setPhotoPosition}
         photos={images}
         width={SCREEN_WIDTH - 40 - 10}
         ratio={1.3333}
@@ -74,32 +98,49 @@ class PhotoView extends React.Component<any, any> {
           const uri = img.file ? img.file : img.uri;
           const size = (SCREEN_WIDTH - 70) / 3;
           const main = img === this.state.selectedImage;
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({ position: i });
-                this.toggleModal();
-              }}
-              key={uri}
-              style={{
-                width: size,
-                height: size,
-                margin: 5,
-                borderColor: main ? '#7678ED' : undefined,
-                borderWidth: main ? 5 : 0
-              }}
-            >
-              <Image
-                style={{
-                  flex: 1,
-                  width: '100%',
-                  height: '100%',
-                  resizeMode: 'cover'
-                }}
-                source={{ uri }}
-              />
 
-            </TouchableOpacity>
+          return (
+            <View key={uri}>
+              <TouchableOpacity
+                onPress={async () => this.deleteImage(i)}
+                style={{
+                  position: 'absolute',
+                  zIndex: 280,
+                  bottom: 8,
+                  left: 10,
+                  paddingHorizontal: 5,
+                  borderRadius: 5,
+                  backgroundColor: '#aaa'
+                }}
+              >
+                <Ionicons name="ios-trash" size={24} color="#fff" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState({ position: i });
+                  this.toggleModal();
+                }}
+                style={{
+                  width: size,
+                  height: size,
+                  margin: 5,
+                  borderRadius: 5,
+                  borderColor: main ? '#7678ED' : undefined,
+                  borderWidth: main ? 5 : 0,
+                  opacity: i > 5 ? 0.2 : 1
+                }}
+              >
+                <Image
+                  style={{
+                    flex: 1,
+                    width: '100%',
+                    height: '100%',
+                    resizeMode: 'cover'
+                  }}
+                  source={{ uri }}
+                />
+              </TouchableOpacity>
+            </View>
           );
         })}
         <View />
@@ -112,6 +153,7 @@ class PhotoView extends React.Component<any, any> {
       <React.Fragment>
         <View style={{ flexDirection: 'row' }}>
           <ImageAlbumPicker
+            imgqty={this.state.images.length}
             label={word.photos}
             lang={lang}
             sublabel={word.subphotos}
@@ -119,6 +161,7 @@ class PhotoView extends React.Component<any, any> {
             width={SCREEN_WIDTH}
           />
           <PhotoPicker
+            imgqty={this.state.images.length}
             icon="ios-camera"
             label={word.photos}
             pickImage={pickCameraImage}
@@ -160,29 +203,7 @@ class PhotoView extends React.Component<any, any> {
                 }}
               >
                 <TouchableOpacity
-                  onPress={async () => {
-                    const images = this.state.images;
-                    if (this.state.images.length === 1) {
-                      this.props.updateImagesList([]);
-                      this.setState({
-                        position: 0,
-                        isModalVisible: false
-                      });
-                    }
-                    images.splice(this.state.position, 1);
-                    this.props.updateImagesList(images);
-                    if (this.state.position === images.length) {
-                      if (images.length === 0) {
-                        await this.setState({
-                          position: 0
-                        });
-                      } else {
-                        await this.setState({
-                          position: this.state.position - 1
-                        });
-                      }
-                    }
-                  }}
+                  onPress={async () => this.deleteImage(this.state.position)}
                   style={{ paddingHorizontal: 10 }}
                 >
                   <Ionicons name="ios-trash" size={33} color="#fff" />
