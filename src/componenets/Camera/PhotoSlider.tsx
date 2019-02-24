@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, View, ScrollView, Animated } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Animated,
+  InteractionManager
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Photo } from '../../lib';
@@ -18,6 +24,7 @@ export default class PhotoSlider extends React.Component<any, any> {
       return { ...prevState };
     }
   }
+  scrollView: any;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -26,6 +33,20 @@ export default class PhotoSlider extends React.Component<any, any> {
       selectedImage: null,
       loading: false
     };
+  }
+
+  componentDidMount() {
+    this.scrollView.scrollTo({
+      x: this.props.width * this.state.position,
+      animated: false
+    });
+    // InteractionManager.runAfterInteractions(() => {
+    //   this.scrollView.scrollTo({
+    //     x: this.props.width * this.state.position,
+    //     animated: false
+    //   });
+    //   console.log('called DidMount');
+    // });
   }
 
   handlePageChange = (e: any) => {
@@ -46,6 +67,9 @@ export default class PhotoSlider extends React.Component<any, any> {
     return (
       <View style={styles.container}>
         <ScrollView
+          ref={(ref: any) => {
+            this.scrollView = ref;
+          }}
           pagingEnabled
           horizontal
           showsHorizontalScrollIndicator={false}

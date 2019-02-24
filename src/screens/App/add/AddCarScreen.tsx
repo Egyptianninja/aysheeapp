@@ -15,7 +15,6 @@ import { graphql } from 'react-apollo';
 import * as Progress from 'react-native-progress';
 import {
   StyleSheet,
-  ImagePicker as ImageAlbumPicker,
   UserLocation,
   uploadPhotos,
   getPureNumber,
@@ -37,7 +36,6 @@ import {
   Title
 } from '../../../lib';
 import { Platform } from 'expo-core';
-import { PhotoPicker } from '../../../componenets/Add/photoPicker';
 import PhotoView from '../../../componenets/Add/PhotoView';
 const { width } = Dimensions.get('window');
 
@@ -235,8 +233,6 @@ class AddCarScreen extends React.Component<any, any> {
     bag.setSubmitting(false);
   };
   render() {
-    console.log(this.state.selectedImage);
-
     const word = this.props.words;
     const { lang, user } = this.props;
     const subBrands = this.props.subBrands.filter(
