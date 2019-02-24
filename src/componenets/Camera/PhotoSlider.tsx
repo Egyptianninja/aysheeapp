@@ -1,20 +1,29 @@
 import * as React from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Dimensions,
-  Animated,
-  TouchableWithoutFeedback
-} from 'react-native';
+import { StyleSheet, View, ScrollView, Animated } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
 import { Photo } from '../../lib';
 
 export default class PhotoSlider extends React.Component<any, any> {
+  static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    if (
+      nextProps.position !== prevState.position ||
+      nextProps.selectedImage !== prevState.selectedImage
+    ) {
+      return {
+        position: nextProps.position,
+        selectedImage: nextProps.selectedImage
+      };
+    } else {
+      return { ...prevState };
+    }
+  }
   constructor(props: any) {
     super(props);
     this.state = {
       animatedScroll: new Animated.Value(0),
       position: 0,
+      selectedImage: null,
       loading: false
     };
   }
@@ -23,11 +32,11 @@ export default class PhotoSlider extends React.Component<any, any> {
     const offset = e.nativeEvent.contentOffset;
     if (offset.x === 0) {
       this.setState({ position: 0 });
-      this.props.getPhotoPosition(0);
+      this.props.setPhotoPosition(0);
     } else {
       const position = Math.round(offset.x / this.props.width);
       this.setState({ position });
-      this.props.getPhotoPosition(position);
+      this.props.setPhotoPosition(position);
     }
   };
 
@@ -39,7 +48,6 @@ export default class PhotoSlider extends React.Component<any, any> {
         <ScrollView
           pagingEnabled
           horizontal
-          scrollEnabled={this.state.scrollEnabled}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           onMomentumScrollEnd={this.handlePageChange}
@@ -50,10 +58,25 @@ export default class PhotoSlider extends React.Component<any, any> {
           ])}
         >
           {photos.map((image: any, i: any) => {
-            const uri = image.uri;
+            const uri = image.file ? image.file : image.uri;
+            const main = image === this.state.selectedImage;
             return (
-              <View key={image.uri}>
+              <View key={uri}>
+                {main && (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      left: 5,
+                      width: 40,
+                      height: 80,
+                      zIndex: 270
+                    }}
+                  >
+                    <Ionicons name="md-bookmark" size={50} color="#00B77C" />
+                  </View>
+                )}
                 <Photo
+                  main={main}
                   uri={uri}
                   width={this.props.width}
                   height={height}
@@ -101,9 +124,9 @@ export default class PhotoSlider extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#7678ED',
+    backgroundColor: 'rgba(118, 120, 237, 0.3)',
     borderWidth: 5,
-    borderColor: '#7678ED'
+    borderColor: 'rgba(118, 120, 237, 0.3)'
   },
   layoutIndicator: {
     height: 15,

@@ -15,7 +15,7 @@ import { graphql } from 'react-apollo';
 import * as Progress from 'react-native-progress';
 import {
   StyleSheet,
-  ImagePicker,
+  ImagePicker as ImageAlbumPicker,
   UserLocation,
   uploadPhotos,
   getPureNumber,
@@ -37,6 +37,8 @@ import {
   Title
 } from '../../../lib';
 import { Platform } from 'expo-core';
+import { PhotoPicker } from '../../../componenets/Add/photoPicker';
+import PhotoView from '../../../componenets/Add/PhotoView';
 const { width } = Dimensions.get('window');
 
 class AddCarScreen extends React.Component<any, any> {
@@ -64,34 +66,53 @@ class AddCarScreen extends React.Component<any, any> {
     clearTimeout(this.timer);
   }
 
-  returnData = (images: any) => {
+  returnData = (imgs: any) => {
+    const stateImages = this.state.images;
+    const images = [...stateImages, ...imgs];
+    this.setState({ images });
+  };
+  updateImagesList = (images: any) => {
     this.setState({ images });
   };
   renderImages = () => {
-    return this.state.images.map((img: any) => {
-      return (
-        <View
-          key={img.uri}
-          style={{
-            width: 50,
-            height: 70,
-            margin: 4,
-            borderColor: '#aaa',
-            borderWidth: 1
-          }}
-        >
-          <Image
-            style={{
-              flex: 1,
-              width: '100%',
-              height: '100%',
-              resizeMode: 'cover'
-            }}
-            source={{ uri: img.uri }}
-          />
-        </View>
-      );
-    });
+    return (
+      <View
+        style={{
+          flex: 1,
+          width: width - 40,
+          flexWarp: 'warp',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          flexWrap: 'wrap'
+        }}
+      >
+        {this.state.images.map((img: any) => {
+          const size = (width - 70) / 3;
+          return (
+            <View
+              key={img.file ? img.file : img.uri}
+              style={{
+                width: size,
+                height: size,
+                margin: 5
+              }}
+            >
+              <Image
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'cover'
+                }}
+                source={{ uri: img.file ? img.file : img.uri }}
+              />
+            </View>
+          );
+        })}
+        <View />
+      </View>
+    );
   };
 
   hendleSelectedImage = (selectedImage: any) => {
@@ -126,6 +147,13 @@ class AddCarScreen extends React.Component<any, any> {
     this.setState({ isShowMessage: false });
   };
 
+  pickCameraImage = () => {
+    this.props.navigation.navigate('CameraScreen', {
+      returnData: this.returnData,
+      lang: this.props.lang
+    });
+  };
+
   handleSubmit = async (values: any, bag: any) => {
     let photos;
     if (this.state.images.length > 0) {
@@ -134,14 +162,7 @@ class AddCarScreen extends React.Component<any, any> {
         this.state.selectedImage,
         this.updateProgressBar
       );
-    } else {
-      photos = await uploadPhotos(
-        values.photos,
-        this.state.selectedImage,
-        this.updateProgressBar
-      );
     }
-
     const category = this.props.navigation.getParam('item');
     delete category.sort;
     const {
@@ -172,7 +193,7 @@ class AddCarScreen extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
-    this.updateProgressBar(1 / (3 + photos.length));
+    this.updateProgressBar(1 / (3 + this.state.images.length));
     const res = await this.props.addClassifiedMutation({
       variables: {
         title,
@@ -196,7 +217,7 @@ class AddCarScreen extends React.Component<any, any> {
       }
     });
     if (res.data.createPost.ok) {
-      this.updateProgressBar(1 / (3 + photos.length));
+      this.updateProgressBar(1 / (3 + this.state.images.length));
       if (this.state.pushToken) {
         this.props.notificationSub({
           variables: {
@@ -205,7 +226,7 @@ class AddCarScreen extends React.Component<any, any> {
           }
         });
       }
-      this.updateProgressBar(1 / (3 + photos.length));
+      this.updateProgressBar(1 / (3 + this.state.images.length));
       this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
     if (!res.data.createPost.ok) {
@@ -214,6 +235,8 @@ class AddCarScreen extends React.Component<any, any> {
     bag.setSubmitting(false);
   };
   render() {
+    console.log(this.state.selectedImage);
+
     const word = this.props.words;
     const { lang, user } = this.props;
     const subBrands = this.props.subBrands.filter(
@@ -238,7 +261,6 @@ class AddCarScreen extends React.Component<any, any> {
               initialValues={{
                 title: '',
                 body: '',
-                photos: [],
                 price: '',
                 currency: '',
                 isnew: false,
@@ -357,33 +379,16 @@ class AddCarScreen extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
-                  <ImagePicker
-                    name="photos"
-                    label={word.photos}
+                  <PhotoView
+                    word={word}
                     lang={lang}
-                    sublabel={word.subphotos}
-                    value={values.photos}
-                    onChange={setFieldValue}
+                    images={this.state.images}
+                    selectedImage={this.state.selectedImage}
+                    returnData={this.returnData}
+                    pickCameraImage={this.pickCameraImage}
+                    updateImagesList={this.updateImagesList}
                     hendleSelectedImage={this.hendleSelectedImage}
                   />
-                  <View style={{ flexDirection: 'row' }}>
-                    {this.state.images.length > 0 && this.renderImages()}
-                  </View>
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.props.navigation.navigate('CameraScreen', {
-                        returnData: this.returnData,
-                        lang
-                      })
-                    }
-                    style={{
-                      padding: 10,
-                      backgroundColor: '#eee',
-                      borderRadius: 20
-                    }}
-                  >
-                    <Text>Camera</Text>
-                  </TouchableOpacity>
                   <Group
                     color="#444"
                     size={24}
