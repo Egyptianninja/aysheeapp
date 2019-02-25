@@ -66,8 +66,6 @@ export default class PhotoSlider extends React.Component<any, any> {
   };
 
   render() {
-    console.log(this.state.position);
-
     const { photos } = this.props;
     const height = this.props.width * 1.3333;
     return (

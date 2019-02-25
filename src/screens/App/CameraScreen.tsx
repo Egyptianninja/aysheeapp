@@ -279,18 +279,31 @@ export default class CameraScreen extends React.Component<any, any> {
               </Animated.View>
             </TouchableOpacity>
           </View>
-          <Camera
-            ref={ref => {
-              this.camera = ref;
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#000'
             }}
-            style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.3333 }}
-            type={this.state.type}
-            flashMode={this.state.flash}
-            whiteBalance="auto"
-            ratio="4:3"
-            autoFocus="on"
-            zoom={this.state.zoom}
-          />
+          >
+            <Camera
+              ref={ref => {
+                this.camera = ref;
+              }}
+              // style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH }}
+              // ratio="1:1"
+              // style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.5 }}
+              // ratio="3:2"
+              style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.3333 }}
+              ratio="4:3"
+              type={this.state.type}
+              flashMode={this.state.flash}
+              whiteBalance="auto"
+              autoFocus="on"
+              zoom={this.state.zoom}
+            />
+          </View>
 
           <Slider
             step={0.01}
@@ -299,25 +312,20 @@ export default class CameraScreen extends React.Component<any, any> {
             value={this.state.zoom}
             style={{
               position: 'absolute',
-              bottom: SCREEN_HEGHT / 2 - 100,
-              right: SCREEN_WIDTH / 2 - 20,
+              bottom: 105,
+              left: SCREEN_WIDTH / 2 - 150,
               zIndex: 150,
-              padding: 20,
-              width: 350,
+              width: 300,
               backgroundColor: 'transparent',
               alignSelf: 'center',
-              opacity: 0.8,
-              transform: [
-                { scaleX: 0.7 },
-                { scaleY: 0.7 },
-                { rotate: '-90deg' }
-              ]
+              opacity: 0.8
             }}
           />
 
           <View
             style={{
-              flex: 1,
+              width: '100%',
+              height: 110,
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center'
