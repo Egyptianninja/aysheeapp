@@ -66,6 +66,8 @@ export default class PhotoSlider extends React.Component<any, any> {
   };
 
   render() {
+    console.log(this.state.position);
+
     const { photos } = this.props;
     const height = this.props.width * 1.3333;
     return (
@@ -87,7 +89,7 @@ export default class PhotoSlider extends React.Component<any, any> {
         >
           {photos.map((image: any, i: any) => {
             const uri = image.file ? image.file : image.uri;
-            const main = image === this.state.selectedImage;
+            const main = uri === this.state.selectedImage;
             return (
               <View key={uri}>
                 {main && (

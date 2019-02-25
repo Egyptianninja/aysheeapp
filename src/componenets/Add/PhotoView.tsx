@@ -97,7 +97,7 @@ class PhotoView extends React.Component<any, any> {
         {this.state.images.map((img: any, i: any) => {
           const uri = img.file ? img.file : img.uri;
           const size = (SCREEN_WIDTH - 70) / 3;
-          const main = img === this.state.selectedImage;
+          const main = uri === this.state.selectedImage;
 
           return (
             <View key={uri}>

@@ -88,14 +88,15 @@ export default class CameraScreen extends React.Component<any, any> {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
 
-  getPhotoPosition = (position: any) => {
+  setPhotoPosition = (position: any) => {
     this.setState({ position });
   };
 
   renderSliderImages = (images: any) => {
     return (
       <PhotoSlider
-        getPhotoPosition={this.getPhotoPosition}
+        position={this.state.position}
+        setPhotoPosition={this.setPhotoPosition}
         photos={images}
         width={SCREEN_WIDTH - 40 - 10}
         ratio={1.3333}
@@ -167,6 +168,30 @@ export default class CameraScreen extends React.Component<any, any> {
       await CameraRoll.saveToCameraRoll(image.uri, 'photo');
     });
     this.setState({ saved: true });
+  };
+
+  deleteImage = async (position: any) => {
+    const images = this.state.images;
+    if (this.state.images.length === 1) {
+      this.props.updateImagesList([]);
+      this.setState({
+        position: 0,
+        isModalVisible: false
+      });
+    }
+    images.splice(position, 1);
+    this.props.updateImagesList(images);
+    if (position === images.length) {
+      if (images.length === 0) {
+        await this.setState({
+          position: 0
+        });
+      } else {
+        await this.setState({
+          position: position - 1
+        });
+      }
+    }
   };
 
   render() {
