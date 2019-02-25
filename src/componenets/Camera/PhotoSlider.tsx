@@ -12,9 +12,13 @@ import { Photo } from '../../lib';
 
 export default class PhotoSlider extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    if (nextProps.selectedImage !== prevState.selectedImage) {
+    if (
+      nextProps.selectedImage !== prevState.selectedImage ||
+      nextProps.position !== prevState.position
+    ) {
       return {
-        selectedImage: nextProps.selectedImage
+        selectedImage: nextProps.selectedImage,
+        position: nextProps.position
       };
     } else {
       return { ...prevState };
