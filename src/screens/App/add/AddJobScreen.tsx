@@ -125,12 +125,10 @@ class AddJobScreen extends React.Component<any, any> {
     let trueLocation = null;
 
     if (loc) {
-      trueLocation = [
-        {
-          lat: loc.coords.latitude,
-          lon: loc.coords.longitude
-        }
-      ];
+      trueLocation = {
+        lat: loc.coords.latitude,
+        lon: loc.coords.longitude
+      };
     }
     this.updateProgressBar(1 / (3 + this.state.images.length));
     const res = await this.props.addClassifiedMutation({

@@ -98,7 +98,7 @@ export const telecode = [
   { name: 'Jamaica', tel: 1876, iso: 'JM', iso3: 'JAM' },
   { name: 'Japan', tel: 81, iso: 'JP', iso3: 'JPN' },
   { name: 'Jersey', tel: 441534, iso: 'JE', iso3: 'JEY' },
-  { name: 'Jordan', tel: 962, iso: '', iso3: 'JOR' },
+  { name: 'Jordan', tel: 962, iso: 'JO', iso3: 'JOR' },
   { name: 'Kazakhstan', tel: 7, iso: 'KZ', iso3: 'KAZ' },
   { name: 'Kenya', tel: 254, iso: 'KE', iso3: 'KEN' },
   { name: 'Kiribati', tel: 686, iso: 'KI', iso3: 'KIR' },

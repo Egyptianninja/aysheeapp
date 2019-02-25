@@ -574,17 +574,17 @@ class ItemView extends React.Component<any, any> {
               data={jdata}
             />
           )}
-          {post.trueLocation && post.trueLocation.length > 0 && (
+          {post.trueLocation && (
             <ItemLocation
-              latitude={post.trueLocation[0].lat}
-              longitude={post.trueLocation[0].lon}
+              latitude={post.trueLocation.lat}
+              longitude={post.trueLocation.lon}
               title={post.title}
             />
           )}
-          {post.trueLocation && post.trueLocation.length > 0 && (
+          {post.trueLocation && (
             <Link
-              latitude={post.trueLocation[0].lat}
-              longitude={post.trueLocation[0].lon}
+              latitude={post.trueLocation.lat}
+              longitude={post.trueLocation.lon}
               title={post.title}
             />
           )}

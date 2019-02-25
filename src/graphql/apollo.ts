@@ -20,18 +20,15 @@ import { store } from '../store';
 
 const host = secrets.host;
 const uri = secrets.uri;
-
 const httpLink = createHttpLink({
   uri: host
 });
-
 const wsLink = new WebSocketLink({
   uri,
   options: {
     reconnect: true
   }
 });
-
 const authLink = setContext(async (_, { headers }) => {
   const token = await AsyncStorage.getItem('aysheetoken');
   return {

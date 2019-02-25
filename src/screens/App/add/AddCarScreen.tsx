@@ -147,12 +147,12 @@ class AddCarScreen extends React.Component<any, any> {
     let trueLocation = null;
 
     if (loc) {
-      trueLocation = [
+      trueLocation =
         {
           lat: loc.coords.latitude,
           lon: loc.coords.longitude
         }
-      ];
+      ;
     }
     this.updateProgressBar(1 / (3 + this.state.images.length));
     const res = await this.props.addClassifiedMutation({

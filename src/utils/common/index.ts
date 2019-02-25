@@ -3,6 +3,8 @@ import { parseJwt } from './parseJwt';
 import { StyleSheet } from './stylesheet';
 import {
   getCountryCode,
+  getLocaleCountry,
+  getCodeFromCountry,
   getCountryCodeQatar,
   getCountryFromLatLon
 } from './getCountryCode';
@@ -27,5 +29,7 @@ export {
   filterOptions,
   getCountryFromLatLon,
   Orientation,
-  ZoomView
+  ZoomView,
+  getLocaleCountry,
+  getCodeFromCountry
 };

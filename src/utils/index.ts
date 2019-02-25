@@ -32,7 +32,9 @@ import {
   filterOptions,
   getCountryFromLatLon,
   Orientation,
-  ZoomView
+  ZoomView,
+  getLocaleCountry,
+  getCodeFromCountry
 } from './common';
 import { since } from './since';
 import {
@@ -95,5 +97,7 @@ export {
   DotIndicatorSmall,
   Orientation,
   ZoomView,
-  flipImage
+  flipImage,
+  getLocaleCountry,
+  getCodeFromCountry
 };
