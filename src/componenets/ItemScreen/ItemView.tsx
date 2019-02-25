@@ -549,7 +549,9 @@ class ItemView extends React.Component<any, any> {
                     callargs,
                     word,
                     isAuthenticated: this.props.isAuthenticated,
-                    userId: this.props.user._id,
+                    userId: this.props.isAuthenticated
+                      ? this.props.user._id
+                      : undefined,
                     navigation: this.props.navigation,
                     ardroid: this.ardroid
                   });
@@ -572,21 +574,20 @@ class ItemView extends React.Component<any, any> {
               data={jdata}
             />
           )}
-          {post.trueLocation && (
+          {post.trueLocation && post.trueLocation.length > 0 && (
             <ItemLocation
-              latitude={post.trueLocation.lat}
-              longitude={post.trueLocation.lon}
+              latitude={post.trueLocation[0].lat}
+              longitude={post.trueLocation[0].lon}
               title={post.title}
             />
           )}
-          {post.trueLocation && (
+          {post.trueLocation && post.trueLocation.length > 0 && (
             <Link
-              latitude={post.trueLocation.lat}
-              longitude={post.trueLocation.lon}
+              latitude={post.trueLocation[0].lat}
+              longitude={post.trueLocation[0].lon}
               title={post.title}
             />
           )}
-
           <View
             style={{
               marginHorizontal: 20,

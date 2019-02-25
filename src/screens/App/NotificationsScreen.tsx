@@ -32,7 +32,7 @@ class NotificationsScreen extends React.Component<any, any> {
               return <Loading />;
             }
             if (error) {
-              return `Error!: ${error}`;
+              return <View />;
             }
             const notis = data.getMyNotifications.data;
             return (

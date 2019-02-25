@@ -232,7 +232,10 @@ class PhotoView extends React.Component<any, any> {
                     const currentImage: any = this.state.images[
                       this.state.position
                     ];
-                    this.props.hendleSelectedImage(currentImage);
+                    const uri = currentImage.file
+                      ? currentImage.file
+                      : currentImage.uri;
+                    this.props.hendleSelectedImage(uri);
                   }}
                   style={{ paddingHorizontal: 10 }}
                 >

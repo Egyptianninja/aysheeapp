@@ -43,7 +43,8 @@ export const uploadPhotos = async (
         secrets.upload.UPLOAD_PRESET,
         secrets.upload.CLOUD_NAME
       ).then(response => {
-        const selected = photo.file === selectedImage ? 1 : 0;
+        const uri = photo.file ? photo.file : photo.uri;
+        const selected = uri === selectedImage ? 1 : 0;
         const { public_id } = response.data;
         const image = `${public_id}-${ratio}-${selected}`;
         photoArray = photoArray.concat(image);

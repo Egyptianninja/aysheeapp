@@ -19,8 +19,10 @@ import {
   login,
   codeSent,
   initTime,
-  initCode
+  initCode,
+  addUniquename
 } from '../../store/actions/userAtions';
+
 import smsLoginWithCode from '../../graphql/mutation/smsLoginWithCode';
 import smsRequestCode from '../../graphql/mutation/smsRequestCode';
 import { smsTimes, codeTimes } from '../../constants';
@@ -106,17 +108,12 @@ class CodeScreen extends React.Component<any, any> {
       if (res.data.smsLoginWithCode.ok) {
         const { token, data } = res.data.smsLoginWithCode;
         await AsyncStorage.setItem('aysheetoken', token);
-        this.props.login(token, data);
-        this.props.initTime();
-        this.props.initCode();
-        if (data.uniquename) {
-          this.props.navigation.navigate('App');
-        } else {
-          const name = this.props.navigation.getParam('name');
-          this.props.navigation.navigate('NameScreen', {
-            name
-          });
-        }
+        const name = this.props.navigation.getParam('name');
+        await this.props.addUniquename(name);
+        await this.props.login(token, data);
+        await this.props.initTime();
+        await this.props.initCode();
+        this.props.navigation.navigate('App');
       } else {
         if (res.data.smsLoginWithCode.ok === false) {
           const nowTime = Math.floor(new Date().getTime() / 1000);
@@ -313,7 +310,7 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(
   mapStateToProps,
-  { smsSent, login, codeSent, initCode, initTime }
+  { smsSent, login, codeSent, initCode, initTime, addUniquename }
 )(
   graphql(smsLoginWithCode, {
     name: 'smsLoginWithCode'

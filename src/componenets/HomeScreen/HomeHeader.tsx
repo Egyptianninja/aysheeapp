@@ -9,7 +9,6 @@ import { icons } from '../../load';
 const home = icons.home.icon();
 const mainmenu = icons.mainmenu.icon();
 const namelogo = icons.namelogo.icon();
-const search = icons.search.icon();
 
 class HomeHeader extends React.Component<any, any> {
   state = {
