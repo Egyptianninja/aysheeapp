@@ -15,9 +15,7 @@ import { bindActionCreators } from 'redux';
 import { graphql } from 'react-apollo';
 import { Permissions } from 'expo';
 import { StyleSheet, pickImage, parseJwt } from '../../../utils';
-import addHeaderPhoto from '../../../graphql/mutation/addHeaderPhoto';
 import updateProfile from '../../../graphql/mutation/updateProfile';
-import addAvatar from '../../../graphql/mutation/addAvatar';
 import { updateUser } from '../../../store/actions/userAtions';
 import { Ionicons } from '@expo/vector-icons';
 import { Input, Button } from '../../../lib';
@@ -50,17 +48,17 @@ class ProfileScreen extends React.Component<any, any> {
 
     const headerPhoto = await pickImage(false, 960, 0.8);
     if (headerPhoto) {
-      const res = await this.props.addHeaderPhoto({
+      const res = await this.props.updateProfile({
         variables: {
           headerPhoto
         }
       });
-      if (res.data.addHeaderPhoto.ok) {
+      if (res.data.updateProfile.ok) {
         this.props.updateUser({ headerPhoto });
         return true;
       }
-      if (!res.data.addHeaderPhoto.ok) {
-        console.log('Error', res.data.addHeaderPhoto.error);
+      if (!res.data.updateProfile.ok) {
+        console.log('Error', res.data.updateProfile.error);
         return false;
       }
     }
@@ -125,16 +123,16 @@ class ProfileScreen extends React.Component<any, any> {
               }
               const avatar = await pickImage(true, 400, 0.8);
               if (avatar) {
-                const res = await this.props.addAvatar({
+                const res = await this.props.updateProfile({
                   variables: {
                     avatar
                   }
                 });
-                if (res.data.addAvatar.ok) {
+                if (res.data.updateProfile.ok) {
                   this.props.updateUser({ avatar });
                 }
-                if (!res.data.addAvatar.ok) {
-                  console.log('Error', res.data.addAvatar.error);
+                if (!res.data.updateProfile.ok) {
+                  console.log('Error', res.data.updateProfile.error);
                 }
               }
             }}
@@ -371,17 +369,9 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(
-  graphql(addHeaderPhoto, {
-    name: 'addHeaderPhoto'
-  })(
-    graphql(updateProfile, {
-      name: 'updateProfile'
-    })(
-      graphql(addAvatar, {
-        name: 'addAvatar'
-      })(ProfileScreen)
-    )
-  )
+  graphql(updateProfile, {
+    name: 'updateProfile'
+  })(ProfileScreen)
 );
 
 const styles = StyleSheet.create({

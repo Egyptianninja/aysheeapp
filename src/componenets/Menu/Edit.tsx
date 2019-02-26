@@ -69,26 +69,27 @@ export default class Edit extends React.Component<any, any> {
     const res = await this.props.editClassifieds({
       variables: {
         postId: this.props.post.id,
-        price: price ? Number(price) : price,
-        currency,
-        phone,
-        isnew,
-        issale,
-        iswarranty,
-        space: space ? Number(space) : space,
-        rooms: rooms ? Number(rooms) : rooms,
-        bathrooms: bathrooms ? Number(bathrooms) : bathrooms,
-        isfurnishered,
-        year: year ? Number(year) : year,
-        km: km ? Number(km) : km,
-        color,
-        jobTitle,
-        jobIndustry,
-        isfullTime,
-        education,
-        experience,
-        salary: salary ? Number(salary) : salary,
-        trueLocation
+        price: price ? Number(price) : undefined,
+        currency: currency ? currency : undefined,
+        phone: phone ? phone : undefined,
+        isnew: isnew || isnew === false ? isnew : undefined,
+        issale: issale || issale === false ? issale : undefined,
+        iswarranty: iswarranty || iswarranty === false ? iswarranty : undefined,
+        space: space ? Number(space) : undefined,
+        rooms: rooms ? Number(rooms) : undefined,
+        bathrooms: bathrooms ? Number(bathrooms) : undefined,
+        isfurnishered:
+          isfurnishered || isfurnishered === false ? isfurnishered : undefined,
+        year: year ? Number(year) : undefined,
+        km: km ? Number(km) : undefined,
+        color: color ? color : undefined,
+        jobTitle: jobTitle ? jobTitle : undefined,
+        jobIndustry: jobIndustry ? jobIndustry : undefined,
+        education: education ? education : undefined,
+        experience: experience ? experience : undefined,
+        isfullTime: isfullTime || isfullTime === false ? isfullTime : undefined,
+        salary: salary ? Number(salary) : undefined,
+        trueLocation: trueLocation ? trueLocation : undefined
       }
     });
     if (res.data.updatePost.ok) {

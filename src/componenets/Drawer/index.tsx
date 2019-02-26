@@ -22,7 +22,7 @@ import {
 import addAvatar from '../../graphql/mutation/addAvatar';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import logoutFromAll from '../../graphql/mutation/logoutFromAll';
-import { StyleSheet, pickImage } from '../../utils';
+import { StyleSheet, pickImage, getCountryCityFromToken } from '../../utils';
 import secrets from '../../constants/secrets';
 import { icons } from '../../load';
 import { Avatar } from '../Avatar';
@@ -45,10 +45,13 @@ class Drawer extends React.Component<any, any> {
       case 6: {
         // TODO: uncomment to logout from all
         // await this.props.logoutFromAll();
+        const { country, city } = await getCountryCityFromToken();
         AsyncStorage.removeItem('aysheetoken');
         this.props.logout();
         this.props.phoneRemoved();
-        const response = await this.props.refreshToken();
+        const response = await this.props.refreshToken({
+          variables: { country, city }
+        });
         const { token } = response.data.refreshToken;
         await AsyncStorage.setItem('aysheetoken', token);
         this.props.navigation.goBack();

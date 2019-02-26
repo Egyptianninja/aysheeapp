@@ -3,10 +3,10 @@ import { TouchableOpacity, Text, View, Image } from 'react-native';
 import { icons } from '../../load';
 import { telecode } from '../../constants';
 
-export const Choise = ({ name, action, hideModal }: any) => {
+export const Choise = ({ country, city, action, width }: any) => {
   let icon;
-  if (name) {
-    const countryISO = telecode.filter((cu: any) => cu.name === name)[0].iso;
+  if (country) {
+    const countryISO = telecode.filter((cu: any) => cu.name === country)[0].iso;
     const iconFunc = icons.flag.filter(ic => ic.id === countryISO);
     icon = iconFunc ? iconFunc[0].icon() : icons.mainmenu.icon();
   }
@@ -14,44 +14,42 @@ export const Choise = ({ name, action, hideModal }: any) => {
   return (
     <TouchableOpacity
       onPress={async () => {
-        action(name);
+        action({ country, city });
       }}
       style={{
-        flexDirection: 'row-reverse',
+        flexDirection: 'row',
         margin: 7,
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: width - 80,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        backgroundColor: '#eee',
+        borderRadius: 10,
+        shadowOffset: { width: 3, height: 3 },
+        shadowColor: '#555',
+        shadowOpacity: 0.3
       }}
     >
-      <Text
-        style={{
-          fontSize: 18,
-          fontFamily: 'cairo-regular',
-          textAlign: 'right',
-          paddingHorizontal: 10,
-          color: '#000'
-        }}
-      >
-        {name}
-      </Text>
       <View
         style={{
-          width: 48,
-          height: 48,
-          borderRadius: 24,
+          width: 52,
+          height: 52,
+          borderRadius: 26,
           overflow: 'hidden',
+          opacity: 0.8,
           justifyContent: 'center',
           alignItems: 'center',
-          borderWidth: 2,
+          borderWidth: 3,
           backgroundColor: '#fff',
-          borderColor: '#7678ED'
+          borderColor: '#fff'
         }}
       >
         <View
           style={{
-            width: 40,
-            height: 40,
-            borderRadius: 20,
+            width: 80,
+            height: 80,
+            borderRadius: 40,
             overflow: 'hidden',
             marginHorizontal: 10
           }}
@@ -66,6 +64,17 @@ export const Choise = ({ name, action, hideModal }: any) => {
           />
         </View>
       </View>
+      <Text
+        style={{
+          fontSize: 18,
+          fontFamily: 'cairo-regular',
+          textAlign: 'right',
+          paddingHorizontal: 10,
+          color: '#000'
+        }}
+      >
+        {country}
+      </Text>
     </TouchableOpacity>
   );
 };

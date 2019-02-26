@@ -13,6 +13,16 @@ export const getCountryCode = async () => {
     code: teleitem[0].tel
   };
 };
+export const getCountryCityFromToken = async () => {
+  const token = await AsyncStorage.getItem('aysheetoken');
+  const data = parseJwt(token);
+  return {
+    token,
+    data,
+    country: data.country,
+    city: data.city
+  };
+};
 
 export const getCountryCodeQatar = async () => {
   const token = await AsyncStorage.getItem('aysheetoken');
@@ -30,7 +40,7 @@ export const getCountryCodeQatar = async () => {
     return { country: '', code: '' };
   }
 };
-export const getCodeFromCountry = async (country: any) => {
+export const getCodeFromCountry = (country: any) => {
   const teleitem =
     country === ''
       ? telecode.filter((cc: any) => cc.name === 'Qatar')

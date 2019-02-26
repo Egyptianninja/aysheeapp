@@ -34,7 +34,8 @@ import {
   Orientation,
   ZoomView,
   getLocaleCountry,
-  getCodeFromCountry
+  getCodeFromCountry,
+  getCountryCityFromToken
 } from './common';
 import { since } from './since';
 import {
@@ -99,5 +100,6 @@ export {
   ZoomView,
   flipImage,
   getLocaleCountry,
-  getCodeFromCountry
+  getCodeFromCountry,
+  getCountryCityFromToken
 };

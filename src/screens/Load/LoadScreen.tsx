@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, AsyncStorage, Image, Dimensions } from 'react-native';
+import { View, AsyncStorage, Image, Dimensions, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import Modal from 'react-native-modal';
@@ -25,7 +25,7 @@ class LoadScreen extends React.Component<any, any> {
       city: null,
       country: null
     };
-    this.checkAuth();
+    this.getCountryToken();
   }
   componentWillUnmount() {
     clearTimeout(this.timer);
@@ -47,8 +47,8 @@ class LoadScreen extends React.Component<any, any> {
     this.setState({ isModalVisible: false });
   };
 
-  chooseCountry = async (country: any) => {
-    await this.refreshUserToken({ country, city: this.state.city });
+  chooseCountry = async ({ country, city }: any) => {
+    await this.refreshUserToken({ country, city });
     const code = getCodeFromCountry(country);
     await this.props.initApp(country, code);
     await this.hideModal();
@@ -57,9 +57,8 @@ class LoadScreen extends React.Component<any, any> {
     }, 500);
   };
 
-  checkAuth = async () => {
+  getCountryToken = async () => {
     const myCountry = await this.props.getMyCountry({});
-
     const ipCountry = myCountry ? myCountry.data.getMyCountry.country : '';
     const city = myCountry ? myCountry.data.getMyCountry.city : '';
     const localeCountry = getLocaleCountry();
@@ -76,9 +75,63 @@ class LoadScreen extends React.Component<any, any> {
 
   renderOptions = () => {
     return (
-      <View>
-        <Choise name={this.state.ipCountry} action={this.chooseCountry} />
-        <Choise name={this.state.localeCountry} action={this.chooseCountry} />
+      <React.Fragment>
+        <View>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: 'bold',
+              color: '#aaa',
+              padding: 10,
+              alignSelf: 'center'
+            }}
+          >
+            Choose Market‎
+          </Text>
+        </View>
+        <View>
+          <Choise
+            action={this.chooseCountry}
+            country={this.state.ipCountry}
+            city={this.state.city}
+            width={width}
+          />
+          <Choise
+            action={this.chooseCountry}
+            country={this.state.localeCountry}
+            city=""
+            width={width}
+          />
+        </View>
+      </React.Fragment>
+    );
+  };
+  renderLogo = () => {
+    return (
+      <View
+        style={{
+          flex: 2,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <View
+          style={{
+            width: 150,
+            height: 40,
+            overflow: 'hidden',
+            marginHorizontal: 10
+          }}
+        >
+          <Image
+            style={{
+              flex: 1,
+              width: '100%',
+              height: '100%'
+            }}
+            source={require('../../../assets/icons/header/namelogo.png')}
+          />
+        </View>
       </View>
     );
   };
@@ -96,7 +149,7 @@ class LoadScreen extends React.Component<any, any> {
         <Image
           source={images.load}
           style={{ flex: 1, width: undefined, height: undefined }}
-          resizeMode="cover"
+          resizeMode="contain"
           fadeDuration={0}
         />
 
@@ -110,19 +163,20 @@ class LoadScreen extends React.Component<any, any> {
         >
           <View
             style={{
-              backgroundColor: '#eee',
+              backgroundColor: '#f7f7f7',
               borderRadius: 10,
               position: 'absolute',
               bottom: 0,
               margin: 0,
               height: height - 40,
-              paddingTop: 10,
               width: width - 40,
               justifyContent: 'center',
               alignItems: 'center'
             }}
           >
-            {this.renderOptions()}
+            {this.renderLogo()}
+
+            <View style={{ flex: 3 }}>{this.renderOptions()}</View>
           </View>
         </Modal>
       </View>

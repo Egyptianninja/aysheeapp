@@ -6,7 +6,8 @@ import {
   getLocaleCountry,
   getCodeFromCountry,
   getCountryCodeQatar,
-  getCountryFromLatLon
+  getCountryFromLatLon,
+  getCountryCityFromToken
 } from './getCountryCode';
 import { isArabic, arabicToNum } from './arabic';
 import { nameToColor } from './color';
@@ -31,5 +32,6 @@ export {
   Orientation,
   ZoomView,
   getLocaleCountry,
-  getCodeFromCountry
+  getCodeFromCountry,
+  getCountryCityFromToken
 };
