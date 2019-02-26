@@ -52,8 +52,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
     bar: 0
   };
   noSale = [2, 3, 7, 8, 13, 15, 17, 18];
-  noNew = [18, 17];
   noPrice = [15];
+  noNew = [18, 17];
   noWaranty = [18, 17, 15, 13, 12];
   acc = [8];
 

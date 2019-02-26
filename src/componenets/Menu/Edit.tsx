@@ -15,13 +15,14 @@ export default class Edit extends React.Component<any, any> {
       return { ...prevState };
     }
   }
-  noPrice = [9, 10, 15];
-  noSale = [2, 3, 5, 6, 7, 8, 9, 10, 13, 15, 17, 18];
-  noNew = [5, 6, 9, 10, 18, 17];
-  noWaranty = [0, 5, 6, 9, 10, 12, 13, 15, 17, 18];
+  noSale = [2, 3, 5, 7, 9, 13, 15, 17, 18];
+  noPrice = [9, 15];
+  noNew = [5, 9, 18, 17];
+  noWaranty = [0, 5, 9, 12, 13, 15, 17, 18];
+  acc = [8];
   re = [0];
   car = [1];
-  job = [5, 6];
+  job = [5];
 
   constructor(props: any) {
     super(props);
@@ -38,11 +39,11 @@ export default class Edit extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const {
       price,
-      currency,
       phone,
       isnew,
       issale,
       iswarranty,
+      isforman,
       space,
       rooms,
       bathrooms,
@@ -70,11 +71,12 @@ export default class Edit extends React.Component<any, any> {
       variables: {
         postId: this.props.post.id,
         price: price ? Number(price) : undefined,
-        currency: currency ? currency : undefined,
         phone: phone ? phone : undefined,
+        trueLocation: trueLocation ? trueLocation : undefined,
         isnew: isnew || isnew === false ? isnew : undefined,
         issale: issale || issale === false ? issale : undefined,
         iswarranty: iswarranty || iswarranty === false ? iswarranty : undefined,
+        isforman: isforman || isforman === false ? isforman : undefined,
         space: space ? Number(space) : undefined,
         rooms: rooms ? Number(rooms) : undefined,
         bathrooms: bathrooms ? Number(bathrooms) : undefined,
@@ -85,11 +87,10 @@ export default class Edit extends React.Component<any, any> {
         color: color ? color : undefined,
         jobTitle: jobTitle ? jobTitle : undefined,
         jobIndustry: jobIndustry ? jobIndustry : undefined,
+        isfullTime: isfullTime || isfullTime === false ? isfullTime : undefined,
         education: education ? education : undefined,
         experience: experience ? experience : undefined,
-        isfullTime: isfullTime || isfullTime === false ? isfullTime : undefined,
-        salary: salary ? Number(salary) : undefined,
-        trueLocation: trueLocation ? trueLocation : undefined
+        salary: salary ? Number(salary) : undefined
       }
     });
     if (res.data.updatePost.ok) {
@@ -142,23 +143,26 @@ export default class Edit extends React.Component<any, any> {
                 currency: post.currency,
                 phone: post.phone,
                 isnew: post.isnew,
+                isold: !post.isnew,
                 issale: post.issale,
+                isrent: !post.issale,
                 iswarranty: post.iswarranty,
-
+                isforman: post.isforman,
+                isforwomen: !post.isforman,
                 space: post.space ? post.space.toString() : post.space,
                 rooms: post.rooms ? post.rooms.toString() : post.rooms,
                 bathrooms: post.bathrooms
                   ? post.bathrooms.toString()
                   : post.bathrooms,
                 isfurnishered: post.isfurnishered,
-
+                isUnfurnishered: !post.isfurnishered,
                 year: post.year ? post.year.toString() : post.year,
                 km: post.km ? post.km.toString() : post.km,
                 color: post.color,
-
                 jobTitle: post.jobTitle,
                 jobIndustry: post.jobIndustry,
                 isfullTime: post.isfullTime,
+                isPartTime: !post.isfullTime,
                 education: post.education,
                 experience: post.experience,
                 salary: post.salary ? post.salary.toString() : post.salary,
@@ -198,6 +202,27 @@ export default class Edit extends React.Component<any, any> {
                       keyboardType="number-pad"
                       height={40}
                     />
+                  )}
+                  {this.acc.includes(categoryId) && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={lang === 'ar' ? true : false}
+                    >
+                      <RadioButton
+                        name="isforwomen"
+                        label={word.isforwomen}
+                        value={values.isforwomen}
+                        selected={values.isforwomen}
+                      />
+                      <RadioButton
+                        name="isforman"
+                        label={word.isforman}
+                        value={values.isforman}
+                        selected={values.isforman}
+                      />
+                    </Group>
                   )}
                   <Input
                     rtl={lang === 'ar' ? true : false}
