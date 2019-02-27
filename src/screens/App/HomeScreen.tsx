@@ -19,7 +19,7 @@ import {
   Message,
   registerForPushNotificationsAsync
 } from '../../utils';
-import { Loading, CategoriesScroll, Noresult } from '../../componenets';
+import { HomeLoading, CategoriesScroll, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
 import { Menu, Report } from '../../componenets/Menu';
 
@@ -295,7 +295,7 @@ class HomeScreen extends React.Component<any, any> {
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
-              return <Loading categoryId={rest.categoryId} />;
+              return <HomeLoading categoryId={rest.categoryId} />;
             }
             if (error) {
               return <Text>{error}</Text>;

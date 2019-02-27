@@ -5,7 +5,8 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
@@ -19,10 +20,13 @@ import {
   phoneAdded,
   phoneRemoved,
   smsSent,
-  initTime
+  initTime,
+  initCode,
+  addUniquename
 } from '../../store/actions/userAtions';
 import smsRequestCode from '../../graphql/mutation/smsRequestCode';
 import notificationSub from '../../graphql/mutation/notificationSub';
+import smsLoginWithPhone from '../../graphql/mutation/smsLoginWithPhone';
 
 import { smsTimes } from '../../constants';
 
@@ -30,13 +34,21 @@ const { width } = Dimensions.get('window');
 class PhoneScreen extends React.Component<any, any> {
   subs: any;
   state = {
+    localePhone: null,
     phone: null,
     name: null,
     loading: false,
     interval: 0
   };
 
-  componentDidMount() {
+  async componentWillMount() {
+    const phone = await AsyncStorage.getItem('phone');
+    if (phone) {
+      await this.setState({ localePhone: phone });
+    }
+  }
+
+  async componentDidMount() {
     this.setInterval();
     this.subs = [
       this.props.navigation.addListener('didFocus', () => {
@@ -72,30 +84,47 @@ class PhoneScreen extends React.Component<any, any> {
     try {
       const { phone } = values;
       const phoneNumber = `${this.props.code}${phone}`;
-
-      const res = await this.props.smsRequestCode({
-        variables: { phone: phoneNumber }
-      });
-      if (res.data.smsRequestCode.ok) {
-        const name = res.data.smsRequestCode.message;
-        const nowTime = Math.floor(new Date().getTime() / 1000);
-        const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
-        await this.props.smsSent(nextTime);
-        const interval = nextTime - nowTime;
-        await this.setState({
-          phone: phoneNumber,
-          name,
-          interval: interval > 0 ? interval : 0
+      if (phoneNumber === this.state.localePhone) {
+        const res = await this.props.smsLoginWithPhone({
+          variables: { phone: phoneNumber }
         });
-        this.props.phoneAdded(phoneNumber, name);
-        this.props.navigation.navigate('CodeScreen', {
-          phone: phoneNumber,
-          name
-        });
+        if (res.data.smsLoginWithPhone.ok) {
+          const { token, data } = res.data.smsLoginWithPhone;
+          await AsyncStorage.setItem('aysheetoken', token);
+          const name = await AsyncStorage.getItem('name');
+          await this.props.addUniquename(name);
+          await this.props.login(token, data);
+          await this.props.initTime();
+          await this.props.initCode();
+          this.props.navigation.navigate('App');
+        }
       } else {
-        bag.setErrors({ phone: res.data.smsRequestCode.error });
+        const res = await this.props.smsRequestCode({
+          variables: { phone: phoneNumber }
+        });
+        if (res.data.smsRequestCode.ok) {
+          await AsyncStorage.setItem('phone', phoneNumber);
+          const name = res.data.smsRequestCode.message;
+          await AsyncStorage.setItem('name', name);
+          const nowTime = Math.floor(new Date().getTime() / 1000);
+          const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
+          await this.props.smsSent(nextTime);
+          const interval = nextTime - nowTime;
+          await this.setState({
+            phone: phoneNumber,
+            name,
+            interval: interval > 0 ? interval : 0
+          });
+          this.props.phoneAdded(phoneNumber, name);
+          this.props.navigation.navigate('CodeScreen', {
+            phone: phoneNumber,
+            name
+          });
+        } else {
+          bag.setErrors({ phone: res.data.smsRequestCode.error });
+        }
+        bag.setSubmitting(false);
       }
-      bag.setSubmitting(false);
     } catch (error) {
       bag.setErrors(error);
     }
@@ -107,6 +136,7 @@ class PhoneScreen extends React.Component<any, any> {
 
   render() {
     const { words } = this.props;
+    const { localePhone }: any = this.state;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -140,10 +170,11 @@ class PhoneScreen extends React.Component<any, any> {
           >
             <Formik
               initialValues={{
-                phone: this.props.phone
-                  ? this.props.phone.replace(this.props.code, '')
+                phone: localePhone
+                  ? localePhone.replace(this.props.code, '')
                   : ''
               }}
+              enableReinitialize={true}
               onSubmit={this.handleCodeSubmit}
               validationSchema={Yup.object().shape({
                 phone: Yup.string()
@@ -254,7 +285,9 @@ export default connect(
     phoneAdded,
     phoneRemoved,
     smsSent,
-    initTime
+    initTime,
+    initCode,
+    addUniquename
   }
 )(
   graphql(smsRequestCode, {
@@ -262,6 +295,10 @@ export default connect(
   })(
     graphql(notificationSub, {
       name: 'notificationSub'
-    })(PhoneScreen)
+    })(
+      graphql(smsLoginWithPhone, {
+        name: 'smsLoginWithPhone'
+      })(PhoneScreen)
+    )
   )
 );

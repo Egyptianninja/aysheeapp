@@ -1,0 +1,26 @@
+import gql from 'graphql-tag';
+
+export default gql`
+  mutation smsLoginWithPhone($phone: String!) {
+    smsLoginWithPhone(phone: $phone) {
+      ok
+      token
+      data {
+        _id
+        uniquename
+        phone
+        email
+        name
+        about
+        isstore
+        avatar
+        headerPhoto
+        country
+        city
+        website
+        verified
+      }
+      error
+    }
+  }
+`;

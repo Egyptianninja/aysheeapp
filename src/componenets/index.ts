@@ -15,7 +15,13 @@ import {
   getJobProperties
 } from './ItemScreen';
 import NotificationItem from './NotificationScreen/item';
-import { MessageModal, Loading, Noresult, LoadingSmall } from './Common';
+import {
+  MessageModal,
+  Loading,
+  Noresult,
+  LoadingSmall,
+  HomeLoading
+} from './Common';
 
 export {
   Avatar,
@@ -36,5 +42,6 @@ export {
   getproperties,
   getJobProperties,
   Noresult,
-  LoadingSmall
+  LoadingSmall,
+  HomeLoading
 };
