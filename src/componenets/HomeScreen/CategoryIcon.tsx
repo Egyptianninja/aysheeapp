@@ -30,9 +30,12 @@ const CategoryIcon = ({
             backgroundColor: '#fff',
             height: 60,
             width: 60,
-            borderRadius: 30,
+            borderRadius: 15,
             borderColor: '#7678ED',
-            borderWidth: 2
+            borderWidth: 2,
+            shadowOffset: { width: 3, height: 3 },
+            shadowColor: '#555',
+            shadowOpacity: 0.3
           }}
         >
           <View style={styles.iconView}>
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 52,
     width: 52,
-    borderRadius: 26,
+    borderRadius: 13,
     // borderColor: '#7678ED',
     // borderWidth: 2,
     overflow: 'hidden'

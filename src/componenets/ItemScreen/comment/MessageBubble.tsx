@@ -5,7 +5,7 @@ import { StyleSheet, isArabic, since } from '../../../utils';
 import { Avatar } from '../../Avatar';
 export default class MessageBubble extends React.Component<any, any> {
   render() {
-    const { message, lang, width, words, isAuthenticated } = this.props;
+    const { message, lang, isRTL, width, words, isAuthenticated } = this.props;
     const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
       message.user.avatar
     }`;
@@ -18,9 +18,7 @@ export default class MessageBubble extends React.Component<any, any> {
         <View
           style={{
             flexDirection:
-              lang === 'ar' && Platform.OS !== 'android'
-                ? 'row-reverse'
-                : 'row',
+              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
             padding: 10,
             borderRadius: 10
           }}
@@ -89,7 +87,7 @@ export default class MessageBubble extends React.Component<any, any> {
               <View
                 style={{
                   alignItems:
-                    lang === 'ar' && Platform.OS !== 'android'
+                    isRTL && Platform.OS !== 'android'
                       ? 'flex-end'
                       : 'flex-start'
                 }}
@@ -100,9 +98,7 @@ export default class MessageBubble extends React.Component<any, any> {
                     fontWeight: 'bold',
                     color: '#000',
                     textAlign:
-                      lang === 'ar' && Platform.OS !== 'android'
-                        ? 'right'
-                        : 'left'
+                      isRTL && Platform.OS !== 'android' ? 'right' : 'left'
                   }}
                 >
                   {message.user.name}
@@ -112,7 +108,7 @@ export default class MessageBubble extends React.Component<any, any> {
                     fontSize: 12,
                     color: '#777',
                     textAlign:
-                      lang === 'ar' && Platform.OS !== 'android'
+                      isRTL && Platform.OS !== 'android'
                         ? 'right'
                         : 'left',
                     paddingBottom: 5
@@ -128,10 +124,10 @@ export default class MessageBubble extends React.Component<any, any> {
               message.replayto.body && (
                 <View
                   style={{
-                    borderLeftWidth: lang === 'ar' ? undefined : 3,
-                    borderLeftColor: lang === 'ar' ? undefined : '#555',
-                    borderRightWidth: lang === 'ar' ? 3 : undefined,
-                    borderRightColor: lang === 'ar' ? '#555' : undefined,
+                    borderLeftWidth: isRTL ? undefined : 3,
+                    borderLeftColor: isRTL ? undefined : '#555',
+                    borderRightWidth: isRTL ? 3 : undefined,
+                    borderRightColor: isRTL ? '#555' : undefined,
                     marginHorizontal: 10,
                     padding: 5,
                     backgroundColor: '#ddd',
@@ -180,9 +176,7 @@ export default class MessageBubble extends React.Component<any, any> {
         <View
           style={{
             flexDirection:
-              lang === 'ar' && Platform.OS !== 'android'
-                ? 'row-reverse'
-                : 'row',
+              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
             paddingHorizontal: 50
           }}
         >
@@ -208,9 +202,7 @@ export default class MessageBubble extends React.Component<any, any> {
               }
               style={{
                 flexDirection:
-                  lang === 'ar' && Platform.OS !== 'android'
-                    ? 'row'
-                    : 'row-reverse'
+                  isRTL && Platform.OS !== 'android' ? 'row' : 'row-reverse'
               }}
             >
               <Ionicons
@@ -222,13 +214,11 @@ export default class MessageBubble extends React.Component<any, any> {
               <Text
                 style={{
                   fontSize: 14,
-                  paddingLeft: lang === 'ar' ? 5 : 10,
-                  paddingRight: lang === 'ar' ? 10 : 5,
+                  paddingLeft: isRTL ? 5 : 10,
+                  paddingRight: isRTL ? 10 : 5,
                   color: '#7678ED',
                   textAlign:
-                    lang === 'ar' && Platform.OS !== 'android'
-                      ? 'right'
-                      : 'left'
+                    isRTL && Platform.OS !== 'android' ? 'right' : 'left'
                 }}
               >
                 {words.replay}

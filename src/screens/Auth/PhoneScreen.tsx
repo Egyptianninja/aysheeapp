@@ -273,7 +273,6 @@ const mapStateToProps = (state: any) => ({
   phone: state.user.phone,
   name: state.user.name,
   sms: state.user.sms,
-  lang: state.glob.languageName,
   code: state.glob.code,
   words: state.glob.language.words
 });

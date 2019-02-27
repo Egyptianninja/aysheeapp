@@ -61,17 +61,18 @@ class MyFavScreen extends React.Component<any, any> {
     this.setState({ isMessageVisible: false });
   };
 
-  selectePost = (post: any, word: any, lang: any) => {
+  selectePost = (post: any, word: any, lang: any, isRTL: any) => {
     this.props.navigation.navigate('ItemScreenUser', {
       post,
       word,
       lang,
-      fav: true
+      fav: true,
+      isRTL
     });
   };
 
   render() {
-    const { lang, words } = this.props;
+    const { lang, words, isRTL } = this.props;
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id
@@ -88,20 +89,20 @@ class MyFavScreen extends React.Component<any, any> {
           showMessageModal={this.showMessageModal}
           postId={postId}
           word={words}
-          lang={lang}
+          isRTL={isRTL}
           fav={true}
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
           hideReportModal={this.hideReportModal}
           word={words}
-          lang={lang}
+          isRTL={isRTL}
         />
         <Message
           isVisible={this.state.isMessageVisible}
           title={words.removeedtovafavorites}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -143,6 +144,7 @@ class MyFavScreen extends React.Component<any, any> {
                     selectePost={this.selectePost}
                     word={words}
                     lang={lang}
+                    isRTL={isRTL}
                   />
                 )}
                 getHeightForItem={({ item }: any) => item.height}
@@ -164,6 +166,7 @@ const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
   isAuthenticated: state.user.isAuthenticated,
   lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   words: state.glob.language.words
 });
 

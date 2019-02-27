@@ -13,11 +13,7 @@ class ChoiseScreen extends React.Component<any, any> {
     const { createAd } = words();
 
     return (
-      <ChoiseCategory
-        navigation={this.props.navigation}
-        title={createAd}
-        lang={this.props.language}
-      />
+      <ChoiseCategory navigation={this.props.navigation} title={createAd} />
     );
   }
 }

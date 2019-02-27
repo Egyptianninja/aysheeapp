@@ -185,8 +185,6 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleNotification = (notification: any) => {
-    console.log(notification);
-
     if (notification.origin === 'received') {
       // show internal message with notification data and way to go to post
     } else {
@@ -194,7 +192,8 @@ class HomeScreen extends React.Component<any, any> {
       this.props.navigation.navigate('ItemScreen', {
         postId,
         word: this.props.words,
-        lang: this.props.lang
+        lang: this.props.lang,
+        isRTL: this.props.isRTL
       });
     }
   };
@@ -213,13 +212,13 @@ class HomeScreen extends React.Component<any, any> {
       rest: {}
     });
   };
-  selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate('ItemScreen', { post, word, lang });
+  selectePost = (post: any, word: any, lang: any, isRTL: any) => {
+    this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
   };
 
   render() {
     const { clampedScroll, rest } = this.state;
-    const { lang, words, query } = this.props;
+    const { lang, words, query, isRTL } = this.props;
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id
@@ -243,29 +242,28 @@ class HomeScreen extends React.Component<any, any> {
           showMessageModal={this.showMessageModal}
           postId={postId}
           word={words}
-          lang={lang}
+          isRTL={isRTL}
           // TODO:
-          onModalHide={
-            this.state.isMessageVisible
-              ? this.showMessageModal({
-                  seconds: 1,
-                  message: this.state.message
-                })
-              : undefined
-          }
+          // onModalHide={
+          //   this.state.isMessageVisible
+          //     ? this.showMessageModal({
+          //         seconds: 1,
+          //         message: this.state.message
+          //       })
+          //     : undefined
+          // }
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
           hideReportModal={this.hideReportModal}
           word={words}
-          lang={lang}
+          isRTL={isRTL}
         />
         <Message
           isVisible={this.state.isMessageVisible}
           title={this.state.message}
           icon="ios-checkmark-circle"
-          lang={lang}
-          width={width}
+          isRTL={isRTL}
           height={120}
         />
         <Animated.View
@@ -285,7 +283,7 @@ class HomeScreen extends React.Component<any, any> {
         >
           <CategoriesScroll
             setHome={(click: any) => (this.catScrollHome = click)}
-            lang={lang}
+            isRTL={isRTL}
             currentCategory={this.state.rest.categoryId}
             addFilter={this.addFilter}
             removeFilter={this.removeFilter}
@@ -309,7 +307,7 @@ class HomeScreen extends React.Component<any, any> {
             }
             const postsQuery = data.getTimeLine.posts;
             if (postsQuery && postsQuery.length === 0) {
-              return <Noresult lang={lang} title={words.noresults} />;
+              return <Noresult isRTL={isRTL} title={words.noresults} />;
             }
             const posts = readyPosts(postsQuery, 200, 79, lang);
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
@@ -352,6 +350,7 @@ class HomeScreen extends React.Component<any, any> {
                       showMenuModal={this.showMenuModal}
                       selectePost={this.selectePost}
                       word={this.props.words}
+                      isRTL={isRTL}
                       lang={lang}
                     />
                   )}
@@ -373,6 +372,7 @@ class HomeScreen extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   categories: state.glob.language.category,
   words: state.glob.language.words,
   isAuthenticated: state.user.isAuthenticated,

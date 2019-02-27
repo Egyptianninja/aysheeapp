@@ -20,6 +20,7 @@ class ItemScreen extends React.Component<any, any> {
     const postId = this.props.navigation.getParam('postId');
     const word = this.props.navigation.getParam('word');
     const lang = this.props.navigation.getParam('lang');
+    const isRTL = this.props.navigation.getParam('isRTL');
     const fav = this.props.navigation.getParam('fav');
     const myItem = this.props.navigation.getParam('myItem');
     const live = this.props.navigation.getParam('live');
@@ -29,6 +30,7 @@ class ItemScreen extends React.Component<any, any> {
           post={post}
           postId={post.id ? post.id : post._id}
           word={word}
+          isRTL={isRTL}
           lang={lang}
           fav={fav}
           myItem={myItem}
@@ -69,6 +71,7 @@ class ItemScreen extends React.Component<any, any> {
                 postId={getedPost.id}
                 word={word}
                 lang={lang}
+                isRTL={isRTL}
                 fav={fav}
                 myItem={myItem}
                 live={live}

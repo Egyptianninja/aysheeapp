@@ -13,8 +13,7 @@ const Message = ({
   cancelAction,
   icon,
   isVisible,
-  lang,
-  width,
+  isRTL,
   height,
   iconColor
 }: any) => (
@@ -36,8 +35,8 @@ const Message = ({
       <View
         style={{
           position: 'absolute',
-          right: lang === 'ar' ? undefined : 20,
-          left: lang === 'ar' ? 20 : undefined,
+          right: isRTL ? undefined : 20,
+          left: isRTL ? 20 : undefined,
           top: 30,
           width: 40,
           height: 40,
@@ -53,7 +52,7 @@ const Message = ({
       </View>
       <View
         style={{
-          alignSelf: lang === 'ar' ? 'flex-end' : 'flex-start',
+          alignSelf: isRTL ? 'flex-end' : 'flex-start',
           paddingHorizontal: 10,
           paddingLeft: 25,
           alignItems: 'flex-start',
@@ -65,7 +64,7 @@ const Message = ({
       <View>
         <Text
           style={{
-            textAlign: lang === 'ar' ? 'right' : 'left',
+            textAlign: isRTL ? 'right' : 'left',
             paddingHorizontal: 20,
             fontSize: 16
           }}
@@ -73,7 +72,7 @@ const Message = ({
           {body}
         </Text>
       </View>
-      <View style={{ flexDirection: lang === 'ar' ? 'row-reverse' : 'row' }}>
+      <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
         {okbtnTitle && (
           <Button
             background="#E85255"

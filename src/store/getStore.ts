@@ -2,6 +2,7 @@ import { store } from './';
 
 export const user = () => store.getState().user;
 export const languageName = () => store.getState().glob.languageName;
+export const isRTL = () => store.getState().glob.isRTL;
 
 export const category = () => store.getState().glob.language.category;
 export const kind = () => store.getState().glob.language.kind;

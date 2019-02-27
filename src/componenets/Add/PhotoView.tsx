@@ -148,14 +148,13 @@ class PhotoView extends React.Component<any, any> {
     );
   };
   render() {
-    const { word, lang, returnData, pickCameraImage } = this.props;
+    const { word, returnData, pickCameraImage, isRTL } = this.props;
     return (
       <React.Fragment>
         <View style={{ flexDirection: 'row' }}>
           <ImageAlbumPicker
             imgqty={this.state.images.length}
             label={word.photos}
-            lang={lang}
             sublabel={word.subphotos}
             returnData={returnData}
             width={SCREEN_WIDTH}
@@ -166,7 +165,6 @@ class PhotoView extends React.Component<any, any> {
             label={word.photos}
             pickImage={pickCameraImage}
             width={SCREEN_WIDTH}
-            lang={lang}
             sublabel={word.subphotos}
           />
         </View>

@@ -9,7 +9,7 @@ export const Option = ({
   onChange,
   name,
   width,
-  lang,
+  isRTL,
   onSelectBrand,
   onSelecteOption,
   icon
@@ -17,7 +17,7 @@ export const Option = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        const langName = lang === 'ar' ? itemData.ar : itemData.en;
+        const langName = isRTL ? itemData.ar : itemData.en;
 
         if (name === 'kind') {
           onChange('brand', '');
@@ -54,7 +54,7 @@ export const Option = ({
         borderColor: '#ddd',
         borderRadius: 5,
         flexDirection:
-          lang === 'ar' && Platform.OS !== 'android' ? 'row-reverse' : 'row'
+          isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
       }}
     >
       {icon && (
@@ -78,13 +78,13 @@ export const Option = ({
         style={{
           fontSize: 18,
           fontFamily: 'cairo-regular',
-          textAlign: lang === 'ar' ? 'right' : 'left',
+          textAlign: isRTL ? 'right' : 'left',
           paddingHorizontal: 10
         }}
       >
         {itemData.name && !itemData.en
           ? itemData.name
-          : lang === 'ar'
+          : isRTL
           ? itemData.ar
           : itemData.en}
       </Text>

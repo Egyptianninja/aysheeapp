@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-const Properties = ({ data, words, lang, android }: any) => (
+const Properties = ({ data, words, isRTL, android }: any) => (
   <View
     style={{
       flex: 1,
       alignItems: 'center',
       justifyContent: 'flex-start',
-      flexDirection: lang === 'ar' && !android ? 'row-reverse' : 'row',
+      flexDirection: isRTL && !android ? 'row-reverse' : 'row',
       flexWrap: 'wrap'
     }}
   >
@@ -18,7 +18,7 @@ const Properties = ({ data, words, lang, android }: any) => (
             style={{
               padding: 10,
               width: '33%',
-              alignItems: lang === 'ar' && !android ? 'flex-end' : 'flex-start',
+              alignItems: isRTL && !android ? 'flex-end' : 'flex-start',
               justifyContent: 'center'
             }}
             key={dt.name}

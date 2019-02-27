@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Image, Text } from 'react-native';
 
-const Noresult = ({ lang, title }: any) => (
+const Noresult = ({ title, isRTL }: any) => (
   <View
     style={{
       flex: 1,
@@ -31,7 +31,7 @@ const Noresult = ({ lang, title }: any) => (
 
     <Text
       style={{
-        textAlign: lang === 'ar' ? 'right' : 'left',
+        textAlign: isRTL ? 'right' : 'left',
         fontWeight: 'bold',
         fontSize: 20,
         color: '#9C949A'

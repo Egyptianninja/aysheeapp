@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
+import * as React from 'react';
+import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 const Button = (props: any) => {
   const {
@@ -9,7 +9,7 @@ const Button = (props: any) => {
     background,
     textStyle,
     loading,
-    lang,
+    isRTL,
     ...rest
   } = props;
   return (
@@ -17,7 +17,7 @@ const Button = (props: any) => {
       style={[
         style,
         {
-          backgroundColor: disabled ? "#ccc" : background
+          backgroundColor: disabled ? '#ccc' : background
         }
       ]}
       {...rest}
@@ -27,9 +27,9 @@ const Button = (props: any) => {
       {loading && (
         <ActivityIndicator
           style={{
-            position: "absolute",
-            right: lang === "ar" ? 80 : undefined,
-            left: lang === "ar" ? undefined : 80,
+            position: 'absolute',
+            right: isRTL ? 80 : undefined,
+            left: isRTL ? undefined : 80,
             top: 20
           }}
           size="small"

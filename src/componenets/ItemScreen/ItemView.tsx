@@ -50,7 +50,7 @@ class ItemView extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
-  ardroid = Platform.OS === 'android' && this.props.lang === 'ar';
+  ardroid = Platform.OS === 'android' && this.props.isRTL;
   keyboardDidShowListener: any;
   keyboardDidHideListener: any;
   scrollView: any;
@@ -264,7 +264,7 @@ class ItemView extends React.Component<any, any> {
   };
 
   render() {
-    const { post, myItem, fav, live, word, lang, postId } = this.props;
+    const { post, myItem, fav, live, word, isRTL, postId } = this.props;
     const photos = this.getimageurls(post);
     const pdata = getproperties(post);
     const jdata = getJobProperties(post);
@@ -289,7 +289,7 @@ class ItemView extends React.Component<any, any> {
           live={live}
           fav={fav}
           word={word}
-          lang={lang}
+          isRTL={isRTL}
           favoritePost={this.props.favoritePost}
           unFavoritePost={this.props.unFavoritePost}
           editClassifieds={this.props.editClassifieds}
@@ -304,7 +304,7 @@ class ItemView extends React.Component<any, any> {
           isReportModalVisible={this.state.isReportModalVisible}
           hideReportModal={this.hideReportModal}
           word={word}
-          lang={lang}
+          isRTL={isRTL}
         />
         {this.state.isEditModalVisible && (
           <Edit
@@ -315,7 +315,7 @@ class ItemView extends React.Component<any, any> {
             showEditModal={this.showEditModal}
             showCheckMessageModal={this.showCheckMessageModal}
             word={word}
-            lang={lang}
+            isRTL={isRTL}
             post={post}
           />
         )}
@@ -324,7 +324,7 @@ class ItemView extends React.Component<any, any> {
           title={this.state.message}
           word={word}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -337,7 +337,7 @@ class ItemView extends React.Component<any, any> {
           cancelbtnTitle={word.cancel}
           okAction={this.deletePost}
           cancelAction={this.canceldeletePost}
-          lang={lang}
+          isRTL={isRTL}
           iconColor="#E85255"
           height={200}
         />
@@ -404,13 +404,7 @@ class ItemView extends React.Component<any, any> {
               {post.title.substring(0, 20)}
             </Text>
           </View>
-          <MenuIconHeader
-            post={post}
-            favoritePost={this.props.favoritePost}
-            showMenuModal={this.showMenuModal}
-            word={word}
-            lang={lang}
-          />
+          <MenuIconHeader showMenuModal={this.showMenuModal} />
         </Animated.View>
         <ScrollView
           onContentSizeChange={this.getScrollLength}
@@ -562,14 +556,14 @@ class ItemView extends React.Component<any, any> {
           <View style={{ height: 20 }} />
           <Properties
             android={Platform.OS === 'android'}
-            lang={lang}
+            isRTL={isRTL}
             words={word}
             data={pdata}
           />
           {(post.categoryId === 5 || post.categoryId === 6) && (
             <Properties
               android={Platform.OS === 'android'}
-              lang={lang}
+              isRTL={isRTL}
               words={word}
               data={jdata}
             />
@@ -594,9 +588,7 @@ class ItemView extends React.Component<any, any> {
               marginTop: 20,
               marginBottom: 5,
               alignItems:
-                lang === 'ar' && Platform.OS !== 'android'
-                  ? 'flex-end'
-                  : 'flex-start',
+                isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
               justifyContent: 'center'
             }}
           >
@@ -632,6 +624,7 @@ class ItemView extends React.Component<any, any> {
                   navigation={this.props.navigation}
                   isAuthenticated={this.props.isAuthenticated}
                   lang={this.props.lang}
+                  isRTL={this.props.isRTL}
                   words={word}
                   width={width}
                   user={this.props.user}
@@ -712,7 +705,7 @@ class ItemView extends React.Component<any, any> {
             autoFocus={true}
             postId={postId}
             placeholder={word.writecomment}
-            lang={lang}
+            isRTL={isRTL}
           />
         )}
 

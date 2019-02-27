@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView } from 'react-native';
-import { category, languageName } from '../../store/getStore';
+import { category, isRTL } from '../../store/getStore';
 import { icons } from '../../load';
 import { Choise } from './Choise';
 
@@ -14,7 +14,7 @@ const renderChoices = (items: any, navigation: any) => {
         icon={icon}
         navigation={navigation}
         key={item.id}
-        lang={languageName()}
+        isRTL={isRTL()}
       />
     );
   });

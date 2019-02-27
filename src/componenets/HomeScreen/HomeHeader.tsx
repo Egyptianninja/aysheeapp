@@ -139,7 +139,7 @@ class HomeHeader extends React.Component<any, any> {
                   justifyContent: 'center',
                   alignItems: 'center',
                   paddingTop: 4,
-                  paddingHorizontal: 3
+                  paddingHorizontal: 5
                 }}
               >
                 <Ionicons
@@ -162,13 +162,13 @@ class HomeHeader extends React.Component<any, any> {
               paddingHorizontal: 5,
               justifyContent: 'center',
               alignItems: 'center',
-              paddingBottom: 3
+              marginRight: 10
             }}
           >
             <View
               style={{
-                width: 30,
-                height: 30
+                width: 33,
+                height: 31
               }}
             >
               <Image

@@ -199,9 +199,9 @@ class CameraScreen extends React.Component<any, any> {
 
   render() {
     const { hasCameraPermission } = this.state;
-    const lang = this.props.navigation.getParam('lang');
+    const isRTL = this.props.navigation.getParam('isRTL');
     const imgqty = this.props.navigation.getParam('imgqty');
-    const ardroid = Platform.OS === 'android' && lang === 'ar';
+    const ardroid = Platform.OS === 'android' && isRTL;
 
     const spin = this.spinValue.interpolate({
       inputRange: [-1, 0, 1],

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 const BottonNew = ({
-  lang,
+  isRTL,
   scrollView,
   removeAllFilters,
   navigation,
@@ -12,7 +12,7 @@ const BottonNew = ({
 }: any) => (
   <TouchableOpacity
     onPress={() => {
-      // lang === 'ar'
+      // isRTL
       //   ? scrollView.scrollToEnd({ animated: true })
       //   : scrollView.scrollTo({ animated: true, offset: 0 });
       // removeAllFilters();

@@ -7,8 +7,7 @@ const CategoryIconSingle = ({
   icon,
   addFilter,
   removeAllFilters,
-  categoryId,
-  lang
+  categoryId
 }: any) => {
   return (
     <View

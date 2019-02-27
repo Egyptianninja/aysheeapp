@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TouchableOpacity, Text, View, Image, Platform } from 'react-native';
 
-export const Choise = ({ item, icon, navigation, lang }: any) => {
+export const Choise = ({ item, icon, navigation, isRTL }: any) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -21,7 +21,7 @@ export const Choise = ({ item, icon, navigation, lang }: any) => {
       }}
       style={{
         flexDirection:
-          lang === 'ar' && Platform.OS !== 'android' ? 'row' : 'row-reverse',
+          isRTL && Platform.OS !== 'android' ? 'row' : 'row-reverse',
         margin: 7,
         alignItems: 'flex-end',
         justifyContent: 'flex-end'

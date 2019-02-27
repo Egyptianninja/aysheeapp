@@ -36,6 +36,7 @@ export default class Select extends React.Component<any, any> {
       return (
         <Option
           key={da.id}
+          isRTL={this.props.isRTL}
           icon={icon}
           toggleModal={this.toggleModal}
           onChange={this.props.onChange}
@@ -46,7 +47,7 @@ export default class Select extends React.Component<any, any> {
     });
   };
 
-  renderlabel = (value: any, label: any, required: any, lang: any) => {
+  renderlabel = (value: any, label: any, required: any, isRTL: any) => {
     if (required && value === '') {
       return (
         <View
@@ -54,7 +55,7 @@ export default class Select extends React.Component<any, any> {
             flex: 1,
             justifyContent: 'space-between',
             flexDirection:
-              lang === 'ar' && Platform.OS !== 'android' ? 'row-reverse' : 'row'
+              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
           }}
         >
           <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>{label}</Text>
@@ -79,15 +80,11 @@ export default class Select extends React.Component<any, any> {
           style={{
             flex: 1,
             justifyContent: 'space-between',
-            flexDirection: lang === 'ar' ? 'row-reverse' : 'row'
+            flexDirection: isRTL ? 'row-reverse' : 'row'
           }}
         >
           <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>
-            {value.name && !value.en
-              ? value.name
-              : lang === 'ar'
-              ? value.ar
-              : value.en}
+            {value.name && !value.en ? value.name : isRTL ? value.ar : value.en}
           </Text>
           {!this.props.nosubLabel && (
             <Text
@@ -106,12 +103,12 @@ export default class Select extends React.Component<any, any> {
   };
 
   render() {
-    const { value, label, required, lang, values } = this.props;
+    const { value, label, required, isRTL, values } = this.props;
     return (
       <View>
         <TouchableOpacity
           style={{
-            flexDirection: this.props.lang === 'ar' ? 'row-reverse' : 'row',
+            flexDirection: isRTL ? 'row-reverse' : 'row',
             width: this.props.width ? this.props.width : width - 40,
             height: 40,
             marginTop: 10,
@@ -128,7 +125,7 @@ export default class Select extends React.Component<any, any> {
         >
           <Ionicons name="ios-arrow-down" size={26} color="#555" />
 
-          {this.renderlabel(value, label, required, lang)}
+          {this.renderlabel(value, label, required, isRTL)}
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}

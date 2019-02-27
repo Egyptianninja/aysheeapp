@@ -40,7 +40,7 @@ export default class Report extends React.Component<any, any> {
   };
 
   render() {
-    const { word, lang } = this.props;
+    const { word, isRTL } = this.props;
     return (
       <Modal
         isVisible={this.state.isReportModalVisible}
@@ -88,7 +88,7 @@ export default class Report extends React.Component<any, any> {
             }: any) => (
               <React.Fragment>
                 <InputPhone
-                  rtl={lang === 'ar' ? true : false}
+                  rtl={isRTL}
                   name="body"
                   label={word.body}
                   value={values.body}
@@ -105,7 +105,7 @@ export default class Report extends React.Component<any, any> {
                 />
 
                 <Button
-                  lang={lang}
+                  isRTL={isRTL}
                   background="#272727"
                   style={styles.btnStyle}
                   textStyle={styles.btnTextStyle}

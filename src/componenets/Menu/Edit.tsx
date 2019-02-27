@@ -109,7 +109,7 @@ export default class Edit extends React.Component<any, any> {
   };
 
   render() {
-    const { word, lang, post } = this.props;
+    const { word, isRTL, post } = this.props;
     const { categoryId } = post;
     return (
       <Modal
@@ -188,7 +188,7 @@ export default class Edit extends React.Component<any, any> {
                   </Title>
                   {!this.noPrice.includes(categoryId) && (
                     <Input
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                       num
                       name="price"
                       label={word.price}
@@ -208,7 +208,7 @@ export default class Edit extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <RadioButton
                         name="isforwomen"
@@ -225,7 +225,7 @@ export default class Edit extends React.Component<any, any> {
                     </Group>
                   )}
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     num
                     name="phone"
                     label={word.phone}
@@ -244,7 +244,7 @@ export default class Edit extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <RadioButton
                         name="isnew"
@@ -265,7 +265,7 @@ export default class Edit extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <RadioButton
                         name="issale"
@@ -286,7 +286,7 @@ export default class Edit extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <CheckBox
                         name="iswarranty"
@@ -302,7 +302,7 @@ export default class Edit extends React.Component<any, any> {
                         color="#444"
                         size={24}
                         onChange={setFieldValue}
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                       >
                         <RadioButton
                           name="isfurnishered"
@@ -318,7 +318,7 @@ export default class Edit extends React.Component<any, any> {
                         />
                       </Group>
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         num
                         name="space"
                         label={word.space}
@@ -337,7 +337,7 @@ export default class Edit extends React.Component<any, any> {
                   {this.car.includes(categoryId) && (
                     <React.Fragment>
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         num
                         name="year"
                         label={word.year}
@@ -352,7 +352,7 @@ export default class Edit extends React.Component<any, any> {
                         height={40}
                       />
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         name="color"
                         label={word.color}
                         value={values.color}
@@ -367,7 +367,7 @@ export default class Edit extends React.Component<any, any> {
                         height={40}
                       />
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         num
                         name="km"
                         label={word.km}
@@ -387,7 +387,7 @@ export default class Edit extends React.Component<any, any> {
                   {this.job.includes(categoryId) && (
                     <React.Fragment>
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         num
                         name="salary"
                         label={word.salary}
@@ -402,7 +402,7 @@ export default class Edit extends React.Component<any, any> {
                         height={40}
                       />
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         name="jobTitle"
                         label={word.jobtitle}
                         value={values.jobTitle}
@@ -417,7 +417,7 @@ export default class Edit extends React.Component<any, any> {
                         height={40}
                       />
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         name="jobIndustry"
                         label={word.jobindustry}
                         value={values.jobIndustry}
@@ -432,7 +432,7 @@ export default class Edit extends React.Component<any, any> {
                         height={40}
                       />
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         name="education"
                         label={word.education}
                         value={values.education}
@@ -447,7 +447,7 @@ export default class Edit extends React.Component<any, any> {
                         height={40}
                       />
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         name="experience"
                         label={word.experience}
                         value={values.experience}
@@ -465,7 +465,7 @@ export default class Edit extends React.Component<any, any> {
                         color="#444"
                         size={24}
                         onChange={setFieldValue}
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                       >
                         <RadioButton
                           name="isfullTime"
@@ -486,7 +486,7 @@ export default class Edit extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <CheckBox
                       name="location"
@@ -510,7 +510,7 @@ export default class Edit extends React.Component<any, any> {
                     }}
                   >
                     <Button
-                      lang={lang}
+                      isRTL={isRTL}
                       background="#272727"
                       style={styles.btnStyle}
                       textStyle={styles.btnTextStyle}

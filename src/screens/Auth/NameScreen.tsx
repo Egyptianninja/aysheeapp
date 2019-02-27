@@ -83,7 +83,7 @@ class NameScreen extends React.Component<any, any> {
   };
 
   render() {
-    const { lang, words } = this.props;
+    const { words, isRTL } = this.props;
     const name = this.props.navigation.getParam('name');
 
     return (
@@ -121,7 +121,7 @@ class NameScreen extends React.Component<any, any> {
                 <React.Fragment>
                   <View>
                     <InputName
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                       name="name"
                       label={words.uniquename}
                       value={values.name}
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: any) => ({
   phone: state.user.phone,
-  lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   words: state.glob.language.words
 });
 

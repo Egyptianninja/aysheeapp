@@ -31,13 +31,14 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
     };
   }
 
-  selectePost = (post: any, word: any, lang: any) => {
+  selectePost = (post: any, word: any, lang: any, isRTL: any) => {
     this.props.navigation.navigate('ItemScreenUser', {
       post,
       word,
       lang,
       myItem: true,
-      live: true
+      live: true,
+      isRTL
     });
   };
 
@@ -97,7 +98,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
   };
 
   render() {
-    const { lang, words } = this.props;
+    const { lang, words, isRTL } = this.props;
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id
@@ -118,7 +119,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
           myItem={true}
           live={true}
           word={words}
-          lang={lang}
+          isRTL={isRTL}
         />
         {this.state.isEditModalVisible && (
           <Edit
@@ -127,7 +128,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
             hideEditModal={this.hideEditModal}
             showMessageModal={this.showMessageModal}
             word={words}
-            lang={lang}
+            isRTL={isRTL}
             postId={postId}
             post={this.state.modalPost}
           />
@@ -136,7 +137,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
           isVisible={this.state.isMessageVisible}
           title={this.state.message}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -149,7 +150,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
           cancelbtnTitle={words.cancel}
           okAction={this.deletePost}
           cancelAction={this.canceldeletePost}
-          lang={lang}
+          isRTL={isRTL}
           iconColor="#E85255"
           height={200}
         />
@@ -191,6 +192,7 @@ class MyOnlinePostsScreen extends React.Component<any, any> {
                     showMenuModal={this.showMenuModal}
                     word={words}
                     lang={lang}
+                    isRTL={isRTL}
                   />
                 )}
                 getHeightForItem={({ item }: any) => item.height}
@@ -212,6 +214,7 @@ const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
   isAuthenticated: state.user.isAuthenticated,
   lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   words: state.glob.language.words
 });
 

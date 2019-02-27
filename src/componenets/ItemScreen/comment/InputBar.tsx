@@ -85,7 +85,7 @@ export default class InputBar extends React.Component<any, any> {
           <AutoInput
             style={[
               styles.textBox,
-              { textAlign: this.props.lang === 'ar' ? 'right' : 'left' }
+              { textAlign: this.props.isRTL ? 'right' : 'left' }
             ]}
             ref={(ref: any) => {
               this.autogrowInput = ref;

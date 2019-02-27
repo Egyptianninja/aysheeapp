@@ -12,12 +12,13 @@ const ItemViewSmall = (props: any) => {
       imageHeight,
       subTitle,
       time,
-      isrtl,
+      isrtl: isPostRTL,
       uri,
       price,
       currency
     },
     lang,
+    isRTL,
     word,
     showMenuModal,
     selectePost
@@ -35,7 +36,7 @@ const ItemViewSmall = (props: any) => {
       <View style={{ width: imageWidth }}>
         <TouchableWithoutFeedback
           onPress={() => {
-            selectePost(post, word, lang);
+            selectePost(post, word, lang, isRTL);
           }}
         >
           <View style={styles.interContainer}>
@@ -124,7 +125,9 @@ const ItemViewSmall = (props: any) => {
                     flex: 1,
 
                     alignSelf:
-                      isrtl && Platform.OS !== 'android' ? 'flex-end' : 'auto'
+                      isPostRTL && Platform.OS !== 'android'
+                        ? 'flex-end'
+                        : 'auto'
                   }}
                 >
                   <Text style={{ color: '#555', fontSize: 16 }}>

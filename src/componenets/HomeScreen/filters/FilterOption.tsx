@@ -9,7 +9,7 @@ export const FilterOption = ({
   itemKind,
   addFilter,
   removeFilter,
-  lang,
+  isRTL,
   rest,
   words
 }: any) => {
@@ -70,9 +70,7 @@ export const FilterOption = ({
           fontFamily: 'cairo-regular',
           paddingHorizontal: 10,
           alignSelf:
-            lang === 'ar' && Platform.OS !== 'android'
-              ? 'flex-end'
-              : 'flex-start'
+            isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
         }}
       >
         {itemData.name}

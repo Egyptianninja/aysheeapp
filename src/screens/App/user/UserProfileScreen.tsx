@@ -43,8 +43,13 @@ class UserProfileScreen extends React.Component<any, any> {
     };
   }
 
-  selectePost = (post: any, word: any, lang: any) => {
-    this.props.navigation.navigate('ItemScreenUser', { post, word, lang });
+  selectePost = (post: any, word: any, lang: any, isRTL: any) => {
+    this.props.navigation.navigate('ItemScreenUser', {
+      post,
+      word,
+      lang,
+      isRTL
+    });
   };
 
   showMenuModal = (post: any) => {
@@ -78,7 +83,7 @@ class UserProfileScreen extends React.Component<any, any> {
   };
 
   render() {
-    const { lang, words } = this.props;
+    const { lang, words, isRTL } = this.props;
     const headerHeight = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
       outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
@@ -116,19 +121,19 @@ class UserProfileScreen extends React.Component<any, any> {
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
           word={words}
-          lang={lang}
+          isRTL={isRTL}
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
           hideReportModal={this.hideReportModal}
           word={words}
-          lang={lang}
+          isRTL={isRTL}
         />
         <Message
           isVisible={this.state.isMessageVisible}
           title={words.successadded}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -265,6 +270,7 @@ class UserProfileScreen extends React.Component<any, any> {
                     showMenuModal={this.showMenuModal}
                     word={words}
                     lang={lang}
+                    isRTL={isRTL}
                   />
                 )}
                 getHeightForItem={({ item }: any) => item.height}
@@ -285,6 +291,7 @@ class UserProfileScreen extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
   isAuthenticated: state.user.isAuthenticated,
+  isRTL: state.glob.isRTL,
   lang: state.glob.languageName,
   words: state.glob.language.words
 });

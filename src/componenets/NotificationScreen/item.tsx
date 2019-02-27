@@ -3,7 +3,7 @@ import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import { StyleSheet, since } from '../../utils';
 
 const Item = (props: any) => {
-  const { item, lang, navigation } = props;
+  const { item, lang, navigation, isRTL } = props;
   const time = since(item.createdAt, lang);
   const postId = JSON.parse(item.data).postId;
   return (
@@ -12,7 +12,8 @@ const Item = (props: any) => {
         navigation.navigate('ItemScreen', {
           postId,
           word: props.words,
-          lang
+          lang,
+          isRTL
         })
       }
     >
@@ -20,7 +21,7 @@ const Item = (props: any) => {
         style={{
           flex: 1,
           justifyContent: 'center',
-          alignItems: lang === 'ar' ? 'flex-end' : 'flex-start',
+          alignItems: isRTL ? 'flex-end' : 'flex-start',
           padding: 10,
           marginHorizontal: 16,
           marginVertical: 8,

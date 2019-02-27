@@ -92,7 +92,7 @@ const Option = ({
   itemData,
   hideMenuModal,
   showReportModal,
-  lang,
+  isRTL,
   favoritePost,
   unFavoritePost,
   showMessageModal,
@@ -111,9 +111,9 @@ const Option = ({
             variables: { postId }
           });
           hideMenuModal();
-          // setTimeout(() => {
-          //   showMessageModal({ seconds: 1, message: word.successadded });
-          // }, 1000);
+          setTimeout(() => {
+            showMessageModal({ seconds: 1, message: word.successadded });
+          }, 1000);
         } else if (itemData.id === 2) {
           await unFavoritePost({
             variables: { postId }
@@ -212,7 +212,7 @@ const Option = ({
         style={{
           fontSize: 18,
           fontFamily: 'cairo-regular',
-          textAlign: lang === 'ar' ? 'right' : 'left',
+          textAlign: isRTL ? 'right' : 'left',
           paddingHorizontal: 10
         }}
       >

@@ -11,7 +11,7 @@ const HeaderFilter: any = ({
   addFilter,
   sortData,
   removeFilter,
-  lang,
+  isRTL,
   words
 }: any) => {
   if (categoryId === 0) {
@@ -27,7 +27,7 @@ const HeaderFilter: any = ({
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           return renderSelectRow(
             words,
@@ -36,7 +36,7 @@ const HeaderFilter: any = ({
             filter.data,
             addFilter,
             removeFilter,
-            lang
+            isRTL
           );
         })}
       </RenderFilter>
@@ -56,7 +56,7 @@ const HeaderFilter: any = ({
     const filters = catFilters.filter((fl: any) => fl.data);
 
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           if (filter.name === 'subBrandId') {
             return renderSelectRow(
@@ -66,7 +66,7 @@ const HeaderFilter: any = ({
               filter.data,
               addFilter,
               removeFilter,
-              lang,
+              isRTL,
               !(brandId || brandId === 0),
               { id: brandId, label: words.subBrand, name: 'subBrandId' }
             );
@@ -78,7 +78,7 @@ const HeaderFilter: any = ({
               filter.data,
               addFilter,
               removeFilter,
-              lang
+              isRTL
             );
           }
         })}
@@ -98,7 +98,7 @@ const HeaderFilter: any = ({
     const filters = catFilters.filter((fl: any) => fl.data);
 
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           if (filter.name === 'subBrandId') {
             return renderSelectRow(
@@ -108,7 +108,7 @@ const HeaderFilter: any = ({
               filter.data,
               addFilter,
               removeFilter,
-              lang,
+              isRTL,
               !(brandId || brandId === 0),
               { id: brandId, label: words.subBrand, name: 'subBrandId' }
             );
@@ -120,7 +120,7 @@ const HeaderFilter: any = ({
               filter.data,
               addFilter,
               removeFilter,
-              lang
+              isRTL
             );
           }
         })}
@@ -139,7 +139,7 @@ const HeaderFilter: any = ({
     const filters = catFilters.filter((fl: any) => fl.data);
 
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           if (filter.name === 'eBrandId') {
             return renderSelectRow(
@@ -149,7 +149,7 @@ const HeaderFilter: any = ({
               filter.data,
               addFilter,
               removeFilter,
-              lang,
+              isRTL,
               !(kindId || kindId === 0),
               { id: kindId, label: words.brand, name: 'eBrandId' }
             );
@@ -161,7 +161,7 @@ const HeaderFilter: any = ({
               filter.data,
               addFilter,
               removeFilter,
-              lang
+              isRTL
             );
           }
         })}
@@ -182,7 +182,7 @@ const HeaderFilter: any = ({
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           return renderSelectRow(
             words,
@@ -191,7 +191,7 @@ const HeaderFilter: any = ({
             filter.data,
             addFilter,
             removeFilter,
-            lang
+            isRTL
           );
         })}
       </RenderFilter>
@@ -210,7 +210,7 @@ const HeaderFilter: any = ({
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           return renderSelectRow(
             words,
@@ -219,7 +219,7 @@ const HeaderFilter: any = ({
             filter.data,
             addFilter,
             removeFilter,
-            lang
+            isRTL
           );
         })}
       </RenderFilter>
@@ -232,7 +232,7 @@ const HeaderFilter: any = ({
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           return renderSelectRow(
             words,
@@ -241,7 +241,7 @@ const HeaderFilter: any = ({
             filter.data,
             addFilter,
             removeFilter,
-            lang
+            isRTL
           );
         })}
       </RenderFilter>
@@ -254,7 +254,7 @@ const HeaderFilter: any = ({
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           return renderSelectRow(
             words,
@@ -263,7 +263,7 @@ const HeaderFilter: any = ({
             filter.data,
             addFilter,
             removeFilter,
-            lang
+            isRTL
           );
         })}
       </RenderFilter>
@@ -277,7 +277,7 @@ const HeaderFilter: any = ({
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           return renderSelectRow(
             words,
@@ -286,7 +286,7 @@ const HeaderFilter: any = ({
             filter.data,
             addFilter,
             removeFilter,
-            lang
+            isRTL
           );
         })}
       </RenderFilter>
@@ -298,7 +298,7 @@ const HeaderFilter: any = ({
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter lang={lang} filters={filters}>
+      <RenderFilter isRTL={isRTL} filters={filters}>
         {filters.map((filter: any) => {
           return renderSelectRow(
             words,
@@ -307,7 +307,7 @@ const HeaderFilter: any = ({
             filter.data,
             addFilter,
             removeFilter,
-            lang
+            isRTL
           );
         })}
       </RenderFilter>
@@ -326,14 +326,14 @@ const renderSelectRow = (
   bucket: any,
   addFilter: any,
   removeFilter: any,
-  lang: any,
+  isRTL: any,
   disable: boolean = false,
   pid: any = null
 ) => {
   return (
     <View key={itemKind} style={{ flexDirection: 'row' }}>
       <FilterSelect
-        lang={lang}
+        isRTL={isRTL}
         data={bucket}
         disable={disable}
         pid={pid}
@@ -362,9 +362,7 @@ const RenderFilter = (props: any) => {
       contentContainerStyle={{
         flex: 1,
         justifyContent:
-          props.lang === 'ar' && Platform.OS !== 'android'
-            ? 'flex-end'
-            : 'flex-start'
+          props.isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
       }}
       style={{
         minWidth: width - 85
@@ -373,9 +371,7 @@ const RenderFilter = (props: any) => {
       <View
         style={{
           flexDirection:
-            props.lang === 'ar' && Platform.OS !== 'android'
-              ? 'row-reverse'
-              : 'row',
+            props.isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
           justifyContent: 'center',
           alignItems: 'center'
         }}

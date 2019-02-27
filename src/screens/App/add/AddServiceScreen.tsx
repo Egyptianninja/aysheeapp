@@ -85,6 +85,7 @@ class AddServiceScreen extends React.Component<any, any> {
     this.props.navigation.navigate('CameraScreen', {
       returnData: this.returnData,
       lang: this.props.lang,
+      isRTL: this.props.isRTL,
       imgqty: this.state.images.length
     });
   };
@@ -146,7 +147,7 @@ class AddServiceScreen extends React.Component<any, any> {
   };
   render() {
     const word = this.props.words;
-    const { lang, user } = this.props;
+    const { user, isRTL } = this.props;
     const category = this.props.navigation.getParam('item');
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
@@ -155,7 +156,7 @@ class AddServiceScreen extends React.Component<any, any> {
           isVisible={this.state.isShowMessage}
           title={word.successadded}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -196,7 +197,7 @@ class AddServiceScreen extends React.Component<any, any> {
                   <Title width={width - 40}>{word.addnewad}</Title>
 
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="title"
                     label={word.title}
                     value={values.title}
@@ -220,7 +221,7 @@ class AddServiceScreen extends React.Component<any, any> {
                       onChange={setFieldValue}
                       words={this.props.words}
                       values={values}
-                      lang={lang}
+                      isRTL={isRTL}
                     />
                   )}
                   <Select
@@ -231,11 +232,11 @@ class AddServiceScreen extends React.Component<any, any> {
                     label={word.service}
                     value={values.service}
                     onChange={setFieldValue}
-                    lang={lang}
+                    isRTL={isRTL}
                   />
 
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="body"
                     label={word.body}
                     value={values.body}
@@ -252,7 +253,7 @@ class AddServiceScreen extends React.Component<any, any> {
                   />
                   <PhotoView
                     word={word}
-                    lang={lang}
+                    isRTL={isRTL}
                     images={this.state.images}
                     selectedImage={this.state.selectedImage}
                     returnData={this.returnData}
@@ -261,7 +262,7 @@ class AddServiceScreen extends React.Component<any, any> {
                     hendleSelectedImage={this.hendleSelectedImage}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     num
                     name="phone"
                     label={word.phone}
@@ -279,7 +280,7 @@ class AddServiceScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <CheckBox
                       name="location"
@@ -296,7 +297,7 @@ class AddServiceScreen extends React.Component<any, any> {
                     />
                   )}
                   <Button
-                    lang={lang}
+                    isRTL={isRTL}
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
@@ -381,6 +382,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: any) => ({
   service: state.glob.language.service,
   lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   words: state.glob.language.words,
   kind: state.glob.language.kind,
   user: state.user.user

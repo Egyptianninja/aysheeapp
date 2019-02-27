@@ -81,7 +81,6 @@ class CategoriesScroll extends React.Component<any, any> {
       <CategoryIconSingle
         icon={icon}
         noTitle={true}
-        lang={this.props.lang}
         addFilter={this.props.addFilter}
         removeAllFilters={this.props.removeAllFilters}
         categoryId={this.props.rest.categoryId}
@@ -104,13 +103,13 @@ class CategoriesScroll extends React.Component<any, any> {
   };
 
   scrollListToStart = () => {
-    if (this.props.lang === 'ar') {
+    if (this.props.isRTL) {
       this.scrollView.scrollToEnd({ animated: false });
     }
   };
 
   handleHome = () => {
-    this.props.lang === 'ar'
+    this.props.isRTL
       ? this.scrollView.scrollToEnd({ animated: true })
       : this.scrollView.scrollTo({ animated: true, offset: 0 });
     this.props.removeAllFilters();
@@ -125,7 +124,7 @@ class CategoriesScroll extends React.Component<any, any> {
       removeAllFilters,
       rest,
       words,
-      lang
+      isRTL
     } = this.props;
     const allbtnactive = !(rest.categoryId || rest.categoryId === 0);
     const selected =
@@ -135,15 +134,12 @@ class CategoriesScroll extends React.Component<any, any> {
         <View
           style={{
             flexDirection:
-              lang === 'ar' && Platform.OS !== 'android'
-                ? 'row-reverse'
-                : 'row',
+              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
             paddingHorizontal: 5
           }}
         >
           {!selected && (
             <BottonNew
-              lang={lang}
               allbtnactive={allbtnactive}
               scrollView={this.scrollView}
               removeAllFilters={removeAllFilters}
@@ -162,10 +158,10 @@ class CategoriesScroll extends React.Component<any, any> {
                 height: 70,
                 width: 35,
                 backgroundColor: '#f1f1f1',
-                borderBottomRightRadius: lang === 'ar' ? 35 : undefined,
-                borderTopRightRadius: lang === 'ar' ? 35 : undefined,
-                borderTopLeftRadius: lang === 'ar' ? undefined : 35,
-                borderBottomLeftRadius: lang === 'ar' ? undefined : 35,
+                borderBottomRightRadius: isRTL ? 35 : undefined,
+                borderTopRightRadius: isRTL ? 35 : undefined,
+                borderTopLeftRadius: isRTL ? undefined : 35,
+                borderBottomLeftRadius: isRTL ? undefined : 35,
                 justifyContent: 'center',
                 alignItems: 'center',
                 paddingVertical: 10,
@@ -183,26 +179,23 @@ class CategoriesScroll extends React.Component<any, any> {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
               flexDirection:
-                lang === 'ar' && Platform.OS !== 'android'
-                  ? 'row-reverse'
-                  : 'row',
+                isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
               paddingLeft: selected ? 75 : 0
             }}
             style={{
               backgroundColor: selected ? '#f1f1f1' : '#fff',
               height: selected ? 70 : 90,
               marginVertical: selected ? 10 : undefined,
-              borderBottomRightRadius:
-                selected && lang === 'ar' ? 40 : undefined,
-              borderTopRightRadius: selected && lang === 'ar' ? 40 : undefined,
+              borderBottomRightRadius: selected && isRTL ? 40 : undefined,
+              borderTopRightRadius: selected && isRTL ? 40 : undefined,
               borderTopLeftRadius: !selected
                 ? undefined
-                : selected && lang === 'ar'
+                : selected && isRTL
                 ? undefined
                 : 40,
               borderBottomLeftRadius: !selected
                 ? undefined
-                : selected && lang === 'ar'
+                : selected && isRTL
                 ? undefined
                 : 40
             }}
@@ -211,7 +204,7 @@ class CategoriesScroll extends React.Component<any, any> {
 
             {this.props.buckets && (
               <HeaderFilter
-                lang={this.props.lang}
+                isRTL={this.props.isRTL}
                 rest={rest}
                 sortData={sortData}
                 buckets={this.state.buckets}

@@ -19,7 +19,7 @@ class NotificationsScreen extends React.Component<any, any> {
   }
 
   render() {
-    const { lang, words } = this.props;
+    const { lang, words, isRTL } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Query
@@ -56,6 +56,7 @@ class NotificationsScreen extends React.Component<any, any> {
                       navigation={this.props.navigation}
                       item={item}
                       lang={lang}
+                      isRTL={isRTL}
                       words={words}
                     />
                   )}
@@ -75,6 +76,7 @@ class NotificationsScreen extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
+  isRTL: state.glob.isRTL,
   lang: state.glob.languageName,
   words: state.glob.language.words
 });

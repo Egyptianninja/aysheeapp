@@ -117,7 +117,7 @@ export const readyPosts = (
   posts: any,
   imageSize: number,
   textHeight: number,
-  languageName: any
+  lang: any
 ) => {
   return posts.map((post: any) => {
     const ratio =
@@ -128,7 +128,7 @@ export const readyPosts = (
             secrets.upload.CLOUD_NAME
           }/image/upload/w_${imageSize}/${post.photos[0].substring(0, 20)}`
         : undefined;
-    const time = since(post.updatedAt, languageName);
+    const time = since(post.updatedAt, lang);
 
     const subTitle = post.title.substring(0, 17);
     const imageWidth = Math.ceil(width / 2 - 17);

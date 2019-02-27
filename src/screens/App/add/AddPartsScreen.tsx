@@ -100,6 +100,7 @@ class AddPartsScreen extends React.Component<any, any> {
     this.props.navigation.navigate('CameraScreen', {
       returnData: this.returnData,
       lang: this.props.lang,
+      isRTL: this.props.isRTL,
       imgqty: this.state.images.length
     });
   };
@@ -184,7 +185,7 @@ class AddPartsScreen extends React.Component<any, any> {
   };
   render() {
     const word = this.props.words;
-    const { lang, user } = this.props;
+    const { user, isRTL } = this.props;
     const subBrands = this.props.subBrands.filter(
       (sb: any) => sb.pid === this.state.selectedBrand
     );
@@ -194,7 +195,7 @@ class AddPartsScreen extends React.Component<any, any> {
           isVisible={this.state.isShowMessage}
           title={word.successadded}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -255,7 +256,7 @@ class AddPartsScreen extends React.Component<any, any> {
                   <Title width={width - 40}>{word.addnewad}</Title>
                   <React.Fragment>
                     <Input
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                       name="title"
                       label={word.title}
                       value={values.title}
@@ -273,7 +274,7 @@ class AddPartsScreen extends React.Component<any, any> {
                       name="brand"
                       required
                       words={this.props.words}
-                      lang={this.props.lang}
+                      isRTL={isRTL}
                       data={this.props.brands}
                       label={word.brand}
                       value={values.brand}
@@ -289,12 +290,12 @@ class AddPartsScreen extends React.Component<any, any> {
                       label={word.subBrand}
                       value={values.subBrand}
                       onChange={setFieldValue}
-                      lang={this.props.lang}
+                      isRTL={isRTL}
                     />
                   </React.Fragment>
 
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="body"
                     label={word.body}
                     value={values.body}
@@ -311,7 +312,7 @@ class AddPartsScreen extends React.Component<any, any> {
                   />
                   <PhotoView
                     word={word}
-                    lang={lang}
+                    isRTL={isRTL}
                     images={this.state.images}
                     selectedImage={this.state.selectedImage}
                     returnData={this.returnData}
@@ -323,7 +324,7 @@ class AddPartsScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <RadioButton
                       name="isnew"
@@ -342,7 +343,7 @@ class AddPartsScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <RadioButton
                       name="issale"
@@ -359,7 +360,7 @@ class AddPartsScreen extends React.Component<any, any> {
                   </Group>
 
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     num
                     name="year"
                     label={word.year}
@@ -374,7 +375,7 @@ class AddPartsScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="color"
                     label={word.color}
                     value={values.color}
@@ -392,7 +393,7 @@ class AddPartsScreen extends React.Component<any, any> {
                     style={{
                       flex: 1,
                       flexDirection:
-                        lang === 'ar' && Platform.OS !== 'android'
+                        isRTL && Platform.OS !== 'android'
                           ? 'row-reverse'
                           : 'row',
                       justifyContent: 'center',
@@ -406,7 +407,7 @@ class AddPartsScreen extends React.Component<any, any> {
                       }}
                     >
                       <Input
-                        rtl={lang === 'ar' ? true : false}
+                        rtl={isRTL}
                         num
                         name="price"
                         label={word.price}
@@ -439,12 +440,12 @@ class AddPartsScreen extends React.Component<any, any> {
                         label={word.currency}
                         onChange={setFieldValue}
                         words={this.props.words}
-                        lang={this.props.lang}
+                        isRTL={isRTL}
                       />
                     </View>
                   </View>
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     num
                     name="phone"
                     label={word.phone}
@@ -462,7 +463,7 @@ class AddPartsScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <CheckBox
                       name="location"
@@ -480,7 +481,7 @@ class AddPartsScreen extends React.Component<any, any> {
                     />
                   )}
                   <Button
-                    lang={lang}
+                    isRTL={isRTL}
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
@@ -564,6 +565,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   brands: state.glob.brands,
   subBrands: state.glob.subBrands,
   kind: state.glob.language.kind,

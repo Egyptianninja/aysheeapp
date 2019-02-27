@@ -92,6 +92,7 @@ class AddJobScreen extends React.Component<any, any> {
     this.props.navigation.navigate('CameraScreen', {
       returnData: this.returnData,
       lang: this.props.lang,
+      isRTL: this.props.isRTL,
       imgqty: this.state.images.length
     });
   };
@@ -170,7 +171,7 @@ class AddJobScreen extends React.Component<any, any> {
   };
   render() {
     const word = this.props.words;
-    const { lang, user } = this.props;
+    const { user, isRTL } = this.props;
     const category = this.props.navigation.getParam('item');
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
 
@@ -180,7 +181,7 @@ class AddJobScreen extends React.Component<any, any> {
           isVisible={this.state.isShowMessage}
           title={word.successadded}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -240,11 +241,11 @@ class AddJobScreen extends React.Component<any, any> {
                       onChange={setFieldValue}
                       words={this.props.words}
                       values={values}
-                      lang={lang}
+                      isRTL={isRTL}
                     />
                   )}
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="title"
                     label={word.title}
                     value={values.title}
@@ -259,7 +260,7 @@ class AddJobScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="body"
                     label={word.body}
                     value={values.body}
@@ -276,7 +277,7 @@ class AddJobScreen extends React.Component<any, any> {
                   />
                   <PhotoView
                     word={word}
-                    lang={lang}
+                    isRTL={isRTL}
                     images={this.state.images}
                     selectedImage={this.state.selectedImage}
                     returnData={this.returnData}
@@ -288,7 +289,7 @@ class AddJobScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <RadioButton
                       name="isfullTime"
@@ -304,7 +305,7 @@ class AddJobScreen extends React.Component<any, any> {
                     />
                   </Group>
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     num
                     name="salary"
                     label={word.salary}
@@ -319,7 +320,7 @@ class AddJobScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="jobTitle"
                     label={word.jobtitle}
                     value={values.jobTitle}
@@ -334,7 +335,7 @@ class AddJobScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="jobIndustry"
                     label={word.jobindustry}
                     value={values.jobIndustry}
@@ -349,7 +350,7 @@ class AddJobScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="education"
                     label={word.education}
                     value={values.education}
@@ -364,7 +365,7 @@ class AddJobScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="experience"
                     label={word.experience}
                     value={values.experience}
@@ -379,7 +380,7 @@ class AddJobScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     num
                     name="phone"
                     label={word.phone}
@@ -397,7 +398,7 @@ class AddJobScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <CheckBox
                       name="location"
@@ -414,7 +415,7 @@ class AddJobScreen extends React.Component<any, any> {
                     />
                   )}
                   <Button
-                    lang={lang}
+                    isRTL={isRTL}
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
@@ -497,6 +498,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
+  isRTL: state.glob.isRTL,
   lang: state.glob.languageName,
   words: state.glob.language.words,
   kind: state.glob.language.kind,

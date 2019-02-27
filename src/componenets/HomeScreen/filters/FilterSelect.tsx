@@ -67,7 +67,7 @@ export default class FilterSelect extends React.Component<any, any> {
               fontSize: 16,
               fontFamily: 'cairo-regular',
               textAlign:
-                this.props.lang === 'ar' && Platform.OS !== 'android'
+                this.props.isRTL && Platform.OS !== 'android'
                   ? 'right'
                   : 'left',
               paddingHorizontal: 10,
@@ -80,7 +80,7 @@ export default class FilterSelect extends React.Component<any, any> {
         {data.buckets.map((da: any) => {
           return (
             <FilterOption
-              lang={this.props.lang}
+              isRTL={this.props.isRTL}
               key={da.id}
               toggleModal={this.toggleModal}
               handleLabel={this.handleLabel}
@@ -104,7 +104,7 @@ export default class FilterSelect extends React.Component<any, any> {
         data = { buckets, label, name };
       }
     }
-    const { rest, itemKind, lang } = this.props;
+    const { rest, itemKind, isRTL } = this.props;
     const selected =
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
     const selectedLable =
@@ -116,9 +116,7 @@ export default class FilterSelect extends React.Component<any, any> {
         <TouchableOpacity
           style={{
             flexDirection:
-              lang === 'ar' && Platform.OS !== 'android'
-                ? 'row-reverse'
-                : 'row',
+              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
             padding: 2,
             paddingLeft: 2,
             height: 40,
@@ -166,8 +164,8 @@ export default class FilterSelect extends React.Component<any, any> {
             <View
               style={{
                 position: 'absolute',
-                left: lang === 'ar' ? undefined : 30,
-                right: lang === 'ar' ? 30 : undefined,
+                left: isRTL ? undefined : 30,
+                right: isRTL ? 30 : undefined,
                 top: -5
               }}
             >

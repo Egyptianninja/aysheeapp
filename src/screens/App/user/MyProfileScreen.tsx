@@ -97,15 +97,15 @@ class ProfileScreen extends React.Component<any, any> {
           userData.avatar
         }`
       : 'https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png';
-    const { lang, words } = this.props;
+    const { words, isRTL } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <View style={[styles.container, { zIndex: 10 }]}>
           <TouchableOpacity
             style={{
               position: 'absolute',
-              right: lang === 'ar' ? undefined : 20,
-              left: lang === 'ar' ? 20 : undefined,
+              right: isRTL ? undefined : 20,
+              left: isRTL ? 20 : undefined,
               top: 140,
               zIndex: 200
             }}
@@ -241,7 +241,7 @@ class ProfileScreen extends React.Component<any, any> {
                   }}
                 >
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="name"
                     label={words.name}
                     value={values.name}
@@ -256,7 +256,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="about"
                     label={words.about}
                     value={values.about}
@@ -272,7 +272,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={100}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="country"
                     label={words.country}
                     value={values.country}
@@ -287,7 +287,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="city"
                     label={words.city}
                     value={values.city}
@@ -302,7 +302,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="email"
                     label={words.email}
                     value={values.email}
@@ -317,7 +317,7 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="website"
                     label={words.website}
                     value={values.website}
@@ -333,7 +333,7 @@ class ProfileScreen extends React.Component<any, any> {
                   />
 
                   <Button
-                    lang={lang}
+                    isRTL={isRTL}
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
@@ -362,7 +362,7 @@ const mapDispatchToProps = (dispatch: any) =>
   );
 
 const mapStateToProps = (state: any) => ({
-  lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   isAuthenticated: state.user.isAuthenticated,
   user: state.user.user,
   words: state.glob.language.words

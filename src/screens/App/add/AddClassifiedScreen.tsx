@@ -114,6 +114,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
     this.props.navigation.navigate('CameraScreen', {
       returnData: this.returnData,
       lang: this.props.lang,
+      isRTL: this.props.isRTL,
       imgqty: this.state.images.length
     });
   };
@@ -196,7 +197,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
   };
   render() {
     const word = this.props.words;
-    const { lang, user } = this.props;
+    const { user, isRTL } = this.props;
     const category = this.props.navigation.getParam('item');
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     let eBrands: any;
@@ -218,7 +219,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
           isVisible={this.state.isShowMessage}
           title={word.successadded}
           icon="ios-checkmark-circle"
-          lang={lang}
+          isRTL={isRTL}
           width={width}
           height={120}
         />
@@ -268,7 +269,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                 <React.Fragment>
                   <Title width={width - 40}>{word.addnewad}</Title>
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="title"
                     label={word.title}
                     value={values.title}
@@ -287,7 +288,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <RadioButton
                         name="isforwomen"
@@ -314,7 +315,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       onSelecteOption={this.onSelecteOption}
                       words={this.props.words}
                       values={values}
-                      lang={lang}
+                      isRTL={isRTL}
                     />
                   )}
                   {this.state.isElectronics &&
@@ -326,7 +327,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                         label={word.eBrand}
                         value={values.eBrand}
                         onChange={setFieldValue}
-                        lang={lang}
+                        isRTL={isRTL}
                       />
                     )}
                   {category.id === 6 && (
@@ -336,11 +337,11 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       label={word.eBrand}
                       value={values.eBrand}
                       onChange={setFieldValue}
-                      lang={lang}
+                      isRTL={isRTL}
                     />
                   )}
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     name="body"
                     label={word.body}
                     value={values.body}
@@ -357,7 +358,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                   />
                   <PhotoView
                     word={word}
-                    lang={lang}
+                    isRTL={isRTL}
                     images={this.state.images}
                     selectedImage={this.state.selectedImage}
                     returnData={this.returnData}
@@ -370,7 +371,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <RadioButton
                         name="isnew"
@@ -391,7 +392,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <RadioButton
                         name="issale"
@@ -413,7 +414,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       style={{
                         flex: 1,
                         flexDirection:
-                          lang === 'ar' && Platform.OS !== 'android'
+                          isRTL && Platform.OS !== 'android'
                             ? 'row-reverse'
                             : 'row',
                         justifyContent: 'center',
@@ -427,7 +428,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                         }}
                       >
                         <Input
-                          rtl={lang === 'ar' ? true : false}
+                          rtl={isRTL}
                           num
                           name="price"
                           label={word.price}
@@ -460,13 +461,13 @@ class AddClassifiedScreen extends React.Component<any, any> {
                           label={word.currency}
                           onChange={setFieldValue}
                           words={this.props.words}
-                          lang={this.props.lang}
+                          isRTL={isRTL}
                         />
                       </View>
                     </View>
                   )}
                   <Input
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                     num
                     name="phone"
                     label={word.phone}
@@ -486,7 +487,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       color="#444"
                       size={24}
                       onChange={setFieldValue}
-                      rtl={lang === 'ar' ? true : false}
+                      rtl={isRTL}
                     >
                       <CheckBox
                         name="iswarranty"
@@ -500,7 +501,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                     color="#444"
                     size={24}
                     onChange={setFieldValue}
-                    rtl={lang === 'ar' ? true : false}
+                    rtl={isRTL}
                   >
                     <CheckBox
                       name="location"
@@ -517,7 +518,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                     />
                   )}
                   <Button
-                    lang={lang}
+                    isRTL={isRTL}
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
@@ -603,6 +604,7 @@ const mapStateToProps = (state: any) => ({
   kind: state.glob.language.kind,
   electroBrands: state.glob.language.electroBrands,
   lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   words: state.glob.language.words,
   user: state.user.user
 });

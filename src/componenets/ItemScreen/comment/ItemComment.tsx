@@ -40,6 +40,7 @@ class ItemComment extends React.PureComponent<any, any> {
           user={this.props.user}
           words={this.props.words}
           lang={this.props.lang}
+          isRTL={this.props.isRTL}
           message={message}
           key={message._id}
           replayComment={this.props.replayComment}
