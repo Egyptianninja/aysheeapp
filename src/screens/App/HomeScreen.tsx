@@ -295,7 +295,7 @@ class HomeScreen extends React.Component<any, any> {
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
-              return <Loading />;
+              return <Loading categoryId={rest.categoryId} />;
             }
             if (error) {
               return <Text>{error}</Text>;
