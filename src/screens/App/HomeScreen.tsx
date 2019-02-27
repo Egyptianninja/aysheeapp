@@ -255,7 +255,7 @@ class HomeScreen extends React.Component<any, any> {
         />
         <Message
           isVisible={this.state.isMessageVisible}
-          title={words.successadded}
+          title={this.state.message}
           icon="ios-checkmark-circle"
           lang={lang}
           width={width}

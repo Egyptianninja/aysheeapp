@@ -110,10 +110,10 @@ const Option = ({
           await favoritePost({
             variables: { postId }
           });
-          await hideMenuModal();
-          setTimeout(() => {
-            showMessageModal({ seconds: 1, message: word.successadded });
-          }, 1000);
+          hideMenuModal();
+          // setTimeout(() => {
+          //   showMessageModal({ seconds: 1, message: word.successadded });
+          // }, 1000);
         } else if (itemData.id === 2) {
           await unFavoritePost({
             variables: { postId }

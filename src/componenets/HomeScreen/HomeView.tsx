@@ -128,8 +128,13 @@ class HomeScreen extends React.Component<any, any> {
   showMenuModal = (post: any) => {
     this.setState({ isMenuModalVisible: true, modalPost: post });
   };
-  hideMenuModal = () => {
+  hideMenuModal = (message?: any) => {
     this.setState({ isMenuModalVisible: false, modalPost: null });
+    if (message) {
+      setTimeout(() => {
+        this.showMessageModal({ seconds: 1, message });
+      }, 1000);
+    }
   };
   showReportModal = () => {
     this.setState({ isReportModalVisible: true });
@@ -255,7 +260,7 @@ class HomeScreen extends React.Component<any, any> {
         />
         <Message
           isVisible={this.state.isMessageVisible}
-          title={words.successadded}
+          title={this.state.message}
           icon="ios-checkmark-circle"
           lang={lang}
           width={width}

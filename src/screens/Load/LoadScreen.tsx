@@ -168,7 +168,7 @@ class LoadScreen extends React.Component<any, any> {
               position: 'absolute',
               bottom: 0,
               margin: 0,
-              height: height - 40,
+              height: height - 80,
               width: width - 40,
               justifyContent: 'center',
               alignItems: 'center'
