@@ -9,6 +9,7 @@ import {
 const initialState = {
   language: '',
   languageName: '',
+  isRTL: false,
   country: '',
   code: '',
   brands: '',
@@ -22,7 +23,8 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         language: action.language,
-        languageName: action.languageName
+        languageName: action.languageName,
+        isRTL: action.isRTL
       };
     case INIT_APP:
       return {

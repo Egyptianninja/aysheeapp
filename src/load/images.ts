@@ -47,6 +47,8 @@ export const images = {
   icon19: require('../../assets/icons/main/Find-Jobs.jpg'),
   icon20: require('../../assets/icons/main/request-service.jpg'),
   icon21: require('../../assets/icons/main/offer-services.jpg'),
+  icon22: require('../../assets/icons/main/pc-camera.png'),
+  icon23: require('../../assets/icons/main/building-material.png'),
 
   // FILTER ICONS
   sortType: require('../../assets/icons/filtericons/Sort.png'),
@@ -138,6 +140,23 @@ export const images = {
   b71: require('../../assets/icons/brands/71.png'),
   b72: require('../../assets/icons/brands/72.png'),
   b73: require('../../assets/icons/brands/73.png'),
+
+  b74: require('../../assets/icons/brands/74.png'),
+  b75: require('../../assets/icons/brands/75.png'),
+  b76: require('../../assets/icons/brands/76.png'),
+  b77: require('../../assets/icons/brands/77.png'),
+  b78: require('../../assets/icons/brands/78.png'),
+  b79: require('../../assets/icons/brands/79.png'),
+  b80: require('../../assets/icons/brands/80.png'),
+  b81: require('../../assets/icons/brands/81.png'),
+  b82: require('../../assets/icons/brands/82.png'),
+  b83: require('../../assets/icons/brands/83.png'),
+  b84: require('../../assets/icons/brands/84.png'),
+  b85: require('../../assets/icons/brands/85.png'),
+  b86: require('../../assets/icons/brands/86.png'),
+  b87: require('../../assets/icons/brands/87.png'),
+  b88: require('../../assets/icons/brands/88.png'),
+  b89: require('../../assets/icons/brands/89.png'),
 
   DZ: require('../../assets/icons/flag/algeria.png'),
   AT: require('../../assets/icons/flag/austria.png'),

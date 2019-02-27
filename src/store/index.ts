@@ -36,11 +36,11 @@ export const store = createStore(
   enhancer(applyMiddleware(thunk))
 );
 export const persistor = persistStore(store, undefined, async () => {
-  const appVersion = '1.1.82';
+  const appVersion = '1.1.88';
   const localAppVersion = await AsyncStorage.getItem('appVersion');
   const languageName = store.getState().glob.languageName;
   const locale = getLocale();
-
+  const isRTL = locale.isRTL;
   const systemLang = locale.lang.substring(0, 2);
   if (
     !languageName ||
@@ -51,7 +51,7 @@ export const persistor = persistStore(store, undefined, async () => {
     const { ar, en, tr } = require('../../languages');
     const { brands, subBrands } = require('../constants');
     const lang = systemLang === 'ar' ? ar : systemLang === 'tr' ? tr : en;
-    await store.dispatch(setLanguage(lang, systemLang || 'en'));
+    await store.dispatch(setLanguage(lang, systemLang || 'en', isRTL));
     await store.dispatch(initBrands(brands));
     await store.dispatch(initSubBrands(subBrands));
     await AsyncStorage.setItem('appVersion', appVersion);

@@ -33,7 +33,7 @@ export default {
     },
     {
       id: 6,
-      sort: 11,
+      sort: 2,
       name: 'أجهزة منزلية',
       nameGlob: 'أجهزة منزلية, Electronics, Electronics'
     },
@@ -46,8 +46,8 @@ export default {
     {
       id: 8,
       sort: 6,
-      name: 'الموضة والجمال',
-      nameGlob: 'الموضة والجمال, Accessories, Accessories'
+      name: 'اكسسوارات',
+      nameGlob: 'اكسسوارات, Accessories, Accessories'
     },
     {
       id: 9,
@@ -72,7 +72,7 @@ export default {
     { id: 14, sort: 3, name: 'جوالات', nameGlob: 'جوالات, Mobile, Mobile' },
     {
       id: 15,
-      sort: 2,
+      sort: 11,
       name: 'قطع غيار',
       nameGlob: 'قطع غيار, Spare Parts, Spare Parts'
     },
@@ -172,19 +172,14 @@ export default {
     { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
     { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
 
-    { pid: 6, id: 98, name: 'أل جي', nameGlob: 'أل جي' },
-    { pid: 6, id: 99, name: 'سامسونج', nameGlob: 'سامسونج' },
-    { pid: 6, id: 100, name: 'سوني', nameGlob: 'سوني' },
-    { pid: 6, id: 101, name: 'باناسونيك', nameGlob: 'باناسونيك' },
-    { pid: 6, id: 102, name: 'فيزيو', nameGlob: 'فيزيو' },
-    { pid: 6, id: 103, name: 'هنسز', nameGlob: 'هنسز' },
-    { pid: 6, id: 104, name: 'باناسونيك ', nameGlob: 'باناسونيك ' },
-    { pid: 6, id: 105, name: 'توشيبا', nameGlob: 'توشيبا' },
-    { pid: 6, id: 106, name: 'فيليبس', nameGlob: 'فيليبس' },
-    { pid: 6, id: 107, name: 'شارب', nameGlob: 'شارب' },
-    { pid: 6, id: 108, name: 'سانيو', nameGlob: 'سانيو' },
-    { pid: 6, id: 109, name: 'جي في سي', nameGlob: 'جي في سي' },
-    { pid: 6, id: 110, name: 'أخرى', nameGlob: 'أخرى' },
+    { pid: 6, id: 98, nameGlob: 'Water Heaters', name: 'سخانات مياه' },
+    { pid: 6, id: 99, nameGlob: 'Water Coolers', name: 'مبردات مياه' },
+    { pid: 6, id: 100, nameGlob: 'Washing Machine', name: 'غسالات' },
+    { pid: 6, id: 101, nameGlob: 'Fridges', name: 'ثلاجات ' },
+    { pid: 6, id: 102, nameGlob: 'Ovens & Cookers', name: 'بوتوجاز وأفران' },
+    { pid: 6, id: 103, nameGlob: 'Televisions', name: 'تلفزيون' },
+    { pid: 6, id: 104, nameGlob: 'TV Receivers ', name: 'رسيفر ' },
+    { pid: 6, id: 105, nameGlob: 'Othes', name: 'أخرى' },
 
     { pid: 12, id: 18, name: 'كتب أطفال', nameGlob: 'كتب أطفال' },
     {
@@ -265,6 +260,20 @@ export default {
     { pid: 5, id: 6, name: 'غو برو', nameGlob: 'غو برو' },
     { pid: 5, id: 7, name: 'ليسيا', nameGlob: 'ليسيا' },
     { pid: 5, id: 8, name: 'أخرى', nameGlob: 'أخرى' },
+
+    { pid: 6, id: 98, name: 'أل جي', nameGlob: 'أل جي' },
+    { pid: 6, id: 99, name: 'سامسونج', nameGlob: 'سامسونج' },
+    { pid: 6, id: 100, name: 'سوني', nameGlob: 'سوني' },
+    { pid: 6, id: 101, name: 'باناسونيك', nameGlob: 'باناسونيك' },
+    { pid: 6, id: 102, name: 'فيزيو', nameGlob: 'فيزيو' },
+    { pid: 6, id: 103, name: 'هنسز', nameGlob: 'هنسز' },
+    { pid: 6, id: 104, name: 'باناسونيك ', nameGlob: 'باناسونيك ' },
+    { pid: 6, id: 105, name: 'توشيبا', nameGlob: 'توشيبا' },
+    { pid: 6, id: 106, name: 'فيليبس', nameGlob: 'فيليبس' },
+    { pid: 6, id: 107, name: 'شارب', nameGlob: 'شارب' },
+    { pid: 6, id: 108, name: 'سانيو', nameGlob: 'سانيو' },
+    { pid: 6, id: 109, name: 'جي في سي', nameGlob: 'جي في سي' },
+    { pid: 6, id: 110, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 8, id: 31, name: 'لينوفو', nameGlob: 'لينوفو' },
     { pid: 8, id: 32, name: 'أتش بي', nameGlob: 'أتش بي ' },

@@ -206,6 +206,12 @@ class AddClassifiedScreen extends React.Component<any, any> {
         (eb: any) => eb.pid === this.state.selectedElectronics
       );
     }
+    let electricalBrands: any;
+    if (category.id === 6) {
+      electricalBrands = this.props.electroBrands.filter(
+        (eb: any) => eb.pid === 6
+      );
+    }
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message
@@ -323,6 +329,16 @@ class AddClassifiedScreen extends React.Component<any, any> {
                         lang={lang}
                       />
                     )}
+                  {category.id === 6 && (
+                    <Select
+                      name="eBrand"
+                      data={electricalBrands}
+                      label={word.eBrand}
+                      value={values.eBrand}
+                      onChange={setFieldValue}
+                      lang={lang}
+                    />
+                  )}
                   <Input
                     rtl={lang === 'ar' ? true : false}
                     name="body"

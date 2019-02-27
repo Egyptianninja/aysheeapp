@@ -6,11 +6,12 @@ import {
   ADD_PERMISSION
 } from '../types';
 
-export function setLanguage(language: any, languageName: string) {
+export function setLanguage(language: any, languageName: string, isRTL: any) {
   return {
     type: SET_LANGUAGE,
     language,
-    languageName
+    languageName,
+    isRTL
   };
 }
 export function initApp(country: any, code: any) {

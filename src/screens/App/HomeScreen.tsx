@@ -185,12 +185,18 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleNotification = (notification: any) => {
-    const postId = notification.data.postId;
-    this.props.navigation.navigate('ItemScreen', {
-      postId,
-      word: this.props.words,
-      lang: this.props.lang
-    });
+    console.log(notification);
+
+    if (notification.origin === 'received') {
+      // show internal message with notification data and way to go to post
+    } else {
+      const postId = notification.data.postId;
+      this.props.navigation.navigate('ItemScreen', {
+        postId,
+        word: this.props.words,
+        lang: this.props.lang
+      });
+    }
   };
   addFilter = (itemKind: any, value: any) => {
     this.setState({ rest: { ...this.state.rest, [itemKind]: value } });

@@ -33,7 +33,7 @@ export default {
     },
     {
       id: 6,
-      sort: 11,
+      sort: 2,
       name: 'Electronics',
       nameGlob: 'أجهزة منزلية, Electronics, Electronics'
     },
@@ -47,7 +47,7 @@ export default {
       id: 8,
       sort: 6,
       name: 'Accessories',
-      nameGlob: 'الموضة والجمال, Accessories, Accessories'
+      nameGlob: 'اكسسوارات, Accessories, Accessories'
     },
     {
       id: 9,
@@ -68,7 +68,7 @@ export default {
     { id: 14, sort: 3, name: 'Mobile', nameGlob: 'جوالات, Mobile, Mobile' },
     {
       id: 15,
-      sort: 2,
+      sort: 11,
       name: 'Spare Parts',
       nameGlob: 'قطع غيار, Spare Parts, Spare Parts'
     },
@@ -151,19 +151,14 @@ export default {
     { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
     { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
 
-    { pid: 6, id: 98, name: 'LG', nameGlob: 'LG' },
-    { pid: 6, id: 99, name: 'Samsung', nameGlob: 'Samsung' },
-    { pid: 6, id: 100, name: 'Sony', nameGlob: 'Sony' },
-    { pid: 6, id: 101, name: 'Panasonic', nameGlob: 'Panasonic' },
-    { pid: 6, id: 102, name: 'Vizio', nameGlob: 'Vizio' },
-    { pid: 6, id: 103, name: 'Hisense', nameGlob: 'Hisense' },
-    { pid: 6, id: 104, name: 'Panasonic ', nameGlob: 'Panasonic ' },
-    { pid: 6, id: 105, name: 'Toshiba', nameGlob: 'Toshiba' },
-    { pid: 6, id: 106, name: 'Philips', nameGlob: 'Philips' },
-    { pid: 6, id: 107, name: 'Sharp', nameGlob: 'Sharp' },
-    { pid: 6, id: 108, name: 'Sanyo', nameGlob: 'Sanyo' },
-    { pid: 6, id: 109, name: 'JVC', nameGlob: 'JVC' },
-    { pid: 6, id: 110, name: 'Other', nameGlob: 'Other' },
+    { pid: 6, id: 98, name: 'Water Heaters', nameGlob: 'سخانات مياه' },
+    { pid: 6, id: 99, name: 'Water Coolers', nameGlob: 'مبردات مياه' },
+    { pid: 6, id: 100, name: 'Washing Machine', nameGlob: 'غسالات' },
+    { pid: 6, id: 101, name: 'Fridges', nameGlob: 'ثلاجات ' },
+    { pid: 6, id: 102, name: 'Ovens & Cookers', nameGlob: 'بوتوجاز وأفران' },
+    { pid: 6, id: 103, name: 'Televisions', nameGlob: 'تلفزيون' },
+    { pid: 6, id: 104, name: 'TV Receivers ', nameGlob: 'رسيفر ' },
+    { pid: 6, id: 105, name: 'Othes', nameGlob: 'أخرى' },
 
     { pid: 12, id: 18, name: 'Kids Books', nameGlob: 'Kids Books' },
     {
@@ -243,6 +238,20 @@ export default {
     { pid: 5, id: 6, name: 'GoPro', nameGlob: 'GoPro' },
     { pid: 5, id: 7, name: 'Leica', nameGlob: 'Leica' },
     { pid: 5, id: 8, name: 'Other', nameGlob: 'Other' },
+
+    { pid: 6, id: 98, name: 'LG', nameGlob: 'LG' },
+    { pid: 6, id: 99, name: 'Samsung', nameGlob: 'Samsung' },
+    { pid: 6, id: 100, name: 'Sony', nameGlob: 'Sony' },
+    { pid: 6, id: 101, name: 'Panasonic', nameGlob: 'Panasonic' },
+    { pid: 6, id: 102, name: 'Vizio', nameGlob: 'Vizio' },
+    { pid: 6, id: 103, name: 'Hisense', nameGlob: 'Hisense' },
+    { pid: 6, id: 104, name: 'Panasonic ', nameGlob: 'Panasonic ' },
+    { pid: 6, id: 105, name: 'Toshiba', nameGlob: 'Toshiba' },
+    { pid: 6, id: 106, name: 'Philips', nameGlob: 'Philips' },
+    { pid: 6, id: 107, name: 'Sharp', nameGlob: 'Sharp' },
+    { pid: 6, id: 108, name: 'Sanyo', nameGlob: 'Sanyo' },
+    { pid: 6, id: 109, name: 'JVC', nameGlob: 'JVC' },
+    { pid: 6, id: 110, name: 'Other', nameGlob: 'Other' },
 
     { pid: 8, id: 31, name: 'Lenovo', nameGlob: 'Lenovo' },
     { pid: 8, id: 32, name: 'HP', nameGlob: 'HP ' },
