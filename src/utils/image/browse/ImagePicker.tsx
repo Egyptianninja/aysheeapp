@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Permissions } from 'expo';
 import ImageModal from './ImageModal';
+import { connect } from 'react-redux';
+import { addPermission } from '../../../store/actions/globActions';
 import { PhotoPicker } from '../../../componenets/Add/photoPicker';
 
 class ImagePicker extends React.PureComponent<any, any> {
@@ -34,6 +36,7 @@ class ImagePicker extends React.PureComponent<any, any> {
     if (finalStatus !== 'granted') {
       return;
     }
+    this.props.addPermission('CAMERA_ROLL');
     this.setState({ imageBrowserOpen: true });
     this.setState({ isPhotoModalVisible: true });
   };
@@ -78,4 +81,7 @@ class ImagePicker extends React.PureComponent<any, any> {
   }
 }
 
-export default ImagePicker;
+export default connect(
+  null,
+  { addPermission }
+)(ImagePicker);

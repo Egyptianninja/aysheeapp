@@ -13,15 +13,17 @@ import {
   Easing,
   CameraRoll
 } from 'react-native';
+import { connect } from 'react-redux';
 import Modal from 'react-native-modal';
 import { Camera, Permissions, ImageManipulator, Constants } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
+import { addPermission } from '../../store/actions/globActions';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
 import { Orientation } from '../../utils';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
 
-export default class CameraScreen extends React.Component<any, any> {
+class CameraScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
@@ -43,6 +45,7 @@ export default class CameraScreen extends React.Component<any, any> {
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
+    this.props.addPermission('CAMERA');
   }
 
   componentWillUnmount = () => {
@@ -504,3 +507,8 @@ export default class CameraScreen extends React.Component<any, any> {
     }
   }
 }
+
+export default connect(
+  null,
+  { addPermission }
+)(CameraScreen);

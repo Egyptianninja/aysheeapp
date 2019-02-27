@@ -1,9 +1,12 @@
-import * as React from "react";
-import { View } from "react-native";
-import { StyleSheet } from "../common";
-import { MapView, Location, Permissions } from "expo";
+import * as React from 'react';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { addPermission } from '../../store/actions/globActions';
 
-export default class UserLocation extends React.Component<any, any> {
+import { StyleSheet } from '../common';
+import { MapView, Location, Permissions } from 'expo';
+
+class UserLocation extends React.Component<any, any> {
   timerHandle: any;
   map: any;
   state = {
@@ -26,10 +29,11 @@ export default class UserLocation extends React.Component<any, any> {
 
   getLocationAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.props.onChange("location", false);
+    if (status !== 'granted') {
+      this.props.onChange('location', false);
       return;
     }
+    this.props.addPermission('LOCATION');
     this.setState({ granted: true });
     return this.updateLocation();
   };
@@ -59,7 +63,7 @@ export default class UserLocation extends React.Component<any, any> {
               this.map = mapView;
             }}
             style={{
-              alignSelf: "stretch",
+              alignSelf: 'stretch',
               height: 200,
               width: this.props.width - 40
             }}
@@ -76,13 +80,18 @@ export default class UserLocation extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ecf0f1",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
     marginTop: 10,
     borderWidth: 1,
-    borderColor: "#eee",
+    borderColor: '#eee',
     borderRadius: 5,
-    overflow: "hidden"
+    overflow: 'hidden'
   }
 });
+
+export default connect(
+  null,
+  { addPermission }
+)(UserLocation);

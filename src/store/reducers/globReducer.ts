@@ -1,4 +1,10 @@
-import { SET_LANGUAGE, SET_BRANDS, SET_SUB_BRANDS, INIT_APP } from '../types';
+import {
+  SET_LANGUAGE,
+  SET_BRANDS,
+  SET_SUB_BRANDS,
+  INIT_APP,
+  ADD_PERMISSION
+} from '../types';
 
 const initialState = {
   language: '',
@@ -6,7 +12,8 @@ const initialState = {
   country: '',
   code: '',
   brands: '',
-  subBrands: ''
+  subBrands: '',
+  permissions: {}
 };
 
 export default function(state = initialState, action: any) {
@@ -32,6 +39,14 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         subBrands: action.subBrands
+      };
+    case ADD_PERMISSION:
+      return {
+        ...state,
+        permissions: {
+          ...state.permissions,
+          [action.permission]: true
+        }
       };
 
     default:

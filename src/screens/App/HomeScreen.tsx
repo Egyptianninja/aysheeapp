@@ -39,6 +39,7 @@ class HomeScreen extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
+
     const scrollAnim = new Animated.Value(0);
     const offsetAnim = new Animated.Value(0);
     this.state = {

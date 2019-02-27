@@ -1,4 +1,10 @@
-import { SET_LANGUAGE, SET_BRANDS, SET_SUB_BRANDS, INIT_APP } from '../types';
+import {
+  SET_LANGUAGE,
+  SET_BRANDS,
+  SET_SUB_BRANDS,
+  INIT_APP,
+  ADD_PERMISSION
+} from '../types';
 
 export function setLanguage(language: any, languageName: string) {
   return {
@@ -21,9 +27,17 @@ export function initBrands(brands: any) {
     brands
   };
 }
+
 export function initSubBrands(subBrands: any) {
   return {
     type: SET_SUB_BRANDS,
     subBrands
+  };
+}
+
+export function addPermission(permission: any) {
+  return {
+    type: ADD_PERMISSION,
+    permission
   };
 }

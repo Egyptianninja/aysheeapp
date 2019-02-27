@@ -17,6 +17,7 @@ import { Permissions } from 'expo';
 import { StyleSheet, pickImage, parseJwt } from '../../../utils';
 import updateProfile from '../../../graphql/mutation/updateProfile';
 import { updateUser } from '../../../store/actions/userAtions';
+import { addPermission } from '../../../store/actions/globActions';
 import { Ionicons } from '@expo/vector-icons';
 import { Input, Button } from '../../../lib';
 import { Formik } from 'formik';
@@ -45,7 +46,7 @@ class ProfileScreen extends React.Component<any, any> {
     if (finalStatus !== 'granted') {
       return;
     }
-
+    this.props.addPermission('CAMERA_ROLL');
     const headerPhoto = await pickImage(false, 960, 0.8);
     if (headerPhoto) {
       const res = await this.props.updateProfile({
@@ -121,6 +122,7 @@ class ProfileScreen extends React.Component<any, any> {
               if (finalStatus !== 'granted') {
                 return;
               }
+              this.props.addPermission('CAMERA_ROLL');
               const avatar = await pickImage(true, 400, 0.8);
               if (avatar) {
                 const res = await this.props.updateProfile({
@@ -353,7 +355,8 @@ class ProfileScreen extends React.Component<any, any> {
 const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
-      updateUser
+      updateUser,
+      addPermission
     },
     dispatch
   );
