@@ -252,9 +252,11 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleonPressIn = (id: any) => {
+    // TODO:
     // this.setState({ pressed: id });
   };
   handleonPressOut = () => {
+    // TODO:
     // this.setState({ pressed: null });
   };
 
