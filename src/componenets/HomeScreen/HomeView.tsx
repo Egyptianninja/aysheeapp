@@ -388,7 +388,8 @@ export default connect(
     name: 'refreshToken'
   })(
     graphql(favoritePost, {
-      name: 'favoritePost'
+      name: 'favoritePost',
+      options: { refetchQueries: ['getMyFavoritePosts'] }
     })(
       graphql(notificationSub, {
         name: 'notificationSub'

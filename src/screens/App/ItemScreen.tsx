@@ -104,16 +104,20 @@ export default connect(mapStateToProps)(
     name: 'createComment'
   })(
     graphql(favoritePost, {
-      name: 'favoritePost'
+      name: 'favoritePost',
+      options: { refetchQueries: ['getMyFavoritePosts'] }
     })(
       graphql(unFavoritePost, {
-        name: 'unFavoritePost'
+        name: 'unFavoritePost',
+        options: { refetchQueries: ['getMyFavoritePosts'] }
       })(
         graphql(editClassifieds, {
-          name: 'editClassifieds'
+          name: 'editClassifieds',
+          options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
         })(
           graphql(deletePost, {
-            name: 'deletePost'
+            name: 'deletePost',
+            options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
           })(ItemScreen)
         )
       )

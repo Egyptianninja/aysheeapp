@@ -220,10 +220,12 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps)(
   graphql(editClassifieds, {
-    name: 'editClassifieds'
+    name: 'editClassifieds',
+    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
   })(
     graphql(deletePost, {
-      name: 'deletePost'
+      name: 'deletePost',
+      options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
     })(MyOnlinePostsScreen)
   )
 );

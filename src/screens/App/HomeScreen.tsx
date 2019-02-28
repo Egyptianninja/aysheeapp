@@ -453,17 +453,19 @@ export default connect(
     name: 'refreshToken'
   })(
     graphql(favoritePost, {
-      name: 'favoritePost'
+      name: 'favoritePost',
+      options: { refetchQueries: ['getMyFavoritePosts'] }
     })(
       graphql(notificationSub, {
         name: 'notificationSub'
       })(
         graphql(deletePost, {
           name: 'deletePost',
-          options: { refetchQueries: ['getTimeLine'] }
+          options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
         })(
           graphql(editClassifieds, {
-            name: 'editClassifieds'
+            name: 'editClassifieds',
+            options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
           })(HomeScreen)
         )
       )

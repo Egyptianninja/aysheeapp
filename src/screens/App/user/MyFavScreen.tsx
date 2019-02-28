@@ -172,6 +172,7 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps)(
   graphql(unFavoritePost, {
-    name: 'unFavoritePost'
+    name: 'unFavoritePost',
+    options: { refetchQueries: ['getMyFavoritePosts'] }
   })(MyFavScreen)
 );
