@@ -127,6 +127,8 @@ export default gql`
           lat
           lon
         }
+        islive
+        updates
         userId
         updatedAt
       }

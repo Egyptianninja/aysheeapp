@@ -66,13 +66,15 @@ export default class Menu extends React.Component<any, any> {
   };
   render() {
     const { word, myItem, live, fav, user, isAuthenticated, post } = this.props;
+    console.log(post);
+
     const owner = this.isOwner({ user, isAuthenticated, post });
     const options = filterOptions(
       word.popmenu,
       myItem || owner
-        ? live
-          ? [5, 7, 8, 9]
-          : [6, 8, 9]
+        ? live === false
+          ? [6, 8, 9]
+          : [5, 7, 8, 9]
         : fav
         ? [2, 3, 4]
         : [1, 3, 4]
