@@ -9,6 +9,8 @@ import getTimeLine from '../../graphql/query/getTimeLine';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
+import editClassifieds from '../../graphql/mutation/editClassifieds';
+import deletePost from '../../graphql/mutation/deletePost';
 import * as store from '../../store/getStore';
 import { setBuckets } from '../../store/actions/postActions';
 import {
@@ -21,7 +23,7 @@ import {
 } from '../../utils';
 import { HomeLoading, CategoriesScroll, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
-import { Menu, Report } from '../../componenets/Menu';
+import { Menu, Report, Edit } from '../../componenets/Menu';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -46,6 +48,8 @@ class HomeScreen extends React.Component<any, any> {
       isMenuModalVisible: false,
       isReportModalVisible: false,
       isMessageVisible: false,
+      isEditModalVisible: false,
+      isCheckMessaheVisible: false,
       modalPost: null,
       refreshing: false,
       notification: null,
@@ -130,7 +134,13 @@ class HomeScreen extends React.Component<any, any> {
     this.setState({ isMenuModalVisible: true, modalPost: post });
   };
   hideMenuModal = () => {
-    this.setState({ isMenuModalVisible: false, modalPost: null });
+    this.setState({ isMenuModalVisible: false });
+  };
+  showEditModal = () => {
+    this.setState({ isEditModalVisible: true });
+  };
+  hideEditModal = () => {
+    this.setState({ isEditModalVisible: false });
   };
   showReportModal = () => {
     this.setState({ isReportModalVisible: true });
@@ -153,9 +163,31 @@ class HomeScreen extends React.Component<any, any> {
       }, seconds * 1000);
     }
   };
-
   hideMessageModal = () => {
     this.setState({ isMessageVisible: false });
+  };
+  showCheckMessageModal = async () => {
+    this.setState({ isCheckMessaheVisible: true });
+  };
+  hideCheckMessageModal = () => {
+    this.setState({ isCheckMessaheVisible: false });
+  };
+  deletePost = async () => {
+    await this.props.deletePost({
+      variables: {
+        postId: this.state.modalPost.id
+      }
+    });
+    this.hideCheckMessageModal();
+    setTimeout(() => {
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.addeleted
+      });
+    }, 1000);
+  };
+  canceldeletePost = async () => {
+    this.hideCheckMessageModal();
   };
 
   handleTop = () => {
@@ -240,9 +272,15 @@ class HomeScreen extends React.Component<any, any> {
           hideMenuModal={this.hideMenuModal}
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
+          deletePost={this.props.deletePost}
+          editClassifieds={this.props.editClassifieds}
+          showEditModal={this.showEditModal}
+          showCheckMessageModal={this.showCheckMessageModal}
           postId={postId}
           word={words}
           isRTL={isRTL}
+          isAuthenticated={this.props.isAuthenticated}
+          user={this.props.user}
           // TODO:
           // onModalHide={
           //   this.state.isMessageVisible
@@ -253,6 +291,18 @@ class HomeScreen extends React.Component<any, any> {
           //     : undefined
           // }
         />
+        {this.state.isEditModalVisible && (
+          <Edit
+            isEditModalVisible={this.state.isEditModalVisible}
+            editClassifieds={this.props.editClassifieds}
+            hideEditModal={this.hideEditModal}
+            showMessageModal={this.showMessageModal}
+            word={words}
+            isRTL={isRTL}
+            postId={postId}
+            post={this.state.modalPost}
+          />
+        )}
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
           hideReportModal={this.hideReportModal}
@@ -265,6 +315,19 @@ class HomeScreen extends React.Component<any, any> {
           icon="ios-checkmark-circle"
           isRTL={isRTL}
           height={120}
+        />
+        <Message
+          isVisible={this.state.isCheckMessaheVisible}
+          body={words.deleteareyousure}
+          icon="ios-information-circle"
+          width={width}
+          okbtnTitle={words.yes}
+          cancelbtnTitle={words.cancel}
+          okAction={this.deletePost}
+          cancelAction={this.canceldeletePost}
+          isRTL={isRTL}
+          iconColor="#E85255"
+          height={200}
         />
         <Animated.View
           style={{
@@ -392,7 +455,21 @@ export default connect(
     })(
       graphql(notificationSub, {
         name: 'notificationSub'
-      })(HomeScreen)
+      })(
+        graphql(deletePost, {
+          name: 'deletePost',
+          options: {
+            refetchQueries: ['getTimeLine']
+          }
+        })(
+          graphql(editClassifieds, {
+            name: 'editClassifieds',
+            options: {
+              refetchQueries: ['getTimeLine']
+            }
+          })(HomeScreen)
+        )
+      )
     )
   )
 );

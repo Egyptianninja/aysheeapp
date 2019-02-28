@@ -264,7 +264,16 @@ class ItemView extends React.Component<any, any> {
   };
 
   render() {
-    const { post, myItem, fav, live, word, isRTL, postId } = this.props;
+    const {
+      post,
+      myItem,
+      fav,
+      live,
+      word,
+      isRTL,
+      postId,
+      isAuthenticated
+    } = this.props;
     const photos = this.getimageurls(post);
     const pdata = getproperties(post);
     const jdata = getJobProperties(post);
@@ -299,6 +308,8 @@ class ItemView extends React.Component<any, any> {
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
           showCheckMessageModal={this.showCheckMessageModal}
+          isAuthenticated={isAuthenticated}
+          user={this.props.user}
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}

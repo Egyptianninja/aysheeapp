@@ -19,6 +19,7 @@ import {
   isArabic,
   Message
 } from '../../../utils';
+import getTimeLine from '../../../graphql/query/getTimeLine';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 
@@ -390,7 +391,10 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps)(
   graphql(addClassifiedMutation, {
-    name: 'addClassifiedMutation'
+    name: 'addClassifiedMutation',
+    options: {
+      refetchQueries: ['getTimeLine']
+    }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

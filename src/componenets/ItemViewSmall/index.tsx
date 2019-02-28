@@ -38,6 +38,7 @@ const ItemViewSmall = (props: any) => {
           onPress={() => {
             selectePost(post, word, lang, isRTL);
           }}
+          onLongPress={() => showMenuModal(post)}
         >
           <View style={styles.interContainer}>
             {uri && (

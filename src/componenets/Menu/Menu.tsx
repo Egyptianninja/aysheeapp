@@ -51,12 +51,31 @@ export default class Menu extends React.Component<any, any> {
       );
     });
   };
-
+  isOwner = ({ user, isAuthenticated, post }: any) => {
+    if (post) {
+      if (isAuthenticated) {
+        if (post.userId === user._id) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  };
   render() {
-    const { word, myItem, live, fav } = this.props;
+    const { word, myItem, live, fav, user, isAuthenticated, post } = this.props;
+    const owner = this.isOwner({ user, isAuthenticated, post });
     const options = filterOptions(
       word.popmenu,
-      myItem ? (live ? [5, 7, 8, 9] : [6, 8, 9]) : fav ? [2, 3, 4] : [1, 3, 4]
+      myItem || owner
+        ? live
+          ? [5, 7, 8, 9]
+          : [6, 8, 9]
+        : fav
+        ? [2, 3, 4]
+        : [1, 3, 4]
     );
     return (
       <Modal
