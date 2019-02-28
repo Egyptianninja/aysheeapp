@@ -66,8 +66,6 @@ export default class Menu extends React.Component<any, any> {
   };
   render() {
     const { word, myItem, live, fav, user, isAuthenticated, post } = this.props;
-    console.log(post);
-
     const owner = this.isOwner({ user, isAuthenticated, post });
     const options = filterOptions(
       word.popmenu,

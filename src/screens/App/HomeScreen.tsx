@@ -51,6 +51,7 @@ class HomeScreen extends React.Component<any, any> {
       isEditModalVisible: false,
       isCheckMessaheVisible: false,
       modalPost: null,
+      pressed: null,
       refreshing: false,
       notification: null,
       query: null,
@@ -250,6 +251,13 @@ class HomeScreen extends React.Component<any, any> {
     this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
   };
 
+  handleonPressIn = (id: any) => {
+    // this.setState({ pressed: id });
+  };
+  handleonPressOut = () => {
+    // this.setState({ pressed: null });
+  };
+
   render() {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query, isRTL } = this.props;
@@ -411,6 +419,9 @@ class HomeScreen extends React.Component<any, any> {
                   renderItem={({ item }: any) => (
                     <ItemViewSmall
                       post={item}
+                      handleonPressIn={this.handleonPressIn}
+                      handleonPressOut={this.handleonPressOut}
+                      pressed={this.state.pressed}
                       navigation={this.props.navigation}
                       showMenuModal={this.showMenuModal}
                       selectePost={this.selectePost}
