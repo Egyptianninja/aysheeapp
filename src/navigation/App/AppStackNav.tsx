@@ -26,7 +26,8 @@ export const AppStackNavigator = createStackNavigator({
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }: any) => ({
-      header: <HomeHeader navigation={navigation} />
+      header: <HomeHeader navigation={navigation} />,
+      headerBackTitle: null
     })
   },
   ItemScreen: {
@@ -34,7 +35,8 @@ export const AppStackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }: any) => ({
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
 
@@ -44,7 +46,8 @@ export const AppStackNavigator = createStackNavigator({
       title: navigation.getParam('post').title,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
 
@@ -54,7 +57,8 @@ export const AppStackNavigator = createStackNavigator({
       title: 'اضافة اعلان جديد',
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
   AddClassifiedScreen: {
@@ -63,7 +67,8 @@ export const AppStackNavigator = createStackNavigator({
       title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
   AddServiceScreen: {
@@ -72,7 +77,8 @@ export const AppStackNavigator = createStackNavigator({
       title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
   AddRealEstateScreen: {
@@ -81,7 +87,8 @@ export const AppStackNavigator = createStackNavigator({
       title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
   AddCarScreen: {
@@ -90,7 +97,8 @@ export const AppStackNavigator = createStackNavigator({
       title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
   AddPartsScreen: {
@@ -99,7 +107,8 @@ export const AppStackNavigator = createStackNavigator({
       title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
   AddJobScreen: {
@@ -108,39 +117,45 @@ export const AppStackNavigator = createStackNavigator({
       title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
     })
   },
   MyPostsScreen: {
     screen: PostTabsStack,
     navigationOptions: () => ({
       title: 'منشوراتي',
-      headerTintColor: '#555'
+      headerTintColor: '#555',
+      headerBackTitle: null
     })
   },
   MyFavScreen: {
     screen: MyFavScreen,
     navigationOptions: ({ navigation }: any) => ({
       title: 'المفضلة',
-      headerTintColor: '#555'
+      headerTintColor: '#555',
+      headerBackTitle: null
     })
   },
   UserProfileScreen: {
     screen: UserProfileScreen,
     navigationOptions: () => ({
-      headerTintColor: '#555'
+      headerTintColor: '#555',
+      headerBackTitle: null
     })
   },
   NotificationsScreen: {
     screen: NotificationsScreen,
     navigationOptions: () => ({
-      headerTintColor: '#555'
+      headerTintColor: '#555',
+      headerBackTitle: null
     })
   },
   CameraScreen: {
     screen: CameraScreen,
     navigationOptions: () => ({
-      headerTintColor: '#555'
+      headerTintColor: '#555',
+      headerBackTitle: null
     })
   },
   Profile: {
@@ -149,6 +164,7 @@ export const AppStackNavigator = createStackNavigator({
       headerStyle: styles.headerStyle,
       headerTintColor: '#eee',
       headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null,
       headerLeft: (
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>

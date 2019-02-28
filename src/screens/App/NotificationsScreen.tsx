@@ -36,7 +36,7 @@ class NotificationsScreen extends React.Component<any, any> {
             }
             const notis = data.getMyNotifications.data;
             return (
-              <View style={{ flex: 1, marginTop: 8 }}>
+              <View style={{ flex: 1, paddingTop: 5, backgroundColor: '#eee' }}>
                 <FlatList
                   ref={(ref: any) => {
                     this.flatListRef = ref;

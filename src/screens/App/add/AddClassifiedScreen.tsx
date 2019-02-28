@@ -52,10 +52,17 @@ class AddClassifiedScreen extends React.Component<any, any> {
     images: [],
     bar: 0
   };
-  noSale = [2, 3, 7, 8, 13, 15, 17, 18];
-  noPrice = [15];
-  noNew = [18, 17];
-  noWaranty = [18, 17, 15, 13, 12];
+  noClassified = [0, 1, 5, 9, 15];
+
+  noSale = [2, 3, 5, 7, 8, 9, 13, 14, 15, 17, 18];
+  noPrice = [5, 9];
+  noNew = [5, 9, 17, 18];
+  noWaranty = [0, 5, 9, 12, 13, 17, 18];
+
+  noKind = [4, 7, 11, 19];
+  kind = [2, 3, 6, 8, 10, 12, 13, 14, 16, 17, 18];
+  eBrand = [2, 6];
+
   acc = [8];
 
   async componentWillMount() {
@@ -253,6 +260,9 @@ class AddClassifiedScreen extends React.Component<any, any> {
                 title: Yup.string()
                   .max(100)
                   .required('Required'),
+                kind: this.kind.includes(category.id)
+                  ? Yup.string().required('Required')
+                  : Yup.string(),
                 body: Yup.string()
                   .max(1000)
                   .required('Required'),

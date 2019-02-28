@@ -22,24 +22,28 @@ const Item = (props: any) => {
           flex: 1,
           justifyContent: 'center',
           alignItems: isRTL ? 'flex-end' : 'flex-start',
-          padding: 10,
+          padding: 5,
           marginHorizontal: 16,
-          marginVertical: 8,
+          marginVertical: 5,
           borderColor: '#ddd',
-          backgroundColor: '#f7f7f7',
+          backgroundColor: '#fff',
           borderWidth: 1,
-          borderRadius: 5
+          borderRadius: 10
         }}
       >
-        <View>
-          <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: 'bold'
-            }}
-          >
-            {item.title}
-          </Text>
+        <Text
+          style={{
+            padding: 5,
+            paddingTop: 10,
+            fontWeight: 'bold'
+          }}
+        >
+          {item.title}
+        </Text>
+        <View style={{ padding: 10 }}>
+          <Text>{item.body}</Text>
+        </View>
+        <View style={{ position: 'absolute', top: 5, left: 0 }}>
           <Text
             style={{
               color: '#999',
@@ -50,28 +54,9 @@ const Item = (props: any) => {
             {time}
           </Text>
         </View>
-        <View style={{ padding: 10, marginTop: 10 }}>
-          <Text>{item.body}</Text>
-        </View>
       </View>
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  interContainer: {
-    flex: 1,
-    marginVertical: 5,
-    paddingBottom: 10,
-    borderRadius: 7,
-    borderWidth: 1,
-    borderColor: '#e5e5e5'
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
 
 export default Item;

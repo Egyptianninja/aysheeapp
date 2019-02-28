@@ -253,8 +253,6 @@ class AddCarScreen extends React.Component<any, any> {
                 year: Yup.number()
                   .integer('price must be number')
                   .required('Required'),
-                km: Yup.number().integer('price must be number'),
-                color: Yup.string().max(100),
                 phone: Yup.string()
                   .max(25)
                   .required('Required')
@@ -502,6 +500,19 @@ class AddCarScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={isRTL}
+                  >
+                    <CheckBox
+                      name="iswarranty"
+                      label={word.warranty}
+                      value={values.iswarranty}
+                      selected={values.iswarranty}
+                    />
+                  </Group>
                   <Group
                     color="#444"
                     size={24}

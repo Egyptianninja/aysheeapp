@@ -40,7 +40,7 @@ class Input extends React.PureComponent<any, any> {
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <TextInput
           onChangeText={this.handleChange}
-          placeholder={label}
+          // placeholder={label}
           onBlur={this.handleTouch}
           style={[
             this.props.innerStyle,
