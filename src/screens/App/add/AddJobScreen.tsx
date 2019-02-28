@@ -19,7 +19,6 @@ import {
   isArabic,
   Message
 } from '../../../utils';
-import getTimeLine from '../../../graphql/query/getTimeLine';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 
@@ -150,6 +149,8 @@ class AddJobScreen extends React.Component<any, any> {
         salary: Number(salary),
         trueLocation
       }
+      // refetchQueries: ['getTimeLine'],
+      // awaitRefetchQueries: true
     });
 
     if (res.data.createPost.ok) {
@@ -509,9 +510,7 @@ const mapStateToProps = (state: any) => ({
 export default connect(mapStateToProps)(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: {
-      refetchQueries: ['getTimeLine']
-    }
+    options: { refetchQueries: ['getTimeLine'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

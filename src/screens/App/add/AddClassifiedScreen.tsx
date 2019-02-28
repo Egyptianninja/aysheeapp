@@ -176,6 +176,10 @@ class AddClassifiedScreen extends React.Component<any, any> {
         phone,
         trueLocation
       }
+      // refetchQueries: ['getTimeLine'],
+      // refetchQueries: ['getTimeLine'],
+      // refetchQueries: [{ query: getTimeLine }],
+      // awaitRefetchQueries: true
     });
 
     if (res.data.createPost.ok) {
@@ -613,9 +617,7 @@ const mapStateToProps = (state: any) => ({
 export default connect(mapStateToProps)(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: {
-      refetchQueries: ['getTimeLine']
-    }
+    options: { refetchQueries: ['getTimeLine'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

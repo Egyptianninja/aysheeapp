@@ -177,6 +177,8 @@ class HomeScreen extends React.Component<any, any> {
       variables: {
         postId: this.state.modalPost.id
       }
+      // refetchQueries: ['getTimeLine'],
+      // awaitRefetchQueries: true
     });
     this.hideCheckMessageModal();
     setTimeout(() => {
@@ -209,9 +211,9 @@ class HomeScreen extends React.Component<any, any> {
           .getNode()
           .scrollToOffset({ offset: 0, animated: true });
       } else {
-        this.state.rest.publish
-          ? this.setState({ rest: { publish: undefined } })
-          : this.setState({ rest: { publish: true } });
+        // this.state.rest.publish
+        //   ? this.setState({ rest: { publish: undefined } })
+        //   : this.setState({ rest: { publish: true } });
       }
     }
   };
@@ -458,15 +460,10 @@ export default connect(
       })(
         graphql(deletePost, {
           name: 'deletePost',
-          options: {
-            refetchQueries: ['getTimeLine']
-          }
+          options: { refetchQueries: ['getTimeLine'] }
         })(
           graphql(editClassifieds, {
-            name: 'editClassifieds',
-            options: {
-              refetchQueries: ['getTimeLine']
-            }
+            name: 'editClassifieds'
           })(HomeScreen)
         )
       )

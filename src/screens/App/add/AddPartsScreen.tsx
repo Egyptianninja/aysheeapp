@@ -21,7 +21,6 @@ import {
   registerForPushNotificationsAsync,
   Message
 } from '../../../utils';
-import getTimeLine from '../../../graphql/query/getTimeLine';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 import { currencyTypes } from '../../../constants';
@@ -165,6 +164,8 @@ class AddPartsScreen extends React.Component<any, any> {
         subBrand,
         trueLocation
       }
+      // refetchQueries: ['getTimeLine'],
+      // awaitRefetchQueries: true
     });
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + this.state.images.length));
@@ -577,9 +578,7 @@ const mapStateToProps = (state: any) => ({
 export default connect(mapStateToProps)(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: {
-      refetchQueries: ['getTimeLine']
-    }
+    options: { refetchQueries: ['getTimeLine'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'
