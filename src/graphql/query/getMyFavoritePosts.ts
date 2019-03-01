@@ -17,6 +17,8 @@ export default gql`
         issale
         iswarranty
         isforman
+        isjobreq
+        isservicereq
         areaunit
         space
         rooms

@@ -111,7 +111,7 @@ class AddJobScreen extends React.Component<any, any> {
     const {
       title,
       body,
-      kind,
+      isjobreq,
       phone,
       jobTitle,
       jobIndustry,
@@ -137,7 +137,7 @@ class AddJobScreen extends React.Component<any, any> {
         title,
         body,
         category,
-        kind,
+        isjobreq,
         photos,
         isrtl,
         phone,
@@ -174,8 +174,6 @@ class AddJobScreen extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
-    const category = this.props.navigation.getParam('item');
-    const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
 
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -193,7 +191,8 @@ class AddJobScreen extends React.Component<any, any> {
               initialValues={{
                 title: '',
                 body: '',
-                kind: '',
+                isjobreq: true,
+                isjoboffer: false,
                 phone: getPureNumber(user.phone),
                 jobTitle: '',
                 jobIndustry: '',
@@ -233,19 +232,25 @@ class AddJobScreen extends React.Component<any, any> {
               }: any) => (
                 <React.Fragment>
                   <Title width={width - 40}>{word.addnewad}</Title>
-                  {kinds.length > 0 && (
-                    <Select
-                      name="kind"
-                      required
-                      value={values.kind}
-                      data={kinds}
-                      label={word.type}
-                      onChange={setFieldValue}
-                      words={this.props.words}
-                      values={values}
-                      isRTL={isRTL}
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={isRTL}
+                  >
+                    <RadioButton
+                      name="isjobreq"
+                      label={word.isjobreq}
+                      value={values.isjobreq}
+                      selected={values.isjobreq}
                     />
-                  )}
+                    <RadioButton
+                      name="isjoboffer"
+                      label={word.isjoboffer}
+                      value={values.isjoboffer}
+                      selected={values.isjoboffer}
+                    />
+                  </Group>
                   <Input
                     rtl={isRTL}
                     name="title"

@@ -21,10 +21,10 @@ const ItemViewSmall = (props: any) => {
     isRTL,
     word,
     showMenuModal,
-    selectePost,
-    handleonPressIn,
-    handleonPressOut,
-    pressed
+    selectePost
+    // handleonPressIn,
+    // handleonPressOut,
+    // pressed
   } = props;
 
   return (
@@ -38,8 +38,8 @@ const ItemViewSmall = (props: any) => {
     >
       <View style={{ width: imageWidth }}>
         <TouchableWithoutFeedback
-          onPressIn={() => handleonPressIn(post.id)}
-          onPressOut={() => handleonPressOut(post.id)}
+          // onPressIn={() => handleonPressIn(post.id)}
+          // onPressOut={() => handleonPressOut(post.id)}
           onPress={() => {
             selectePost(post, word, lang, isRTL);
           }}
@@ -49,11 +49,11 @@ const ItemViewSmall = (props: any) => {
             {uri && (
               <View
                 style={[
-                  styles.center,
-                  {
-                    borderColor: pressed === post.id ? 'red' : undefined,
-                    borderWidth: pressed === post.id ? 2 : undefined
-                  }
+                  styles.center
+                  // {
+                  //   borderColor: pressed === post.id ? 'red' : undefined,
+                  //   borderWidth: pressed === post.id ? 2 : undefined
+                  // }
                 ]}
               >
                 <PostImage width={imageWidth} height={imageHeight} uri={uri} />

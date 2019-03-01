@@ -22,11 +22,19 @@ import {
   CameraScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
+import OfferScreen from '../../utils/swiper';
+
 export const AppStackNavigator = createStackNavigator({
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }: any) => ({
       header: <HomeHeader navigation={navigation} />,
+      headerBackTitle: null
+    })
+  },
+  OfferScreen: {
+    screen: OfferScreen,
+    navigationOptions: ({ navigation }: any) => ({
       headerBackTitle: null
     })
   },

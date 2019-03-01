@@ -432,6 +432,10 @@ export default {
     addeleted: 'Item deleted',
     isforwomen: 'Women',
     isforman: 'Man',
+    isjobreq: 'Look for Job',
+    isjoboffer: 'Job Opportunities',
+    isservicereq: 'Request Sercvice',
+    isserviceoffer: 'Offer Service',
 
     labels: {
       categoryId: 'Category',

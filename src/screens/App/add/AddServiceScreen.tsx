@@ -22,7 +22,15 @@ import {
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 
-import { Input, Button, Group, CheckBox, Select, Title } from '../../../lib';
+import {
+  Input,
+  Button,
+  Group,
+  CheckBox,
+  Select,
+  Title,
+  RadioButton
+} from '../../../lib';
 
 import { getPureNumber } from '../../../utils/call';
 import PhotoView from '../../../componenets/Add/PhotoView';
@@ -101,7 +109,7 @@ class AddServiceScreen extends React.Component<any, any> {
     }
     const category = this.props.navigation.getParam('item');
     delete category.sort;
-    const { title, body, phone, service, kind, location } = values;
+    const { title, body, phone, service, isservicereq, location } = values;
     const isrtl = isArabic(title);
     const loc: any = location ? this.state.location : null;
     let trueLocation = null;
@@ -118,7 +126,7 @@ class AddServiceScreen extends React.Component<any, any> {
         title,
         body,
         category,
-        kind,
+        isservicereq,
         photos,
         isrtl,
         phone,
@@ -150,8 +158,6 @@ class AddServiceScreen extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
-    const category = this.props.navigation.getParam('item');
-    const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message
@@ -168,7 +174,8 @@ class AddServiceScreen extends React.Component<any, any> {
               initialValues={{
                 title: '',
                 body: '',
-                kind: '',
+                isservicereq: true,
+                isserviceoffer: false,
                 phone: getPureNumber(user.phone),
                 service: '',
                 location: false
@@ -197,7 +204,25 @@ class AddServiceScreen extends React.Component<any, any> {
               }: any) => (
                 <React.Fragment>
                   <Title width={width - 40}>{word.addnewad}</Title>
-
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={isRTL}
+                  >
+                    <RadioButton
+                      name="isservicereq"
+                      label={word.isservicereq}
+                      value={values.isservicereq}
+                      selected={values.isservicereq}
+                    />
+                    <RadioButton
+                      name="isserviceoffer"
+                      label={word.isserviceoffer}
+                      value={values.isserviceoffer}
+                      selected={values.isserviceoffer}
+                    />
+                  </Group>
                   <Input
                     rtl={isRTL}
                     name="title"
@@ -213,19 +238,7 @@ class AddServiceScreen extends React.Component<any, any> {
                     autoCorrect={false}
                     height={40}
                   />
-                  {kinds.length > 0 && (
-                    <Select
-                      name="kind"
-                      required
-                      value={values.kind}
-                      data={kinds}
-                      label={word.type}
-                      onChange={setFieldValue}
-                      words={this.props.words}
-                      values={values}
-                      isRTL={isRTL}
-                    />
-                  )}
+
                   <Select
                     name="service"
                     required

@@ -138,7 +138,7 @@ export default {
     {
       pid: 5,
       id: 79,
-      name: ' يبحث عن عمل',
+      name: 'يبحث عن عمل',
       nameGlob: 'Look for Job, يبحث عن عمل'
     },
     {
@@ -455,6 +455,10 @@ export default {
     addeleted: 'تم حذف الإعلان',
     isforwomen: 'نسائي',
     isforman: 'رجالي',
+    isjobreq: 'يبحث عن عمل',
+    isjoboffer: 'وظائف شاغرة',
+    isservicereq: 'طلب خدمة',
+    isserviceoffer: 'عرض خدمة',
 
     labels: {
       categoryId: 'المجموعة',

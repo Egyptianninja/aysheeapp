@@ -20,6 +20,8 @@ export default gql`
     $iswarranty: Boolean
     $trueLocation: LocationInput
     $isforman: Boolean
+    $isjobreq: Boolean
+    $isservicereq: Boolean
     $areaunit: String
     $realestate: NameInput
     $space: Int
@@ -59,6 +61,8 @@ export default gql`
       iswarranty: $iswarranty
       trueLocation: $trueLocation
       isforman: $isforman
+      isjobreq: $isjobreq
+      isservicereq: $isservicereq
       areaunit: $areaunit
       realestate: $realestate
       space: $space

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Image, Text } from 'react-native';
-
+import { images } from '../../load';
 const Noresult = ({ title, isRTL }: any) => (
   <View
     style={{
@@ -14,8 +14,8 @@ const Noresult = ({ title, isRTL }: any) => (
   >
     <View
       style={{
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 40,
         opacity: 0.4
       }}
     >
@@ -25,16 +25,16 @@ const Noresult = ({ title, isRTL }: any) => (
           width: '100%',
           height: '100%'
         }}
-        source={require('../../../assets/icons/main/searchbook.png')}
+        source={images.namelogo}
       />
     </View>
 
     <Text
       style={{
         textAlign: isRTL ? 'right' : 'left',
-        fontWeight: 'bold',
         fontSize: 20,
-        color: '#9C949A'
+        color: '#9C949A',
+        marginTop: 40
       }}
     >
       {title}

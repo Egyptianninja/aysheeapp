@@ -6,6 +6,7 @@ import CategoryIcon from './CategoryIcon';
 import HeaderFilter from './HeaderFilter';
 import BottonNew from './BottonNew';
 import CategoryIconSingle from './CategoryIconSingle';
+import OfferIcon from './OffersIcon';
 
 class CategoriesScroll extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -200,8 +201,12 @@ class CategoriesScroll extends React.Component<any, any> {
                 : 40
             }}
           >
-            {!selected && this.renderCategories(categories)}
-
+            {!selected && (
+              <View style={{ flexDirection: 'row-reverse' }}>
+                <OfferIcon navigation={this.props.navigation} />
+                {this.renderCategories(categories)}
+              </View>
+            )}
             {this.props.buckets && (
               <HeaderFilter
                 isRTL={this.props.isRTL}

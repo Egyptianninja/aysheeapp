@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Animated, Dimensions } from 'react-native';
+import { View, Text, Animated, Dimensions, StatusBar } from 'react-native';
 import { debounce } from 'lodash';
 import { Notifications } from 'expo';
 import { connect } from 'react-redux';
@@ -36,7 +36,7 @@ class HomeScreen extends React.Component<any, any> {
   clampedScrollValue = 0;
   offsetValue = 0;
   scrollValue = 0;
-  NAVBAR_HEIGHT = 134;
+  NAVBAR_HEIGHT = 90;
 
   constructor(props: any) {
     super(props);
@@ -55,7 +55,6 @@ class HomeScreen extends React.Component<any, any> {
       refreshing: false,
       notification: null,
       query: null,
-      loading: false,
       rest: {},
       scrollAnim,
       offsetAnim,
@@ -212,9 +211,9 @@ class HomeScreen extends React.Component<any, any> {
           .getNode()
           .scrollToOffset({ offset: 0, animated: true });
       } else {
-        // this.state.rest.publish
-        //   ? this.setState({ rest: { publish: undefined } })
-        //   : this.setState({ rest: { publish: true } });
+        this.state.rest.publish
+          ? this.setState({ rest: { publish: undefined } })
+          : this.setState({ rest: { publish: true } });
       }
     }
   };
@@ -268,7 +267,6 @@ class HomeScreen extends React.Component<any, any> {
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
-    this.NAVBAR_HEIGHT = 90;
 
     const navbarTranslate = clampedScroll.interpolate({
       inputRange: [0, this.NAVBAR_HEIGHT],
@@ -277,6 +275,7 @@ class HomeScreen extends React.Component<any, any> {
     });
     return (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
+        <StatusBar translucent={true} barStyle={'dark-content'} />
         <Menu
           post={this.state.modalPost}
           favoritePost={this.props.favoritePost}
@@ -367,7 +366,6 @@ class HomeScreen extends React.Component<any, any> {
             rest={this.state.rest}
           />
         </Animated.View>
-
         <Query
           query={getTimeLine}
           variables={{ ...rest, query }}
