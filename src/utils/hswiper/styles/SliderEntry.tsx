@@ -24,21 +24,17 @@ export default StyleSheet.create({
     width: itemWidth,
     height: slideHeight,
     paddingHorizontal: itemHorizontalMargin,
-    paddingTop: 25,
+    marginTop: 5,
+    paddingTop: 20,
     paddingBottom: 18,
-    // shadowOpacity: 0.8,
-    // shadowRadius: 8,
-    // shadowColor: '#171717',
-    // shadowOffset: { height: 0, width: 0 }
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 6
     },
-    shadowOpacity: 0.8,
-    shadowRadius: 7,
-
-    elevation: 10
+    shadowOpacity: 0.7,
+    shadowRadius: 6,
+    elevation: 8
   },
   imageContainer: {
     flex: 1,

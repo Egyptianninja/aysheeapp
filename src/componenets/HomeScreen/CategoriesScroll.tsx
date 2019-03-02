@@ -181,11 +181,12 @@ class CategoriesScroll extends React.Component<any, any> {
             contentContainerStyle={{
               flexDirection:
                 isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-              paddingLeft: selected ? 75 : 0
+              paddingLeft: selected ? 75 : 0,
+              paddingTop: 5
             }}
             style={{
               backgroundColor: selected ? '#f1f1f1' : '#fff',
-              height: selected ? 70 : 90,
+              height: selected ? 70 : 95,
               marginVertical: selected ? 10 : undefined,
               borderBottomRightRadius: selected && isRTL ? 40 : undefined,
               borderTopRightRadius: selected && isRTL ? 40 : undefined,

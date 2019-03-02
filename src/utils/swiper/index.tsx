@@ -71,7 +71,7 @@ export default class Swiper extends Component<any, any> {
           enableMomentum={false}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
-          lockScrollTimeoutDuration={250}
+          // lockScrollTimeoutDuration={250}
           swipeThreshold={10}
           // loop={true}
           // loopClonesPerSide={2}
@@ -125,9 +125,8 @@ export default class Swiper extends Component<any, any> {
           enableMomentum={false}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
-          lockScrollTimeoutDuration={250}
+          // lockScrollTimeoutDuration={250}
           swipeThreshold={10}
-          activeAnimationType="spring"
           onSnapToItem={(index: any) =>
             this.setState({ slider1ActiveSlide: index })
           }
@@ -165,9 +164,9 @@ export default class Swiper extends Component<any, any> {
           enableMomentum={false}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
-          lockScrollTimeoutDuration={250}
+          // lockScrollTimeoutDuration={250}
           swipeThreshold={10}
-          activeAnimationType="spring"
+          // activeAnimationType="spring"
           onSnapToItem={(index: any) =>
             this.setState({ slider1ActiveSlide: index })
           }

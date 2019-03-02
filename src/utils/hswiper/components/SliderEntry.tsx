@@ -55,7 +55,7 @@ export default class SliderEntry extends Component<any, any> {
           style={{
             position: 'absolute',
             right: 10,
-            top: 5,
+            top: 1,
             zIndex: 100,
             flexDirection: 'row'
           }}
@@ -83,16 +83,16 @@ export default class SliderEntry extends Component<any, any> {
               borderRadius: 19,
               borderColor: '#7678ED',
               borderWidth: 1,
-              backgroundColor: '#fff',
+              backgroundColor: '#eee',
               justifyContent: 'center',
               alignItems: 'center'
             }}
           >
             <Image
               style={{
-                height: 32,
-                width: 32,
-                borderRadius: 16
+                height: 33,
+                width: 33,
+                borderRadius: 17
               }}
               source={images[`b${icon}`]}
             />

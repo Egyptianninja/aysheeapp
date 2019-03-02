@@ -385,7 +385,7 @@ class ItemView extends React.Component<any, any> {
               right: 0,
               flexDirection: this.ardroid ? 'row-reverse' : 'row',
               paddingTop: Constants.statusBarHeight,
-              height: Constants.statusBarHeight + 45,
+              height: Constants.statusBarHeight + 40,
               justifyContent: 'space-between',
               paddingHorizontal: 10,
               alignItems: 'center',

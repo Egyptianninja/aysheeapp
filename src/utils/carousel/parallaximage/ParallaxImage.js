@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './ParallaxImage.style';
-
+import Loading from '../../../componenets/Common/LoadingTiny';
 export default class ParallaxImage extends Component {
   static propTypes = {
     ...Image.propTypes,
@@ -204,11 +204,12 @@ export default class ParallaxImage extends Component {
 
     return status === 1 && showSpinner ? (
       <View style={styles.loaderContainer}>
-        <ActivityIndicator
+        {/* <ActivityIndicator
           size={'small'}
           color={spinnerColor}
           animating={true}
-        />
+        /> */}
+        <Loading />
       </View>
     ) : (
       false

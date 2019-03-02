@@ -32,7 +32,7 @@ const ItemHeader = ({ title, navigation }: any) => {
             right: 0,
             flexDirection: 'row',
             paddingTop: Constants.statusBarHeight,
-            height: Constants.statusBarHeight + 45,
+            height: Constants.statusBarHeight + 40,
             justifyContent: 'space-between',
             paddingHorizontal: 10,
             alignItems: 'center',

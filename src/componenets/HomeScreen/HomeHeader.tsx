@@ -56,8 +56,8 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 34,
-                height: 23
+                width: 30,
+                height: 20
               }}
             >
               <Image
@@ -83,7 +83,7 @@ class HomeHeader extends React.Component<any, any> {
             >
               <Ionicons
                 name="ios-notifications-outline"
-                size={33}
+                size={30}
                 color="#777"
               />
             </TouchableOpacity>
@@ -118,8 +118,8 @@ class HomeHeader extends React.Component<any, any> {
               >
                 <View
                   style={{
-                    width: 90,
-                    height: 22
+                    width: 85,
+                    height: 20
                   }}
                 >
                   <Image
@@ -143,9 +143,9 @@ class HomeHeader extends React.Component<any, any> {
                 }}
               >
                 <Ionicons
-                  style={{ color: '#7678ED' }}
+                  style={{ color: '#777' }}
                   name="ios-search"
-                  size={30}
+                  size={28}
                 />
               </TouchableOpacity>
             </React.Fragment>
@@ -159,7 +159,7 @@ class HomeHeader extends React.Component<any, any> {
               handleHome();
             }}
             style={{
-              paddingHorizontal: 5,
+              paddingHorizontal: 10,
               justifyContent: 'center',
               alignItems: 'center',
               marginRight: 10
@@ -167,8 +167,8 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 33,
-                height: 31
+                width: 28,
+                height: 26
               }}
             >
               <Image
@@ -191,7 +191,7 @@ class HomeHeader extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    height: Constants.statusBarHeight + 45,
+    height: Constants.statusBarHeight + 40,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 100

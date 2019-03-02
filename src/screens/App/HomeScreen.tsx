@@ -37,7 +37,7 @@ class HomeScreen extends React.Component<any, any> {
   clampedScrollValue = 0;
   offsetValue = 0;
   scrollValue = 0;
-  NAVBAR_HEIGHT = 90;
+  NAVBAR_HEIGHT = 95;
 
   constructor(props: any) {
     super(props);
@@ -351,9 +351,9 @@ class HomeScreen extends React.Component<any, any> {
             backgroundColor: '#fff',
             height: this.NAVBAR_HEIGHT,
             transform: [{ translateY: navbarTranslate }],
-            minHeight: 91,
+            minHeight: 96,
             borderBottomWidth: 1,
-            borderBottomColor: '#DEDBDD'
+            borderBottomColor: '#eee'
           }}
         >
           <CategoriesScroll
@@ -410,6 +410,7 @@ class HomeScreen extends React.Component<any, any> {
                     { useNativeDriver: true }
                   )}
                   onMomentumScrollBegin={this._onMomentumScrollBegin}
+                  showsVerticalScrollIndicator={false}
                   onMomentumScrollEnd={this._onMomentumScrollEnd}
                   onScrollEndDrag={this._onScrollEndDrag}
                   onRefresh={() => refetch()}

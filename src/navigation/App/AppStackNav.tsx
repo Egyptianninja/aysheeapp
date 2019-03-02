@@ -23,6 +23,7 @@ import {
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 import OfferScreen from '../../utils/swiper';
+import { Constants } from 'expo';
 
 export const AppStackNavigator = createStackNavigator({
   HomeScreen: {
@@ -205,19 +206,21 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   headerStyle: {
+    height: 40,
     backgroundColor: '#fff',
-    shadowOffset: { width: 2, height: 2 },
-    shadowColor: '#555',
+    borderBottomWidth: 0,
+    shadowOffset: { width: 3, height: 3 },
+    shadowColor: '#777',
     shadowOpacity: 0.1
   },
   headerTitleStyle: {
     fontFamily: 'cairo-regular',
-    fontSize: 20,
+    fontSize: 18,
     color: '#000'
   },
   mainheaderTitleStyle: {
     fontFamily: 'multaqa-font',
-    fontSize: 20,
+    fontSize: 18,
     color: '#000'
   },
   icon: {
