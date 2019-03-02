@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from '../../utils';
 import { images } from '../../load';
-const OfferIcon = ({ navigation }: any) => {
+const OfferIcon = ({ navigation, title }: any) => {
   return (
     <TouchableOpacity
       onPress={async () => {
@@ -24,6 +24,9 @@ const OfferIcon = ({ navigation }: any) => {
             />
           </View>
         </View>
+        <View style={styles.textView}>
+          <Text style={[styles.text, { color: '#171717' }]}>{title}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -39,20 +42,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    width: 70,
-    height: 75,
-    borderRadius: 13,
-    // borderColor: '#7678ED',
-    // borderWidth: 2,
-    overflow: 'hidden',
-    shadowOffset: { width: 3, height: 3 },
-    shadowColor: '#555',
-    shadowOpacity: 0.5
+    width: 65,
+    height: 61
   },
   imageView: {
-    width: 70,
-    height: 75,
-    opacity: 0.6
+    width: 65,
+    height: 65
   },
   text: {
     textAlign: 'center',

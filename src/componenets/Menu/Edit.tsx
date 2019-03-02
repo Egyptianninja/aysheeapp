@@ -15,11 +15,20 @@ export default class Edit extends React.Component<any, any> {
       return { ...prevState };
     }
   }
-  noSale = [2, 3, 5, 7, 9, 13, 15, 17, 18];
-  noPrice = [9, 15];
-  noNew = [5, 9, 18, 17];
-  noWaranty = [0, 5, 9, 12, 13, 15, 17, 18];
+
+  noClassified = [0, 1, 5, 9, 15];
+
+  noSale = [2, 3, 5, 7, 8, 9, 13, 14, 15, 17, 18];
+  noPrice = [5, 9];
+  noNew = [5, 9, 17, 18];
+  noWaranty = [0, 5, 9, 12, 13, 17, 18];
+
+  noKind = [4, 7, 11, 19];
+  kind = [2, 3, 6, 8, 10, 12, 13, 14, 16, 17, 18];
+  eBrand = [2, 6];
+
   acc = [8];
+
   re = [0];
   car = [1];
   job = [5];

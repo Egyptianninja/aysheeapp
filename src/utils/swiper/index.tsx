@@ -115,18 +115,19 @@ export default class Swiper extends Component<any, any> {
             }
           }}
           data={ENTRIES2}
-          renderItem={this._renderItem}
+          renderItem={this._renderItemWithParallax}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
           hasParallaxImages={true}
           firstItem={SLIDER_1_FIRST_ITEM}
-          inactiveSlideScale={0.94}
+          inactiveSlideScale={0.9}
           inactiveSlideOpacity={0.7}
+          enableMomentum={false}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
-          activeAnimationType="spring"
           lockScrollTimeoutDuration={250}
           swipeThreshold={10}
+          activeAnimationType="spring"
           onSnapToItem={(index: any) =>
             this.setState({ slider1ActiveSlide: index })
           }
@@ -154,18 +155,19 @@ export default class Swiper extends Component<any, any> {
             }
           }}
           data={ENTRIES3}
-          renderItem={this._renderItem}
+          renderItem={this._renderItemWithParallax}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
           hasParallaxImages={true}
           firstItem={SLIDER_1_FIRST_ITEM}
           inactiveSlideScale={0.94}
           inactiveSlideOpacity={0.7}
+          enableMomentum={false}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
-          activeAnimationType="spring"
           lockScrollTimeoutDuration={250}
           swipeThreshold={10}
+          activeAnimationType="spring"
           onSnapToItem={(index: any) =>
             this.setState({ slider1ActiveSlide: index })
           }
@@ -226,11 +228,17 @@ export default class Swiper extends Component<any, any> {
           indicatorStyle={'white'}
           scrollEventThrottle={16}
           decelerationRate={0}
-          snapToInterval={HEIGHT - 120}
+          snapToInterval={HEIGHT - 110}
           snapToAlignment={'start'}
           showsVerticalScrollIndicator={false}
           directionalLockEnabled={true}
         >
+          {this.example1}
+          {this.example2}
+          {this.example3}
+          {this.example1}
+          {this.example2}
+          {this.example3}
           {this.example1}
           {this.example2}
           {this.example3}

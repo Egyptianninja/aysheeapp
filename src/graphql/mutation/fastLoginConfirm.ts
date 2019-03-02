@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   mutation fastLoginConfirm($email: String!, $code: Int!) {
@@ -13,6 +13,8 @@ export default gql`
         isstore
         avatar
         headerPhoto
+        color
+        lang
         country
         city
         phone

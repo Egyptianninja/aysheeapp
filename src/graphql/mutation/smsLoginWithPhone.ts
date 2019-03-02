@@ -15,6 +15,8 @@ export default gql`
         isstore
         avatar
         headerPhoto
+        color
+        lang
         country
         city
         website

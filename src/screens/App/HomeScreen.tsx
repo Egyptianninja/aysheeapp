@@ -13,6 +13,7 @@ import editClassifieds from '../../graphql/mutation/editClassifieds';
 import deletePost from '../../graphql/mutation/deletePost';
 import * as store from '../../store/getStore';
 import { setBuckets } from '../../store/actions/postActions';
+import Swiper from '../../utils/hswiper';
 import {
   getNextPosts,
   getNewPosts,
@@ -430,6 +431,7 @@ class HomeScreen extends React.Component<any, any> {
                       lang={lang}
                     />
                   )}
+                  ListHeaderComponent={() => <Swiper />}
                   getHeightForItem={({ item }: any) => item.height}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}

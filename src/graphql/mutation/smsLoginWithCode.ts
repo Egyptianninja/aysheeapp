@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default gql`
   mutation smsLoginWithCode($phone: String!, $code: Int!, $name: String) {
@@ -15,6 +15,8 @@ export default gql`
         isstore
         avatar
         headerPhoto
+        color
+        lang
         country
         city
         website
