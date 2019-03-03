@@ -1,12 +1,12 @@
-import { createDrawerNavigator } from "react-navigation";
-import { AppStackNavigator } from "./AppStackNav";
-import Drawer from "../../componenets/Drawer";
+import { createDrawerNavigator } from 'react-navigation';
+import { AppStackNavigator } from './AppStackNav';
+import Drawer from '../../componenets/Drawer';
 
 export const AppDrawerNavigator = createDrawerNavigator(
   { Home: AppStackNavigator },
   {
-    drawerPosition: "left",
+    drawerPosition: 'right',
     contentComponent: Drawer,
-    drawerBackgroundColor: "transparent"
+    drawerBackgroundColor: 'transparent'
   } as any
 );

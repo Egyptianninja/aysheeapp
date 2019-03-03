@@ -47,7 +47,11 @@ class HomeHeader extends React.Component<any, any> {
           ]}
         >
           <TouchableOpacity
-            onPress={() => this.props.navigation.toggleDrawer()}
+            onPress={() => {
+              const handleHome = this.props.navigation.getParam('handleHome');
+              this.hideSearch();
+              handleHome();
+            }}
             style={{
               marginLeft: 7,
               marginTop: 1,
@@ -56,17 +60,18 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 30,
-                height: 20
+                width: 28,
+                height: 26
               }}
             >
               <Image
                 style={{
                   flex: 1,
-                  width: undefined,
-                  height: undefined
+                  width: '100%',
+                  height: '100%',
+                  tintColor: '#777'
                 }}
-                source={mainmenu}
+                source={home}
               />
             </View>
           </TouchableOpacity>
@@ -153,11 +158,7 @@ class HomeHeader extends React.Component<any, any> {
         </View>
         <View style={[styles.rightIconView, { flex: 1.5 }]}>
           <TouchableOpacity
-            onPress={() => {
-              const handleHome = this.props.navigation.getParam('handleHome');
-              this.hideSearch();
-              handleHome();
-            }}
+            onPress={() => this.props.navigation.toggleDrawer()}
             style={{
               paddingHorizontal: 10,
               justifyContent: 'center',
@@ -167,18 +168,17 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 28,
-                height: 26
+                width: 30,
+                height: 20
               }}
             >
               <Image
                 style={{
                   flex: 1,
-                  width: '100%',
-                  height: '100%',
-                  tintColor: '#777'
+                  width: undefined,
+                  height: undefined
                 }}
-                source={home}
+                source={mainmenu}
               />
             </View>
           </TouchableOpacity>

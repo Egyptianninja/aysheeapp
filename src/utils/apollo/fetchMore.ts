@@ -180,7 +180,43 @@ export const readyUserPosts = (
 
     const subTitle = post.title.substring(0, 17);
     const imageWidth = Math.ceil(width / 2 - 17);
-    const imageHeight = imageWidth * 1.3;
+    const imageHeight = imageWidth * 1.333;
+    const height = Math.ceil(imageHeight) + textHeight;
+    return {
+      ...post,
+      height,
+      ratio: ratio > 3 ? 3 : ratio,
+      subTitle,
+      time,
+      uri,
+      imageWidth,
+      imageHeight,
+      finalRatio
+    };
+  });
+};
+export const readyOfferPosts = (
+  posts: any,
+  imageSize: number,
+  textHeight: number,
+  languageName: any
+) => {
+  return posts.map((post: any) => {
+    const ratio =
+      post.photos.length > 0 ? Number(post.photos[0].substring(21, 26)) : 0;
+    const finalRatio = getFinalRatio(post.photos);
+
+    const uri =
+      post.photos.length > 0
+        ? `http://res.cloudinary.com/${
+            secrets.upload.CLOUD_NAME
+          }/image/upload/w_${imageSize}/${post.photos[0].substring(0, 20)}`
+        : undefined;
+    const time = since(post.updatedAt, languageName);
+
+    const subTitle = post.title.substring(0, 17);
+    const imageWidth = Math.ceil(width - 10);
+    const imageHeight = imageWidth * 1.333;
     const height = Math.ceil(imageHeight) + textHeight;
     return {
       ...post,

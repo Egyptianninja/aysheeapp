@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 export default gql`
   mutation createPost(
     $title: String!
-    $body: String!
-    $category: NameInput!
+    $body: String
+    $category: NameInput
     $isoffer: Boolean
     $kind: NameInput
     $isrtl: Boolean

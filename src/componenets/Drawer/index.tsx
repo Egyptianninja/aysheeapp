@@ -22,6 +22,7 @@ import {
 import addAvatar from '../../graphql/mutation/addAvatar';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import logoutFromAll from '../../graphql/mutation/logoutFromAll';
+import upgradeToStore from '../../graphql/mutation/upgradeToStore';
 import { StyleSheet, pickImage, getCountryCityFromToken } from '../../utils';
 import secrets from '../../constants/secrets';
 import { icons } from '../../load';
@@ -39,10 +40,22 @@ class Drawer extends React.Component<any, any> {
       case 1:
         return this.props.navigation.navigate('ChoiseScreen');
       case 2:
-        return this.props.navigation.navigate('MyPostsScreen');
+        return this.props.navigation.navigate('AddOfferScreen');
       case 3:
+        return this.props.navigation.navigate('MyPostsScreen');
+      case 4:
         return this.props.navigation.navigate('MyFavScreen');
-      case 6: {
+      case 5: {
+        const res = await this.props.upgradeToStore({});
+        if (res.data.upgradeToStore.ok) {
+          const { data } = res.data.upgradeToStore;
+          await this.props.updateUser(data);
+        }
+        this.props.navigation.goBack();
+        return;
+      }
+
+      case 7: {
         // TODO: uncomment to logout from all
         // await this.props.logoutFromAll();
         const { country, city } = await getCountryCityFromToken();
@@ -60,7 +73,11 @@ class Drawer extends React.Component<any, any> {
   };
 
   renderMenu = (menus: any, lng: any) => {
-    return menus.map((menu: any) => {
+    const { isstore } = this.props.user;
+    const userMenu = !isstore
+      ? menus.filter((m: any) => m.id !== 2)
+      : menus.filter((m: any) => m.id !== 5);
+    return userMenu.map((menu: any) => {
       const iconFunc = icons.menu.filter(ic => ic.id === menu.id);
       const icon = iconFunc[0].icon;
       return (
@@ -311,7 +328,11 @@ export default connect(
     })(
       graphql(refreshToken, {
         name: 'refreshToken'
-      })(Drawer)
+      })(
+        graphql(upgradeToStore, {
+          name: 'upgradeToStore'
+        })(Drawer)
+      )
     )
   )
 );

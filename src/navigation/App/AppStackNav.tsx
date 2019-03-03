@@ -19,11 +19,13 @@ import {
   AddPartsScreen,
   UserProfileScreen,
   MyFavScreen,
-  CameraScreen
+  CameraScreen,
+  AddOfferScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 import OfferScreen from '../../utils/swiper';
 import { Constants } from 'expo';
+import StoreOfferScreen from '../../screens/App/user/StoreOfferScreen';
 
 export const AppStackNavigator = createStackNavigator({
   HomeScreen: {
@@ -74,6 +76,16 @@ export const AppStackNavigator = createStackNavigator({
     screen: AddClassifiedScreen,
     navigationOptions: ({ navigation }: any) => ({
       title: navigation.getParam('item').name,
+      headerStyle: styles.headerStyle,
+      headerTintColor: '#555',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
+    })
+  },
+  AddOfferScreen: {
+    screen: AddOfferScreen,
+    navigationOptions: ({ navigation }: any) => ({
+      // title: navigation.getParam('item').name,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
       headerTitleStyle: styles.headerTitleStyle,
@@ -148,6 +160,7 @@ export const AppStackNavigator = createStackNavigator({
   },
   UserProfileScreen: {
     screen: UserProfileScreen,
+    // screen: StoreOfferScreen,
     navigationOptions: () => ({
       headerTintColor: '#555',
       headerBackTitle: null

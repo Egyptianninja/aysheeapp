@@ -5,8 +5,6 @@ import { ParallaxImage } from '../../carousel';
 import styles from '../styles/SliderEntry';
 import { images } from '../../../load';
 
-const icon = Math.floor(Math.random() * 89);
-
 export default class SliderEntry extends Component<any, any> {
   static propTypes = {
     data: PropTypes.object.isRequired,
@@ -62,16 +60,12 @@ export default class SliderEntry extends Component<any, any> {
         >
           <Text
             style={{
-              top: -3,
+              top: -6,
               right: 5,
               fontSize: 13,
               fontWeight: 'bold',
               color: '#171717',
-              fontFamily: 'cairo-regular',
-              shadowOpacity: 1,
-              shadowRadius: 8,
-              shadowColor: '#fff',
-              shadowOffset: { height: 0, width: 0 }
+              fontFamily: 'cairo-regular'
             }}
           >
             مكتبة جرير
@@ -94,7 +88,7 @@ export default class SliderEntry extends Component<any, any> {
                 width: 33,
                 borderRadius: 17
               }}
-              source={images[`b${icon}`]}
+              source={images.b2}
             />
           </View>
         </View>

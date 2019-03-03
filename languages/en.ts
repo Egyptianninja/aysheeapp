@@ -317,11 +317,12 @@ export default {
   menu: [
     { id: 0, name: 'Profile' },
     { id: 1, name: 'New Ad' },
-    { id: 2, name: 'My Ads' },
-    { id: 3, name: 'Favorites' },
-    { id: 4, name: 'Options & privacy' },
-    { id: 5, name: 'Help Center' },
-    { id: 6, name: 'Logout' }
+    { id: 2, name: 'New Offer' },
+    { id: 3, name: 'My Ads' },
+    { id: 4, name: 'Favorites' },
+    { id: 5, name: 'Upgrade Account' },
+    { id: 6, name: 'Help Center' },
+    { id: 7, name: 'Logout' }
   ],
   sort: [
     { id: 1, name: 'Recent' },

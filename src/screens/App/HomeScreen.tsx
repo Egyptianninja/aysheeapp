@@ -211,11 +211,12 @@ class HomeScreen extends React.Component<any, any> {
         this.flatListRef
           .getNode()
           .scrollToOffset({ offset: 0, animated: true });
-      } else {
-        this.state.rest.publish
-          ? this.setState({ rest: { publish: undefined } })
-          : this.setState({ rest: { publish: true } });
       }
+      // else {
+      //   this.state.rest.publish
+      //     ? this.setState({ rest: { publish: undefined } })
+      //     : this.setState({ rest: { publish: true } });
+      // }
     }
   };
 

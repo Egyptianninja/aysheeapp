@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
-import Carousel, { Pagination } from '../carousel';
+import { View } from 'react-native';
+import Carousel from '../carousel';
 import { sliderWidth, itemWidth } from './styles/SliderEntry';
 import SliderEntry from './components/SliderEntry';
-import styles, { colors } from './styles/index';
+import styles from './styles/index';
 import { ENTRIES } from './static/entries';
-import { User } from '../../componenets/User/User';
 
 const SLIDER_1_FIRST_ITEM = 1;
 
@@ -51,11 +50,11 @@ export default class Swiper extends Component<any, any> {
           containerCustomStyle={styles.slider}
           lockScrollTimeoutDuration={250}
           swipeThreshold={10}
-          loop={true}
-          loopClonesPerSide={2}
-          autoplay={true}
-          autoplayDelay={500}
-          autoplayInterval={3000}
+          // loop={true}
+          // loopClonesPerSide={2}
+          // autoplay={true}
+          // autoplayDelay={500}
+          // autoplayInterval={3000}
           onSnapToItem={(index: any) =>
             this.setState({ slider1ActiveSlide: index })
           }

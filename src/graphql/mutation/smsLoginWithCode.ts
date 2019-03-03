@@ -13,6 +13,9 @@ export default gql`
         name
         about
         isstore
+        offersLimit
+        onlineLimit
+        offlineLimit
         avatar
         headerPhoto
         color

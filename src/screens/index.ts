@@ -5,6 +5,7 @@ import ChoiseScreen from './App/ChoiseScreen';
 import NotificationsScreen from './App/NotificationsScreen';
 import AddClassifiedScreen from './App/add/AddClassifiedScreen';
 
+import AddOfferScreen from './App/add/AddOfferScreen';
 import AddRealEstateScreen from './App/add/AddRealEstateScreen';
 import AddServiceScreen from './App/add/AddServiceScreen';
 import AddJobScreen from './App/add/AddJobScreen';
@@ -20,6 +21,8 @@ import MyFavScreen from './App/user/MyFavScreen';
 import MyProfileScreen from './App/user/MyProfileScreen';
 import UserProfileScreen from './App/user/UserProfileScreen';
 import CameraScreen from './App/CameraScreen';
+import UserItemsScreen from './App/user/UserItemsScreen';
+import StoreOfferScreen from './App/user/StoreOfferScreen';
 
 export {
   HomeScreen,
@@ -42,5 +45,8 @@ export {
   CodeScreen,
   NameScreen,
   UserProfileScreen,
-  CameraScreen
+  CameraScreen,
+  UserItemsScreen,
+  StoreOfferScreen,
+  AddOfferScreen
 };

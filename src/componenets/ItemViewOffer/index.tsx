@@ -79,9 +79,9 @@ const ItemViewSmall = (props: any) => {
               <View
                 style={{
                   flex: 1,
-                  height: 55,
-                  padding: 5,
-                  paddingTop: 5
+                  height: 20,
+                  paddingTop: 5,
+                  paddingHorizontal: 10
                 }}
               >
                 <View
@@ -92,59 +92,28 @@ const ItemViewSmall = (props: any) => {
                     justifyContent: 'space-between'
                   }}
                 >
-                  {(price || price === 0) && (
-                    <View
-                      style={{
-                        flexDirection:
-                          Platform.OS === 'android' ? 'row-reverse' : 'row'
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color: '#26A65B',
-                          fontWeight: 'bold',
-                          opacity: 0.9,
-                          fontSize: 14
-                        }}
-                      >
-                        {price.toLocaleString('en')}
-                      </Text>
-                      <Text
-                        style={{
-                          color: '#777',
-                          paddingTop: 5,
-                          fontSize: 10,
-                          fontWeight: '200'
-                        }}
-                      >
-                        {' '}
-                        {currency}
-                      </Text>
-                    </View>
-                  )}
-                  {!price && price !== 0 && (
-                    <View style={{ height: 16, width: 100 }} />
-                  )}
-                  <Text
+                  <View
                     style={{
-                      fontSize: 10,
-                      color: '#ababab'
+                      flexDirection:
+                        Platform.OS === 'android' ? 'row-reverse' : 'row'
                     }}
                   >
-                    {time}
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-
-                    alignSelf:
-                      isPostRTL && Platform.OS !== 'android'
-                        ? 'flex-end'
-                        : 'auto'
-                  }}
-                >
-                  <Text style={{ color: '#555', fontSize: 16 }}>
+                    <Text
+                      style={{
+                        color: '#555',
+                        fontSize: 10,
+                        fontWeight: '200'
+                      }}
+                    >
+                      {time}
+                    </Text>
+                  </View>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: '#555'
+                    }}
+                  >
                     {subTitle}
                   </Text>
                 </View>

@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation smsLoginWithPhone($phone: String!) {
-    smsLoginWithPhone(phone: $phone) {
+  mutation upgradeToStore {
+    upgradeToStore {
       ok
-      token
+      message
       data {
         _id
         uniquename

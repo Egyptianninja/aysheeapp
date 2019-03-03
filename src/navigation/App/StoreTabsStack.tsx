@@ -2,27 +2,23 @@ import {
   createMaterialTopTabNavigator,
   createStackNavigator
 } from 'react-navigation';
-import { getLang } from '../../utils';
-const onlineposts = getLang() === 'ar' ? 'الاعلانات المنشورة' : 'Online Posts';
-const offlineposts =
-  getLang() === 'ar' ? 'الاعلانات غير المنشورة' : 'Offline Posts';
 
-import { MyOnlinePostsScreen, MyOfflinePostsScreen } from '../../screens';
-export const PostTabs = createMaterialTopTabNavigator(
+import { UserItemsScreen, StoreOfferScreen } from '../../screens';
+const StoreTabs = createMaterialTopTabNavigator(
   {
-    MyOnlinePostsScreen: {
-      screen: MyOnlinePostsScreen,
+    StoreOfferScreen: {
+      screen: StoreOfferScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: onlineposts,
+        title: 'OFFERS',
         headerStyle: { backgroundColor: '#fff' },
         headerTintColor: '#777',
         headerTitleStyle: { fontSize: 20, color: '#000' }
       })
     },
-    MyOfflinePostsScreen: {
-      screen: MyOfflinePostsScreen,
+    UserItemsScreen: {
+      screen: UserItemsScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: offlineposts,
+        title: 'ITEMS',
         headerStyle: { backgroundColor: '#fff' },
         headerTintColor: '#777',
         headerTitleStyle: { fontSize: 20, color: '#000' }
@@ -48,8 +44,8 @@ export const PostTabs = createMaterialTopTabNavigator(
 );
 
 export default createStackNavigator({
-  PostTabs: {
-    screen: PostTabs,
+  StoreTabs: {
+    screen: StoreTabs,
     navigationOptions: ({ navigation, tintColor }: any) => ({
       header: null
     })

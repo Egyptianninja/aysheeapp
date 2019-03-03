@@ -35,6 +35,7 @@ export default gql`
         bathrooms
         isfurnishered
         islive
+        isoffer
 
         categoryId
         category
