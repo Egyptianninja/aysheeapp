@@ -3,11 +3,15 @@ import {
   createStackNavigator
 } from 'react-navigation';
 import { getLang } from '../../utils';
-const onlineposts = getLang() === 'ar' ? 'الاعلانات المنشورة' : 'Online Posts';
-const offlineposts =
-  getLang() === 'ar' ? 'الاعلانات غير المنشورة' : 'Offline Posts';
+const onlineposts = getLang() === 'ar' ? 'المنشور' : 'Online';
+const offlineposts = getLang() === 'ar' ? 'غير المنشورة' : 'Offline';
+const offerposts = getLang() === 'ar' ? 'العروض' : 'Offers';
 
-import { MyOnlinePostsScreen, MyOfflinePostsScreen } from '../../screens';
+import {
+  MyOnlinePostsScreen,
+  MyOfflinePostsScreen,
+  MyOffersScreen
+} from '../../screens';
 export const PostTabs = createMaterialTopTabNavigator(
   {
     MyOnlinePostsScreen: {
@@ -23,6 +27,15 @@ export const PostTabs = createMaterialTopTabNavigator(
       screen: MyOfflinePostsScreen,
       navigationOptions: ({ navigation }: any) => ({
         title: offlineposts,
+        headerStyle: { backgroundColor: '#fff' },
+        headerTintColor: '#777',
+        headerTitleStyle: { fontSize: 20, color: '#000' }
+      })
+    },
+    MyOffersScreen: {
+      screen: MyOffersScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: offerposts,
         headerStyle: { backgroundColor: '#fff' },
         headerTintColor: '#777',
         headerTitleStyle: { fontSize: 20, color: '#000' }

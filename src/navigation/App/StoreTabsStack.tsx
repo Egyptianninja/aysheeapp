@@ -4,11 +4,12 @@ import {
 } from 'react-navigation';
 
 import { UserItemsScreen, StoreOfferScreen } from '../../screens';
-const StoreTabs = createMaterialTopTabNavigator(
+export const StoreTabs = createMaterialTopTabNavigator(
   {
     StoreOfferScreen: {
       screen: StoreOfferScreen,
       navigationOptions: ({ navigation }: any) => ({
+        params: { user: navigation.state.params.user },
         title: 'OFFERS',
         headerStyle: { backgroundColor: '#fff' },
         headerTintColor: '#777',
@@ -18,6 +19,7 @@ const StoreTabs = createMaterialTopTabNavigator(
     UserItemsScreen: {
       screen: UserItemsScreen,
       navigationOptions: ({ navigation }: any) => ({
+        params: { user: navigation.state.params.user },
         title: 'ITEMS',
         headerStyle: { backgroundColor: '#fff' },
         headerTintColor: '#777',
@@ -47,7 +49,8 @@ export default createStackNavigator({
   StoreTabs: {
     screen: StoreTabs,
     navigationOptions: ({ navigation, tintColor }: any) => ({
-      header: null
+      header: null,
+      params: { user: navigation.state.params.user }
     })
   }
 });

@@ -412,6 +412,7 @@ export default {
     min4: 'Minimum 4 characters',
     max25: 'Maximum 25 characters',
     nameisrequire: 'Name is required',
+    emailisrequired: 'Email is required',
     namenotvalid: 'Not valid name',
     noresults: 'No results',
     sort: 'Sort',
@@ -437,6 +438,10 @@ export default {
     isjoboffer: 'Job Opportunities',
     isservicereq: 'Request Sercvice',
     isserviceoffer: 'Offer Service',
+    tel: 'Telephone',
+    fax: 'Fax',
+    mob: 'Mobile',
+    apdateaccount: 'Update Account',
 
     labels: {
       categoryId: 'Category',

@@ -1,8 +1,32 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation upgradeToStore {
-    upgradeToStore {
+  mutation upgradeToStore(
+    $name: String
+    $email: String
+    $website: String
+    $about: String
+    $avatar: String
+    $headerPhoto: String
+    $color: String
+    $tel: String
+    $fax: String
+    $mob: String
+    $location: LocationInput
+  ) {
+    upgradeToStore(
+      name: $name
+      email: $email
+      website: $website
+      about: $about
+      avatar: $avatar
+      headerPhoto: $headerPhoto
+      color: $color
+      tel: $tel
+      fax: $fax
+      mob: $mob
+      location: $location
+    ) {
       ok
       message
       data {
@@ -24,6 +48,13 @@ export default gql`
         city
         website
         verified
+        tel
+        fax
+        mob
+        location {
+          lon
+          lat
+        }
       }
       error
     }

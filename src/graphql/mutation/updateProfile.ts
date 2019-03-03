@@ -46,6 +46,13 @@ export default gql`
         city
         website
         verified
+        tel
+        fax
+        mob
+        location {
+          lon
+          lat
+        }
       }
       error
     }

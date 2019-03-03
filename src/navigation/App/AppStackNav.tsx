@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../../utils';
 import PostTabsStack from './PostTabsStack';
+import StoreTabsStack from './StoreTabsStack';
 import {
   HomeScreen,
   ItemScreen,
@@ -20,7 +21,8 @@ import {
   UserProfileScreen,
   MyFavScreen,
   CameraScreen,
-  AddOfferScreen
+  AddOfferScreen,
+  UpgradeToStore
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 import OfferScreen from '../../utils/swiper';
@@ -66,6 +68,15 @@ export const AppStackNavigator = createStackNavigator({
     screen: ChoiseScreen,
     navigationOptions: ({ navigation }: any) => ({
       title: 'اضافة اعلان جديد',
+      headerStyle: styles.headerStyle,
+      headerTintColor: '#555',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null
+    })
+  },
+  UpgradeToStore: {
+    screen: UpgradeToStore,
+    navigationOptions: ({ navigation }: any) => ({
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
       headerTitleStyle: styles.headerTitleStyle,
@@ -160,8 +171,10 @@ export const AppStackNavigator = createStackNavigator({
   },
   UserProfileScreen: {
     screen: UserProfileScreen,
+    // screen: StoreTabsStack,
     // screen: StoreOfferScreen,
-    navigationOptions: () => ({
+    navigationOptions: ({ navigation }: any) => ({
+      user: navigation.getParam('user'),
       headerTintColor: '#555',
       headerBackTitle: null
     })

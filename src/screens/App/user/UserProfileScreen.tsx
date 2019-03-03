@@ -20,7 +20,6 @@ import { Avatar, Loading } from '../../../componenets';
 import favoritePost from '../../../graphql/mutation/favoritePost';
 import { Menu, Report } from '../../../componenets/Menu';
 const { width } = Dimensions.get('window');
-import StoreTabsStack from '../../../navigation/App/StoreTabsStack';
 
 const HEADER_MAX_HEIGHT = 175;
 const HEADER_MIN_HEIGHT = 90;

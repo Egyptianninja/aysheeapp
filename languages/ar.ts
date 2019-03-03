@@ -435,6 +435,7 @@ export default {
     min4: 'الحد الادنى 4 حروف',
     max25: 'الحد الاقصى 25 حرف',
     nameisrequire: 'الاسم التعريفي مطلوب',
+    emailisrequired: 'البريد الالكتروني مطلوب',
     namenotvalid: 'الاسم التعريفي غير صالح',
     noresults: 'لا توجد نتائج',
     sort: 'فرز',
@@ -460,6 +461,10 @@ export default {
     isjoboffer: 'وظائف شاغرة',
     isservicereq: 'طلب خدمة',
     isserviceoffer: 'عرض خدمة',
+    tel: 'هاتف',
+    fax: 'فاكس',
+    mob: 'جوال',
+    apdateaccount: 'تعديل الحساب',
 
     labels: {
       categoryId: 'المجموعة',

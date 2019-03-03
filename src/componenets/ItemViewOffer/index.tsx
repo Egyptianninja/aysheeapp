@@ -41,7 +41,7 @@ const ItemViewSmall = (props: any) => {
           // onPressIn={() => handleonPressIn(post.id)}
           // onPressOut={() => handleonPressOut(post.id)}
           onPress={() => {
-            selectePost(post, word, lang, isRTL);
+            // selectePost(post, word, lang, isRTL);
           }}
           onLongPress={() => showMenuModal(post)}
         >

@@ -16,9 +16,11 @@ import CodeScreen from './Auth/CodeScreen';
 import NameScreen from './Auth/NameScreen';
 import LoadScreen from './Load/LoadScreen';
 import MyOnlinePostsScreen from './App/user/MyOnlinePostsScreen';
+import UpgradeToStore from './App/user/UpgradeToStore';
 import MyOfflinePostsScreen from './App/user/MyOfflinePostsScreen';
 import MyFavScreen from './App/user/MyFavScreen';
 import MyProfileScreen from './App/user/MyProfileScreen';
+import MyOffersScreen from './App/user/MyOffersScreen';
 import UserProfileScreen from './App/user/UserProfileScreen';
 import CameraScreen from './App/CameraScreen';
 import UserItemsScreen from './App/user/UserItemsScreen';
@@ -48,5 +50,7 @@ export {
   CameraScreen,
   UserItemsScreen,
   StoreOfferScreen,
-  AddOfferScreen
+  AddOfferScreen,
+  MyOffersScreen,
+  UpgradeToStore
 };

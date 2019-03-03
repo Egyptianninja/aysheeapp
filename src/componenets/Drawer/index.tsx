@@ -46,13 +46,15 @@ class Drawer extends React.Component<any, any> {
       case 4:
         return this.props.navigation.navigate('MyFavScreen');
       case 5: {
-        const res = await this.props.upgradeToStore({});
-        if (res.data.upgradeToStore.ok) {
-          const { data } = res.data.upgradeToStore;
-          await this.props.updateUser(data);
-        }
-        this.props.navigation.goBack();
-        return;
+        return this.props.navigation.navigate('UpgradeToStore');
+
+        // const res = await this.props.upgradeToStore({});
+        // if (res.data.upgradeToStore.ok) {
+        //   const { data } = res.data.upgradeToStore;
+        //   await this.props.updateUser(data);
+        // }
+        // this.props.navigation.goBack();
+        // return;
       }
 
       case 7: {
