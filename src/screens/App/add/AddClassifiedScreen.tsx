@@ -4,9 +4,6 @@ import {
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
-  TouchableOpacity,
-  Text,
-  Image,
   Platform
 } from 'react-native';
 import { Formik } from 'formik';
@@ -24,7 +21,6 @@ import {
   getPureNumber,
   Message
 } from '../../../utils';
-import getTimeLine from '../../../graphql/query/getTimeLine';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 import {

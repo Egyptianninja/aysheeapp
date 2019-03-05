@@ -465,6 +465,7 @@ export default {
     fax: 'فاكس',
     mob: 'جوال',
     apdateaccount: 'تعديل الحساب',
+    accountupdated: 'تم تعديل الحساب',
 
     labels: {
       categoryId: 'المجموعة',

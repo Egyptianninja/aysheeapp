@@ -16,7 +16,9 @@ import {
   ImagePicker,
   ImageViewer,
   ProgressiveImage,
-  flipImage
+  flipImage,
+  pickImageWithoutUpload,
+  uploadPickedImage
 } from './image';
 import {
   getLocation,
@@ -53,6 +55,7 @@ import {
 import Message from './message';
 import DotIndicator from './loading';
 import DotIndicatorSmall from './loading/small';
+import ColorPicker from './color';
 export {
   StyleSheet,
   uploadPhoto,
@@ -101,5 +104,8 @@ export {
   flipImage,
   getLocaleCountry,
   getCodeFromCountry,
-  getCountryCityFromToken
+  getCountryCityFromToken,
+  ColorPicker,
+  pickImageWithoutUpload,
+  uploadPickedImage
 };

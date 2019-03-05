@@ -6,6 +6,8 @@ export default gql`
     $body: String
     $category: NameInput
     $isoffer: Boolean
+    $start: Date
+    $end: Date
     $kind: NameInput
     $isrtl: Boolean
     $photos: [String]
@@ -46,6 +48,8 @@ export default gql`
       body: $body
       category: $category
       isoffer: $isoffer
+      start: $start
+      end: $end
       kind: $kind
       isrtl: $isrtl
       photos: $photos

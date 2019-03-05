@@ -14,7 +14,13 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import * as Progress from 'react-native-progress';
-import { StyleSheet, UserLocation, Message, pickImage } from '../../../utils';
+import {
+  StyleSheet,
+  UserLocation,
+  Message,
+  pickImage,
+  ColorPicker
+} from '../../../utils';
 import upgradeToStore from '../../../graphql/mutation/upgradeToStore';
 import { Ionicons } from '@expo/vector-icons';
 import { updateUser } from '../../../store/actions/userAtions';
@@ -22,6 +28,7 @@ import { addPermission } from '../../../store/actions/globActions';
 import { Input, Button, Group, CheckBox, Title } from '../../../lib';
 import { Permissions } from 'expo';
 import { Avatar } from '../../../componenets';
+import { colors } from '../../../constants';
 import { bindActionCreators } from 'redux';
 const { width } = Dimensions.get('window');
 
@@ -32,6 +39,8 @@ class UpgradeToStore extends React.Component<any, any> {
     location: null,
     avatar: null,
     headerPhoto: null,
+    isAvatarLoading: false,
+    isHeaderLoading: false,
     bar: 0
   };
 
@@ -46,12 +55,14 @@ class UpgradeToStore extends React.Component<any, any> {
     if (finalStatus !== 'granted') {
       return;
     }
+    this.setState({ isHeaderLoading: true });
     this.props.addPermission('CAMERA_ROLL');
     const headerPhoto = await pickImage(false, 1080, 0.8);
 
     if (headerPhoto) {
       this.setState({ headerPhoto });
     }
+    this.setState({ isHeaderLoading: false });
   };
   onAvatarUpload = async () => {
     const permissions = Permissions.CAMERA_ROLL;
@@ -64,11 +75,13 @@ class UpgradeToStore extends React.Component<any, any> {
     if (finalStatus !== 'granted') {
       return;
     }
+    this.setState({ isAvatarLoading: true });
     this.props.addPermission('CAMERA_ROLL');
-    const avatar = await pickImage(false, 1080, 0.8);
+    const avatar = await pickImage(true, 400, 0.8);
     if (avatar) {
       this.setState({ avatar });
     }
+    this.setState({ isAvatarLoading: false });
   };
 
   showMessage = ({ seconds, screen }: any) => {
@@ -135,10 +148,10 @@ class UpgradeToStore extends React.Component<any, any> {
     });
 
     if (res.data.upgradeToStore.ok) {
-      this.updateProgressBar(1 / 3);
+      this.updateProgressBar(2 / 3);
       const { data } = res.data.upgradeToStore;
       await this.props.updateUser(data);
-      this.updateProgressBar(1 / 3);
+      this.updateProgressBar(3 / 3);
       this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
     if (!res.data.upgradeToStore.ok) {
@@ -147,8 +160,6 @@ class UpgradeToStore extends React.Component<any, any> {
     bag.setSubmitting(false);
   };
   render() {
-    console.log(this.state);
-
     const word = this.props.words;
     const { user, isRTL } = this.props;
     const uri = this.state.headerPhoto
@@ -168,11 +179,11 @@ class UpgradeToStore extends React.Component<any, any> {
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message
           isVisible={this.state.isShowMessage}
-          title={word.successadded}
+          title={word.accountupdated}
           icon="ios-checkmark-circle"
           isRTL={isRTL}
           width={width}
-          height={120}
+          height={100}
         />
         <ScrollView>
           <View style={styles.container}>
@@ -182,7 +193,7 @@ class UpgradeToStore extends React.Component<any, any> {
                 email: '',
                 website: '',
                 about: '',
-                color: '',
+                color: '#7678ED',
                 tel: '',
                 fax: '',
                 mob: '',
@@ -234,6 +245,21 @@ class UpgradeToStore extends React.Component<any, any> {
                         }}
                         source={{ uri: avataruri }}
                       />
+                      {this.state.isAvatarLoading && (
+                        <View
+                          style={{
+                            position: 'absolute',
+                            left: 15,
+                            top: 15
+                          }}
+                        >
+                          <Progress.Circle
+                            indeterminate={true}
+                            size={50}
+                            borderColor="#eee"
+                          />
+                        </View>
+                      )}
                     </TouchableOpacity>
                     {!user.headerPhoto && !this.state.headerPhoto && (
                       <TouchableWithoutFeedback
@@ -264,6 +290,21 @@ class UpgradeToStore extends React.Component<any, any> {
                           />
                         </TouchableWithoutFeedback>
                       ))}
+                    {this.state.isHeaderLoading && (
+                      <View
+                        style={{
+                          position: 'absolute',
+                          left: width / 2 - 25,
+                          top: 62.5
+                        }}
+                      >
+                        <Progress.Circle
+                          indeterminate={true}
+                          size={50}
+                          borderColor="#eee"
+                        />
+                      </View>
+                    )}
                     <View style={{ position: 'absolute', left: 20, top: 40 }}>
                       <TouchableOpacity
                         onPress={() => this.props.navigation.goBack()}
@@ -344,6 +385,7 @@ class UpgradeToStore extends React.Component<any, any> {
                   <Input
                     rtl={isRTL}
                     name="color"
+                    color={values.color}
                     label={word.color}
                     value={values.color}
                     onChange={setFieldValue}
@@ -356,7 +398,11 @@ class UpgradeToStore extends React.Component<any, any> {
                     autoCorrect={false}
                     height={40}
                   />
-
+                  <ColorPicker
+                    onChange={(color: any) => setFieldValue('color', color)}
+                    defaultColor={values.color}
+                    colors={colors}
+                  />
                   <Input
                     rtl={isRTL}
                     num

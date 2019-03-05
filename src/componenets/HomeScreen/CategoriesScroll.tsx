@@ -142,6 +142,8 @@ class CategoriesScroll extends React.Component<any, any> {
           {!selected && (
             <BottonNew
               allbtnactive={allbtnactive}
+              addFilter={addFilter}
+              showCategoriesModal={this.props.showCategoriesModal}
               scrollView={this.scrollView}
               removeAllFilters={removeAllFilters}
               isAuthenticated={this.props.isAuthenticated}

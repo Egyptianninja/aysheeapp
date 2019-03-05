@@ -12,6 +12,7 @@ import InputPhone from './elements/InputPhone';
 import KeyboardSpacer from './elements/KeyboardSpacer';
 import Logo from './elements/Logo';
 import Message from './elements/Message';
+import SelectDate from './elements/SelectDate';
 import RadioButton from './elements/RadioButton';
 import Select from './elements/Select';
 import Title from './elements/Title';
@@ -37,5 +38,6 @@ export {
   KeyboardSpacer,
   Logo,
   Photo,
-  LoadingView
+  LoadingView,
+  SelectDate
 };

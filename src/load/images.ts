@@ -15,6 +15,7 @@ export const images = {
   logo: require('../../assets/logo.png'),
   icon: require('../../assets/icon.png'),
   offers: require('../../assets/icons/header/offers.png'),
+  shops: require('../../assets/icons/header/shops.jpeg'),
 
   home: require('../../assets/icons/header/home.png'),
   bell: require('../../assets/icons/header/bell.png'),

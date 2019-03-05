@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet } from '../../utils';
 const BottonNew = ({
   isRTL,
   scrollView,
@@ -8,46 +9,86 @@ const BottonNew = ({
   navigation,
   title,
   allbtnactive,
-  isAuthenticated
+  isAuthenticated,
+  showCategoriesModal
 }: any) => (
-  <TouchableOpacity
-    onPress={() => {
-      // isRTL
-      //   ? scrollView.scrollToEnd({ animated: true })
-      //   : scrollView.scrollTo({ animated: true, offset: 0 });
-      // removeAllFilters();
-      isAuthenticated
-        ? navigation.navigate('ChoiseScreen')
-        : navigation.navigate('Auth');
-    }}
+  <View
     style={{
-      height: 75,
-      marginVertical: 7,
-      marginHorizontal: 5,
-      borderWidth: 1,
-      borderColor: '#DEDBDD',
-      backgroundColor: '#7678ED',
-      shadowOffset: { width: 2, height: 2 },
-      shadowColor: '#666',
-      shadowRadius: 3,
-      shadowOpacity: 0.2,
-      alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 20,
-      flexDirection: 'row'
+      alignItems: 'center',
+      paddingTop: 7,
+      marginLeft: 5
     }}
   >
-    <Text
+    <TouchableOpacity
+      onPress={() => showCategoriesModal()}
       style={{
-        fontSize: 14,
-        color: '#fff',
-        fontFamily: 'cairo-regular',
-        transform: [{ rotateZ: '270deg' }]
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        backgroundColor: '#fff',
+        height: 60,
+        width: 60,
+        borderRadius: 30,
+        borderColor: '#7678ED',
+        borderWidth: 2,
+        shadowOffset: { width: 3, height: 3 },
+        shadowColor: '#555',
+        shadowOpacity: 0.3
       }}
     >
-      {title.toUpperCase()}
-    </Text>
-  </TouchableOpacity>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignSelf: 'center',
+          height: 52,
+          width: 52,
+          borderRadius: 26,
+          overflow: 'hidden',
+          backgroundColor: '#7678ED'
+        }}
+      >
+        <Ionicons
+          name="ios-keypad"
+          size={38}
+          color="#fff"
+          style={{ top: 2, left: 1 }}
+        />
+      </View>
+    </TouchableOpacity>
+    <View style={styles.textView}>
+      <Text style={[styles.text, { color: '#171717' }]}>جميع الاقسام</Text>
+    </View>
+  </View>
 );
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 5,
+    minWidth: 80,
+    backgroundColor: '#fff'
+  },
+  iconView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    height: 52,
+    width: 52,
+    borderRadius: 13,
+    // borderColor: '#7678ED',
+    // borderWidth: 2,
+    overflow: 'hidden'
+  },
+  imageView: {
+    width: 52,
+    height: 52
+  },
+  text: {
+    textAlign: 'center',
+    fontFamily: 'cairo-regular',
+    fontSize: 12
+  }
+});
 
 export default BottonNew;

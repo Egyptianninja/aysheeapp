@@ -3,7 +3,9 @@ import {
   View,
   Dimensions,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Image
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -15,13 +17,25 @@ import {
   registerForPushNotificationsAsync,
   uploadPhotos,
   isArabic,
-  Message
+  Message,
+  UserLocation,
+  pickImage,
+  pickImageWithoutUpload,
+  uploadPickedImage
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 
-import { Input, Button, Title } from '../../../lib';
+import {
+  Input,
+  Button,
+  Title,
+  SelectDate,
+  Group,
+  CheckBox
+} from '../../../lib';
 import PhotoView from '../../../componenets/Add/PhotoView';
+import { Permissions } from 'expo';
 const { width } = Dimensions.get('window');
 
 class AddServiceScreen extends React.Component<any, any> {
@@ -30,7 +44,7 @@ class AddServiceScreen extends React.Component<any, any> {
     isShowMessage: false,
     location: null,
     pushToken: null,
-    images: [],
+    image: null,
     bar: 0
   };
 
@@ -38,6 +52,25 @@ class AddServiceScreen extends React.Component<any, any> {
     const pushToken = await registerForPushNotificationsAsync();
     await this.setState({ pushToken });
   }
+
+  onPhotoUpload = async () => {
+    const permissions = Permissions.CAMERA_ROLL;
+    const { status: existingStatus } = await Permissions.getAsync(permissions);
+    let finalStatus = existingStatus;
+    if (finalStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(permissions);
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      return;
+    }
+    // this.props.addPermission('CAMERA_ROLL');
+    const image = await pickImageWithoutUpload(false);
+
+    if (image) {
+      this.setState({ image });
+    }
+  };
 
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
@@ -68,48 +101,50 @@ class AddServiceScreen extends React.Component<any, any> {
     this.setState({ bar: this.state.bar + value });
   };
 
-  returnData = (imgs: any) => {
-    const stateImages = this.state.images;
-    const images = [...stateImages, ...imgs];
-    this.setState({ images });
-  };
-
-  updateImagesList = (images: any) => {
-    this.setState({ images });
-  };
-  pickCameraImage = () => {
-    this.props.navigation.navigate('CameraScreen', {
-      returnData: this.returnData,
-      lang: this.props.lang,
-      isRTL: this.props.isRTL,
-      imgqty: this.state.images.length
-    });
-  };
-
   handleSubmit = async (values: any, bag: any) => {
-    let photos;
-    if (this.state.images.length > 0) {
-      photos = await uploadPhotos(
-        this.state.images,
-        this.state.selectedImage,
-        this.updateProgressBar
-      );
-    }
-    const { title } = values;
+    const { title, body, startend, location } = values;
     const isrtl = isArabic(title);
 
-    this.updateProgressBar(1 / (3 + this.state.images.length));
+    const photo = this.state.image
+      ? await uploadPickedImage(this.state.image, 1080, 0.8)
+      : null;
+
+    const start = new Date(Object.keys(startend.name[0])[0]);
+    const end = new Date(
+      Object.keys(startend.name[startend.name.length - 1])[0]
+    );
+
+    const loc: any = location ? this.state.location : null;
+    let trueLocation = null;
+
+    if (loc) {
+      trueLocation = {
+        lat: loc.coords.latitude,
+        lon: loc.coords.longitude
+      };
+    }
+
+    this.updateProgressBar(1 / 3);
+    console.log('values', values);
+    console.log('this.state', this.state);
+    console.log('photo', photo);
+    console.log('start', start);
+    console.log('end', end);
     const res = await this.props.addClassifiedMutation({
       variables: {
         title,
-        photos,
+        body,
+        photos: photo ? [photo] : null,
         isoffer: true,
-        isrtl
+        isrtl,
+        start,
+        end,
+        trueLocation
       }
     });
 
     if (res.data.createPost.ok) {
-      this.updateProgressBar(1 / (3 + this.state.images.length));
+      this.updateProgressBar(1 / 3);
       if (this.state.pushToken) {
         this.props.notificationSub({
           variables: {
@@ -118,7 +153,7 @@ class AddServiceScreen extends React.Component<any, any> {
           }
         });
       }
-      this.updateProgressBar(1 / (3 + this.state.images.length));
+      this.updateProgressBar(1 / 3);
       this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
     if (!res.data.createPost.ok) {
@@ -143,7 +178,10 @@ class AddServiceScreen extends React.Component<any, any> {
           <View style={styles.container}>
             <Formik
               initialValues={{
-                title: ''
+                title: '',
+                body: '',
+                startend: '',
+                location: false
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -178,17 +216,87 @@ class AddServiceScreen extends React.Component<any, any> {
                     autoCorrect={false}
                     height={40}
                   />
-
-                  <PhotoView
-                    word={word}
-                    isRTL={isRTL}
-                    images={this.state.images}
-                    selectedImage={this.state.selectedImage}
-                    returnData={this.returnData}
-                    pickCameraImage={this.pickCameraImage}
-                    updateImagesList={this.updateImagesList}
-                    hendleSelectedImage={this.hendleSelectedImage}
+                  <Input
+                    rtl={isRTL}
+                    name="body"
+                    label={word.body}
+                    value={values.body}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.body && errors.body}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    multiline={true}
+                    height={100}
                   />
+
+                  {!this.state.image && (
+                    <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
+                      <View
+                        style={{
+                          width: width - 20,
+                          height: 175,
+                          backgroundColor: '#6FA7D5'
+                        }}
+                      />
+                    </TouchableWithoutFeedback>
+                  )}
+                  {this.state.image && (
+                    <Image
+                      source={{ uri: this.state.image.uri }}
+                      style={{
+                        flex: 1,
+                        width: width - 20,
+                        height:
+                          (this.state.image.height / this.state.image.width) *
+                          (width - 20),
+                        resizeMode: 'cover'
+                      }}
+                    />
+                  )}
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginHorizontal: 30,
+                      borderBottomWidth: 1,
+                      borderBottomColor: '#bbb'
+                    }}
+                  >
+                    <SelectDate
+                      name="startend"
+                      period={true}
+                      lable={'Start End'}
+                      value={values.startend}
+                      onChange={setFieldValue}
+                      iconName="md-clock"
+                    />
+                  </View>
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={isRTL}
+                  >
+                    <CheckBox
+                      name="location"
+                      msg={word.locationmsg}
+                      label={word.location}
+                      value={values.location}
+                      selected={values.location}
+                    />
+                  </Group>
+                  {values.location && (
+                    <UserLocation
+                      getCurrentLocation={this.getCurrentLocation}
+                      width={width}
+                    />
+                  )}
 
                   <Button
                     isRTL={isRTL}

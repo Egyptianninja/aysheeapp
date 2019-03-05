@@ -8,6 +8,8 @@ export default gql`
     $updates: Int
     $islive: Boolean
     $isoffer: Boolean
+    $start: Date
+    $end: Date
     $isnew: Boolean
     $issale: Boolean
     $kind: NameInput
@@ -49,6 +51,8 @@ export default gql`
       updates: $updates
       islive: $islive
       isoffer: $isoffer
+      start: $start
+      end: $end
       isnew: $isnew
       issale: $issale
       kind: $kind

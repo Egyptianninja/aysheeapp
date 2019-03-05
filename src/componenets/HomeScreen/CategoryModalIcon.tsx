@@ -2,37 +2,37 @@ import * as React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from '../../utils';
 
-const CategoryIcon = ({
+const CategoryModalIcon = ({
   item,
   icon,
   addFilter,
   removeAllFilters,
-  categoryId
+  hideCategoriesModal,
+  categoryId,
+  width,
+  height
 }: any) => {
   const active = categoryId === item.id;
   return (
     <TouchableOpacity
       onPress={async () => {
-        if (categoryId === item.id) {
-          removeAllFilters();
-        } else {
-          await removeAllFilters();
-          addFilter('categoryId', item.id);
-        }
+        await removeAllFilters();
+        addFilter('categoryId', item.id);
+        hideCategoriesModal();
       }}
     >
-      <View style={styles.container}>
+      <View style={{ width: (width - 20) / 4, height: (height - 175) / 5 }}>
         <View
           style={{
             justifyContent: 'center',
             alignItems: 'center',
             alignSelf: 'center',
             backgroundColor: '#fff',
-            height: 60,
-            width: 60,
-            borderRadius: 30,
+            height: 62,
+            width: 62,
+            borderRadius: 8,
             borderColor: '#7678ED',
-            borderWidth: 2,
+            borderWidth: 1,
             shadowOffset: { width: 3, height: 3 },
             shadowColor: '#555',
             shadowOpacity: 0.3
@@ -63,25 +63,20 @@ const CategoryIcon = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 5,
-    minWidth: 80,
-    backgroundColor: '#fff'
-  },
   iconView: {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    height: 52,
-    width: 52,
-    borderRadius: 26,
+    height: 60,
+    width: 60,
+    borderRadius: 8,
     // borderColor: '#7678ED',
     // borderWidth: 2,
     overflow: 'hidden'
   },
   imageView: {
-    width: 52,
-    height: 52
+    width: 60,
+    height: 60
   },
   text: {
     textAlign: 'center',
@@ -90,4 +85,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CategoryIcon;
+export default CategoryModalIcon;

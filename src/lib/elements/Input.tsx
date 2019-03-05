@@ -23,7 +23,7 @@ class Input extends React.PureComponent<any, any> {
   };
 
   render() {
-    const { label, error, ...rest } = this.props;
+    const { label, error, color, ...rest } = this.props;
     return (
       <View
         style={[
@@ -40,11 +40,14 @@ class Input extends React.PureComponent<any, any> {
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <TextInput
           onChangeText={this.handleChange}
-          // placeholder={label}
           onBlur={this.handleTouch}
           style={[
             this.props.innerStyle,
-            { textAlign: this.props.rtl ? 'right' : 'left' }
+            {
+              textAlign: this.props.rtl ? 'right' : 'left',
+              backgroundColor: color ? color : undefined,
+              color: color ? '#fff' : undefined
+            }
           ]}
           {...rest}
         />

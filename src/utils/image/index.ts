@@ -1,4 +1,11 @@
-import { uploadPhoto, uploadPhotos, pickImage, compressImage } from './upload';
+import {
+  uploadPhoto,
+  uploadPhotos,
+  pickImage,
+  compressImage,
+  pickImageWithoutUpload,
+  uploadPickedImage
+} from './upload';
 import ImagePicker from './browse/ImagePicker';
 import ImageViewer from './viewer';
 import ProgressiveImage from './Progressive';
@@ -12,5 +19,7 @@ export {
   ImagePicker,
   ImageViewer,
   ProgressiveImage,
-  flipImage
+  flipImage,
+  pickImageWithoutUpload,
+  uploadPickedImage
 };

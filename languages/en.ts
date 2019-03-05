@@ -442,6 +442,7 @@ export default {
     fax: 'Fax',
     mob: 'Mobile',
     apdateaccount: 'Update Account',
+    accountupdated: 'Account Updated',
 
     labels: {
       categoryId: 'Category',

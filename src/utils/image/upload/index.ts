@@ -65,7 +65,7 @@ export const uploadPhotos = async (
 export const pickImage = async (
   editing = true,
   width = 1080,
-  compress: 0.8
+  compress = 0.8
 ) => {
   const result: any = await ImagePicker.launchImageLibraryAsync({
     allowsEditing: editing
@@ -74,6 +74,31 @@ export const pickImage = async (
     return false;
   }
   const resizedImage = await compressImage(result.uri, width, compress);
+  const base64Img = `data:image/jpg;base64,${resizedImage.base64}`;
+
+  return uploadPhoto(
+    base64Img,
+    secrets.upload.UPLOAD_PRESET,
+    secrets.upload.CLOUD_NAME
+  ).then(response => {
+    return response.data.public_id;
+  });
+};
+export const pickImageWithoutUpload = async (editing = true) => {
+  const result: any = await ImagePicker.launchImageLibraryAsync({
+    allowsEditing: editing
+  });
+  if (result.cancelled) {
+    return false;
+  }
+  return result;
+};
+export const uploadPickedImage = async (
+  image: any,
+  width: 1080,
+  compress: 0.8
+) => {
+  const resizedImage = await compressImage(image.uri, width, compress);
   const base64Img = `data:image/jpg;base64,${resizedImage.base64}`;
 
   return uploadPhoto(

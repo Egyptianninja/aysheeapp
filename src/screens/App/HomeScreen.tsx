@@ -13,7 +13,7 @@ import editClassifieds from '../../graphql/mutation/editClassifieds';
 import deletePost from '../../graphql/mutation/deletePost';
 import * as store from '../../store/getStore';
 import { setBuckets } from '../../store/actions/postActions';
-import Swiper from '../../utils/hswiper';
+// import Swiper from '../../utils/hswiper';
 import {
   getNextPosts,
   getNewPosts,
@@ -25,6 +25,7 @@ import {
 import { HomeLoading, CategoriesScroll, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
 import { Menu, Report, Edit } from '../../componenets/Menu';
+import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -51,6 +52,7 @@ class HomeScreen extends React.Component<any, any> {
       isMessageVisible: false,
       isEditModalVisible: false,
       isCheckMessaheVisible: false,
+      isCategoriesModalVisible: false,
       modalPost: null,
       pressed: null,
       refreshing: false,
@@ -172,6 +174,12 @@ class HomeScreen extends React.Component<any, any> {
   };
   hideCheckMessageModal = () => {
     this.setState({ isCheckMessaheVisible: false });
+  };
+  showCategoriesModal = () => {
+    this.setState({ isCategoriesModalVisible: true });
+  };
+  hideCategoriesModal = () => {
+    this.setState({ isCategoriesModalVisible: false });
   };
   deletePost = async () => {
     await this.props.deletePost({
@@ -342,6 +350,15 @@ class HomeScreen extends React.Component<any, any> {
           iconColor="#E85255"
           height={200}
         />
+        <CategoriesModal
+          isCategoriesModalVisible={this.state.isCategoriesModalVisible}
+          hideCategoriesModal={this.hideCategoriesModal}
+          categories={this.props.categories}
+          isRTL={this.props.isRTL}
+          navigation={this.props.navigation}
+          addFilter={this.addFilter}
+          removeAllFilters={this.removeAllFilters}
+        />
         <Animated.View
           style={{
             zIndex: 100,
@@ -361,6 +378,7 @@ class HomeScreen extends React.Component<any, any> {
             setHome={(click: any) => (this.catScrollHome = click)}
             isRTL={isRTL}
             currentCategory={this.state.rest.categoryId}
+            showCategoriesModal={this.showCategoriesModal}
             addFilter={this.addFilter}
             removeFilter={this.removeFilter}
             removeAllFilters={this.removeAllFilters}
@@ -433,7 +451,7 @@ class HomeScreen extends React.Component<any, any> {
                       lang={lang}
                     />
                   )}
-                  ListHeaderComponent={() => <Swiper />}
+                  // ListHeaderComponent={() => <Swiper />}
                   getHeightForItem={({ item }: any) => item.height}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}
