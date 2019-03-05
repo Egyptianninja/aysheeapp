@@ -79,9 +79,11 @@ class HomeScreen extends React.Component<any, any> {
   }
 
   async componentDidMount() {
-    if (this.props.isAuthenticated) {
-      const pushToken = await registerForPushNotificationsAsync();
-      await this.setState({ pushToken });
+    if (!this.props.permissions.NOTIFICATIONS) {
+      if (this.props.isAuthenticated) {
+        const pushToken = await registerForPushNotificationsAsync();
+        await this.setState({ pushToken });
+      }
     }
     if (this.state.pushToken) {
       await this.props.notificationSub({
@@ -471,6 +473,7 @@ class HomeScreen extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   isRTL: state.glob.isRTL,
+  permissions: state.glob.permissions,
   categories: state.glob.language.category,
   words: state.glob.language.words,
   isAuthenticated: state.user.isAuthenticated,

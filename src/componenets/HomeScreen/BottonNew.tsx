@@ -49,12 +49,7 @@ const BottonNew = ({
           backgroundColor: '#7678ED'
         }}
       >
-        <Ionicons
-          name="ios-keypad"
-          size={38}
-          color="#fff"
-          style={{ top: 2, left: 1 }}
-        />
+        <Ionicons name="ios-keypad" size={34} color="#fff" style={{ top: 1 }} />
       </View>
     </TouchableOpacity>
     <View style={styles.textView}>

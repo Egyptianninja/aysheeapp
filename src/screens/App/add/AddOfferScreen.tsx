@@ -163,6 +163,7 @@ class AddServiceScreen extends React.Component<any, any> {
   };
   render() {
     const word = this.props.words;
+    const { image } = this.state;
     const { isRTL } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -244,15 +245,13 @@ class AddServiceScreen extends React.Component<any, any> {
                       />
                     </TouchableWithoutFeedback>
                   )}
-                  {this.state.image && (
+                  {image && (
                     <Image
-                      source={{ uri: this.state.image.uri }}
+                      source={{ uri: image.uri }}
                       style={{
                         flex: 1,
                         width: width - 20,
-                        height:
-                          (this.state.image.height / this.state.image.width) *
-                          (width - 20),
+                        height: (image.height / image.width) * (width - 20),
                         resizeMode: 'cover'
                       }}
                     />
