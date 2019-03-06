@@ -6,7 +6,7 @@ const OfferIcon = ({ navigation, title }: any) => {
   return (
     <TouchableOpacity
       onPress={async () => {
-        navigation.navigate('OfferScreen');
+        navigation.navigate('OffersScreen');
       }}
     >
       <View style={styles.container}>

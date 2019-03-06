@@ -22,10 +22,10 @@ import {
   MyFavScreen,
   CameraScreen,
   AddOfferScreen,
-  UpgradeToStore
+  UpgradeToStore,
+  OffersScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
-import OfferScreen from '../../utils/swiper';
 import { Constants } from 'expo';
 import StoreOfferScreen from '../../screens/App/user/StoreOfferScreen';
 
@@ -37,8 +37,8 @@ export const AppStackNavigator = createStackNavigator({
       headerBackTitle: null
     })
   },
-  OfferScreen: {
-    screen: OfferScreen,
+  OffersScreen: {
+    screen: OffersScreen,
     navigationOptions: ({ navigation }: any) => ({
       headerBackTitle: null
     })

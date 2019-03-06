@@ -2,6 +2,7 @@ import HomeScreen from './App/HomeScreen';
 import ItemScreen from './App/ItemScreen';
 import ItemScreenUser from './App/ItemScreenUser';
 import ChoiseScreen from './App/ChoiseScreen';
+import OffersScreen from './App/OffersScreen';
 import NotificationsScreen from './App/NotificationsScreen';
 import AddClassifiedScreen from './App/add/AddClassifiedScreen';
 
@@ -52,5 +53,6 @@ export {
   StoreOfferScreen,
   AddOfferScreen,
   MyOffersScreen,
-  UpgradeToStore
+  UpgradeToStore,
+  OffersScreen
 };

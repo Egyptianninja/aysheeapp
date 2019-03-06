@@ -13,33 +13,28 @@ import { User } from '../../componenets/User/User';
 import { Carousel } from '../../utils';
 import {
   SliderEntry,
-  ENTRIES1,
-  ENTRIES2,
-  ENTRIES3,
   sliderWidth,
   itemWidth,
-  styles,
-  colors
+  styles
 } from '../../componenets/OffersScreen';
+import { Query } from 'react-apollo';
+import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
+import { Loading } from '../../componenets';
 
 const HEIGHT = Dimensions.get('window').height;
-const SLIDER_1_FIRST_ITEM = 1;
+const FIRST_ITEM = 1;
 
-export default class Swiper extends Component<any, any> {
+export default class OffersScreen extends Component<any, any> {
   static navigationOptions = { header: null };
   constructor(props: any) {
     super(props);
     this.state = {
-      slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
+      slider1ActiveSlide: FIRST_ITEM,
       slider1Ref: null
     };
   }
 
-  _renderItem({ item, index }: any) {
-    return <SliderEntry data={item} even={(index + 1) % 2 === 0} />;
-  }
-
-  _renderItemWithParallax({ item, index }: any, parallaxProps: any) {
+  renderItemWithParallax({ item, index }: any, parallaxProps: any) {
     return (
       <SliderEntry
         data={item}
@@ -50,89 +45,28 @@ export default class Swiper extends Component<any, any> {
     );
   }
 
-  get example1() {
-    const { slider1ActiveSlide, slider1Ref }: any = this.state;
-
+  renderShopOffers = (data: any) => {
+    const { name, avatar, color, offers } = data;
     return (
-      <View
-        style={[
-          styles.exampleContainer,
-          { backgroundColor: colors.background1 }
-        ]}
-      >
-        <User icon={5} />
+      <View style={[styles.exampleContainer, { backgroundColor: color }]}>
+        <User avatar={avatar} name={name} />
         <Carousel
           ref={(c: any) => {
             if (!this.state.slider1Ref) {
               this.setState({ slider1Ref: c });
             }
           }}
-          data={ENTRIES1}
-          renderItem={this._renderItemWithParallax}
+          data={offers}
+          renderItem={this.renderItemWithParallax}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
           hasParallaxImages={true}
-          firstItem={SLIDER_1_FIRST_ITEM}
-          inactiveSlideScale={0.94}
-          inactiveSlideOpacity={0.7}
-          enableMomentum={false}
-          containerCustomStyle={styles.slider}
-          contentContainerCustomStyle={styles.sliderContentContainer}
-          // lockScrollTimeoutDuration={250}
-          swipeThreshold={10}
-          // loop={true}
-          // loopClonesPerSide={2}
-          // autoplay={true}
-          // autoplayDelay={500}
-          // autoplayInterval={3000}
-          onSnapToItem={(index: any) =>
-            this.setState({ slider1ActiveSlide: index })
-          }
-        />
-        {/* <Pagination
-          dotsLength={ENTRIES1.length}
-          activeDotIndex={slider1ActiveSlide}
-          containerStyle={styles.paginationContainer}
-          dotColor={'rgba(255, 255, 255, 0.92)'}
-          dotStyle={styles.paginationDot}
-          inactiveDotColor={colors.black}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-          carouselRef={slider1Ref}
-          tappableDots={!!slider1Ref}
-        /> */}
-      </View>
-    );
-  }
-  get example2() {
-    const { slider1ActiveSlide, slider1Ref }: any = this.state;
-
-    return (
-      <View
-        style={[
-          styles.exampleContainer,
-          { backgroundColor: colors.background2 }
-        ]}
-      >
-        <User icon={8} />
-        <Carousel
-          ref={(c: any) => {
-            if (!this.state.slider1Ref) {
-              this.setState({ slider1Ref: c });
-            }
-          }}
-          data={ENTRIES2}
-          renderItem={this._renderItemWithParallax}
-          sliderWidth={sliderWidth}
-          itemWidth={itemWidth}
-          hasParallaxImages={true}
-          firstItem={SLIDER_1_FIRST_ITEM}
+          firstItem={FIRST_ITEM}
           inactiveSlideScale={0.9}
           inactiveSlideOpacity={0.7}
           enableMomentum={false}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
-          // lockScrollTimeoutDuration={250}
           swipeThreshold={10}
           onSnapToItem={(index: any) =>
             this.setState({ slider1ActiveSlide: index })
@@ -140,69 +74,7 @@ export default class Swiper extends Component<any, any> {
         />
       </View>
     );
-  }
-  get example3() {
-    const { slider1ActiveSlide, slider1Ref }: any = this.state;
-
-    return (
-      <View
-        style={[
-          styles.exampleContainer,
-          {
-            backgroundColor: colors.background3
-          }
-        ]}
-      >
-        <User icon={22} />
-        <Carousel
-          ref={(c: any) => {
-            if (!this.state.slider1Ref) {
-              this.setState({ slider1Ref: c });
-            }
-          }}
-          data={ENTRIES3}
-          renderItem={this._renderItemWithParallax}
-          sliderWidth={sliderWidth}
-          itemWidth={itemWidth}
-          hasParallaxImages={true}
-          firstItem={SLIDER_1_FIRST_ITEM}
-          inactiveSlideScale={0.94}
-          inactiveSlideOpacity={0.7}
-          enableMomentum={false}
-          containerCustomStyle={styles.slider}
-          contentContainerCustomStyle={styles.sliderContentContainer}
-          // lockScrollTimeoutDuration={250}
-          swipeThreshold={10}
-          // activeAnimationType="spring"
-          onSnapToItem={(index: any) =>
-            this.setState({ slider1ActiveSlide: index })
-          }
-        />
-      </View>
-    );
-  }
-
-  // get example2() {
-  //   return (
-  //     <View style={styles.exampleContainer}>
-  //       <Text style={styles.title}>Example 2</Text>
-  //       <Text style={styles.subtitle}>Momentum | Left-aligned</Text>
-  //       <Carousel
-  //         data={ENTRIES2}
-  //         renderItem={this._renderItem}
-  //         sliderWidth={sliderWidth}
-  //         itemWidth={itemWidth}
-  //         inactiveSlideScale={0.9}
-  //         inactiveSlideOpacity={1}
-  //         enableMomentum={true}
-  //         activeSlideAlignment={'start'}
-  //         containerCustomStyle={styles.slider}
-  //         contentContainerCustomStyle={styles.sliderContentContainer}
-  //         removeClippedSubviews={false}
-  //       />
-  //     </View>
-  //   );
-  // }
+  };
 
   render() {
     return (
@@ -228,33 +100,140 @@ export default class Swiper extends Component<any, any> {
         >
           <Ionicons name="ios-arrow-back" size={33} color="#fff" />
         </TouchableOpacity>
-        <ScrollView
-          style={styles.scrollview}
-          contentContainerStyle={styles.scrollviewContentContainer}
-          indicatorStyle={'white'}
-          scrollEventThrottle={16}
-          decelerationRate={0}
-          snapToInterval={HEIGHT - 110}
-          snapToAlignment={'start'}
-          showsVerticalScrollIndicator={false}
-          directionalLockEnabled={true}
+
+        <Query
+          query={getShopsWithOffers}
+          variables={{}}
+          fetchPolicy="network-only"
         >
-          {this.example1}
-          {this.example2}
-          {this.example3}
-          {this.example1}
-          {this.example2}
-          {this.example3}
-          {this.example1}
-          {this.example2}
-          {this.example3}
-          {this.example1}
-          {this.example2}
-          {this.example3}
-          {this.example1}
-          {this.example2}
-        </ScrollView>
+          {({ loading, error, data, fetchMore, refetch }) => {
+            if (loading) {
+              return <Loading />;
+            }
+            if (error) {
+              return <Text>{error}</Text>;
+            }
+            const shops = data.getShopsWithOffers;
+            if (shops && shops.length === 0) {
+              return <View />;
+            }
+
+            return (
+              <ScrollView
+                style={styles.scrollview}
+                contentContainerStyle={styles.scrollviewContentContainer}
+                indicatorStyle={'white'}
+                scrollEventThrottle={16}
+                decelerationRate={0}
+                snapToInterval={HEIGHT - 110}
+                snapToAlignment={'start'}
+                showsVerticalScrollIndicator={false}
+                directionalLockEnabled={true}
+                // onRefresh={() => refetch()}
+                // refreshing={this.state.refreshing}
+              >
+                {shops.map((shop: any) => {
+                  return this.renderShopOffers(shop);
+                })}
+              </ScrollView>
+            );
+          }}
+        </Query>
       </View>
     );
   }
 }
+
+// const shops = [
+//   {
+//     _id: '5c7c1b4e4b557e001c46a999',
+//     name: 'عروض ازياء سبلاش',
+//     avatar: 'tyeteyfwpjzz7ogz5vmd',
+//     color: '#7678ED',
+//     offers: [
+//       {
+//         _id: '5c7f10915cc915001aa8e77c',
+//         title: 'اشتري واسترجع النصف',
+//         body: 'هذا العرض بجميع محلات سبلاش قطر ',
+//         photos: ['vje67evix6bsgnlpycq3'],
+//         start: '2019-03-06T00:00:00.000Z',
+//         end: '2019-03-31T00:00:00.000Z',
+//         trueLocation: {
+//           lat: 25.274608692418138,
+//           lon: 51.49217156344039
+//         }
+//       },
+//       {
+//         _id: '5c7f20585cc915001aa8e783',
+//         title: 'عرض مدخر النقود',
+//         body: 'مجمع قطر للتسوق يعلن عن عرض مدخر النقود',
+//         photos: ['oemn9geq4fylhakoqtse'],
+//         start: '2019-03-07T00:00:00.000Z',
+//         end: '2019-03-15T00:00:00.000Z',
+//         trueLocation: {
+//           lat: 25.274588242744557,
+//           lon: 51.49217199022465
+//         }
+//       }
+//     ]
+//   },
+//   {
+//     _id: '5c7f0eb9bf1b98001b9ede58',
+//     name: 'العود للعطور',
+//     avatar: null,
+//     color: '#7678ED',
+//     offers: [
+//       {
+//         _id: '5c7f0fb95cc915001aa8e77b',
+//         title: 'عرض للعود',
+//         body: 'عرض جديد للعود',
+//         photos: ['lg3jp54zohmzucmzjncl'],
+//         start: '2019-03-12T00:00:00.000Z',
+//         end: '2019-03-28T00:00:00.000Z',
+//         trueLocation: {
+//           lat: 25.22549437106315,
+//           lon: 51.43563692745055
+//         }
+//       },
+//       {
+//         _id: '5c7f10d45cc915001aa8e77d',
+//         title: 'عروض الصيف',
+//         body: 'عروض الصيف',
+//         photos: ['p3dqff0o7hgeeae1ysyb'],
+//         start: '2019-03-20T00:00:00.000Z',
+//         end: '2019-03-23T00:00:00.000Z',
+//         trueLocation: null
+//       },
+//       {
+//         _id: '5c7f13c35cc915001aa8e780',
+//         title: 'عرض جديد',
+//         body: 'عرض جديد',
+//         photos: ['pzycqzyt4nr1c3foratp'],
+//         start: '2019-03-13T00:00:00.000Z',
+//         end: '2019-03-21T00:00:00.000Z',
+//         trueLocation: null
+//       },
+//       {
+//         _id: '5c7f15705cc915001aa8e781',
+//         title: 'عروض الربيع',
+//         body: 'عروض الربيع',
+//         photos: ['enc6cz5v5vmrbeosdkyx'],
+//         start: '2019-03-19T00:00:00.000Z',
+//         end: '2019-03-23T00:00:00.000Z',
+//         trueLocation: {
+//           lat: 25.225508811556914,
+//           lon: 51.43560039983238
+//         }
+//       },
+//       {
+//         _id: '5c7f161d5cc915001aa8e782',
+//         title: 'العرض الخامس',
+//         body: 'العرض الخامس',
+//         photos: ['xwbari6qdprrua7benjp'],
+//         start: '2019-03-13T00:00:00.000Z',
+//         end: '2019-03-21T00:00:00.000Z',
+//         trueLocation: null
+//       }
+//     ]
+//   }
+// ];

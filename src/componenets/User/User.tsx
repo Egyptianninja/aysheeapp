@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Text, View, Image } from 'react-native';
-import { images } from '../../load';
 
-export const User = ({ icon }: any) => {
-  const img: any = images[`b${icon}`];
+export const User = ({ name, avatar }: any) => {
+  const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${avatar}`;
+
   return (
     <View
       style={{
@@ -27,10 +27,10 @@ export const User = ({ icon }: any) => {
             textAlign: 'right'
           }}
         >
-          Jarir Bookstore
+          {name}
         </Text>
         <Text style={{ fontSize: 16, color: '#fff', textAlign: 'right' }}>
-          Not Just a Bookstore
+          Slogan
         </Text>
       </View>
 
@@ -52,7 +52,7 @@ export const User = ({ icon }: any) => {
             width: 50,
             borderRadius: 25
           }}
-          source={img}
+          source={{ uri }}
         />
       </View>
     </View>

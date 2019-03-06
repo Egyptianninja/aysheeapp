@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
 import { ParallaxImage } from '../../../utils';
 import styles from '../styles/SliderEntry';
 
 export default class SliderEntry extends Component<any, any> {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    even: PropTypes.bool,
-    parallax: PropTypes.bool,
-    parallaxProps: PropTypes.object
-  };
-
   get image() {
     const {
-      data: { illustration },
+      data: { photos },
       parallax,
       parallaxProps,
       even
     } = this.props;
 
+    const uri = `http://res.cloudinary.com/arflon/image/upload/w_${500}/${
+      photos[0]
+    }`;
     return parallax ? (
       <ParallaxImage
-        source={{ uri: illustration }}
+        source={{ uri }}
         containerStyle={[
           styles.imageContainer,
           even ? styles.imageContainerEven : {}
@@ -34,13 +29,13 @@ export default class SliderEntry extends Component<any, any> {
         {...parallaxProps}
       />
     ) : (
-      <Image source={{ uri: illustration }} style={styles.image} />
+      <Image source={{ uri }} style={styles.image} />
     );
   }
 
   render() {
     const {
-      data: { title, subtitle },
+      data: { _id, body, end, photos, start, title },
       even
     } = this.props;
 
@@ -79,7 +74,7 @@ export default class SliderEntry extends Component<any, any> {
             style={[styles.subtitle, even ? styles.subtitleEven : {}]}
             numberOfLines={2}
           >
-            {subtitle}
+            {body}
           </Text>
         </View>
       </TouchableOpacity>

@@ -43,7 +43,7 @@ export default class CategoriesModal extends React.Component<any, any> {
         >
           <TouchableOpacity
             onPress={async () => {
-              this.props.navigation.navigate('OfferScreen');
+              this.props.navigation.navigate('OffersScreen');
               this.props.hideCategoriesModal();
             }}
             style={{
