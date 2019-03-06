@@ -20,43 +20,50 @@ const CategoryModalIcon = ({
         addFilter('categoryId', item.id);
         hideCategoriesModal();
       }}
+      style={{
+        padding: 5
+      }}
     >
-      <View style={{ width: (width - 20) / 4, height: (height - 175) / 5 }}>
-        <View
+      <View
+        style={{
+          width: (width - 20) / 3 - 13.45,
+          height: (width - 20) / 3 - 13.45,
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignSelf: 'center',
+          backgroundColor: '#fff',
+          overflow: 'hidden',
+          borderRadius: 8,
+          borderColor: '#ddd',
+          borderWidth: 1,
+          shadowOffset: { width: 3, height: 3 },
+          shadowColor: '#555',
+          shadowOpacity: 0.3
+        }}
+      >
+        <Image
+          style={[
+            {
+              flex: 1,
+              width: '100%',
+              height: '100%'
+            }
+          ]}
+          source={icon}
+        />
+      </View>
+
+      <View style={styles.textView}>
+        <Text
           style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignSelf: 'center',
-            backgroundColor: '#fff',
-            height: 62,
-            width: 62,
-            borderRadius: 8,
-            borderColor: '#7678ED',
-            borderWidth: 1,
-            shadowOffset: { width: 3, height: 3 },
-            shadowColor: '#555',
-            shadowOpacity: 0.3
+            color: '#171717',
+            textAlign: 'center',
+            fontFamily: 'cairo-regular',
+            fontSize: 12
           }}
         >
-          <View style={styles.iconView}>
-            <View style={styles.imageView}>
-              <Image
-                style={[
-                  {
-                    flex: 1,
-                    width: '100%',
-                    height: '100%'
-                  }
-                ]}
-                source={icon}
-              />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.textView}>
-          <Text style={[styles.text, { color: '#171717' }]}>{item.name}</Text>
-        </View>
+          {item.name}
+        </Text>
       </View>
     </TouchableOpacity>
   );

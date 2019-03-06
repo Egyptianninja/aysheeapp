@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
 import { images, icons } from '../../load';
 import CategoryModalIcon from './CategoryModalIcon';
 
@@ -32,59 +33,90 @@ export default class CategoriesModal extends React.Component<any, any> {
 
   renderOfferShop = () => {
     return (
-      <View
-        style={{
-          width: width - 40,
-          height: 75,
-          flexDirection: 'row'
-        }}
-      >
-        <TouchableOpacity
-          onPress={async () => {
-            this.props.navigation.navigate('OfferScreen');
-            this.props.hideCategoriesModal();
-          }}
+      <View>
+        <View
           style={{
-            flex: 1,
-            backgroundColor: '#eee',
-            marginRight: 5,
-            justifyContent: 'center',
-            alignItems: 'center'
+            width: width - 40,
+            height: (width - 20) / 3 - 15,
+            flexDirection: 'row'
           }}
         >
-          <Image
-            style={[
-              {
-                flex: 1,
-                width: '100%',
-                height: '100%'
-              }
-            ]}
-            source={images.offers}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            console.log('shops');
-          }}
+          <TouchableOpacity
+            onPress={async () => {
+              this.props.navigation.navigate('OfferScreen');
+              this.props.hideCategoriesModal();
+            }}
+            style={{
+              flex: 1,
+              backgroundColor: '#eee',
+              marginRight: 5,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Image
+              style={[
+                {
+                  flex: 1,
+                  width: '100%',
+                  height: '100%'
+                }
+              ]}
+              source={images.offers}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              console.log('shops');
+            }}
+            style={{
+              flex: 1,
+              marginLeft: 5,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Image
+              style={[
+                {
+                  flex: 1,
+                  width: '100%',
+                  height: '100%'
+                }
+              ]}
+              source={images.shops}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
           style={{
-            flex: 1,
-            marginLeft: 5,
-            justifyContent: 'center',
-            alignItems: 'center'
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            flexDirection: 'row'
           }}
         >
-          <Image
-            style={[
-              {
-                flex: 1,
-                width: '100%',
-                height: '100%'
-              }
-            ]}
-            source={images.shops}
-          />
-        </TouchableOpacity>
+          <Text
+            style={{
+              color: '#171717',
+              textAlign: 'center',
+              fontFamily: 'cairo-regular',
+              fontSize: 12
+            }}
+          >
+            قسم العروض
+          </Text>
+          <Text
+            style={{
+              color: '#171717',
+              textAlign: 'center',
+              fontFamily: 'cairo-regular',
+              fontSize: 12
+            }}
+          >
+            قسم المتاجر
+          </Text>
+        </View>
       </View>
     );
   };
@@ -118,7 +150,10 @@ export default class CategoriesModal extends React.Component<any, any> {
     return (
       <View
         style={{
-          flexDirection: this.props.isRTL ? 'row-reverse' : 'row'
+          flexDirection: this.props.isRTL ? 'row-reverse' : 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingHorizontal: 10
         }}
       >
         {this.renderCategories(this.props.categories.slice(start, end))}
@@ -153,7 +188,7 @@ export default class CategoriesModal extends React.Component<any, any> {
             alignItems: 'center'
           }}
         >
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{
                 width: width - 20,
@@ -161,6 +196,58 @@ export default class CategoriesModal extends React.Component<any, any> {
                 alignItems: 'center'
               }}
             >
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: width - 20,
+                  height: 50
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => this.props.hideCategoriesModal()}
+                  style={{
+                    position: 'absolute',
+                    top: 5,
+                    left: 20,
+                    zIndex: 10,
+                    width: 32,
+                    height: 32,
+                    borderRadius: 16,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: '#777',
+                      textAlign: 'center',
+                      fontFamily: 'cairo-regular',
+                      fontSize: 18
+                    }}
+                  >
+                    ⤬
+                  </Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: '#777',
+                      textAlign: 'center',
+                      fontFamily: 'cairo-regular',
+                      fontSize: 18
+                    }}
+                  >
+                    جميع الاقسام
+                  </Text>
+                </View>
+              </View>
               {this.renderOfferShop()}
               <View
                 style={{
@@ -168,11 +255,13 @@ export default class CategoriesModal extends React.Component<any, any> {
                   paddingTop: 10
                 }}
               >
-                {this.renderCategoryRow(0, 4)}
-                {this.renderCategoryRow(4, 8)}
-                {this.renderCategoryRow(8, 12)}
-                {this.renderCategoryRow(12, 16)}
-                {this.renderCategoryRow(16, 20)}
+                {this.renderCategoryRow(0, 3)}
+                {this.renderCategoryRow(3, 6)}
+                {this.renderCategoryRow(6, 9)}
+                {this.renderCategoryRow(9, 12)}
+                {this.renderCategoryRow(12, 15)}
+                {this.renderCategoryRow(15, 18)}
+                {this.renderCategoryRow(18, 20)}
               </View>
             </View>
           </ScrollView>

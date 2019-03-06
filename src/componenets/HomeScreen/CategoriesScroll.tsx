@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, ScrollView, Platform } from 'react-native';
+import {
+  View,
+  ScrollView,
+  Platform,
+  Text,
+  TouchableOpacity
+} from 'react-native';
 import { connect } from 'react-redux';
 import { icons } from '../../load';
 import CategoryIcon from './CategoryIcon';
@@ -132,6 +138,32 @@ class CategoriesScroll extends React.Component<any, any> {
       this.props.currentCategory || this.props.currentCategory === 0;
     return (
       <View style={{ width: '100%' }}>
+        {selected && (
+          <View
+            style={{
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexDirection: 'row'
+            }}
+          >
+            <TouchableOpacity onPress={() => this.props.removeAllFilters()}>
+              <Text
+                style={{
+                  padding: 10
+                }}
+              >
+                العودة للرئيسية
+              </Text>
+            </TouchableOpacity>
+            <Text
+              style={{
+                padding: 10
+              }}
+            >
+              Category Name
+            </Text>
+          </View>
+        )}
         <View
           style={{
             flexDirection:
@@ -151,8 +183,9 @@ class CategoriesScroll extends React.Component<any, any> {
               title={words.listfree}
             />
           )}
-          {selected && this.renderSelectedCategory(this.props.currentCategory)}
-          {selected && (
+
+          {/* {selected && this.renderSelectedCategory(this.props.currentCategory)} */}
+          {/* {selected && (
             <View
               style={{
                 position: 'absolute',
@@ -171,7 +204,7 @@ class CategoriesScroll extends React.Component<any, any> {
                 zIndex: 240
               }}
             />
-          )}
+          )} */}
           <ScrollView
             ref={(ref: any) => {
               this.scrollView = ref;
@@ -183,25 +216,25 @@ class CategoriesScroll extends React.Component<any, any> {
             contentContainerStyle={{
               flexDirection:
                 isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-              paddingLeft: selected ? 75 : 0,
-              paddingTop: 5
+              // paddingLeft: selected ? 75 : 0,
+              paddingTop: !selected ? 5 : undefined
             }}
             style={{
-              backgroundColor: selected ? '#f1f1f1' : '#fff',
-              height: selected ? 70 : 95,
-              marginVertical: selected ? 10 : undefined,
-              borderBottomRightRadius: selected && isRTL ? 40 : undefined,
-              borderTopRightRadius: selected && isRTL ? 40 : undefined,
-              borderTopLeftRadius: !selected
-                ? undefined
-                : selected && isRTL
-                ? undefined
-                : 40,
-              borderBottomLeftRadius: !selected
-                ? undefined
-                : selected && isRTL
-                ? undefined
-                : 40
+              backgroundColor: selected ? '#7678ED' : '#fff',
+              height: selected ? 50 : 95
+              // margin: selected ? 10 : undefined
+              // borderBottomRightRadius: selected && isRTL ? 40 : undefined,
+              // borderTopRightRadius: selected && isRTL ? 40 : undefined,
+              // borderTopLeftRadius: !selected
+              //   ? undefined
+              //   : selected && isRTL
+              //   ? undefined
+              //   : 40,
+              // borderBottomLeftRadius: !selected
+              //   ? undefined
+              //   : selected && isRTL
+              //   ? undefined
+              //   : 40
             }}
           >
             {!selected && (

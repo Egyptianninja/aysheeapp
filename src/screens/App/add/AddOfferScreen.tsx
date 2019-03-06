@@ -5,7 +5,9 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Image
+  Image,
+  Platform,
+  Text
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -25,6 +27,7 @@ import {
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
+import { Ionicons } from '@expo/vector-icons';
 
 import {
   Input,
@@ -125,11 +128,7 @@ class AddServiceScreen extends React.Component<any, any> {
     }
 
     this.updateProgressBar(1 / 3);
-    console.log('values', values);
-    console.log('this.state', this.state);
-    console.log('photo', photo);
-    console.log('start', start);
-    console.log('end', end);
+
     const res = await this.props.addClassifiedMutation({
       variables: {
         title,
@@ -163,8 +162,8 @@ class AddServiceScreen extends React.Component<any, any> {
   };
   render() {
     const word = this.props.words;
-    const { image } = this.state;
     const { isRTL } = this.props;
+    const image: any = this.state.image;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message
@@ -235,24 +234,45 @@ class AddServiceScreen extends React.Component<any, any> {
                   />
 
                   {!this.state.image && (
-                    <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
-                      <View
-                        style={{
-                          width: width - 20,
-                          height: 175,
-                          backgroundColor: '#6FA7D5'
-                        }}
-                      />
-                    </TouchableWithoutFeedback>
+                    <React.Fragment>
+                      <Text
+                        style={[
+                          styles.labelStyle,
+                          { alignSelf: 'flex-end', paddingRight: 35 }
+                        ]}
+                      >
+                        اختيار صورة العرض
+                      </Text>
+                      <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
+                        <View
+                          style={{
+                            width: width - 60,
+                            backgroundColor: '#eee',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginVertical: 10,
+                            height: 100,
+                            borderRadius: 8
+                          }}
+                        >
+                          <Ionicons
+                            name="ios-camera"
+                            size={46}
+                            color="#5658AD"
+                          />
+                        </View>
+                      </TouchableWithoutFeedback>
+                    </React.Fragment>
                   )}
                   {image && (
                     <Image
                       source={{ uri: image.uri }}
                       style={{
                         flex: 1,
-                        width: width - 20,
-                        height: (image.height / image.width) * (width - 20),
-                        resizeMode: 'cover'
+                        width: width - 60,
+                        height: (image.height / image.width) * (width - 60),
+                        resizeMode: 'cover',
+                        borderRadius: 8
                       }}
                     />
                   )}
@@ -268,12 +288,14 @@ class AddServiceScreen extends React.Component<any, any> {
                     }}
                   >
                     <SelectDate
+                      rtl={isRTL}
                       name="startend"
                       period={true}
-                      lable={'Start End'}
+                      label="تحديد بداية و نهاية العرض"
+                      labelStyle={styles.labelStyle}
                       value={values.startend}
                       onChange={setFieldValue}
-                      iconName="md-clock"
+                      iconName="ios-calendar"
                     />
                   </View>
                   <Group
@@ -351,7 +373,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 40,
+    width: width - 60,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
     writingDirection: 'auto',

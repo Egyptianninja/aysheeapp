@@ -13,6 +13,10 @@ export default gql`
         name
         about
         isstore
+        offersqty
+        onlineqty
+        offlineqty
+        lastoffer
         offersLimit
         onlineLimit
         offlineLimit

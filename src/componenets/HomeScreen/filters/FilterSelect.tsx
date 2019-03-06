@@ -11,6 +11,7 @@ import { FilterOption } from './FilterOption';
 import { FilterIcon } from './FilterIcon';
 import { icons } from '../../../load';
 import { Platform } from 'expo-core';
+import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
@@ -121,33 +122,41 @@ export default class FilterSelect extends React.Component<any, any> {
             paddingLeft: 2,
             height: 40,
             minWidth: 65,
-            borderRadius: 10,
+            // borderRadius: 10,
             justifyContent: 'center',
             alignItems: 'center',
             marginRight: 5,
             // marginTop: 15,
-            borderWidth: 1,
-            borderColor: '#E7E4E6',
+            // borderWidth: 1,
+            // borderColor: '#E7E4E6',
             // borderColor: selected ? '#7678ED' : '#E7E4E6',
             // backgroundColor: selected ? '#9C949A' : '#fff',
-            backgroundColor: '#fff',
-            shadowOffset: { width: 0, height: 0 },
-            shadowColor: '#555',
-            shadowOpacity: 0.3,
+            backgroundColor: '#7678ED',
+            // shadowOffset: { width: 0, height: 0 },
+            // shadowColor: '#555',
+            // shadowOpacity: 0.3,
             paddingHorizontal: 5
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
-          <View style={{ paddingHorizontal: 5 }}>
-            <FilterIcon icon={icon} size={16} color="#aaa" />
+          <View
+            style={{
+              paddingHorizontal: 5
+            }}
+          >
+            <FilterIcon
+              icon={icon}
+              size={16}
+              color={selected ? '#ACE4AA' : '#fff'}
+            />
           </View>
           <Text
             style={{
               color: selected
-                ? '#7678ED'
+                ? '#ACE4AA'
                 : this.props.disable
-                ? '#ccc'
-                : '#272727',
+                ? '#ddd'
+                : '#fff',
               fontSize: 16,
               // fontFamily: 'cairo-regular',
               fontWeight: selected ? 'bold' : '300',
@@ -180,6 +189,12 @@ export default class FilterSelect extends React.Component<any, any> {
               </Text>
             </View>
           )} */}
+          <Ionicons
+            style={{ paddingHorizontal: 10, top: 2 }}
+            name="md-arrow-dropdown"
+            size={24}
+            color={selected ? '#ACE4AA' : '#fff'}
+          />
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}

@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   Text,
   Dimensions,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
@@ -25,37 +26,38 @@ export default class SelectDate extends React.Component<any, any> {
   };
 
   render() {
+    const { labelStyle, label, rtl, value, period } = this.props;
     return (
       <View
         style={{
-          flex: 1
-          // marginHorizontal: 45
+          flex: 1,
+          alignItems:
+            rtl && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
         }}
       >
+        <Text style={labelStyle}>{label}</Text>
         <TouchableOpacity
           style={{
             flex: 1,
             flexDirection: 'row',
-            marginHorizontal: 10,
-            justifyContent: 'space-between',
-            paddingHorizontal: 10,
-
-            paddingBottom: 10
+            marginVertical: 10,
+            height: 100,
+            width: '100%',
+            borderRadius: 8,
+            backgroundColor: '#eee',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}
           onPress={() => this.toggleModal()}
         >
-          {this.props.value === '' && (
-            <Text style={{ fontSize: 16, paddingRight: 20 }}>
-              {this.props.lable}
-            </Text>
-          )}
-
-          {this.props.value !== '' && this.props.period && (
+          {value !== '' && period && (
             <React.Fragment>
-              <Text style={{ fontSize: 16, paddingRight: 20 }}>
+              <Text
+                style={{ fontSize: 16, paddingRight: 20, color: '#5658AD' }}
+              >
                 {Object.keys(this.props.value.name[0])[0]}
               </Text>
-              <Text style={{ fontSize: 16 }}>
+              <Text style={{ fontSize: 16, color: '#5658AD' }}>
                 {
                   Object.keys(
                     this.props.value.name[this.props.value.name.length - 1]
@@ -65,10 +67,12 @@ export default class SelectDate extends React.Component<any, any> {
             </React.Fragment>
           )}
           {this.props.value !== '' && !this.props.period && (
-            <Text style={{ fontSize: 16 }}>{this.props.value.name}</Text>
+            <Text style={{ fontSize: 16, color: '#5658AD' }}>
+              {this.props.value.name}
+            </Text>
           )}
           {!this.props.value.name && (
-            <Ionicons name={this.props.iconName} size={26} color="#ddd" />
+            <Ionicons name={this.props.iconName} size={46} color="#5658AD" />
           )}
         </TouchableOpacity>
         <Modal

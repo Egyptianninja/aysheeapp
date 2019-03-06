@@ -56,6 +56,11 @@ import Message from './message';
 import DotIndicator from './loading';
 import DotIndicatorSmall from './loading/small';
 import ColorPicker from './color';
+import Carousel, {
+  Pagination,
+  ParallaxImage,
+  getInputRangeFromIndexes
+} from './carousel';
 export {
   StyleSheet,
   uploadPhoto,
@@ -107,5 +112,9 @@ export {
   getCountryCityFromToken,
   ColorPicker,
   pickImageWithoutUpload,
-  uploadPickedImage
+  uploadPickedImage,
+  Carousel,
+  Pagination,
+  ParallaxImage,
+  getInputRangeFromIndexes
 };
