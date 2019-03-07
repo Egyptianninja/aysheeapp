@@ -6,7 +6,7 @@ import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
 import { getDBNextPosts, readyUserPosts, Message } from '../../../utils';
-import { Loading } from '../../../componenets';
+import { Loading, Noresult } from '../../../componenets';
 import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
 import { Menu, Report } from '../../../componenets/Menu';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
@@ -119,7 +119,12 @@ class MyFavScreen extends React.Component<any, any> {
               return `Error!: ${error}`;
             }
             const posts = data.getMyFavoritePosts.data;
+
+            if (posts && posts.length === 0) {
+              return <Noresult />;
+            }
             const rPosts = readyUserPosts(posts, 200, 79, lang);
+
             return (
               <MasonryList
                 ref={(ref: any) => {

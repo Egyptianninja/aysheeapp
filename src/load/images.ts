@@ -15,7 +15,7 @@ export const images = {
   logo: require('../../assets/logo.png'),
   icon: require('../../assets/icon.png'),
   offers: require('../../assets/icons/header/offers.png'),
-  shops: require('../../assets/icons/header/shops.jpeg'),
+  shops: require('../../assets/icons/header/shops.jpg'),
 
   home: require('../../assets/icons/header/home.png'),
   bell: require('../../assets/icons/header/bell.png'),
@@ -23,6 +23,7 @@ export const images = {
   menu: require('../../assets/icons/header/menu.png'),
 
   namelogo: require('../../assets/icons/header/namelogo.png'),
+  namelogofull: require('../../assets/icons/header/namelogofull.png'),
 
   itemmenuiconup: require('../../assets/icons/header/pointsv.png'),
   itemmenuicon: require('../../assets/icons/header/pointsh.png'),

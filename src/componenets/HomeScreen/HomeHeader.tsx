@@ -69,7 +69,7 @@ class HomeHeader extends React.Component<any, any> {
                   flex: 1,
                   width: '100%',
                   height: '100%',
-                  tintColor: '#777'
+                  tintColor: '#999'
                 }}
                 source={home}
               />

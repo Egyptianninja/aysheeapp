@@ -6,15 +6,33 @@ export default gql`
       _id
       name
       uniquename
+      phone
+      email
       avatar
-      offersLimit
-      onlineLimit
-      offlineLimit
+      about
+      headerPhoto
+      color
+      country
+      city
+      website
+      isstore
+      branches {
+        name
+        location {
+          lat
+          lon
+        }
+      }
+      offersqty
+      onlineqty
+      company
+      tel
+      fax
+      mob
       location {
         lat
         lon
       }
-      postsQty
     }
   }
 `;

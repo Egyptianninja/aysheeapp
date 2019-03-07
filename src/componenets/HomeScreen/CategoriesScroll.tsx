@@ -7,6 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons';
 import { icons } from '../../load';
 import CategoryIcon from './CategoryIcon';
 import HeaderFilter from './HeaderFilter';
@@ -147,13 +148,17 @@ class CategoriesScroll extends React.Component<any, any> {
             }}
           >
             <TouchableOpacity onPress={() => this.props.removeAllFilters()}>
-              <Text
+              <Ionicons
+                name="ios-arrow-back"
+                size={31}
                 style={{
-                  padding: 10
+                  position: 'absolute',
+                  left: 20,
+                  top: -13,
+                  paddingHorizontal: 15
                 }}
-              >
-                العودة للرئيسية
-              </Text>
+                color="#999"
+              />
             </TouchableOpacity>
             <Text
               style={{

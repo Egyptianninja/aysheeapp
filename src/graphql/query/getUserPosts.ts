@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query getUserPosts($userId: String!, $cursor: [Float]) {
-    getUserPosts(userId: $userId, cursor: $cursor) {
+  query getUserPosts($userId: String!, $isoffer: Boolean, $cursor: [Float]) {
+    getUserPosts(userId: $userId, isoffer: $isoffer, cursor: $cursor) {
       ok
       took
       total

@@ -11,23 +11,20 @@ import { connect } from 'react-redux';
 import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
-import { Ionicons } from '@expo/vector-icons';
-import { Constants } from 'expo';
 import getUserPosts from '../../../graphql/query/getUserPosts';
 import { getNextPosts, readyUserPosts, Message } from '../../../utils';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Avatar, Loading } from '../../../componenets';
 import favoritePost from '../../../graphql/mutation/favoritePost';
+import { Ionicons } from '@expo/vector-icons';
 import { Menu, Report } from '../../../componenets/Menu';
 const { width } = Dimensions.get('window');
 
-const HEADER_MAX_HEIGHT = 175;
-const HEADER_MIN_HEIGHT = 90;
-const PROFILE_IMAGE_MAX_HEIGHT = 80;
-const PROFILE_IMAGE_MIN_HEIGHT = 40;
+const HEADER_HEIGHT = 175;
+const PROFILE_IMAGE_HEIGHT = 80;
 
 class UserProfileScreen extends React.Component<any, any> {
-  static navigationOptions = { header: null };
+  // static navigationOptions = { header: null };
   flatListRef: any;
   getNextPosts: any;
   constructor(p: any) {
@@ -85,33 +82,29 @@ class UserProfileScreen extends React.Component<any, any> {
 
   render() {
     const { lang, words, isRTL } = this.props;
+
     const headerHeight = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+      inputRange: [0, HEADER_HEIGHT],
+      outputRange: [HEADER_HEIGHT, 0],
       extrapolate: 'clamp'
     });
-    const profileImageHeight = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [PROFILE_IMAGE_MAX_HEIGHT, PROFILE_IMAGE_MIN_HEIGHT],
+    const topPaddingIcons = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_HEIGHT],
+      outputRange: [HEADER_HEIGHT - 50, -50],
       extrapolate: 'clamp'
     });
 
     const imageMarginTop = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [HEADER_MAX_HEIGHT - PROFILE_IMAGE_MAX_HEIGHT / 2, 40],
+      inputRange: [0, HEADER_HEIGHT],
+      outputRange: [
+        HEADER_HEIGHT / 2 - PROFILE_IMAGE_HEIGHT,
+        -PROFILE_IMAGE_HEIGHT
+      ],
       extrapolate: 'clamp'
     });
-    const imageMarginLeft = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [10, 60],
-      extrapolate: 'clamp'
-    });
-    const nameMarginTop = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [-75, 40],
-      extrapolate: 'clamp'
-    });
+
     const user = this.props.navigation.getParam('user');
+    const isofferstab = this.state.rest.isoffer;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -138,88 +131,46 @@ class UserProfileScreen extends React.Component<any, any> {
           width={width}
           height={120}
         />
-        <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}
-          style={{
-            position: 'absolute',
-            top: Constants.statusBarHeight + 10,
-            left: 10,
-            zIndex: 860,
-            width: 32,
-            height: 32,
-            borderRadius: 16,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.1)'
-          }}
-        >
-          <Ionicons name="ios-arrow-back" size={30} color="#9C949A" />
-        </TouchableOpacity>
+
         <Animated.View
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
-            backgroundColor: '#A7A9F3',
+            backgroundColor: '#fff',
             height: headerHeight,
             zIndex: 200,
             flexDirection: 'row'
           }}
         >
-          <View
-            style={{
-              position: 'absolute',
-              width,
-              top: 40,
-              left: 0,
-              height: 40,
-              backgroundColor: 'red',
-              alignItems: 'flex-end',
-              paddingHorizontal: 10,
-              justifyContent: 'center',
-              flexDirection: 'row'
-            }}
-          >
-            <TouchableOpacity
-              style={{ padding: 10 }}
-              onPress={() => {
-                this.setState({ rest: { ...this.state.rest, isoffer: true } });
-              }}
-            >
-              <Text>Offers</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{ padding: 10 }}
-              onPress={() => {
-                this.setState({ rest: {} });
-              }}
-            >
-              <Text>ads</Text>
-            </TouchableOpacity>
-          </View>
           <Animated.View
             style={{
-              height: profileImageHeight,
-              width: profileImageHeight,
-              borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
+              height: 80,
+              width: 80,
+              borderColor: '#7678ED',
+              borderWidth: 2,
+              borderRadius: 40,
               overflow: 'hidden',
+              backgroundColor: '#fff',
               marginTop: imageMarginTop,
-              marginLeft: imageMarginLeft
+              marginLeft: 20,
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
             {!user.avatar && (
               <Avatar
                 name={user.name ? user.name : user.uniquename}
-                size={profileImageHeight}
+                size={72}
               />
             )}
             {user.avatar && (
               <Image
                 style={{
                   flex: 1,
-                  width: '100%',
-                  height: '100%'
+                  width: 72,
+                  height: 72
                 }}
                 source={{
                   uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
@@ -232,16 +183,15 @@ class UserProfileScreen extends React.Component<any, any> {
           <Animated.View
             style={{
               marginTop: imageMarginTop,
-              marginLeft: 20,
-              zIndex: 210
+              marginLeft: 10,
+              zIndex: 10
             }}
           >
             {!user.name && (
               <Text
                 style={{
                   fontFamily: 'cairo-regular',
-                  fontSize: 22,
-                  color: '#fff'
+                  fontSize: 16
                 }}
               >
                 {user.uniquename}
@@ -251,13 +201,148 @@ class UserProfileScreen extends React.Component<any, any> {
               <Text
                 style={{
                   fontFamily: 'cairo-regular',
-                  fontSize: 22,
-                  color: '#fff'
+                  fontSize: 18
                 }}
               >
                 {user.name}
               </Text>
             )}
+            <Text
+              style={{
+                fontFamily: 'cairo-regular',
+                fontSize: 14,
+                color: '#777'
+              }}
+            >
+              {user.about}
+            </Text>
+          </Animated.View>
+          <Animated.View
+            style={{
+              position: 'absolute',
+              width,
+              top: topPaddingIcons,
+              height: 50,
+              zIndex: 1000,
+              backgroundColor: '#fff',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              paddingHorizontal: 10
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#eee',
+                marginHorizontal: 10,
+                borderRadius: 5
+              }}
+            >
+              <Ionicons name="ios-call" size={33} color="#7678ED" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#eee',
+                marginHorizontal: 10,
+                borderRadius: 5
+              }}
+            >
+              <Ionicons name="ios-mail" size={33} color="#7678ED" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#eee',
+                marginHorizontal: 10,
+                borderRadius: 5
+              }}
+            >
+              <Ionicons name="ios-globe" size={33} color="#7678ED" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#eee',
+                marginHorizontal: 10,
+                borderRadius: 5
+              }}
+            >
+              <Ionicons name="ios-map" size={33} color="#7678ED" />
+            </TouchableOpacity>
+          </Animated.View>
+
+          <Animated.View
+            style={{
+              position: 'absolute',
+              width,
+              top: headerHeight,
+              left: 0,
+              height: 50,
+              zIndex: 300,
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'row',
+              backgroundColor: '#fff'
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                padding: 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: !isofferstab ? '#7678ED' : '#eee',
+                marginHorizontal: 2,
+                marginLeft: 9
+              }}
+              onPress={() => {
+                this.setState({ rest: {} });
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: 'cairo-regular',
+                  color: !isofferstab ? '#eee' : '#7678ED',
+                  fontSize: 18
+                }}
+              >
+                الاعلانات ({user.onlineqty})
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                padding: 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: isofferstab ? '#7678ED' : '#eee',
+                marginHorizontal: 2,
+                marginRight: 9
+              }}
+              onPress={() => {
+                this.setState({ rest: { ...this.state.rest, isoffer: true } });
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: 'cairo-regular',
+                  color: isofferstab ? '#eee' : '#7678ED',
+                  fontSize: 18
+                }}
+              >
+                العروض ({user.offersqty})
+              </Text>
+            </TouchableOpacity>
           </Animated.View>
         </Animated.View>
 
@@ -289,7 +374,7 @@ class UserProfileScreen extends React.Component<any, any> {
                   this.getNextPosts(data, fetchMore, 'getUserPosts')
                 }
                 contentContainerStyle={{
-                  marginTop: HEADER_MAX_HEIGHT,
+                  marginTop: HEADER_HEIGHT + 40,
                   paddingBottom: 160
                 }}
                 refreshing={this.state.refreshing}

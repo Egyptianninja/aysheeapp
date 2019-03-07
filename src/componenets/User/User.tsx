@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, Image } from 'react-native';
 
-export const User = ({ name, avatar }: any) => {
+export const User = ({ name, avatar, about }: any) => {
   const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${avatar}`;
 
   return (
@@ -30,7 +30,7 @@ export const User = ({ name, avatar }: any) => {
           {name}
         </Text>
         <Text style={{ fontSize: 16, color: '#fff', textAlign: 'right' }}>
-          Slogan
+          {about}
         </Text>
       </View>
 

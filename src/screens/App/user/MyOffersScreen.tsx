@@ -6,7 +6,7 @@ import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import getMyPosts from '../../../graphql/query/getMyPosts';
 import { getNextPosts, readyUserPosts, Message } from '../../../utils';
-import { Loading } from '../../../componenets';
+import { Loading, Noresult } from '../../../componenets';
 import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import deletePost from '../../../graphql/mutation/deletePost';
 import { Menu, Edit } from '../../../componenets/Menu';
@@ -168,6 +168,9 @@ class MyOffersScreen extends React.Component<any, any> {
               console.log(`Error!: ${error}`);
             }
             const { posts } = data.getMyPosts;
+            if (posts && posts.length === 0) {
+              return <Noresult />;
+            }
             const rPosts = readyOfferPosts(posts, 400, 44, lang);
             return (
               <MasonryList

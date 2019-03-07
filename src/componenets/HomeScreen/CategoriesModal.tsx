@@ -161,6 +161,63 @@ export default class CategoriesModal extends React.Component<any, any> {
     );
   };
 
+  renderHeader = (title: any) => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          width: width - 20,
+          height: 50
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => this.props.hideCategoriesModal()}
+          style={{
+            position: 'absolute',
+            top: 5,
+            left: 20,
+            zIndex: 10,
+            width: 32,
+            height: 32,
+            borderRadius: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+          }}
+        >
+          <Text
+            style={{
+              color: '#777',
+              textAlign: 'center',
+              fontFamily: 'cairo-regular',
+              fontSize: 18
+            }}
+          >
+            ⤬
+          </Text>
+        </TouchableOpacity>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Text
+            style={{
+              color: '#777',
+              textAlign: 'center',
+              fontFamily: 'cairo-regular',
+              fontSize: 18
+            }}
+          >
+            {title}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   render() {
     const { word, isRTL } = this.props;
     return (
@@ -188,6 +245,7 @@ export default class CategoriesModal extends React.Component<any, any> {
             alignItems: 'center'
           }}
         >
+          {this.renderHeader('جميع الاقسام')}
           <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{
@@ -196,58 +254,6 @@ export default class CategoriesModal extends React.Component<any, any> {
                 alignItems: 'center'
               }}
             >
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: width - 20,
-                  height: 50
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => this.props.hideCategoriesModal()}
-                  style={{
-                    position: 'absolute',
-                    top: 5,
-                    left: 20,
-                    zIndex: 10,
-                    width: 32,
-                    height: 32,
-                    borderRadius: 16,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: '#777',
-                      textAlign: 'center',
-                      fontFamily: 'cairo-regular',
-                      fontSize: 18
-                    }}
-                  >
-                    ⤬
-                  </Text>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: '#777',
-                      textAlign: 'center',
-                      fontFamily: 'cairo-regular',
-                      fontSize: 18
-                    }}
-                  >
-                    جميع الاقسام
-                  </Text>
-                </View>
-              </View>
               {this.renderOfferShop()}
               <View
                 style={{

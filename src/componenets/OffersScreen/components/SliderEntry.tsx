@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+
 import { ParallaxImage } from '../../../utils';
 import styles from '../styles/SliderEntry';
 
-export default class SliderEntry extends Component<any, any> {
+class SliderEntry extends Component<any, any> {
   get image() {
     const {
       data: { photos },
       parallax,
       parallaxProps,
+      navigation,
       even
     } = this.props;
 
@@ -38,6 +41,7 @@ export default class SliderEntry extends Component<any, any> {
       data: { _id, body, end, photos, start, title },
       even
     } = this.props;
+    const { words, lang, isRTL } = this.props;
 
     const uppercaseTitle = title ? (
       <Text
@@ -54,8 +58,13 @@ export default class SliderEntry extends Component<any, any> {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.slideInnerContainer}
-        onLongPress={() => {
-          alert(`You've clicked '${title}'`);
+        onPress={() => {
+          this.props.navigation.navigate('ItemScreenModal', {
+            post: this.props.data,
+            word: words,
+            lang,
+            isRTL
+          });
         }}
       >
         <View
@@ -81,3 +90,11 @@ export default class SliderEntry extends Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => ({
+  lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
+  words: state.glob.language.words
+});
+
+export default connect(mapStateToProps)(SliderEntry);

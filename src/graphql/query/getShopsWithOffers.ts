@@ -5,6 +5,7 @@ export default gql`
     getShopsWithOffers {
       _id
       name
+      about
       avatar
       offers {
         _id
@@ -17,6 +18,7 @@ export default gql`
           lat
           lon
         }
+        userId
       }
     }
   }

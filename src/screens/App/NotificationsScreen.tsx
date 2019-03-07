@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { debounce } from 'lodash';
 import getMyNotifications from '../../graphql/query/getMyNotifications';
 import { getDBNextPosts } from '../../utils';
-import { NotificationItem, Loading } from '../../componenets';
+import { NotificationItem, Loading, Noresult } from '../../componenets';
 import { connect } from 'react-redux';
 
 class NotificationsScreen extends React.Component<any, any> {
@@ -32,9 +32,12 @@ class NotificationsScreen extends React.Component<any, any> {
               return <Loading />;
             }
             if (error) {
-              return <View />;
+              return <Noresult />;
             }
             const notis = data.getMyNotifications.data;
+            if (notis && notis.length === 0) {
+              return <Noresult />;
+            }
             return (
               <View style={{ flex: 1, paddingTop: 5, backgroundColor: '#eee' }}>
                 <FlatList

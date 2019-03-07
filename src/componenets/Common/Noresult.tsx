@@ -15,7 +15,7 @@ const Noresult = ({ title, isRTL }: any) => (
     <View
       style={{
         width: 150,
-        height: 40,
+        height: 150,
         opacity: 0.4
       }}
     >
@@ -25,7 +25,7 @@ const Noresult = ({ title, isRTL }: any) => (
           width: '100%',
           height: '100%'
         }}
-        source={images.namelogo}
+        source={images.namelogofull}
       />
     </View>
 

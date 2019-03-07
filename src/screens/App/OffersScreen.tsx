@@ -34,22 +34,26 @@ export default class OffersScreen extends Component<any, any> {
     };
   }
 
-  renderItemWithParallax({ item, index }: any, parallaxProps: any) {
+  renderItemWithParallax = ({ item, index }: any, parallaxProps: any) => {
     return (
       <SliderEntry
         data={item}
         even={(index + 1) % 2 === 0}
         parallax={true}
         parallaxProps={parallaxProps}
+        navigation={this.props.navigation}
       />
     );
-  }
+  };
 
   renderShopOffers = (data: any) => {
-    const { name, avatar, color, offers } = data;
+    const { _id, name, avatar, color, offers, about } = data;
     return (
-      <View style={[styles.exampleContainer, { backgroundColor: color }]}>
-        <User avatar={avatar} name={name} />
+      <View
+        key={_id}
+        style={[styles.exampleContainer, { backgroundColor: color }]}
+      >
+        <User avatar={avatar} name={name} about={about} />
         <Carousel
           ref={(c: any) => {
             if (!this.state.slider1Ref) {
@@ -114,6 +118,7 @@ export default class OffersScreen extends Component<any, any> {
               return <Text>{error}</Text>;
             }
             const shops = data.getShopsWithOffers;
+
             if (shops && shops.length === 0) {
               return <View />;
             }

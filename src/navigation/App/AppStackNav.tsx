@@ -4,7 +4,6 @@ import { createStackNavigator } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../../utils';
 import PostTabsStack from './PostTabsStack';
-import StoreTabsStack from './StoreTabsStack';
 import {
   HomeScreen,
   ItemScreen,
@@ -23,11 +22,12 @@ import {
   CameraScreen,
   AddOfferScreen,
   UpgradeToStore,
-  OffersScreen
+  OffersScreen,
+  ItemScreenModal,
+  ProfileScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
-import { Constants } from 'expo';
-import StoreOfferScreen from '../../screens/App/user/StoreOfferScreen';
+import { user } from '../../store/getStore';
 
 export const AppStackNavigator = createStackNavigator({
   HomeScreen: {
@@ -61,6 +61,16 @@ export const AppStackNavigator = createStackNavigator({
       headerTintColor: '#555',
       headerTitleStyle: styles.headerTitleStyle,
       headerBackTitle: null
+    })
+  },
+  ItemScreenModal: {
+    screen: ItemScreenModal,
+    navigationOptions: ({ navigation }: any) => ({
+      headerStyle: styles.headerStyle,
+      headerTintColor: '#555',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerBackTitle: null,
+      mode: 'modal'
     })
   },
 
@@ -170,11 +180,9 @@ export const AppStackNavigator = createStackNavigator({
     })
   },
   UserProfileScreen: {
-    screen: UserProfileScreen,
-    // screen: StoreTabsStack,
-    // screen: StoreOfferScreen,
+    screen: ProfileScreen,
     navigationOptions: ({ navigation }: any) => ({
-      user: navigation.getParam('user'),
+      title: navigation.getParam('user').name,
       headerTintColor: '#555',
       headerBackTitle: null
     })
