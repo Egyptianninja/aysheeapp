@@ -287,7 +287,6 @@ class HomeScreen extends React.Component<any, any> {
     });
     return (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
-        <StatusBar translucent={true} barStyle={'dark-content'} />
         <Menu
           post={this.state.modalPost}
           favoritePost={this.props.favoritePost}

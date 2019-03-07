@@ -147,7 +147,12 @@ class CategoriesScroll extends React.Component<any, any> {
               flexDirection: 'row'
             }}
           >
-            <TouchableOpacity onPress={() => this.props.removeAllFilters()}>
+            <TouchableOpacity
+              style={{
+                width: 55
+              }}
+              onPress={() => this.props.removeAllFilters()}
+            >
               <Ionicons
                 name="ios-arrow-back"
                 size={31}
@@ -162,10 +167,24 @@ class CategoriesScroll extends React.Component<any, any> {
             </TouchableOpacity>
             <Text
               style={{
-                padding: 10
+                padding: 5,
+                fontSize: 14,
+                fontFamily: 'cairo-regular',
+                color: '#7678ED'
               }}
             >
-              Category Name
+              جوالات
+            </Text>
+            <Text
+              style={{
+                padding: 5,
+                fontSize: 14,
+                paddingRight: 10,
+                fontFamily: 'cairo-regular',
+                color: '#777'
+              }}
+            >
+              فلاتر
             </Text>
           </View>
         )}
@@ -246,7 +265,7 @@ class CategoriesScroll extends React.Component<any, any> {
               <View style={{ flexDirection: 'row-reverse' }}>
                 <OfferIcon
                   navigation={this.props.navigation}
-                  title="Best Offers"
+                  title="اهم العروض"
                 />
                 {this.renderCategories(categories)}
               </View>

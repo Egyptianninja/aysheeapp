@@ -105,6 +105,8 @@ class UserProfileScreen extends React.Component<any, any> {
 
     const user = this.props.navigation.getParam('user');
     const isofferstab = this.state.rest.isoffer;
+    const maincolor = user.color ? user.color : '#7678ED';
+    const ismyaccount = user._id === this.props.user._id;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -148,7 +150,7 @@ class UserProfileScreen extends React.Component<any, any> {
             style={{
               height: 80,
               width: 80,
-              borderColor: '#7678ED',
+              borderColor: maincolor,
               borderWidth: 2,
               borderRadius: 40,
               overflow: 'hidden',
@@ -216,19 +218,48 @@ class UserProfileScreen extends React.Component<any, any> {
             >
               {user.about}
             </Text>
+            {ismyaccount && (
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate('Profile');
+                }}
+                style={{
+                  marginTop: 5,
+                  paddingHorizontal: 10,
+                  borderColor: '#ddd',
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-around'
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: 'cairo-regular',
+                    fontSize: 12
+                  }}
+                >
+                  تعديل الملف الشخصي
+                </Text>
+                <Ionicons name="md-person" size={24} color="#000" />
+              </TouchableOpacity>
+            )}
           </Animated.View>
           <Animated.View
             style={{
               position: 'absolute',
               width,
               top: topPaddingIcons,
-              height: 50,
+              height: 40,
               zIndex: 1000,
               backgroundColor: '#fff',
               flexDirection: 'row',
               justifyContent: 'space-around',
               alignItems: 'center',
-              paddingHorizontal: 10
+              paddingHorizontal: 10,
+              borderColor: '#ddd',
+              borderWidth: 1
             }}
           >
             <TouchableOpacity
@@ -236,51 +267,67 @@ class UserProfileScreen extends React.Component<any, any> {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#eee',
                 marginHorizontal: 10,
                 borderRadius: 5
               }}
             >
-              <Ionicons name="ios-call" size={33} color="#7678ED" />
+              <Ionicons name="ios-call" size={31} color={maincolor} />
             </TouchableOpacity>
+            <View
+              style={{
+                height: 30,
+                borderLeftColor: '#ddd',
+                borderLeftWidth: 1
+              }}
+            />
             <TouchableOpacity
               style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#eee',
                 marginHorizontal: 10,
                 borderRadius: 5
               }}
             >
-              <Ionicons name="ios-mail" size={33} color="#7678ED" />
+              <Ionicons name="ios-mail" size={31} color={maincolor} />
             </TouchableOpacity>
+            <View
+              style={{
+                height: 30,
+                borderLeftColor: '#ddd',
+                borderLeftWidth: 1
+              }}
+            />
             <TouchableOpacity
               style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#eee',
                 marginHorizontal: 10,
                 borderRadius: 5
               }}
             >
-              <Ionicons name="ios-globe" size={33} color="#7678ED" />
+              <Ionicons name="ios-globe" size={31} color={maincolor} />
             </TouchableOpacity>
+            <View
+              style={{
+                height: 30,
+                borderLeftColor: '#ddd',
+                borderLeftWidth: 1
+              }}
+            />
             <TouchableOpacity
               style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#eee',
                 marginHorizontal: 10,
                 borderRadius: 5
               }}
             >
-              <Ionicons name="ios-map" size={33} color="#7678ED" />
+              <Ionicons name="ios-map" size={31} color={maincolor} />
             </TouchableOpacity>
           </Animated.View>
-
           <Animated.View
             style={{
               position: 'absolute',
@@ -292,7 +339,9 @@ class UserProfileScreen extends React.Component<any, any> {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'row',
-              backgroundColor: '#fff'
+              backgroundColor: '#fff',
+              borderColor: '#ddd',
+              borderWidth: 1
             }}
           >
             <TouchableOpacity
@@ -301,7 +350,6 @@ class UserProfileScreen extends React.Component<any, any> {
                 padding: 5,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: !isofferstab ? '#7678ED' : '#eee',
                 marginHorizontal: 2,
                 marginLeft: 9
               }}
@@ -312,32 +360,40 @@ class UserProfileScreen extends React.Component<any, any> {
               <Text
                 style={{
                   fontFamily: 'cairo-regular',
-                  color: !isofferstab ? '#eee' : '#7678ED',
-                  fontSize: 18
+                  color: !isofferstab ? maincolor : '#000',
+                  fontSize: 16
                 }}
               >
                 الاعلانات ({user.onlineqty})
               </Text>
             </TouchableOpacity>
+            <View
+              style={{
+                height: 30,
+                borderLeftColor: '#ddd',
+                borderLeftWidth: 1
+              }}
+            />
             <TouchableOpacity
               style={{
                 flex: 1,
                 padding: 5,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: isofferstab ? '#7678ED' : '#eee',
                 marginHorizontal: 2,
                 marginRight: 9
               }}
               onPress={() => {
-                this.setState({ rest: { ...this.state.rest, isoffer: true } });
+                this.setState({
+                  rest: { ...this.state.rest, isoffer: true }
+                });
               }}
             >
               <Text
                 style={{
                   fontFamily: 'cairo-regular',
-                  color: isofferstab ? '#eee' : '#7678ED',
-                  fontSize: 18
+                  color: isofferstab ? maincolor : '#000',
+                  fontSize: 16
                 }}
               >
                 العروض ({user.offersqty})
@@ -409,6 +465,7 @@ class UserProfileScreen extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   categories: state.glob.language.category,
   isAuthenticated: state.user.isAuthenticated,
+  user: state.user.user,
   isRTL: state.glob.isRTL,
   lang: state.glob.languageName,
   words: state.glob.language.words

@@ -22,7 +22,8 @@ import {
   ItemLocation,
   call,
   ImageViewer,
-  Message
+  Message,
+  getDate
 } from '../../utils';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
@@ -518,6 +519,22 @@ class ItemView extends React.Component<any, any> {
                 furntObject={furntObject}
                 warrantyObject={warrantyObject}
               />
+            )}
+            {post.start && (
+              <Text
+                style={{
+                  position: 'absolute',
+                  left: 10,
+                  top: 0,
+                  textAlign: 'left',
+                  color: '#7678ED',
+                  fontSize: 12,
+                  marginTop: 6
+                }}
+                numberOfLines={2}
+              >
+                {getDate(post.start)} - {getDate(post.end)}
+              </Text>
             )}
             <BodyView
               ardroid={this.ardroid}

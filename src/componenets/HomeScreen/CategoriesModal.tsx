@@ -51,7 +51,11 @@ export default class CategoriesModal extends React.Component<any, any> {
               backgroundColor: '#eee',
               marginRight: 5,
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              borderRadius: 8,
+              borderColor: '#ddd',
+              borderWidth: 1,
+              overflow: 'hidden'
             }}
           >
             <Image
@@ -62,19 +66,24 @@ export default class CategoriesModal extends React.Component<any, any> {
                   height: '100%'
                 }
               ]}
-              source={images.offers}
+              source={images.offersphoto}
             />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              console.log('shops');
+              this.props.navigation.navigate('ShopsScreen');
+              this.props.hideCategoriesModal();
             }}
             style={{
               flex: 1,
               marginLeft: 5,
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              borderRadius: 8,
+              borderColor: '#ddd',
+              borderWidth: 1,
+              overflow: 'hidden'
             }}
           >
             <Image

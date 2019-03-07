@@ -35,10 +35,7 @@ const CategoryModalIcon = ({
           overflow: 'hidden',
           borderRadius: 8,
           borderColor: '#ddd',
-          borderWidth: 1,
-          shadowOffset: { width: 3, height: 3 },
-          shadowColor: '#555',
-          shadowOpacity: 0.3
+          borderWidth: 1
         }}
       >
         <Image

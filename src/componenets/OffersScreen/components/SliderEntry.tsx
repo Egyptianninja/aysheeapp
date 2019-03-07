@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
-import { ParallaxImage } from '../../../utils';
+import { ParallaxImage, getDate } from '../../../utils';
 import styles from '../styles/SliderEntry';
 
 class SliderEntry extends Component<any, any> {
@@ -38,14 +38,14 @@ class SliderEntry extends Component<any, any> {
 
   render() {
     const {
-      data: { _id, body, end, photos, start, title },
+      data: { _id, body, end, photos, start, title, isrtl },
       even
     } = this.props;
     const { words, lang, isRTL } = this.props;
 
     const uppercaseTitle = title ? (
       <Text
-        style={[styles.title, even ? styles.titleEven : {}]}
+        style={[styles.title, { textAlign: isrtl ? 'right' : 'left' }]}
         numberOfLines={2}
       >
         {title.toUpperCase()}
@@ -67,23 +67,31 @@ class SliderEntry extends Component<any, any> {
           });
         }}
       >
-        <View
-          style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}
-        >
+        <View style={[styles.imageContainer]}>
           {this.image}
-          <View
-            style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]}
-          />
+          <View style={[styles.radiusMask]} />
         </View>
-        <View
-          style={[styles.textContainer, even ? styles.textContainerEven : {}]}
-        >
+        <View style={[styles.textContainer]}>
           {uppercaseTitle}
           <Text
-            style={[styles.subtitle, even ? styles.subtitleEven : {}]}
+            style={[styles.subtitle, { textAlign: isrtl ? 'right' : 'left' }]}
             numberOfLines={2}
           >
             {body}
+          </Text>
+          <Text
+            style={{
+              position: 'absolute',
+              left: 20,
+              top: -10,
+              textAlign: 'left',
+              color: 'rgba(255, 255, 255, 0.7)',
+              fontSize: 12,
+              marginTop: 6
+            }}
+            numberOfLines={2}
+          >
+            {getDate(start)} - {getDate(end)}
           </Text>
         </View>
       </TouchableOpacity>

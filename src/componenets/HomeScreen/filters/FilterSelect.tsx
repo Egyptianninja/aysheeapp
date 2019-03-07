@@ -157,10 +157,11 @@ export default class FilterSelect extends React.Component<any, any> {
                 : this.props.disable
                 ? '#ddd'
                 : '#fff',
-              fontSize: 16,
+              fontSize: 14,
               // fontFamily: 'cairo-regular',
               fontWeight: selected ? 'bold' : '300',
-              paddingHorizontal: 5
+              paddingHorizontal: 5,
+              fontFamily: 'cairo-regular'
             }}
           >
             {selected

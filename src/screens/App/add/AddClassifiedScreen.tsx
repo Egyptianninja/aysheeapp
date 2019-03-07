@@ -55,8 +55,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
   noNew = [5, 9, 17, 18];
   noWaranty = [0, 5, 9, 12, 13, 17, 18];
 
-  noKind = [4, 7, 11, 19];
-  kind = [2, 3, 6, 8, 10, 12, 13, 14, 16, 17, 18];
+  noKind = [4, 7, 19];
+  kind = [2, 3, 6, 8, 10, 11, 12, 13, 14, 16, 17, 18];
   eBrand = [2, 6];
 
   acc = [8];

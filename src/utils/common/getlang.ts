@@ -15,3 +15,7 @@ export const getLang = () => {
   const locale = getLocale();
   return locale.lang.substring(0, 2);
 };
+export const getLocaleLang = () => {
+  const locale = getLocale();
+  return locale.lang;
+};

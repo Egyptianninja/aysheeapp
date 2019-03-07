@@ -14,7 +14,7 @@ export const colors = {
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background1
+    backgroundColor: '#fff'
   },
   gradient: {
     ...StyleSheet.absoluteFillObject

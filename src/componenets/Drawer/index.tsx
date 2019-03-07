@@ -92,7 +92,7 @@ class Drawer extends React.Component<any, any> {
               flex: 1,
               marginHorizontal: 10,
               marginVertical: 7,
-              flexDirection: 'row',
+              flexDirection: 'row-reverse',
               alignItems: 'center',
               justifyContent: 'flex-start'
             }}
@@ -107,14 +107,14 @@ class Drawer extends React.Component<any, any> {
               <Ionicons
                 name={icon}
                 size={33}
-                color="#5B4C57"
+                color="#555"
                 style={{ marginHorizontal: 5 }}
               />
             </View>
 
             <Text
               style={{
-                color: '#5B4C57',
+                color: '#555',
                 fontSize: 16,
                 fontFamily: lng === 'ar' ? 'cairo-light' : 'comfortaa-Regular'
               }}
@@ -134,7 +134,7 @@ class Drawer extends React.Component<any, any> {
         }/image/upload/w_${100}/${user.avatar}`
       : 'https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png';
     return (
-      <View style={[styles.drawer, { borderBottomColor: '#5B4C57' }]}>
+      <View style={[styles.drawer, { borderBottomColor: '#555' }]}>
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('Profile');
@@ -157,17 +157,46 @@ class Drawer extends React.Component<any, any> {
           }}
         >
           {!user.avatar && (
-            <Avatar name={user.name ? user.name : user.uniquename} size={80} />
+            <View
+              style={{
+                width: 88,
+                height: 88,
+                borderRadius: 44,
+                borderColor: user.color,
+                borderWidth: 2,
+                backgroundColor: '#fff',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Avatar
+                name={user.name ? user.name : user.uniquename}
+                size={80}
+              />
+            </View>
           )}
           {user.avatar && (
-            <Image
+            <View
               style={{
-                height: 80,
-                width: 80,
-                borderRadius: 40
+                width: 88,
+                height: 88,
+                borderRadius: 44,
+                borderColor: user.color,
+                borderWidth: 2,
+                backgroundColor: '#fff',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
-              source={{ uri }}
-            />
+            >
+              <Image
+                style={{
+                  height: 80,
+                  width: 80,
+                  borderRadius: 40
+                }}
+                source={{ uri }}
+              />
+            </View>
           )}
         </TouchableOpacity>
         <TouchableOpacity
@@ -179,7 +208,7 @@ class Drawer extends React.Component<any, any> {
             <Text
               style={{
                 fontSize: 16,
-                color: '#5B4C57',
+                color: '#555',
                 paddingVertical: 10
               }}
             >
@@ -190,8 +219,9 @@ class Drawer extends React.Component<any, any> {
             <Text
               style={{
                 fontSize: 16,
-                color: '#5B4C57',
-                paddingVertical: 10
+                color: '#555',
+                paddingVertical: 10,
+                fontFamily: 'cairo-light'
               }}
             >
               {user.name}
@@ -228,7 +258,7 @@ class Drawer extends React.Component<any, any> {
           <Text
             style={{
               fontSize: 18,
-              color: '#5B4C57',
+              color: '#555',
               fontFamily: 'cairo-bold',
               paddingVertical: 10
             }}

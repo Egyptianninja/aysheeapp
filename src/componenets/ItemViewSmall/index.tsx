@@ -67,7 +67,7 @@ const ItemViewSmall = (props: any) => {
                   {
                     width: imageWidth - 2,
                     height: imageHeight,
-                    backgroundColor: '#f1f1f1'
+                    backgroundColor: '#fff'
                   }
                 ]}
               >
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderWidth: 1,
     borderColor: '#e5e5e5',
-    backgroundColor: '#f1f1f1'
+    backgroundColor: '#fff'
     // shadowColor: '#000',
     // shadowOffset: {
     //   width: 0,

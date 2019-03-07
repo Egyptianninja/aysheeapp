@@ -5,6 +5,7 @@ import ItemScreenModal from './App/ItemScreenModal';
 import ChoiseScreen from './App/ChoiseScreen';
 import OffersScreen from './App/OffersScreen';
 import NotificationsScreen from './App/NotificationsScreen';
+import ShopsScreen from './App/ShopsScreen';
 import AddClassifiedScreen from './App/add/AddClassifiedScreen';
 import AddOfferScreen from './App/add/AddOfferScreen';
 import AddRealEstateScreen from './App/add/AddRealEstateScreen';
@@ -53,5 +54,6 @@ export {
   UpgradeToStore,
   OffersScreen,
   ItemScreenModal,
-  ProfileScreen
+  ProfileScreen,
+  ShopsScreen
 };

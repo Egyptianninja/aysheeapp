@@ -62,7 +62,12 @@ export default {
       nameGlob: 'مواد بناء, Building Materials, Building Materials'
     },
 
-    { id: 11, sort: 16, name: 'Music', nameGlob: 'الات موسيقية, Music, Music' },
+    {
+      id: 11,
+      sort: 16,
+      name: 'Handcrafts',
+      nameGlob: 'حرف يدوية وفن, Handcrafts, Handcrafts'
+    },
     { id: 12, sort: 17, name: 'Books', nameGlob: 'كتب, Books, Books' },
     { id: 13, sort: 7, name: 'Clothes', nameGlob: 'ملابس, Clothes, Clothes' },
     { id: 14, sort: 3, name: 'Mobile', nameGlob: 'جوالات, Mobile, Mobile' },
@@ -150,6 +155,11 @@ export default {
     { pid: 10, id: 95, name: 'جبس ودهانات', nameGlob: 'جبس ودهانات' },
     { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
     { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
+
+    { pid: 11, id: 106, name: 'Handcrafts', nameGlob: 'حرف يدوية' },
+    { pid: 11, id: 107, name: 'Music Instruments', nameGlob: 'آلات موسيقية' },
+    { pid: 11, id: 108, name: 'Drawing and Arts', nameGlob: 'رسم وفنون' },
+    { pid: 11, id: 109, name: 'Othes', nameGlob: 'أخرى' },
 
     { pid: 6, id: 98, name: 'Water Heaters', nameGlob: 'سخانات مياه' },
     { pid: 6, id: 99, name: 'Water Coolers', nameGlob: 'مبردات مياه' },

@@ -15,6 +15,7 @@ export const images = {
   logo: require('../../assets/logo.png'),
   icon: require('../../assets/icon.png'),
   offers: require('../../assets/icons/header/offers.png'),
+  offersphoto: require('../../assets/icons/header/offersphoto.jpg'),
   shops: require('../../assets/icons/header/shops.jpg'),
 
   home: require('../../assets/icons/header/home.png'),
@@ -36,7 +37,7 @@ export const images = {
   icon5: require('../../assets/icons/main/furniture.png'),
   icon6: require('../../assets/icons/main/childreen-needs.jpg'),
   icon7: require('../../assets/icons/main/health-and-sport.png'),
-  icon8: require('../../assets/icons/main/music.jpg'),
+  icon8: require('../../assets/icons/main/art.jpg'),
   icon9: require('../../assets/icons/main/books.png'),
   icon10: require('../../assets/icons/main/clothes.jpg'),
   icon11: require('../../assets/icons/main/mobile.jpg'),

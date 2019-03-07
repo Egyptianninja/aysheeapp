@@ -13,6 +13,7 @@ import { isArabic, arabicToNum } from './arabic';
 import { nameToColor } from './color';
 import { getLang, getLocale } from './getlang';
 import { filterOptions } from './general';
+import { getDate } from './getDate';
 import Orientation from './orientation';
 import ZoomView from './zoomView';
 
@@ -33,5 +34,6 @@ export {
   ZoomView,
   getLocaleCountry,
   getCodeFromCountry,
-  getCountryCityFromToken
+  getCountryCityFromToken,
+  getDate
 };

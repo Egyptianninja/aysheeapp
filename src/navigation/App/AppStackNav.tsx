@@ -24,7 +24,8 @@ import {
   UpgradeToStore,
   OffersScreen,
   ItemScreenModal,
-  ProfileScreen
+  ProfileScreen,
+  ShopsScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 import { user } from '../../store/getStore';
@@ -191,6 +192,15 @@ export const AppStackNavigator = createStackNavigator({
     screen: NotificationsScreen,
     navigationOptions: () => ({
       headerTintColor: '#555',
+      headerBackTitle: null
+    })
+  },
+  ShopsScreen: {
+    screen: ShopsScreen,
+    navigationOptions: () => ({
+      headerTintColor: '#555',
+      headerTitleStyle: styles.headerTitleStyle,
+      title: 'قسم المتاجر',
       headerBackTitle: null
     })
   },

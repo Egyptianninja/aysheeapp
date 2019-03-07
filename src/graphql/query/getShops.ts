@@ -26,21 +26,6 @@ export default gql`
         lat
         lon
       }
-      offers {
-        _id
-        title
-        phone
-        body
-        photos
-        start
-        end
-        isrtl
-        trueLocation {
-          lat
-          lon
-        }
-        userId
-      }
     }
   }
 `;

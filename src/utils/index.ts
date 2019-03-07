@@ -37,7 +37,8 @@ import {
   ZoomView,
   getLocaleCountry,
   getCodeFromCountry,
-  getCountryCityFromToken
+  getCountryCityFromToken,
+  getDate
 } from './common';
 import { since } from './since';
 import {
@@ -116,5 +117,6 @@ export {
   Carousel,
   Pagination,
   ParallaxImage,
-  getInputRangeFromIndexes
+  getInputRangeFromIndexes,
+  getDate
 };

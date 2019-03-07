@@ -53,7 +53,13 @@ export default class OffersScreen extends Component<any, any> {
         key={_id}
         style={[styles.exampleContainer, { backgroundColor: color }]}
       >
-        <User avatar={avatar} name={name} about={about} />
+        <User
+          navigation={this.props.navigation}
+          avatar={avatar}
+          name={name}
+          about={about}
+          user={data}
+        />
         <Carousel
           ref={(c: any) => {
             if (!this.state.slider1Ref) {
@@ -83,11 +89,11 @@ export default class OffersScreen extends Component<any, any> {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar
+        {/* <StatusBar
           translucent={true}
           backgroundColor={'rgba(0, 0, 0, 0.3)'}
           barStyle={'light-content'}
-        />
+        /> */}
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
           style={{
@@ -95,9 +101,9 @@ export default class OffersScreen extends Component<any, any> {
             top: 30,
             left: 15,
             zIndex: 100,
-            width: 36,
-            height: 36,
-            borderRadius: 18,
+            width: 60,
+            height: 40,
+            paddingHorizontal: 20,
             justifyContent: 'center',
             alignItems: 'center'
           }}
@@ -148,97 +154,3 @@ export default class OffersScreen extends Component<any, any> {
     );
   }
 }
-
-// const shops = [
-//   {
-//     _id: '5c7c1b4e4b557e001c46a999',
-//     name: 'عروض ازياء سبلاش',
-//     avatar: 'tyeteyfwpjzz7ogz5vmd',
-//     color: '#7678ED',
-//     offers: [
-//       {
-//         _id: '5c7f10915cc915001aa8e77c',
-//         title: 'اشتري واسترجع النصف',
-//         body: 'هذا العرض بجميع محلات سبلاش قطر ',
-//         photos: ['vje67evix6bsgnlpycq3'],
-//         start: '2019-03-06T00:00:00.000Z',
-//         end: '2019-03-31T00:00:00.000Z',
-//         trueLocation: {
-//           lat: 25.274608692418138,
-//           lon: 51.49217156344039
-//         }
-//       },
-//       {
-//         _id: '5c7f20585cc915001aa8e783',
-//         title: 'عرض مدخر النقود',
-//         body: 'مجمع قطر للتسوق يعلن عن عرض مدخر النقود',
-//         photos: ['oemn9geq4fylhakoqtse'],
-//         start: '2019-03-07T00:00:00.000Z',
-//         end: '2019-03-15T00:00:00.000Z',
-//         trueLocation: {
-//           lat: 25.274588242744557,
-//           lon: 51.49217199022465
-//         }
-//       }
-//     ]
-//   },
-//   {
-//     _id: '5c7f0eb9bf1b98001b9ede58',
-//     name: 'العود للعطور',
-//     avatar: null,
-//     color: '#7678ED',
-//     offers: [
-//       {
-//         _id: '5c7f0fb95cc915001aa8e77b',
-//         title: 'عرض للعود',
-//         body: 'عرض جديد للعود',
-//         photos: ['lg3jp54zohmzucmzjncl'],
-//         start: '2019-03-12T00:00:00.000Z',
-//         end: '2019-03-28T00:00:00.000Z',
-//         trueLocation: {
-//           lat: 25.22549437106315,
-//           lon: 51.43563692745055
-//         }
-//       },
-//       {
-//         _id: '5c7f10d45cc915001aa8e77d',
-//         title: 'عروض الصيف',
-//         body: 'عروض الصيف',
-//         photos: ['p3dqff0o7hgeeae1ysyb'],
-//         start: '2019-03-20T00:00:00.000Z',
-//         end: '2019-03-23T00:00:00.000Z',
-//         trueLocation: null
-//       },
-//       {
-//         _id: '5c7f13c35cc915001aa8e780',
-//         title: 'عرض جديد',
-//         body: 'عرض جديد',
-//         photos: ['pzycqzyt4nr1c3foratp'],
-//         start: '2019-03-13T00:00:00.000Z',
-//         end: '2019-03-21T00:00:00.000Z',
-//         trueLocation: null
-//       },
-//       {
-//         _id: '5c7f15705cc915001aa8e781',
-//         title: 'عروض الربيع',
-//         body: 'عروض الربيع',
-//         photos: ['enc6cz5v5vmrbeosdkyx'],
-//         start: '2019-03-19T00:00:00.000Z',
-//         end: '2019-03-23T00:00:00.000Z',
-//         trueLocation: {
-//           lat: 25.225508811556914,
-//           lon: 51.43560039983238
-//         }
-//       },
-//       {
-//         _id: '5c7f161d5cc915001aa8e782',
-//         title: 'العرض الخامس',
-//         body: 'العرض الخامس',
-//         photos: ['xwbari6qdprrua7benjp'],
-//         start: '2019-03-13T00:00:00.000Z',
-//         end: '2019-03-21T00:00:00.000Z',
-//         trueLocation: null
-//       }
-//     ]
-//   }
-// ];

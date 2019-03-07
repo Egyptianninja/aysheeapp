@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 
-export const User = ({ name, avatar, about }: any) => {
+export const User = ({ name, avatar, about, navigation, user }: any) => {
   const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${avatar}`;
 
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('UserProfileScreen', { user });
+      }}
       style={{
         alignItems: 'center',
         flexDirection: 'row',
@@ -55,6 +58,6 @@ export const User = ({ name, avatar, about }: any) => {
           source={{ uri }}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

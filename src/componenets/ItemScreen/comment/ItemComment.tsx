@@ -68,9 +68,11 @@ class ItemComment extends React.PureComponent<any, any> {
             alignSelf: 'center'
           }}
         >
-          <Text style={{ color: '#7678ED' }}>
-            {this.props.word.morecomments}
-          </Text>
+          {messages.lenght > 0 && (
+            <Text style={{ color: '#7678ED' }}>
+              {this.props.word.morecomments}
+            </Text>
+          )}
         </TouchableOpacity>
         {messages}
       </View>

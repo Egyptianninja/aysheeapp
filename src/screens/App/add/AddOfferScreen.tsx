@@ -23,7 +23,8 @@ import {
   UserLocation,
   pickImage,
   pickImageWithoutUpload,
-  uploadPickedImage
+  uploadPickedImage,
+  getPureNumber
 } from '../../../utils';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
@@ -105,7 +106,7 @@ class AddServiceScreen extends React.Component<any, any> {
   };
 
   handleSubmit = async (values: any, bag: any) => {
-    const { title, body, startend, location } = values;
+    const { title, body, startend, location, phone } = values;
     const isrtl = isArabic(title);
 
     const photo = this.state.image
@@ -138,7 +139,8 @@ class AddServiceScreen extends React.Component<any, any> {
         isrtl,
         start,
         end,
-        trueLocation
+        trueLocation,
+        phone
       }
     });
 
@@ -181,12 +183,16 @@ class AddServiceScreen extends React.Component<any, any> {
                 title: '',
                 body: '',
                 startend: '',
+                phone: getPureNumber(this.props.user.phone),
                 location: false
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
                 title: Yup.string()
                   .max(100)
+                  .required('Required'),
+                phone: Yup.string()
+                  .max(25)
                   .required('Required')
               })}
               render={({
@@ -265,16 +271,18 @@ class AddServiceScreen extends React.Component<any, any> {
                     </React.Fragment>
                   )}
                   {image && (
-                    <Image
-                      source={{ uri: image.uri }}
-                      style={{
-                        flex: 1,
-                        width: width - 60,
-                        height: (image.height / image.width) * (width - 60),
-                        resizeMode: 'cover',
-                        borderRadius: 8
-                      }}
-                    />
+                    <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
+                      <Image
+                        source={{ uri: image.uri }}
+                        style={{
+                          flex: 1,
+                          width: width - 60,
+                          height: (image.height / image.width) * (width - 60),
+                          resizeMode: 'cover',
+                          borderRadius: 8
+                        }}
+                      />
+                    </TouchableWithoutFeedback>
                   )}
                   <View
                     style={{
@@ -298,6 +306,21 @@ class AddServiceScreen extends React.Component<any, any> {
                       iconName="ios-calendar"
                     />
                   </View>
+                  <Input
+                    rtl={isRTL}
+                    num
+                    name="phone"
+                    label={word.phone}
+                    value={values.phone}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.phone && errors.phone}
+                    keyboardType="number-pad"
+                    height={40}
+                  />
                   <Group
                     color="#444"
                     size={24}
