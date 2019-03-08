@@ -128,10 +128,14 @@ export const icons = {
     { id: 'isnew', icon: () => images.isnew },
     { id: 'issale', icon: () => images.issale },
     { id: 'isfurnishered', icon: () => images.isfurnishered },
+    { id: 'isforman', icon: () => images.kindId },
+    { id: 'isjobreq', icon: () => images.kindId },
+    { id: 'isservicereq', icon: () => images.kindId },
     { id: 'rooms', icon: () => images.rooms },
     { id: 'bathrooms', icon: () => images.bathrooms },
     { id: 'year', icon: () => images.year }
   ],
+
   home: { id: 'home', icon: () => images.home },
   mainmenu: { id: 'menu', icon: () => images.menu },
   namelogo: { id: 'menu', icon: () => images.namelogo },

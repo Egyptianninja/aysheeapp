@@ -1,12 +1,12 @@
 import { AsyncStorage } from 'react-native';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import reducers from './reducers';
+import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
 import { getLocale } from '../load';
-import { setLanguage, initBrands, initSubBrands } from './actions/globActions';
+import { initBrands, initSubBrands, setLanguage } from './actions/globActions';
+import reducers from './reducers';
 const persistConfig = {
   key: 'root',
   storage,
@@ -36,7 +36,7 @@ export const store = createStore(
   enhancer(applyMiddleware(thunk))
 );
 export const persistor = persistStore(store, undefined, async () => {
-  const appVersion = '1.1.96';
+  const appVersion = '1.1.97';
   const localAppVersion = await AsyncStorage.getItem('appVersion');
   const languageName = store.getState().glob.languageName;
   const locale = getLocale();
