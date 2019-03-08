@@ -301,15 +301,6 @@ class HomeScreen extends React.Component<any, any> {
           isRTL={isRTL}
           isAuthenticated={this.props.isAuthenticated}
           user={this.props.user}
-          // TODO:
-          // onModalHide={
-          //   this.state.isMessageVisible
-          //     ? this.showMessageModal({
-          //         seconds: 1,
-          //         message: this.state.message
-          //       })
-          //     : undefined
-          // }
         />
         {this.state.isEditModalVisible && (
           <Edit

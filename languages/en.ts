@@ -444,6 +444,7 @@ export default {
     addeleted: 'Item deleted',
     isforwomen: 'Women',
     isforman: 'Man',
+    manwomen: 'Man Women',
     isjobreq: 'Look for Job',
     isjoboffer: 'Job Opportunities',
     isservicereq: 'Request Sercvice',

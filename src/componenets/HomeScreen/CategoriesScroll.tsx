@@ -1,18 +1,18 @@
+import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import {
-  View,
-  ScrollView,
   Platform,
+  ScrollView,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Ionicons } from '@expo/vector-icons';
 import { icons } from '../../load';
-import CategoryIcon from './CategoryIcon';
-import HeaderFilter from './HeaderFilter';
 import BottonNew from './BottonNew';
+import CategoryIcon from './CategoryIcon';
 import CategoryIconSingle from './CategoryIconSingle';
+import HeaderFilter from './HeaderFilter';
 import OfferIcon from './OffersIcon';
 
 class CategoriesScroll extends React.Component<any, any> {
@@ -35,7 +35,6 @@ class CategoriesScroll extends React.Component<any, any> {
     }
   }
   scrollView: any;
-
   constructor(props: any) {
     super(props);
     this.state = {
@@ -207,28 +206,6 @@ class CategoriesScroll extends React.Component<any, any> {
               title={words.listfree}
             />
           )}
-
-          {/* {selected && this.renderSelectedCategory(this.props.currentCategory)} */}
-          {/* {selected && (
-            <View
-              style={{
-                position: 'absolute',
-                left: 5,
-                top: 10,
-                height: 70,
-                width: 35,
-                backgroundColor: '#f1f1f1',
-                borderBottomRightRadius: isRTL ? 35 : undefined,
-                borderTopRightRadius: isRTL ? 35 : undefined,
-                borderTopLeftRadius: isRTL ? undefined : 35,
-                borderBottomLeftRadius: isRTL ? undefined : 35,
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingVertical: 10,
-                zIndex: 240
-              }}
-            />
-          )} */}
           <ScrollView
             ref={(ref: any) => {
               this.scrollView = ref;
@@ -240,25 +217,11 @@ class CategoriesScroll extends React.Component<any, any> {
             contentContainerStyle={{
               flexDirection:
                 isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-              // paddingLeft: selected ? 75 : 0,
               paddingTop: !selected ? 5 : undefined
             }}
             style={{
               backgroundColor: selected ? '#7678ED' : '#fff',
               height: selected ? 50 : 95
-              // margin: selected ? 10 : undefined
-              // borderBottomRightRadius: selected && isRTL ? 40 : undefined,
-              // borderTopRightRadius: selected && isRTL ? 40 : undefined,
-              // borderTopLeftRadius: !selected
-              //   ? undefined
-              //   : selected && isRTL
-              //   ? undefined
-              //   : 40,
-              // borderBottomLeftRadius: !selected
-              //   ? undefined
-              //   : selected && isRTL
-              //   ? undefined
-              //   : 40
             }}
           >
             {!selected && (

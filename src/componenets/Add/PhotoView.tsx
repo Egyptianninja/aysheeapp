@@ -1,18 +1,17 @@
+import { Ionicons } from '@expo/vector-icons';
+import { ImageManipulator } from 'expo';
 import * as React from 'react';
 import {
-  View,
-  Image,
   Dimensions,
-  TouchableOpacity,
+  Image,
   ScrollView,
-  Text
+  TouchableOpacity,
+  View
 } from 'react-native';
+import Modal from 'react-native-modal';
+import PhotoSlider from '../../componenets/Camera/PhotoSlider';
 import { ImagePicker as ImageAlbumPicker } from '../../utils';
 import { PhotoPicker } from './photoPicker';
-import Modal from 'react-native-modal';
-import { ImageManipulator } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
-import PhotoSlider from '../../componenets/Camera/PhotoSlider';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
 class PhotoView extends React.Component<any, any> {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, ScrollView, View } from 'react-native';
 import FilterSelect from './filters/FilterSelect';
 
 const { width } = Dimensions.get('window');
@@ -92,7 +92,6 @@ const HeaderFilter: any = ({
       { name: 'brandId', data: getItems(buckets, 'brandId') },
       { name: 'subBrandId', data: getItems(buckets, 'subBrandId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'issale', data: getItems(buckets, 'issale') },
       { name: 'year', data: getItems(buckets, 'year') }
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
@@ -133,8 +132,7 @@ const HeaderFilter: any = ({
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'issale', data: getItems(buckets, 'issale') }
+      { name: 'isnew', data: getItems(buckets, 'isnew') }
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
 
@@ -167,10 +165,101 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
+  } else if (categoryId === 3 || categoryId === 8 || categoryId === 14) {
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter isRTL={isRTL} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            isRTL
+          );
+        })}
+      </RenderFilter>
+    );
+  } else if (categoryId === 4 || categoryId === 19) {
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') },
+      { name: 'issale', data: getItems(buckets, 'issale') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter isRTL={isRTL} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            isRTL
+          );
+        })}
+      </RenderFilter>
+    );
+  } else if (categoryId === 9) {
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'isservicereq', data: getItems(buckets, 'isservicereq') },
+      { name: 'serviceId', data: getItems(buckets, 'serviceId') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter isRTL={isRTL} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            isRTL
+          );
+        })}
+      </RenderFilter>
+    );
+  } else if (categoryId === 17 || categoryId === 18) {
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter isRTL={isRTL} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            isRTL
+          );
+        })}
+      </RenderFilter>
+    );
   } else if (
-    categoryId === 3 ||
-    categoryId === 8 ||
-    categoryId === 14 ||
+    categoryId === 10 ||
+    categoryId === 11 ||
+    categoryId === 12 ||
     categoryId === 16
   ) {
     const catFilters = [
@@ -196,15 +285,34 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
-  } else if (
-    categoryId === 4 ||
-    categoryId === 7 ||
-    categoryId === 11 ||
-    categoryId === 19
-  ) {
+  } else if (categoryId === 5) {
     const catFilters = [
       { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'isjobreq', data: getItems(buckets, 'isjobreq') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter isRTL={isRTL} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            isRTL
+          );
+        })}
+      </RenderFilter>
+    );
+  } else if (categoryId === 6) {
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
       { name: 'issale', data: getItems(buckets, 'issale') }
     ];
@@ -224,55 +332,10 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
-  } else if (categoryId === 9 || categoryId === 10) {
+  } else if (categoryId === 7) {
     const catFilters = [
       { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'serviceId', data: getItems(buckets, 'serviceId') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
-    return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
-            words,
-            rest,
-            filter.name,
-            filter.data,
-            addFilter,
-            removeFilter,
-            isRTL
-          );
-        })}
-      </RenderFilter>
-    );
-  } else if (categoryId === 17) {
-    const catFilters = [
-      { name: 'sortType', data: sortData },
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
-    return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
-            words,
-            rest,
-            filter.name,
-            filter.data,
-            addFilter,
-            removeFilter,
-            isRTL
-          );
-        })}
-      </RenderFilter>
-    );
-  } else if (categoryId === 12 || categoryId === 13 || categoryId === 18) {
-    const catFilters = [
-      { name: 'sortType', data: sortData },
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') }
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
@@ -291,10 +354,12 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
-  } else if (categoryId === 5 || categoryId === 6) {
+  } else if (categoryId === 13) {
     const catFilters = [
       { name: 'sortType', data: sortData },
-      { name: 'city', data: getItems(buckets, 'city') }
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') }
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (

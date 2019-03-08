@@ -129,6 +129,45 @@ export const getOtherBuckets = (store: any, data: any, query: any) => {
         buckets: namedBucket,
         label: words.furnisher
       };
+    } else if (agg.name === 'isforman') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key === '0' ? words.isforwomen : words.isforman,
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: words.manwomen
+      };
+    } else if (agg.name === 'isjobreq') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key === '0' ? words.isjoboffer : words.isjobreq,
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: words.type
+      };
+    } else if (agg.name === 'isservicereq') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key === '0' ? words.isserviceoffer : words.isservicereq,
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: words.type
+      };
     } else if (agg.name === 'rooms') {
       const namedBucket = agg.buckets.map((bk: any) => {
         return {

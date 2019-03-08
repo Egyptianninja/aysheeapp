@@ -462,6 +462,7 @@ export default {
     addeleted: 'تم حذف الإعلان',
     isforwomen: 'نسائي',
     isforman: 'رجالي',
+    manwomen: 'رجالي نسائي',
     isjobreq: 'يبحث عن عمل',
     isjoboffer: 'وظائف شاغرة',
     isservicereq: 'طلب خدمة',
