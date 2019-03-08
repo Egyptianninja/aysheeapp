@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AsyncStorage } from 'react-native';
-import { words } from '../../store/getStore';
 import ChoiseCategory from '../../componenets/ChoiseScreen/ChoiseCategory';
+import { words } from '../../store/getStore';
 
 class ChoiseScreen extends React.Component<any, any> {
   signOut = async () => {

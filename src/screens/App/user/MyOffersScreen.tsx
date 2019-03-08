@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { View, Dimensions } from 'react-native';
-import { connect } from 'react-redux';
-import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
-import getMyPosts from '../../../graphql/query/getMyPosts';
-import { getNextPosts, readyUserPosts, Message } from '../../../utils';
+import * as React from 'react';
+import { graphql, Query } from 'react-apollo';
+import { Dimensions, View } from 'react-native';
+import { connect } from 'react-redux';
 import { Loading, Noresult } from '../../../componenets';
-import editClassifieds from '../../../graphql/mutation/editClassifieds';
-import deletePost from '../../../graphql/mutation/deletePost';
-import { Menu, Edit } from '../../../componenets/Menu';
 import ItemViewOffer from '../../../componenets/ItemViewOffer';
+import { Edit, Menu } from '../../../componenets/Menu';
+import deletePost from '../../../graphql/mutation/deletePost';
+import editClassifieds from '../../../graphql/mutation/editClassifieds';
+import getMyPosts from '../../../graphql/query/getMyPosts';
+import { getNextPosts, Message } from '../../../utils';
 import { readyOfferPosts } from '../../../utils/apollo/fetchMore';
 
 const { width } = Dimensions.get('window');
@@ -33,7 +33,7 @@ class MyOffersScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any, isRTL: any) => {
-    this.props.navigation.navigate('ItemScreenUser', {
+    this.props.navigation.push('ItemScreen', {
       post,
       word,
       lang,

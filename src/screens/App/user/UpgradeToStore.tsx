@@ -1,35 +1,34 @@
-import * as React from 'react';
-import {
-  View,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  Image,
-  TouchableWithoutFeedback,
-  Text
-} from 'react-native';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
-import * as Progress from 'react-native-progress';
-import {
-  StyleSheet,
-  UserLocation,
-  Message,
-  pickImage,
-  ColorPicker
-} from '../../../utils';
-import upgradeToStore from '../../../graphql/mutation/upgradeToStore';
 import { Ionicons } from '@expo/vector-icons';
-import { updateUser } from '../../../store/actions/userAtions';
-import { addPermission } from '../../../store/actions/globActions';
-import { Input, Button, Group, CheckBox, Title } from '../../../lib';
 import { Permissions } from 'expo';
+import { Formik } from 'formik';
+import * as React from 'react';
+import { graphql } from 'react-apollo';
+import {
+  Dimensions,
+  Image,
+  KeyboardAvoidingView,
+  ScrollView,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
+import * as Progress from 'react-native-progress';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Yup from 'yup';
 import { Avatar } from '../../../componenets';
 import { colors } from '../../../constants';
-import { bindActionCreators } from 'redux';
+import upgradeToStore from '../../../graphql/mutation/upgradeToStore';
+import { Button, CheckBox, Group, Input, Title } from '../../../lib';
+import { addPermission } from '../../../store/actions/globActions';
+import { updateUser } from '../../../store/actions/userAtions';
+import {
+  ColorPicker,
+  Message,
+  pickImage,
+  StyleSheet,
+  UserLocation
+} from '../../../utils';
 const { width } = Dimensions.get('window');
 
 class UpgradeToStore extends React.Component<any, any> {

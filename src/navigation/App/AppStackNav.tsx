@@ -7,7 +7,6 @@ import PostTabsStack from './PostTabsStack';
 import {
   HomeScreen,
   ItemScreen,
-  ItemScreenUser,
   MyProfileScreen,
   ChoiseScreen,
   NotificationsScreen,
@@ -47,17 +46,6 @@ export const AppStackNavigator = createStackNavigator({
   ItemScreen: {
     screen: ItemScreen,
     navigationOptions: ({ navigation }: any) => ({
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-
-  ItemScreenUser: {
-    screen: ItemScreenUser,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('post').title,
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
       headerTitleStyle: styles.headerTitleStyle,

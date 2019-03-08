@@ -22,6 +22,8 @@ export default gql`
         price
         currency
         isrtl
+        start
+        end
         phone
         isnew
         issale

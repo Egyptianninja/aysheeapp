@@ -8,16 +8,13 @@ import styles from '../styles/SliderEntry';
 class SliderEntry extends Component<any, any> {
   get image() {
     const {
-      data: { photos },
+      data: { uri },
       parallax,
       parallaxProps,
       navigation,
       even
     } = this.props;
 
-    const uri = `http://res.cloudinary.com/arflon/image/upload/w_${500}/${
-      photos[0]
-    }`;
     return parallax ? (
       <ParallaxImage
         source={{ uri }}
@@ -53,7 +50,6 @@ class SliderEntry extends Component<any, any> {
     ) : (
       false
     );
-
     return (
       <TouchableOpacity
         activeOpacity={1}

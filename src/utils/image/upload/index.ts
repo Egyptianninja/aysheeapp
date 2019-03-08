@@ -91,6 +91,7 @@ export const pickImageWithoutUpload = async (editing = true) => {
   if (result.cancelled) {
     return false;
   }
+
   return result;
 };
 export const uploadPickedImage = async (
@@ -100,13 +101,16 @@ export const uploadPickedImage = async (
 ) => {
   const resizedImage = await compressImage(image.uri, width, compress);
   const base64Img = `data:image/jpg;base64,${resizedImage.base64}`;
-
+  const { height } = resizedImage;
+  const ratio = (height / width).toFixed(4);
   return uploadPhoto(
     base64Img,
     secrets.upload.UPLOAD_PRESET,
     secrets.upload.CLOUD_NAME
   ).then(response => {
-    return response.data.public_id;
+    const { public_id } = response.data;
+    const photo = `${public_id}-${ratio}-1`;
+    return photo;
   });
 };
 
@@ -121,4 +125,15 @@ export const compressImage = async (
     { compress, base64: true }
   );
   return manipResult;
+};
+
+export const getImageFromString = (imageString: any, imageSize: any) => {
+  const uri = `http://res.cloudinary.com/${
+    secrets.upload.CLOUD_NAME
+  }/image/upload/w_${imageSize}/${imageString.substring(0, 20)}`;
+  const ratio = imageString.substring(21, 26);
+  return {
+    uri,
+    ratio
+  };
 };

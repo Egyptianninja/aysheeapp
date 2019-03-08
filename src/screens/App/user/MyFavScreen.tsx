@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { View, Dimensions } from 'react-native';
-import { connect } from 'react-redux';
-import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
-import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
-import { getDBNextPosts, readyUserPosts, Message } from '../../../utils';
+import * as React from 'react';
+import { graphql, Query } from 'react-apollo';
+import { Dimensions, View } from 'react-native';
+import { connect } from 'react-redux';
 import { Loading, Noresult } from '../../../componenets';
-import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
-import { Menu, Report } from '../../../componenets/Menu';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
+import { Menu, Report } from '../../../componenets/Menu';
+import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
+import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
+import { getDBNextPosts, Message, readyUserPosts } from '../../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -62,7 +62,7 @@ class MyFavScreen extends React.Component<any, any> {
   };
 
   selectePost = (post: any, word: any, lang: any, isRTL: any) => {
-    this.props.navigation.navigate('ItemScreenUser', {
+    this.props.navigation.push('ItemScreen', {
       post,
       word,
       lang,

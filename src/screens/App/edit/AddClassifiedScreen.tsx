@@ -1,43 +1,38 @@
-import * as React from 'react';
-import {
-  View,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  Text,
-  Image,
-  Platform
-} from 'react-native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { connect } from 'react-redux';
+import * as React from 'react';
 import { graphql } from 'react-apollo';
-import * as Progress from 'react-native-progress';
 import {
-  StyleSheet,
-  ImagePicker,
-  uploadPhotos,
-  UserLocation,
-  registerForPushNotificationsAsync,
-  isArabic,
-  getPureNumber,
-  Message
-} from '../../../utils';
-import getTimeLine from '../../../graphql/query/getTimeLine';
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View
+} from 'react-native';
+import * as Progress from 'react-native-progress';
+import { connect } from 'react-redux';
+import * as Yup from 'yup';
+import PhotoView from '../../../componenets/Add/PhotoView';
+import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 import {
-  Input,
   Button,
-  Group,
-  RadioButton,
   CheckBox,
+  Group,
+  Input,
+  RadioButton,
   Select,
   Title
 } from '../../../lib';
-import { currencyTypes } from '../../../constants';
-import PhotoView from '../../../componenets/Add/PhotoView';
+import {
+  getPureNumber,
+  isArabic,
+  Message,
+  registerForPushNotificationsAsync,
+  StyleSheet,
+  uploadPhotos,
+  UserLocation
+} from '../../../utils';
 
 const { width } = Dimensions.get('window');
 

@@ -1,31 +1,29 @@
-import * as React from 'react';
-import {
-  View,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView
-} from 'react-native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { connect } from 'react-redux';
+import * as React from 'react';
 import { graphql } from 'react-apollo';
-import * as Progress from 'react-native-progress';
 import {
-  StyleSheet,
-  ImagePicker,
-  UserLocation,
-  registerForPushNotificationsAsync,
-  uploadPhotos,
-  isArabic,
-  Message
-} from '../../../utils';
+  Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+  View
+} from 'react-native';
+import * as Progress from 'react-native-progress';
+import { connect } from 'react-redux';
+import * as Yup from 'yup';
+import PhotoView from '../../../componenets/Add/PhotoView';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-
-import { Input, Button, Group, CheckBox, Select, Title } from '../../../lib';
-
+import { Button, CheckBox, Group, Input, Select, Title } from '../../../lib';
+import {
+  isArabic,
+  Message,
+  registerForPushNotificationsAsync,
+  StyleSheet,
+  uploadPhotos,
+  UserLocation
+} from '../../../utils';
 import { getPureNumber } from '../../../utils/call';
-import PhotoView from '../../../componenets/Add/PhotoView';
+
 const { width } = Dimensions.get('window');
 
 class AddServiceScreen extends React.Component<any, any> {

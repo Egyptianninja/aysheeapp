@@ -1,27 +1,27 @@
+import { Ionicons } from '@expo/vector-icons';
+import { Permissions } from 'expo';
+import { Formik } from 'formik';
 import * as React from 'react';
+import { graphql } from 'react-apollo';
 import {
-  View,
-  Text,
-  Image,
+  AsyncStorage,
   Dimensions,
+  Image,
+  KeyboardAvoidingView,
+  ScrollView,
+  Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  AsyncStorage,
-  ScrollView,
-  KeyboardAvoidingView
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { graphql } from 'react-apollo';
-import { Permissions } from 'expo';
-import { StyleSheet, pickImage, parseJwt } from '../../../utils';
-import updateProfile from '../../../graphql/mutation/updateProfile';
-import { updateUser } from '../../../store/actions/userAtions';
-import { addPermission } from '../../../store/actions/globActions';
-import { Ionicons } from '@expo/vector-icons';
-import { Input, Button } from '../../../lib';
-import { Formik } from 'formik';
 import { Avatar } from '../../../componenets';
+import updateProfile from '../../../graphql/mutation/updateProfile';
+import { Button, Input } from '../../../lib';
+import { addPermission } from '../../../store/actions/globActions';
+import { updateUser } from '../../../store/actions/userAtions';
+import { parseJwt, pickImage, StyleSheet } from '../../../utils';
 const { width } = Dimensions.get('window');
 
 class ProfileScreen extends React.Component<any, any> {

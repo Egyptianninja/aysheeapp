@@ -1,25 +1,23 @@
+import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
+import { Query } from 'react-apollo';
 import {
-  View,
+  Dimensions,
   ScrollView,
   Text,
   TouchableOpacity,
-  Dimensions,
-  StatusBar
+  View
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { User } from '../../componenets/User/User';
-
-import { Carousel } from '../../utils';
+import { Loading } from '../../componenets';
 import {
+  itemWidth,
   SliderEntry,
   sliderWidth,
-  itemWidth,
   styles
 } from '../../componenets/OffersScreen';
-import { Query } from 'react-apollo';
+import { User } from '../../componenets/User/User';
 import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
-import { Loading } from '../../componenets';
+import { Carousel, getLang, readyUserPosts } from '../../utils';
 
 const HEIGHT = Dimensions.get('window').height;
 const FIRST_ITEM = 1;
@@ -48,6 +46,8 @@ export default class OffersScreen extends Component<any, any> {
 
   renderShopOffers = (data: any) => {
     const { _id, name, avatar, color, offers, about } = data;
+    const lang = getLang();
+    const readyOffers = readyUserPosts(offers, 400, 79, lang);
     return (
       <View
         key={_id}
@@ -66,7 +66,7 @@ export default class OffersScreen extends Component<any, any> {
               this.setState({ slider1Ref: c });
             }
           }}
-          data={offers}
+          data={readyOffers}
           renderItem={this.renderItemWithParallax}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
@@ -77,6 +77,7 @@ export default class OffersScreen extends Component<any, any> {
           enableMomentum={false}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
+          lockScrollTimeoutDuration={250}
           swipeThreshold={10}
           onSnapToItem={(index: any) =>
             this.setState({ slider1ActiveSlide: index })

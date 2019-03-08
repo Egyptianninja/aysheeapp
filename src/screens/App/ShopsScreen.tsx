@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { View, FlatList, Dimensions } from 'react-native';
-import { Query } from 'react-apollo';
 import { debounce } from 'lodash';
-import getShopsWithOffers from '../../graphql/query/getShops';
-import ShopItem from '../../componenets/ShopsScreen';
-import { getDBNextPosts } from '../../utils';
-import { Loading, Noresult } from '../../componenets';
+import * as React from 'react';
+import { Query } from 'react-apollo';
+import { Dimensions, FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
+import { Loading, Noresult } from '../../componenets';
+import ShopItem from '../../componenets/ShopsScreen';
+import getShopsWithOffers from '../../graphql/query/getShops';
+import { getDBNextPosts } from '../../utils';
 const { width } = Dimensions.get('window');
 class ShopsScreen extends React.Component<any, any> {
   flatListRef: any;

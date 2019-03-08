@@ -1,39 +1,38 @@
-import * as React from 'react';
-import {
-  View,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform
-} from 'react-native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { connect } from 'react-redux';
+import * as React from 'react';
 import { graphql } from 'react-apollo';
-import * as Progress from 'react-native-progress';
 import {
-  StyleSheet,
-  ImagePicker,
-  UserLocation,
-  uploadPhotos,
-  getPureNumber,
-  isArabic,
-  registerForPushNotificationsAsync,
-  Message
-} from '../../../utils';
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View
+} from 'react-native';
+import * as Progress from 'react-native-progress';
+import { connect } from 'react-redux';
+import * as Yup from 'yup';
+import PhotoView from '../../../componenets/Add/PhotoView';
+import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import { currencyTypes } from '../../../constants';
 import {
-  Input,
   Button,
-  Group,
   CheckBox,
-  Select,
+  Group,
+  Input,
   RadioButton,
+  Select,
   Title
 } from '../../../lib';
-import PhotoView from '../../../componenets/Add/PhotoView';
+import {
+  getPureNumber,
+  isArabic,
+  Message,
+  registerForPushNotificationsAsync,
+  StyleSheet,
+  uploadPhotos,
+  UserLocation
+} from '../../../utils';
 const { width } = Dimensions.get('window');
 
 class AddPartsScreen extends React.Component<any, any> {

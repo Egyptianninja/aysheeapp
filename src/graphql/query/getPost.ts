@@ -9,6 +9,8 @@ export default gql`
         title
         body
         isrtl
+        start
+        end
         photos
         price
         currency

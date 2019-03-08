@@ -1,6 +1,5 @@
 import HomeScreen from './App/HomeScreen';
 import ItemScreen from './App/ItemScreen';
-import ItemScreenUser from './App/ItemScreenUser';
 import ItemScreenModal from './App/ItemScreenModal';
 import ChoiseScreen from './App/ChoiseScreen';
 import OffersScreen from './App/OffersScreen';
@@ -30,7 +29,6 @@ import ProfileScreen from './App/user/ProfileScreen';
 export {
   HomeScreen,
   ItemScreen,
-  ItemScreenUser,
   MyProfileScreen,
   ChoiseScreen,
   NotificationsScreen,

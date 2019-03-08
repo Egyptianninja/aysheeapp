@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { Query, graphql } from 'react-apollo';
-import getPost from '../../graphql/query/getPost';
-import { Loading } from '../../componenets';
-import { readyPost } from '../../utils';
-import ItemView from '../../componenets/ItemScreen/ItemView';
+import { graphql, Query } from 'react-apollo';
 import { connect } from 'react-redux';
+import { Loading } from '../../componenets';
+import ItemHeader from '../../componenets/ItemScreen/ItemHeader';
+import ItemView from '../../componenets/ItemScreen/ItemView';
+import createComment from '../../graphql/mutation/createComment';
+import deletePost from '../../graphql/mutation/deletePost';
+import editClassifieds from '../../graphql/mutation/editClassifieds';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import unFavoritePost from '../../graphql/mutation/unFavoritePost';
-import createComment from '../../graphql/mutation/createComment';
-import editClassifieds from '../../graphql/mutation/editClassifieds';
-import deletePost from '../../graphql/mutation/deletePost';
-import ItemHeader from '../../componenets/ItemScreen/ItemHeader';
+import getPost from '../../graphql/query/getPost';
+import { readyPost } from '../../utils';
 class ItemScreenModal extends React.Component<any, any> {
   static navigationOptions = {
     header: null

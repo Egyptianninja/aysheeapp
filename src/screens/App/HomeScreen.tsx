@@ -1,31 +1,29 @@
-import * as React from 'react';
-import { View, Text, Animated, Dimensions, StatusBar } from 'react-native';
-import { debounce } from 'lodash';
-import { Notifications } from 'expo';
-import { connect } from 'react-redux';
-import { Query, graphql } from 'react-apollo';
 import MasonryList from '@appandflow/masonry-list';
-import getTimeLine from '../../graphql/query/getTimeLine';
-import refreshToken from '../../graphql/mutation/refreshToken';
+import { Notifications } from 'expo';
+import { debounce } from 'lodash';
+import * as React from 'react';
+import { graphql, Query } from 'react-apollo';
+import { Animated, Dimensions, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
+import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
+import ItemViewSmall from '../../componenets/ItemViewSmall';
+import { Edit, Menu, Report } from '../../componenets/Menu';
+import deletePost from '../../graphql/mutation/deletePost';
+import editClassifieds from '../../graphql/mutation/editClassifieds';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
-import editClassifieds from '../../graphql/mutation/editClassifieds';
-import deletePost from '../../graphql/mutation/deletePost';
-import * as store from '../../store/getStore';
+import refreshToken from '../../graphql/mutation/refreshToken';
+import getTimeLine from '../../graphql/query/getTimeLine';
 import { setBuckets } from '../../store/actions/postActions';
-// import Swiper from '../../utils/hswiper';
+import * as store from '../../store/getStore';
 import {
   getNextPosts,
-  getNewPosts,
-  readyPosts,
   getTimeLineBuckets,
   Message,
+  readyPosts,
   registerForPushNotificationsAsync
 } from '../../utils';
-import { HomeLoading, CategoriesScroll, Noresult } from '../../componenets';
-import ItemViewSmall from '../../componenets/ItemViewSmall';
-import { Menu, Report, Edit } from '../../componenets/Menu';
-import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');

@@ -1,23 +1,23 @@
+import MasonryList from '@appandflow/masonry-list';
+import { Ionicons } from '@expo/vector-icons';
+import { debounce } from 'lodash';
 import * as React from 'react';
+import { graphql, Query } from 'react-apollo';
 import {
-  View,
-  Dimensions,
   Animated,
+  Dimensions,
   Image,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Query, graphql } from 'react-apollo';
-import MasonryList from '@appandflow/masonry-list';
-import { debounce } from 'lodash';
-import getUserPosts from '../../../graphql/query/getUserPosts';
-import { getNextPosts, readyUserPosts, Message } from '../../../utils';
-import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Avatar, Loading } from '../../../componenets';
-import favoritePost from '../../../graphql/mutation/favoritePost';
-import { Ionicons } from '@expo/vector-icons';
+import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Menu, Report } from '../../../componenets/Menu';
+import favoritePost from '../../../graphql/mutation/favoritePost';
+import getUserPosts from '../../../graphql/query/getUserPosts';
+import { getNextPosts, Message, readyUserPosts } from '../../../utils';
 const { width } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 175;
@@ -42,7 +42,7 @@ class UserProfileScreen extends React.Component<any, any> {
   }
 
   selectePost = (post: any, word: any, lang: any, isRTL: any) => {
-    this.props.navigation.navigate('ItemScreenUser', {
+    this.props.navigation.push('ItemScreen', {
       post,
       word,
       lang,

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { View, FlatList } from 'react-native';
-import { Query } from 'react-apollo';
 import { debounce } from 'lodash';
+import * as React from 'react';
+import { Query } from 'react-apollo';
+import { FlatList, View } from 'react-native';
+import { connect } from 'react-redux';
+import { Loading, Noresult, NotificationItem } from '../../componenets';
 import getMyNotifications from '../../graphql/query/getMyNotifications';
 import { getDBNextPosts } from '../../utils';
-import { NotificationItem, Loading, Noresult } from '../../componenets';
-import { connect } from 'react-redux';
 
 class NotificationsScreen extends React.Component<any, any> {
   flatListRef: any;

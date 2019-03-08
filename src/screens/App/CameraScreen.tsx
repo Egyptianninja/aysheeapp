@@ -1,24 +1,24 @@
+import { Ionicons } from '@expo/vector-icons';
+import { Camera, Constants, ImageManipulator, Permissions } from 'expo';
 import * as React from 'react';
 import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  Platform,
-  StatusBar,
-  Slider,
-  ScrollView,
   Animated,
+  CameraRoll,
+  Dimensions,
   Easing,
-  CameraRoll
+  Image,
+  Platform,
+  ScrollView,
+  Slider,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { connect } from 'react-redux';
 import Modal from 'react-native-modal';
-import { Camera, Permissions, ImageManipulator, Constants } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
-import { addPermission } from '../../store/actions/globActions';
+import { connect } from 'react-redux';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
+import { addPermission } from '../../store/actions/globActions';
 import { Orientation } from '../../utils';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
