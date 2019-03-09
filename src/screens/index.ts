@@ -1,6 +1,5 @@
 import HomeScreen from './App/HomeScreen';
 import ItemScreen from './App/ItemScreen';
-import ItemScreenModal from './App/ItemScreenModal';
 import ChoiseScreen from './App/ChoiseScreen';
 import OffersScreen from './App/OffersScreen';
 import NotificationsScreen from './App/NotificationsScreen';
@@ -47,7 +46,6 @@ export {
   EditProfileScreen,
   UpgradeToStore,
   OffersScreen,
-  ItemScreenModal,
   ProfileScreen,
   ShopsScreen
 };

@@ -37,7 +37,8 @@ class ProfileScreen extends React.Component<any, any> {
       isReportModalVisible: false,
       isMessageVisible: false,
       modalPost: null,
-      rest: {}
+      rest: {},
+      tab: 1
     };
   }
 
@@ -104,7 +105,9 @@ class ProfileScreen extends React.Component<any, any> {
     });
 
     const user = this.props.navigation.getParam('user');
+
     const isofferstab = this.state.rest.isoffer;
+    const { tab } = this.state;
     const maincolor = user.color ? user.color : '#7678ED';
     const ismyaccount = this.props.isAuthenticated
       ? user._id === this.props.user._id
@@ -357,13 +360,13 @@ class ProfileScreen extends React.Component<any, any> {
                 marginLeft: 9
               }}
               onPress={() => {
-                this.setState({ rest: {} });
+                this.setState({ rest: {}, tab: 1 });
               }}
             >
               <Text
                 style={{
                   fontFamily: 'cairo-regular',
-                  color: !isofferstab ? maincolor : '#000',
+                  color: tab === 1 ? maincolor : '#000',
                   fontSize: 16
                 }}
               >
@@ -391,14 +394,15 @@ class ProfileScreen extends React.Component<any, any> {
                   }}
                   onPress={() => {
                     this.setState({
-                      rest: { islive: true, isoffer: true }
+                      rest: { islive: true, isoffer: true },
+                      tab: 2
                     });
                   }}
                 >
                   <Text
                     style={{
                       fontFamily: 'cairo-regular',
-                      color: isofferstab ? maincolor : '#000',
+                      color: tab === 2 ? maincolor : '#000',
                       fontSize: 16
                     }}
                   >
@@ -427,14 +431,15 @@ class ProfileScreen extends React.Component<any, any> {
                   }}
                   onPress={() => {
                     this.setState({
-                      rest: { islive: false }
+                      rest: { islive: false },
+                      tab: 3
                     });
                   }}
                 >
                   <Text
                     style={{
                       fontFamily: 'cairo-regular',
-                      color: isofferstab ? maincolor : '#000',
+                      color: tab === 3 ? maincolor : '#000',
                       fontSize: 16
                     }}
                   >

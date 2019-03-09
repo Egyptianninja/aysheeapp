@@ -3,7 +3,6 @@ import { View, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../../utils';
-import PostTabsStack from './PostTabsStack';
 import {
   HomeScreen,
   ItemScreen,
@@ -20,7 +19,6 @@ import {
   AddOfferScreen,
   UpgradeToStore,
   OffersScreen,
-  ItemScreenModal,
   ProfileScreen,
   ShopsScreen,
   EditProfileScreen
@@ -38,7 +36,8 @@ export const AppStackNavigator = createStackNavigator({
   OffersScreen: {
     screen: OffersScreen,
     navigationOptions: ({ navigation }: any) => ({
-      headerBackTitle: null
+      headerBackTitle: null,
+      drawerLockMode: 'locked-closed'
     })
   },
   ItemScreen: {
@@ -48,16 +47,6 @@ export const AppStackNavigator = createStackNavigator({
       headerTintColor: '#555',
       headerTitleStyle: styles.headerTitleStyle,
       headerBackTitle: null
-    })
-  },
-  ItemScreenModal: {
-    screen: ItemScreenModal,
-    navigationOptions: ({ navigation }: any) => ({
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null,
-      mode: 'modal'
     })
   },
 
@@ -151,14 +140,6 @@ export const AppStackNavigator = createStackNavigator({
       headerBackTitle: null
     })
   },
-  // MyPostsScreen: {
-  //   screen: PostTabsStack,
-  //   navigationOptions: () => ({
-  //     title: 'منشوراتي',
-  //     headerTintColor: '#555',
-  //     headerBackTitle: null
-  //   })
-  // },
   MyFavScreen: {
     screen: MyFavScreen,
     navigationOptions: ({ navigation }: any) => ({
