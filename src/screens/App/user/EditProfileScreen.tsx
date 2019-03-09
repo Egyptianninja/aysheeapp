@@ -68,9 +68,7 @@ class EditProfileScreen extends React.Component<any, any> {
     if (seconds && screen) {
       setTimeout(() => {
         this.setState({ isShowMessage: false });
-        screen === 'back'
-          ? this.props.navigation.goBack()
-          : this.props.navigation.navigate(screen);
+        this.props.navigation.navigate(screen, { user: this.props.user });
       }, seconds * 1000);
     }
   };
@@ -133,7 +131,7 @@ class EditProfileScreen extends React.Component<any, any> {
       const { data } = res.data.updateProfile;
       await this.props.updateUser(data);
       this.updateProgressBar(3 / 3);
-      this.showMessage({ seconds: 2, screen: 'back' });
+      this.showMessage({ seconds: 2, screen: 'ProfileScreen' });
     }
     if (!res.data.updateProfile.ok) {
       bag.setErrors({ name: res.data.updateProfile.error });

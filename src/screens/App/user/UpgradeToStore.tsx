@@ -68,7 +68,7 @@ class UpgradeToStore extends React.Component<any, any> {
     if (seconds && screen) {
       setTimeout(() => {
         this.setState({ isShowMessage: false });
-        this.props.navigation.navigate(screen);
+        this.props.navigation.navigate(screen, { user: this.props.user });
       }, seconds * 1000);
     }
   };
@@ -131,7 +131,7 @@ class UpgradeToStore extends React.Component<any, any> {
       const { data } = res.data.upgradeToStore;
       await this.props.updateUser(data);
       this.updateProgressBar(3 / 3);
-      this.showMessage({ seconds: 2, screen: 'HomeScreen' });
+      this.showMessage({ seconds: 2, screen: 'ProfileScreen' });
     }
     if (!res.data.upgradeToStore.ok) {
       bag.setErrors({ name: res.data.upgradeToStore.error });
