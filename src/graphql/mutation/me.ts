@@ -1,10 +1,9 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation smsLoginWithPhone($phone: String!) {
-    smsLoginWithPhone(phone: $phone) {
+  mutation me {
+    me {
       ok
-      token
       data {
         _id
         uniquename
@@ -37,7 +36,6 @@ export default gql`
           lat
         }
       }
-      error
     }
   }
 `;

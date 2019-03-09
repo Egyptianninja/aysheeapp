@@ -14,7 +14,7 @@ import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Yup from 'yup';
-import { Avatar } from '../../../componenets';
+import { Avatar, AvatarCircle } from '../../../componenets';
 import { colors } from '../../../constants';
 import upgradeToStore from '../../../graphql/mutation/upgradeToStore';
 import { Button, CheckBox, Group, Input, Title } from '../../../lib';
@@ -160,16 +160,16 @@ class UpgradeToStore extends React.Component<any, any> {
           <View style={styles.container}>
             <Formik
               initialValues={{
-                name: '',
-                about: '',
-                color: '#7678ED',
-                email: '',
-                website: '',
-                addressCountry: '',
-                addressCity: '',
-                tel: '',
-                fax: '',
-                mob: '',
+                name: user.name,
+                about: user.about,
+                color: user.color,
+                email: user.email,
+                website: user.website,
+                addressCountry: user.addressCountry,
+                addressCity: user.addressCity,
+                tel: user.tel,
+                fax: user.fax,
+                mob: user.mob,
                 location: false
               }}
               onSubmit={this.handleSubmit}
@@ -199,32 +199,11 @@ class UpgradeToStore extends React.Component<any, any> {
                       }}
                       onPress={this.onAvatarUpload}
                     >
-                      {!user.avatar && !avatar && (
-                        <Avatar
-                          name={user.name ? user.name : user.uniquename}
-                          size={100}
-                        />
-                      )}
-                      {user.avatar && !avatar && (
-                        <Image
-                          style={{
-                            height: 100,
-                            width: 100,
-                            borderRadius: 50
-                          }}
-                          source={{ uri: userAvatar }}
-                        />
-                      )}
-                      {avatar && (
-                        <Image
-                          style={{
-                            height: 100,
-                            width: 100,
-                            borderRadius: 50
-                          }}
-                          source={{ uri: avatar.uri }}
-                        />
-                      )}
+                      <AvatarCircle
+                        user={user}
+                        size={100}
+                        image={avatar ? avatar : null}
+                      />
                     </TouchableOpacity>
                   </View>
                   <Input
@@ -413,7 +392,6 @@ class UpgradeToStore extends React.Component<any, any> {
                     textStyle={styles.btnTextStyle}
                     title={word.save}
                     onPress={handleSubmit}
-                    disabled={!isValid || isSubmitting}
                   />
                   {isSubmitting && (
                     <View

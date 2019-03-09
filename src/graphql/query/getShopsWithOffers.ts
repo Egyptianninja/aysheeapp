@@ -10,7 +10,6 @@ export default gql`
       email
       avatar
       about
-      headerPhoto
       color
       addressCountry
       addressCity

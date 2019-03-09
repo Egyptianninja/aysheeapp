@@ -16,6 +16,7 @@ import notificationSub from '../../graphql/mutation/notificationSub';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import getTimeLine from '../../graphql/query/getTimeLine';
 import { setBuckets } from '../../store/actions/postActions';
+import { updateQty } from '../../store/actions/userAtions';
 import * as store from '../../store/getStore';
 import {
   getNextPosts,
@@ -186,9 +187,12 @@ class HomeScreen extends React.Component<any, any> {
       variables: {
         postId: this.state.modalPost.id
       }
-      // refetchQueries: ['getTimeLine'],
-      // awaitRefetchQueries: true
     });
+    if (this.state.modalPost.isoffer) {
+      await this.props.updateQty('offers', -1);
+    } else {
+      await this.props.updateQty('online', -1);
+    }
     this.hideCheckMessageModal();
     setTimeout(() => {
       this.showMessageModal({
@@ -471,7 +475,7 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(
   mapStateToProps,
-  { setBuckets }
+  { setBuckets, updateQty }
 )(
   graphql(refreshToken, {
     name: 'refreshToken'

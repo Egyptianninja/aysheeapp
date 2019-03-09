@@ -11,7 +11,8 @@ import {
   CODE_SENT,
   INIT_CODE,
   ADD_UNIQUENAME,
-  ADD_PUSH_TOKEN
+  ADD_PUSH_TOKEN,
+  UPDATE_QTY
 } from '../types';
 
 const initialState = {
@@ -98,6 +99,15 @@ export default function(state = initialState, action: any) {
         user: {
           ...state.user,
           ...action.payload
+        }
+      };
+    case UPDATE_QTY:
+      const nameqty = action.name + 'qty';
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [nameqty]: state.user[nameqty] + action.num
         }
       };
     case SMS_SENT:

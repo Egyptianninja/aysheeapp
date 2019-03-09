@@ -14,12 +14,12 @@ import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Yup from 'yup';
-import { Avatar } from '../../../componenets';
+import { AvatarCircle } from '../../../componenets';
 import { colors } from '../../../constants';
 import updateProfile from '../../../graphql/mutation/updateProfile';
 import { Button, CheckBox, Group, Input, Title } from '../../../lib';
 import { addPermission } from '../../../store/actions/globActions';
-import { updateUser } from '../../../store/actions/userAtions';
+import { updateUser, updateQty } from '../../../store/actions/userAtions';
 import {
   ColorPicker,
   Message,
@@ -199,32 +199,11 @@ class EditProfileScreen extends React.Component<any, any> {
                       }}
                       onPress={this.onAvatarUpload}
                     >
-                      {!user.avatar && !avatar && (
-                        <Avatar
-                          name={user.name ? user.name : user.uniquename}
-                          size={100}
-                        />
-                      )}
-                      {user.avatar && !avatar && (
-                        <Image
-                          style={{
-                            height: 100,
-                            width: 100,
-                            borderRadius: 50
-                          }}
-                          source={{ uri: userAvatar }}
-                        />
-                      )}
-                      {avatar && (
-                        <Image
-                          style={{
-                            height: 100,
-                            width: 100,
-                            borderRadius: 50
-                          }}
-                          source={{ uri: avatar.uri }}
-                        />
-                      )}
+                      <AvatarCircle
+                        user={user}
+                        size={100}
+                        image={avatar ? avatar : null}
+                      />
                     </TouchableOpacity>
                   </View>
                   <Input
@@ -500,7 +479,8 @@ const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
       updateUser,
-      addPermission
+      addPermission,
+      updateQty
     },
     dispatch
   );

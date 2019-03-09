@@ -20,3 +20,4 @@ export const DEL_QUERY = 'DEL_QUERY';
 export const ADD_UNIQUENAME = 'ADD_UNIQUENAME';
 export const ADD_PUSH_TOKEN = 'ADD_PUSH_TOKEN';
 export const ADD_PERMISSION = 'ADD_PERMISSION';
+export const UPDATE_QTY = 'UPDATE_QTY';

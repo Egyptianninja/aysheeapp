@@ -12,6 +12,7 @@ import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import PhotoView from '../../../componenets/Add/PhotoView';
+import { updateQty } from '../../../store/actions/userAtions';
 import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
@@ -194,6 +195,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
           }
         });
       }
+      await this.props.updateQty('online', 1);
       this.updateProgressBar(1 / (3 + this.state.images.length));
       this.showMessage({ seconds: 2, screen: 'HomeScreen' });
     }
@@ -619,7 +621,10 @@ const mapStateToProps = (state: any) => ({
   user: state.user.user
 });
 
-export default connect(mapStateToProps)(
+export default connect(
+  mapStateToProps,
+  { updateQty }
+)(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
     options: { refetchQueries: ['getTimeLine'] }

@@ -15,8 +15,21 @@ export default gql`
         _id
         name
         uniquename
-        avatar
         phone
+        email
+        avatar
+        about
+        color
+        addressCountry
+        addressCity
+        website
+        isstore
+        offersqty
+        onlineqty
+        company
+        tel
+        fax
+        mob
       }
     }
   }

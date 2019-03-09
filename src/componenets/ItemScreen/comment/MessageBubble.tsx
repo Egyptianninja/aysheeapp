@@ -2,14 +2,10 @@ import * as React from 'react';
 import { Text, View, Image, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, isArabic, since } from '../../../utils';
-import { Avatar } from '../../Avatar';
+import { Avatar, AvatarCircle } from '../../Avatar';
 export default class MessageBubble extends React.Component<any, any> {
   render() {
     const { message, lang, isRTL, width, words, isAuthenticated } = this.props;
-    const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-      message.user.avatar
-    }`;
-
     const rtl = isArabic(message.body);
     const time = since(message.updatedAt, lang);
 
@@ -25,17 +21,9 @@ export default class MessageBubble extends React.Component<any, any> {
         >
           <TouchableOpacity
             onPress={() => {
-              if (isAuthenticated) {
-                const screen =
-                  message.user._id === this.props.user._id
-                    ? 'MyPostsScreen'
-                    : 'ProfileScreen';
-                this.props.navigation.navigate(screen, { user: message.user });
-              } else {
-                this.props.navigation.navigate('ProfileScreen', {
-                  user: message.user
-                });
-              }
+              this.props.navigation.navigate('ProfileScreen', {
+                user: message.user
+              });
             }}
           >
             <View
@@ -44,44 +32,15 @@ export default class MessageBubble extends React.Component<any, any> {
                 alignItems: 'center'
               }}
             >
-              {!message.user.avatar && (
-                <Avatar
-                  name={
-                    message.user.name
-                      ? message.user.name
-                      : message.user.uniquename
-                  }
-                  size={40}
-                />
-              )}
-              {message.user.avatar && (
-                <Image
-                  style={{
-                    height: 40,
-                    width: 40,
-                    borderRadius: 20
-                  }}
-                  source={{ uri }}
-                />
-              )}
+              <AvatarCircle user={message.user} size={40} />
             </View>
           </TouchableOpacity>
           <View style={styles.messageBubble}>
             <TouchableOpacity
               onPress={() => {
-                if (isAuthenticated) {
-                  const screen =
-                    message.user._id === this.props.user._id
-                      ? 'MyPostsScreen'
-                      : 'ProfileScreen';
-                  this.props.navigation.navigate(screen, {
-                    user: message.user
-                  });
-                } else {
-                  this.props.navigation.navigate('ProfileScreen', {
-                    user: message.user
-                  });
-                }
+                this.props.navigation.navigate('ProfileScreen', {
+                  user: message.user
+                });
               }}
             >
               <View
@@ -103,19 +62,6 @@ export default class MessageBubble extends React.Component<any, any> {
                 >
                   {message.user.name}
                 </Text>
-                {/* <Text
-                  style={{
-                    fontSize: 12,
-                    color: '#777',
-                    textAlign:
-                      isRTL && Platform.OS !== 'android'
-                        ? 'right'
-                        : 'left',
-                    paddingBottom: 5
-                  }}
-                >
-                  {message.user.uniquename}
-                </Text> */}
               </View>
             </TouchableOpacity>
             {message.replayto &&

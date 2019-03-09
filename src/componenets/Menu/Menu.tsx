@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { onShare, filterOptions } from '../../utils';
-
+import { store } from '../../store';
+import { updateQty } from '../../store/actions/userAtions';
 const { width } = Dimensions.get('window');
 
 export default class Menu extends React.Component<any, any> {
@@ -183,9 +184,11 @@ const Option = ({
           editClassifieds({
             variables: {
               postId: post.id,
-              islive: !post.islive
+              islive: true
             }
           });
+          await store.dispatch(updateQty('online', 1));
+          await store.dispatch(updateQty('offline', -1));
           hideMenuModal();
           setTimeout(() => {
             showMessageModal({ seconds: 1, message: word.adpublished });
@@ -195,9 +198,11 @@ const Option = ({
           editClassifieds({
             variables: {
               postId: post.id,
-              islive: !post.islive
+              islive: false
             }
           });
+          await store.dispatch(updateQty('online', -1));
+          await store.dispatch(updateQty('offline', 1));
           hideMenuModal();
           setTimeout(() => {
             showMessageModal({ seconds: 1, message: word.adunpupished });

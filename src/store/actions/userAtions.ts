@@ -11,7 +11,8 @@ import {
   CODE_SENT,
   INIT_CODE,
   ADD_UNIQUENAME,
-  ADD_PUSH_TOKEN
+  ADD_PUSH_TOKEN,
+  UPDATE_QTY
 } from '../types';
 
 export function login(token: string, data: any) {
@@ -87,5 +88,12 @@ export function initTime() {
 export function initCode() {
   return {
     type: INIT_CODE
+  };
+}
+export function updateQty(name: any, num: any) {
+  return {
+    type: UPDATE_QTY,
+    name,
+    num
   };
 }

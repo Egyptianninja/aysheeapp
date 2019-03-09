@@ -47,7 +47,6 @@ export default gql`
         onlineLimit
         offlineLimit
         avatar
-        headerPhoto
         color
         lang
         country

@@ -104,12 +104,13 @@ class ProfileScreen extends React.Component<any, any> {
       extrapolate: 'clamp'
     });
 
-    const user = this.props.navigation.getParam('user');
+    const paramUser = this.props.navigation.getParam('user');
+    const ismyaccount = this.props.isAuthenticated
+      ? paramUser._id === this.props.user._id
+      : null;
+    const user = ismyaccount ? this.props.user : paramUser;
     const { tab } = this.state;
     const maincolor = user.color ? user.color : '#7678ED';
-    const ismyaccount = this.props.isAuthenticated
-      ? user._id === this.props.user._id
-      : false;
     const isshop = user.isstore;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -409,7 +410,6 @@ class ProfileScreen extends React.Component<any, any> {
         <Query
           query={getUserPosts}
           variables={{ userId: user._id, ...this.state.rest }}
-          // fetchPolicy="network-only"
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
