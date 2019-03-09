@@ -106,7 +106,9 @@ class ProfileScreen extends React.Component<any, any> {
     const user = this.props.navigation.getParam('user');
     const isofferstab = this.state.rest.isoffer;
     const maincolor = user.color ? user.color : '#7678ED';
-    const ismyaccount = user._id === this.props.user._id;
+    const ismyaccount = this.props.isAuthenticated
+      ? user._id === this.props.user._id
+      : false;
     const isshop = user.isstore;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>

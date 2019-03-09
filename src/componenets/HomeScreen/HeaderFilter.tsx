@@ -165,10 +165,34 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
-  } else if (categoryId === 3 || categoryId === 8 || categoryId === 14) {
+  } else if (categoryId === 3 || categoryId === 14) {
     const catFilters = [
       { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter isRTL={isRTL} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            isRTL
+          );
+        })}
+      </RenderFilter>
+    );
+  } else if (categoryId === 8) {
+    const catFilters = [
+      { name: 'sortType', data: sortData },
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'isforman', data: getItems(buckets, 'isforman') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') }
     ];
