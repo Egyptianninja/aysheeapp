@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Avatar, Loading } from '../../../componenets';
+import { Avatar, Loading, AvatarCircle } from '../../../componenets';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Menu, Report } from '../../../componenets/Menu';
 import favoritePost from '../../../graphql/mutation/favoritePost';
@@ -86,7 +86,7 @@ class ProfileScreen extends React.Component<any, any> {
 
     const headerHeight = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_HEIGHT],
-      outputRange: [HEADER_HEIGHT, 0],
+      outputRange: [HEADER_HEIGHT, -1],
       extrapolate: 'clamp'
     });
     const topPaddingIcons = this.state.scrollY.interpolate({
@@ -99,14 +99,12 @@ class ProfileScreen extends React.Component<any, any> {
       inputRange: [0, HEADER_HEIGHT],
       outputRange: [
         HEADER_HEIGHT / 2 - PROFILE_IMAGE_HEIGHT,
-        -PROFILE_IMAGE_HEIGHT
+        -HEADER_HEIGHT / 2 - PROFILE_IMAGE_HEIGHT
       ],
       extrapolate: 'clamp'
     });
 
     const user = this.props.navigation.getParam('user');
-
-    const isofferstab = this.state.rest.isoffer;
     const { tab } = this.state;
     const maincolor = user.color ? user.color : '#7678ED';
     const ismyaccount = this.props.isAuthenticated
@@ -154,39 +152,11 @@ class ProfileScreen extends React.Component<any, any> {
         >
           <Animated.View
             style={{
-              height: 80,
-              width: 80,
-              borderColor: maincolor,
-              borderWidth: 2,
-              borderRadius: 40,
-              overflow: 'hidden',
-              backgroundColor: '#fff',
               marginTop: imageMarginTop,
-              marginLeft: 20,
-              alignItems: 'center',
-              justifyContent: 'center'
+              marginLeft: 20
             }}
           >
-            {!user.avatar && (
-              <Avatar
-                name={user.name ? user.name : user.uniquename}
-                size={72}
-              />
-            )}
-            {user.avatar && (
-              <Image
-                style={{
-                  flex: 1,
-                  width: 72,
-                  height: 72
-                }}
-                source={{
-                  uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-                    user.avatar
-                  }`
-                }}
-              />
-            )}
+            <AvatarCircle user={user} size={PROFILE_IMAGE_HEIGHT} />
           </Animated.View>
           <Animated.View
             style={{
@@ -263,9 +233,9 @@ class ProfileScreen extends React.Component<any, any> {
               flexDirection: 'row',
               justifyContent: 'space-around',
               alignItems: 'center',
-              paddingHorizontal: 10,
-              borderColor: '#ddd',
-              borderWidth: 1
+              paddingHorizontal: 10
+              // borderColor: '#ddd',
+              // borderWidth: 1
             }}
           >
             <TouchableOpacity
@@ -357,7 +327,8 @@ class ProfileScreen extends React.Component<any, any> {
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginHorizontal: 2,
-                marginLeft: 9
+                backgroundColor: tab === 1 ? '#eee' : '#fff'
+                // marginLeft: 9
               }}
               onPress={() => {
                 this.setState({ rest: {}, tab: 1 });
@@ -375,78 +346,62 @@ class ProfileScreen extends React.Component<any, any> {
             </TouchableOpacity>
 
             {isshop && (
-              <React.Fragment>
-                <View
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  padding: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginHorizontal: 2,
+                  // marginRight: 9,
+                  backgroundColor: tab === 2 ? '#eee' : '#fff'
+                }}
+                onPress={() => {
+                  this.setState({
+                    rest: { islive: true, isoffer: true },
+                    tab: 2
+                  });
+                }}
+              >
+                <Text
                   style={{
-                    height: 30,
-                    borderLeftColor: '#ddd',
-                    borderLeftWidth: 1
-                  }}
-                />
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    padding: 5,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginHorizontal: 2,
-                    marginRight: 9
-                  }}
-                  onPress={() => {
-                    this.setState({
-                      rest: { islive: true, isoffer: true },
-                      tab: 2
-                    });
+                    fontFamily: 'cairo-regular',
+                    color: tab === 2 ? maincolor : '#000',
+                    fontSize: 16
                   }}
                 >
-                  <Text
-                    style={{
-                      fontFamily: 'cairo-regular',
-                      color: tab === 2 ? maincolor : '#000',
-                      fontSize: 16
-                    }}
-                  >
-                    العروض ({user.offersqty})
-                  </Text>
-                </TouchableOpacity>
-              </React.Fragment>
+                  العروض ({user.offersqty})
+                </Text>
+              </TouchableOpacity>
             )}
             {ismyaccount && (
-              <React.Fragment>
-                <View
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  padding: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginHorizontal: 2,
+                  // marginRight: 9,
+                  backgroundColor: tab === 3 ? '#eee' : '#fff'
+                }}
+                onPress={() => {
+                  this.setState({
+                    rest: { islive: false },
+                    tab: 3
+                  });
+                }}
+              >
+                <Text
                   style={{
-                    height: 30,
-                    borderLeftColor: '#ddd',
-                    borderLeftWidth: 1
-                  }}
-                />
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    padding: 5,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginHorizontal: 2,
-                    marginRight: 9
-                  }}
-                  onPress={() => {
-                    this.setState({
-                      rest: { islive: false },
-                      tab: 3
-                    });
+                    fontFamily: 'cairo-regular',
+                    color: tab === 3 ? maincolor : '#000',
+                    fontSize: 16
                   }}
                 >
-                  <Text
-                    style={{
-                      fontFamily: 'cairo-regular',
-                      color: tab === 3 ? maincolor : '#000',
-                      fontSize: 16
-                    }}
-                  >
-                    غير منشور ({user.offlineqty})
-                  </Text>
-                </TouchableOpacity>
-              </React.Fragment>
+                  غير منشور ({user.offlineqty})
+                </Text>
+              </TouchableOpacity>
             )}
           </Animated.View>
         </Animated.View>

@@ -26,7 +26,7 @@ import upgradeToStore from '../../graphql/mutation/upgradeToStore';
 import { StyleSheet, pickImage, getCountryCityFromToken } from '../../utils';
 import secrets from '../../constants/secrets';
 import { icons } from '../../load';
-import { Avatar } from '../Avatar';
+import { Avatar, AvatarCircle } from '../Avatar';
 
 class Drawer extends React.Component<any, any> {
   state = {
@@ -145,65 +145,8 @@ class Drawer extends React.Component<any, any> {
               user: this.props.user
             });
           }}
-          onLongPress={async () => {
-            const avatar = await pickImage(true, 400, 0.8);
-            if (avatar) {
-              const res = await this.props.addAvatar({
-                variables: {
-                  avatar
-                }
-              });
-              if (res.data.addAvatar.ok) {
-                this.props.updateUser({ avatar });
-              }
-              if (!res.data.addAvatar.ok) {
-                console.log('Error', res.data.addAvatar.error);
-              }
-            }
-          }}
         >
-          {!user.avatar && (
-            <View
-              style={{
-                width: 88,
-                height: 88,
-                borderRadius: 44,
-                borderColor: user.color,
-                borderWidth: 2,
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Avatar
-                name={user.name ? user.name : user.uniquename}
-                size={80}
-              />
-            </View>
-          )}
-          {user.avatar && (
-            <View
-              style={{
-                width: 88,
-                height: 88,
-                borderRadius: 44,
-                borderColor: user.color,
-                borderWidth: 2,
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Image
-                style={{
-                  height: 80,
-                  width: 80,
-                  borderRadius: 40
-                }}
-                source={{ uri }}
-              />
-            </View>
-          )}
+          <AvatarCircle user={user} size={88} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {

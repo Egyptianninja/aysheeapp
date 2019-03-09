@@ -1,4 +1,4 @@
-import { Avatar } from './Avatar';
+import { Avatar, AvatarCircle } from './Avatar';
 import ChoiseCategory from './ChoiseScreen/ChoiseCategory';
 import Drawer from './Drawer';
 import { CategoriesScroll } from './HomeScreen';
@@ -43,5 +43,6 @@ export {
   getJobProperties,
   Noresult,
   LoadingSmall,
-  HomeLoading
+  HomeLoading,
+  AvatarCircle
 };

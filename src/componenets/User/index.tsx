@@ -3,14 +3,13 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { call } from '../../utils';
 
-import { Avatar } from '../Avatar';
+import { AvatarCircle } from '../Avatar';
 
 export const renderUser = ({
   user,
   callargs,
   word,
-  isAuthenticated,
-  userId,
+
   navigation,
   ardroid
 }: any) => {
@@ -27,35 +26,14 @@ export const renderUser = ({
       }}
     >
       <View style={{ flex: 2, flexDirection: ardroid ? 'row-reverse' : 'row' }}>
-        {user.avatar && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('ProfileScreen', { user });
-            }}
-          >
-            <Image
-              style={{
-                height: 50,
-                width: 50,
-                borderRadius: 25
-              }}
-              source={{
-                uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-                  user.avatar
-                }`
-              }}
-            />
-          </TouchableOpacity>
-        )}
-        {!user.avatar && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('ProfileScreen', { user });
-            }}
-          >
-            <Avatar name={user.name ? user.name : user.uniquename} size={50} />
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ProfileScreen', { user });
+          }}
+        >
+          <AvatarCircle user={user} size={50} />
+        </TouchableOpacity>
+
         <View style={{ paddingLeft: 10, alignItems: 'center' }}>
           <TouchableOpacity
             onPress={() => {

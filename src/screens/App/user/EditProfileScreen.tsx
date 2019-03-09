@@ -413,7 +413,6 @@ class EditProfileScreen extends React.Component<any, any> {
                     textStyle={styles.btnTextStyle}
                     title={word.save}
                     onPress={handleSubmit}
-                    disabled={!isValid || isSubmitting}
                   />
                   {isSubmitting && (
                     <View

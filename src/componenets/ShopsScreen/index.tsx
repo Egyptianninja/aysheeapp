@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
-import { Avatar } from '../Avatar';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { AvatarCircle } from '../Avatar';
 
 const ShopItem = ({ user, myId, navigation, width }: any) => {
-  const maincolor = user.color ? user.color : '#7678ED';
   return (
     <View
       style={{
@@ -19,36 +17,11 @@ const ShopItem = ({ user, myId, navigation, width }: any) => {
       <TouchableOpacity
         onPress={() => navigation.navigate('ProfileScreen', { user })}
         style={{
-          height: 80,
-          width: 80,
-          borderColor: maincolor,
-          borderWidth: 2,
-          borderRadius: 40,
-          overflow: 'hidden',
-          backgroundColor: '#fff',
           marginTop: 20,
-          marginHorizontal: 20,
-          alignItems: 'center',
-          justifyContent: 'center'
+          marginHorizontal: 20
         }}
       >
-        {!user.avatar && (
-          <Avatar name={user.name ? user.name : user.uniquename} size={72} />
-        )}
-        {user.avatar && (
-          <Image
-            style={{
-              flex: 1,
-              width: 72,
-              height: 72
-            }}
-            source={{
-              uri: `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-                user.avatar
-              }`
-            }}
-          />
-        )}
+        <AvatarCircle user={user} size={76} />
       </TouchableOpacity>
       <View
         style={{
