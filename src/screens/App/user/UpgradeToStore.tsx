@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Permissions } from 'expo';
 import { Formik } from 'formik';
 import * as React from 'react';
@@ -9,7 +8,6 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View
 } from 'react-native';
 import * as Progress from 'react-native-progress';
@@ -25,9 +23,10 @@ import { updateUser } from '../../../store/actions/userAtions';
 import {
   ColorPicker,
   Message,
-  pickImage,
   StyleSheet,
-  UserLocation
+  UserLocation,
+  pickImageWithoutUpload,
+  uploadPickedImage
 } from '../../../utils';
 const { width } = Dimensions.get('window');
 
@@ -37,32 +36,9 @@ class UpgradeToStore extends React.Component<any, any> {
     isShowMessage: false,
     location: null,
     avatar: null,
-    headerPhoto: null,
-    isAvatarLoading: false,
-    isHeaderLoading: false,
     bar: 0
   };
 
-  onheaderPhotoUpload = async () => {
-    const permissions = Permissions.CAMERA_ROLL;
-    const { status: existingStatus } = await Permissions.getAsync(permissions);
-    let finalStatus = existingStatus;
-    if (finalStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(permissions);
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      return;
-    }
-    this.setState({ isHeaderLoading: true });
-    this.props.addPermission('CAMERA_ROLL');
-    const headerPhoto = await pickImage(false, 1080, 0.8);
-
-    if (headerPhoto) {
-      this.setState({ headerPhoto });
-    }
-    this.setState({ isHeaderLoading: false });
-  };
   onAvatarUpload = async () => {
     const permissions = Permissions.CAMERA_ROLL;
     const { status: existingStatus } = await Permissions.getAsync(permissions);
@@ -74,13 +50,12 @@ class UpgradeToStore extends React.Component<any, any> {
     if (finalStatus !== 'granted') {
       return;
     }
-    this.setState({ isAvatarLoading: true });
     this.props.addPermission('CAMERA_ROLL');
-    const avatar = await pickImage(true, 400, 0.8);
+    const avatar = await pickImageWithoutUpload(true);
+
     if (avatar) {
       this.setState({ avatar });
     }
-    this.setState({ isAvatarLoading: false });
   };
 
   showMessage = ({ seconds, screen }: any) => {
@@ -111,10 +86,12 @@ class UpgradeToStore extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const {
       name,
-      email,
-      website,
       about,
       color,
+      email,
+      website,
+      addressCountry,
+      addressCity,
       tel,
       fax,
       mob,
@@ -128,17 +105,20 @@ class UpgradeToStore extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
-    const { avatar, headerPhoto } = this.state;
+    const avatar = this.state.avatar
+      ? await uploadPickedImage(this.state.avatar, 400, 0.8, false)
+      : null;
     this.updateProgressBar(1 / 3);
     const res = await this.props.upgradeToStore({
       variables: {
         name,
-        email,
-        website,
         about,
         avatar: avatar ? avatar : undefined,
-        headerPhoto: headerPhoto ? headerPhoto : undefined,
         color,
+        email,
+        website,
+        addressCountry,
+        addressCity,
         tel,
         fax,
         mob,
@@ -161,18 +141,10 @@ class UpgradeToStore extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
-    const uri = this.state.headerPhoto
-      ? `http://res.cloudinary.com/arflon/image/upload/w_${500}/${
-          this.state.headerPhoto
-        }`
-      : `http://res.cloudinary.com/arflon/image/upload/w_${500}/${
-          user.headerPhoto
-        }`;
-    const avataruri = this.state.avatar
-      ? `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-          this.state.avatar
-        }`
-      : `http://res.cloudinary.com/arflon/image/upload/w_${100}/${user.avatar}`;
+    const userAvatar = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
+      user.avatar
+    }`;
+    const avatar: any = this.state.avatar;
 
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -189,10 +161,12 @@ class UpgradeToStore extends React.Component<any, any> {
             <Formik
               initialValues={{
                 name: '',
-                email: '',
-                website: '',
                 about: '',
                 color: '#7678ED',
+                email: '',
+                website: '',
+                addressCountry: '',
+                addressCity: '',
                 tel: '',
                 fax: '',
                 mob: '',
@@ -218,104 +192,40 @@ class UpgradeToStore extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Title width={width - 40}>{word.apdateaccount}</Title>
                   <View style={[styles.container, { zIndex: 10 }]}>
                     <TouchableOpacity
                       style={{
-                        position: 'absolute',
-                        right: isRTL ? undefined : 20,
-                        left: isRTL ? 20 : undefined,
-                        top: 140,
-                        zIndex: 200
+                        padding: 20
                       }}
                       onPress={this.onAvatarUpload}
                     >
-                      {!user.avatar && !this.state.avatar && (
+                      {!user.avatar && !avatar && (
                         <Avatar
                           name={user.name ? user.name : user.uniquename}
-                          size={80}
+                          size={100}
                         />
                       )}
-                      <Image
-                        style={{
-                          height: 80,
-                          width: 80,
-                          borderRadius: 40
-                        }}
-                        source={{ uri: avataruri }}
-                      />
-                      {this.state.isAvatarLoading && (
-                        <View
+                      {user.avatar && !avatar && (
+                        <Image
                           style={{
-                            position: 'absolute',
-                            left: 15,
-                            top: 15
+                            height: 100,
+                            width: 100,
+                            borderRadius: 50
                           }}
-                        >
-                          <Progress.Circle
-                            indeterminate={true}
-                            size={50}
-                            borderColor="#eee"
-                          />
-                        </View>
+                          source={{ uri: userAvatar }}
+                        />
+                      )}
+                      {avatar && (
+                        <Image
+                          style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 50
+                          }}
+                          source={{ uri: avatar.uri }}
+                        />
                       )}
                     </TouchableOpacity>
-                    {!user.headerPhoto && !this.state.headerPhoto && (
-                      <TouchableWithoutFeedback
-                        onPress={this.onheaderPhotoUpload}
-                      >
-                        <View
-                          style={{
-                            width,
-                            height: 175,
-                            backgroundColor: '#6FA7D5'
-                          }}
-                        />
-                      </TouchableWithoutFeedback>
-                    )}
-                    {user.headerPhoto ||
-                      (this.state.headerPhoto && (
-                        <TouchableWithoutFeedback
-                          onPress={this.onheaderPhotoUpload}
-                        >
-                          <Image
-                            source={{ uri }}
-                            style={{
-                              flex: 1,
-                              width,
-                              height: 175,
-                              resizeMode: 'cover'
-                            }}
-                          />
-                        </TouchableWithoutFeedback>
-                      ))}
-                    {this.state.isHeaderLoading && (
-                      <View
-                        style={{
-                          position: 'absolute',
-                          left: width / 2 - 25,
-                          top: 62.5
-                        }}
-                      >
-                        <Progress.Circle
-                          indeterminate={true}
-                          size={50}
-                          borderColor="#eee"
-                        />
-                      </View>
-                    )}
-                    <View style={{ position: 'absolute', left: 20, top: 40 }}>
-                      <TouchableOpacity
-                        onPress={() => this.props.navigation.goBack()}
-                      >
-                        <Ionicons
-                          name="ios-arrow-back"
-                          size={33}
-                          style={{ padding: 10 }}
-                          color="#fff"
-                        />
-                      </TouchableOpacity>
-                    </View>
                   </View>
                   <Input
                     rtl={isRTL}
@@ -328,6 +238,52 @@ class UpgradeToStore extends React.Component<any, any> {
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
                     error={touched.name && errors.name}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    height={40}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    name="about"
+                    label={word.about}
+                    value={values.about}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.about && errors.about}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    multiline={true}
+                    height={100}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    name="addressCountry"
+                    label={word.country}
+                    value={values.addressCountry}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.addressCountry && errors.addressCountry}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    height={40}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    name="addressCity"
+                    label={word.city}
+                    value={values.addressCity}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.addressCity && errors.addressCity}
                     autoCapitalize="none"
                     autoCorrect={false}
                     height={40}
@@ -362,23 +318,6 @@ class UpgradeToStore extends React.Component<any, any> {
                     autoCapitalize="none"
                     autoCorrect={false}
                     height={40}
-                  />
-
-                  <Input
-                    rtl={isRTL}
-                    name="about"
-                    label={word.about}
-                    value={values.about}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.about && errors.about}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    multiline={true}
-                    height={100}
                   />
 
                   <Input

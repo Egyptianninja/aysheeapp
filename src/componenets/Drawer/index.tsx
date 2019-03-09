@@ -48,7 +48,9 @@ class Drawer extends React.Component<any, any> {
       case 4:
         return this.props.navigation.navigate('MyFavScreen');
       case 5: {
-        return this.props.navigation.navigate('UpgradeToStore');
+        return this.props.navigation.navigate('UpgradeToStore', {
+          title: this.props.words.apdateaccount
+        });
 
         // const res = await this.props.upgradeToStore({});
         // if (res.data.upgradeToStore.ok) {

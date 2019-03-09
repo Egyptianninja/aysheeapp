@@ -3,12 +3,13 @@ import gql from 'graphql-tag';
 export default gql`
   mutation upgradeToStore(
     $name: String
-    $email: String
-    $website: String
     $about: String
     $avatar: String
-    $headerPhoto: String
     $color: String
+    $email: String
+    $website: String
+    $addressCountry: String
+    $addressCity: String
     $tel: String
     $fax: String
     $mob: String
@@ -16,12 +17,13 @@ export default gql`
   ) {
     upgradeToStore(
       name: $name
-      email: $email
-      website: $website
       about: $about
       avatar: $avatar
-      headerPhoto: $headerPhoto
       color: $color
+      email: $email
+      website: $website
+      addressCountry: $addressCountry
+      addressCity: $addressCity
       tel: $tel
       fax: $fax
       mob: $mob

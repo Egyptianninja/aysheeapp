@@ -5,25 +5,29 @@ export default gql`
     $name: String
     $about: String
     $avatar: String
-    $headerPhoto: String
     $color: String
-    $lang: String
-    $addressCountry: String
-    $addressCity: String
     $email: String
     $website: String
+    $addressCountry: String
+    $addressCity: String
+    $tel: String
+    $fax: String
+    $mob: String
+    $location: LocationInput
   ) {
     updateProfile(
       name: $name
       about: $about
       avatar: $avatar
-      headerPhoto: $headerPhoto
       color: $color
-      lang: $lang
-      addressCountry: $addressCountry
-      addressCity: $addressCity
       email: $email
       website: $website
+      addressCountry: $addressCountry
+      addressCity: $addressCity
+      tel: $tel
+      fax: $fax
+      mob: $mob
+      location: $location
     ) {
       ok
       message

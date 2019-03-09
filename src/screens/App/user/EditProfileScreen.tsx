@@ -1,41 +1,45 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Permissions } from 'expo';
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
 import {
-  AsyncStorage,
   Dimensions,
   Image,
   KeyboardAvoidingView,
   ScrollView,
-  Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View
 } from 'react-native';
+import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as Yup from 'yup';
 import { Avatar } from '../../../componenets';
+import { colors } from '../../../constants';
 import updateProfile from '../../../graphql/mutation/updateProfile';
-import { Button, Input } from '../../../lib';
+import { Button, CheckBox, Group, Input, Title } from '../../../lib';
 import { addPermission } from '../../../store/actions/globActions';
 import { updateUser } from '../../../store/actions/userAtions';
-import { parseJwt, pickImage, StyleSheet } from '../../../utils';
+import {
+  ColorPicker,
+  Message,
+  StyleSheet,
+  UserLocation,
+  pickImageWithoutUpload,
+  uploadPickedImage
+} from '../../../utils';
 const { width } = Dimensions.get('window');
 
-class ProfileScreen extends React.Component<any, any> {
-  static navigationOptions = {
-    header: null
+class EditProfileScreen extends React.Component<any, any> {
+  state = {
+    selectedImage: null,
+    isShowMessage: false,
+    location: null,
+    avatar: null,
+    bar: 0
   };
-  tokenData: any;
 
-  async componentDidMount() {
-    const token = await AsyncStorage.getItem('aysheetoken');
-    this.tokenData = parseJwt(token);
-  }
-
-  onPhotoUpload = async () => {
+  onAvatarUpload = async () => {
     const permissions = Permissions.CAMERA_ROLL;
     const { status: existingStatus } = await Permissions.getAsync(permissions);
     let finalStatus = existingStatus;
@@ -47,189 +51,138 @@ class ProfileScreen extends React.Component<any, any> {
       return;
     }
     this.props.addPermission('CAMERA_ROLL');
-    const headerPhoto = await pickImage(false, 960, 0.8);
-    if (headerPhoto) {
-      const res = await this.props.updateProfile({
-        variables: {
-          headerPhoto
-        }
-      });
-      if (res.data.updateProfile.ok) {
-        this.props.updateUser({ headerPhoto });
-        return true;
-      }
-      if (!res.data.updateProfile.ok) {
-        console.log('Error', res.data.updateProfile.error);
-        return false;
-      }
+    const avatar = await pickImageWithoutUpload(true);
+
+    if (avatar) {
+      this.setState({ avatar });
     }
   };
 
+  showMessage = ({ seconds, screen }: any) => {
+    this.setState({ isShowMessage: true });
+    if (seconds && !screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+      }, seconds * 1000);
+    }
+    if (seconds && screen) {
+      setTimeout(() => {
+        this.setState({ isShowMessage: false });
+        screen === 'back'
+          ? this.props.navigation.goBack()
+          : this.props.navigation.navigate(screen);
+      }, seconds * 1000);
+    }
+  };
+  hideMessage = () => {
+    this.setState({ isShowMessage: false });
+  };
+  getCurrentLocation = (location: any) => {
+    this.setState({ location });
+  };
+
+  updateProgressBar = (value: any) => {
+    this.setState({ bar: this.state.bar + value });
+  };
+
   handleSubmit = async (values: any, bag: any) => {
-    const { name, about, addressCountry, addressCity, email, website } = values;
+    const {
+      name,
+      about,
+      color,
+      email,
+      website,
+      addressCountry,
+      addressCity,
+      tel,
+      fax,
+      mob,
+      location
+    } = values;
+    const loc: any = location ? this.state.location : null;
+    let trueLocation = null;
+    if (loc) {
+      trueLocation = {
+        lat: loc.coords.latitude,
+        lon: loc.coords.longitude
+      };
+    }
+    const avatar = this.state.avatar
+      ? await uploadPickedImage(this.state.avatar, 400, 0.8, false)
+      : null;
+    this.updateProgressBar(1 / 3);
     const res = await this.props.updateProfile({
       variables: {
         name,
         about,
+        avatar: avatar ? avatar : undefined,
+        color,
+        email,
+        website,
         addressCountry,
         addressCity,
-        email,
-        website
+        tel,
+        fax,
+        mob,
+        location: trueLocation
       }
     });
 
     if (res.data.updateProfile.ok) {
-      this.props.updateUser({
-        name,
-        about,
-        addressCountry,
-        addressCity,
-        email,
-        website
-      });
+      this.updateProgressBar(2 / 3);
+      const { data } = res.data.updateProfile;
+      await this.props.updateUser(data);
+      this.updateProgressBar(3 / 3);
+      this.showMessage({ seconds: 2, screen: 'back' });
     }
     if (!res.data.updateProfile.ok) {
-      bag.setErrors({ title: res.data.updateProfile.error });
+      bag.setErrors({ name: res.data.updateProfile.error });
     }
     bag.setSubmitting(false);
   };
-
   render() {
-    const userData = this.props.user;
-    const uri = `http://res.cloudinary.com/arflon/image/upload/w_${500}/${
-      userData.headerPhoto
+    const word = this.props.words;
+    const { user, isRTL } = this.props;
+    const userAvatar = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
+      user.avatar
     }`;
-    const avataruri = userData.avatar
-      ? `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-          userData.avatar
-        }`
-      : 'https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png';
-    const { words, isRTL } = this.props;
+    const avatar: any = this.state.avatar;
+
     return (
-      <View style={{ flex: 1 }}>
-        <View style={[styles.container, { zIndex: 10 }]}>
-          <TouchableOpacity
-            style={{
-              position: 'absolute',
-              right: isRTL ? undefined : 20,
-              left: isRTL ? 20 : undefined,
-              top: 140,
-              zIndex: 200
-            }}
-            onPress={async () => {
-              const permissions = Permissions.CAMERA_ROLL;
-              const { status: existingStatus } = await Permissions.getAsync(
-                permissions
-              );
-              let finalStatus = existingStatus;
-              if (finalStatus !== 'granted') {
-                const { status } = await Permissions.askAsync(permissions);
-                finalStatus = status;
-              }
-              if (finalStatus !== 'granted') {
-                return;
-              }
-              this.props.addPermission('CAMERA_ROLL');
-              const avatar = await pickImage(true, 400, 0.8);
-              if (avatar) {
-                const res = await this.props.updateProfile({
-                  variables: {
-                    avatar
-                  }
-                });
-                if (res.data.updateProfile.ok) {
-                  this.props.updateUser({ avatar });
-                }
-                if (!res.data.updateProfile.ok) {
-                  console.log('Error', res.data.updateProfile.error);
-                }
-              }
-            }}
-          >
-            {!userData.avatar && (
-              <Avatar
-                name={userData.name ? userData.name : userData.uniquename}
-                size={80}
-              />
-            )}
-            {userData.avatar && (
-              <Image
-                style={{
-                  height: 80,
-                  width: 80,
-                  borderRadius: 40
-                }}
-                source={{ uri: avataruri }}
-              />
-            )}
-          </TouchableOpacity>
-          {!userData.headerPhoto && (
-            <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
-              <View
-                style={{ width, height: 175, backgroundColor: '#6FA7D5' }}
-              />
-            </TouchableWithoutFeedback>
-          )}
-          {userData.headerPhoto && (
-            <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
-              <Image
-                source={{ uri }}
-                style={{
-                  flex: 1,
-                  width,
-                  height: 175,
-                  resizeMode: 'cover'
-                }}
-              />
-            </TouchableWithoutFeedback>
-          )}
-          <View style={{ position: 'absolute', left: 20, top: 40 }}>
-            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Ionicons
-                name="ios-arrow-back"
-                size={33}
-                style={{ padding: 10 }}
-                color="#fff"
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{ position: 'absolute', alignSelf: 'center', top: 75 }}>
-            {!userData.name && (
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  color: '#fff',
-                  fontSize: 22
-                }}
-              >
-                + {userData.phone}
-              </Text>
-            )}
-            {userData.name !== '' && (
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  color: '#fff',
-                  fontSize: 22
-                }}
-              >
-                {userData.name}
-              </Text>
-            )}
-          </View>
-        </View>
-        <KeyboardAvoidingView behavior="padding" enabled>
-          <ScrollView>
+      <KeyboardAvoidingView behavior="padding" enabled>
+        <Message
+          isVisible={this.state.isShowMessage}
+          title={word.accountupdated}
+          icon="ios-checkmark-circle"
+          isRTL={isRTL}
+          width={width}
+          height={100}
+        />
+        <ScrollView>
+          <View style={styles.container}>
             <Formik
               initialValues={{
-                name: userData.name,
-                about: userData.about,
-                addressCountry: userData.addressCountry,
-                addressCity: userData.addressCity,
-                email: userData.email,
-                website: userData.website
+                name: user.name,
+                about: user.about,
+                color: user.color,
+                email: user.email,
+                website: user.website,
+                addressCountry: user.addressCountry,
+                addressCity: user.addressCity,
+                tel: user.tel,
+                fax: user.fax,
+                mob: user.mob,
+                location: false
               }}
               onSubmit={this.handleSubmit}
+              validationSchema={Yup.object().shape({
+                name: Yup.string()
+                  .max(100)
+                  .required(word.nameisrequire),
+                email: Yup.string()
+                  .email('Not valid email')
+                  .required(word.emailisrequired)
+              })}
               render={({
                 values,
                 handleSubmit,
@@ -237,20 +190,49 @@ class ProfileScreen extends React.Component<any, any> {
                 errors,
                 touched,
                 setFieldTouched,
+                isValid,
                 isSubmitting
               }: any) => (
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 40
-                  }}
-                >
+                <React.Fragment>
+                  <View style={[styles.container, { zIndex: 10 }]}>
+                    <TouchableOpacity
+                      style={{
+                        padding: 20
+                      }}
+                      onPress={this.onAvatarUpload}
+                    >
+                      {!user.avatar && !avatar && (
+                        <Avatar
+                          name={user.name ? user.name : user.uniquename}
+                          size={100}
+                        />
+                      )}
+                      {user.avatar && !avatar && (
+                        <Image
+                          style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 50
+                          }}
+                          source={{ uri: userAvatar }}
+                        />
+                      )}
+                      {avatar && (
+                        <Image
+                          style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 50
+                          }}
+                          source={{ uri: avatar.uri }}
+                        />
+                      )}
+                    </TouchableOpacity>
+                  </View>
                   <Input
                     rtl={isRTL}
                     name="name"
-                    label={words.name}
+                    label={word.name}
                     value={values.name}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -265,7 +247,7 @@ class ProfileScreen extends React.Component<any, any> {
                   <Input
                     rtl={isRTL}
                     name="about"
-                    label={words.about}
+                    label={word.about}
                     value={values.about}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -278,11 +260,10 @@ class ProfileScreen extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
-
                   <Input
                     rtl={isRTL}
                     name="addressCountry"
-                    label={words.country}
+                    label={word.country}
                     value={values.addressCountry}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -297,7 +278,7 @@ class ProfileScreen extends React.Component<any, any> {
                   <Input
                     rtl={isRTL}
                     name="addressCity"
-                    label={words.city}
+                    label={word.city}
                     value={values.addressCity}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -312,7 +293,7 @@ class ProfileScreen extends React.Component<any, any> {
                   <Input
                     rtl={isRTL}
                     name="email"
-                    label={words.email}
+                    label={word.email}
                     value={values.email}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -321,13 +302,14 @@ class ProfileScreen extends React.Component<any, any> {
                     labelStyle={styles.labelStyle}
                     error={touched.email && errors.email}
                     autoCapitalize="none"
+                    keyboardType="email-address"
                     autoCorrect={false}
                     height={40}
                   />
                   <Input
                     rtl={isRTL}
                     name="website"
-                    label={words.website}
+                    label={word.website}
                     value={values.website}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -340,65 +322,136 @@ class ProfileScreen extends React.Component<any, any> {
                     height={40}
                   />
 
+                  <Input
+                    rtl={isRTL}
+                    name="color"
+                    color={values.color}
+                    label={word.color}
+                    value={values.color}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.color && errors.color}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    height={40}
+                  />
+                  <ColorPicker
+                    onChange={(color: any) => setFieldValue('color', color)}
+                    defaultColor={values.color}
+                    colors={colors}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    num
+                    name="tel"
+                    label={word.tel}
+                    value={values.tel}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.tel && errors.tel}
+                    keyboardType="number-pad"
+                    height={40}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    num
+                    name="fax"
+                    label={word.fax}
+                    value={values.fax}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.fax && errors.fax}
+                    keyboardType="number-pad"
+                    height={40}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    num
+                    name="mob"
+                    label={word.mob}
+                    value={values.mob}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.mob && errors.mob}
+                    keyboardType="number-pad"
+                    height={40}
+                  />
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={isRTL}
+                  >
+                    <CheckBox
+                      name="location"
+                      label={word.location}
+                      msg={word.locationmsg}
+                      value={values.location}
+                      selected={values.location}
+                    />
+                  </Group>
+                  {values.location && (
+                    <UserLocation
+                      getCurrentLocation={this.getCurrentLocation}
+                      width={width}
+                    />
+                  )}
                   <Button
                     isRTL={isRTL}
                     background="#272727"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
-                    title={words.save}
+                    title={word.save}
                     onPress={handleSubmit}
-                    disabled={isSubmitting}
-                    loading={isSubmitting}
+                    disabled={!isValid || isSubmitting}
                   />
-                </View>
+                  {isSubmitting && (
+                    <View
+                      style={{
+                        position: 'relative',
+                        left: 65,
+                        bottom: 65
+                      }}
+                    >
+                      <Progress.Circle
+                        indeterminate={this.state.bar === 0 ? true : false}
+                        progress={this.state.bar}
+                        size={30}
+                        color="#26A65B"
+                        borderColor="#eee"
+                      />
+                    </View>
+                  )}
+                </React.Fragment>
               )}
             />
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+          </View>
+          <View style={{ height: 60 }} />
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch: any) =>
-  bindActionCreators(
-    {
-      updateUser,
-      addPermission
-    },
-    dispatch
-  );
-
-const mapStateToProps = (state: any) => ({
-  isRTL: state.glob.isRTL,
-  isAuthenticated: state.user.isAuthenticated,
-  user: state.user.user,
-  words: state.glob.language.words
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(
-  graphql(updateProfile, {
-    name: 'updateProfile'
-  })(ProfileScreen)
-);
-
 const styles = StyleSheet.create({
   container: {
-    height: 175,
-    width,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  image: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover'
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-
   button: {
     marginTop: 20,
     width: '100%'
@@ -416,18 +469,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5,
-    zIndex: 1
+    borderRadius: 5
   },
   labelStyle: {
-    color: '#6FA7D5',
     fontSize: 18,
     padding: 5
   },
   btnStyle: {
     marginTop: 30,
-    height: 40,
-    width: 120,
+    height: 60,
+    width: width - 80,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 20,
@@ -439,3 +490,29 @@ const styles = StyleSheet.create({
     fontFamily: 'cairo-regular'
   }
 });
+
+const mapStateToProps = (state: any) => ({
+  isRTL: state.glob.isRTL,
+  lang: state.glob.languageName,
+  words: state.glob.language.words,
+  kind: state.glob.language.kind,
+  user: state.user.user
+});
+
+const mapDispatchToProps = (dispatch: any) =>
+  bindActionCreators(
+    {
+      updateUser,
+      addPermission
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  graphql(updateProfile, {
+    name: 'updateProfile'
+  })(EditProfileScreen)
+);

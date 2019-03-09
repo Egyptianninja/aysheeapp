@@ -67,7 +67,7 @@ const ItemViewSmall = (props: any) => {
                   {
                     width: imageWidth - 2,
                     height: imageHeight,
-                    backgroundColor: '#fff'
+                    backgroundColor: '#eee'
                   }
                 ]}
               >

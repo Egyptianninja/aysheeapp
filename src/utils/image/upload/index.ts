@@ -96,8 +96,9 @@ export const pickImageWithoutUpload = async (editing = true) => {
 };
 export const uploadPickedImage = async (
   image: any,
-  width: 1080,
-  compress: 0.8
+  width = 1080,
+  compress = 0.8,
+  rt = true
 ) => {
   const resizedImage = await compressImage(image.uri, width, compress);
   const base64Img = `data:image/jpg;base64,${resizedImage.base64}`;
@@ -109,7 +110,7 @@ export const uploadPickedImage = async (
     secrets.upload.CLOUD_NAME
   ).then(response => {
     const { public_id } = response.data;
-    const photo = `${public_id}-${ratio}-1`;
+    const photo = rt ? `${public_id}-${ratio}-1` : public_id;
     return photo;
   });
 };

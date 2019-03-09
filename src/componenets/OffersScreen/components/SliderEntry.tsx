@@ -55,7 +55,7 @@ class SliderEntry extends Component<any, any> {
         activeOpacity={1}
         style={styles.slideInnerContainer}
         onPress={() => {
-          this.props.navigation.navigate('ItemScreenModal', {
+          this.props.navigation.navigate('ItemScreen', {
             post: this.props.data,
             word: words,
             lang,

@@ -74,6 +74,7 @@ export const AppStackNavigator = createStackNavigator({
   UpgradeToStore: {
     screen: UpgradeToStore,
     navigationOptions: ({ navigation }: any) => ({
+      title: navigation.getParam('title'),
       headerStyle: styles.headerStyle,
       headerTintColor: '#555',
       headerTitleStyle: styles.headerTitleStyle,

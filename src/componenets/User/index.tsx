@@ -30,13 +30,7 @@ export const renderUser = ({
         {user.avatar && (
           <TouchableOpacity
             onPress={() => {
-              if (isAuthenticated) {
-                const screen =
-                  user._id === userId ? 'MyPostsScreen' : 'ProfileScreen';
-                navigation.navigate(screen, { user });
-              } else {
-                navigation.navigate('ProfileScreen', { user });
-              }
+              navigation.navigate('ProfileScreen', { user });
             }}
           >
             <Image
@@ -56,13 +50,7 @@ export const renderUser = ({
         {!user.avatar && (
           <TouchableOpacity
             onPress={() => {
-              if (isAuthenticated) {
-                const screen =
-                  user._id === userId ? 'MyPostsScreen' : 'ProfileScreen';
-                navigation.navigate(screen, { user });
-              } else {
-                navigation.navigate('ProfileScreen', { user });
-              }
+              navigation.navigate('ProfileScreen', { user });
             }}
           >
             <Avatar name={user.name ? user.name : user.uniquename} size={50} />
@@ -71,13 +59,7 @@ export const renderUser = ({
         <View style={{ paddingLeft: 10, alignItems: 'center' }}>
           <TouchableOpacity
             onPress={() => {
-              if (isAuthenticated) {
-                const screen =
-                  user._id === userId ? 'MyPostsScreen' : 'ProfileScreen';
-                navigation.navigate(screen, { user });
-              } else {
-                navigation.navigate('ProfileScreen', { user });
-              }
+              navigation.navigate('ProfileScreen', { user });
             }}
           >
             {(user.name || user.name !== '') && (
