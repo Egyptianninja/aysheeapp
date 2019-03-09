@@ -20,16 +20,13 @@ import MyOnlinePostsScreen from './App/user/MyOnlinePostsScreen';
 import UpgradeToStore from './App/user/UpgradeToStore';
 import MyOfflinePostsScreen from './App/user/MyOfflinePostsScreen';
 import MyFavScreen from './App/user/MyFavScreen';
-import MyProfileScreen from './App/user/MyProfileScreen';
-import MyOffersScreen from './App/user/MyOffersScreen';
-import UserProfileScreen from './App/user/UserProfileScreen';
-import CameraScreen from './App/CameraScreen';
+import EditProfileScreen from './App/user/EditProfileScreen';
 import ProfileScreen from './App/user/ProfileScreen';
+import CameraScreen from './App/CameraScreen';
 
 export {
   HomeScreen,
   ItemScreen,
-  MyProfileScreen,
   ChoiseScreen,
   NotificationsScreen,
   AddClassifiedScreen,
@@ -45,10 +42,9 @@ export {
   MyFavScreen,
   CodeScreen,
   NameScreen,
-  UserProfileScreen,
   CameraScreen,
   AddOfferScreen,
-  MyOffersScreen,
+  EditProfileScreen,
   UpgradeToStore,
   OffersScreen,
   ItemScreenModal,

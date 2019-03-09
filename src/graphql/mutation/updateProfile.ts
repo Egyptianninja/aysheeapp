@@ -8,8 +8,8 @@ export default gql`
     $headerPhoto: String
     $color: String
     $lang: String
-    $country: String
-    $city: String
+    $addressCountry: String
+    $addressCity: String
     $email: String
     $website: String
   ) {
@@ -20,8 +20,8 @@ export default gql`
       headerPhoto: $headerPhoto
       color: $color
       lang: $lang
-      country: $country
-      city: $city
+      addressCountry: $addressCountry
+      addressCity: $addressCity
       email: $email
       website: $website
     ) {
@@ -48,6 +48,8 @@ export default gql`
         lang
         country
         city
+        addressCountry
+        addressCity
         website
         verified
         tel

@@ -66,20 +66,27 @@ class ProfileScreen extends React.Component<any, any> {
   };
 
   handleSubmit = async (values: any, bag: any) => {
-    const { name, about, country, city, email, website } = values;
+    const { name, about, addressCountry, addressCity, email, website } = values;
     const res = await this.props.updateProfile({
       variables: {
         name,
         about,
-        country,
-        city,
+        addressCountry,
+        addressCity,
         email,
         website
       }
     });
 
     if (res.data.updateProfile.ok) {
-      this.props.updateUser({ name, about, country, city, email, website });
+      this.props.updateUser({
+        name,
+        about,
+        addressCountry,
+        addressCity,
+        email,
+        website
+      });
     }
     if (!res.data.updateProfile.ok) {
       bag.setErrors({ title: res.data.updateProfile.error });
@@ -217,8 +224,8 @@ class ProfileScreen extends React.Component<any, any> {
               initialValues={{
                 name: userData.name,
                 about: userData.about,
-                country: userData.country,
-                city: userData.city,
+                addressCountry: userData.addressCountry,
+                addressCity: userData.addressCity,
                 email: userData.email,
                 website: userData.website
               }}
@@ -271,32 +278,33 @@ class ProfileScreen extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
+
                   <Input
                     rtl={isRTL}
-                    name="country"
+                    name="addressCountry"
                     label={words.country}
-                    value={values.country}
+                    value={values.addressCountry}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
                     outerStyle={styles.outerStyle}
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
-                    error={touched.country && errors.country}
+                    error={touched.addressCountry && errors.addressCountry}
                     autoCapitalize="none"
                     autoCorrect={false}
                     height={40}
                   />
                   <Input
                     rtl={isRTL}
-                    name="city"
+                    name="addressCity"
                     label={words.city}
-                    value={values.city}
+                    value={values.addressCity}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
                     outerStyle={styles.outerStyle}
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
-                    error={touched.city && errors.city}
+                    error={touched.addressCity && errors.addressCity}
                     autoCapitalize="none"
                     autoCorrect={false}
                     height={40}

@@ -36,7 +36,9 @@ class Drawer extends React.Component<any, any> {
   menuAction = async (id: number) => {
     switch (id) {
       case 0:
-        return this.props.navigation.navigate('Profile');
+        return this.props.navigation.navigate('ProfileScreen', {
+          user: this.props.user
+        });
       case 1:
         return this.props.navigation.navigate('ChoiseScreen');
       case 2:
@@ -137,7 +139,9 @@ class Drawer extends React.Component<any, any> {
       <View style={[styles.drawer, { borderBottomColor: '#555' }]}>
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('Profile');
+            this.props.navigation.navigate('ProfileScreen', {
+              user: this.props.user
+            });
           }}
           onLongPress={async () => {
             const avatar = await pickImage(true, 400, 0.8);
@@ -201,7 +205,9 @@ class Drawer extends React.Component<any, any> {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('Profile');
+            this.props.navigation.navigate('ProfileScreen', {
+              user: this.props.user
+            });
           }}
         >
           {!user.name && (

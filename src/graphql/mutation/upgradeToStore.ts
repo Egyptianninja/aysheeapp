@@ -50,6 +50,8 @@ export default gql`
         lang
         country
         city
+        addressCountry
+        addressCity
         website
         verified
         tel

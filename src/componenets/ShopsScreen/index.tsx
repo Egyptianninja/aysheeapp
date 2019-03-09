@@ -17,7 +17,7 @@ const ShopItem = ({ user, myId, navigation, width }: any) => {
       }}
     >
       <TouchableOpacity
-        onPress={() => navigation.navigate('UserProfileScreen', { user })}
+        onPress={() => navigation.navigate('ProfileScreen', { user })}
         style={{
           height: 80,
           width: 80,
@@ -59,7 +59,7 @@ const ShopItem = ({ user, myId, navigation, width }: any) => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate('UserProfileScreen', { user })}
+          onPress={() => navigation.navigate('ProfileScreen', { user })}
           style={{
             alignItems: 'flex-end'
           }}

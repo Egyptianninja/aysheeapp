@@ -7,7 +7,6 @@ import PostTabsStack from './PostTabsStack';
 import {
   HomeScreen,
   ItemScreen,
-  MyProfileScreen,
   ChoiseScreen,
   NotificationsScreen,
   AddClassifiedScreen,
@@ -16,7 +15,6 @@ import {
   AddJobScreen,
   AddCarScreen,
   AddPartsScreen,
-  UserProfileScreen,
   MyFavScreen,
   CameraScreen,
   AddOfferScreen,
@@ -24,10 +22,10 @@ import {
   OffersScreen,
   ItemScreenModal,
   ProfileScreen,
-  ShopsScreen
+  ShopsScreen,
+  EditProfileScreen
 } from '../../screens';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
-import { user } from '../../store/getStore';
 
 export const AppStackNavigator = createStackNavigator({
   HomeScreen: {
@@ -152,14 +150,14 @@ export const AppStackNavigator = createStackNavigator({
       headerBackTitle: null
     })
   },
-  MyPostsScreen: {
-    screen: PostTabsStack,
-    navigationOptions: () => ({
-      title: 'منشوراتي',
-      headerTintColor: '#555',
-      headerBackTitle: null
-    })
-  },
+  // MyPostsScreen: {
+  //   screen: PostTabsStack,
+  //   navigationOptions: () => ({
+  //     title: 'منشوراتي',
+  //     headerTintColor: '#555',
+  //     headerBackTitle: null
+  //   })
+  // },
   MyFavScreen: {
     screen: MyFavScreen,
     navigationOptions: ({ navigation }: any) => ({
@@ -168,7 +166,7 @@ export const AppStackNavigator = createStackNavigator({
       headerBackTitle: null
     })
   },
-  UserProfileScreen: {
+  ProfileScreen: {
     screen: ProfileScreen,
     navigationOptions: ({ navigation }: any) => ({
       title: navigation.getParam('user').name,
@@ -199,8 +197,8 @@ export const AppStackNavigator = createStackNavigator({
       headerBackTitle: null
     })
   },
-  Profile: {
-    screen: MyProfileScreen,
+  EditProfileScreen: {
+    screen: EditProfileScreen,
     navigationOptions: ({ navigation }: any) => ({
       headerStyle: styles.headerStyle,
       headerTintColor: '#eee',

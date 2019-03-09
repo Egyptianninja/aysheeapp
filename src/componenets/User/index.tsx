@@ -32,10 +32,10 @@ export const renderUser = ({
             onPress={() => {
               if (isAuthenticated) {
                 const screen =
-                  user._id === userId ? 'MyPostsScreen' : 'UserProfileScreen';
+                  user._id === userId ? 'MyPostsScreen' : 'ProfileScreen';
                 navigation.navigate(screen, { user });
               } else {
-                navigation.navigate('UserProfileScreen', { user });
+                navigation.navigate('ProfileScreen', { user });
               }
             }}
           >
@@ -58,10 +58,10 @@ export const renderUser = ({
             onPress={() => {
               if (isAuthenticated) {
                 const screen =
-                  user._id === userId ? 'MyPostsScreen' : 'UserProfileScreen';
+                  user._id === userId ? 'MyPostsScreen' : 'ProfileScreen';
                 navigation.navigate(screen, { user });
               } else {
-                navigation.navigate('UserProfileScreen', { user });
+                navigation.navigate('ProfileScreen', { user });
               }
             }}
           >
@@ -73,10 +73,10 @@ export const renderUser = ({
             onPress={() => {
               if (isAuthenticated) {
                 const screen =
-                  user._id === userId ? 'MyPostsScreen' : 'UserProfileScreen';
+                  user._id === userId ? 'MyPostsScreen' : 'ProfileScreen';
                 navigation.navigate(screen, { user });
               } else {
-                navigation.navigate('UserProfileScreen', { user });
+                navigation.navigate('ProfileScreen', { user });
               }
             }}
           >

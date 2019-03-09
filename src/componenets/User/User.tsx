@@ -7,7 +7,7 @@ export const User = ({ name, avatar, about, navigation, user }: any) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('UserProfileScreen', { user });
+        navigation.navigate('ProfileScreen', { user });
       }}
       style={{
         alignItems: 'center',

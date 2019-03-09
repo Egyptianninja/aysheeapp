@@ -12,8 +12,8 @@ export default gql`
       about
       headerPhoto
       color
-      country
-      city
+      addressCountry
+      addressCity
       website
       isstore
       branches {

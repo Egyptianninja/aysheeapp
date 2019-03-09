@@ -23,7 +23,7 @@ const { width } = Dimensions.get('window');
 const HEADER_HEIGHT = 175;
 const PROFILE_IMAGE_HEIGHT = 80;
 
-class UserProfileScreen extends React.Component<any, any> {
+class ProfileScreen extends React.Component<any, any> {
   // static navigationOptions = { header: null };
   flatListRef: any;
   getNextPosts: any;
@@ -107,6 +107,7 @@ class UserProfileScreen extends React.Component<any, any> {
     const isofferstab = this.state.rest.isoffer;
     const maincolor = user.color ? user.color : '#7678ED';
     const ismyaccount = user._id === this.props.user._id;
+    const isshop = user.isstore;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -221,7 +222,7 @@ class UserProfileScreen extends React.Component<any, any> {
             {ismyaccount && (
               <TouchableOpacity
                 onPress={() => {
-                  this.props.navigation.navigate('Profile');
+                  this.props.navigation.navigate('EditProfileScreen');
                 }}
                 style={{
                   marginTop: 5,
@@ -367,38 +368,79 @@ class UserProfileScreen extends React.Component<any, any> {
                 الاعلانات ({user.onlineqty})
               </Text>
             </TouchableOpacity>
-            <View
-              style={{
-                height: 30,
-                borderLeftColor: '#ddd',
-                borderLeftWidth: 1
-              }}
-            />
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                padding: 5,
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginHorizontal: 2,
-                marginRight: 9
-              }}
-              onPress={() => {
-                this.setState({
-                  rest: { ...this.state.rest, isoffer: true }
-                });
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  color: isofferstab ? maincolor : '#000',
-                  fontSize: 16
-                }}
-              >
-                العروض ({user.offersqty})
-              </Text>
-            </TouchableOpacity>
+
+            {isshop && (
+              <React.Fragment>
+                <View
+                  style={{
+                    height: 30,
+                    borderLeftColor: '#ddd',
+                    borderLeftWidth: 1
+                  }}
+                />
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    padding: 5,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginHorizontal: 2,
+                    marginRight: 9
+                  }}
+                  onPress={() => {
+                    this.setState({
+                      rest: { islive: true, isoffer: true }
+                    });
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: 'cairo-regular',
+                      color: isofferstab ? maincolor : '#000',
+                      fontSize: 16
+                    }}
+                  >
+                    العروض ({user.offersqty})
+                  </Text>
+                </TouchableOpacity>
+              </React.Fragment>
+            )}
+            {ismyaccount && (
+              <React.Fragment>
+                <View
+                  style={{
+                    height: 30,
+                    borderLeftColor: '#ddd',
+                    borderLeftWidth: 1
+                  }}
+                />
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    padding: 5,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginHorizontal: 2,
+                    marginRight: 9
+                  }}
+                  onPress={() => {
+                    this.setState({
+                      rest: { islive: false }
+                    });
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: 'cairo-regular',
+                      color: isofferstab ? maincolor : '#000',
+                      fontSize: 16
+                    }}
+                  >
+                    غير منشور ({user.offlineqty})
+                  </Text>
+                </TouchableOpacity>
+              </React.Fragment>
+            )}
           </Animated.View>
         </Animated.View>
 
@@ -430,7 +472,7 @@ class UserProfileScreen extends React.Component<any, any> {
                   this.getNextPosts(data, fetchMore, 'getUserPosts')
                 }
                 contentContainerStyle={{
-                  marginTop: HEADER_HEIGHT + 40,
+                  marginTop: HEADER_HEIGHT + 50,
                   paddingBottom: 160
                 }}
                 refreshing={this.state.refreshing}
@@ -475,5 +517,5 @@ export default connect(mapStateToProps)(
   graphql(favoritePost, {
     name: 'favoritePost',
     options: { refetchQueries: ['getMyFavoritePosts'] }
-  })(UserProfileScreen)
+  })(ProfileScreen)
 );

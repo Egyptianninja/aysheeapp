@@ -29,10 +29,10 @@ export default class MessageBubble extends React.Component<any, any> {
                 const screen =
                   message.user._id === this.props.user._id
                     ? 'MyPostsScreen'
-                    : 'UserProfileScreen';
+                    : 'ProfileScreen';
                 this.props.navigation.navigate(screen, { user: message.user });
               } else {
-                this.props.navigation.navigate('UserProfileScreen', {
+                this.props.navigation.navigate('ProfileScreen', {
                   user: message.user
                 });
               }
@@ -73,12 +73,12 @@ export default class MessageBubble extends React.Component<any, any> {
                   const screen =
                     message.user._id === this.props.user._id
                       ? 'MyPostsScreen'
-                      : 'UserProfileScreen';
+                      : 'ProfileScreen';
                   this.props.navigation.navigate(screen, {
                     user: message.user
                   });
                 } else {
-                  this.props.navigation.navigate('UserProfileScreen', {
+                  this.props.navigation.navigate('ProfileScreen', {
                     user: message.user
                   });
                 }
