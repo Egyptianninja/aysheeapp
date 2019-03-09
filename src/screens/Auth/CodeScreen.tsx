@@ -26,6 +26,7 @@ import {
 import smsLoginWithCode from '../../graphql/mutation/smsLoginWithCode';
 import smsRequestCode from '../../graphql/mutation/smsRequestCode';
 import { smsTimes, codeTimes } from '../../constants';
+import { Logo } from '../../componenets';
 const { width } = Dimensions.get('window');
 
 class CodeScreen extends React.Component<any, any> {
@@ -138,6 +139,7 @@ class CodeScreen extends React.Component<any, any> {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Logo />
           <KeyboardAvoidingView
             style={{
               flex: 1,

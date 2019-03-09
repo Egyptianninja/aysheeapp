@@ -35,10 +35,11 @@ class SliderEntry extends Component<any, any> {
 
   render() {
     const {
-      data: { _id, body, end, photos, start, title, isrtl },
-      even
+      words,
+      lang,
+      isRTL,
+      data: { body, end, start, title, isrtl }
     } = this.props;
-    const { words, lang, isRTL } = this.props;
 
     const uppercaseTitle = title ? (
       <Text

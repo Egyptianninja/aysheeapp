@@ -8,7 +8,7 @@ export const Choise = ({ country, city, action, width }: any) => {
   if (country) {
     const countryISO = telecode.filter((cu: any) => cu.name === country)[0].iso;
     const iconFunc = icons.flag.filter(ic => ic.id === countryISO);
-    icon = iconFunc ? iconFunc[0].icon() : icons.mainmenu.icon();
+    icon = iconFunc.length > 0 ? iconFunc[0].icon() : icons.mainmenu.icon();
   }
 
   return (

@@ -29,6 +29,7 @@ import notificationSub from '../../graphql/mutation/notificationSub';
 import smsLoginWithPhone from '../../graphql/mutation/smsLoginWithPhone';
 
 import { smsTimes } from '../../constants';
+import { Logo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
 class PhoneScreen extends React.Component<any, any> {
@@ -152,6 +153,7 @@ class PhoneScreen extends React.Component<any, any> {
             />
           </TouchableOpacity>
           <View style={{ flex: 2 }}>
+            <Logo />
             <CountDownTimer
               counter={this.state.interval}
               cb={this.counterCllBack}

@@ -27,7 +27,10 @@ export const FilterOption = ({
         if (
           itemKind === 'isnew' ||
           itemKind === 'issale' ||
-          itemKind === 'isfurnishered'
+          itemKind === 'isfurnishered' ||
+          itemKind === 'isforman' ||
+          itemKind === 'isjobreq' ||
+          itemKind === 'isservicereq'
         ) {
           const value = Number(itemData.id) === 1 ? true : false;
           addFilter(itemKind, value);

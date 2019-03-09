@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { Loading } from '../../componenets';
+import { Loading, Noresult } from '../../componenets';
 import {
   itemWidth,
   SliderEntry,
@@ -90,11 +90,6 @@ export default class OffersScreen extends Component<any, any> {
   render() {
     return (
       <View style={styles.container}>
-        {/* <StatusBar
-          translucent={true}
-          backgroundColor={'rgba(0, 0, 0, 0.3)'}
-          barStyle={'light-content'}
-        /> */}
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
           style={{
@@ -109,7 +104,7 @@ export default class OffersScreen extends Component<any, any> {
             alignItems: 'center'
           }}
         >
-          <Ionicons name="ios-arrow-back" size={33} color="#fff" />
+          <Ionicons name="ios-arrow-back" size={33} color="#ddd" />
         </TouchableOpacity>
 
         <Query
@@ -127,7 +122,7 @@ export default class OffersScreen extends Component<any, any> {
             const shops = data.getShopsWithOffers;
 
             if (shops && shops.length === 0) {
-              return <View />;
+              return <Noresult title="No Offers" />;
             }
 
             return (

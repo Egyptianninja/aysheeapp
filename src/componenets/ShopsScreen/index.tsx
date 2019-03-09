@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { AvatarCircle } from '../Avatar';
 
-const ShopItem = ({ user, myId, navigation, width }: any) => {
+const ShopItem = ({ user, navigation, width }: any) => {
   return (
     <View
       style={{

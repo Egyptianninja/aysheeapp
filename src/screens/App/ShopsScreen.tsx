@@ -59,7 +59,6 @@ class ShopsScreen extends React.Component<any, any> {
                   renderItem={({ item }: any) => (
                     <ShopItem
                       user={item}
-                      myId={this.props.user._id}
                       navigation={this.props.navigation}
                       width={width}
                     />
