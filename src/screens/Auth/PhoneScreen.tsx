@@ -13,7 +13,7 @@ import { graphql } from 'react-apollo';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, registerForPushNotificationsAsync } from '../../utils';
+import { StyleSheet } from '../../utils';
 import { Button, InputPhone, CountDownTimer } from '../../lib';
 import {
   login,
@@ -153,7 +153,6 @@ class PhoneScreen extends React.Component<any, any> {
             />
           </TouchableOpacity>
           <View style={{ flex: 2 }}>
-            <Logo />
             <CountDownTimer
               counter={this.state.interval}
               cb={this.counterCllBack}

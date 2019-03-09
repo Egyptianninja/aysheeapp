@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image } from 'react-native';
 import { images } from '../../load';
 const Logo = () => (
   <View
     style={{
       flex: 1,
-      marginTop: 150,
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
-      width: 150,
-      height: 150
+      width: 50,
+      height: 100
     }}
   >
     <Image

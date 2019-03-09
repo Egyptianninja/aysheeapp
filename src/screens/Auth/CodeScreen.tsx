@@ -139,7 +139,6 @@ class CodeScreen extends React.Component<any, any> {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <Logo />
           <KeyboardAvoidingView
             style={{
               flex: 1,
