@@ -120,6 +120,16 @@ export default {
     { pid: 3, id: 15, name: 'Tables & Chairs', nameGlob: 'Tables & Chairs' },
     { pid: 3, id: 16, name: 'Bedrooms', nameGlob: 'Bedrooms' },
     { pid: 3, id: 17, name: 'Other', nameGlob: 'Other' },
+
+    { pid: 4, id: 120, name: 'العاب اطفال', nameGlob: 'العاب اطفال' },
+    { pid: 4, id: 121, name: 'مستلزمات اطفال', nameGlob: 'مستلزمات اطفال' },
+    { pid: 4, id: 122, name: 'أخرى', nameGlob: 'أخرى' },
+
+    { pid: 7, id: 123, name: 'معدات رياضية', nameGlob: 'معدات رياضية' },
+    { pid: 7, id: 124, name: 'دراجات هوائية', nameGlob: 'دراجات هوائية' },
+    { pid: 7, id: 125, name: 'اجهزة طبية', nameGlob: 'اجهزة طبية' },
+    { pid: 7, id: 126, name: 'أخرى', nameGlob: 'أخرى' },
+
     {
       pid: 5,
       id: 79,

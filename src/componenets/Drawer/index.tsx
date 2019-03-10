@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import secrets from '../../constants/secrets';
 import addAvatar from '../../graphql/mutation/addAvatar';
 import logoutFromAll from '../../graphql/mutation/logoutFromAll';
 import refreshToken from '../../graphql/mutation/refreshToken';
@@ -130,11 +129,6 @@ class Drawer extends React.Component<any, any> {
   };
 
   renderHeader = (user: any) => {
-    const uri = user.avatar
-      ? `http://res.cloudinary.com/${
-          secrets.upload.CLOUD_NAME
-        }/image/upload/w_${100}/${user.avatar}`
-      : 'https://res.cloudinary.com/arflon/image/upload/v1541759172/logo_q1vzrp.png';
     return (
       <View style={[styles.drawer, { borderBottomColor: '#555' }]}>
         <TouchableOpacity
@@ -153,17 +147,6 @@ class Drawer extends React.Component<any, any> {
             });
           }}
         >
-          {!user.name && (
-            <Text
-              style={{
-                fontSize: 16,
-                color: '#555',
-                paddingVertical: 10
-              }}
-            >
-              + {user.phone}
-            </Text>
-          )}
           {user.name !== '' && (
             <Text
               style={{
@@ -176,6 +159,15 @@ class Drawer extends React.Component<any, any> {
               {user.name}
             </Text>
           )}
+          <Text
+            style={{
+              fontSize: 16,
+              color: '#555',
+              paddingVertical: 10
+            }}
+          >
+            + {user.phone}
+          </Text>
         </TouchableOpacity>
       </View>
     );

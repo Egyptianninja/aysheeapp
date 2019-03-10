@@ -1,7 +1,13 @@
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View
+} from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -9,9 +15,26 @@ import PhotoView from '../../../componenets/Add/PhotoView';
 import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import { Button, CheckBox, Group, Input, RadioButton, Select, Title } from '../../../lib';
+import {
+  Button,
+  CheckBox,
+  Group,
+  Input,
+  RadioButton,
+  Select,
+  Title
+} from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
-import { getCurrency, getPureNumber, isArabic, Message, registerForPushNotificationsAsync, StyleSheet, uploadPhotos, UserLocation } from '../../../utils';
+import {
+  getCurrency,
+  getPureNumber,
+  isArabic,
+  Message,
+  registerForPushNotificationsAsync,
+  StyleSheet,
+  uploadPhotos,
+  UserLocation
+} from '../../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -33,8 +56,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
   noNew = [5, 9, 17, 18];
   noWaranty = [0, 5, 9, 12, 13, 17, 18];
 
-  noKind = [4, 7, 19];
-  kind = [2, 3, 6, 8, 10, 11, 12, 13, 14, 16, 17, 18];
+  noKind = [19];
+  kind = [2, 3, 4, 6, 7, 8, 10, 11, 12, 13, 14, 16, 17, 18];
   eBrand = [2, 6];
 
   acc = [8];
