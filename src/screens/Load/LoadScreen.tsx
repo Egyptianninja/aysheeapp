@@ -8,7 +8,7 @@ import getMyCountry from '../../graphql/mutation/getMyCountry';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import { images } from '../../load';
 import { initApp } from '../../store/actions/globActions';
-import { getCodeFromCountry } from '../../utils';
+import { getCodeFromCountry, getLang } from '../../utils';
 const { width, height } = Dimensions.get('window');
 
 class LoadScreen extends React.Component<any, any> {
@@ -31,9 +31,9 @@ class LoadScreen extends React.Component<any, any> {
     clearTimeout(this.timer);
   }
 
-  refreshUserToken = async ({ country, city }: any) => {
+  refreshUserToken = async ({ country, city, lang }: any) => {
     const response = await this.props.refreshToken({
-      variables: { country, city }
+      variables: { country, city, lang }
     });
     const { token } = response.data.refreshToken;
     await AsyncStorage.setItem('aysheetoken', token);
@@ -86,7 +86,8 @@ class LoadScreen extends React.Component<any, any> {
     // }
 
     // TODO: only ip data used
-    await this.refreshUserToken({ country: ipCountry, city });
+    const lang = getLang();
+    await this.refreshUserToken({ country: ipCountry, city, lang });
     const code = getCodeFromCountry(ipCountry);
     await this.props.initApp(ipCountry, code);
     this.props.navigation.navigate('App');
