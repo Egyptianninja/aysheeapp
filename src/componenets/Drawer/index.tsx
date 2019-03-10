@@ -1,32 +1,30 @@
-import * as React from 'react';
-import {
-  View,
-  Image,
-  Text,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-  StatusBar,
-  AsyncStorage
-} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as React from 'react';
+import { graphql } from 'react-apollo';
+import {
+  AsyncStorage,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { graphql } from 'react-apollo';
+import secrets from '../../constants/secrets';
+import addAvatar from '../../graphql/mutation/addAvatar';
+import logoutFromAll from '../../graphql/mutation/logoutFromAll';
+import refreshToken from '../../graphql/mutation/refreshToken';
+import upgradeToStore from '../../graphql/mutation/upgradeToStore';
+import { icons } from '../../load';
 import {
   login,
   logout,
-  updateUser,
-  phoneRemoved
+  phoneRemoved,
+  updateUser
 } from '../../store/actions/userAtions';
-import addAvatar from '../../graphql/mutation/addAvatar';
-import refreshToken from '../../graphql/mutation/refreshToken';
-import logoutFromAll from '../../graphql/mutation/logoutFromAll';
-import upgradeToStore from '../../graphql/mutation/upgradeToStore';
-import { StyleSheet, pickImage, getCountryCityFromToken } from '../../utils';
-import secrets from '../../constants/secrets';
-import { icons } from '../../load';
-import { Avatar, AvatarCircle } from '../Avatar';
+import { getCountryCityFromToken, StyleSheet } from '../../utils';
+import { AvatarCircle } from '../Avatar';
 
 class Drawer extends React.Component<any, any> {
   state = {

@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { View, AsyncStorage, Image, Dimensions, Text } from 'react-native';
-import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
+import { AsyncStorage, Dimensions, Image, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
-import { initApp } from '../../store/actions/globActions';
-import refreshToken from '../../graphql/mutation/refreshToken';
-import getMyCountry from '../../graphql/mutation/getMyCountry';
-import { getLocaleCountry, getCodeFromCountry } from '../../utils';
-import { images } from '../../load';
+import { connect } from 'react-redux';
 import { Choise } from '../../componenets/LoadScreen/Choise';
+import getMyCountry from '../../graphql/mutation/getMyCountry';
+import refreshToken from '../../graphql/mutation/refreshToken';
+import { images } from '../../load';
+import { initApp } from '../../store/actions/globActions';
+import { getCodeFromCountry } from '../../utils';
 const { width, height } = Dimensions.get('window');
 
 class LoadScreen extends React.Component<any, any> {
@@ -61,16 +61,35 @@ class LoadScreen extends React.Component<any, any> {
     const myCountry = await this.props.getMyCountry({});
     const ipCountry = myCountry ? myCountry.data.getMyCountry.country : '';
     const city = myCountry ? myCountry.data.getMyCountry.city : '';
-    const localeCountry = getLocaleCountry();
-    if (ipCountry === localeCountry) {
-      await this.refreshUserToken({ country: ipCountry, city });
-      const code = getCodeFromCountry(ipCountry);
-      await this.props.initApp(ipCountry, code);
-      this.props.navigation.navigate('App');
-    } else {
-      await this.setState({ ipCountry, localeCountry, city });
-      this.showModal();
-    }
+
+    // TODO: lonlatCountry
+    // const location = this.props.permissions.LOCATION
+    //   ? await Location.getCurrentPositionAsync({})
+    //   : null;
+    // const lonlatCountry = location
+    //   ? await getCountryFromLatLon(
+    //       location.coords.latitude,
+    //       location.coords.longitude
+    //     )
+    //   : null;
+
+    // TODO: ready as local or ip country
+    // const localeCountry = getLocaleCountry();
+    // if (ipCountry === localeCountry) {
+    //   await this.refreshUserToken({ country: ipCountry, city });
+    //   const code = getCodeFromCountry(ipCountry);
+    //   await this.props.initApp(ipCountry, code);
+    //   this.props.navigation.navigate('App');
+    // } else {
+    //   await this.setState({ ipCountry, localeCountry, city });
+    //   this.showModal();
+    // }
+
+    // TODO: only ip data used
+    await this.refreshUserToken({ country: ipCountry, city });
+    const code = getCodeFromCountry(ipCountry);
+    await this.props.initApp(ipCountry, code);
+    this.props.navigation.navigate('App');
   };
 
   renderOptions = () => {
@@ -185,7 +204,8 @@ class LoadScreen extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
-  sms: state.user.sms
+  sms: state.user.sms,
+  permissions: state.glob.permissions
 });
 
 export default connect(
