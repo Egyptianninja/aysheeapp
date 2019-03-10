@@ -41,7 +41,9 @@ class Drawer extends React.Component<any, any> {
             title: this.props.words.apdateaccount
           });
         } else {
-          return this.props.navigation.navigate('Auth', { directstore: true });
+          return this.props.navigation.navigate('PhoneScreen', {
+            directstore: true
+          });
         }
 
       case 2:
@@ -49,7 +51,11 @@ class Drawer extends React.Component<any, any> {
           user: this.props.user
         });
       case 3:
-        return this.props.navigation.navigate('ChoiseScreen');
+        if (this.props.isAuthenticated) {
+          return this.props.navigation.navigate('ChoiseScreen');
+        } else {
+          return this.props.navigation.navigate('Auth');
+        }
       case 4:
         return this.props.navigation.navigate('AddOfferScreen');
       case 5:

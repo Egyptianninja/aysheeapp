@@ -84,6 +84,7 @@ class EditProfileScreen extends React.Component<any, any> {
   };
 
   handleSubmit = async (values: any, bag: any) => {
+    const isstore = this.props.user.isstore;
     const {
       name,
       about,
@@ -94,7 +95,6 @@ class EditProfileScreen extends React.Component<any, any> {
       addressCity,
       tel,
       fax,
-      mob,
       location
     } = values;
     const loc: any = location ? this.state.location : null;
@@ -112,25 +112,24 @@ class EditProfileScreen extends React.Component<any, any> {
     const res = await this.props.updateProfile({
       variables: {
         name,
-        about,
+        about: isstore ? about : undefined,
         avatar: avatar ? avatar : undefined,
         color,
         email,
-        website,
+        website: isstore ? website : undefined,
         addressCountry,
         addressCity,
-        tel,
-        fax,
-        mob,
-        location: trueLocation
+        tel: isstore ? tel : undefined,
+        fax: isstore ? fax : undefined,
+        location: isstore ? trueLocation : undefined
       }
     });
 
     if (res.data.updateProfile.ok) {
-      this.updateProgressBar(2 / 3);
+      this.updateProgressBar(1 / 3);
       const { data } = res.data.updateProfile;
       await this.props.updateUser(data);
-      this.updateProgressBar(3 / 3);
+      this.updateProgressBar(1 / 3);
       this.showMessage({ seconds: 2, screen: 'ProfileScreen' });
     }
     if (!res.data.updateProfile.ok) {
@@ -141,9 +140,7 @@ class EditProfileScreen extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
-    const userAvatar = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-      user.avatar
-    }`;
+    const isstore = user.isstore;
     const avatar: any = this.state.avatar;
 
     return (
@@ -176,10 +173,37 @@ class EditProfileScreen extends React.Component<any, any> {
               validationSchema={Yup.object().shape({
                 name: Yup.string()
                   .max(100)
-                  .required(word.nameisrequire),
-                email: Yup.string()
-                  .email('Not valid email')
-                  .required(word.emailisrequired)
+                  .required(word.isrequire),
+                body: isstore
+                  ? Yup.string()
+                      .max(1000)
+                      .required(word.isrequire)
+                  : Yup.string().max(1000),
+                email: isstore
+                  ? Yup.string()
+                      .email('Not valid email')
+                      .required(word.isrequire)
+                  : Yup.string().email('Not valid email'),
+                addressCountry: isstore
+                  ? Yup.string()
+                      .max(50)
+                      .required(word.isrequire)
+                  : Yup.string().max(50),
+                addressCity: isstore
+                  ? Yup.string()
+                      .max(50)
+                      .required(word.isrequire)
+                  : Yup.string().max(50),
+                tel: isstore
+                  ? Yup.string()
+                      .max(50)
+                      .required(word.isrequire)
+                  : Yup.string().max(50),
+                fax: isstore
+                  ? Yup.string()
+                      .max(50)
+                      .required(word.isrequire)
+                  : Yup.string().max(50)
               })}
               render={({
                 values,
@@ -221,22 +245,24 @@ class EditProfileScreen extends React.Component<any, any> {
                     autoCorrect={false}
                     height={40}
                   />
-                  <Input
-                    rtl={isRTL}
-                    name="about"
-                    label={word.about}
-                    value={values.about}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.about && errors.about}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    multiline={true}
-                    height={100}
-                  />
+                  {isstore && (
+                    <Input
+                      rtl={isRTL}
+                      name="about"
+                      label={word.about}
+                      value={values.about}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      outerStyle={styles.outerStyle}
+                      innerStyle={styles.innerStyle}
+                      labelStyle={styles.labelStyle}
+                      error={touched.about && errors.about}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      multiline={true}
+                      height={100}
+                    />
+                  )}
                   <Input
                     rtl={isRTL}
                     name="addressCountry"
@@ -283,21 +309,23 @@ class EditProfileScreen extends React.Component<any, any> {
                     autoCorrect={false}
                     height={40}
                   />
-                  <Input
-                    rtl={isRTL}
-                    name="website"
-                    label={word.website}
-                    value={values.website}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.website && errors.website}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    height={40}
-                  />
+                  {isstore && (
+                    <Input
+                      rtl={isRTL}
+                      name="website"
+                      label={word.website}
+                      value={values.website}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      outerStyle={styles.outerStyle}
+                      innerStyle={styles.innerStyle}
+                      labelStyle={styles.labelStyle}
+                      error={touched.website && errors.website}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      height={40}
+                    />
+                  )}
 
                   <Input
                     rtl={isRTL}
@@ -320,70 +348,64 @@ class EditProfileScreen extends React.Component<any, any> {
                     defaultColor={values.color}
                     colors={colors}
                   />
-                  <Input
-                    rtl={isRTL}
-                    num
-                    name="tel"
-                    label={word.tel}
-                    value={values.tel}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.tel && errors.tel}
-                    keyboardType="number-pad"
-                    height={40}
-                  />
-                  <Input
-                    rtl={isRTL}
-                    num
-                    name="fax"
-                    label={word.fax}
-                    value={values.fax}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.fax && errors.fax}
-                    keyboardType="number-pad"
-                    height={40}
-                  />
-                  <Input
-                    rtl={isRTL}
-                    num
-                    name="mob"
-                    label={word.mob}
-                    value={values.mob}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.mob && errors.mob}
-                    keyboardType="number-pad"
-                    height={40}
-                  />
-                  <Group
-                    color="#444"
-                    size={24}
-                    onChange={setFieldValue}
-                    rtl={isRTL}
-                  >
-                    <CheckBox
-                      name="location"
-                      label={word.location}
-                      msg={word.locationmsg}
-                      value={values.location}
-                      selected={values.location}
+                  {isstore && (
+                    <Input
+                      rtl={isRTL}
+                      num
+                      name="tel"
+                      label={word.tel}
+                      value={values.tel}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      outerStyle={styles.outerStyle}
+                      innerStyle={styles.innerStyle}
+                      labelStyle={styles.labelStyle}
+                      error={touched.tel && errors.tel}
+                      keyboardType="number-pad"
+                      height={40}
                     />
-                  </Group>
-                  {values.location && (
-                    <UserLocation
-                      getCurrentLocation={this.getCurrentLocation}
-                      width={width}
+                  )}
+                  {isstore && (
+                    <Input
+                      rtl={isRTL}
+                      num
+                      name="fax"
+                      label={word.fax}
+                      value={values.fax}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      outerStyle={styles.outerStyle}
+                      innerStyle={styles.innerStyle}
+                      labelStyle={styles.labelStyle}
+                      error={touched.fax && errors.fax}
+                      keyboardType="number-pad"
+                      height={40}
                     />
+                  )}
+
+                  {isstore && (
+                    <React.Fragment>
+                      <Group
+                        color="#444"
+                        size={24}
+                        onChange={setFieldValue}
+                        rtl={isRTL}
+                      >
+                        <CheckBox
+                          name="location"
+                          label={word.location}
+                          msg={word.locationmsg}
+                          value={values.location}
+                          selected={values.location}
+                        />
+                      </Group>
+                      {values.location && (
+                        <UserLocation
+                          getCurrentLocation={this.getCurrentLocation}
+                          width={width}
+                        />
+                      )}
+                    </React.Fragment>
                   )}
                   <Button
                     isRTL={isRTL}

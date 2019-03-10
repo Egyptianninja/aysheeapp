@@ -94,7 +94,6 @@ class UpgradeToStore extends React.Component<any, any> {
       addressCity,
       tel,
       fax,
-      mob,
       location
     } = values;
     const loc: any = location ? this.state.location : null;
@@ -121,7 +120,6 @@ class UpgradeToStore extends React.Component<any, any> {
         addressCity,
         tel,
         fax,
-        mob,
         location: trueLocation
       }
     });
@@ -131,7 +129,7 @@ class UpgradeToStore extends React.Component<any, any> {
       const { data } = res.data.upgradeToStore;
       await this.props.updateUser(data);
       this.updateProgressBar(3 / 3);
-      this.showMessage({ seconds: 2, screen: 'ProfileScreen' });
+      this.showMessage({ seconds: 1, screen: 'ProfileScreen' });
     }
     if (!res.data.upgradeToStore.ok) {
       bag.setErrors({ name: res.data.upgradeToStore.error });
@@ -141,9 +139,6 @@ class UpgradeToStore extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
-    const userAvatar = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${
-      user.avatar
-    }`;
     const avatar: any = this.state.avatar;
 
     return (
@@ -176,10 +171,25 @@ class UpgradeToStore extends React.Component<any, any> {
               validationSchema={Yup.object().shape({
                 name: Yup.string()
                   .max(100)
-                  .required(word.nameisrequire),
+                  .required(word.isrequire),
+                body: Yup.string()
+                  .max(1000)
+                  .required(word.isrequire),
                 email: Yup.string()
                   .email('Not valid email')
-                  .required(word.emailisrequired)
+                  .required(word.isrequire),
+                addressCountry: Yup.string()
+                  .max(50)
+                  .required(word.isrequire),
+                addressCity: Yup.string()
+                  .max(50)
+                  .required(word.isrequire),
+                tel: Yup.string()
+                  .max(50)
+                  .required(word.isrequire),
+                fax: Yup.string()
+                  .max(50)
+                  .required(word.isrequire)
               })}
               render={({
                 values,
@@ -295,6 +305,7 @@ class UpgradeToStore extends React.Component<any, any> {
                     labelStyle={styles.labelStyle}
                     error={touched.website && errors.website}
                     autoCapitalize="none"
+                    keyboardType="email-address"
                     autoCorrect={false}
                     height={40}
                   />
@@ -347,21 +358,6 @@ class UpgradeToStore extends React.Component<any, any> {
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
                     error={touched.fax && errors.fax}
-                    keyboardType="number-pad"
-                    height={40}
-                  />
-                  <Input
-                    rtl={isRTL}
-                    num
-                    name="mob"
-                    label={word.mob}
-                    value={values.mob}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.mob && errors.mob}
                     keyboardType="number-pad"
                     height={40}
                   />

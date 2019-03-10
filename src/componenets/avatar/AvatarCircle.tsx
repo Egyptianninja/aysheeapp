@@ -2,17 +2,17 @@ import * as React from 'react';
 import { Text, View, Image } from 'react-native';
 
 export const AvatarCircle = ({ user, size, image }: any) => {
-  const uri = user.avatar
+  const dburi = user.avatar
     ? `http://res.cloudinary.com/arflon/image/upload/w_${100}/${user.avatar}`
     : null;
   const color = user.color ? user.color : '#7678ED';
 
   const name = user.name ? user.name : user.uniquename;
-  const letter = !uri ? name.substring(0, 1).toUpperCase() : null;
-  const imageUri = image ? image.uri : uri ? uri : false;
+  const letter = !dburi ? name.substring(0, 1).toUpperCase() : null;
+  const uri = image ? image.uri : dburi ? dburi : false;
   return (
     <React.Fragment>
-      {!imageUri && (
+      {!uri && (
         <View
           style={{
             width: size,
@@ -39,7 +39,7 @@ export const AvatarCircle = ({ user, size, image }: any) => {
           </View>
         </View>
       )}
-      {imageUri && (
+      {uri && (
         <View
           style={{
             width: size,
@@ -58,7 +58,7 @@ export const AvatarCircle = ({ user, size, image }: any) => {
               width: size - 8,
               borderRadius: (size - 8) / 2
             }}
-            source={{ uri: imageUri }}
+            source={{ uri }}
           />
         </View>
       )}

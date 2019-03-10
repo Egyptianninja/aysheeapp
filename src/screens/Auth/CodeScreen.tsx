@@ -97,7 +97,6 @@ class CodeScreen extends React.Component<any, any> {
 
   handleLoginSubmit = async (values: any, bag: any) => {
     const directstore = this.props.navigation.getParam('directstore');
-
     try {
       const { code } = values;
       const res = await this.props.smsLoginWithCode({
@@ -108,13 +107,16 @@ class CodeScreen extends React.Component<any, any> {
       });
       if (res.data.smsLoginWithCode.ok) {
         const { token, data } = res.data.smsLoginWithCode;
+        const isstore = data.isstore;
         await AsyncStorage.setItem('aysheetoken', token);
         const name = this.props.navigation.getParam('name');
         await this.props.addUniquename(name);
         await this.props.login(token, data);
         await this.props.initTime();
         await this.props.initCode();
-        directstore
+        isstore
+          ? this.props.navigation.navigate('App')
+          : directstore
           ? this.props.navigation.navigate('UpgradeToStore', {
               title: this.props.words.apdateaccount
             })

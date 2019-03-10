@@ -438,6 +438,7 @@ export default {
     validnamemessage: 'your unique name 4 - 25 Characters ( a-z 0-9 _ )',
     min4: 'Minimum 4 characters',
     max25: 'Maximum 25 characters',
+    isrequire: 'Field is required',
     nameisrequire: 'Name is required',
     emailisrequired: 'Email is required',
     namenotvalid: 'Not valid name',

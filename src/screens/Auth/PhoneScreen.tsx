@@ -91,13 +91,20 @@ class PhoneScreen extends React.Component<any, any> {
         });
         if (res.data.smsLoginWithPhone.ok) {
           const { token, data } = res.data.smsLoginWithPhone;
+          const isstore = data.isstore;
           await AsyncStorage.setItem('aysheetoken', token);
           const name = await AsyncStorage.getItem('name');
           await this.props.addUniquename(name);
           await this.props.login(token, data);
           await this.props.initTime();
           await this.props.initCode();
-          this.props.navigation.navigate('App');
+          isstore
+            ? this.props.navigation.navigate('App')
+            : directstore
+            ? this.props.navigation.navigate('UpgradeToStore', {
+                title: this.props.words.apdateaccount
+              })
+            : this.props.navigation.navigate('App');
         }
       } else {
         const res = await this.props.smsRequestCode({
@@ -139,7 +146,7 @@ class PhoneScreen extends React.Component<any, any> {
   render() {
     const { words } = this.props;
     const { localePhone }: any = this.state;
-
+    const { directstore } = this.props.navigation.state.params;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
