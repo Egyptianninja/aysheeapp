@@ -14,6 +14,8 @@ export default gql`
     $issale: Boolean
     $iswarranty: Boolean
     $isforman: Boolean
+    $isjobreq: Boolean
+    $isservicereq: Boolean
     $areaunit: String
     $realestateId: Int
     $space: Int
@@ -44,6 +46,8 @@ export default gql`
       issale: $issale
       iswarranty: $iswarranty
       isforman: $isforman
+      isjobreq: $isjobreq
+      isservicereq: $isservicereq
       areaunit: $areaunit
       realestateId: $realestateId
       space: $space

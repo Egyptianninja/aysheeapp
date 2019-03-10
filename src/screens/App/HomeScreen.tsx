@@ -287,6 +287,8 @@ class HomeScreen extends React.Component<any, any> {
       outputRange: [0, -this.NAVBAR_HEIGHT],
       extrapolate: 'clamp'
     });
+    console.log(this.state.rest);
+
     return (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
         <Menu

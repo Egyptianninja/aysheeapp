@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableOpacity, Text, Platform } from 'react-native';
+import { Platform, Text, TouchableOpacity } from 'react-native';
 import { getUserLocation } from '../../../utils';
 export const FilterOption = ({
   itemData,
@@ -9,9 +9,7 @@ export const FilterOption = ({
   itemKind,
   addFilter,
   removeFilter,
-  isRTL,
-  rest,
-  words
+  isRTL
 }: any) => {
   return (
     <TouchableOpacity
