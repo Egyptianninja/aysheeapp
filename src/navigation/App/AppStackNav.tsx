@@ -1,29 +1,29 @@
-import * as React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from '../../utils';
+import * as React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 import {
-  HomeScreen,
-  ItemScreen,
-  ChoiseScreen,
-  NotificationsScreen,
+  AddCarScreen,
   AddClassifiedScreen,
+  AddJobScreen,
+  AddOfferScreen,
+  AddPartsScreen,
   AddRealEstateScreen,
   AddServiceScreen,
-  AddJobScreen,
-  AddCarScreen,
-  AddPartsScreen,
-  MyFavScreen,
   CameraScreen,
-  AddOfferScreen,
-  UpgradeToStore,
+  ChoiseScreen,
+  EditProfileScreen,
+  HomeScreen,
+  ItemScreen,
+  MyFavScreen,
+  NotificationsScreen,
   OffersScreen,
   ProfileScreen,
   ShopsScreen,
-  EditProfileScreen
+  UpgradeToStore
 } from '../../screens';
-import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
+import { StyleSheet } from '../../utils';
 
 export const AppStackNavigator = createStackNavigator({
   HomeScreen: {

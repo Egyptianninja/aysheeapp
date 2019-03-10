@@ -1,27 +1,25 @@
-import HomeScreen from './App/HomeScreen';
-import ItemScreen from './App/ItemScreen';
-import ChoiseScreen from './App/ChoiseScreen';
-import OffersScreen from './App/OffersScreen';
-import NotificationsScreen from './App/NotificationsScreen';
-import ShopsScreen from './App/ShopsScreen';
+import AddCarScreen from './App/add/AddCarScreen';
 import AddClassifiedScreen from './App/add/AddClassifiedScreen';
+import AddJobScreen from './App/add/AddJobScreen';
 import AddOfferScreen from './App/add/AddOfferScreen';
+import AddPartsScreen from './App/add/AddPartsScreen';
 import AddRealEstateScreen from './App/add/AddRealEstateScreen';
 import AddServiceScreen from './App/add/AddServiceScreen';
-import AddJobScreen from './App/add/AddJobScreen';
-import AddCarScreen from './App/add/AddCarScreen';
-import AddPartsScreen from './App/add/AddPartsScreen';
-import PhoneScreen from './Auth/PhoneScreen';
+import CameraScreen from './App/CameraScreen';
+import ChoiseScreen from './App/ChoiseScreen';
+import HomeScreen from './App/HomeScreen';
+import ItemScreen from './App/ItemScreen';
+import NotificationsScreen from './App/NotificationsScreen';
+import OffersScreen from './App/OffersScreen';
+import ShopsScreen from './App/ShopsScreen';
+import EditProfileScreen from './App/user/EditProfileScreen';
+import MyFavScreen from './App/user/MyFavScreen';
+import ProfileScreen from './App/user/ProfileScreen';
+import UpgradeToStore from './App/user/UpgradeToStore';
 import CodeScreen from './Auth/CodeScreen';
 import NameScreen from './Auth/NameScreen';
+import PhoneScreen from './Auth/PhoneScreen';
 import LoadScreen from './Load/LoadScreen';
-import MyOnlinePostsScreen from './App/user/MyOnlinePostsScreen';
-import UpgradeToStore from './App/user/UpgradeToStore';
-import MyOfflinePostsScreen from './App/user/MyOfflinePostsScreen';
-import MyFavScreen from './App/user/MyFavScreen';
-import EditProfileScreen from './App/user/EditProfileScreen';
-import ProfileScreen from './App/user/ProfileScreen';
-import CameraScreen from './App/CameraScreen';
 
 export {
   HomeScreen,
@@ -36,8 +34,6 @@ export {
   AddPartsScreen,
   PhoneScreen,
   LoadScreen,
-  MyOnlinePostsScreen,
-  MyOfflinePostsScreen,
   MyFavScreen,
   CodeScreen,
   NameScreen,

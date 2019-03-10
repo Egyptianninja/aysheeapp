@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { View, Text, TouchableWithoutFeedback, Platform } from 'react-native';
+import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { StyleSheet } from '../../utils';
-import { PostImage } from './PostImage';
 import { MenuIcon } from './MenuIcon';
+import { PostImage } from './PostImage';
 
 const ItemViewSmall = (props: any) => {
   const {
@@ -22,9 +22,6 @@ const ItemViewSmall = (props: any) => {
     word,
     showMenuModal,
     selectePost
-    // handleonPressIn,
-    // handleonPressOut,
-    // pressed
   } = props;
 
   return (
@@ -38,8 +35,6 @@ const ItemViewSmall = (props: any) => {
     >
       <View style={{ width: imageWidth }}>
         <TouchableWithoutFeedback
-          // onPressIn={() => handleonPressIn(post.id)}
-          // onPressOut={() => handleonPressOut(post.id)}
           onPress={() => {
             selectePost(post, word, lang, isRTL);
           }}
@@ -47,15 +42,7 @@ const ItemViewSmall = (props: any) => {
         >
           <View style={styles.interContainer}>
             {uri && (
-              <View
-                style={[
-                  styles.center
-                  // {
-                  //   borderColor: pressed === post.id ? 'red' : undefined,
-                  //   borderWidth: pressed === post.id ? 2 : undefined
-                  // }
-                ]}
-              >
+              <View style={styles.center}>
                 <PostImage width={imageWidth} height={imageHeight} uri={uri} />
               </View>
             )}
@@ -167,14 +154,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e5e5e5',
     backgroundColor: '#fff'
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 4
-    // },
-    // shadowOpacity: 0.2,
-    // shadowRadius: 5,
-    // elevation: 5
   },
   center: {
     flex: 1,

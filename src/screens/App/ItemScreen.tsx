@@ -22,8 +22,10 @@ class ItemScreen extends React.Component<any, any> {
     const lang = this.props.navigation.getParam('lang');
     const isRTL = this.props.navigation.getParam('isRTL');
 
-    const myItem = this.props.isAuthenticated
-      ? this.props.user._id === post.userId
+    const myItem = post
+      ? this.props.isAuthenticated
+        ? this.props.user._id === post.userId
+        : null
       : null;
 
     const fav = this.props.navigation.getParam('fav');
@@ -69,6 +71,11 @@ class ItemScreen extends React.Component<any, any> {
               );
             }
             const getedPost = readyPost(data.getPost.data, lang);
+            const ismyItem = getedPost
+              ? this.props.isAuthenticated
+                ? this.props.user._id === getedPost.userId
+                : null
+              : null;
             return (
               <ItemView
                 post={getedPost}
@@ -77,7 +84,7 @@ class ItemScreen extends React.Component<any, any> {
                 lang={lang}
                 isRTL={isRTL}
                 fav={fav}
-                myItem={myItem}
+                myItem={ismyItem}
                 live={live}
                 editClassifieds={this.props.editClassifieds}
                 deletePost={this.props.deletePost}

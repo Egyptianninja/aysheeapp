@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {
-  View,
+  Dimensions,
+  ScrollView,
   Text,
   TouchableOpacity,
-  Dimensions,
-  ScrollView
+  View
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { onShare, filterOptions } from '../../utils';
 import { store } from '../../store';
 import { updateQty } from '../../store/actions/userAtions';
+import { filterOptions, onShare } from '../../utils';
 const { width } = Dimensions.get('window');
 
 export default class Menu extends React.Component<any, any> {
@@ -66,17 +66,20 @@ export default class Menu extends React.Component<any, any> {
     }
   };
   render() {
-    const { word, myItem, live, fav, user, isAuthenticated, post } = this.props;
+    const { word, myItem, fav, user, isAuthenticated, post } = this.props;
     const owner = this.isOwner({ user, isAuthenticated, post });
+    const live = post ? post.islive : false;
     const options = filterOptions(
       word.popmenu,
-      myItem || owner
-        ? live === false
-          ? [6, 8, 9]
-          : [5, 7, 8, 9]
-        : fav
-        ? [2, 3, 4]
-        : [1, 3, 4]
+      isAuthenticated
+        ? myItem || owner
+          ? live === false
+            ? [6, 8, 9]
+            : [5, 7, 8, 9]
+          : fav
+          ? [2, 3, 4]
+          : [1, 3, 4]
+        : [3]
     );
     return (
       <Modal

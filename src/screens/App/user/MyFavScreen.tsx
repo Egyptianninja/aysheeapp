@@ -84,6 +84,7 @@ class MyFavScreen extends React.Component<any, any> {
           post={this.state.modalPost}
           unFavoritePost={this.props.unFavoritePost}
           isMenuModalVisible={this.state.isMenuModalVisible}
+          isAuthenticated={this.props.isAuthenticated}
           hideMenuModal={this.hideMenuModal}
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
@@ -91,6 +92,7 @@ class MyFavScreen extends React.Component<any, any> {
           word={words}
           isRTL={isRTL}
           fav={true}
+          user={this.props.user}
         />
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
@@ -172,7 +174,8 @@ const mapStateToProps = (state: any) => ({
   isAuthenticated: state.user.isAuthenticated,
   lang: state.glob.languageName,
   isRTL: state.glob.isRTL,
-  words: state.glob.language.words
+  words: state.glob.language.words,
+  user: state.user.user
 });
 
 export default connect(mapStateToProps)(

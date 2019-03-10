@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
-import { StyleSheet, since } from '../../utils';
+import { since } from '../../utils';
 
 const Item = (props: any) => {
   const { item, lang, navigation, isRTL } = props;

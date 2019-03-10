@@ -296,7 +296,6 @@ class HomeScreen extends React.Component<any, any> {
           hideMenuModal={this.hideMenuModal}
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
-          deletePost={this.props.deletePost}
           editClassifieds={this.props.editClassifieds}
           showEditModal={this.showEditModal}
           showCheckMessageModal={this.showCheckMessageModal}

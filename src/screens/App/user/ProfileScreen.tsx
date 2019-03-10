@@ -6,25 +6,27 @@ import { graphql, Query } from 'react-apollo';
 import {
   Animated,
   Dimensions,
-  Image,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Avatar, Loading, AvatarCircle } from '../../../componenets';
+import { AvatarCircle, Loading } from '../../../componenets';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
-import { Menu, Report } from '../../../componenets/Menu';
+import { Edit, Menu, Report } from '../../../componenets/Menu';
+import deletePost from '../../../graphql/mutation/deletePost';
+import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import favoritePost from '../../../graphql/mutation/favoritePost';
 import getUserPosts from '../../../graphql/query/getUserPosts';
+import { updateQty } from '../../../store/actions/userAtions';
 import { getNextPosts, Message, readyUserPosts } from '../../../utils';
+
 const { width } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 175;
 const PROFILE_IMAGE_HEIGHT = 80;
 
 class ProfileScreen extends React.Component<any, any> {
-  // static navigationOptions = { header: null };
   flatListRef: any;
   getNextPosts: any;
   constructor(p: any) {
@@ -35,6 +37,8 @@ class ProfileScreen extends React.Component<any, any> {
       refreshing: false,
       isMenuModalVisible: false,
       isReportModalVisible: false,
+      isEditModalVisible: false,
+      isCheckMessaheVisible: false,
       isMessageVisible: false,
       modalPost: null,
       rest: {},
@@ -55,7 +59,7 @@ class ProfileScreen extends React.Component<any, any> {
     this.setState({ isMenuModalVisible: true, modalPost: post });
   };
   hideMenuModal = () => {
-    this.setState({ isMenuModalVisible: false, modalPost: null });
+    this.setState({ isMenuModalVisible: false });
   };
   showReportModal = () => {
     this.setState({ isReportModalVisible: true });
@@ -79,6 +83,42 @@ class ProfileScreen extends React.Component<any, any> {
   };
   hideMessageModal = () => {
     this.setState({ isMessageVisible: false });
+  };
+  showEditModal = () => {
+    this.setState({ isEditModalVisible: true });
+  };
+  hideEditModal = () => {
+    this.setState({ isEditModalVisible: false });
+  };
+  showCheckMessageModal = async () => {
+    this.setState({ isCheckMessaheVisible: true });
+  };
+  hideCheckMessageModal = () => {
+    this.setState({ isCheckMessaheVisible: false });
+  };
+
+  deletePost = async () => {
+    await this.props.deletePost({
+      variables: {
+        postId: this.state.modalPost.id
+      }
+    });
+    if (this.state.modalPost.isoffer) {
+      await this.props.updateQty('offers', -1);
+    } else {
+      await this.props.updateQty('online', -1);
+    }
+    this.hideCheckMessageModal();
+    setTimeout(() => {
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.addeleted
+      });
+    }, 1000);
+  };
+
+  canceldeletePost = async () => {
+    this.hideCheckMessageModal();
   };
 
   render() {
@@ -112,6 +152,11 @@ class ProfileScreen extends React.Component<any, any> {
     const { tab } = this.state;
     const maincolor = user.color ? user.color : '#7678ED';
     const isshop = user.isstore;
+    const postId = this.state.modalPost
+      ? this.state.modalPost.id
+        ? this.state.modalPost.id
+        : this.state.modalPost._id
+      : null;
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -121,9 +166,27 @@ class ProfileScreen extends React.Component<any, any> {
           hideMenuModal={this.hideMenuModal}
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
+          editClassifieds={this.props.editClassifieds}
+          showEditModal={this.showEditModal}
+          showCheckMessageModal={this.showCheckMessageModal}
+          postId={postId}
           word={words}
           isRTL={isRTL}
+          isAuthenticated={this.props.isAuthenticated}
+          user={this.props.user}
         />
+        {this.state.isEditModalVisible && (
+          <Edit
+            isEditModalVisible={this.state.isEditModalVisible}
+            editClassifieds={this.props.editClassifieds}
+            hideEditModal={this.hideEditModal}
+            showMessageModal={this.showMessageModal}
+            word={words}
+            isRTL={isRTL}
+            postId={postId}
+            post={this.state.modalPost}
+          />
+        )}
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
           hideReportModal={this.hideReportModal}
@@ -132,11 +195,23 @@ class ProfileScreen extends React.Component<any, any> {
         />
         <Message
           isVisible={this.state.isMessageVisible}
-          title={words.successadded}
+          title={this.state.message}
           icon="ios-checkmark-circle"
           isRTL={isRTL}
-          width={width}
           height={120}
+        />
+        <Message
+          isVisible={this.state.isCheckMessaheVisible}
+          body={words.deleteareyousure}
+          icon="ios-information-circle"
+          width={width}
+          okbtnTitle={words.yes}
+          cancelbtnTitle={words.cancel}
+          okAction={this.deletePost}
+          cancelAction={this.canceldeletePost}
+          isRTL={isRTL}
+          iconColor="#E85255"
+          height={200}
         />
 
         <Animated.View
@@ -475,9 +550,22 @@ const mapStateToProps = (state: any) => ({
   words: state.glob.language.words
 });
 
-export default connect(mapStateToProps)(
+export default connect(
+  mapStateToProps,
+  { updateQty }
+)(
   graphql(favoritePost, {
     name: 'favoritePost',
     options: { refetchQueries: ['getMyFavoritePosts'] }
-  })(ProfileScreen)
+  })(
+    graphql(deletePost, {
+      name: 'deletePost',
+      options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+    })(
+      graphql(editClassifieds, {
+        name: 'editClassifieds',
+        options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+      })(ProfileScreen)
+    )
+  )
 );
