@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { AsyncStorage, Dimensions, Image, Text, View } from 'react-native';
-import Modal from 'react-native-modal';
+import { AsyncStorage, Dimensions, Image, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Choise } from '../../componenets/LoadScreen/Choise';
 import getMyCountry from '../../graphql/mutation/getMyCountry';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import { images } from '../../load';
@@ -39,23 +37,23 @@ class LoadScreen extends React.Component<any, any> {
     await AsyncStorage.setItem('aysheetoken', token);
   };
 
-  showModal = () => {
-    this.setState({ isModalVisible: true });
-  };
+  // showModal = () => {
+  //   this.setState({ isModalVisible: true });
+  // };
 
-  hideModal = () => {
-    this.setState({ isModalVisible: false });
-  };
+  // hideModal = () => {
+  //   this.setState({ isModalVisible: false });
+  // };
 
-  chooseCountry = async ({ country, city }: any) => {
-    await this.refreshUserToken({ country, city });
-    const code = getCodeFromCountry(country);
-    await this.props.initApp(country, code);
-    await this.hideModal();
-    this.timer = setTimeout(() => {
-      this.props.navigation.navigate('App');
-    }, 500);
-  };
+  // chooseCountry = async ({ country, city }: any) => {
+  //   await this.refreshUserToken({ country, city });
+  //   const code = getCodeFromCountry(country);
+  //   await this.props.initApp(country, code);
+  //   await this.hideModal();
+  //   this.timer = setTimeout(() => {
+  //     this.props.navigation.navigate('App');
+  //   }, 500);
+  // };
 
   getCountryToken = async () => {
     const myCountry = await this.props.getMyCountry({});
@@ -86,46 +84,46 @@ class LoadScreen extends React.Component<any, any> {
     // }
 
     // TODO: only ip data used
-    const lang = getLang();
+    const lang = await getLang();
     await this.refreshUserToken({ country: ipCountry, city, lang });
     const code = getCodeFromCountry(ipCountry);
     await this.props.initApp(ipCountry, code);
     this.props.navigation.navigate('App');
   };
 
-  renderOptions = () => {
-    return (
-      <React.Fragment>
-        <View>
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: 'bold',
-              color: '#aaa',
-              padding: 10,
-              alignSelf: 'center'
-            }}
-          >
-            Choose Market‎
-          </Text>
-        </View>
-        <View>
-          <Choise
-            action={this.chooseCountry}
-            country={this.state.ipCountry}
-            city={this.state.city}
-            width={width}
-          />
-          <Choise
-            action={this.chooseCountry}
-            country={this.state.localeCountry}
-            city=""
-            width={width}
-          />
-        </View>
-      </React.Fragment>
-    );
-  };
+  // renderOptions = () => {
+  //   return (
+  //     <React.Fragment>
+  //       <View>
+  //         <Text
+  //           style={{
+  //             fontSize: 18,
+  //             fontWeight: 'bold',
+  //             color: '#aaa',
+  //             padding: 10,
+  //             alignSelf: 'center'
+  //           }}
+  //         >
+  //           Choose Market‎
+  //         </Text>
+  //       </View>
+  //       <View>
+  //         <Choise
+  //           action={this.chooseCountry}
+  //           country={this.state.ipCountry}
+  //           city={this.state.city}
+  //           width={width}
+  //         />
+  //         <Choise
+  //           action={this.chooseCountry}
+  //           country={this.state.localeCountry}
+  //           city=""
+  //           width={width}
+  //         />
+  //       </View>
+  //     </React.Fragment>
+  //   );
+  // };
   renderLogo = () => {
     return (
       <View
@@ -173,7 +171,7 @@ class LoadScreen extends React.Component<any, any> {
           fadeDuration={0}
         />
 
-        <Modal
+        {/* <Modal
           isVisible={this.state.isModalVisible}
           onBackdropPress={() => null}
           backdropOpacity={0.2}
@@ -198,7 +196,7 @@ class LoadScreen extends React.Component<any, any> {
 
             <View style={{ flex: 3 }}>{this.renderOptions()}</View>
           </View>
-        </Modal>
+        </Modal> */}
       </View>
     );
   }
