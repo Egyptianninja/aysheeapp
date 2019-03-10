@@ -332,17 +332,24 @@ export default {
       name: 'Contracting',
       nameGlob: 'اعمال مقاولة, Contracting, Contracting'
     },
-    { id: 9, name: 'Other', nameGlob: 'اخرى, Other, Other' }
+
+    {
+      id: 9,
+      name: 'Educational',
+      nameGlob: 'تعليمية, Educational, Educational'
+    },
+    { id: 10, name: 'Other', nameGlob: 'اخرى, Other, Other' }
   ],
   menu: [
-    { id: 0, name: 'Profile' },
-    { id: 1, name: 'New Ad' },
-    { id: 2, name: 'New Offer' },
-    { id: 3, name: 'My Ads' },
-    { id: 4, name: 'Favorites' },
-    { id: 5, name: 'Upgrade Account' },
-    { id: 6, name: 'Help Center' },
-    { id: 7, name: 'Logout' }
+    { id: 0, name: 'Login' },
+    { id: 1, name: 'Register as Shop' },
+    { id: 2, name: 'Profile' },
+    { id: 3, name: 'New Ad' },
+    { id: 4, name: 'New Offer' },
+    { id: 5, name: 'My Ads' },
+    { id: 6, name: 'Favorites' },
+    { id: 7, name: 'Help Center' },
+    { id: 8, name: 'Logout' }
   ],
   sort: [
     { id: 1, name: 'Recent' },

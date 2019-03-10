@@ -1,32 +1,31 @@
+import { Formik } from 'formik';
 import * as React from 'react';
+import { graphql } from 'react-apollo';
 import {
-  Text,
-  View,
-  Keyboard,
+  AsyncStorage,
   Dimensions,
+  Keyboard,
   KeyboardAvoidingView,
+  Text,
   TouchableWithoutFeedback,
-  AsyncStorage
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { StyleSheet } from '../../utils';
-import { Button, CountDownTimer, InputCode } from '../../lib';
-import {
-  smsSent,
-  login,
-  codeSent,
-  initTime,
-  initCode,
-  addUniquename
-} from '../../store/actions/userAtions';
-
+import { codeTimes, smsTimes } from '../../constants';
 import smsLoginWithCode from '../../graphql/mutation/smsLoginWithCode';
 import smsRequestCode from '../../graphql/mutation/smsRequestCode';
-import { smsTimes, codeTimes } from '../../constants';
-import { Logo } from '../../componenets';
+import { Button, CountDownTimer, InputCode } from '../../lib';
+import {
+  addUniquename,
+  codeSent,
+  initCode,
+  initTime,
+  login,
+  smsSent
+} from '../../store/actions/userAtions';
+import { StyleSheet } from '../../utils';
+
 const { width } = Dimensions.get('window');
 
 class CodeScreen extends React.Component<any, any> {
@@ -72,7 +71,6 @@ class CodeScreen extends React.Component<any, any> {
 
   handleResendCode = async (bag: any) => {
     const { phone } = this.state;
-
     const res = await this.props.smsRequestCode({
       variables: {
         phone
@@ -98,6 +96,8 @@ class CodeScreen extends React.Component<any, any> {
   };
 
   handleLoginSubmit = async (values: any, bag: any) => {
+    const directstore = this.props.navigation.getParam('directstore');
+
     try {
       const { code } = values;
       const res = await this.props.smsLoginWithCode({
@@ -114,7 +114,11 @@ class CodeScreen extends React.Component<any, any> {
         await this.props.login(token, data);
         await this.props.initTime();
         await this.props.initCode();
-        this.props.navigation.navigate('App');
+        directstore
+          ? this.props.navigation.navigate('UpgradeToStore', {
+              title: this.props.words.apdateaccount
+            })
+          : this.props.navigation.navigate('App');
       } else {
         if (res.data.smsLoginWithCode.ok === false) {
           const nowTime = Math.floor(new Date().getTime() / 1000);

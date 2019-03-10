@@ -347,17 +347,19 @@ export default {
       name: 'اعمال مقاولة',
       nameGlob: 'اعمال مقاولة, Contracting, Contracting'
     },
-    { id: 9, name: 'اخرى', nameGlob: 'اخرى, Other, Other' }
+    { id: 9, name: 'تعليمية', nameGlob: 'تعليمية, Educational, Educational' },
+    { id: 10, name: 'اخرى', nameGlob: 'اخرى, Other, Other' }
   ],
   menu: [
-    { id: 0, name: 'الملف الشخصي' },
-    { id: 1, name: 'اضافة اعلان جديد' },
-    { id: 2, name: 'اضافة عرض جديد' },
-    { id: 3, name: 'إعلاناتي' },
-    { id: 4, name: 'المفضلة' },
-    { id: 5, name: 'تسجيل الحساب كمتجر' },
-    { id: 6, name: 'مركز المساعدة' },
-    { id: 7, name: 'تسجيل خروج' }
+    { id: 0, name: 'تسجيل دخول' },
+    { id: 1, name: 'تسجيل متجر' },
+    { id: 2, name: 'الملف الشخصي' },
+    { id: 3, name: 'اضافة اعلان جديد' },
+    { id: 4, name: 'اضافة عرض جديد' },
+    { id: 5, name: 'إعلاناتي' },
+    { id: 6, name: 'المفضلة' },
+    { id: 7, name: 'مركز المساعدة' },
+    { id: 8, name: 'تسجيل خروج' }
   ],
   sort: [
     { id: 1, name: 'الأحدث' },

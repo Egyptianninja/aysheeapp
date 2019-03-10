@@ -33,32 +33,33 @@ class Drawer extends React.Component<any, any> {
   menuAction = async (id: number) => {
     switch (id) {
       case 0:
+        return this.props.navigation.navigate('Auth');
+
+      case 1:
+        if (this.props.isAuthenticated) {
+          return this.props.navigation.navigate('UpgradeToStore', {
+            title: this.props.words.apdateaccount
+          });
+        } else {
+          return this.props.navigation.navigate('Auth', { directstore: true });
+        }
+
+      case 2:
         return this.props.navigation.navigate('ProfileScreen', {
           user: this.props.user
         });
-      case 1:
-        return this.props.navigation.navigate('ChoiseScreen');
-      case 2:
-        return this.props.navigation.navigate('AddOfferScreen');
       case 3:
-        return this.props.navigation.navigate('MyPostsScreen');
+        return this.props.navigation.navigate('ChoiseScreen');
       case 4:
-        return this.props.navigation.navigate('MyFavScreen');
-      case 5: {
-        return this.props.navigation.navigate('UpgradeToStore', {
-          title: this.props.words.apdateaccount
+        return this.props.navigation.navigate('AddOfferScreen');
+      case 5:
+        return this.props.navigation.navigate('ProfileScreen', {
+          user: this.props.user
         });
+      case 6:
+        return this.props.navigation.navigate('MyFavScreen');
 
-        // const res = await this.props.upgradeToStore({});
-        // if (res.data.upgradeToStore.ok) {
-        //   const { data } = res.data.upgradeToStore;
-        //   await this.props.updateUser(data);
-        // }
-        // this.props.navigation.goBack();
-        // return;
-      }
-
-      case 7: {
+      case 8: {
         // TODO: uncomment to logout from all
         // await this.props.logoutFromAll();
         const { country, city } = await getCountryCityFromToken();
@@ -76,11 +77,17 @@ class Drawer extends React.Component<any, any> {
   };
 
   renderMenu = (menus: any, lng: any) => {
-    const { isstore } = this.props.user;
-    const userMenu = !isstore
-      ? menus.filter((m: any) => m.id !== 2)
-      : menus.filter((m: any) => m.id !== 5);
-    return userMenu.map((menu: any) => {
+    const { isAuthenticated } = this.props;
+    const isstore = isAuthenticated ? this.props.user.isstore : null;
+
+    const items = isAuthenticated
+      ? isstore
+        ? [2, 3, 4, 5, 6, 7, 8]
+        : [1, 2, 3, 5, 6, 7, 8]
+      : [0, 1, 3, 7];
+    const usermenu = menus.filter((mnu: any) => items.includes(mnu.id));
+
+    return usermenu.map((menu: any) => {
       const iconFunc = icons.menu.filter(ic => ic.id === menu.id);
       const icon = iconFunc[0].icon;
       return (
@@ -112,7 +119,6 @@ class Drawer extends React.Component<any, any> {
                 style={{ marginHorizontal: 5 }}
               />
             </View>
-
             <Text
               style={{
                 color: '#555',
@@ -146,19 +152,21 @@ class Drawer extends React.Component<any, any> {
               user: this.props.user
             });
           }}
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
         >
-          {user.name !== '' && (
-            <Text
-              style={{
-                fontSize: 16,
-                color: '#555',
-                paddingVertical: 10,
-                fontFamily: 'cairo-light'
-              }}
-            >
-              {user.name}
-            </Text>
-          )}
+          <Text
+            style={{
+              fontSize: 16,
+              color: '#555',
+              paddingVertical: 10,
+              fontFamily: 'cairo-light'
+            }}
+          >
+            {user.name}
+          </Text>
           <Text
             style={{
               fontSize: 16,
@@ -224,15 +232,15 @@ class Drawer extends React.Component<any, any> {
         }}
         // forceInset={{ top: 'always', horizontal: 'never' }}
       >
-        <ScrollView style={{ flex: 1 }} scrollEventThrottle={60}>
+        <ScrollView style={{ flex: 2 }} scrollEventThrottle={60}>
           {!this.props.isAuthenticated && this.nunLogedHeader()}
           {this.props.isAuthenticated && (
-            <View style={{ flex: 3, marginTop: 20 }}>
+            <View style={{ flex: 4, marginTop: 20 }}>
               {this.renderHeader(user)}
               <View style={{ height: 20 }} />
-              {this.renderMenu(menus, lang)}
             </View>
           )}
+          {this.renderMenu(menus, lang)}
         </ScrollView>
       </SafeAreaView>
     );
@@ -242,9 +250,9 @@ class Drawer extends React.Component<any, any> {
 const styles = StyleSheet.create({
   drawer: {
     flex: 1,
-    height: 150,
+    height: 200,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     borderBottomWidth: 1,
     marginHorizontal: 30
   },

@@ -1,35 +1,33 @@
+import { Ionicons } from '@expo/vector-icons';
+import { Formik } from 'formik';
 import * as React from 'react';
+import { graphql } from 'react-apollo';
 import {
-  View,
-  Keyboard,
+  AsyncStorage,
   Dimensions,
+  Keyboard,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback,
   TouchableOpacity,
-  AsyncStorage
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from '../../utils';
-import { Button, InputPhone, CountDownTimer } from '../../lib';
+import { smsTimes } from '../../constants';
+import notificationSub from '../../graphql/mutation/notificationSub';
+import smsLoginWithPhone from '../../graphql/mutation/smsLoginWithPhone';
+import smsRequestCode from '../../graphql/mutation/smsRequestCode';
+import { Button, CountDownTimer, InputPhone } from '../../lib';
 import {
+  addUniquename,
+  initCode,
+  initTime,
   login,
   phoneAdded,
   phoneRemoved,
-  smsSent,
-  initTime,
-  initCode,
-  addUniquename
+  smsSent
 } from '../../store/actions/userAtions';
-import smsRequestCode from '../../graphql/mutation/smsRequestCode';
-import notificationSub from '../../graphql/mutation/notificationSub';
-import smsLoginWithPhone from '../../graphql/mutation/smsLoginWithPhone';
-
-import { smsTimes } from '../../constants';
-import { Logo } from '../../componenets';
+import { StyleSheet } from '../../utils';
 
 const { width } = Dimensions.get('window');
 class PhoneScreen extends React.Component<any, any> {
@@ -82,6 +80,8 @@ class PhoneScreen extends React.Component<any, any> {
   };
 
   handleCodeSubmit = async (values: any, bag: any) => {
+    const directstore = this.props.navigation.getParam('directstore');
+
     try {
       const { phone } = values;
       const phoneNumber = `${this.props.code}${phone}`;
@@ -119,7 +119,8 @@ class PhoneScreen extends React.Component<any, any> {
           this.props.phoneAdded(phoneNumber, name);
           this.props.navigation.navigate('CodeScreen', {
             phone: phoneNumber,
-            name
+            name,
+            directstore
           });
         } else {
           bag.setErrors({ phone: res.data.smsRequestCode.error });
@@ -138,6 +139,7 @@ class PhoneScreen extends React.Component<any, any> {
   render() {
     const { words } = this.props;
     const { localePhone }: any = this.state;
+
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>

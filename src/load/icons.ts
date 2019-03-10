@@ -145,13 +145,14 @@ export const icons = {
 
   menu: [
     { id: 0, icon: 'md-person' },
-    { id: 1, icon: 'md-add' },
-    { id: 2, icon: 'ios-bookmark' },
-    { id: 3, icon: 'ios-calendar' },
-    { id: 4, icon: 'ios-heart' },
-    { id: 5, icon: 'ios-podium' },
-    { id: 6, icon: 'ios-help-circle' },
-    { id: 7, icon: 'ios-exit' }
+    { id: 1, icon: 'ios-briefcase' },
+    { id: 2, icon: 'md-person' },
+    { id: 3, icon: 'md-add' },
+    { id: 4, icon: 'ios-bookmark' },
+    { id: 5, icon: 'ios-calendar' },
+    { id: 6, icon: 'ios-heart' },
+    { id: 7, icon: 'ios-help-circle' },
+    { id: 8, icon: 'ios-exit' }
   ],
 
   flag: [
