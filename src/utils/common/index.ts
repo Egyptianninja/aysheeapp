@@ -1,20 +1,21 @@
-import { getLocation } from './getLocation';
-import { parseJwt } from './parseJwt';
-import { StyleSheet } from './stylesheet';
+import { arabicToNum, isArabic } from './arabic';
+import { nameToColor } from './color';
+import { filterOptions } from './general';
 import {
-  getCountryCode,
-  getLocaleCountry,
   getCodeFromCountry,
+  getCountryCityFromToken,
+  getCountryCode,
   getCountryCodeQatar,
   getCountryFromLatLon,
-  getCountryCityFromToken
+  getLocaleCountry
 } from './getCountryCode';
-import { isArabic, arabicToNum } from './arabic';
-import { nameToColor } from './color';
-import { getLang, getLocale } from './getlang';
-import { filterOptions } from './general';
+import { getCurrency } from './getCurrency';
 import { getDate } from './getDate';
+import { getLang, getLocale } from './getlang';
+import { getLocation } from './getLocation';
 import Orientation from './orientation';
+import { parseJwt } from './parseJwt';
+import { StyleSheet } from './stylesheet';
 import ZoomView from './zoomView';
 
 export {
@@ -35,5 +36,6 @@ export {
   getLocaleCountry,
   getCodeFromCountry,
   getCountryCityFromToken,
-  getDate
+  getDate,
+  getCurrency
 };

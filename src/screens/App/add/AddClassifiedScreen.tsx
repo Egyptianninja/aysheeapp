@@ -1,39 +1,17 @@
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import {
-  Dimensions,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  View
-} from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import PhotoView from '../../../componenets/Add/PhotoView';
-import { updateQty } from '../../../store/actions/userAtions';
 import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import {
-  Button,
-  CheckBox,
-  Group,
-  Input,
-  RadioButton,
-  Select,
-  Title
-} from '../../../lib';
-import {
-  getPureNumber,
-  isArabic,
-  Message,
-  registerForPushNotificationsAsync,
-  StyleSheet,
-  uploadPhotos,
-  UserLocation
-} from '../../../utils';
+import { Button, CheckBox, Group, Input, RadioButton, Select, Title } from '../../../lib';
+import { updateQty } from '../../../store/actions/userAtions';
+import { getCurrency, getPureNumber, isArabic, Message, registerForPushNotificationsAsync, StyleSheet, uploadPhotos, UserLocation } from '../../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -241,7 +219,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                 kind: '',
                 eBrand: '',
                 price: '',
-                currency: '',
+                currency: getCurrency(),
                 isforman: false,
                 isforwomen: true,
                 isnew: false,

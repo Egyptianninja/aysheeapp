@@ -11,7 +11,6 @@ import {
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
-import { updateQty } from '../../../store/actions/userAtions';
 import PhotoView from '../../../componenets/Add/PhotoView';
 import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
@@ -25,7 +24,9 @@ import {
   Select,
   Title
 } from '../../../lib';
+import { updateQty } from '../../../store/actions/userAtions';
 import {
+  getCurrency,
   getPureNumber,
   isArabic,
   Message,
@@ -209,7 +210,7 @@ class AddPartsScreen extends React.Component<any, any> {
                 title: '',
                 body: '',
                 price: '',
-                currency: '',
+                currency: getCurrency(),
                 isnew: false,
                 isold: true,
                 issale: true,

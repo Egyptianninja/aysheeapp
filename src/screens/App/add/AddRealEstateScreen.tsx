@@ -11,8 +11,6 @@ import {
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
-import { updateQty } from '../../../store/actions/userAtions';
-
 import PhotoView from '../../../componenets/Add/PhotoView';
 import { areaUnits, currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
@@ -26,7 +24,9 @@ import {
   Select,
   Title
 } from '../../../lib';
+import { updateQty } from '../../../store/actions/userAtions';
 import {
+  getCurrency,
   isArabic,
   Message,
   registerForPushNotificationsAsync,
@@ -213,7 +213,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
                 title: '',
                 body: '',
                 price: '',
-                currency: '',
+                currency: getCurrency(),
                 isfurnishered: false,
                 isUnfurnishered: true,
                 issale: false,
