@@ -190,7 +190,11 @@ const Option = ({
               islive: true
             }
           });
-          await store.dispatch(updateQty('online', 1));
+          if (post.isoffer) {
+            await store.dispatch(updateQty('offers', 1));
+          } else {
+            await store.dispatch(updateQty('online', 1));
+          }
           await store.dispatch(updateQty('offline', -1));
           hideMenuModal();
           setTimeout(() => {
@@ -204,7 +208,11 @@ const Option = ({
               islive: false
             }
           });
-          await store.dispatch(updateQty('online', -1));
+          if (post.isoffer) {
+            await store.dispatch(updateQty('offers', -1));
+          } else {
+            await store.dispatch(updateQty('online', -1));
+          }
           await store.dispatch(updateQty('offline', 1));
           hideMenuModal();
           setTimeout(() => {

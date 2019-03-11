@@ -129,7 +129,7 @@ class UpgradeToStore extends React.Component<any, any> {
       const { data } = res.data.upgradeToStore;
       await this.props.updateUser(data);
       this.updateProgressBar(3 / 3);
-      this.showMessage({ seconds: 1, screen: 'ProfileScreen' });
+      this.showMessage({ seconds: 1, screen: 'HomeScreen' });
     }
     if (!res.data.upgradeToStore.ok) {
       bag.setErrors({ name: res.data.upgradeToStore.error });
@@ -172,7 +172,7 @@ class UpgradeToStore extends React.Component<any, any> {
                 name: Yup.string()
                   .max(100)
                   .required(word.isrequire),
-                body: Yup.string()
+                about: Yup.string()
                   .max(1000)
                   .required(word.isrequire),
                 email: Yup.string()
@@ -387,6 +387,7 @@ class UpgradeToStore extends React.Component<any, any> {
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.save}
+                    disabled={!isValid || isSubmitting}
                     onPress={handleSubmit}
                   />
                   {isSubmitting && (

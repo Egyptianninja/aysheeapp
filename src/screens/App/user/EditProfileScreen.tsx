@@ -83,6 +83,40 @@ class EditProfileScreen extends React.Component<any, any> {
     this.setState({ bar: this.state.bar + value });
   };
 
+  validSchema = ({ word, isstore }: any) => {
+    if (isstore) {
+      return Yup.object().shape({
+        name: Yup.string()
+          .max(100)
+          .required(word.isrequire),
+        about: Yup.string()
+          .max(1000)
+          .required(word.isrequire),
+        email: Yup.string()
+          .email('Not valid email')
+          .required(word.isrequire),
+        addressCountry: Yup.string()
+          .max(50)
+          .required(word.isrequire),
+        addressCity: Yup.string()
+          .max(50)
+          .required(word.isrequire),
+        tel: Yup.string()
+          .max(50)
+          .required(word.isrequire),
+        fax: Yup.string()
+          .max(50)
+          .required(word.isrequire)
+      });
+    } else {
+      return Yup.object().shape({
+        name: Yup.string()
+          .max(100)
+          .required(word.isrequire)
+      });
+    }
+  };
+
   handleSubmit = async (values: any, bag: any) => {
     const isstore = this.props.user.isstore;
     const {
@@ -137,6 +171,7 @@ class EditProfileScreen extends React.Component<any, any> {
     }
     bag.setSubmitting(false);
   };
+
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
@@ -166,45 +201,10 @@ class EditProfileScreen extends React.Component<any, any> {
                 addressCity: user.addressCity,
                 tel: user.tel,
                 fax: user.fax,
-                mob: user.mob,
                 location: false
               }}
               onSubmit={this.handleSubmit}
-              validationSchema={Yup.object().shape({
-                name: Yup.string()
-                  .max(100)
-                  .required(word.isrequire),
-                body: isstore
-                  ? Yup.string()
-                      .max(1000)
-                      .required(word.isrequire)
-                  : Yup.string().max(1000),
-                email: isstore
-                  ? Yup.string()
-                      .email('Not valid email')
-                      .required(word.isrequire)
-                  : Yup.string().email('Not valid email'),
-                addressCountry: isstore
-                  ? Yup.string()
-                      .max(50)
-                      .required(word.isrequire)
-                  : Yup.string().max(50),
-                addressCity: isstore
-                  ? Yup.string()
-                      .max(50)
-                      .required(word.isrequire)
-                  : Yup.string().max(50),
-                tel: isstore
-                  ? Yup.string()
-                      .max(50)
-                      .required(word.isrequire)
-                  : Yup.string().max(50),
-                fax: isstore
-                  ? Yup.string()
-                      .max(50)
-                      .required(word.isrequire)
-                  : Yup.string().max(50)
-              })}
+              validationSchema={this.validSchema({ word, isstore })}
               render={({
                 values,
                 handleSubmit,
@@ -413,6 +413,7 @@ class EditProfileScreen extends React.Component<any, any> {
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.save}
+                    disabled={!isValid || isSubmitting}
                     onPress={handleSubmit}
                   />
                   {isSubmitting && (

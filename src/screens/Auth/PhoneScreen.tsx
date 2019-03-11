@@ -146,7 +146,6 @@ class PhoneScreen extends React.Component<any, any> {
   render() {
     const { words } = this.props;
     const { localePhone }: any = this.state;
-    const { directstore } = this.props.navigation.state.params;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
