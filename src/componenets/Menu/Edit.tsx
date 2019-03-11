@@ -21,10 +21,11 @@ export default class Edit extends React.Component<any, any> {
   noSale = [2, 3, 5, 7, 8, 9, 13, 14, 15, 17, 18];
   noPrice = [5, 9];
   noNew = [5, 9, 17, 18];
+
   noWaranty = [0, 5, 9, 12, 13, 17, 18];
 
-  noKind = [4, 7, 11, 19];
-  kind = [2, 3, 6, 8, 10, 12, 13, 14, 16, 17, 18];
+  noKind = [19];
+  kind = [2, 3, 4, 6, 7, 8, 10, 11, 12, 13, 14, 16, 17, 18];
   eBrand = [2, 6];
 
   acc = [8];
@@ -32,6 +33,7 @@ export default class Edit extends React.Component<any, any> {
   re = [0];
   car = [1];
   job = [5];
+  serv = [9];
 
   constructor(props: any) {
     super(props);
@@ -53,6 +55,8 @@ export default class Edit extends React.Component<any, any> {
       issale,
       iswarranty,
       isforman,
+      isjobreq,
+      isservicereq,
       space,
       rooms,
       bathrooms,
@@ -86,6 +90,9 @@ export default class Edit extends React.Component<any, any> {
         issale: issale || issale === false ? issale : undefined,
         iswarranty: iswarranty || iswarranty === false ? iswarranty : undefined,
         isforman: isforman || isforman === false ? isforman : undefined,
+        isjobreq: isjobreq || isjobreq === false ? isjobreq : undefined,
+        isservicereq:
+          isservicereq || isservicereq === false ? isservicereq : undefined,
         space: space ? Number(space) : undefined,
         rooms: rooms ? Number(rooms) : undefined,
         bathrooms: bathrooms ? Number(bathrooms) : undefined,
@@ -157,6 +164,10 @@ export default class Edit extends React.Component<any, any> {
                 isrent: !post.issale,
                 iswarranty: post.iswarranty,
                 isforman: post.isforman,
+                isjobreq: post.isjobreq,
+                isjoboffer: !post.isjobreq,
+                isservicereq: post.isservicereq,
+                isserviceoffer: !post.isservicereq,
                 isforwomen: !post.isforman,
                 space: post.space ? post.space.toString() : post.space,
                 rooms: post.rooms ? post.rooms.toString() : post.rooms,
@@ -230,6 +241,28 @@ export default class Edit extends React.Component<any, any> {
                         label={word.isforman}
                         value={values.isforman}
                         selected={values.isforman}
+                      />
+                    </Group>
+                  )}
+
+                  {this.serv.includes(categoryId) && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={isRTL}
+                    >
+                      <RadioButton
+                        name="isservicereq"
+                        label={word.isservicereq}
+                        value={values.isservicereq}
+                        selected={values.isservicereq}
+                      />
+                      <RadioButton
+                        name="isserviceoffer"
+                        label={word.isserviceoffer}
+                        value={values.isserviceoffer}
+                        selected={values.isserviceoffer}
                       />
                     </Group>
                   )}
@@ -392,9 +425,27 @@ export default class Edit extends React.Component<any, any> {
                       />
                     </React.Fragment>
                   )}
-
                   {this.job.includes(categoryId) && (
                     <React.Fragment>
+                      <Group
+                        color="#444"
+                        size={24}
+                        onChange={setFieldValue}
+                        rtl={isRTL}
+                      >
+                        <RadioButton
+                          name="isjobreq"
+                          label={word.isjobreq}
+                          value={values.isjobreq}
+                          selected={values.isjobreq}
+                        />
+                        <RadioButton
+                          name="isjoboffer"
+                          label={word.isjoboffer}
+                          value={values.isjoboffer}
+                          selected={values.isjoboffer}
+                        />
+                      </Group>
                       <Input
                         rtl={isRTL}
                         num

@@ -26,8 +26,8 @@ const CategoryModalIcon = ({
     >
       <View
         style={{
-          width: (width - 20) / 3 - 13.45,
-          height: (width - 20) / 3 - 13.45,
+          width: (width - 20) / 3 - 15,
+          height: (width - 20) / 3 - 15,
           justifyContent: 'center',
           alignItems: 'center',
           alignSelf: 'center',

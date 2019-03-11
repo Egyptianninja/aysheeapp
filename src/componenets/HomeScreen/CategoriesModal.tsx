@@ -8,7 +8,6 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Ionicons } from '@expo/vector-icons';
 import { images, icons } from '../../load';
 import CategoryModalIcon from './CategoryModalIcon';
 
@@ -49,11 +48,11 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               flex: 1,
               backgroundColor: '#eee',
-              marginRight: 5,
+              marginRight: 7,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 8,
-              borderColor: '#ddd',
+              borderColor: '#aaa',
               borderWidth: 1,
               overflow: 'hidden'
             }}
@@ -77,11 +76,11 @@ export default class CategoriesModal extends React.Component<any, any> {
             }}
             style={{
               flex: 1,
-              marginLeft: 5,
+              marginLeft: 7,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 8,
-              borderColor: '#ddd',
+              borderColor: '#aaa',
               borderWidth: 1,
               overflow: 'hidden'
             }}
