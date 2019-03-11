@@ -1,25 +1,31 @@
 import * as React from 'react';
 import { View, Image } from 'react-native';
 import { images } from '../../load';
-const Logo = () => (
+const Logo = ({ size = 150 }) => (
   <View
     style={{
-      flex: 1,
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
-      width: 50,
-      height: 100
+      zIndex: 500
     }}
   >
-    <Image
+    <View
       style={{
-        flex: 1,
-        width: '100%',
-        height: '100%'
+        width: size,
+        height: size,
+        opacity: 0.8
       }}
-      source={images.namelogofull}
-    />
+    >
+      <Image
+        style={{
+          flex: 1,
+          width: '100%',
+          height: '100%'
+        }}
+        source={images.namelogofull}
+      />
+    </View>
   </View>
 );
 

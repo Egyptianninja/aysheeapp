@@ -28,6 +28,7 @@ import {
   smsSent
 } from '../../store/actions/userAtions';
 import { StyleSheet } from '../../utils';
+import { Logo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
 class PhoneScreen extends React.Component<any, any> {
@@ -111,9 +112,7 @@ class PhoneScreen extends React.Component<any, any> {
           variables: { phone: phoneNumber }
         });
         if (res.data.smsRequestCode.ok) {
-          await AsyncStorage.setItem('phone', phoneNumber);
           const name = res.data.smsRequestCode.message;
-          await AsyncStorage.setItem('name', name);
           const nowTime = Math.floor(new Date().getTime() / 1000);
           const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
           await this.props.smsSent(nextTime);
@@ -167,7 +166,6 @@ class PhoneScreen extends React.Component<any, any> {
             />
           </View>
 
-          <View style={{ height: 20 }} />
           <KeyboardAvoidingView
             style={{
               flex: 3,
@@ -200,6 +198,7 @@ class PhoneScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
+                  <Logo />
                   <InputPhone
                     num
                     name="phone"

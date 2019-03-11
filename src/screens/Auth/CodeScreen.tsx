@@ -25,6 +25,7 @@ import {
   smsSent
 } from '../../store/actions/userAtions';
 import { StyleSheet } from '../../utils';
+import { Logo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
 
@@ -110,6 +111,9 @@ class CodeScreen extends React.Component<any, any> {
         const isstore = data.isstore;
         await AsyncStorage.setItem('aysheetoken', token);
         const name = this.props.navigation.getParam('name');
+        const phone = this.props.navigation.getParam('phone');
+        await AsyncStorage.setItem('phone', phone);
+        await AsyncStorage.setItem('name', name);
         await this.props.addUniquename(name);
         await this.props.login(token, data);
         await this.props.initTime();
@@ -174,6 +178,8 @@ class CodeScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
+                  <Logo />
+
                   <Text
                     style={{ fontSize: 24, color: '#555', fontWeight: '200' }}
                   >
@@ -193,8 +199,6 @@ class CodeScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={50}
                   />
-                  <View style={{ height: 20 }} />
-
                   <View style={{ flexDirection: 'row' }}>
                     <Button
                       background="#272727"

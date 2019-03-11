@@ -7,7 +7,8 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,7 +16,7 @@ import addAvatar from '../../graphql/mutation/addAvatar';
 import logoutFromAll from '../../graphql/mutation/logoutFromAll';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import upgradeToStore from '../../graphql/mutation/upgradeToStore';
-import { icons } from '../../load';
+import { icons, images } from '../../load';
 import {
   login,
   logout,
@@ -104,7 +105,7 @@ class Drawer extends React.Component<any, any> {
           <View
             style={{
               flex: 1,
-              marginHorizontal: 10,
+              marginHorizontal: 20,
               marginVertical: 7,
               flexDirection: 'row-reverse',
               alignItems: 'center',
@@ -192,35 +193,30 @@ class Drawer extends React.Component<any, any> {
       <View
         style={{
           flex: 1,
-          marginTop: 50,
-          height: 150,
+          height: 200,
           alignItems: 'center',
-          justifyContent: 'flex-start'
+          justifyContent: 'center',
+          borderBottomWidth: 1,
+          borderBottomColor: '#aaa',
+          margin: 30
         }}
       >
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('Auth');
-            // this.props.navigation.navigate("FastLoginScreen");
-          }}
+        <View
           style={{
-            paddingHorizontal: 30,
-            borderWidth: 1,
-            borderColor: '#ddd',
-            borderRadius: 5
+            width: 150,
+            height: 150,
+            opacity: 0.4
           }}
         >
-          <Text
+          <Image
             style={{
-              fontSize: 18,
-              color: '#555',
-              fontFamily: 'cairo-bold',
-              paddingVertical: 10
+              flex: 1,
+              width: '100%',
+              height: '100%'
             }}
-          >
-            {this.props.words.login}
-          </Text>
-        </TouchableOpacity>
+            source={images.namelogofull}
+          />
+        </View>
       </View>
     );
   };
@@ -260,6 +256,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 1,
+    borderBottomColor: '#aaa',
     marginHorizontal: 30
   },
   drawerImage: {
