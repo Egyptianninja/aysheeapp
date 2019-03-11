@@ -55,7 +55,9 @@ class Drawer extends React.Component<any, any> {
         if (this.props.isAuthenticated) {
           return this.props.navigation.navigate('ChoiseScreen');
         } else {
-          return this.props.navigation.navigate('Auth');
+          return this.props.navigation.navigate('PhoneScreen', {
+            add: true
+          });
         }
       case 4:
         return this.props.navigation.navigate('AddOfferScreen');

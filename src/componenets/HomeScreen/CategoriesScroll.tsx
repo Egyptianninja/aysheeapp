@@ -153,28 +153,23 @@ class CategoriesScroll extends React.Component<any, any> {
               onPress={() => this.props.removeAllFilters()}
             >
               <Ionicons
-                name="ios-arrow-back"
-                size={31}
-                style={{
-                  position: 'absolute',
-                  left: 20,
-                  top: -13,
-                  paddingHorizontal: 15
-                }}
-                color="#999"
+                style={{ paddingHorizontal: 15, paddingTop: 3 }}
+                name="ios-close-circle"
+                size={33}
+                color="#8E90F0"
               />
             </TouchableOpacity>
             <Text
               style={{
-                padding: 5,
-                fontSize: 14,
+                fontSize: 18,
                 fontFamily: 'cairo-regular',
-                color: '#7678ED'
+                color: '#7678ED',
+                paddingHorizontal: 15
               }}
             >
               جوالات
             </Text>
-            <Text
+            {/* <Text
               style={{
                 padding: 5,
                 fontSize: 14,
@@ -184,7 +179,7 @@ class CategoriesScroll extends React.Component<any, any> {
               }}
             >
               فلاتر
-            </Text>
+            </Text> */}
           </View>
         )}
         <View
@@ -220,7 +215,7 @@ class CategoriesScroll extends React.Component<any, any> {
               paddingTop: !selected ? 5 : undefined
             }}
             style={{
-              backgroundColor: selected ? '#7678ED' : '#fff',
+              backgroundColor: '#fff',
               height: selected ? 50 : 95
             }}
           >

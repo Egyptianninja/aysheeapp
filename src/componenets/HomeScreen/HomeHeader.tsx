@@ -29,7 +29,7 @@ class HomeHeader extends React.Component<any, any> {
           styles.container,
           {
             flexDirection: this.ardroid ? 'row-reverse' : 'row',
-            backgroundColor: '#fff',
+            backgroundColor: '#7678ED',
             shadowOffset: { width: 3, height: 3 },
             shadowColor: '#777',
             shadowOpacity: 0.1
@@ -69,7 +69,7 @@ class HomeHeader extends React.Component<any, any> {
                   flex: 1,
                   width: '100%',
                   height: '100%',
-                  tintColor: '#999'
+                  tintColor: '#fff'
                 }}
                 source={home}
               />
@@ -89,7 +89,7 @@ class HomeHeader extends React.Component<any, any> {
               <Ionicons
                 name="ios-notifications-outline"
                 size={30}
-                color="#777"
+                color="#fff"
               />
             </TouchableOpacity>
           )}
@@ -148,7 +148,7 @@ class HomeHeader extends React.Component<any, any> {
                 }}
               >
                 <Ionicons
-                  style={{ color: '#777' }}
+                  style={{ color: '#fff' }}
                   name="ios-search"
                   size={28}
                 />

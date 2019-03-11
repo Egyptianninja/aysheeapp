@@ -381,13 +381,6 @@ const renderSelectRow = (
 ) => {
   return (
     <View key={itemKind} style={{ flexDirection: 'row' }}>
-      <View
-        style={{
-          marginVertical: 10,
-          borderLeftWidth: 1,
-          borderLeftColor: '#ddd'
-        }}
-      />
       <FilterSelect
         isRTL={isRTL}
         data={bucket}

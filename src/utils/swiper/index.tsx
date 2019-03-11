@@ -200,11 +200,7 @@ export default class Swiper extends Component<any, any> {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar
-          translucent={true}
-          backgroundColor={'rgba(0, 0, 0, 0.3)'}
-          barStyle={'light-content'}
-        />
+        <StatusBar translucent={true} barStyle={'light-content'} />
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
           style={{

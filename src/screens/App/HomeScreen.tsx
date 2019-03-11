@@ -3,7 +3,7 @@ import { Notifications } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Animated, Dimensions, Text, View } from 'react-native';
+import { Animated, Dimensions, Text, View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
@@ -289,6 +289,7 @@ class HomeScreen extends React.Component<any, any> {
     });
     return (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
+        <StatusBar translucent={true} barStyle={'light-content'} />
         <Menu
           post={this.state.modalPost}
           favoritePost={this.props.favoritePost}

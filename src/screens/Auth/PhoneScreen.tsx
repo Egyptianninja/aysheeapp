@@ -82,6 +82,7 @@ class PhoneScreen extends React.Component<any, any> {
 
   handleCodeSubmit = async (values: any, bag: any) => {
     const directstore = this.props.navigation.getParam('directstore');
+    const add = this.props.navigation.getParam('add');
 
     try {
       const { phone } = values;
@@ -99,12 +100,15 @@ class PhoneScreen extends React.Component<any, any> {
           await this.props.login(token, data);
           await this.props.initTime();
           await this.props.initCode();
-          isstore
-            ? this.props.navigation.navigate('App')
-            : directstore
-            ? this.props.navigation.navigate('UpgradeToStore', {
-                title: this.props.words.apdateaccount
-              })
+
+          directstore
+            ? isstore
+              ? this.props.navigation.navigate('App')
+              : this.props.navigation.navigate('UpgradeToStore', {
+                  title: this.props.words.apdateaccount
+                })
+            : add
+            ? this.props.navigation.navigate('ChoiseScreen')
             : this.props.navigation.navigate('App');
         }
       } else {
@@ -126,7 +130,8 @@ class PhoneScreen extends React.Component<any, any> {
           this.props.navigation.navigate('CodeScreen', {
             phone: phoneNumber,
             name,
-            directstore
+            directstore,
+            add
           });
         } else {
           bag.setErrors({ phone: res.data.smsRequestCode.error });

@@ -25,182 +25,155 @@ import {
 } from '../../screens';
 import { StyleSheet } from '../../utils';
 
-export const AppStackNavigator = createStackNavigator({
-  HomeScreen: {
-    screen: HomeScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      header: <HomeHeader navigation={navigation} />,
-      headerBackTitle: null
-    })
-  },
-  OffersScreen: {
-    screen: OffersScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      headerBackTitle: null,
-      drawerLockMode: 'locked-closed'
-    })
-  },
-  ItemScreen: {
-    screen: ItemScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
+export const AppStackNavigator = createStackNavigator(
+  {
+    HomeScreen: {
+      screen: HomeScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: <HomeHeader navigation={navigation} />,
+        headerBackTitle: null
+      })
+    },
+    OffersScreen: {
+      screen: OffersScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        headerBackTitle: null,
+        drawerLockMode: 'locked-closed'
+      })
+    },
+    ItemScreen: {
+      screen: ItemScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        headerBackTitle: null
+      })
+    },
 
-  ChoiseScreen: {
-    screen: ChoiseScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: 'اضافة اعلان جديد',
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
+    ChoiseScreen: {
+      screen: ChoiseScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: 'اضافة اعلان جديد',
+        headerBackTitle: null
+      })
+    },
+    UpgradeToStore: {
+      screen: UpgradeToStore,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('title'),
+        headerBackTitle: null
+      })
+    },
+    AddClassifiedScreen: {
+      screen: AddClassifiedScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('item').name,
+        headerBackTitle: null
+      })
+    },
+    AddOfferScreen: {
+      screen: AddOfferScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        headerBackTitle: null
+      })
+    },
+    AddServiceScreen: {
+      screen: AddServiceScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('item').name,
+        headerBackTitle: null
+      })
+    },
+    AddRealEstateScreen: {
+      screen: AddRealEstateScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('item').name,
+        headerBackTitle: null
+      })
+    },
+    AddCarScreen: {
+      screen: AddCarScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('item').name,
+        headerBackTitle: null
+      })
+    },
+    AddPartsScreen: {
+      screen: AddPartsScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('item').name,
+        headerBackTitle: null
+      })
+    },
+    AddJobScreen: {
+      screen: AddJobScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('item').name,
+        headerBackTitle: null
+      })
+    },
+    MyFavScreen: {
+      screen: MyFavScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: 'المفضلة',
+        headerBackTitle: null
+      })
+    },
+    ProfileScreen: {
+      screen: ProfileScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('user').name,
+        headerBackTitle: null
+      })
+    },
+    NotificationsScreen: {
+      screen: NotificationsScreen,
+      navigationOptions: () => ({
+        headerBackTitle: null
+      })
+    },
+    ShopsScreen: {
+      screen: ShopsScreen,
+      navigationOptions: () => ({
+        title: 'قسم المتاجر',
+        headerBackTitle: null
+      })
+    },
+    CameraScreen: {
+      screen: CameraScreen,
+      navigationOptions: () => ({
+        headerBackTitle: null
+      })
+    },
+    EditProfileScreen: {
+      screen: EditProfileScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        headerBackTitle: null,
+        headerLeft: (
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Ionicons
+                name="ios-arrow-back"
+                size={33}
+                style={styles.icon}
+                color="#000"
+              />
+            </TouchableOpacity>
+          </View>
+        )
+      })
+    }
   },
-  UpgradeToStore: {
-    screen: UpgradeToStore,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('title'),
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  AddClassifiedScreen: {
-    screen: AddClassifiedScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  AddOfferScreen: {
-    screen: AddOfferScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      // title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  AddServiceScreen: {
-    screen: AddServiceScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  AddRealEstateScreen: {
-    screen: AddRealEstateScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  AddCarScreen: {
-    screen: AddCarScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  AddPartsScreen: {
-    screen: AddPartsScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  AddJobScreen: {
-    screen: AddJobScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('item').name,
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null
-    })
-  },
-  MyFavScreen: {
-    screen: MyFavScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: 'المفضلة',
-      headerTintColor: '#555',
-      headerBackTitle: null
-    })
-  },
-  ProfileScreen: {
-    screen: ProfileScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      title: navigation.getParam('user').name,
-      headerTintColor: '#555',
-      headerBackTitle: null
-    })
-  },
-  NotificationsScreen: {
-    screen: NotificationsScreen,
-    navigationOptions: () => ({
-      headerTintColor: '#555',
-      headerBackTitle: null
-    })
-  },
-  ShopsScreen: {
-    screen: ShopsScreen,
-    navigationOptions: () => ({
-      headerTintColor: '#555',
-      headerTitleStyle: styles.headerTitleStyle,
-      title: 'قسم المتاجر',
-      headerBackTitle: null
-    })
-  },
-  CameraScreen: {
-    screen: CameraScreen,
-    navigationOptions: () => ({
-      headerTintColor: '#555',
-      headerBackTitle: null
-    })
-  },
-  EditProfileScreen: {
-    screen: EditProfileScreen,
-    navigationOptions: ({ navigation }: any) => ({
-      headerStyle: styles.headerStyle,
-      headerTintColor: '#eee',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerBackTitle: null,
-      headerLeft: (
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              name="ios-arrow-back"
-              size={33}
-              style={styles.icon}
-              color="#000"
-            />
-          </TouchableOpacity>
-        </View>
-      )
-    })
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#7678ED'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }
   }
-});
+);
 
 const styles = StyleSheet.create({
   imageView: {

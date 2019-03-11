@@ -98,6 +98,7 @@ class CodeScreen extends React.Component<any, any> {
 
   handleLoginSubmit = async (values: any, bag: any) => {
     const directstore = this.props.navigation.getParam('directstore');
+    const add = this.props.navigation.getParam('add');
     try {
       const { code } = values;
       const res = await this.props.smsLoginWithCode({
@@ -118,12 +119,14 @@ class CodeScreen extends React.Component<any, any> {
         await this.props.login(token, data);
         await this.props.initTime();
         await this.props.initCode();
-        isstore
-          ? this.props.navigation.navigate('App')
-          : directstore
-          ? this.props.navigation.navigate('UpgradeToStore', {
-              title: this.props.words.apdateaccount
-            })
+        directstore
+          ? isstore
+            ? this.props.navigation.navigate('App')
+            : this.props.navigation.navigate('UpgradeToStore', {
+                title: this.props.words.apdateaccount
+              })
+          : add
+          ? this.props.navigation.navigate('ChoiseScreen')
           : this.props.navigation.navigate('App');
       } else {
         if (res.data.smsLoginWithCode.ok === false) {

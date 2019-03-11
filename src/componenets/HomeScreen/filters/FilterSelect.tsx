@@ -118,24 +118,23 @@ export default class FilterSelect extends React.Component<any, any> {
           style={{
             flexDirection:
               isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-            padding: 2,
-            paddingLeft: 2,
-            height: 40,
+            padding: 5,
+            height: 36,
             minWidth: 65,
-            // borderRadius: 10,
+            borderRadius: 18,
+            marginHorizontal: 5,
             justifyContent: 'center',
             alignItems: 'center',
-            marginRight: 5,
-            // marginTop: 15,
-            // borderWidth: 1,
-            // borderColor: '#E7E4E6',
-            // borderColor: selected ? '#7678ED' : '#E7E4E6',
-            // backgroundColor: selected ? '#9C949A' : '#fff',
-            backgroundColor: '#7678ED',
-            // shadowOffset: { width: 0, height: 0 },
-            // shadowColor: '#555',
-            // shadowOpacity: 0.3,
-            paddingHorizontal: 5
+            backgroundColor: '#fafafa',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+
+            elevation: 5
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
@@ -147,20 +146,18 @@ export default class FilterSelect extends React.Component<any, any> {
             <FilterIcon
               icon={icon}
               size={16}
-              color={selected ? '#ACE4AA' : '#fff'}
+              color={selected ? '#7678ED' : '#555'}
             />
           </View>
           <Text
             style={{
               color: selected
-                ? '#ACE4AA'
+                ? '#7678ED'
                 : this.props.disable
-                ? '#ddd'
-                : '#fff',
+                ? '#aaa'
+                : '#555',
               fontSize: 14,
-              // fontFamily: 'cairo-regular',
               fontWeight: selected ? 'bold' : '300',
-              paddingHorizontal: 5,
               fontFamily: 'cairo-regular'
             }}
           >
@@ -170,31 +167,11 @@ export default class FilterSelect extends React.Component<any, any> {
               ? data.label
               : this.state.label}
           </Text>
-          {/* {selectedLable && (
-            <View
-              style={{
-                position: 'absolute',
-                left: isRTL ? undefined : 30,
-                right: isRTL ? 30 : undefined,
-                top: -5
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 12,
-                  fontFamily: 'cairo-regular'
-                  // color: '#fff'
-                }}
-              >
-                {data.label}
-              </Text>
-            </View>
-          )} */}
           <Ionicons
             style={{ paddingHorizontal: 10, top: 2 }}
             name="md-arrow-dropdown"
             size={24}
-            color={selected ? '#ACE4AA' : '#fff'}
+            color={selected ? '#7678ED' : '#555'}
           />
         </TouchableOpacity>
         <Modal

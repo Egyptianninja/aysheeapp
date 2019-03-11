@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { AsyncStorage, Dimensions, Image, View } from 'react-native';
+import { AsyncStorage, Dimensions, Image, View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import getMyCountry from '../../graphql/mutation/getMyCountry';
 import refreshToken from '../../graphql/mutation/refreshToken';
@@ -46,11 +46,12 @@ class LoadScreen extends React.Component<any, any> {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#171717',
+          backgroundColor: '#7678ED',
           width,
           height
         }}
       >
+        <StatusBar translucent={true} barStyle={'light-content'} />
         <Image
           source={images.load}
           style={{ flex: 1, width: undefined, height: undefined }}

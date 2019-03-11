@@ -366,14 +366,14 @@ class ItemView extends React.Component<any, any> {
             borderRadius: 16,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+            backgroundColor: 'rgba(0, 0, 0, 0.1)'
           }}
         >
           <Ionicons
             name="ios-arrow-back"
             size={30}
             style={styles.icon}
-            color="#9C949A"
+            color="#fff"
           />
         </TouchableOpacity>
         {/* header */}
@@ -394,7 +394,7 @@ class ItemView extends React.Component<any, any> {
               shadowOffset: { width: 3, height: 3 },
               shadowColor: '#555',
               shadowOpacity: 0.2,
-              backgroundColor: '#fff',
+              backgroundColor: '#7678ED',
               opacity: opacityStyle
             }
           ]}
@@ -410,7 +410,7 @@ class ItemView extends React.Component<any, any> {
               style={{
                 fontFamily: 'cairo-regular',
                 fontSize: 20,
-                color: '#373737'
+                color: '#fff'
               }}
             >
               {post.title.substring(0, 20)}
