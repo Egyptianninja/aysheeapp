@@ -159,7 +159,7 @@ class PhoneScreen extends React.Component<any, any> {
               style={{ margin: 20 }}
             />
           </TouchableOpacity>
-          <View style={{ flex: 2 }}>
+          <View style={{ flex: 1 }}>
             <CountDownTimer
               counter={this.state.interval}
               cb={this.counterCllBack}
@@ -175,6 +175,8 @@ class PhoneScreen extends React.Component<any, any> {
             behavior="padding"
             enabled
           >
+            <Logo />
+
             <Formik
               initialValues={{
                 phone: localePhone
@@ -198,7 +200,6 @@ class PhoneScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Logo />
                   <InputPhone
                     num
                     name="phone"
