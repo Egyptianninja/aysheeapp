@@ -38,46 +38,48 @@ export default class FilterSelect extends React.Component<any, any> {
   renderOptions = (data: any) => {
     return (
       <React.Fragment>
-        <TouchableOpacity
-          onPress={() => {
-            const { itemKind, removeFilter } = this.props;
-            removeFilter(itemKind);
-            if (itemKind === 'brandId') {
-              removeFilter('subBrandId');
-            }
-            if (itemKind === 'kindId') {
-              removeFilter('eBrandId');
-              removeFilter('brandId');
-              removeFilter('subBrandId');
-            }
-            this.handleLabel(this.props.data.label);
-            this.toggleModal();
-          }}
-          style={{
-            flex: 1,
-            padding: 3,
-            margin: 7,
-            backgroundColor: '#eee',
-            borderWidth: 1,
-            borderColor: '#ddd',
-            borderRadius: 5
-          }}
-        >
-          <Text
+        {!this.props.sort && (
+          <TouchableOpacity
+            onPress={() => {
+              const { itemKind, removeFilter } = this.props;
+              removeFilter(itemKind);
+              if (itemKind === 'brandId') {
+                removeFilter('subBrandId');
+              }
+              if (itemKind === 'kindId') {
+                removeFilter('eBrandId');
+                removeFilter('brandId');
+                removeFilter('subBrandId');
+              }
+              this.handleLabel(this.props.data.label);
+              this.toggleModal();
+            }}
             style={{
-              fontSize: 16,
-              fontFamily: 'cairo-regular',
-              textAlign:
-                this.props.isRTL && Platform.OS !== 'android'
-                  ? 'right'
-                  : 'left',
-              paddingHorizontal: 10,
-              color: '#ff5959'
+              flex: 1,
+              padding: 3,
+              margin: 7,
+              backgroundColor: '#eee',
+              borderWidth: 1,
+              borderColor: '#ddd',
+              borderRadius: 5
             }}
           >
-            {this.props.words.remove}
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: 'cairo-regular',
+                textAlign:
+                  this.props.isRTL && Platform.OS !== 'android'
+                    ? 'right'
+                    : 'left',
+                paddingHorizontal: 10,
+                color: '#ff5959'
+              }}
+            >
+              {this.props.words.remove}
+            </Text>
+          </TouchableOpacity>
+        )}
         {data.buckets.map((da: any) => {
           return (
             <FilterOption
@@ -112,30 +114,37 @@ export default class FilterSelect extends React.Component<any, any> {
     //   selected && rest[itemKind] !== false && rest[itemKind] !== true;
     const iconFunc = icons.filterIcons.filter(ic => ic.id === itemKind);
     // const icon = iconFunc[0].icon();
+
     return (
       <View>
         <TouchableOpacity
-          style={{
-            flexDirection:
-              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-            padding: 5,
-            height: 38,
-            minWidth: 65,
-            borderRadius: 18,
-            marginHorizontal: 5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#fafafa',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2
+          style={[
+            {
+              flexDirection:
+                isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
+              padding: 5,
+              height: 38,
+              minWidth: 65,
+              borderRadius: 18,
+              marginHorizontal: this.props.sort ? 0 : 5,
+              justifyContent: 'center',
+              alignItems: 'center'
             },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
+            !this.props.sort
+              ? {
+                  backgroundColor: '#fafafa',
+                  shadowColor: '#000',
+                  shadowOffset: {
+                    width: 0,
+                    height: 2
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
 
-            elevation: 5
-          }}
+                  elevation: 5
+                }
+              : {}
+          ]}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
           {/* <View
@@ -151,11 +160,12 @@ export default class FilterSelect extends React.Component<any, any> {
           </View> */}
           <Text
             style={{
-              color: selected
-                ? '#7678ED'
-                : this.props.disable
-                ? '#aaa'
-                : '#555',
+              color:
+                selected || this.props.sort
+                  ? '#7678ED'
+                  : this.props.disable
+                  ? '#aaa'
+                  : '#555',
               fontSize: 15,
               fontWeight: selected ? 'bold' : '300',
               fontFamily: 'cairo-regular',
@@ -165,15 +175,19 @@ export default class FilterSelect extends React.Component<any, any> {
             {selected
               ? `${this.state.label}`
               : !this.props.rest[itemKind]
-              ? data.label
+              ? this.props.sort
+                ? data.buckets[0].name
+                : data.label
               : this.state.label}
           </Text>
-          <Ionicons
-            style={{ paddingHorizontal: 10, top: 2 }}
-            name="md-arrow-dropdown"
-            size={24}
-            color={selected ? '#7678ED' : '#555'}
-          />
+          {!this.props.sort && (
+            <Ionicons
+              style={{ paddingHorizontal: 10, top: 2 }}
+              name="md-arrow-dropdown"
+              size={24}
+              color={selected ? '#7678ED' : '#555'}
+            />
+          )}
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}

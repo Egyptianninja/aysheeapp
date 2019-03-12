@@ -14,6 +14,7 @@ import CategoryIcon from './CategoryIcon';
 import CategoryIconSingle from './CategoryIconSingle';
 import HeaderFilter from './HeaderFilter';
 import OfferIcon from './OffersIcon';
+import FilterSelect from './filters/FilterSelect';
 
 class CategoriesScroll extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -139,6 +140,10 @@ class CategoriesScroll extends React.Component<any, any> {
     const categoryName = categories.filter(
       (cat: any) => cat.id === rest.categoryId
     )[0];
+    const back = Object.values(rest).length === 1;
+    console.log(rest);
+    console.log(Object.values(rest));
+
     return (
       <View style={{ width: '100%' }}>
         {selected && (
@@ -149,23 +154,55 @@ class CategoriesScroll extends React.Component<any, any> {
               flexDirection: 'row'
             }}
           >
-            <TouchableOpacity
-              style={{
-                position: 'absolute',
-                left: -5,
-                top: -4,
-                zIndex: 10,
-                padding: 5
-              }}
-              onPress={() => this.props.removeAllFilters()}
-            >
-              <Ionicons
-                style={{ paddingHorizontal: 15, paddingTop: 3 }}
-                name="ios-close-circle"
-                size={33}
-                color="#8E90F0"
-              />
-            </TouchableOpacity>
+            {back && (
+              <TouchableOpacity
+                style={{
+                  position: 'absolute',
+                  left: -2,
+                  top: -4,
+                  zIndex: 10,
+                  padding: 5
+                }}
+                onPress={() => this.props.removeAllFilters()}
+              >
+                <Ionicons
+                  style={{ paddingHorizontal: 10, paddingTop: 3 }}
+                  name="ios-arrow-back"
+                  size={33}
+                  color="#8E90F0"
+                />
+              </TouchableOpacity>
+            )}
+            {!back && (
+              <TouchableOpacity
+                style={{
+                  position: 'absolute',
+                  left: -5,
+                  top: -4,
+                  zIndex: 10,
+                  padding: 5,
+                  flexDirection: 'row'
+                }}
+                onPress={() => this.props.removeAllCategoryFilters()}
+              >
+                <Ionicons
+                  style={{ paddingHorizontal: 10, paddingTop: 3 }}
+                  name="ios-close-circle"
+                  size={33}
+                  color="#8E90F0"
+                />
+                <Text
+                  style={{
+                    top: 10,
+                    left: -5,
+                    color: '#7678ED',
+                    fontSize: 15
+                  }}
+                >
+                  Filters
+                </Text>
+              </TouchableOpacity>
+            )}
             <View
               style={{
                 flex: 1,
@@ -175,7 +212,7 @@ class CategoriesScroll extends React.Component<any, any> {
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 22,
                   fontFamily: 'cairo-regular',
                   color: '#7678ED',
                   paddingHorizontal: 15
@@ -184,18 +221,31 @@ class CategoriesScroll extends React.Component<any, any> {
                 {categoryName.name}
               </Text>
             </View>
+
             <TouchableOpacity
               style={{
                 position: 'absolute',
                 right: -5,
                 top: -4,
                 zIndex: 10,
-                padding: 5
+                padding: 5,
+                flexDirection: 'row',
+                justifyContent: 'flex-end'
               }}
               onPress={() => null}
             >
+              <FilterSelect
+                isRTL={isRTL}
+                data={sortData}
+                sort={true}
+                itemKind="sortType"
+                addFilter={addFilter}
+                removeFilter={removeFilter}
+                rest={rest}
+                words={words}
+              />
               <Ionicons
-                style={{ paddingHorizontal: 15, paddingTop: 3 }}
+                style={{ paddingRight: 10, paddingTop: 3 }}
                 name="ios-funnel"
                 size={30}
                 color="#8E90F0"

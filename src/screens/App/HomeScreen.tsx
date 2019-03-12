@@ -260,6 +260,12 @@ class HomeScreen extends React.Component<any, any> {
       rest: {}
     });
   };
+  removeAllCategoryFilters = () => {
+    const newrest = { categoryId: this.state.rest.categoryId };
+    this.setState({
+      rest: newrest
+    });
+  };
   selectePost = (post: any, word: any, lang: any, isRTL: any) => {
     this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
   };
@@ -376,6 +382,7 @@ class HomeScreen extends React.Component<any, any> {
             addFilter={this.addFilter}
             removeFilter={this.removeFilter}
             removeAllFilters={this.removeAllFilters}
+            removeAllCategoryFilters={this.removeAllCategoryFilters}
             navigation={this.props.navigation}
             rest={this.state.rest}
           />
