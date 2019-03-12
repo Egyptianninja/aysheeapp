@@ -136,6 +136,9 @@ class CategoriesScroll extends React.Component<any, any> {
     const allbtnactive = !(rest.categoryId || rest.categoryId === 0);
     const selected =
       this.props.currentCategory || this.props.currentCategory === 0;
+    const categoryName = categories.filter(
+      (cat: any) => cat.id === rest.categoryId
+    )[0];
     return (
       <View style={{ width: '100%' }}>
         {selected && (
@@ -148,7 +151,11 @@ class CategoriesScroll extends React.Component<any, any> {
           >
             <TouchableOpacity
               style={{
-                width: 55
+                position: 'absolute',
+                left: -5,
+                top: -4,
+                zIndex: 10,
+                padding: 5
               }}
               onPress={() => this.props.removeAllFilters()}
             >
@@ -159,27 +166,41 @@ class CategoriesScroll extends React.Component<any, any> {
                 color="#8E90F0"
               />
             </TouchableOpacity>
-            <Text
+            <View
               style={{
-                fontSize: 18,
-                fontFamily: 'cairo-regular',
-                color: '#7678ED',
-                paddingHorizontal: 15
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              جوالات
-            </Text>
-            {/* <Text
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontFamily: 'cairo-regular',
+                  color: '#7678ED',
+                  paddingHorizontal: 15
+                }}
+              >
+                {categoryName.name}
+              </Text>
+            </View>
+            <TouchableOpacity
               style={{
-                padding: 5,
-                fontSize: 14,
-                paddingRight: 10,
-                fontFamily: 'cairo-regular',
-                color: '#777'
+                position: 'absolute',
+                right: -5,
+                top: -4,
+                zIndex: 10,
+                padding: 5
               }}
+              onPress={() => null}
             >
-              فلاتر
-            </Text> */}
+              <Ionicons
+                style={{ paddingHorizontal: 15, paddingTop: 3 }}
+                name="ios-funnel"
+                size={30}
+                color="#8E90F0"
+              />
+            </TouchableOpacity>
           </View>
         )}
         <View

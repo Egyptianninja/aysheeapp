@@ -21,7 +21,8 @@ const Logo = ({ size = 150 }) => (
         style={{
           flex: 1,
           width: '100%',
-          height: '100%'
+          height: '100%',
+          tintColor: '#7678ED'
         }}
         source={images.namelogofull}
       />

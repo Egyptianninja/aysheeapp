@@ -48,7 +48,7 @@ export default class OffersScreen extends Component<any, any> {
   renderShopOffers = (data: any) => {
     const { _id, name, avatar, color, offers, about } = data;
     const lang = getLang();
-    const readyOffers = readyUserPosts(offers, 400, 79, lang);
+    const readyOffers = readyUserPosts(offers, 1080, 79, lang);
     return (
       <View
         key={_id}

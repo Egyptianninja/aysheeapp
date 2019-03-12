@@ -2,16 +2,7 @@ import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../../utils';
-const BottonNew = ({
-  isRTL,
-  scrollView,
-  removeAllFilters,
-  navigation,
-  title,
-  allbtnactive,
-  isAuthenticated,
-  showCategoriesModal
-}: any) => (
+const BottonNew = ({ showCategoriesModal }: any) => (
   <View
     style={{
       justifyContent: 'center',
@@ -27,9 +18,9 @@ const BottonNew = ({
         alignItems: 'center',
         alignSelf: 'center',
         backgroundColor: '#fff',
-        height: 60,
-        width: 60,
-        borderRadius: 30,
+        height: 58,
+        width: 58,
+        borderRadius: 29,
         borderColor: '#7678ED',
         borderWidth: 2,
         shadowOffset: { width: 3, height: 3 },
@@ -46,10 +37,15 @@ const BottonNew = ({
           width: 52,
           borderRadius: 26,
           overflow: 'hidden',
-          backgroundColor: '#7678ED'
+          backgroundColor: '#fff'
         }}
       >
-        <Ionicons name="ios-keypad" size={34} color="#fff" style={{ top: 1 }} />
+        <Ionicons
+          name="ios-keypad"
+          size={34}
+          color="#7678ED"
+          style={{ top: 1 }}
+        />
       </View>
     </TouchableOpacity>
     <View style={styles.textView}>

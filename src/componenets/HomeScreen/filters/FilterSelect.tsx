@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { FilterOption } from './FilterOption';
-import { FilterIcon } from './FilterIcon';
+// import { FilterIcon } from './FilterIcon';
 import { icons } from '../../../load';
 import { Platform } from 'expo-core';
 import { Ionicons } from '@expo/vector-icons';
@@ -108,10 +108,10 @@ export default class FilterSelect extends React.Component<any, any> {
     const { rest, itemKind, isRTL } = this.props;
     const selected =
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
-    const selectedLable =
-      selected && rest[itemKind] !== false && rest[itemKind] !== true;
+    // const selectedLable =
+    //   selected && rest[itemKind] !== false && rest[itemKind] !== true;
     const iconFunc = icons.filterIcons.filter(ic => ic.id === itemKind);
-    const icon = iconFunc[0].icon();
+    // const icon = iconFunc[0].icon();
     return (
       <View>
         <TouchableOpacity
@@ -119,7 +119,7 @@ export default class FilterSelect extends React.Component<any, any> {
             flexDirection:
               isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
             padding: 5,
-            height: 36,
+            height: 38,
             minWidth: 65,
             borderRadius: 18,
             marginHorizontal: 5,
@@ -138,7 +138,7 @@ export default class FilterSelect extends React.Component<any, any> {
           }}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
-          <View
+          {/* <View
             style={{
               paddingHorizontal: 5
             }}
@@ -148,7 +148,7 @@ export default class FilterSelect extends React.Component<any, any> {
               size={16}
               color={selected ? '#7678ED' : '#555'}
             />
-          </View>
+          </View> */}
           <Text
             style={{
               color: selected
@@ -156,9 +156,10 @@ export default class FilterSelect extends React.Component<any, any> {
                 : this.props.disable
                 ? '#aaa'
                 : '#555',
-              fontSize: 14,
+              fontSize: 15,
               fontWeight: selected ? 'bold' : '300',
-              fontFamily: 'cairo-regular'
+              fontFamily: 'cairo-regular',
+              paddingLeft: 5
             }}
           >
             {selected

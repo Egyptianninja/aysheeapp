@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Modal from 'react-native-modal';
 import { Input, Button, Group, RadioButton, CheckBox, Title } from '../../lib';
-import { UserLocation } from '../../utils';
+import { UserLocation, isArabic } from '../../utils';
 const { width } = Dimensions.get('window');
 
 export default class Edit extends React.Component<any, any> {
@@ -50,6 +50,8 @@ export default class Edit extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const {
       price,
+      title,
+      body,
       phone,
       isnew,
       issale,
@@ -72,6 +74,7 @@ export default class Edit extends React.Component<any, any> {
       salary,
       location
     } = values;
+    const isrtl = isArabic(title);
     const loc: any = location ? this.state.location : null;
     let trueLocation = values.trueLocation;
     if (loc) {
@@ -83,6 +86,9 @@ export default class Edit extends React.Component<any, any> {
     const res = await this.props.editClassifieds({
       variables: {
         postId: this.props.post.id,
+        title,
+        body,
+        isrtl,
         price: price ? Number(price) : undefined,
         phone: phone ? phone : undefined,
         trueLocation: trueLocation ? trueLocation : undefined,
@@ -155,6 +161,11 @@ export default class Edit extends React.Component<any, any> {
           <ScrollView>
             <Formik
               initialValues={{
+                title: post.title,
+                body: post.body,
+                start: post.start,
+                end: post.end,
+                photos: post.photos,
                 price: post.price ? post.price.toString() : post.price,
                 currency: post.currency,
                 phone: post.phone,
@@ -191,7 +202,14 @@ export default class Edit extends React.Component<any, any> {
                 location: false
               }}
               onSubmit={this.handleSubmit}
-              validationSchema={Yup.object().shape({})}
+              validationSchema={Yup.object().shape({
+                title: Yup.string()
+                  .max(100)
+                  .required('Required'),
+                body: Yup.string()
+                  .max(1000)
+                  .required('Required')
+              })}
               render={({
                 values,
                 handleSubmit,
@@ -206,6 +224,37 @@ export default class Edit extends React.Component<any, any> {
                   <Title>
                     <Text>{word.editadd}</Text>
                   </Title>
+                  <Input
+                    rtl={isRTL}
+                    name="title"
+                    label={word.title}
+                    value={values.title}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.title && errors.title}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    height={40}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    name="body"
+                    label={word.body}
+                    value={values.body}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.body && errors.body}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    multiline={true}
+                    height={100}
+                  />
                   {!this.noPrice.includes(categoryId) && (
                     <Input
                       rtl={isRTL}

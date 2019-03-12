@@ -124,13 +124,13 @@ class Drawer extends React.Component<any, any> {
               <Ionicons
                 name={icon}
                 size={33}
-                color="#555"
+                color="#777"
                 style={{ marginHorizontal: 5 }}
               />
             </View>
             <Text
               style={{
-                color: '#555',
+                color: '#171717',
                 fontSize: 16,
                 fontFamily: lng === 'ar' ? 'cairo-light' : 'comfortaa-Regular'
               }}
@@ -206,17 +206,18 @@ class Drawer extends React.Component<any, any> {
         <View
           style={{
             width: 150,
-            height: 150,
-            shadowOffset: { width: 3, height: 3 },
-            shadowColor: '#000',
-            shadowOpacity: 0.5
+            height: 150
+            // shadowOffset: { width: 3, height: 3 },
+            // shadowColor: '#000',
+            // shadowOpacity: 0.5
           }}
         >
           <Image
             style={{
               flex: 1,
               width: '100%',
-              height: '100%'
+              height: '100%',
+              tintColor: '#7678ED'
             }}
             source={images.namelogowhite}
           />
