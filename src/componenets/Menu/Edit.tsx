@@ -8,7 +8,8 @@ import {
   ScrollView,
   Text,
   TouchableWithoutFeedback,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -212,6 +213,67 @@ export default class Edit extends React.Component<any, any> {
     });
     return { name: period };
   };
+
+  renderHeader = (title: any) => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          width: width - 60,
+          height: 50,
+          backgroundColor: '#ddd',
+          paddingHorizontal: 10,
+          alignSelf: 'center'
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => this.props.hideEditModal()}
+          style={{
+            position: 'absolute',
+            top: 8,
+            left: 10,
+            zIndex: 10,
+            width: 32,
+            height: 32,
+            borderRadius: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+          }}
+        >
+          <Text
+            style={{
+              color: '#777',
+              textAlign: 'center',
+              fontFamily: 'cairo-regular',
+              fontSize: 18
+            }}
+          >
+            ⤬
+          </Text>
+        </TouchableOpacity>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Text
+            style={{
+              color: '#777',
+              textAlign: 'center',
+              fontFamily: 'cairo-regular',
+              fontSize: 18
+            }}
+          >
+            {title}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   render() {
     const { word, isRTL, post } = this.props;
     const { categoryId } = post;
@@ -314,9 +376,7 @@ export default class Edit extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  {/* <Title>
-                    <Text>{word.editadd}</Text>
-                  </Title> */}
+                  {this.renderHeader(word.editadd)}
 
                   <Input
                     rtl={isRTL}
