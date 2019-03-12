@@ -40,7 +40,7 @@ class HomeHeader extends React.Component<any, any> {
           style={[
             styles.leftIconView,
             {
-              flex: 3,
+              flex: this.props.isAuthenticated ? 3 : 1.5,
               flexDirection: this.ardroid ? 'row-reverse' : 'row',
               justifyContent: 'flex-start'
             }
@@ -81,10 +81,10 @@ class HomeHeader extends React.Component<any, any> {
                 this.props.navigation.navigate('NotificationsScreen');
               }}
               style={{
-                paddingHorizontal: 5,
+                paddingHorizontal: 7,
                 marginLeft: 2,
                 paddingVertical: 7,
-                paddingRight: 10
+                paddingRight: 5
               }}
             >
               <Ionicons
@@ -100,7 +100,7 @@ class HomeHeader extends React.Component<any, any> {
           style={[
             styles.searchView,
             {
-              flex: 11,
+              flex: 12,
               flexDirection: this.ardroid ? 'row-reverse' : 'row'
             }
           ]}
@@ -117,7 +117,7 @@ class HomeHeader extends React.Component<any, any> {
             <React.Fragment>
               <View
                 style={{
-                  flex: 9.5,
+                  flex: 12,
                   justifyContent: 'center',
                   alignItems: 'center'
                 }}
@@ -144,7 +144,7 @@ class HomeHeader extends React.Component<any, any> {
                   flex: 1.5,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  paddingVertical: 8,
+                  paddingVertical: 9,
                   paddingLeft: 6,
                   paddingHorizontal: 8
                 }}
@@ -152,7 +152,7 @@ class HomeHeader extends React.Component<any, any> {
                 <Ionicons
                   style={{ color: '#fff' }}
                   name="ios-search"
-                  size={28}
+                  size={26}
                 />
               </TouchableOpacity>
             </React.Fragment>

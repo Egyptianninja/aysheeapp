@@ -220,7 +220,12 @@ class CategoriesScroll extends React.Component<any, any> {
             }}
           >
             {!selected && (
-              <View style={{ flexDirection: 'row-reverse' }}>
+              <View
+                style={{
+                  flexDirection:
+                    isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
+                }}
+              >
                 <OfferIcon
                   navigation={this.props.navigation}
                   title="اهم العروض"

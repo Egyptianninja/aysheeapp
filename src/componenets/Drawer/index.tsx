@@ -234,9 +234,8 @@ class Drawer extends React.Component<any, any> {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: '#fff'
+          backgroundColor: '#F2F2FD'
         }}
-        // forceInset={{ top: 'always', horizontal: 'never' }}
       >
         <ScrollView style={{ flex: 2 }} scrollEventThrottle={60}>
           {!this.props.isAuthenticated && this.nunLogedHeader()}
