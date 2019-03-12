@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
@@ -8,7 +9,8 @@ import {
   KeyboardAvoidingView,
   Text,
   TouchableWithoutFeedback,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -152,6 +154,12 @@ class CodeScreen extends React.Component<any, any> {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <TouchableOpacity
+            style={{ position: 'absolute', left: 20, top: 30, zIndex: 150 }}
+            onPress={() => this.props.navigation.navigate('App')}
+          >
+            <Ionicons name="ios-arrow-back" size={30} color="#555" />
+          </TouchableOpacity>
           <KeyboardAvoidingView
             style={{
               flex: 1,
@@ -181,7 +189,7 @@ class CodeScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Logo />
+                  <Logo size={120} />
 
                   <Text
                     style={{ fontSize: 24, color: '#555', fontWeight: '200' }}
@@ -244,7 +252,6 @@ class CodeScreen extends React.Component<any, any> {
                 <CountDownTimer
                   counter={this.state.codeInterval}
                   cb={this.counterCodeCllBack}
-                  small={true}
                 />
               </View>
               <View

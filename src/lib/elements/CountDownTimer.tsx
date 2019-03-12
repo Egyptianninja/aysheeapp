@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View, Text } from "react-native";
-import { getSecondsDistance } from "../../utils";
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { getSecondsDistance } from '../../utils';
 
 class CountDownTimer extends React.Component<any, any> {
   intervalId: any;
@@ -50,69 +50,57 @@ class CountDownTimer extends React.Component<any, any> {
 
   render() {
     const { days, hours, minutes, seconds } = this.state.date;
-    const { small } = this.props;
+    const { size = 16 } = this.props;
     if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
       return <View />;
     }
     let chours;
     if (this.state.date.days === 0 && this.state.date.days === 0) {
-      chours = ("0" + this.state.date.hours).slice(-2);
+      chours = ('0' + this.state.date.hours).slice(-2);
     }
-    const cminutes = ("0" + this.state.date.minutes).slice(-2);
-    const cseconds = ("0" + this.state.date.seconds).slice(-2);
+    const cminutes = ('0' + this.state.date.minutes).slice(-2);
+    const cseconds = ('0' + this.state.date.seconds).slice(-2);
 
     return (
       <View
         style={{
           flex: 1,
-          marginTop: small ? 0 : 80,
-          justifyContent: "center",
-          alignItems: "center"
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
-        {/* {!small && (
-          <Text
-            style={{
-              color: "#aaa",
-              fontSize: small ? 12 : 24,
-              fontWeight: "200"
-            }}
-          >
-            Remaining Time
-          </Text>
-        )} */}
         <View
           style={{
             flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
             padding: 10
           }}
         >
           <Text
             style={{
-              color: "#999",
-              fontSize: small ? 16 : 48,
-              fontWeight: "200"
+              color: '#999',
+              fontSize: size,
+              fontWeight: '200'
             }}
           >
             {chours}:
           </Text>
           <Text
             style={{
-              color: "#999",
-              fontSize: small ? 16 : 48,
-              fontWeight: "200"
+              color: '#999',
+              fontSize: size,
+              fontWeight: '200'
             }}
           >
             {cminutes}:
           </Text>
           <Text
             style={{
-              color: "#999",
-              fontSize: small ? 16 : 48,
-              fontWeight: "200"
+              color: '#999',
+              fontSize: size,
+              fontWeight: '200'
             }}
           >
             {cseconds}

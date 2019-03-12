@@ -157,30 +157,26 @@ class PhoneScreen extends React.Component<any, any> {
             style={{ position: 'absolute', left: 20, top: 30, zIndex: 150 }}
             onPress={() => this.props.navigation.navigate('App')}
           >
-            <Ionicons
-              name="ios-arrow-back"
-              size={30}
-              color="#777"
-              style={{ margin: 20 }}
-            />
+            <Ionicons name="ios-arrow-back" size={30} color="#555" />
           </TouchableOpacity>
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 2 }}>
             <CountDownTimer
               counter={this.state.interval}
               cb={this.counterCllBack}
+              size={32}
             />
           </View>
 
           <KeyboardAvoidingView
             style={{
-              flex: 3,
+              flex: 5,
               justifyContent: 'center',
               alignItems: 'center'
             }}
             behavior="padding"
             enabled
           >
-            <Logo />
+            <Logo size={120} />
 
             <Formik
               initialValues={{

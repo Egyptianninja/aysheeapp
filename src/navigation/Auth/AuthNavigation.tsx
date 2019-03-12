@@ -12,13 +12,13 @@ export const AuthStackNavigator = createStackNavigator({
   CodeScreen: {
     screen: CodeScreen,
     navigationOptions: ({ navigation }: any) => ({
-      headerTintColor: '#555'
+      header: null
     })
   },
   NameScreen: {
     screen: NameScreen,
     navigationOptions: ({ navigation }: any) => ({
-      headerTintColor: '#555'
+      header: null
     })
   }
 });
