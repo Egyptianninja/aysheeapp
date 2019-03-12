@@ -8,7 +8,7 @@ export default class DotIndicatorSmall extends React.PureComponent<any, any> {
   static defaultProps = {
     animationEasing: Easing.inOut(Easing.ease),
 
-    color: 'rgb(0, 0, 0)',
+    color: '#7678ED',
     count: 4,
     size: 16
   };
@@ -27,14 +27,15 @@ export default class DotIndicatorSmall extends React.PureComponent<any, any> {
   }
 
   renderComponent({ index, count, progress }: any) {
-    const { size, colors }: any = this.props;
+    const { size, color }: any = this.props;
 
     const style = {
       width: size,
       height: size,
       margin: size / 2,
       borderRadius: size / 2,
-      backgroundColor: colors[index],
+      backgroundColor: color,
+      // backgroundColor: colors[index],
       transform: [
         {
           scale: progress.interpolate({
