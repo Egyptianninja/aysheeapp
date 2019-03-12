@@ -14,7 +14,7 @@ export const User = ({ name, avatar, about, navigation, user }: any) => {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         margin: 10,
-        paddingTop: 20
+        paddingTop: 10
       }}
     >
       <View

@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import {
   Dimensions,
-  ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  FlatList
 } from 'react-native';
 import { Loading, Noresult } from '../../componenets';
 import {
@@ -20,7 +20,7 @@ import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
 import { Carousel, getLang, readyUserPosts } from '../../utils';
 
 const HEIGHT = Dimensions.get('window').height;
-const FIRST_ITEM = 1;
+const FIRST_ITEM = 0;
 
 export default class OffersScreen extends Component<any, any> {
   static navigationOptions = { header: null };
@@ -28,7 +28,8 @@ export default class OffersScreen extends Component<any, any> {
     super(props);
     this.state = {
       slider1ActiveSlide: FIRST_ITEM,
-      slider1Ref: null
+      slider1Ref: null,
+      refreshing: false
     };
   }
 
@@ -126,23 +127,26 @@ export default class OffersScreen extends Component<any, any> {
             }
 
             return (
-              <ScrollView
+              <FlatList
+                data={shops}
                 style={styles.scrollview}
                 contentContainerStyle={styles.scrollviewContentContainer}
                 indicatorStyle={'white'}
                 scrollEventThrottle={16}
                 decelerationRate={0}
-                snapToInterval={HEIGHT - 110}
+                snapToInterval={HEIGHT - 55}
                 snapToAlignment={'start'}
                 showsVerticalScrollIndicator={false}
                 directionalLockEnabled={true}
-                // onRefresh={() => refetch()}
-                // refreshing={this.state.refreshing}
+                renderItem={({ item }: any) => this.renderShopOffers(item)}
+                keyExtractor={(item: any) => item._id}
+                onRefresh={() => refetch()}
+                refreshing={this.state.refreshing}
               >
                 {shops.map((shop: any) => {
                   return this.renderShopOffers(shop);
                 })}
-              </ScrollView>
+              </FlatList>
             );
           }}
         </Query>

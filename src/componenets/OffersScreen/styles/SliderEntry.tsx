@@ -10,9 +10,10 @@ function wp(percentage: any) {
   return Math.round(value);
 }
 
-const slideHeight = viewportHeight * 0.7;
-const slideWidth = wp(75);
-const itemHorizontalMargin = wp(1);
+const slideHeight = viewportHeight * 0.8;
+const slideWidth = wp(85);
+const itemHorizontalMargin = 1;
+// const itemHorizontalMargin = wp(1);
 
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
@@ -37,7 +38,8 @@ export default StyleSheet.create({
   },
   image: {
     ...StyleSheet.absoluteFillObject,
-    resizeMode: 'contain',
+    // resizeMode: 'contain',
+    resizeMode: 'cover',
     borderRadius: Platform.OS === 'ios' ? entryBorderRadius : 0,
     borderTopLeftRadius: entryBorderRadius,
     borderTopRightRadius: entryBorderRadius

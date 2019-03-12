@@ -23,10 +23,10 @@ export default StyleSheet.create({
     flex: 1
   },
   scrollviewContentContainer: {
-    paddingBottom: 110
+    paddingBottom: 55
   },
   exampleContainer: {
-    height: HEIGHT - 110
+    height: HEIGHT - 55
   },
   title: {
     paddingHorizontal: 30,
