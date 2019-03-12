@@ -165,7 +165,8 @@ export const AppStackNavigator = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#7678ED'
+        backgroundColor: '#7678ED',
+        height: 40
       },
       headerTintColor: '#fff',
       headerTitleStyle: {

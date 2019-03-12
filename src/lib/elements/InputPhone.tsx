@@ -51,7 +51,7 @@ class InputPhone extends React.PureComponent<any, any> {
             placeholder="1234567890"
             placeholderTextColor="#eee"
             onBlur={this.handleTouch}
-            // autoFocus
+            autoFocus
             style={[
               {
                 width: 200,

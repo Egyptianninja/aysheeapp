@@ -23,8 +23,6 @@ class HomeHeader extends React.Component<any, any> {
     this.setState({ isSearch: false });
   };
   render() {
-    console.log(typeof this.props.query);
-
     return (
       <View
         style={[

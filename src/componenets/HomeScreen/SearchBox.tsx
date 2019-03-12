@@ -6,9 +6,13 @@ import { setQuery, delQuery } from '../../store/actions/postActions';
 import { StyleSheet, isArabic } from '../../utils';
 
 class SearchBox extends React.Component<any, any> {
+  searchInput: any;
   state = {
     query: ''
   };
+  componentDidMount() {
+    this.searchInput.focus();
+  }
   render() {
     const { query } = this.props;
     const q = query !== '' ? query : this.state.query;
@@ -31,9 +35,9 @@ class SearchBox extends React.Component<any, any> {
             }}
           >
             <Ionicons
-              style={{ left: -14, top: -2 }}
+              style={{ left: -13, top: -1 }}
               name="ios-close-circle"
-              size={33}
+              size={31}
               color="#8E90F0"
             />
           </TouchableOpacity>
@@ -46,6 +50,9 @@ class SearchBox extends React.Component<any, any> {
               writingDirection: rtl ? 'rtl' : 'ltr'
             }
           ]}
+          ref={input => {
+            this.searchInput = input;
+          }}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
           autoCorrect={false}
