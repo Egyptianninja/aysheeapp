@@ -29,29 +29,13 @@ class SearchBox extends React.Component<any, any> {
               this.props.delQuery();
               this.setState({ query: '' });
             }}
-            style={{
-              position: 'absolute',
-              width: 26,
-              height: 26,
-              borderRadius: 13,
-              left: 20,
-              top: 2,
-              justifyContent: 'center',
-              alignItems: 'center',
-              zIndex: 200
-            }}
           >
-            <Text
-              style={{
-                fontSize: 20,
-                color: '#fff',
-                fontWeight: 'bold',
-                left: 1,
-                bottom: 1
-              }}
-            >
-              ✕
-            </Text>
+            <Ionicons
+              style={{ left: -14, top: -2 }}
+              name="ios-close-circle"
+              size={33}
+              color="#8E90F0"
+            />
           </TouchableOpacity>
         )}
         <TextInput
@@ -81,7 +65,9 @@ class SearchBox extends React.Component<any, any> {
             this.props.setQuery(this.state.query);
           }}
         />
-        <TouchableOpacity onPress={() => this.props.hideSearch()}>
+        <TouchableOpacity
+          onPress={() => (query !== '' ? null : this.props.hideSearch())}
+        >
           <Ionicons
             style={[styles.icon, { color: '#7678ED' }]}
             name="ios-search"
@@ -96,13 +82,13 @@ class SearchBox extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: '100%',
     height: 32,
     borderRadius: 16,
     paddingLeft: 15,
     borderWidth: 1,
     opacity: 0.8,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   input: {
     flex: 1,
@@ -112,8 +98,7 @@ const styles = StyleSheet.create({
     height: 26
   },
   queryinput: {
-    flex: 1,
-    backgroundColor: '#9C949A',
+    backgroundColor: '#aaa',
     color: '#fff',
     borderRadius: 13,
     paddingHorizontal: 10

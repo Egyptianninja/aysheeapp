@@ -23,6 +23,8 @@ class HomeHeader extends React.Component<any, any> {
     this.setState({ isSearch: false });
   };
   render() {
+    console.log(typeof this.props.query);
+
     return (
       <View
         style={[
@@ -104,15 +106,15 @@ class HomeHeader extends React.Component<any, any> {
             }
           ]}
         >
-          {this.state.isSearch && (
-            <View style={{ flex: 1, paddingHorizontal: 10 }}>
+          {(this.props.query !== '' || this.state.isSearch) && (
+            <View style={{ flex: 1, paddingRight: 10 }}>
               <SearchBox
                 navigation={this.props.navigation}
                 hideSearch={this.hideSearch}
               />
             </View>
           )}
-          {!this.state.isSearch && (
+          {!this.state.isSearch && this.props.query === '' && (
             <React.Fragment>
               <View
                 style={{
@@ -215,7 +217,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: any) => ({
   words: state.glob.language.words,
   lang: state.glob.languageName,
-  isAuthenticated: state.user.isAuthenticated
+  isAuthenticated: state.user.isAuthenticated,
+  query: state.post.query
 });
 
 export default connect(mapStateToProps)(HomeHeader);
