@@ -2,7 +2,12 @@ import { Platform } from 'expo-core';
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { Dimensions, KeyboardAvoidingView, ScrollView, View } from 'react-native';
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+  View
+} from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -10,9 +15,26 @@ import PhotoView from '../../../componenets/Add/PhotoView';
 import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import { Button, CheckBox, Group, Input, RadioButton, Select, Title } from '../../../lib';
+import {
+  Button,
+  CheckBox,
+  Group,
+  Input,
+  RadioButton,
+  Select,
+  Title
+} from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
-import { getCurrency, getPureNumber, isArabic, Message, registerForPushNotificationsAsync, StyleSheet, uploadPhotos, UserLocation } from '../../../utils';
+import {
+  getCurrency,
+  getPureNumber,
+  isArabic,
+  Message,
+  registerForPushNotificationsAsync,
+  StyleSheet,
+  uploadPhotos,
+  UserLocation
+} from '../../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -514,7 +536,7 @@ class AddCarScreen extends React.Component<any, any> {
                   )}
                   <Button
                     isRTL={isRTL}
-                    background="#272727"
+                    background="#7678ED"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.submit}

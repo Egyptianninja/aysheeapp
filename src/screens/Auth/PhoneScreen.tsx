@@ -217,7 +217,7 @@ class PhoneScreen extends React.Component<any, any> {
                     countryCode={this.props.code}
                   />
                   <Button
-                    background="#272727"
+                    background="#7678ED"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={words.send}

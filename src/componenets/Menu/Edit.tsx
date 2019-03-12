@@ -1,11 +1,35 @@
 import * as React from 'react';
-import { View, Dimensions, StyleSheet, ScrollView, Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+import {
+  View,
+  Dimensions,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableWithoutFeedback,
+  Image
+} from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Modal from 'react-native-modal';
-import { Input, Button, Group, RadioButton, CheckBox, Title } from '../../lib';
-import { UserLocation, isArabic } from '../../utils';
-const { width } = Dimensions.get('window');
+import {
+  Input,
+  Button,
+  Group,
+  RadioButton,
+  CheckBox,
+  Title,
+  SelectDate
+} from '../../lib';
+import {
+  UserLocation,
+  isArabic,
+  pickImageWithoutUpload,
+  uploadPickedImage
+} from '../../utils';
+import { Permissions } from 'expo';
+const { width, height } = Dimensions.get('window');
 
 export default class Edit extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -39,7 +63,8 @@ export default class Edit extends React.Component<any, any> {
     super(props);
     this.state = {
       isEditModalVisible: false,
-      location: null
+      location: null,
+      image: null
     };
   }
 
@@ -47,11 +72,30 @@ export default class Edit extends React.Component<any, any> {
     this.setState({ location });
   };
 
+  onPhotoUpload = async () => {
+    const permissions = Permissions.CAMERA_ROLL;
+    const { status: existingStatus } = await Permissions.getAsync(permissions);
+    let finalStatus = existingStatus;
+    if (finalStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(permissions);
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      return;
+    }
+    const image = await pickImageWithoutUpload(false);
+
+    if (image) {
+      this.setState({ image });
+    }
+  };
+
   handleSubmit = async (values: any, bag: any) => {
     const {
       price,
       title,
       body,
+      startend,
       phone,
       isnew,
       issale,
@@ -74,6 +118,9 @@ export default class Edit extends React.Component<any, any> {
       salary,
       location
     } = values;
+    const photo = this.state.image
+      ? await uploadPickedImage(this.state.image, 1080, 0.8)
+      : null;
     const isrtl = isArabic(title);
     const loc: any = location ? this.state.location : null;
     let trueLocation = values.trueLocation;
@@ -83,11 +130,22 @@ export default class Edit extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
+
+    const start = startend
+      ? new Date(Object.keys(startend.name[0])[0])
+      : undefined;
+    const end = startend
+      ? new Date(Object.keys(startend.name[startend.name.length - 1])[0])
+      : undefined;
+
     const res = await this.props.editClassifieds({
       variables: {
         postId: this.props.post.id,
         title,
         body,
+        start,
+        end,
+        photos: photo ? [photo] : undefined,
         isrtl,
         price: price ? Number(price) : undefined,
         phone: phone ? phone : undefined,
@@ -130,9 +188,45 @@ export default class Edit extends React.Component<any, any> {
     bag.setSubmitting(false);
   };
 
+  getDaysArray = (s: any, e: any) => {
+    const a = [];
+    for (const d = s; d <= e; d.setDate(d.getDate() + 1)) {
+      a.push(new Date(d));
+    }
+    return a.map((v: any) => v.toISOString().slice(0, 10));
+  };
+
+  periodBuild = (post: any) => {
+    const prePeriod = this.getDaysArray(
+      new Date(post.start),
+      new Date(post.end)
+    );
+    const period = prePeriod.map((dy: any, i: number) => {
+      if (i === 0) {
+        return { [dy]: { startingDay: true, color: 'skyblue' } };
+      } else if (i === prePeriod.length - 1) {
+        return { [dy]: { endingDay: true, color: 'skyblue' } };
+      } else {
+        return { [dy]: { color: 'skyblue' } };
+      }
+    });
+    return { name: period };
+  };
   render() {
     const { word, isRTL, post } = this.props;
     const { categoryId } = post;
+    const image: any = this.state.image;
+    const period = post.isoffer ? this.periodBuild(post) : null;
+    const photo =
+      post.isoffer && post.photos.length > 0
+        ? {
+            uri: `http://res.cloudinary.com/arflon/image/upload/w_400/${post.photos[0].substring(
+              0,
+              20
+            )}`,
+            ratio: Number(post.photos[0].substring(21, 26))
+          }
+        : null;
     return (
       <Modal
         isVisible={this.state.isEditModalVisible}
@@ -142,7 +236,7 @@ export default class Edit extends React.Component<any, any> {
         animationIn="zoomInDown"
         animationOut="zoomOutUp"
         hideModalContentWhileAnimating={true}
-        style={{ flex: 1 }}
+        style={{ margin: 0 }}
       >
         <View
           style={{
@@ -151,9 +245,9 @@ export default class Edit extends React.Component<any, any> {
             position: 'absolute',
             bottom: 0,
             margin: 0,
-            height: 500,
+            height: height - 100,
             paddingTop: 10,
-            width: width - 40,
+            width,
             justifyContent: 'space-around',
             alignItems: 'center'
           }}
@@ -163,8 +257,7 @@ export default class Edit extends React.Component<any, any> {
               initialValues={{
                 title: post.title,
                 body: post.body,
-                start: post.start,
-                end: post.end,
+                startend: period,
                 photos: post.photos,
                 price: post.price ? post.price.toString() : post.price,
                 currency: post.currency,
@@ -221,9 +314,10 @@ export default class Edit extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Title>
+                  {/* <Title>
                     <Text>{word.editadd}</Text>
-                  </Title>
+                  </Title> */}
+
                   <Input
                     rtl={isRTL}
                     name="title"
@@ -255,7 +349,107 @@ export default class Edit extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
-                  {!this.noPrice.includes(categoryId) && (
+                  {post.isoffer && (
+                    <React.Fragment>
+                      {!image && !photo && (
+                        <React.Fragment>
+                          <Text
+                            style={[
+                              styles.labelStyle,
+                              { alignSelf: 'flex-end', paddingRight: 35 }
+                            ]}
+                          >
+                            اختيار صورة العرض
+                          </Text>
+                          <TouchableWithoutFeedback
+                            onPress={this.onPhotoUpload}
+                          >
+                            <View
+                              style={{
+                                width: width - 60,
+                                backgroundColor: '#eee',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginVertical: 10,
+                                height: 120,
+                                borderRadius: 8
+                              }}
+                            >
+                              <Ionicons
+                                name="ios-camera"
+                                size={46}
+                                color="#5658AD"
+                              />
+                            </View>
+                          </TouchableWithoutFeedback>
+                        </React.Fragment>
+                      )}
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'center'
+                        }}
+                      >
+                        {!image && photo && (
+                          <TouchableWithoutFeedback
+                            onPress={this.onPhotoUpload}
+                          >
+                            <Image
+                              source={{ uri: photo.uri }}
+                              style={{
+                                flex: 1,
+                                width: width - 60,
+                                height: photo.ratio * (width - 60),
+                                resizeMode: 'cover',
+                                borderRadius: 8
+                              }}
+                            />
+                          </TouchableWithoutFeedback>
+                        )}
+                        {image && (
+                          <TouchableWithoutFeedback
+                            onPress={this.onPhotoUpload}
+                          >
+                            <Image
+                              source={{ uri: image.uri }}
+                              style={{
+                                flex: 1,
+                                width: width - 60,
+                                height:
+                                  (image.height / image.width) * (width - 60),
+                                resizeMode: 'cover',
+                                borderRadius: 8
+                              }}
+                            />
+                          </TouchableWithoutFeedback>
+                        )}
+                      </View>
+
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: 'row',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          marginHorizontal: 30,
+                          borderBottomWidth: 1,
+                          borderBottomColor: '#bbb'
+                        }}
+                      >
+                        <SelectDate
+                          rtl={isRTL}
+                          name="startend"
+                          period={true}
+                          label="تحديد بداية و نهاية العرض"
+                          labelStyle={styles.labelStyle}
+                          value={values.startend}
+                          onChange={setFieldValue}
+                          iconName="ios-calendar"
+                        />
+                      </View>
+                    </React.Fragment>
+                  )}
+                  {!this.noPrice.includes(categoryId) && !post.isoffer && (
                     <Input
                       rtl={isRTL}
                       num
@@ -272,7 +466,7 @@ export default class Edit extends React.Component<any, any> {
                       height={40}
                     />
                   )}
-                  {this.acc.includes(categoryId) && (
+                  {this.acc.includes(categoryId) && !post.isoffer && (
                     <Group
                       color="#444"
                       size={24}
@@ -294,7 +488,7 @@ export default class Edit extends React.Component<any, any> {
                     </Group>
                   )}
 
-                  {this.serv.includes(categoryId) && (
+                  {this.serv.includes(categoryId) && !post.isoffer && (
                     <Group
                       color="#444"
                       size={24}
@@ -330,7 +524,7 @@ export default class Edit extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
-                  {!this.noNew.includes(categoryId) && (
+                  {!this.noNew.includes(categoryId) && !post.isoffer && (
                     <Group
                       color="#444"
                       size={24}
@@ -351,7 +545,7 @@ export default class Edit extends React.Component<any, any> {
                       />
                     </Group>
                   )}
-                  {!this.noSale.includes(categoryId) && (
+                  {!this.noSale.includes(categoryId) && !post.isoffer && (
                     <Group
                       color="#444"
                       size={24}
@@ -372,7 +566,7 @@ export default class Edit extends React.Component<any, any> {
                       />
                     </Group>
                   )}
-                  {!this.noWaranty.includes(categoryId) && (
+                  {!this.noWaranty.includes(categoryId) && !post.isoffer && (
                     <Group
                       color="#444"
                       size={24}
@@ -387,7 +581,7 @@ export default class Edit extends React.Component<any, any> {
                       />
                     </Group>
                   )}
-                  {this.re.includes(categoryId) && (
+                  {this.re.includes(categoryId) && !post.isoffer && (
                     <React.Fragment>
                       <Group
                         color="#444"
@@ -425,7 +619,7 @@ export default class Edit extends React.Component<any, any> {
                       />
                     </React.Fragment>
                   )}
-                  {this.car.includes(categoryId) && (
+                  {this.car.includes(categoryId) && !post.isoffer && (
                     <React.Fragment>
                       <Input
                         rtl={isRTL}
@@ -474,7 +668,7 @@ export default class Edit extends React.Component<any, any> {
                       />
                     </React.Fragment>
                   )}
-                  {this.job.includes(categoryId) && (
+                  {this.job.includes(categoryId) && !post.isoffer && (
                     <React.Fragment>
                       <Group
                         color="#444"
@@ -620,7 +814,7 @@ export default class Edit extends React.Component<any, any> {
                   >
                     <Button
                       isRTL={isRTL}
-                      background="#272727"
+                      background="#7678ED"
                       style={styles.btnStyle}
                       textStyle={styles.btnTextStyle}
                       title={word.submit}
@@ -657,7 +851,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 120,
+    width: width - 60,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
     writingDirection: 'auto',

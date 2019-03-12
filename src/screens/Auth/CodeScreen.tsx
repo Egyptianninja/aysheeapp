@@ -212,7 +212,7 @@ class CodeScreen extends React.Component<any, any> {
                   />
                   <View style={{ flexDirection: 'row' }}>
                     <Button
-                      background="#272727"
+                      background="#7678ED"
                       disabled={this.state.codeInterval > 0 ? true : false}
                       style={styles.btnStyle}
                       textStyle={styles.btnTextStyle}
@@ -221,7 +221,7 @@ class CodeScreen extends React.Component<any, any> {
                       loading={isSubmitting}
                     />
                     <Button
-                      background="#272727"
+                      background="#7678ED"
                       disabled={this.state.interval > 0 ? true : false}
                       style={styles.btnStyle}
                       textStyle={styles.btnTextStyle}

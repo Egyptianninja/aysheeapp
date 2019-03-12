@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { AvatarCircle, Loading } from '../../../componenets';
+import { AvatarCircle, Loading, Noresult } from '../../../componenets';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Edit, Menu, Report } from '../../../componenets/Menu';
 import deletePost from '../../../graphql/mutation/deletePost';
@@ -491,7 +491,7 @@ class ProfileScreen extends React.Component<any, any> {
               return <Loading />;
             }
             if (error) {
-              console.log(`Error!: ${error}`);
+              return <Noresult title="error" />;
             }
             const { posts } = data.getUserPosts;
             const rPosts = readyUserPosts(posts, 200, 79, lang);

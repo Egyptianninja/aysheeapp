@@ -314,7 +314,7 @@ class AddServiceScreen extends React.Component<any, any> {
                   )}
                   <Button
                     isRTL={isRTL}
-                    background="#272727"
+                    background="#7678ED"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.submit}

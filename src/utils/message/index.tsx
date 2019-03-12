@@ -47,7 +47,7 @@ const Message = ({
         <Ionicons
           name={icon}
           size={36}
-          color={iconColor ? iconColor : '#26A65B'}
+          color={iconColor ? iconColor : '#7678ED'}
         />
       </View>
       <View
@@ -84,7 +84,7 @@ const Message = ({
         )}
         {cancelbtnTitle && (
           <Button
-            background="#373737"
+            background="#7678ED"
             style={styles.btnStyle}
             textStyle={styles.btnTextStyle}
             title={cancelbtnTitle}

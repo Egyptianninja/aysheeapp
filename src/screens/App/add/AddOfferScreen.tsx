@@ -107,6 +107,8 @@ class AddServiceScreen extends React.Component<any, any> {
     const { title, body, startend, location, phone } = values;
     const isrtl = isArabic(title);
 
+    console.log(startend);
+
     const photo = this.state.image
       ? await uploadPickedImage(this.state.image, 1080, 0.8)
       : null;
@@ -343,7 +345,7 @@ class AddServiceScreen extends React.Component<any, any> {
 
                   <Button
                     isRTL={isRTL}
-                    background="#272727"
+                    background="#7678ED"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.submit}

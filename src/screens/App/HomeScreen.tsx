@@ -390,7 +390,7 @@ class HomeScreen extends React.Component<any, any> {
               return <HomeLoading categoryId={rest.categoryId} />;
             }
             if (error) {
-              return <Text>{error}</Text>;
+              return <Noresult title="error" />;
             }
             const postsQuery = data.getTimeLine.posts;
             if (postsQuery && postsQuery.length === 0) {
