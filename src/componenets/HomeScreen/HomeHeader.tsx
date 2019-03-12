@@ -53,14 +53,14 @@ class HomeHeader extends React.Component<any, any> {
               handleHome();
             }}
             style={{
-              marginLeft: 7,
-              marginTop: 1,
-              padding: 1
+              paddingHorizontal: 5,
+              paddingRight: 5,
+              paddingVertical: 4
             }}
           >
             <View
               style={{
-                width: 28,
+                width: 26,
                 height: 26
               }}
             >
@@ -82,8 +82,9 @@ class HomeHeader extends React.Component<any, any> {
               }}
               style={{
                 paddingHorizontal: 5,
-                marginLeft: 7,
-                marginTop: 5
+                marginLeft: 2,
+                paddingVertical: 7,
+                paddingRight: 10
               }}
             >
               <Ionicons
@@ -143,8 +144,9 @@ class HomeHeader extends React.Component<any, any> {
                   flex: 1.5,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  paddingTop: 4,
-                  paddingHorizontal: 5
+                  paddingVertical: 8,
+                  paddingLeft: 6,
+                  paddingHorizontal: 8
                 }}
               >
                 <Ionicons
@@ -161,14 +163,16 @@ class HomeHeader extends React.Component<any, any> {
             onPress={() => this.props.navigation.toggleDrawer()}
             style={{
               paddingHorizontal: 10,
+              paddingVertical: 15,
               justifyContent: 'center',
               alignItems: 'center',
-              marginRight: 10
+              marginRight: 10,
+              marginTop: 5
             }}
           >
             <View
               style={{
-                width: 30,
+                width: 28,
                 height: 20
               }}
             >

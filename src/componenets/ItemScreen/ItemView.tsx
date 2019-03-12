@@ -357,8 +357,8 @@ class ItemView extends React.Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: Constants.statusBarHeight + 6,
-            left: this.ardroid ? undefined : 10,
+            top: Constants.statusBarHeight + 3,
+            left: this.ardroid ? undefined : 8,
             right: this.ardroid ? 10 : undefined,
             zIndex: 860,
             width: 32,
@@ -388,7 +388,7 @@ class ItemView extends React.Component<any, any> {
               paddingTop: Constants.statusBarHeight,
               height: Constants.statusBarHeight + 40,
               justifyContent: 'space-between',
-              paddingHorizontal: 10,
+              // paddingHorizontal: 10,
               alignItems: 'center',
               zIndex: 850,
               shadowOffset: { width: 3, height: 3 },

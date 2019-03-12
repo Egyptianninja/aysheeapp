@@ -94,17 +94,17 @@ export default class OffersScreen extends Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: 30,
-            left: 15,
+            top: 25,
+            left: 0,
             zIndex: 100,
-            width: 60,
+            width: 40,
             height: 40,
-            paddingHorizontal: 20,
+            paddingHorizontal: 15,
             justifyContent: 'center',
             alignItems: 'center'
           }}
         >
-          <Ionicons name="ios-arrow-back" size={33} color="#ddd" />
+          <Ionicons name="ios-arrow-back" size={31} color="#ddd" />
         </TouchableOpacity>
 
         <Query

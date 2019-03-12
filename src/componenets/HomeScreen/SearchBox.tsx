@@ -56,8 +56,7 @@ class SearchBox extends React.Component<any, any> {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
           autoCorrect={false}
-          onFocus={this.props.onSearchSelect}
-          onEndEditing={this.props.onSearchUnSelect}
+          onBlur={this.props.hideSearch}
           value={query === '' ? this.state.query : query}
           onChangeText={e => {
             {

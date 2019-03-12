@@ -137,9 +137,10 @@ export const icons = {
   ],
 
   home: { id: 'home', icon: () => images.home },
-  mainmenu: { id: 'menu', icon: () => images.menu },
-  namelogo: { id: 'menu', icon: () => images.namelogo },
-  search: { id: 'menu', icon: () => images.search },
+  mainmenu: { id: 'mainmenu', icon: () => images.menu },
+  namelogo: { id: 'namelogo', icon: () => images.namelogo },
+  namelogowhite: { id: 'mainlogowhite', icon: () => images.namelogowhite },
+  search: { id: 'search', icon: () => images.search },
   itemmenuicon: { id: 'itemmenuicon', icon: () => images.itemmenuicon },
   itemmenuiconup: { id: 'itemmenuiconup', icon: () => images.itemmenuiconup },
 

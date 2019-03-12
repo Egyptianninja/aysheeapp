@@ -199,7 +199,7 @@ class Drawer extends React.Component<any, any> {
           alignItems: 'center',
           justifyContent: 'center',
           borderBottomWidth: 1,
-          borderBottomColor: '#aaa',
+          borderBottomColor: '#ddd',
           margin: 30
         }}
       >
@@ -207,7 +207,9 @@ class Drawer extends React.Component<any, any> {
           style={{
             width: 150,
             height: 150,
-            opacity: 0.4
+            shadowOffset: { width: 3, height: 3 },
+            shadowColor: '#000',
+            shadowOpacity: 0.5
           }}
         >
           <Image
@@ -216,7 +218,7 @@ class Drawer extends React.Component<any, any> {
               width: '100%',
               height: '100%'
             }}
-            source={images.namelogofull}
+            source={images.namelogowhite}
           />
         </View>
       </View>

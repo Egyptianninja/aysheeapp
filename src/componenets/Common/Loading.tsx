@@ -6,7 +6,8 @@ const Loading = () => {
     <DotIndicator
       count={3}
       size={10}
-      colors={['#7678ED', '#00B77C', '#E85255']}
+      // colors={['#7678ED', '#00B77C', '#E85255']}
+      // color="#7678ED"
     />
   );
 };

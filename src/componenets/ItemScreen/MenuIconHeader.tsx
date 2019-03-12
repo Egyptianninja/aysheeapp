@@ -10,7 +10,7 @@ export const MenuIconHeader = ({ showMenuModal, post }: any) => (
   >
     <View
       style={{
-        width: 10,
+        width: 25,
         height: 35,
         paddingVertical: 4
       }}

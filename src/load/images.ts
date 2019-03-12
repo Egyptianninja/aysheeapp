@@ -25,6 +25,7 @@ export const images = {
 
   namelogo: require('../../assets/icons/header/namelogo.png'),
   namelogofull: require('../../assets/icons/header/namelogofull.png'),
+  namelogowhite: require('../../assets/icons/header/namelogowhite.png'),
 
   itemmenuiconup: require('../../assets/icons/header/pointsv.png'),
   itemmenuicon: require('../../assets/icons/header/pointsh.png'),
