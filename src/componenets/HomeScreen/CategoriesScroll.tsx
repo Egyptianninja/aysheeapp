@@ -141,9 +141,6 @@ class CategoriesScroll extends React.Component<any, any> {
       (cat: any) => cat.id === rest.categoryId
     )[0];
     const back = Object.values(rest).length === 1;
-    console.log(rest);
-    console.log(Object.values(rest));
-
     return (
       <View style={{ width: '100%' }}>
         {selected && (

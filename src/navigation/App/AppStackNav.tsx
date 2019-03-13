@@ -146,19 +146,7 @@ export const AppStackNavigator = createStackNavigator(
     EditProfileScreen: {
       screen: EditProfileScreen,
       navigationOptions: ({ navigation }: any) => ({
-        headerBackTitle: null,
-        headerLeft: (
-          <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Ionicons
-                name="ios-arrow-back"
-                size={33}
-                style={styles.icon}
-                color="#000"
-              />
-            </TouchableOpacity>
-          </View>
-        )
+        headerBackTitle: null
       })
     }
   },

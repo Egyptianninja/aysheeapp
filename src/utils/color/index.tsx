@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
+const cube = width / 8;
 
 export default class ColorPicker extends React.Component<any, any> {
   static getContrastColor(hex: any) {
@@ -43,7 +44,8 @@ export default class ColorPicker extends React.Component<any, any> {
     }
     return (
       <Text
-        style={{ color: ColorPicker.getContrastColor(color), fontSize: 60 }}
+        // style={{ color: ColorPicker.getContrastColor(color), fontSize: 60 }}
+        style={{ color: '#fff', fontSize: 60 }}
         adjustsFontSizeToFit
       >
         ✔︎
@@ -107,11 +109,11 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 30,
-    height: 30,
-    marginHorizontal: 10,
-    marginVertical: 10,
-    borderRadius: 15,
+    width: cube,
+    height: cube,
+    marginHorizontal: 5,
+    marginVertical: 5,
+    borderRadius: 5,
     elevation: 5,
     shadowOffset: { width: 2, height: 2 },
     shadowColor: 'black',

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Animated } from 'react-native';
+import { Animated } from 'react-native';
 import { nameToColor } from '../../utils';
 
 export const Avatar = ({ name, size }: any) => {

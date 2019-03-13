@@ -194,7 +194,7 @@ class EditProfileScreen extends React.Component<any, any> {
               initialValues={{
                 name: user.name,
                 about: user.about,
-                color: user.color,
+                color: user.color ? user.color : colors[0],
                 email: user.email,
                 website: user.website,
                 addressCountry: user.addressCountry,
