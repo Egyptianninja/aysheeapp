@@ -6,18 +6,15 @@ import {
   Text,
   TouchableOpacity,
   View,
-  FlatList
+  FlatList,
+  StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Loading, Noresult } from '../../componenets';
-import {
-  SliderEntry,
-  styles,
-  OffersSlider
-} from '../../componenets/OffersScreen';
+import { OffersSlider } from '../../componenets/OffersScreen';
 import { User } from '../../componenets/User/User';
 import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
-import { getLang, readyUserPosts } from '../../utils';
+import { readyUserPosts } from '../../utils';
 
 const HEIGHT = Dimensions.get('window').height;
 
@@ -121,6 +118,39 @@ class OffersScreen extends Component<any, any> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  scrollview: {
+    flex: 1
+  },
+  scrollviewContentContainer: {
+    paddingBottom: 55
+  },
+  exampleContainer: {
+    height: HEIGHT - 55
+  },
+  title: {
+    paddingHorizontal: 30,
+    backgroundColor: 'transparent',
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  subtitle: {
+    marginTop: 5,
+    paddingHorizontal: 30,
+    backgroundColor: 'transparent',
+    color: 'rgba(255, 255, 255, 0.75)',
+    fontSize: 13,
+    fontStyle: 'italic',
+    textAlign: 'center'
+  }
+});
 
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
