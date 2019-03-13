@@ -18,7 +18,6 @@ export const getproperties = (post: any) => {
     kind,
     eBrand
   } = post;
-
   return [
     { name: 'isnew', value: isnew },
     { name: 'issale', value: issale },

@@ -34,6 +34,7 @@ export default gql`
         start
         end
         isrtl
+        isoffer
         trueLocation {
           lat
           lon

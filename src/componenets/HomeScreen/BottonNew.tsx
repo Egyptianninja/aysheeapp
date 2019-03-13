@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../../utils';
-const BottonNew = ({ showCategoriesModal }: any) => (
+const BottonNew = ({ showCategoriesModal, title }: any) => (
   <View
     style={{
       justifyContent: 'center',
@@ -49,7 +49,7 @@ const BottonNew = ({ showCategoriesModal }: any) => (
       </View>
     </TouchableOpacity>
     <View style={styles.textView}>
-      <Text style={[styles.text, { color: '#171717' }]}>جميع الاقسام</Text>
+      <Text style={[styles.text, { color: '#171717' }]}>{title}</Text>
     </View>
   </View>
 );

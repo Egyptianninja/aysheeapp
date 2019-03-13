@@ -78,27 +78,6 @@ class CategoriesScroll extends React.Component<any, any> {
       );
     });
   };
-  renderSelectedCategory = (categoryId: any) => {
-    const category = this.props.categories.filter(
-      (a: any) => a.id === categoryId
-    )[0];
-    const iconFunc = icons.category.filter(ic => ic.id === category.id);
-    const icon = iconFunc[0].icon();
-
-    return (
-      <CategoryIconSingle
-        icon={icon}
-        noTitle={true}
-        addFilter={this.props.addFilter}
-        removeAllFilters={this.props.removeAllFilters}
-        categoryId={this.props.rest.categoryId}
-        iconColor="#777"
-        textColor="#777"
-        item={category}
-        key={category.id}
-      />
-    );
-  };
 
   getCategories = (itemKind: string) => {
     return this.props.buckets
@@ -196,7 +175,7 @@ class CategoriesScroll extends React.Component<any, any> {
                     fontSize: 15
                   }}
                 >
-                  Filters
+                  {words.reset}
                 </Text>
               </TouchableOpacity>
             )}
@@ -259,7 +238,7 @@ class CategoriesScroll extends React.Component<any, any> {
               removeAllFilters={removeAllFilters}
               isAuthenticated={this.props.isAuthenticated}
               navigation={this.props.navigation}
-              title={words.listfree}
+              title={words.allcategories}
             />
           )}
           <ScrollView
@@ -289,7 +268,7 @@ class CategoriesScroll extends React.Component<any, any> {
               >
                 <OfferIcon
                   navigation={this.props.navigation}
-                  title="اهم العروض"
+                  title={words.offers}
                 />
                 {this.renderCategories(categories)}
               </View>

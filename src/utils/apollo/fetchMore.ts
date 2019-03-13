@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import * as getStore from '../../store/getStore';
 import { since } from '../since';
 import secrets from '../../constants/secrets';
 const { width } = Dimensions.get('window');
@@ -135,6 +136,14 @@ export const readyPosts = (
     const imageHeight =
       post.photos.length > 0 ? Math.ceil(imageWidth * ratio) : imageWidth * 0.5;
     const height = Math.ceil(imageHeight) + textHeight;
+    const {
+      brand,
+      subBrand,
+      eBrand,
+      kind,
+      realestate,
+      service
+    } = getPostLangValues(post, lang);
     return {
       ...post,
       height,
@@ -143,7 +152,13 @@ export const readyPosts = (
       time,
       uri,
       imageWidth,
-      imageHeight
+      imageHeight,
+      brand,
+      subBrand,
+      eBrand,
+      kind,
+      realestate,
+      service
     };
   });
 };
@@ -163,7 +178,7 @@ export const readyUserPosts = (
   posts: any,
   imageSize: number,
   textHeight: number,
-  languageName: any
+  lang: any
 ) => {
   return posts.map((post: any) => {
     const ratio =
@@ -176,12 +191,20 @@ export const readyUserPosts = (
             secrets.upload.CLOUD_NAME
           }/image/upload/w_${imageSize}/${post.photos[0].substring(0, 20)}`
         : undefined;
-    const time = since(post.updatedAt, languageName);
+    const time = since(post.updatedAt, lang);
 
     const subTitle = post.title.substring(0, 17);
     const imageWidth = Math.ceil(width / 2 - 17);
     const imageHeight = imageWidth * 1.333;
     const height = Math.ceil(imageHeight) + textHeight;
+    const {
+      brand,
+      subBrand,
+      eBrand,
+      kind,
+      realestate,
+      service
+    } = getPostLangValues(post, lang);
     return {
       ...post,
       height,
@@ -191,7 +214,13 @@ export const readyUserPosts = (
       uri,
       imageWidth,
       imageHeight,
-      finalRatio
+      finalRatio,
+      brand,
+      subBrand,
+      eBrand,
+      kind,
+      realestate,
+      service
     };
   });
 };
@@ -199,7 +228,7 @@ export const readyOfferPosts = (
   posts: any,
   imageSize: number,
   textHeight: number,
-  languageName: any
+  lang: any
 ) => {
   return posts.map((post: any) => {
     const ratio =
@@ -212,12 +241,20 @@ export const readyOfferPosts = (
             secrets.upload.CLOUD_NAME
           }/image/upload/w_${imageSize}/${post.photos[0].substring(0, 20)}`
         : undefined;
-    const time = since(post.updatedAt, languageName);
+    const time = since(post.updatedAt, lang);
 
     const subTitle = post.title.substring(0, 17);
     const imageWidth = Math.ceil(width - 10);
     const imageHeight = imageWidth * 1.333;
     const height = Math.ceil(imageHeight) + textHeight;
+    const {
+      brand,
+      subBrand,
+      eBrand,
+      kind,
+      realestate,
+      service
+    } = getPostLangValues(post, lang);
     return {
       ...post,
       height,
@@ -227,7 +264,54 @@ export const readyOfferPosts = (
       uri,
       imageWidth,
       imageHeight,
-      finalRatio
+      finalRatio,
+      brand,
+      subBrand,
+      eBrand,
+      kind,
+      realestate,
+      service
     };
   });
+};
+
+const getPostLangValues = (post: any, lang: any) => {
+  const brands = getStore.brands();
+  const brand = post.brandId
+    ? brands.filter((brd: any) => brd.id === post.brandId)[0][lang]
+    : null;
+
+  const subBrands = getStore.subBrands();
+  const subBrand = post.subBrandId
+    ? subBrands.filter((brd: any) => brd.id === post.subBrandId)[0][lang]
+    : null;
+
+  const eBrands = getStore.electroBrands();
+  const eBrand = post.eBrandId
+    ? eBrands.filter((brd: any) => brd.id === post.eBrandId)[0][lang]
+    : null;
+
+  const kinds = getStore.kind();
+  const kind = post.kindId
+    ? kinds.filter((brd: any) => brd.id === post.kindId)[0][lang]
+    : null;
+
+  const realestates = getStore.realestate();
+  const realestate = post.realestateId
+    ? realestates.filter((brd: any) => brd.id === post.realestateId)[0][lang]
+    : null;
+
+  const services = getStore.service();
+  const service = post.serviceId
+    ? services.filter((brd: any) => brd.id === post.serviceId)[0][lang]
+    : null;
+
+  return {
+    brand,
+    subBrand,
+    eBrand,
+    kind,
+    realestate,
+    service
+  };
 };

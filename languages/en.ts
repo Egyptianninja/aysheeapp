@@ -98,13 +98,18 @@ export default {
     { pid: 1, id: 2, name: 'Van', nameGlob: 'Van' },
     { pid: 1, id: 3, name: 'Pickup', nameGlob: 'Pickup' },
     { pid: 1, id: 4, name: 'Truck', nameGlob: 'Truck' },
+
     { pid: 1, id: 59, name: 'Bus', nameGlob: 'Bus' },
-    // { pid: 1, id: 60, name: 'Microbus', nameGlob: 'Microbus' },
     { pid: 1, id: 61, name: 'Motorcycle', nameGlob: 'Motorcycle' },
     { pid: 1, id: 62, name: 'Other', nameGlob: 'Other' },
 
     { pid: 2, id: 5, name: 'Camera', nameGlob: 'Camera' },
-    { pid: 2, id: 8, name: 'PC & Accessories', nameGlob: 'PC & Accessories' },
+    {
+      pid: 2,
+      id: 8,
+      name: 'Computer & Printer',
+      nameGlob: 'Computer & Printer'
+    },
     { pid: 2, id: 9, name: 'Sounds Systems', nameGlob: 'Sounds Systems' },
     { pid: 2, id: 10, name: 'Video Games', nameGlob: 'Video Games' },
     { pid: 2, id: 11, name: 'Other', nameGlob: 'Other' },
@@ -274,13 +279,18 @@ export default {
     { pid: 6, id: 110, name: 'Other', nameGlob: 'Other' },
 
     { pid: 8, id: 31, name: 'Lenovo', nameGlob: 'Lenovo' },
-    { pid: 8, id: 32, name: 'HP', nameGlob: 'HP ' },
+    { pid: 8, id: 32, name: 'hp', nameGlob: 'hp ' },
     { pid: 8, id: 33, name: 'Dell', nameGlob: 'Dell' },
     { pid: 8, id: 34, name: 'Apple', nameGlob: 'Apple' },
     { pid: 8, id: 35, name: 'VAIO', nameGlob: 'VAIO' },
     { pid: 8, id: 36, name: 'Acer', nameGlob: 'Acer' },
     { pid: 8, id: 37, name: 'Asus', nameGlob: 'Asus' },
-    { pid: 8, id: 38, name: 'Other', nameGlob: 'Other' },
+    { pid: 8, id: 111, name: 'brother', nameGlob: 'brother' },
+    { pid: 8, id: 112, name: 'Canon', nameGlob: 'Canon' },
+    { pid: 8, id: 113, name: 'EPSON', nameGlob: 'EPSON' },
+    { pid: 8, id: 114, name: 'xerox', nameGlob: 'xerox' },
+    { pid: 8, id: 115, name: 'OKI', nameGlob: 'OKI' },
+    { pid: 8, id: 150, name: 'Other', nameGlob: 'Other' },
 
     { pid: 9, id: 39, name: 'Bose', nameGlob: 'Bose ' },
     { pid: 9, id: 40, name: 'Pioneer', nameGlob: 'Pioneer' },
@@ -472,6 +482,9 @@ export default {
     mob: 'Mobile',
     apdateaccount: 'Update Account',
     accountupdated: 'Account Updated',
+    allcategories: 'Categories',
+    offers: 'Offers',
+    reset: 'Reset',
 
     labels: {
       categoryId: 'Category',

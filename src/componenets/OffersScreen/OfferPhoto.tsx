@@ -35,7 +35,7 @@ export default class OfferPhoto extends React.PureComponent<any, any> {
             position: 'absolute',
             width,
             bottom: 0,
-            height: 80,
+            height: 90,
             backgroundColor: 'rgba(0, 0, 0, 0.6)',
             justifyContent: 'center',
             borderBottomLeftRadius: radius,
@@ -48,7 +48,8 @@ export default class OfferPhoto extends React.PureComponent<any, any> {
               color: '#fff',
               fontSize: 18,
               top: -10,
-              paddingHorizontal: 10
+              paddingHorizontal: 10,
+              fontWeight: 'bold'
             }}
           >
             {title}
@@ -56,6 +57,7 @@ export default class OfferPhoto extends React.PureComponent<any, any> {
           <Text
             style={[
               {
+                fontSize: 15,
                 textAlign: offer.isrtl ? 'right' : 'left',
                 color: '#ddd',
                 top: -10,
@@ -74,7 +76,8 @@ export default class OfferPhoto extends React.PureComponent<any, any> {
               textAlign: 'left',
               color: '#fff',
               fontSize: 14,
-              marginTop: 6
+              marginTop: 6,
+              fontWeight: 'bold'
             }}
             numberOfLines={2}
           >

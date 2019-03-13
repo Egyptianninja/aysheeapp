@@ -103,7 +103,6 @@ export default {
     { pid: 1, id: 3, name: 'بيك أب', nameGlob: 'بيك أب' },
     { pid: 1, id: 4, name: 'شاحنة', nameGlob: 'شاحنة' },
     { pid: 1, id: 59, name: 'باص', nameGlob: 'باص' },
-    // { pid: 1, id: 60, name: 'ميكرو باص', nameGlob: 'ميكرو باص' },
     { pid: 1, id: 61, name: 'دراجة نارية', nameGlob: 'دراجة نارية' },
     { pid: 1, id: 62, name: 'أخرى', nameGlob: 'أخرى' },
 
@@ -111,8 +110,8 @@ export default {
     {
       pid: 2,
       id: 8,
-      name: 'أجهزة كمبيوتر & واكسسواراتها',
-      nameGlob: 'أجهزة كمبيوتر & واكسسواراتها'
+      name: 'كمبيوتر وطابعات',
+      nameGlob: 'كمبيوتر وطابعات'
     },
     { pid: 2, id: 9, name: 'أنظمة صوت', nameGlob: 'أنظمة صوت' },
     {
@@ -296,7 +295,12 @@ export default {
     { pid: 8, id: 35, name: 'فايو', nameGlob: 'فايو' },
     { pid: 8, id: 36, name: 'اي سر', nameGlob: 'اي سر' },
     { pid: 8, id: 37, name: 'أسوس', nameGlob: 'أسوس' },
-    { pid: 8, id: 38, name: 'أخرى', nameGlob: 'أخرى' },
+    { pid: 8, id: 111, name: 'برزر', nameGlob: 'برزر' },
+    { pid: 8, id: 112, name: 'كانون', nameGlob: 'كانون' },
+    { pid: 8, id: 113, name: 'ابسون', nameGlob: 'ابسون' },
+    { pid: 8, id: 114, name: 'زيروكس', nameGlob: 'زيروكس' },
+    { pid: 8, id: 115, name: 'اوكاي', nameGlob: 'اوكاي' },
+    { pid: 8, id: 150, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 9, id: 39, name: 'بوز', nameGlob: 'بوز ' },
     { pid: 9, id: 40, name: 'بايونير', nameGlob: 'بايونير' },
@@ -484,6 +488,9 @@ export default {
     mob: 'جوال',
     apdateaccount: 'تعديل الحساب',
     accountupdated: 'تم تعديل الحساب',
+    allcategories: 'جميع الاقسام',
+    offers: 'العروض',
+    reset: 'الغاء',
 
     labels: {
       categoryId: 'المجموعة',

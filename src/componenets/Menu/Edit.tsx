@@ -131,6 +131,7 @@ export default class Edit extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
+    console.log('startend', startend);
 
     const start = startend
       ? new Date(Object.keys(startend.name[0])[0])
