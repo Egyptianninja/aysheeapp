@@ -219,7 +219,7 @@ class CategoriesScroll extends React.Component<any, any> {
               </Text>
             </View>
 
-            <TouchableOpacity
+            <View
               style={{
                 position: 'absolute',
                 right: -5,
@@ -229,7 +229,6 @@ class CategoriesScroll extends React.Component<any, any> {
                 flexDirection: 'row',
                 justifyContent: 'flex-end'
               }}
-              onPress={() => null}
             >
               <FilterSelect
                 isRTL={isRTL}
@@ -241,13 +240,7 @@ class CategoriesScroll extends React.Component<any, any> {
                 rest={rest}
                 words={words}
               />
-              <Ionicons
-                style={{ paddingRight: 10, paddingTop: 3 }}
-                name="ios-funnel"
-                size={30}
-                color="#8E90F0"
-              />
-            </TouchableOpacity>
+            </View>
           </View>
         )}
         <View

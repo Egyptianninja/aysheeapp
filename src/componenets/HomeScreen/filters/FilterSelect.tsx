@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { FilterOption } from './FilterOption';
-// import { FilterIcon } from './FilterIcon';
-import { icons } from '../../../load';
 import { Platform } from 'expo-core';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -110,10 +108,6 @@ export default class FilterSelect extends React.Component<any, any> {
     const { rest, itemKind, isRTL } = this.props;
     const selected =
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
-    // const selectedLable =
-    //   selected && rest[itemKind] !== false && rest[itemKind] !== true;
-    const iconFunc = icons.filterIcons.filter(ic => ic.id === itemKind);
-    // const icon = iconFunc[0].icon();
 
     return (
       <View>
@@ -147,17 +141,6 @@ export default class FilterSelect extends React.Component<any, any> {
           ]}
           onPress={this.props.disable ? () => null : () => this.toggleModal()}
         >
-          {/* <View
-            style={{
-              paddingHorizontal: 5
-            }}
-          >
-            <FilterIcon
-              icon={icon}
-              size={16}
-              color={selected ? '#7678ED' : '#555'}
-            />
-          </View> */}
           <Text
             style={{
               color:
@@ -186,6 +169,14 @@ export default class FilterSelect extends React.Component<any, any> {
               name="md-arrow-dropdown"
               size={24}
               color={selected ? '#7678ED' : '#555'}
+            />
+          )}
+          {this.props.sort && (
+            <Ionicons
+              style={{ marginLeft: 5, paddingRight: 10 }}
+              name="ios-funnel"
+              size={30}
+              color="#8E90F0"
             />
           )}
         </TouchableOpacity>

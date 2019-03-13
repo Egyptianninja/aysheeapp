@@ -7,7 +7,7 @@ import {
   Animated,
   TouchableWithoutFeedback
 } from 'react-native';
-import { Photo } from '../../lib';
+import OfferPhoto from './OfferPhoto';
 const { width } = Dimensions.get('window');
 
 export default class OffersSlider extends React.Component<any, any> {
@@ -30,14 +30,7 @@ export default class OffersSlider extends React.Component<any, any> {
   };
 
   render() {
-    const {
-      words,
-      lang,
-      isRTL,
-      offers,
-      color
-      // data: { body, end, start, title, isrtl }
-    } = this.props;
+    const { words, lang, isRTL, offers, color } = this.props;
     const imageWidth = width - 30;
     const imageheight = (imageWidth * 3) / 2;
 
@@ -58,6 +51,7 @@ export default class OffersSlider extends React.Component<any, any> {
         >
           {offers.map((offer: any, i: any) => {
             const uri = offer.uri;
+
             return (
               <TouchableWithoutFeedback
                 onPress={() => {
@@ -71,8 +65,9 @@ export default class OffersSlider extends React.Component<any, any> {
                 key={i}
               >
                 <View style={{ paddingHorizontal: 15, backgroundColor: color }}>
-                  <Photo
+                  <OfferPhoto
                     uri={uri}
+                    offer={offer}
                     width={imageWidth}
                     height={imageheight}
                     radius={10}
@@ -140,5 +135,18 @@ const styles = StyleSheet.create({
   },
   indicatorSelected: {
     opacity: 1
+  },
+  textContainer: {
+    justifyContent: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingHorizontal: 16,
+    backgroundColor: 'black'
+  },
+  subtitle: {
+    marginTop: 6,
+    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 12,
+    fontStyle: 'italic'
   }
 });
