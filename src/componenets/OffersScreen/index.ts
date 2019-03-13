@@ -9,6 +9,7 @@ import {
 } from './static/entries';
 import { sliderWidth, itemWidth } from './styles/SliderEntry';
 import styles, { colors } from './styles/index';
+import OffersSlider from './OffersSlider';
 export {
   SliderEntry,
   ENTRIES1,
@@ -20,5 +21,6 @@ export {
   sliderWidth,
   itemWidth,
   styles,
-  colors
+  colors,
+  OffersSlider
 };

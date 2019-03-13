@@ -6,13 +6,14 @@ export default class Photo extends React.PureComponent<any, any> {
     loading: true
   };
   render() {
-    const { uri, width, height, overflow, resizeMode } = this.props;
+    const { uri, width, height, overflow, resizeMode, radius } = this.props;
     return (
       <View
         style={{
           width,
           height,
-          overflow: overflow ? overflow : 'hidden'
+          overflow: overflow ? overflow : 'hidden',
+          borderRadius: radius
         }}
       >
         <Image

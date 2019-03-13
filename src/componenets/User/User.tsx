@@ -44,7 +44,6 @@ export const User = ({ name, avatar, about, navigation, user }: any) => {
           borderRadius: 29,
           borderColor: '#fff',
           borderWidth: 2,
-          // backgroundColor: '#000',
           justifyContent: 'center',
           alignItems: 'center'
         }}

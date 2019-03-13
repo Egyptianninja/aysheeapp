@@ -8,46 +8,30 @@ import {
   View,
   FlatList
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Loading, Noresult } from '../../componenets';
 import {
-  itemWidth,
   SliderEntry,
-  sliderWidth,
-  styles
+  styles,
+  OffersSlider
 } from '../../componenets/OffersScreen';
 import { User } from '../../componenets/User/User';
 import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
-import { Carousel, getLang, readyUserPosts } from '../../utils';
+import { getLang, readyUserPosts } from '../../utils';
 
 const HEIGHT = Dimensions.get('window').height;
-const FIRST_ITEM = 0;
 
-export default class OffersScreen extends Component<any, any> {
+class OffersScreen extends Component<any, any> {
   static navigationOptions = { header: null };
   constructor(props: any) {
     super(props);
     this.state = {
-      slider1ActiveSlide: FIRST_ITEM,
-      slider1Ref: null,
       refreshing: false
     };
   }
 
-  renderItemWithParallax = ({ item, index }: any, parallaxProps: any) => {
-    return (
-      <SliderEntry
-        data={item}
-        even={(index + 1) % 2 === 0}
-        parallax={true}
-        parallaxProps={parallaxProps}
-        navigation={this.props.navigation}
-      />
-    );
-  };
-
-  renderShopOffers = (data: any) => {
+  renderShopOffers = (data: any, lang: any) => {
     const { _id, name, avatar, color, offers, about } = data;
-    const lang = getLang();
     const readyOffers = readyUserPosts(offers, 1080, 79, lang);
     return (
       <View
@@ -61,28 +45,13 @@ export default class OffersScreen extends Component<any, any> {
           about={about}
           user={data}
         />
-        <Carousel
-          ref={(c: any) => {
-            if (!this.state.slider1Ref) {
-              this.setState({ slider1Ref: c });
-            }
-          }}
-          data={readyOffers}
-          renderItem={this.renderItemWithParallax}
-          sliderWidth={sliderWidth}
-          itemWidth={itemWidth}
-          hasParallaxImages={true}
-          firstItem={FIRST_ITEM}
-          inactiveSlideScale={0.9}
-          inactiveSlideOpacity={0.7}
-          enableMomentum={false}
-          containerCustomStyle={styles.slider}
-          contentContainerCustomStyle={styles.sliderContentContainer}
-          lockScrollTimeoutDuration={250}
-          swipeThreshold={10}
-          onSnapToItem={(index: any) =>
-            this.setState({ slider1ActiveSlide: index })
-          }
+        <OffersSlider
+          offers={readyOffers}
+          words={this.props.words}
+          lang={this.props.lang}
+          isRTL={this.props.isRTL}
+          navigation={this.props.navigation}
+          color={color}
         />
       </View>
     );
@@ -138,15 +107,13 @@ export default class OffersScreen extends Component<any, any> {
                 snapToAlignment={'start'}
                 showsVerticalScrollIndicator={false}
                 directionalLockEnabled={true}
-                renderItem={({ item }: any) => this.renderShopOffers(item)}
+                renderItem={({ item }: any) =>
+                  this.renderShopOffers(item, this.props.lang)
+                }
                 keyExtractor={(item: any) => item._id}
                 onRefresh={() => refetch()}
                 refreshing={this.state.refreshing}
-              >
-                {shops.map((shop: any) => {
-                  return this.renderShopOffers(shop);
-                })}
-              </FlatList>
+              />
             );
           }}
         </Query>
@@ -154,3 +121,11 @@ export default class OffersScreen extends Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => ({
+  lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
+  words: state.glob.language.words
+});
+
+export default connect(mapStateToProps)(OffersScreen);
