@@ -9,6 +9,7 @@ import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
 import { Edit, Menu, Report } from '../../componenets/Menu';
+import NotificationModal from '../../componenets/NotificationScreen/NotificationModal';
 import createReport from '../../graphql/mutation/createReport';
 import deletePost from '../../graphql/mutation/deletePost';
 import editClassifieds from '../../graphql/mutation/editClassifieds';
@@ -47,6 +48,7 @@ class HomeScreen extends React.Component<any, any> {
       isEditModalVisible: false,
       isCheckMessaheVisible: false,
       isCategoriesModalVisible: false,
+      isNotificationModalVisible: false,
       modalPost: null,
       pressed: null,
       refreshing: false,
@@ -177,6 +179,12 @@ class HomeScreen extends React.Component<any, any> {
   hideCategoriesModal = () => {
     this.setState({ isCategoriesModalVisible: false });
   };
+  showNotificationModal = () => {
+    this.setState({ isNotificationModalVisible: true });
+  };
+  hideNotificationModal = () => {
+    this.setState({ isNotificationModalVisible: false });
+  };
   deletePost = async () => {
     await this.props.deletePost({
       variables: {
@@ -227,8 +235,10 @@ class HomeScreen extends React.Component<any, any> {
     }
   };
 
-  handleNotification = (notification: any) => {
+  handleNotification = async (notification: any) => {
     if (notification.origin === 'received') {
+      await this.setState({ notification });
+      this.showNotificationModal();
       // show internal message with notification data and way to go to post
     } else {
       const postId = notification.data.postId;
@@ -291,6 +301,17 @@ class HomeScreen extends React.Component<any, any> {
     return (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
         <StatusBar translucent={true} barStyle={'light-content'} />
+        {this.state.isNotificationModalVisible && (
+          <NotificationModal
+          isNotificationModalVisible={this.state.isNotificationModalVisible}
+            hideNotificationModal={this.hideNotificationModal}
+            notification={this.state.notification}
+            lang={lang}
+            word={words}
+            navigation={this.props.navigation}
+            isRTL={isRTL}
+          />
+        )}
         <Menu
           post={this.state.modalPost}
           favoritePost={this.props.favoritePost}
