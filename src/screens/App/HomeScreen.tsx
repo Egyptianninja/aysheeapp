@@ -3,12 +3,13 @@ import { Notifications } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Animated, Dimensions, Text, View, StatusBar } from 'react-native';
+import { Animated, Dimensions, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
 import { Edit, Menu, Report } from '../../componenets/Menu';
+import createReport from '../../graphql/mutation/createReport';
 import deletePost from '../../graphql/mutation/deletePost';
 import editClassifieds from '../../graphql/mutation/editClassifieds';
 import favoritePost from '../../graphql/mutation/favoritePost';
@@ -18,13 +19,7 @@ import getTimeLine from '../../graphql/query/getTimeLine';
 import { setBuckets } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
 import * as store from '../../store/getStore';
-import {
-  getNextPosts,
-  getTimeLineBuckets,
-  Message,
-  readyPosts,
-  registerForPushNotificationsAsync
-} from '../../utils';
+import { getNextPosts, getTimeLineBuckets, Message, readyPosts, registerForPushNotificationsAsync } from '../../utils';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -326,7 +321,10 @@ class HomeScreen extends React.Component<any, any> {
         )}
         <Report
           isReportModalVisible={this.state.isReportModalVisible}
+          showMessageModal={this.showMessageModal}
           hideReportModal={this.hideReportModal}
+          createReport={this.props.createReport}
+          post={this.state.modalPost}
           word={words}
           isRTL={isRTL}
         />
@@ -501,7 +499,11 @@ export default connect(
           graphql(editClassifieds, {
             name: 'editClassifieds',
             options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
-          })(HomeScreen)
+          })(
+            graphql(createReport, {
+              name: 'createReport'
+            })(HomeScreen)
+          )
         )
       )
     )

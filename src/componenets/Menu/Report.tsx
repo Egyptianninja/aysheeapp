@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { View, Dimensions, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
+import * as React from 'react';
+import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
-import { Button, InputPhone } from '../../lib';
+import * as Yup from 'yup';
+import { Button, Input } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
-export default class Report extends React.Component<any, any> {
+class Report extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
     if (nextProps.isReportModalVisible !== prevState.isReportModalVisible) {
       return { isReportModalVisible: nextProps.isReportModalVisible };
@@ -23,20 +23,27 @@ export default class Report extends React.Component<any, any> {
   }
 
   handleSubmit = async (values: any, bag: any) => {
-    this.props.hideReportModal();
-    // const res = await this.props.editClassifieds({
-    //   variables: {
-    //     postId: this.props.post.id,
-    //     phone: values.phone
-    //   }
-    // });
-    // if (res.data.updatePost.ok) {
-    //   this.toggleReportModal();
-    // }
-    // if (!res.data.updatePost.ok) {
-    //   bag.setErrors({ title: res.data.updatePost.error });
-    // }
-    // bag.setSubmitting(false);
+    const res = await this.props.createReport({
+      variables: {
+        postId: this.props.post.id,
+        postOwnerId: this.props.post.userId,
+        body: values.body
+      }
+    });
+    if (res.data.createReport.ok) {
+      this.props.hideReportModal();
+      setTimeout(() => {
+        this.props.showMessageModal({
+          seconds: 1,
+          message: this.props.word.successadded
+        });
+      }, 1000);
+    }
+    if (!res.data.createReport.ok) {
+      bag.setErrors({ title: res.data.createReport.error });
+      this.props.hideReportModal();
+    }
+    bag.setSubmitting(false);
   };
 
   render() {
@@ -66,62 +73,66 @@ export default class Report extends React.Component<any, any> {
             alignItems: 'center'
           }}
         >
-          <Formik
-            initialValues={{
-              body: ''
-            }}
-            onSubmit={this.handleSubmit}
-            validationSchema={Yup.object().shape({
-              body: Yup.string()
-                .max(200)
-                .required('Required')
-            })}
-            render={({
-              values,
-              handleSubmit,
-              setFieldValue,
-              errors,
-              touched,
-              setFieldTouched,
-              isValid,
-              isSubmitting
-            }: any) => (
-              <React.Fragment>
-                <InputPhone
-                  rtl={isRTL}
-                  name="body"
-                  label={word.body}
-                  value={values.body}
-                  onChange={setFieldValue}
-                  onTouch={setFieldTouched}
-                  outerStyle={styles.outerStyle}
-                  innerStyle={styles.innerStyle}
-                  labelStyle={styles.labelStyle}
-                  error={touched.body && errors.body}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  multiline={true}
-                  height={100}
-                />
+          <ScrollView>
+            <Formik
+              initialValues={{
+                body: ''
+              }}
+              onSubmit={this.handleSubmit}
+              validationSchema={Yup.object().shape({
+                body: Yup.string()
+                  .max(200)
+                  .required('Required')
+              })}
+              render={({
+                values,
+                handleSubmit,
+                setFieldValue,
+                errors,
+                touched,
+                setFieldTouched,
+                isValid,
+                isSubmitting
+              }: any) => (
+                <React.Fragment>
+                  <Input
+                    rtl={isRTL}
+                    name="body"
+                    label={word.body}
+                    value={values.body}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.body && errors.body}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    multiline={true}
+                    height={100}
+                  />
 
-                <Button
-                  isRTL={isRTL}
-                  background="#7678ED"
-                  style={styles.btnStyle}
-                  textStyle={styles.btnTextStyle}
-                  title={word.submit}
-                  onPress={handleSubmit}
-                  disabled={!isValid || isSubmitting}
-                  loading={isSubmitting}
-                />
-              </React.Fragment>
-            )}
-          />
+                  <Button
+                    isRTL={isRTL}
+                    background="#7678ED"
+                    style={styles.btnStyle}
+                    textStyle={styles.btnTextStyle}
+                    title={word.submit}
+                    onPress={handleSubmit}
+                    disabled={!isValid || isSubmitting}
+                    loading={isSubmitting}
+                  />
+                </React.Fragment>
+              )}
+            />
+          </ScrollView>
         </View>
       </Modal>
     );
   }
 }
+
+export default Report;
 
 const styles = StyleSheet.create({
   container: {
