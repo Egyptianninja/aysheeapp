@@ -41,6 +41,8 @@ class NotificationModal extends React.Component<any, any> {
         backdropOpacity={0.2}
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
         style={{ justifyContent: 'flex-end', margin: 0 }}
       >
         <View
