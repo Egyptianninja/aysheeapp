@@ -1,50 +1,47 @@
-import * as React from 'react';
-import {
-  View,
-  Dimensions,
-  Text,
-  Animated,
-  Keyboard,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  Platform
-} from 'react-native';
-import Modal from 'react-native-modal';
-
-import { Query } from 'react-apollo';
 import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
-import { KeyboardSpacer, LoadingView } from '../../lib';
-import secrets from '../../constants/secrets';
+import * as React from 'react';
+import { Query } from 'react-apollo';
 import {
-  StyleSheet,
-  ItemLocation,
-  call,
-  ImageViewer,
-  Message,
-  getDate
-} from '../../utils';
+  Animated,
+  Dimensions,
+  Keyboard,
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import Modal from 'react-native-modal';
+import {
+  BodyView,
+  FullTimeView,
+  getJobProperties,
+  getproperties,
+  InputBar,
+  ItemComment,
+  Loading,
+  PhotoSlider,
+  PriceView,
+  Properties
+} from '..';
+import secrets from '../../constants/secrets';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
-import { MenuIconHeader } from './MenuIconHeader';
-import { Menu, Report, Edit } from '../Menu';
+import { KeyboardSpacer, LoadingView } from '../../lib';
 import {
-  Avatar,
-  Properties,
-  PriceView,
-  BodyView,
-  InputBar,
-  ItemComment,
-  PhotoSlider,
-  Loading,
-  getproperties,
-  getJobProperties,
-  FullTimeView
-} from '..';
+  getDate,
+  ImageViewer,
+  ItemLocation,
+  Message,
+  StyleSheet
+} from '../../utils';
 import Link from '../../utils/location/link';
+import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
+import { MenuIconHeader } from './MenuIconHeader';
+
 const { width, height } = Dimensions.get('window');
 
 class ItemView extends React.Component<any, any> {
@@ -203,7 +200,10 @@ class ItemView extends React.Component<any, any> {
         replayto,
         ownerId,
         postTitle,
-        userName
+        userName,
+        avatar: this.props.user.avatar,
+        uniquename: this.props.user.uniquename,
+        color: this.props.user.color
       }
     });
     this.setState({

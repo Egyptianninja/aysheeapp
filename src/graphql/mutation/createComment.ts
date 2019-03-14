@@ -8,6 +8,9 @@ export default gql`
     $replayto: CommentRepalyInput
     $postTitle: String
     $userName: String
+    $avatar: String
+    $uniquename: String
+    $color: String
   ) {
     createComment(
       postId: $postId
@@ -16,6 +19,9 @@ export default gql`
       replayto: $replayto
       postTitle: $postTitle
       userName: $userName
+      avatar: $avatar
+      uniquename: $uniquename
+      color: $color
     ) {
       _id
       body

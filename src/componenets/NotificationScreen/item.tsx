@@ -1,61 +1,72 @@
 import * as React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { AvatarCircle } from '..';
 import { since } from '../../utils';
 
 const Item = (props: any) => {
   const { item, lang, navigation, isRTL } = props;
   const time = since(item.createdAt, lang);
-  const postId = JSON.parse(item.data).postId;
+  const { postId, user } = JSON.parse(item.data);
   return (
-    <TouchableWithoutFeedback
-      onPress={() =>
-        navigation.navigate('ItemScreen', {
-          postId,
-          word: props.words,
-          lang,
-          isRTL
-        })
-      }
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: isRTL ? 'flex-end' : 'flex-start',
+        padding: 5,
+        marginHorizontal: 16,
+        marginVertical: 5,
+        borderColor: '#ddd',
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 10
+      }}
     >
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: isRTL ? 'flex-end' : 'flex-start',
-          padding: 5,
-          marginHorizontal: 16,
-          marginVertical: 5,
-          borderColor: '#ddd',
-          backgroundColor: '#fff',
-          borderWidth: 1,
-          borderRadius: 10
-        }}
+      {user && <AvatarCircle user={user} size={40} />}
+
+      <TouchableWithoutFeedback
+        onPress={() =>
+          navigation.navigate('ItemScreen', {
+            postId,
+            word: props.words,
+            lang,
+            isRTL
+          })
+        }
       >
-        <Text
+        <View
           style={{
-            padding: 5,
-            paddingTop: 10,
-            fontWeight: 'bold'
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: isRTL ? 'flex-end' : 'flex-start'
           }}
         >
-          {item.title}
-        </Text>
-        <View style={{ padding: 10 }}>
-          <Text>{item.body}</Text>
-        </View>
-        <View style={{ position: 'absolute', top: 5, left: 0 }}>
           <Text
             style={{
-              color: '#999',
-              fontSize: 12,
-              paddingHorizontal: 15
+              padding: 5,
+              paddingTop: 10,
+              fontWeight: 'bold'
             }}
           >
-            {time}
+            {item.title}
           </Text>
+          <View style={{ padding: 10 }}>
+            <Text>{item.body}</Text>
+          </View>
         </View>
+      </TouchableWithoutFeedback>
+      <View style={{ position: 'absolute', top: 5, left: 0 }}>
+        <Text
+          style={{
+            color: '#999',
+            fontSize: 12,
+            paddingHorizontal: 15
+          }}
+        >
+          {time}
+        </Text>
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
 
