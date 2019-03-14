@@ -8,7 +8,8 @@ import {
   Dimensions,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Linking
 } from 'react-native';
 import { connect } from 'react-redux';
 import { AvatarCircle, Loading, Noresult } from '../../../componenets';
@@ -19,9 +20,9 @@ import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import favoritePost from '../../../graphql/mutation/favoritePost';
 import getUserPosts from '../../../graphql/query/getUserPosts';
 import { updateQty } from '../../../store/actions/userAtions';
-import { getNextPosts, Message, readyUserPosts } from '../../../utils';
-
-const { width } = Dimensions.get('window');
+import { getNextPosts, Message, readyUserPosts, call } from '../../../utils';
+import MapModal from '../../../componenets/ProfileScreen/MapModal';
+const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 175;
 const PROFILE_IMAGE_HEIGHT = 80;
@@ -40,6 +41,7 @@ class ProfileScreen extends React.Component<any, any> {
       isEditModalVisible: false,
       isCheckMessaheVisible: false,
       isMessageVisible: false,
+      isMapModalVisible: false,
       modalPost: null,
       rest: {},
       tab: 1
@@ -95,6 +97,12 @@ class ProfileScreen extends React.Component<any, any> {
   };
   hideCheckMessageModal = () => {
     this.setState({ isCheckMessaheVisible: false });
+  };
+  showMapModal = async () => {
+    this.setState({ isMapModalVisible: true });
+  };
+  hideMapModal = () => {
+    this.setState({ isMapModalVisible: false });
   };
 
   deletePost = async () => {
@@ -157,6 +165,7 @@ class ProfileScreen extends React.Component<any, any> {
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
+    const callargs = { number: user.phone, prompt: false };
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -213,6 +222,17 @@ class ProfileScreen extends React.Component<any, any> {
           iconColor="#E85255"
           height={200}
         />
+        {user.location && user.location.lat && user.location.lon && (
+          <MapModal
+            isMapModalVisible={this.state.isMapModalVisible}
+            hideMapModal={this.hideMapModal}
+            lat={user.location.lat}
+            lon={user.location.lon}
+            title={user.name}
+            width={width}
+            height={height}
+          />
+        )}
 
         <Animated.View
           style={{
@@ -277,7 +297,6 @@ class ProfileScreen extends React.Component<any, any> {
                 }}
                 style={{
                   marginTop: 5,
-                  paddingHorizontal: 10,
                   borderColor: '#ddd',
                   borderWidth: 1,
                   borderRadius: 5,
@@ -289,12 +308,18 @@ class ProfileScreen extends React.Component<any, any> {
                 <Text
                   style={{
                     fontFamily: 'cairo-regular',
-                    fontSize: 12
+                    fontSize: 12,
+                    paddingHorizontal: 10
                   }}
                 >
                   تعديل الملف الشخصي
                 </Text>
-                <Ionicons name="md-person" size={24} color="#000" />
+                <Ionicons
+                  style={{ paddingRight: 10 }}
+                  name="md-person"
+                  size={24}
+                  color="#000"
+                />
               </TouchableOpacity>
             )}
           </Animated.View>
@@ -304,17 +329,16 @@ class ProfileScreen extends React.Component<any, any> {
               width,
               top: topPaddingIcons,
               height: 40,
-              zIndex: 1000,
+              zIndex: 100,
               backgroundColor: '#fff',
               flexDirection: 'row',
               justifyContent: 'space-around',
               alignItems: 'center',
               paddingHorizontal: 10
-              // borderColor: '#ddd',
-              // borderWidth: 1
             }}
           >
             <TouchableOpacity
+              onPress={() => call(callargs)}
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -333,6 +357,7 @@ class ProfileScreen extends React.Component<any, any> {
               }}
             />
             <TouchableOpacity
+              onPress={() => Linking.openURL(user.email)}
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -351,6 +376,7 @@ class ProfileScreen extends React.Component<any, any> {
               }}
             />
             <TouchableOpacity
+              onPress={() => Linking.openURL(user.website)}
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -369,6 +395,7 @@ class ProfileScreen extends React.Component<any, any> {
               }}
             />
             <TouchableOpacity
+              onPress={() => this.showMapModal()}
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -491,7 +518,7 @@ class ProfileScreen extends React.Component<any, any> {
               return <Loading />;
             }
             if (error) {
-              return <Noresult title="error" />;
+              return <Noresult title="network error" />;
             }
             const { posts } = data.getUserPosts;
             const rPosts = readyUserPosts(posts, 200, 79, lang);

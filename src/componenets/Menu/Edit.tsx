@@ -1,35 +1,34 @@
-import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-
-import {
-  View,
-  Dimensions,
-  StyleSheet,
-  ScrollView,
-  Text,
-  TouchableWithoutFeedback,
-  Image,
-  TouchableOpacity
-} from 'react-native';
+import { Permissions } from 'expo';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import Modal from 'react-native-modal';
+import * as React from 'react';
 import {
-  Input,
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
+import Modal from 'react-native-modal';
+import * as Yup from 'yup';
+import {
   Button,
-  Group,
-  RadioButton,
   CheckBox,
-  Title,
+  Group,
+  Input,
+  RadioButton,
   SelectDate
 } from '../../lib';
 import {
-  UserLocation,
   isArabic,
   pickImageWithoutUpload,
-  uploadPickedImage
+  uploadPickedImage,
+  UserLocation
 } from '../../utils';
-import { Permissions } from 'expo';
+
 const { width, height } = Dimensions.get('window');
 
 export default class Edit extends React.Component<any, any> {
@@ -131,8 +130,6 @@ export default class Edit extends React.Component<any, any> {
         lon: loc.coords.longitude
       };
     }
-    console.log('startend', startend);
-
     const start = startend
       ? new Date(Object.keys(startend.name[0])[0])
       : undefined;
@@ -220,10 +217,10 @@ export default class Edit extends React.Component<any, any> {
       <View
         style={{
           flexDirection: 'row',
-          width: width - 60,
+          width,
           height: 50,
-          backgroundColor: '#ddd',
-          paddingHorizontal: 10,
+          backgroundColor: '#aaa',
+          paddingHorizontal: 20,
           alignSelf: 'center'
         }}
       >
@@ -238,16 +235,16 @@ export default class Edit extends React.Component<any, any> {
             height: 32,
             borderRadius: 16,
             justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+            alignItems: 'center'
+            // backgroundColor: 'rgba(255, 255, 255, 0.1)'
           }}
         >
           <Text
             style={{
-              color: '#777',
+              color: '#fff',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
-              fontSize: 18
+              fontSize: 20
             }}
           >
             ⤬
@@ -262,7 +259,7 @@ export default class Edit extends React.Component<any, any> {
         >
           <Text
             style={{
-              color: '#777',
+              color: '#fff',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
               fontSize: 18
@@ -294,27 +291,27 @@ export default class Edit extends React.Component<any, any> {
       <Modal
         isVisible={this.state.isEditModalVisible}
         onBackdropPress={() => this.props.hideEditModal()}
-        backdropOpacity={0.2}
+        backdropOpacity={0.8}
         useNativeDriver={true}
-        animationIn="zoomInDown"
-        animationOut="zoomOutUp"
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
         hideModalContentWhileAnimating={true}
         style={{ margin: 0 }}
       >
         <View
           style={{
             backgroundColor: '#fff',
-            borderRadius: 10,
             position: 'absolute',
             bottom: 0,
             margin: 0,
             height: height - 100,
-            paddingTop: 10,
             width,
             justifyContent: 'space-around',
             alignItems: 'center'
           }}
         >
+          {this.renderHeader(word.editadd)}
+
           <ScrollView>
             <Formik
               initialValues={{
@@ -377,8 +374,6 @@ export default class Edit extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  {this.renderHeader(word.editadd)}
-
                   <Input
                     rtl={isRTL}
                     name="title"
