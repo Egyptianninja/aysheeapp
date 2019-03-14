@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { AvatarCircle } from '..';
 import { since } from '../../utils';
+import { AvatarCircle } from '../Avatar';
 
 const Item = (props: any) => {
   const { item, lang, navigation, isRTL } = props;

@@ -9,11 +9,6 @@ import {
   readyUserPosts
 } from './apollo';
 import { call, getPureNumber } from './call';
-import Carousel, {
-  getInputRangeFromIndexes,
-  Pagination,
-  ParallaxImage
-} from './carousel';
 import ColorPicker from './color';
 import {
   arabicToNum,
@@ -115,10 +110,6 @@ export {
   ColorPicker,
   pickImageWithoutUpload,
   uploadPickedImage,
-  Carousel,
-  Pagination,
-  ParallaxImage,
-  getInputRangeFromIndexes,
   getDate,
   getCurrency
 };
