@@ -1,18 +1,29 @@
-import * as React from 'react';
-import { View, TouchableOpacity, Image, Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
+import * as React from 'react';
+import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
+import { icons } from '../../load';
 import { StyleSheet } from '../../utils';
 import SearchBox from './SearchBox';
-import { Ionicons } from '@expo/vector-icons';
-import { icons } from '../../load';
 const home = icons.home.icon();
 const mainmenu = icons.mainmenu.icon();
 const namelogo = icons.namelogo.icon();
 
 class HomeHeader extends React.Component<any, any> {
+  static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    if (
+      nextProps.navigation.getParam('notification') !== prevState.notification
+    ) {
+      return { notification: nextProps.navigation.getParam('notification') };
+    } else {
+      return { ...prevState };
+    }
+  }
+
   state = {
-    isSearch: false
+    isSearch: false,
+    notification: false
   };
   ardroid = Platform.OS === 'android' && this.props.lang === 'ar';
 
@@ -22,6 +33,7 @@ class HomeHeader extends React.Component<any, any> {
   hideSearch = () => {
     this.setState({ isSearch: false });
   };
+
   render() {
     return (
       <View
@@ -78,6 +90,10 @@ class HomeHeader extends React.Component<any, any> {
           {this.props.isAuthenticated && (
             <TouchableOpacity
               onPress={() => {
+                const clearNotification = this.props.navigation.getParam(
+                  'clearNotification'
+                );
+                clearNotification();
                 this.props.navigation.navigate('NotificationsScreen');
               }}
               style={{
@@ -92,6 +108,19 @@ class HomeHeader extends React.Component<any, any> {
                 size={30}
                 color="#fff"
               />
+              {this.state.notification && (
+                <View
+                  style={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: 6,
+                    backgroundColor: '#FFBD00',
+                    position: 'absolute',
+                    right: 0,
+                    top: 7
+                  }}
+                />
+              )}
             </TouchableOpacity>
           )}
         </View>

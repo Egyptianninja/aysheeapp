@@ -1,6 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import { TouchableOpacity, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 import {

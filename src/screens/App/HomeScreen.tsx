@@ -20,7 +20,13 @@ import getTimeLine from '../../graphql/query/getTimeLine';
 import { setBuckets } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
 import * as store from '../../store/getStore';
-import { getNextPosts, getTimeLineBuckets, Message, readyPosts, registerForPushNotificationsAsync } from '../../utils';
+import {
+  getNextPosts,
+  getTimeLineBuckets,
+  Message,
+  readyPosts,
+  registerForPushNotificationsAsync
+} from '../../utils';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -102,6 +108,9 @@ class HomeScreen extends React.Component<any, any> {
     });
     Notifications.addListener(this.handleNotification);
     this.props.navigation.setParams({ handleHome: this.handleHome });
+    this.props.navigation.setParams({
+      clearNotification: this.clearNotification
+    });
   }
 
   componentWillUnmount() {
@@ -236,6 +245,7 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleNotification = async (notification: any) => {
+    this.props.navigation.setParams({ notification: true });
     if (notification.origin === 'received') {
       await this.setState({ notification });
       this.showNotificationModal();
@@ -250,6 +260,11 @@ class HomeScreen extends React.Component<any, any> {
       });
     }
   };
+
+  clearNotification = () => {
+    this.props.navigation.setParams({ notification: false });
+  };
+
   addFilter = (itemKind: any, value: any) => {
     this.setState({ rest: { ...this.state.rest, [itemKind]: value } });
   };
@@ -303,7 +318,7 @@ class HomeScreen extends React.Component<any, any> {
         <StatusBar translucent={true} barStyle={'light-content'} />
         {this.state.isNotificationModalVisible && (
           <NotificationModal
-          isNotificationModalVisible={this.state.isNotificationModalVisible}
+            isNotificationModalVisible={this.state.isNotificationModalVisible}
             hideNotificationModal={this.hideNotificationModal}
             notification={this.state.notification}
             lang={lang}

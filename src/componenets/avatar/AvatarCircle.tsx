@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { nameToColor } from '../../utils';
 
 export const AvatarCircle = ({ user, size, image }: any) => {
   const dburi = user.avatar
     ? `http://res.cloudinary.com/arflon/image/upload/w_${100}/${user.avatar}`
     : null;
-  const color = user.color ? user.color : nameToColor(user.uniquename);
-
   const name = user.name ? user.name : user.uniquename;
+  const color = user.color ? user.color : nameToColor(name);
+
   const letter = !dburi ? name.substring(0, 1).toUpperCase() : null;
   const uri = image ? image.uri : dburi ? dburi : false;
   return (
