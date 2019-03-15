@@ -11,7 +11,9 @@ import {
 import { FileSystem } from 'expo';
 import ImageTile from './ImageTile';
 const { width } = Dimensions.get('window');
+import { words } from '../../../../store/getStore';
 
+const word = words();
 export default class ImageBrowser extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -99,11 +101,11 @@ export default class ImageBrowser extends React.Component<any, any> {
     return (
       <View style={styles.header}>
         <Button
-          title="عودة"
+          title={word.back}
           onPress={() => this.props.callback(Promise.resolve([]))}
         />
         <Text>{headerText}</Text>
-        <Button title="اضافة" onPress={() => this.prepareCallback()} />
+        <Button title={word.submit} onPress={() => this.prepareCallback()} />
       </View>
     );
   };

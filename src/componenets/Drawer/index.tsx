@@ -53,7 +53,9 @@ class Drawer extends React.Component<any, any> {
         });
       case 3:
         if (this.props.isAuthenticated) {
-          return this.props.navigation.navigate('ChoiseScreen');
+          return this.props.navigation.navigate('ChoiseScreen', {
+            title: this.props.words.addnewad
+          });
         } else {
           return this.props.navigation.navigate('PhoneScreen', {
             add: true
@@ -66,7 +68,9 @@ class Drawer extends React.Component<any, any> {
           user: this.props.user
         });
       case 6:
-        return this.props.navigation.navigate('MyFavScreen');
+        return this.props.navigation.navigate('MyFavScreen', {
+          title: this.props.words.favorites
+        });
 
       case 8: {
         // TODO: uncomment to logout from all
@@ -109,7 +113,7 @@ class Drawer extends React.Component<any, any> {
               flex: 1,
               marginHorizontal: 20,
               marginVertical: 7,
-              flexDirection: 'row-reverse',
+              flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'flex-start'
             }}

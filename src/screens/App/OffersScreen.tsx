@@ -126,7 +126,7 @@ class OffersScreen extends Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#CDCDF8'
+    backgroundColor: '#eee'
   },
   scrollview: {
     flex: 1

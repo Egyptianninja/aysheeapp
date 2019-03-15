@@ -61,6 +61,7 @@ class ShopsScreen extends React.Component<any, any> {
                       user={item}
                       navigation={this.props.navigation}
                       width={width}
+                      words={words}
                     />
                   )}
                   numColumns={1}

@@ -464,6 +464,7 @@ export default {
     offlineposts: 'الاعلانات غير المنشورة',
     replay: 'اكتب رداً',
     moreads: 'اعلانات اخرى',
+    favorites: 'المفضلة',
     addedtovafavorites: 'تم اضافة الاعلان الى المفضلة',
     removeedtovafavorites: 'تم ازالة الاعلان من المفضلة',
     adrefreshed: 'تم تحديث تاريخ الأعلان بنجاح',
@@ -490,23 +491,16 @@ export default {
     accountupdated: 'تم تعديل الحساب',
     allcategories: 'جميع الاقسام',
     offers: 'العروض',
+    ads: 'الاعلانات',
     reset: 'الغاء',
+    offersection: 'قسم العروض',
+    storesection: 'قسم المتاجر',
+    selectphoto: 'اختيار صورة العرض',
+    startendoffer: 'تحديد فترة العرض',
+    editprofile: 'تعديل الملف الشخصي',
+    back: 'عودة',
+    unpublished: 'غير منشور',
 
-    labels: {
-      categoryId: 'المجموعة',
-      kindId: 'النوع',
-      realestateId: 'العقار',
-      serviceId: 'الخدمة',
-      brandId: 'الماركة',
-      subBrandId: 'الماركة الفرعية',
-      eBrandId: 'الماركة',
-      isnew: 'جديد / مستعمل',
-      issale: 'للبيع / للايجار',
-      isfurnishered: 'الفرش',
-      rooms: 'الغرف',
-      bathrooms: 'الحمامات',
-      year: 'سنة الصنع'
-    },
     popmenu: [
       { id: 1, name: 'اضافة الى المفضلة' },
       { id: 2, name: 'ازالة من المفضلة' },
@@ -543,6 +537,21 @@ export default {
       { id: 5, name: 'تعديل السعر' },
       { id: 6, name: 'حذف الاعلان' }
     ]
+  },
+  labels: {
+    categoryId: 'المجموعة',
+    kindId: 'النوع',
+    realestateId: 'العقار',
+    serviceId: 'الخدمة',
+    brandId: 'الماركة',
+    subBrandId: 'الماركة الفرعية',
+    eBrandId: 'الماركة',
+    isnew: 'جديد / مستعمل',
+    issale: 'للبيع / للايجار',
+    isfurnishered: 'الفرش',
+    rooms: 'الغرف',
+    bathrooms: 'الحمامات',
+    year: 'سنة الصنع'
   },
   post: {
     title: 'title',

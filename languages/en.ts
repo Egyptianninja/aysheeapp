@@ -458,6 +458,7 @@ export default {
     offlineposts: 'Offline Posts',
     replay: 'Replay',
     moreads: 'more ads',
+    favorites: 'Favorites',
     addedtovafavorites: 'Successfully added to favorites',
     removeedtovafavorites: 'Successfully removed to favorites',
     adrefreshed: 'Successfully refreshed',
@@ -484,23 +485,16 @@ export default {
     accountupdated: 'Account Updated',
     allcategories: 'Categories',
     offers: 'Offers',
+    ads: 'Ads',
     reset: 'Reset',
+    offersection: 'Offer Section',
+    storesection: 'Store Section',
+    selectphoto: 'Select Offer Image',
+    startendoffer: 'Offer Period',
+    editprofile: 'Edit your profile',
+    back: 'Back',
+    unpublished: 'Unpublished',
 
-    labels: {
-      categoryId: 'Category',
-      kindId: 'Type',
-      realestateId: 'Real Estate',
-      serviceId: ' Service',
-      brandId: 'Brand',
-      subBrandId: 'Sub Brand',
-      eBrandId: 'Brand',
-      isnew: 'New / Used',
-      issale: 'Sale / Rent',
-      isfurnishered: 'Furnisher',
-      rooms: 'Room',
-      bathrooms: 'Bathroom',
-      year: 'Year'
-    },
     popmenu: [
       { id: 1, name: 'Add to favorite' },
       { id: 2, name: 'Remove from favorite' },
@@ -537,6 +531,21 @@ export default {
       { id: 5, name: 'Edit Price' },
       { id: 6, name: 'Delete' }
     ]
+  },
+  labels: {
+    categoryId: 'Category',
+    kindId: 'Type',
+    realestateId: 'Real Estate',
+    serviceId: ' Service',
+    brandId: 'Brand',
+    subBrandId: 'Sub Brand',
+    eBrandId: 'Brand',
+    isnew: 'New / Used',
+    issale: 'Sale / Rent',
+    isfurnishered: 'Furnisher',
+    rooms: 'Room',
+    bathrooms: 'Bathroom',
+    year: 'Year'
   },
 
   post: {

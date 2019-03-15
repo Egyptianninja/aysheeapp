@@ -392,6 +392,7 @@ class HomeScreen extends React.Component<any, any> {
           navigation={this.props.navigation}
           addFilter={this.addFilter}
           removeAllFilters={this.removeAllFilters}
+          word={words}
         />
         <Animated.View
           style={{

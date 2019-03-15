@@ -49,7 +49,8 @@ export const AppStackNavigator = createStackNavigator(
     ChoiseScreen: {
       screen: ChoiseScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: 'اضافة اعلان جديد',
+        title: navigation.getParam('title'),
+        // title: `${word.addnewad}`,
         headerBackTitle: null
       })
     },
@@ -111,7 +112,7 @@ export const AppStackNavigator = createStackNavigator(
     MyFavScreen: {
       screen: MyFavScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: 'المفضلة',
+        title: navigation.getParam('title'),
         headerBackTitle: null
       })
     },
@@ -130,8 +131,8 @@ export const AppStackNavigator = createStackNavigator(
     },
     ShopsScreen: {
       screen: ShopsScreen,
-      navigationOptions: () => ({
-        title: 'قسم المتاجر',
+      navigationOptions: ({ navigation }: any) => ({
+        title: navigation.getParam('title'),
         headerBackTitle: null
       })
     },

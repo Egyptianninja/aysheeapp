@@ -108,7 +108,9 @@ class PhoneScreen extends React.Component<any, any> {
                   title: this.props.words.apdateaccount
                 })
             : add
-            ? this.props.navigation.navigate('ChoiseScreen')
+            ? this.props.navigation.navigate('ChoiseScreen', {
+                title: this.props.words.addnewad
+              })
             : this.props.navigation.navigate('App');
         }
       } else {

@@ -59,34 +59,32 @@ class HomeHeader extends React.Component<any, any> {
           ]}
         >
           <TouchableOpacity
-            onPress={() => {
-              const handleHome = this.props.navigation.getParam('handleHome');
-              this.hideSearch();
-              handleHome();
-            }}
+            onPress={() => this.props.navigation.toggleDrawer()}
             style={{
               paddingHorizontal: 5,
-              paddingRight: 5,
-              paddingVertical: 4
+              paddingVertical: 15,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 5
             }}
           >
             <View
               style={{
-                width: 26,
-                height: 26
+                width: 28,
+                height: 20
               }}
             >
               <Image
                 style={{
                   flex: 1,
-                  width: '100%',
-                  height: '100%',
-                  tintColor: '#fff'
+                  width: undefined,
+                  height: undefined
                 }}
-                source={home}
+                source={mainmenu}
               />
             </View>
           </TouchableOpacity>
+
           {this.props.isAuthenticated && (
             <TouchableOpacity
               onPress={() => {
@@ -189,29 +187,32 @@ class HomeHeader extends React.Component<any, any> {
         </View>
         <View style={[styles.rightIconView, { flex: 1.5 }]}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.toggleDrawer()}
+            onPress={() => {
+              const handleHome = this.props.navigation.getParam('handleHome');
+              this.hideSearch();
+              handleHome();
+            }}
             style={{
-              paddingHorizontal: 10,
-              paddingVertical: 15,
-              justifyContent: 'center',
-              alignItems: 'center',
+              paddingHorizontal: 5,
+              paddingRight: 5,
               marginRight: 10,
-              marginTop: 5
+              paddingVertical: 4
             }}
           >
             <View
               style={{
-                width: 28,
-                height: 20
+                width: 26,
+                height: 26
               }}
             >
               <Image
                 style={{
                   flex: 1,
-                  width: undefined,
-                  height: undefined
+                  width: '100%',
+                  height: '100%',
+                  tintColor: '#fff'
                 }}
-                source={mainmenu}
+                source={home}
               />
             </View>
           </TouchableOpacity>

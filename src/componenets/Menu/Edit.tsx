@@ -417,7 +417,7 @@ export default class Edit extends React.Component<any, any> {
                               { alignSelf: 'flex-end', paddingRight: 35 }
                             ]}
                           >
-                            اختيار صورة العرض
+                            {word.selectphoto}
                           </Text>
                           <TouchableWithoutFeedback
                             onPress={() => this.onPhotoUpload(setFieldValue)}
@@ -498,7 +498,7 @@ export default class Edit extends React.Component<any, any> {
                           rtl={isRTL}
                           name="startend"
                           period={true}
-                          label="تحديد بداية و نهاية العرض"
+                          label={word.startendoffer}
                           labelStyle={styles.labelStyle}
                           value={values.startend}
                           onChange={setFieldValue}

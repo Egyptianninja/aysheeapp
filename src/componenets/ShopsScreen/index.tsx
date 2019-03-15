@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { AvatarCircle } from '../Avatar';
 
-const ShopItem = ({ user, navigation, width }: any) => {
+const ShopItem = ({ user, navigation, width, words }: any) => {
   return (
     <View
       style={{
@@ -84,7 +84,7 @@ const ShopItem = ({ user, navigation, width }: any) => {
               fontSize: 12
             }}
           >
-            العروض {user.offersqty}
+            {words.offers} {user.offersqty}
           </Text>
           <Text
             style={{
@@ -94,7 +94,7 @@ const ShopItem = ({ user, navigation, width }: any) => {
               fontSize: 12
             }}
           >
-            الاعلانات {user.onlineqty}
+            {words.ads} {user.onlineqty}
           </Text>
         </View>
       </View>

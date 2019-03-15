@@ -41,6 +41,7 @@ import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
 import { MenuIconHeader } from './MenuIconHeader';
+import { InstagramProvider } from '../../utils/instgram';
 
 const { width, height } = Dimensions.get('window');
 
@@ -79,7 +80,8 @@ class ItemView extends React.Component<any, any> {
     inputBarText: '',
     cursor: 0,
     opacity: 1,
-    bottomPadding: 0
+    bottomPadding: 0,
+    scrollEnabled: true
   };
 
   componentWillMount() {
@@ -448,337 +450,311 @@ class ItemView extends React.Component<any, any> {
           </View>
           <MenuIconHeader showMenuModal={this.showMenuModal} />
         </Animated.View>
-        <ScrollView
-          onContentSizeChange={this.getScrollLength}
-          scrollEventThrottle={16}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            backgroundColor: '#fff',
-            paddingBottom: 50
-          }}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: { y: this.state.scrollY }
+        <InstagramProvider>
+          <ScrollView
+            onContentSizeChange={this.getScrollLength}
+            scrollEventThrottle={16}
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={this.state.scrollEnabled}
+            contentContainerStyle={{
+              backgroundColor: '#fff',
+              paddingBottom: 300
+            }}
+            onScroll={Animated.event([
+              {
+                nativeEvent: {
+                  contentOffset: { y: this.state.scrollY }
+                }
               }
-            }
-          ])}
-          ref={ref => {
-            this.scrollView = ref;
-          }}
-          style={{ backgroundColor: '#eee' }}
-        >
-          {photos.length > 0 && (
-            <View>
-              <PhotoSlider
-                photos={photos}
-                ratio={post.ratio}
-                showModal={this.showModal}
-              />
-              <Modal
-                isVisible={this.state.isModelVisible}
-                onBackdropPress={() => this.hideModal()}
-                useNativeDriver={true}
-                hideModalContentWhileAnimating={true}
-                style={{ margin: 0 }}
-              >
-                <ImageViewer
-                  imageUrls={photos}
-                  index={this.state.imageIndex}
-                  loadingRender={() => (
-                    <LoadingView width={width} height={height} />
-                  )}
-                  enableSwipeDown={true}
-                  swipeDownThreshold={100}
-                  flipThreshold={60}
-                  doubleClickInterval={240}
-                  pageAnimateTime={180}
-                  saveToLocalByLongPress={false}
-                  onSwipeDown={() => this.hideModal()}
-                  renderIndicator={() => <View />}
+            ])}
+            ref={ref => {
+              this.scrollView = ref;
+            }}
+            style={{ backgroundColor: '#eee' }}
+          >
+            {photos.length > 0 && (
+              <View>
+                <PhotoSlider
+                  photos={photos}
+                  ratio={post.ratio}
+                  showModal={this.showModal}
+                  EnableScroll={this.EnableScroll}
+                  DisableScroll={this.DisableScroll}
                 />
-                <TouchableOpacity
-                  onPress={() => this.hideModal()}
+              </View>
+            )}
+
+            {photos.length === 0 && (
+              <View
+                style={{
+                  width,
+                  height: width,
+                  backgroundColor: '#A7A9F3',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Text
                   style={{
-                    position: 'absolute',
-                    right: 20,
-                    top: Constants.statusBarHeight + 6,
-                    paddingHorizontal: 20
+                    color: '#fff',
+                    fontSize: 40,
+                    fontWeight: 'bold'
                   }}
                 >
-                  <Ionicons name="ios-close" size={40} color="#fff" />
-                </TouchableOpacity>
-              </Modal>
-            </View>
-          )}
+                  {post.title}
+                </Text>
+              </View>
+            )}
+            <View style={{ paddingHorizontal: 10 }}>
+              {(post.isfullTime === true || post.isfullTime === false) && (
+                <FullTimeView
+                  ardroid={this.ardroid}
+                  words={word}
+                  fulltimeObject={fulltimeObject}
+                />
+              )}
+              {(post.price || post.price === 0) && (
+                <PriceView
+                  ardroid={this.ardroid}
+                  words={word}
+                  price={post.price}
+                  currency={post.currency}
+                  newObject={newObject}
+                  saleObject={saleObject}
+                  furntObject={furntObject}
+                  warrantyObject={warrantyObject}
+                />
+              )}
+              {post.start && (
+                <Text
+                  style={{
+                    position: 'absolute',
+                    left: 10,
+                    top: 0,
+                    textAlign: 'left',
+                    color: '#7678ED',
+                    fontSize: 12,
+                    marginTop: 6
+                  }}
+                  numberOfLines={2}
+                >
+                  {getDate(post.start)} - {getDate(post.end)}
+                </Text>
+              )}
+              <BodyView
+                ardroid={this.ardroid}
+                title={post.title}
+                body={post.body}
+                isrtl={post.isrtl}
+                time={post.time}
+                word={word}
+              />
+              <View style={{ height: 20 }} />
 
-          {photos.length === 0 && (
-            <View
-              style={{
-                width,
-                height: width,
-                backgroundColor: '#A7A9F3',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 40,
-                  fontWeight: 'bold'
-                }}
-              >
-                {post.title}
-              </Text>
+              {myItem &&
+                renderUser({
+                  user: this.props.user,
+                  callargs,
+                  word,
+                  isAuthenticated: this.props.isAuthenticated,
+                  userId: this.props.user._id,
+                  navigation: this.props.navigation,
+                  ardroid: this.ardroid
+                })}
+              {!myItem && (
+                <Query query={getUser} variables={{ userId: post.userId }}>
+                  {({ loading, error, data }) => {
+                    if (loading) {
+                      return <Loading />;
+                    }
+                    if (error) {
+                      return <Text>{error}</Text>;
+                    }
+                    const user = data.getUser;
+                    return renderUser({
+                      user,
+                      callargs,
+                      word,
+                      isAuthenticated: this.props.isAuthenticated,
+                      userId: this.props.isAuthenticated
+                        ? this.props.user._id
+                        : undefined,
+                      navigation: this.props.navigation,
+                      ardroid: this.ardroid
+                    });
+                  }}
+                </Query>
+              )}
             </View>
-          )}
-          <View style={{ paddingHorizontal: 10 }}>
-            {(post.isfullTime === true || post.isfullTime === false) && (
-              <FullTimeView
-                ardroid={this.ardroid}
-                words={word}
-                fulltimeObject={fulltimeObject}
-              />
-            )}
-            {(post.price || post.price === 0) && (
-              <PriceView
-                ardroid={this.ardroid}
-                words={word}
-                price={post.price}
-                currency={post.currency}
-                newObject={newObject}
-                saleObject={saleObject}
-                furntObject={furntObject}
-                warrantyObject={warrantyObject}
-              />
-            )}
-            {post.start && (
-              <Text
-                style={{
-                  position: 'absolute',
-                  left: 10,
-                  top: 0,
-                  textAlign: 'left',
-                  color: '#7678ED',
-                  fontSize: 12,
-                  marginTop: 6
-                }}
-                numberOfLines={2}
-              >
-                {getDate(post.start)} - {getDate(post.end)}
-              </Text>
-            )}
-            <BodyView
-              ardroid={this.ardroid}
-              title={post.title}
-              body={post.body}
-              isrtl={post.isrtl}
-              time={post.time}
-              word={word}
-            />
             <View style={{ height: 20 }} />
-
-            {myItem &&
-              renderUser({
-                user: this.props.user,
-                callargs,
-                word,
-                isAuthenticated: this.props.isAuthenticated,
-                userId: this.props.user._id,
-                navigation: this.props.navigation,
-                ardroid: this.ardroid
-              })}
-            {!myItem && (
-              <Query query={getUser} variables={{ userId: post.userId }}>
-                {({ loading, error, data }) => {
-                  if (loading) {
-                    return <Loading />;
-                  }
-                  if (error) {
-                    return <Text>{error}</Text>;
-                  }
-                  const user = data.getUser;
-                  return renderUser({
-                    user,
-                    callargs,
-                    word,
-                    isAuthenticated: this.props.isAuthenticated,
-                    userId: this.props.isAuthenticated
-                      ? this.props.user._id
-                      : undefined,
-                    navigation: this.props.navigation,
-                    ardroid: this.ardroid
-                  });
-                }}
-              </Query>
-            )}
-          </View>
-          <View style={{ height: 20 }} />
-          <Properties
-            android={Platform.OS === 'android'}
-            isRTL={isRTL}
-            words={word}
-            data={pdata}
-          />
-          {(post.categoryId === 5 || post.categoryId === 6) && (
             <Properties
               android={Platform.OS === 'android'}
               isRTL={isRTL}
               words={word}
-              data={jdata}
+              data={pdata}
             />
-          )}
-          {post.trueLocation && (
-            <ItemLocation
-              latitude={post.trueLocation.lat}
-              longitude={post.trueLocation.lon}
-              title={post.title}
-            />
-          )}
-          {post.trueLocation && (
-            <Link
-              latitude={post.trueLocation.lat}
-              longitude={post.trueLocation.lon}
-              title={post.title}
-            />
-          )}
-          <View
-            style={{
-              marginHorizontal: 20,
-              marginTop: 20,
-              marginBottom: 5,
-              alignItems:
-                isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
-              justifyContent: 'center'
-            }}
-          >
-            <Text
+            {(post.categoryId === 5 || post.categoryId === 6) && (
+              <Properties
+                android={Platform.OS === 'android'}
+                isRTL={isRTL}
+                words={word}
+                data={jdata}
+              />
+            )}
+            {post.trueLocation && (
+              <ItemLocation
+                latitude={post.trueLocation.lat}
+                longitude={post.trueLocation.lon}
+                title={post.title}
+              />
+            )}
+            {post.trueLocation && (
+              <Link
+                latitude={post.trueLocation.lat}
+                longitude={post.trueLocation.lon}
+                title={post.title}
+              />
+            )}
+            <View
               style={{
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: '#999'
+                marginHorizontal: 20,
+                marginTop: 20,
+                marginBottom: 5,
+                alignItems:
+                  isRTL && Platform.OS !== 'android'
+                    ? 'flex-end'
+                    : 'flex-start',
+                justifyContent: 'center'
               }}
             >
-              {word.comments}
-            </Text>
-          </View>
-          <View
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  color: '#999'
+                }}
+              >
+                {word.comments}
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: '#fff',
+                paddingHorizontal: 5,
+                marginHorizontal: 10,
+                borderRadius: 10,
+                marginBottom: 10
+              }}
+            >
+              <Query
+                query={getPostComments}
+                variables={{ postId }}
+                fetchPolicy="network-only"
+              >
+                {({ subscribeToMore, fetchMore, ...result }) => (
+                  <ItemComment
+                    {...result}
+                    updateCursor={this.updateCursor}
+                    navigation={this.props.navigation}
+                    isAuthenticated={this.props.isAuthenticated}
+                    lang={this.props.lang}
+                    isRTL={this.props.isRTL}
+                    words={word}
+                    width={width}
+                    user={this.props.user}
+                    replayComment={this.replayComment}
+                    word={word}
+                    subscribeToNewComments={() =>
+                      subscribeToMore({
+                        document: commentAdded,
+                        variables: { postId },
+                        updateQuery: (prev, { subscriptionData }) => {
+                          if (!subscriptionData.data) {
+                            return prev;
+                          }
+                          const newFeedItem =
+                            subscriptionData.data.commentAdded;
+                          return {
+                            ...prev,
+                            getPostComments: [
+                              ...prev.getPostComments,
+                              newFeedItem
+                            ]
+                          };
+                        }
+                      })
+                    }
+                    fetchMoreComments={() =>
+                      fetchMore({
+                        variables: {
+                          postId,
+                          cursor: this.state.cursor
+                        },
+                        updateQuery: (
+                          previousResult: any,
+                          { fetchMoreResult }: any
+                        ) => {
+                          if (
+                            !fetchMoreResult ||
+                            fetchMoreResult.getPostComments.length === 0
+                          ) {
+                            return previousResult;
+                          }
+                          const newComments = fetchMoreResult.getPostComments.reverse();
+                          return {
+                            ...previousResult,
+                            getPostComments: [
+                              ...previousResult.getPostComments,
+                              ...newComments
+                            ]
+                          };
+                        }
+                      })
+                    }
+                  />
+                )}
+              </Query>
+            </View>
+          </ScrollView>
+        </InstagramProvider>
+        {this.props.isAuthenticated && (
+          <Animated.View
             style={{
-              flex: 1,
-              backgroundColor: '#fff',
-              paddingHorizontal: 5,
-              marginHorizontal: 10,
-              borderRadius: 10,
-              marginBottom: 10
+              width,
+              opacity: opacityStyle,
+              position: 'absolute',
+              bottom: this.state.keyboardHeight,
+              left: 0,
+              right: 0
             }}
           >
-            <Query
-              query={getPostComments}
-              variables={{ postId }}
-              fetchPolicy="network-only"
-            >
-              {({ subscribeToMore, fetchMore, ...result }) => (
-                <ItemComment
-                  {...result}
-                  updateCursor={this.updateCursor}
-                  navigation={this.props.navigation}
-                  isAuthenticated={this.props.isAuthenticated}
-                  lang={this.props.lang}
-                  isRTL={this.props.isRTL}
-                  words={word}
-                  width={width}
-                  user={this.props.user}
-                  replayComment={this.replayComment}
-                  word={word}
-                  subscribeToNewComments={() =>
-                    subscribeToMore({
-                      document: commentAdded,
-                      variables: { postId },
-                      updateQuery: (prev, { subscriptionData }) => {
-                        if (!subscriptionData.data) {
-                          return prev;
-                        }
-                        const newFeedItem = subscriptionData.data.commentAdded;
-                        return {
-                          ...prev,
-                          getPostComments: [
-                            ...prev.getPostComments,
-                            newFeedItem
-                          ]
-                        };
-                      }
-                    })
-                  }
-                  fetchMoreComments={() =>
-                    fetchMore({
-                      variables: {
-                        postId,
-                        cursor: this.state.cursor
-                      },
-                      updateQuery: (
-                        previousResult: any,
-                        { fetchMoreResult }: any
-                      ) => {
-                        if (
-                          !fetchMoreResult ||
-                          fetchMoreResult.getPostComments.length === 0
-                        ) {
-                          return previousResult;
-                        }
-                        const newComments = fetchMoreResult.getPostComments.reverse();
-                        return {
-                          ...previousResult,
-                          getPostComments: [
-                            ...previousResult.getPostComments,
-                            ...newComments
-                          ]
-                        };
-                      }
-                    })
-                  }
-                />
-              )}
-            </Query>
-          </View>
-        </ScrollView>
-        {this.props.isAuthenticated && (
-          // <Animated.View
-          //   style={{
-          //     width,
-          //     opacity: opacityStyle,
-          //     position: 'absolute',
-          //     bottom: this.state.keyboardHeight,
-          //     left: 0,
-          //     right: 0
-          //   }}
-          // >
-          <InputBar
-            onSendPressed={(postID: any) => {
-              this.sendMessage({
-                postId: postID,
-                ownerId: post.userId,
-                postTitle: post.title,
-                userName: this.props.user.name
-                  ? this.props.user.name
-                  : this.props.user.uniquename
-              });
-            }}
-            replay={{
-              id: this.state.id,
-              name: this.state.name,
-              body: this.state.body
-            }}
-            ref={this.childRef}
-            closeReplay={this.closeReplay}
-            onChangeText={(text: string) => this.onChangeInputBarText(text)}
-            text={this.state.inputBarText}
-            autoFocus={true}
-            postId={postId}
-            placeholder={word.writecomment}
-            isRTL={isRTL}
-          />
-          // </Animated.View>
+            <InputBar
+              onSendPressed={(postID: any) => {
+                this.sendMessage({
+                  postId: postID,
+                  ownerId: post.userId,
+                  postTitle: post.title,
+                  userName: this.props.user.name
+                    ? this.props.user.name
+                    : this.props.user.uniquename
+                });
+              }}
+              replay={{
+                id: this.state.id,
+                name: this.state.name,
+                body: this.state.body
+              }}
+              ref={this.childRef}
+              closeReplay={this.closeReplay}
+              onChangeText={(text: string) => this.onChangeInputBarText(text)}
+              text={this.state.inputBarText}
+              autoFocus={true}
+              postId={postId}
+              placeholder={word.writecomment}
+              isRTL={isRTL}
+            />
+          </Animated.View>
         )}
 
         <KeyboardSpacer />

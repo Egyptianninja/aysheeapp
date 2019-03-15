@@ -5,7 +5,7 @@ import Drawer from '../../componenets/Drawer';
 export const AppDrawerNavigator = createDrawerNavigator(
   { Home: AppStackNavigator },
   {
-    drawerPosition: 'right',
+    drawerPosition: 'left',
     contentComponent: Drawer,
     drawerBackgroundColor: 'transparent'
   } as any

@@ -71,7 +71,9 @@ export default class CategoriesModal extends React.Component<any, any> {
 
           <TouchableOpacity
             onPress={() => {
-              this.props.navigation.navigate('ShopsScreen');
+              this.props.navigation.navigate('ShopsScreen', {
+                title: this.props.word.storesection
+              });
               this.props.hideCategoriesModal();
             }}
             style={{
@@ -112,7 +114,7 @@ export default class CategoriesModal extends React.Component<any, any> {
               fontSize: 12
             }}
           >
-            قسم العروض
+            {this.props.word.offersection}
           </Text>
           <Text
             style={{
@@ -122,7 +124,7 @@ export default class CategoriesModal extends React.Component<any, any> {
               fontSize: 12
             }}
           >
-            قسم المتاجر
+            {this.props.word.storesection}
           </Text>
         </View>
       </View>
@@ -253,7 +255,7 @@ export default class CategoriesModal extends React.Component<any, any> {
             alignItems: 'center'
           }}
         >
-          {this.renderHeader('جميع الاقسام')}
+          {this.renderHeader(this.props.word.allcategories)}
           <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{

@@ -312,7 +312,7 @@ class ProfileScreen extends React.Component<any, any> {
                     paddingHorizontal: 10
                   }}
                 >
-                  تعديل الملف الشخصي
+                  {words.editprofile}
                 </Text>
                 <Ionicons
                   style={{ paddingRight: 10 }}
@@ -463,7 +463,7 @@ class ProfileScreen extends React.Component<any, any> {
                   fontSize: 16
                 }}
               >
-                الاعلانات ({user.onlineqty})
+                {words.ads} ({user.onlineqty})
               </Text>
             </TouchableOpacity>
 
@@ -492,7 +492,7 @@ class ProfileScreen extends React.Component<any, any> {
                     fontSize: 16
                   }}
                 >
-                  العروض ({user.offersqty})
+                  {words.offers} ({user.offersqty})
                 </Text>
               </TouchableOpacity>
             )}
@@ -521,7 +521,7 @@ class ProfileScreen extends React.Component<any, any> {
                     fontSize: 16
                   }}
                 >
-                  غير منشور ({user.offlineqty})
+                  {words.unpublished} ({user.offlineqty})
                 </Text>
               </TouchableOpacity>
             )}
@@ -531,14 +531,14 @@ class ProfileScreen extends React.Component<any, any> {
         <Query
           query={getUserPosts}
           variables={{ userId: user._id, ...this.state.rest }}
-          fetchPolicy="network-only"
+          // fetchPolicy="network-only"
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
               return <Loading />;
             }
             if (error) {
-              return <Noresult title="network error" />;
+              return <Noresult title="network issue" />;
             }
             const { posts } = data.getUserPosts;
             const rPosts = readyUserPosts(posts, 200, 79, lang);
