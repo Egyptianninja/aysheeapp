@@ -73,7 +73,8 @@ class ItemView extends React.Component<any, any> {
 
     inputBarText: '',
     cursor: 0,
-    opacity: 1
+    opacity: 1,
+    bottomPadding: 0
   };
 
   componentWillMount() {
@@ -154,10 +155,12 @@ class ItemView extends React.Component<any, any> {
   };
 
   keyboardDidShow(e: any) {
+    this.setState({ bottomPadding: e.endCoordinates.height });
     this.scrollView.scrollToEnd();
   }
 
   keyboardDidHide(e: any) {
+    this.setState({ bottomPadding: 0 });
     this.scrollView.scrollToEnd();
   }
 
@@ -714,7 +717,11 @@ class ItemView extends React.Component<any, any> {
           <Animated.View
             style={{
               width,
-              opacity: opacityStyle
+              opacity: opacityStyle,
+              position: 'absolute',
+              bottom: this.state.bottomPadding,
+              left: 0,
+              right: 0
             }}
           >
             <InputBar
