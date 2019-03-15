@@ -114,7 +114,7 @@ export default class FilterSelect extends React.Component<any, any> {
         <TouchableOpacity
           style={[
             {
-              flexDirection: 'row',
+              flexDirection: !this.props.sort ? 'row-reverse' : 'row',
               paddingVertical: 5,
               height: 38,
               minWidth: 65,
