@@ -403,9 +403,9 @@ class HomeScreen extends React.Component<any, any> {
             backgroundColor: '#fff',
             height: this.NAVBAR_HEIGHT,
             transform: [{ translateY: navbarTranslate }],
-            minHeight: 96,
-            borderBottomWidth: 1,
-            borderBottomColor: '#eee'
+            minHeight: this.NAVBAR_HEIGHT
+            // borderBottomWidth: 1,
+            // borderBottomColor: '#eee'
           }}
         >
           <CategoriesScroll

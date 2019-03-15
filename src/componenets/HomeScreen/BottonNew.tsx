@@ -46,6 +46,17 @@ const BottonNew = ({ showCategoriesModal, title }: any) => (
           color="#7678ED"
           style={{ top: 1 }}
         />
+        <View
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: 4,
+            position: 'absolute',
+            left: 12,
+            top: 12,
+            backgroundColor: '#fbbc93'
+          }}
+        />
       </View>
     </TouchableOpacity>
     <View style={styles.textView}>
