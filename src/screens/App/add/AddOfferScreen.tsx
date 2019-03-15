@@ -55,7 +55,7 @@ class AddServiceScreen extends React.Component<any, any> {
     await this.setState({ pushToken });
   }
 
-  onPhotoUpload = async () => {
+  onPhotoUpload = async (setFieldValue: any) => {
     const permissions = Permissions.CAMERA_ROLL;
     const { status: existingStatus } = await Permissions.getAsync(permissions);
     let finalStatus = existingStatus;
@@ -71,6 +71,7 @@ class AddServiceScreen extends React.Component<any, any> {
 
     if (image) {
       this.setState({ image });
+      setFieldValue('photo', image);
     }
   };
 
@@ -106,8 +107,6 @@ class AddServiceScreen extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const { title, body, startend, location, phone } = values;
     const isrtl = isArabic(title);
-
-    console.log(startend);
 
     const photo = this.state.image
       ? await uploadPickedImage(this.state.image, 1080, 0.8)
@@ -185,6 +184,7 @@ class AddServiceScreen extends React.Component<any, any> {
                 body: '',
                 startend: '',
                 phone: getPureNumber(this.props.user.phone),
+                photo: '',
                 location: false
               }}
               onSubmit={this.handleSubmit}
@@ -192,6 +192,11 @@ class AddServiceScreen extends React.Component<any, any> {
                 title: Yup.string()
                   .max(100)
                   .required('Required'),
+                body: Yup.string()
+                  .max(1000)
+                  .required('Required'),
+                photo: Yup.string().required('Required'),
+                startend: Yup.object().required('Required'),
                 phone: Yup.string()
                   .max(25)
                   .required('Required')
@@ -250,7 +255,9 @@ class AddServiceScreen extends React.Component<any, any> {
                       >
                         {word.selectphoto}
                       </Text>
-                      <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
+                      <TouchableWithoutFeedback
+                        onPress={() => this.onPhotoUpload(setFieldValue)}
+                      >
                         <View
                           style={{
                             width: width - 60,
@@ -264,15 +271,17 @@ class AddServiceScreen extends React.Component<any, any> {
                         >
                           <Ionicons
                             name="ios-camera"
-                            size={46}
-                            color="#5658AD"
+                            size={100}
+                            color="#8E90F0"
                           />
                         </View>
                       </TouchableWithoutFeedback>
                     </React.Fragment>
                   )}
                   {image && (
-                    <TouchableWithoutFeedback onPress={this.onPhotoUpload}>
+                    <TouchableWithoutFeedback
+                      onPress={() => this.onPhotoUpload(setFieldValue)}
+                    >
                       <Image
                         source={{ uri: image.uri }}
                         style={{

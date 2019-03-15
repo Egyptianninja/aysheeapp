@@ -126,8 +126,6 @@ class AddPartsScreen extends React.Component<any, any> {
       phone,
       isnew,
       iswarranty,
-      year,
-      km,
       color,
       brand,
       subBrand,
@@ -158,15 +156,11 @@ class AddPartsScreen extends React.Component<any, any> {
         phone,
         price: Number(price),
         currency: currency.name,
-        year: Number(year),
-        km: Number(km),
         color,
         brand,
         subBrand,
         trueLocation
       }
-      // refetchQueries: ['getTimeLine'],
-      // awaitRefetchQueries: true
     });
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + this.state.images.length));
@@ -218,8 +212,6 @@ class AddPartsScreen extends React.Component<any, any> {
                 iswarranty: false,
                 phone: getPureNumber(user.phone),
                 year: '',
-                color: '',
-                km: '',
                 brand: '',
                 subBrand: '',
                 location: false
@@ -237,11 +229,7 @@ class AddPartsScreen extends React.Component<any, any> {
                 price: Yup.number()
                   .integer('price must be number')
                   .required('Required'),
-                year: Yup.number()
-                  .integer('price must be number')
-                  .required('Required'),
-                km: Yup.number().integer('price must be number'),
-                color: Yup.string().max(100),
+                year: Yup.number().integer('price must be number'),
                 phone: Yup.string()
                   .max(25)
                   .required('Required')
@@ -376,21 +364,6 @@ class AddPartsScreen extends React.Component<any, any> {
                     labelStyle={styles.labelStyle}
                     error={touched.year && errors.year}
                     keyboardType="number-pad"
-                    height={40}
-                  />
-                  <Input
-                    rtl={isRTL}
-                    name="color"
-                    label={word.color}
-                    value={values.color}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.color && errors.color}
-                    autoCapitalize="none"
-                    autoCorrect={false}
                     height={40}
                   />
                   <View

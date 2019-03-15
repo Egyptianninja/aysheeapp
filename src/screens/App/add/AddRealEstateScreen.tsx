@@ -235,6 +235,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
                 body: Yup.string()
                   .max(1000)
                   .required('Required'),
+                realestate: Yup.string().required('Required'),
                 price: Yup.number()
                   .integer('price must be number')
                   .required('Required'),

@@ -211,9 +211,7 @@ class AddJobScreen extends React.Component<any, any> {
                 body: Yup.string()
                   .max(1000)
                   .required('Required'),
-                jobTitle: Yup.string()
-                  .max(100)
-                  .required('Required'),
+                jobTitle: Yup.string().max(100),
                 jobIndustry: Yup.string().max(100),
                 education: Yup.string().max(100),
                 phone: Yup.string()

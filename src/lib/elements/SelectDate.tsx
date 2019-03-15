@@ -53,11 +53,11 @@ export default class SelectDate extends React.Component<any, any> {
           {value !== '' && period && (
             <React.Fragment>
               <Text
-                style={{ fontSize: 16, paddingRight: 20, color: '#5658AD' }}
+                style={{ fontSize: 16, paddingRight: 20, color: '#7678ED' }}
               >
                 {Object.keys(this.props.value.name[0])[0]}
               </Text>
-              <Text style={{ fontSize: 16, color: '#5658AD' }}>
+              <Text style={{ fontSize: 16, color: '#7678ED' }}>
                 {
                   Object.keys(
                     this.props.value.name[this.props.value.name.length - 1]
@@ -67,12 +67,12 @@ export default class SelectDate extends React.Component<any, any> {
             </React.Fragment>
           )}
           {this.props.value !== '' && !this.props.period && (
-            <Text style={{ fontSize: 16, color: '#5658AD' }}>
+            <Text style={{ fontSize: 16, color: '#7678ED' }}>
               {this.props.value.name}
             </Text>
           )}
           {!this.props.value.name && (
-            <Ionicons name={this.props.iconName} size={46} color="#5658AD" />
+            <Ionicons name={this.props.iconName} size={80} color="#8E90F0" />
           )}
         </TouchableOpacity>
         <Modal
