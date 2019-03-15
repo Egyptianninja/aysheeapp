@@ -290,6 +290,7 @@ class ItemView extends React.Component<any, any> {
       inputRange: [0, 200],
       outputRange: [0, 1]
     });
+
     return (
       <View style={styles.container}>
         <Menu
@@ -710,31 +711,38 @@ class ItemView extends React.Component<any, any> {
           </View>
         </ScrollView>
         {this.props.isAuthenticated && (
-          <InputBar
-            onSendPressed={(postID: any) => {
-              this.sendMessage({
-                postId: postID,
-                ownerId: post.userId,
-                postTitle: post.title,
-                userName: this.props.user.name
-                  ? this.props.user.name
-                  : this.props.user.uniquename
-              });
+          <Animated.View
+            style={{
+              width,
+              opacity: opacityStyle
             }}
-            replay={{
-              id: this.state.id,
-              name: this.state.name,
-              body: this.state.body
-            }}
-            ref={this.childRef}
-            closeReplay={this.closeReplay}
-            onChangeText={(text: string) => this.onChangeInputBarText(text)}
-            text={this.state.inputBarText}
-            autoFocus={true}
-            postId={postId}
-            placeholder={word.writecomment}
-            isRTL={isRTL}
-          />
+          >
+            <InputBar
+              onSendPressed={(postID: any) => {
+                this.sendMessage({
+                  postId: postID,
+                  ownerId: post.userId,
+                  postTitle: post.title,
+                  userName: this.props.user.name
+                    ? this.props.user.name
+                    : this.props.user.uniquename
+                });
+              }}
+              replay={{
+                id: this.state.id,
+                name: this.state.name,
+                body: this.state.body
+              }}
+              ref={this.childRef}
+              closeReplay={this.closeReplay}
+              onChangeText={(text: string) => this.onChangeInputBarText(text)}
+              text={this.state.inputBarText}
+              autoFocus={true}
+              postId={postId}
+              placeholder={word.writecomment}
+              isRTL={isRTL}
+            />
+          </Animated.View>
         )}
 
         <KeyboardSpacer />
