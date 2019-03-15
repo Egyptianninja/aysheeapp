@@ -49,11 +49,16 @@ class ItemView extends React.Component<any, any> {
     header: null
   };
   ardroid = Platform.OS === 'android' && this.props.isRTL;
+
+  keyboardWillShowListener: any;
+  keyboardWillHideListener: any;
+
   keyboardDidShowListener: any;
   keyboardDidHideListener: any;
   scrollView: any;
   scrollOffset: any;
   scrollViewHeight: any;
+
   childRef: any = React.createRef();
   state = {
     isImageViewVisible: true,
@@ -70,7 +75,7 @@ class ItemView extends React.Component<any, any> {
     body: null,
     imageIndex: 0,
     scrollY: new Animated.Value(0),
-
+    keyboardHeight: new Animated.Value(0),
     inputBarText: '',
     cursor: 0,
     opacity: 1,
@@ -85,6 +90,14 @@ class ItemView extends React.Component<any, any> {
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       this.keyboardDidHide.bind(this)
+    );
+    this.keyboardWillShowListener = Keyboard.addListener(
+      'keyboardWillShow',
+      this.keyboardWillShow.bind(this)
+    );
+    this.keyboardWillHideListener = Keyboard.addListener(
+      'keyboardWillHide',
+      this.keyboardWillHide.bind(this)
     );
   }
 
@@ -154,13 +167,26 @@ class ItemView extends React.Component<any, any> {
     this.hideCheckMessageModal();
   };
 
+  keyboardWillShow(e: any) {
+    const duration = Platform.OS === 'android' ? 100 : e.duration;
+    Animated.timing(this.state.keyboardHeight, {
+      duration: duration + 100,
+      toValue: e.endCoordinates.height
+    }).start();
+  }
+  keyboardWillHide(e: any) {
+    const duration = Platform.OS === 'android' ? 100 : e.duration;
+    Animated.timing(this.state.keyboardHeight, {
+      duration: duration + 100,
+      toValue: 0
+    }).start();
+  }
+
   keyboardDidShow(e: any) {
-    this.setState({ bottomPadding: e.endCoordinates.height });
     this.scrollView.scrollToEnd();
   }
 
   keyboardDidHide(e: any) {
-    this.setState({ bottomPadding: 0 });
     this.scrollView.scrollToEnd();
   }
 
@@ -719,7 +745,7 @@ class ItemView extends React.Component<any, any> {
               width,
               opacity: opacityStyle,
               position: 'absolute',
-              bottom: this.state.bottomPadding,
+              bottom: this.state.keyboardHeight,
               left: 0,
               right: 0
             }}
