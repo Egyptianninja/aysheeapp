@@ -39,7 +39,7 @@ class EditProfileScreen extends React.Component<any, any> {
     bar: 0
   };
 
-  onAvatarUpload = async () => {
+  onAvatarUpload = async (setFieldValue: any) => {
     const permissions = Permissions.CAMERA_ROLL;
     const { status: existingStatus } = await Permissions.getAsync(permissions);
     let finalStatus = existingStatus;
@@ -55,6 +55,7 @@ class EditProfileScreen extends React.Component<any, any> {
 
     if (avatar) {
       this.setState({ avatar });
+      setFieldValue('photo', avatar);
     }
   };
 
@@ -195,6 +196,7 @@ class EditProfileScreen extends React.Component<any, any> {
                 name: user.name,
                 about: user.about,
                 color: user.color ? user.color : colors[0],
+                photo: '',
                 email: user.email,
                 website: user.website,
                 addressCountry: user.addressCountry,
@@ -221,7 +223,7 @@ class EditProfileScreen extends React.Component<any, any> {
                       style={{
                         padding: 20
                       }}
-                      onPress={this.onAvatarUpload}
+                      onPress={() => this.onAvatarUpload(setFieldValue)}
                     >
                       <AvatarCircle
                         user={user}

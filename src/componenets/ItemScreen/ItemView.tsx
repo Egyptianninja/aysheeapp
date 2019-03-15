@@ -452,7 +452,10 @@ class ItemView extends React.Component<any, any> {
           onContentSizeChange={this.getScrollLength}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ backgroundColor: '#fff' }}
+          contentContainerStyle={{
+            backgroundColor: '#fff',
+            paddingBottom: 300
+          }}
           onScroll={Animated.event([
             {
               nativeEvent: {

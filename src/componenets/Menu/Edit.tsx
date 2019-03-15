@@ -72,7 +72,7 @@ export default class Edit extends React.Component<any, any> {
     this.setState({ location });
   };
 
-  onPhotoUpload = async () => {
+  onPhotoUpload = async (setFieldValue: any) => {
     const permissions = Permissions.CAMERA_ROLL;
     const { status: existingStatus } = await Permissions.getAsync(permissions);
     let finalStatus = existingStatus;
@@ -87,6 +87,7 @@ export default class Edit extends React.Component<any, any> {
 
     if (image) {
       this.setState({ image });
+      setFieldValue('photo', image);
     }
   };
 
@@ -319,6 +320,7 @@ export default class Edit extends React.Component<any, any> {
                 body: post.body,
                 startend: period,
                 photos: post.photos,
+                photo: '',
                 price: post.price ? post.price.toString() : post.price,
                 currency: post.currency,
                 phone: post.phone,
@@ -418,7 +420,7 @@ export default class Edit extends React.Component<any, any> {
                             اختيار صورة العرض
                           </Text>
                           <TouchableWithoutFeedback
-                            onPress={this.onPhotoUpload}
+                            onPress={() => this.onPhotoUpload(setFieldValue)}
                           >
                             <View
                               style={{
@@ -448,7 +450,7 @@ export default class Edit extends React.Component<any, any> {
                       >
                         {!image && photo && (
                           <TouchableWithoutFeedback
-                            onPress={this.onPhotoUpload}
+                            onPress={() => this.onPhotoUpload(setFieldValue)}
                           >
                             <Image
                               source={{ uri: photo.uri }}
@@ -464,7 +466,7 @@ export default class Edit extends React.Component<any, any> {
                         )}
                         {image && (
                           <TouchableWithoutFeedback
-                            onPress={this.onPhotoUpload}
+                            onPress={() => this.onPhotoUpload(setFieldValue)}
                           >
                             <Image
                               source={{ uri: image.uri }}

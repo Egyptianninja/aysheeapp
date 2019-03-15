@@ -360,6 +360,7 @@ class ProfileScreen extends React.Component<any, any> {
               onPress={() =>
                 user.email ? Linking.openURL(`mailto: ${user.email}`) : null
               }
+              disabled={!user.email}
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -368,7 +369,11 @@ class ProfileScreen extends React.Component<any, any> {
                 borderRadius: 5
               }}
             >
-              <Ionicons name="ios-mail" size={31} color={maincolor} />
+              <Ionicons
+                name="ios-mail"
+                size={31}
+                color={!user.email ? '#aaa' : maincolor}
+              />
             </TouchableOpacity>
             <View
               style={{
@@ -381,6 +386,7 @@ class ProfileScreen extends React.Component<any, any> {
               onPress={() =>
                 user.website ? Linking.openURL(`http://${user.website}`) : null
               }
+              disabled={!user.website}
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -389,7 +395,11 @@ class ProfileScreen extends React.Component<any, any> {
                 borderRadius: 5
               }}
             >
-              <Ionicons name="ios-globe" size={31} color={maincolor} />
+              <Ionicons
+                name="ios-globe"
+                size={31}
+                color={!user.website ? '#aaa' : maincolor}
+              />
             </TouchableOpacity>
             <View
               style={{
@@ -400,6 +410,7 @@ class ProfileScreen extends React.Component<any, any> {
             />
             <TouchableOpacity
               onPress={() => this.showMapModal()}
+              disabled={!user.location}
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -408,7 +419,11 @@ class ProfileScreen extends React.Component<any, any> {
                 borderRadius: 5
               }}
             >
-              <Ionicons name="ios-map" size={31} color={maincolor} />
+              <Ionicons
+                name="ios-map"
+                size={31}
+                color={!user.location ? '#aaa' : maincolor}
+              />
             </TouchableOpacity>
           </Animated.View>
           <Animated.View
@@ -516,6 +531,7 @@ class ProfileScreen extends React.Component<any, any> {
         <Query
           query={getUserPosts}
           variables={{ userId: user._id, ...this.state.rest }}
+          fetchPolicy="network-only"
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
