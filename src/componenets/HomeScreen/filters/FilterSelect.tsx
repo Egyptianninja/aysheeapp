@@ -114,7 +114,7 @@ export default class FilterSelect extends React.Component<any, any> {
         <TouchableOpacity
           style={[
             {
-              flexDirection: isRTL ? 'row' : 'row-reverse',
+              flexDirection: 'row',
               paddingVertical: 5,
               height: 38,
               minWidth: 65,
@@ -128,16 +128,6 @@ export default class FilterSelect extends React.Component<any, any> {
                   borderWidth: 1,
                   borderColor: '#ddd',
                   paddingLeft: 10
-                  // backgroundColor: '#fafafa',
-                  // shadowColor: '#000',
-                  // shadowOffset: {
-                  //   width: 0,
-                  //   height: 2
-                  // },
-                  // shadowOpacity: 0.25,
-                  // shadowRadius: 3.84,
-
-                  // elevation: 5
                 }
               : {}
           ]}

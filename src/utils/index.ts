@@ -58,6 +58,7 @@ import {
 } from './notifications';
 import { onShare } from './share';
 import { since } from './since';
+import { isIphoneX } from './platform/iphonex';
 export {
   StyleSheet,
   uploadPhoto,
@@ -111,5 +112,6 @@ export {
   pickImageWithoutUpload,
   uploadPickedImage,
   getDate,
-  getCurrency
+  getCurrency,
+  isIphoneX
 };

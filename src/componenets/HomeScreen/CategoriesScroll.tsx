@@ -205,7 +205,6 @@ class CategoriesScroll extends React.Component<any, any> {
                 top: -4,
                 zIndex: 10,
                 padding: 5,
-                flexDirection: 'row',
                 justifyContent: 'flex-end'
               }}
             >

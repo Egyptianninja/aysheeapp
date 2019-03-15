@@ -14,10 +14,10 @@ import { Loading, Noresult } from '../../componenets';
 import { OffersSlider } from '../../componenets/OffersScreen';
 import { User } from '../../componenets/User/User';
 import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
-import { readyUserPosts } from '../../utils';
+import { readyUserPosts, isIphoneX } from '../../utils';
 
 const HEIGHT = Dimensions.get('window').height;
-
+const iphoneX = isIphoneX();
 class OffersScreen extends Component<any, any> {
   static navigationOptions = { header: null };
   constructor(props: any) {
@@ -33,7 +33,10 @@ class OffersScreen extends Component<any, any> {
     return (
       <View
         key={_id}
-        style={[styles.exampleContainer, { backgroundColor: color }]}
+        style={[
+          styles.exampleContainer,
+          { backgroundColor: color, paddingTop: iphoneX ? 30 : 0 }
+        ]}
       >
         <User
           navigation={this.props.navigation}
@@ -61,7 +64,7 @@ class OffersScreen extends Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: 25,
+            top: iphoneX ? 55 : 25,
             left: 0,
             zIndex: 100,
             width: 40,
@@ -100,7 +103,8 @@ class OffersScreen extends Component<any, any> {
                 indicatorStyle={'white'}
                 scrollEventThrottle={16}
                 decelerationRate={0}
-                snapToInterval={HEIGHT - 55}
+                // snapToInterval={HEIGHT - 55}
+                snapToInterval={iphoneX ? HEIGHT - 155 : HEIGHT - 55}
                 snapToAlignment={'start'}
                 showsVerticalScrollIndicator={false}
                 directionalLockEnabled={true}
@@ -122,16 +126,16 @@ class OffersScreen extends Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#CDCDF8'
   },
   scrollview: {
     flex: 1
   },
   scrollviewContentContainer: {
-    paddingBottom: 55
+    paddingBottom: iphoneX ? 155 : 55
   },
   exampleContainer: {
-    height: HEIGHT - 55
+    height: iphoneX ? HEIGHT - 155 : HEIGHT - 55
   },
   title: {
     paddingHorizontal: 30,
