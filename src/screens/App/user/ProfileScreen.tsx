@@ -43,7 +43,7 @@ class ProfileScreen extends React.Component<any, any> {
       isMessageVisible: false,
       isMapModalVisible: false,
       modalPost: null,
-      rest: {},
+      rest: { islive: true },
       tab: 1
     };
   }
@@ -357,7 +357,9 @@ class ProfileScreen extends React.Component<any, any> {
               }}
             />
             <TouchableOpacity
-              onPress={() => Linking.openURL(user.email)}
+              onPress={() =>
+                user.email ? Linking.openURL(`mailto: ${user.email}`) : null
+              }
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -376,7 +378,9 @@ class ProfileScreen extends React.Component<any, any> {
               }}
             />
             <TouchableOpacity
-              onPress={() => Linking.openURL(user.website)}
+              onPress={() =>
+                user.website ? Linking.openURL(`http://${user.website}`) : null
+              }
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -434,7 +438,7 @@ class ProfileScreen extends React.Component<any, any> {
                 // marginLeft: 9
               }}
               onPress={() => {
-                this.setState({ rest: {}, tab: 1 });
+                this.setState({ rest: { islive: true }, tab: 1 });
               }}
             >
               <Text
