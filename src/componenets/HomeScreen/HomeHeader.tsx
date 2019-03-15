@@ -114,10 +114,10 @@ class HomeHeader extends React.Component<any, any> {
                     width: 12,
                     height: 12,
                     borderRadius: 6,
-                    backgroundColor: '#FFCC00',
+                    backgroundColor: '#FFC100',
                     position: 'absolute',
-                    right: 0,
-                    top: 7
+                    right: 2,
+                    top: 8
                   }}
                 />
               )}
