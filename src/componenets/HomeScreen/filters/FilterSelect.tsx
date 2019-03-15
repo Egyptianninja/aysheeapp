@@ -114,28 +114,30 @@ export default class FilterSelect extends React.Component<any, any> {
         <TouchableOpacity
           style={[
             {
-              flexDirection:
-                isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-              padding: 5,
+              flexDirection: isRTL ? 'row' : 'row-reverse',
+              paddingVertical: 5,
               height: 38,
               minWidth: 65,
               borderRadius: 18,
-              marginHorizontal: this.props.sort ? 0 : 5,
+              marginHorizontal: 5,
               justifyContent: 'center',
               alignItems: 'center'
             },
             !this.props.sort
               ? {
-                  backgroundColor: '#fafafa',
-                  shadowColor: '#000',
-                  shadowOffset: {
-                    width: 0,
-                    height: 2
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 3.84,
+                  borderWidth: 1,
+                  borderColor: '#ddd',
+                  paddingLeft: 10
+                  // backgroundColor: '#fafafa',
+                  // shadowColor: '#000',
+                  // shadowOffset: {
+                  //   width: 0,
+                  //   height: 2
+                  // },
+                  // shadowOpacity: 0.25,
+                  // shadowRadius: 3.84,
 
-                  elevation: 5
+                  // elevation: 5
                 }
               : {}
           ]}
@@ -165,7 +167,7 @@ export default class FilterSelect extends React.Component<any, any> {
           </Text>
           {!this.props.sort && (
             <Ionicons
-              style={{ paddingHorizontal: 10, top: 2 }}
+              style={{ paddingLeft: 10, top: 2 }}
               name="md-arrow-dropdown"
               size={24}
               color={selected ? '#7678ED' : '#555'}
