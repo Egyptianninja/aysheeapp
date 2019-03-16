@@ -165,9 +165,9 @@ export default class FilterSelect extends React.Component<any, any> {
           )}
           {this.props.sort && (
             <Ionicons
-              style={{ marginLeft: 5, paddingRight: 10 }}
+              style={{ marginLeft: 5, paddingRight: 5 }}
               name="ios-funnel"
-              size={30}
+              size={26}
               color="#8E90F0"
             />
           )}

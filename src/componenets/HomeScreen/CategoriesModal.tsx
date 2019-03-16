@@ -47,20 +47,28 @@ export default class CategoriesModal extends React.Component<any, any> {
             }}
             style={{
               flex: 1,
-              backgroundColor: '#eee',
+              margin: 5,
               marginRight: 7,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 8,
               borderColor: '#aaa',
               borderWidth: 1,
-              overflow: 'hidden'
+              shadowColor: '#555',
+              shadowOffset: {
+                width: 0,
+                height: 5
+              },
+              shadowOpacity: 0.4,
+              shadowRadius: 5,
+              elevation: 5
             }}
           >
             <Image
               style={[
                 {
                   flex: 1,
+                  borderRadius: 8,
                   width: '100%',
                   height: '100%'
                 }
@@ -78,19 +86,28 @@ export default class CategoriesModal extends React.Component<any, any> {
             }}
             style={{
               flex: 1,
-              marginLeft: 7,
+              margin: 5,
+              marginRight: 7,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 8,
               borderColor: '#aaa',
               borderWidth: 1,
-              overflow: 'hidden'
+              shadowColor: '#555',
+              shadowOffset: {
+                width: 0,
+                height: 5
+              },
+              shadowOpacity: 0.4,
+              shadowRadius: 5,
+              elevation: 5
             }}
           >
             <Image
               style={[
                 {
                   flex: 1,
+                  borderRadius: 8,
                   width: '100%',
                   height: '100%'
                 }
@@ -111,7 +128,7 @@ export default class CategoriesModal extends React.Component<any, any> {
               color: '#171717',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
-              fontSize: 12
+              fontSize: 14
             }}
           >
             {this.props.word.offersection}
@@ -121,7 +138,7 @@ export default class CategoriesModal extends React.Component<any, any> {
               color: '#171717',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
-              fontSize: 12
+              fontSize: 14
             }}
           >
             {this.props.word.storesection}
@@ -177,30 +194,39 @@ export default class CategoriesModal extends React.Component<any, any> {
         style={{
           flexDirection: 'row',
           width: width - 20,
-          height: 50
+          height: 50,
+          backgroundColor: '#ddd',
+          shadowColor: '#555',
+          shadowOffset: {
+            width: 0,
+            height: 5
+          },
+          shadowOpacity: 0.4,
+          shadowRadius: 5,
+          elevation: 5
         }}
       >
         <TouchableOpacity
           onPress={() => this.props.hideCategoriesModal()}
           style={{
             position: 'absolute',
-            top: 5,
-            left: 20,
+            top: 0,
             zIndex: 10,
-            width: 32,
-            height: 32,
+            width: 60,
+            height: 50,
             borderRadius: 16,
             justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+            alignItems: 'center'
           }}
         >
           <Text
             style={{
-              color: '#777',
+              color: '#171717',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
-              fontSize: 18
+              fontSize: 18,
+              paddingHorizontal: 15,
+              paddingVertical: 10
             }}
           >
             ⤬
@@ -215,7 +241,7 @@ export default class CategoriesModal extends React.Component<any, any> {
         >
           <Text
             style={{
-              color: '#777',
+              color: '#171717',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
               fontSize: 18
@@ -234,29 +260,31 @@ export default class CategoriesModal extends React.Component<any, any> {
       <Modal
         isVisible={this.state.isCategoriesModalVisible}
         onBackdropPress={() => this.props.hideCategoriesModal()}
-        backdropOpacity={0.2}
+        backdropOpacity={0.4}
         useNativeDriver={true}
-        animationIn="zoomIn"
-        animationOut="zoomOut"
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
         hideModalContentWhileAnimating={true}
         style={{ flex: 1, margin: 0 }}
       >
         <View
           style={{
             backgroundColor: '#fff',
-            borderRadius: 10,
             position: 'absolute',
             bottom: 0,
             margin: 10,
             height: height - 80,
-            paddingTop: 10,
             width: width - 20,
             justifyContent: 'space-around',
             alignItems: 'center'
           }}
         >
           {this.renderHeader(this.props.word.allcategories)}
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{ paddingTop: 10 }}
+            contentContainerStyle={{ paddingBottom: 30 }}
+          >
             <View
               style={{
                 width: width - 20,

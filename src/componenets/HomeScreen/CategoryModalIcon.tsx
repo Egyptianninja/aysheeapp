@@ -21,27 +21,36 @@ const CategoryModalIcon = ({
         hideCategoriesModal();
       }}
       style={{
-        padding: 5
+        paddingHorizontal: 10,
+        paddingVertical: 10
       }}
     >
       <View
         style={{
-          width: (width - 20) / 3 - 15,
-          height: (width - 20) / 3 - 15,
+          width: (width - 20) / 3 - 25,
+          height: (width - 20) / 3 - 25,
           justifyContent: 'center',
           alignItems: 'center',
           alignSelf: 'center',
           backgroundColor: '#fff',
-          overflow: 'hidden',
           borderRadius: 8,
           borderColor: '#ddd',
-          borderWidth: 1
+          borderWidth: 1,
+          shadowColor: '#555',
+          shadowOffset: {
+            width: 0,
+            height: 5
+          },
+          shadowOpacity: 0.4,
+          shadowRadius: 5,
+          elevation: 5
         }}
       >
         <Image
           style={[
             {
               flex: 1,
+              borderRadius: 8,
               width: '100%',
               height: '100%'
             }
@@ -56,7 +65,7 @@ const CategoryModalIcon = ({
             color: '#171717',
             textAlign: 'center',
             fontFamily: 'cairo-regular',
-            fontSize: 12
+            fontSize: 14
           }}
         >
           {item.name}

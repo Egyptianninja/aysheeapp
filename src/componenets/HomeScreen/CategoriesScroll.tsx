@@ -204,10 +204,11 @@ class CategoriesScroll extends React.Component<any, any> {
               style={{
                 position: 'absolute',
                 right: -5,
-                top: -4,
+                top: -2,
                 zIndex: 10,
                 padding: 5,
-                justifyContent: 'flex-end'
+                justifyContent: 'flex-end',
+                flexDirection: 'row'
               }}
             >
               <FilterSelect
@@ -220,6 +221,37 @@ class CategoriesScroll extends React.Component<any, any> {
                 rest={rest}
                 words={words}
               />
+              <TouchableOpacity
+                onPress={() => this.props.showCategoriesModal()}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  height: 30,
+                  width: 45,
+                  paddingRight: 10,
+                  paddingLeft: 10,
+                  top: -2
+                }}
+              >
+                <Ionicons
+                  name="ios-keypad"
+                  size={30}
+                  color="#7678ED"
+                  style={{ top: 1 }}
+                />
+                <View
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: 3.5,
+                    position: 'absolute',
+                    left: 10,
+                    top: 4,
+                    backgroundColor: '#fbbc93'
+                  }}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         )}
