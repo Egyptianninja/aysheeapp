@@ -391,20 +391,28 @@ class ItemView extends React.Component<any, any> {
             left: this.ardroid ? undefined : 8,
             right: this.ardroid ? 10 : undefined,
             zIndex: 860,
-            width: 32,
-            height: 32,
-            borderRadius: 16,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            width: 60,
+            height: 50,
+            borderRadius: 16
           }}
         >
-          <Ionicons
-            name="ios-arrow-back"
-            size={30}
-            style={styles.icon}
-            color="#fff"
-          />
+          <View
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 16,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }}
+          >
+            <Ionicons
+              name="ios-arrow-back"
+              size={30}
+              style={styles.icon}
+              color="#fff"
+            />
+          </View>
         </TouchableOpacity>
         {/* header */}
         <Animated.View

@@ -296,30 +296,38 @@ class ProfileScreen extends React.Component<any, any> {
                   this.props.navigation.navigate('EditProfileScreen');
                 }}
                 style={{
-                  marginTop: 5,
-                  borderColor: '#ddd',
-                  borderWidth: 1,
-                  borderRadius: 5,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-around'
+                  paddingTop: 5,
+                  paddingBottom: 10,
+                  paddingRight: 10
                 }}
               >
-                <Text
+                <View
                   style={{
-                    fontFamily: 'cairo-regular',
-                    fontSize: 12,
-                    paddingHorizontal: 10
+                    marginTop: 5,
+                    borderColor: '#ddd',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-around'
                   }}
                 >
-                  {words.editprofile}
-                </Text>
-                <Ionicons
-                  style={{ paddingRight: 10 }}
-                  name="md-person"
-                  size={24}
-                  color="#000"
-                />
+                  <Text
+                    style={{
+                      fontFamily: 'cairo-regular',
+                      fontSize: 12,
+                      paddingHorizontal: 10
+                    }}
+                  >
+                    {words.editprofile}
+                  </Text>
+                  <Ionicons
+                    style={{ paddingRight: 10 }}
+                    name="md-person"
+                    size={24}
+                    color="#000"
+                  />
+                </View>
               </TouchableOpacity>
             )}
           </Animated.View>
@@ -343,8 +351,9 @@ class ProfileScreen extends React.Component<any, any> {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginHorizontal: 10,
-                borderRadius: 5
+                borderRadius: 5,
+
+                paddingVertical: 5
               }}
             >
               <Ionicons name="ios-call" size={31} color={maincolor} />
@@ -365,8 +374,9 @@ class ProfileScreen extends React.Component<any, any> {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginHorizontal: 10,
-                borderRadius: 5
+                borderRadius: 5,
+
+                paddingVertical: 5
               }}
             >
               <Ionicons
@@ -391,8 +401,9 @@ class ProfileScreen extends React.Component<any, any> {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginHorizontal: 10,
-                borderRadius: 5
+                borderRadius: 5,
+
+                paddingVertical: 5
               }}
             >
               <Ionicons
@@ -415,8 +426,9 @@ class ProfileScreen extends React.Component<any, any> {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginHorizontal: 10,
-                borderRadius: 5
+                borderRadius: 5,
+
+                paddingVertical: 5
               }}
             >
               <Ionicons

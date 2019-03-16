@@ -52,7 +52,7 @@ class HomeHeader extends React.Component<any, any> {
           style={[
             styles.leftIconView,
             {
-              flex: this.props.isAuthenticated ? 3 : 1.5,
+              flex: this.props.isAuthenticated ? 3.5 : 1.5,
               flexDirection: this.ardroid ? 'row-reverse' : 'row',
               justifyContent: 'flex-start'
             }
@@ -61,8 +61,8 @@ class HomeHeader extends React.Component<any, any> {
           <TouchableOpacity
             onPress={() => this.props.navigation.toggleDrawer()}
             style={{
-              paddingHorizontal: 5,
-              paddingVertical: 15,
+              paddingHorizontal: 8,
+              paddingVertical: 8,
               justifyContent: 'center',
               alignItems: 'center',
               marginTop: 5
@@ -70,8 +70,8 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 28,
-                height: 20
+                width: 30,
+                height: 22
               }}
             >
               <Image
@@ -95,10 +95,9 @@ class HomeHeader extends React.Component<any, any> {
                 this.props.navigation.navigate('NotificationsScreen');
               }}
               style={{
-                paddingHorizontal: 7,
-                marginLeft: 2,
-                paddingVertical: 7,
-                paddingRight: 5
+                paddingHorizontal: 10,
+                paddingTop: 8,
+                paddingRight: 12
               }}
             >
               <Ionicons
@@ -127,7 +126,7 @@ class HomeHeader extends React.Component<any, any> {
           style={[
             styles.searchView,
             {
-              flex: 12,
+              flex: 10,
               flexDirection: this.ardroid ? 'row-reverse' : 'row'
             }
           ]}
@@ -144,7 +143,7 @@ class HomeHeader extends React.Component<any, any> {
             <React.Fragment>
               <View
                 style={{
-                  flex: 12,
+                  flex: 10,
                   justifyContent: 'center',
                   alignItems: 'center'
                 }}
@@ -168,24 +167,23 @@ class HomeHeader extends React.Component<any, any> {
               <TouchableOpacity
                 onPress={() => this.showSearch()}
                 style={{
-                  flex: 1.5,
+                  flex: 1.75,
                   justifyContent: 'center',
                   alignItems: 'center',
                   paddingVertical: 9,
-                  paddingLeft: 6,
-                  paddingHorizontal: 8
+                  paddingLeft: 5
                 }}
               >
                 <Ionicons
                   style={{ color: '#fff' }}
                   name="ios-search"
-                  size={26}
+                  size={28}
                 />
               </TouchableOpacity>
             </React.Fragment>
           )}
         </View>
-        <View style={[styles.rightIconView, { flex: 1.5 }]}>
+        <View style={[styles.rightIconView, { flex: 1.75 }]}>
           <TouchableOpacity
             onPress={() => {
               const handleHome = this.props.navigation.getParam('handleHome');
@@ -193,10 +191,9 @@ class HomeHeader extends React.Component<any, any> {
               handleHome();
             }}
             style={{
-              paddingHorizontal: 5,
-              paddingRight: 5,
-              marginRight: 10,
-              paddingVertical: 4
+              paddingHorizontal: 8,
+              paddingRight: 10,
+              paddingVertical: 7
             }}
           >
             <View
@@ -232,7 +229,6 @@ const styles = StyleSheet.create({
   },
   leftIconView: {
     flex: 3,
-    paddingHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center'
   },

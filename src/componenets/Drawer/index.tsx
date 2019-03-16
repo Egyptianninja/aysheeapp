@@ -107,6 +107,7 @@ class Drawer extends React.Component<any, any> {
         <TouchableOpacity
           onPress={() => this.menuAction(menu.id)}
           key={menu.id}
+          style={{ marginVertical: 2 }}
         >
           <View
             style={{
@@ -239,7 +240,7 @@ class Drawer extends React.Component<any, any> {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: '#F2F2FD'
+          backgroundColor: '#fff'
         }}
       >
         <ScrollView style={{ flex: 2 }} scrollEventThrottle={60}>

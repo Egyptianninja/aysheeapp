@@ -3,10 +3,13 @@ import { View, Image, TouchableOpacity } from 'react-native';
 import { icons } from '../../load';
 const icon = icons.itemmenuiconup.icon();
 
-export const MenuIconHeader = ({ showMenuModal, post }: any) => (
+export const MenuIconHeader = ({ showMenuModal }: any) => (
   <TouchableOpacity
     onPress={() => showMenuModal()}
-    style={{ paddingHorizontal: 10 }}
+    style={{
+      paddingLeft: 13,
+      paddingRight: 7
+    }}
   >
     <View
       style={{

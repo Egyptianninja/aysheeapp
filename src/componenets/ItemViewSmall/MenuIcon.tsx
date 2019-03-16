@@ -8,9 +8,11 @@ export const MenuIcon = ({ showMenuModal, post }: any) => (
     onPress={() => showMenuModal(post)}
     style={{
       position: 'absolute',
-      right: 3,
-      top: 10,
-      marginRight: 2,
+      paddingRight: 8,
+      paddingLeft: 12,
+      paddingVertical: 10,
+      right: 0,
+      top: 0,
       zIndex: 100
     }}
   >
@@ -18,7 +20,7 @@ export const MenuIcon = ({ showMenuModal, post }: any) => (
       style={{
         borderRadius: 6,
         width: 20,
-        height: 35,
+        height: 38,
         backgroundColor: 'rgba(0, 0, 0, 0.1)'
       }}
     >

@@ -22,6 +22,7 @@ import {
   UpgradeToStore
 } from '../../screens';
 import { StyleSheet } from '../../utils';
+import { BackIcon } from '../../componenets';
 
 export const AppStackNavigator = createStackNavigator(
   {
@@ -50,7 +51,6 @@ export const AppStackNavigator = createStackNavigator(
       screen: ChoiseScreen,
       navigationOptions: ({ navigation }: any) => ({
         title: navigation.getParam('title'),
-        // title: `${word.addnewad}`,
         headerBackTitle: null
       })
     },
@@ -158,7 +158,8 @@ export const AppStackNavigator = createStackNavigator(
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold'
-      }
+      },
+      headerBackImage: <BackIcon />
     }
   }
 );

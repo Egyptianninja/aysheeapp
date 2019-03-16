@@ -135,9 +135,11 @@ class CategoriesScroll extends React.Component<any, any> {
                 style={{
                   position: 'absolute',
                   left: -2,
-                  top: -4,
+                  top: -2,
                   zIndex: 10,
-                  padding: 5
+                  paddingVertical: 3,
+                  paddingLeft: 7,
+                  paddingHorizontal: 13
                 }}
                 onPress={() => this.props.removeAllFilters()}
               >
