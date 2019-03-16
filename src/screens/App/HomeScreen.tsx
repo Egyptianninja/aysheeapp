@@ -267,6 +267,9 @@ class HomeScreen extends React.Component<any, any> {
 
   addFilter = (itemKind: any, value: any) => {
     this.setState({ rest: { ...this.state.rest, [itemKind]: value } });
+    if (itemKind === 'sortType' && value === 3) {
+      this.setState({ loadinLocation: true });
+    }
   };
   removeFilter = (itemKind: any) => {
     const filters = this.state.rest;

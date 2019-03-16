@@ -7,7 +7,7 @@ import {
   ScrollView
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { FilterOption } from './FilterOption';
+import FilterOption from './FilterOption';
 import { Platform } from 'expo-core';
 import { Ionicons } from '@expo/vector-icons';
 

@@ -5,7 +5,7 @@ import { Animated, Easing } from 'react-native';
 export default class Indicator extends React.PureComponent<any, any> {
   static defaultProps = {
     animationEasing: Easing.linear,
-    animationDuration: 750,
+    animationDuration: 1000,
 
     animating: true,
     interaction: true,

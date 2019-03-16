@@ -1,13 +1,7 @@
 import * as React from 'react';
-import { DotIndicatorSmall } from '../../utils';
+// import { DotIndicatorSmall } from '../../utils';
+import PulseIndicator from '../../utils/loading/PulseIndicator';
 
-const LoadingTiny = () => (
-  <DotIndicatorSmall
-    count={3}
-    size={6}
-    // colors={['#7678ED', '#00B77C', '#E85255']}
-    // color="#7678ED"
-  />
-);
+const LoadingTiny = () => <PulseIndicator color="#7678ED" size={20} />;
 
 export default LoadingTiny;
