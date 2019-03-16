@@ -4,8 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 
 const BackIcon = ({ navigation }: any) => {
   return (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
+    <View
       style={{
         top: 5,
         left: 0,
@@ -25,7 +24,7 @@ const BackIcon = ({ navigation }: any) => {
       >
         <Ionicons name="ios-arrow-back" size={30} color="#fff" />
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

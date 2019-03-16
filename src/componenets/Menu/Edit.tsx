@@ -293,6 +293,7 @@ export default class Edit extends React.Component<any, any> {
       <Modal
         isVisible={this.state.isEditModalVisible}
         onBackdropPress={() => this.props.hideEditModal()}
+        onBackButtonPress={() => this.props.hideEditModal()}
         backdropOpacity={0.8}
         useNativeDriver={true}
         animationIn="slideInUp"

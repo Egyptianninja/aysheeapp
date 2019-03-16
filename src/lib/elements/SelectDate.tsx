@@ -78,6 +78,7 @@ export default class SelectDate extends React.Component<any, any> {
         <Modal
           isVisible={this.state.isModalVisible}
           onBackdropPress={() => this.setState({ isModalVisible: false })}
+          onBackButtonPress={() => this.setState({ isModalVisible: false })}
           backdropOpacity={0.2}
           useNativeDriver={true}
           hideModalContentWhileAnimating={true}

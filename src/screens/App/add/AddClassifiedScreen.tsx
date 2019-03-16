@@ -281,7 +281,6 @@ class AddClassifiedScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Title width={width - 40}>{word.addnewad}</Title>
                   <Input
                     rtl={isRTL}
                     name="title"

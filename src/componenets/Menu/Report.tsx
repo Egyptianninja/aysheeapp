@@ -52,6 +52,7 @@ class Report extends React.Component<any, any> {
       <Modal
         isVisible={this.state.isReportModalVisible}
         onBackdropPress={() => this.props.hideReportModal()}
+        onBackButtonPress={() => this.props.hideReportModal()}
         backdropOpacity={0.2}
         useNativeDriver={true}
         animationIn="zoomInDown"

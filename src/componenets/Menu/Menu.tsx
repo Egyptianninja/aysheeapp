@@ -85,6 +85,7 @@ export default class Menu extends React.Component<any, any> {
       <Modal
         isVisible={this.state.isMenuModalVisible}
         onBackdropPress={() => this.props.hideMenuModal()}
+        onBackButtonPress={() => this.props.hideMenuModal()}
         backdropOpacity={0.2}
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}

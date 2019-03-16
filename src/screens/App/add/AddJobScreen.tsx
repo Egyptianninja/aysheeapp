@@ -230,7 +230,6 @@ class AddJobScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Title width={width - 40}>{word.addnewad}</Title>
                   <Group
                     color="#444"
                     size={24}

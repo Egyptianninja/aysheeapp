@@ -26,6 +26,7 @@ class MapModal extends React.Component<any, any> {
       <Modal
         isVisible={this.state.isMapModalVisible}
         onBackdropPress={() => hideMapModal()}
+        onBackButtonPress={() => hideMapModal()}
         backdropOpacity={0.6}
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}

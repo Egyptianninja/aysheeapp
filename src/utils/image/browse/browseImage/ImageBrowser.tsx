@@ -13,7 +13,6 @@ import ImageTile from './ImageTile';
 const { width } = Dimensions.get('window');
 import { words } from '../../../../store/getStore';
 
-const word = words();
 export default class ImageBrowser extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -97,7 +96,7 @@ export default class ImageBrowser extends React.Component<any, any> {
   renderHeader = () => {
     const selectedCount = Object.keys(this.state.selected).length;
     const headerText = selectedCount + '/' + this.props.max;
-
+    const word = words();
     return (
       <View style={styles.header}>
         <Button

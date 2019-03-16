@@ -486,6 +486,7 @@ class ItemView extends React.Component<any, any> {
               <Modal
                 isVisible={this.state.isModelVisible}
                 onBackdropPress={() => this.hideModal()}
+                onBackButtonPress={() => this.hideModal()}
                 useNativeDriver={true}
                 hideModalContentWhileAnimating={true}
                 style={{ margin: 0 }}

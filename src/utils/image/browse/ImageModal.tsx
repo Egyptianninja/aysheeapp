@@ -18,6 +18,7 @@ class ImageModal extends React.PureComponent<any, any> {
       <Modal
         isVisible={this.props.isPhotoModalVisible}
         onBackdropPress={() => this.setState({ isPhotoModalVisible: false })}
+        onBackButtonPress={() => this.setState({ isPhotoModalVisible: false })}
         backdropOpacity={0.5}
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}

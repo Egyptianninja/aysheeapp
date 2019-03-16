@@ -38,6 +38,7 @@ class NotificationModal extends React.Component<any, any> {
       <Modal
         isVisible={this.state.isNotificationModalVisible}
         onBackdropPress={() => this.props.hideNotificationModal()}
+        onBackButtonPress={() => this.props.hideNotificationModal()}
         backdropOpacity={0.2}
         // useNativeDriver={true}
         hideModalContentWhileAnimating={true}

@@ -255,11 +255,11 @@ export default class CategoriesModal extends React.Component<any, any> {
   };
 
   render() {
-    const { word, isRTL } = this.props;
     return (
       <Modal
         isVisible={this.state.isCategoriesModalVisible}
         onBackdropPress={() => this.props.hideCategoriesModal()}
+        onBackButtonPress={() => this.props.hideCategoriesModal()}
         backdropOpacity={0.4}
         useNativeDriver={true}
         animationIn="slideInUp"
