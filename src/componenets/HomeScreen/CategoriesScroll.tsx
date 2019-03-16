@@ -192,7 +192,7 @@ class CategoriesScroll extends React.Component<any, any> {
                 style={{
                   fontSize: 22,
                   fontFamily: 'cairo-regular',
-                  color: '#7678ED',
+                  color: '#333',
                   paddingHorizontal: 15
                 }}
               >
@@ -206,7 +206,7 @@ class CategoriesScroll extends React.Component<any, any> {
                 right: -5,
                 top: -2,
                 zIndex: 10,
-                padding: 5,
+                paddingVertical: 5,
                 justifyContent: 'flex-end',
                 flexDirection: 'row'
               }}
@@ -224,30 +224,32 @@ class CategoriesScroll extends React.Component<any, any> {
               <TouchableOpacity
                 onPress={() => this.props.showCategoriesModal()}
                 style={{
-                  justifyContent: 'center',
+                  // justifyContent: 'center',
                   alignItems: 'center',
                   alignSelf: 'center',
                   height: 30,
-                  width: 45,
-                  paddingRight: 10,
-                  paddingLeft: 10,
-                  top: -2
+                  width: 50,
+                  paddingRight: 12,
+                  paddingLeft: 6,
+                  marginRight: 2,
+                  top: -4
+                  // backgroundColor: 'red'
                 }}
               >
                 <Ionicons
                   name="ios-keypad"
-                  size={30}
+                  size={34}
                   color="#7678ED"
                   style={{ top: 1 }}
                 />
                 <View
                   style={{
-                    width: 7,
-                    height: 7,
-                    borderRadius: 3.5,
+                    width: 8,
+                    height: 8,
+                    borderRadius: 4,
                     position: 'absolute',
-                    left: 10,
-                    top: 4,
+                    left: 8,
+                    top: 5,
                     backgroundColor: '#fbbc93'
                   }}
                 />

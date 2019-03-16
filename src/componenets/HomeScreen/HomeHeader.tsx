@@ -61,7 +61,8 @@ class HomeHeader extends React.Component<any, any> {
           <TouchableOpacity
             onPress={() => this.props.navigation.toggleDrawer()}
             style={{
-              paddingHorizontal: 8,
+              paddingLeft: 8,
+              paddingRight: 5,
               paddingVertical: 8,
               justifyContent: 'center',
               alignItems: 'center',
@@ -70,7 +71,7 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 30,
+                width: 32,
                 height: 22
               }}
             >
@@ -111,10 +112,10 @@ class HomeHeader extends React.Component<any, any> {
                     width: 12,
                     height: 12,
                     borderRadius: 6,
-                    backgroundColor: '#fbbc93',
+                    backgroundColor: '#ff00ff',
                     position: 'absolute',
-                    right: 2,
-                    top: 8
+                    right: 8,
+                    top: 10
                   }}
                 />
               )}

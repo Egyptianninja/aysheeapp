@@ -115,9 +115,8 @@ export default class FilterSelect extends React.Component<any, any> {
           style={[
             {
               flexDirection: !this.props.sort ? 'row-reverse' : 'row',
-              paddingVertical: 5,
               height: 38,
-              minWidth: 65,
+              minWidth: this.props.sort ? undefined : 65,
               borderRadius: 18,
               marginHorizontal: 5,
               justifyContent: 'center',
@@ -141,7 +140,7 @@ export default class FilterSelect extends React.Component<any, any> {
                   : this.props.disable
                   ? '#aaa'
                   : '#555',
-              fontSize: 15,
+              fontSize: this.props.sort ? 12 : 15,
               fontWeight: selected ? 'bold' : '300',
               fontFamily: 'cairo-regular',
               paddingLeft: 5
@@ -165,7 +164,7 @@ export default class FilterSelect extends React.Component<any, any> {
           )}
           {this.props.sort && (
             <Ionicons
-              style={{ marginLeft: 5, paddingRight: 5 }}
+              style={{ paddingRight: 5 }}
               name="ios-funnel"
               size={26}
               color="#8E90F0"
