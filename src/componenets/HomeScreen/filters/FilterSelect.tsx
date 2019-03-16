@@ -118,7 +118,7 @@ export default class FilterSelect extends React.Component<any, any> {
               height: 38,
               minWidth: this.props.sort ? undefined : 65,
               borderRadius: 18,
-              marginHorizontal: 5,
+              marginHorizontal: 3,
               justifyContent: 'center',
               alignItems: 'center'
             },
@@ -126,7 +126,8 @@ export default class FilterSelect extends React.Component<any, any> {
               ? {
                   borderWidth: 1,
                   borderColor: '#ddd',
-                  paddingLeft: 10
+                  paddingLeft: 10,
+                  marginTop: 10
                 }
               : {}
           ]}
@@ -164,7 +165,7 @@ export default class FilterSelect extends React.Component<any, any> {
           )}
           {this.props.sort && (
             <Ionicons
-              style={{ paddingRight: 5 }}
+              // style={{ paddingRight: 5 }}
               name="ios-funnel"
               size={26}
               color="#8E90F0"

@@ -190,7 +190,7 @@ class CategoriesScroll extends React.Component<any, any> {
             >
               <Text
                 style={{
-                  fontSize: 22,
+                  fontSize: 18,
                   fontFamily: 'cairo-regular',
                   color: '#333',
                   paddingHorizontal: 15
