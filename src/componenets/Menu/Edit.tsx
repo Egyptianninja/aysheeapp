@@ -28,6 +28,7 @@ import {
   uploadPickedImage,
   UserLocation
 } from '../../utils';
+import LoadingTiny from '../Common/LoadingTiny';
 
 const { width, height } = Dimensions.get('window');
 
@@ -857,6 +858,7 @@ export default class Edit extends React.Component<any, any> {
                       selected={values.location}
                     />
                   </Group>
+                  {values.location && !this.state.location && <LoadingTiny />}
                   {values.location && (
                     <UserLocation
                       getCurrentLocation={this.getCurrentLocation}
@@ -877,7 +879,11 @@ export default class Edit extends React.Component<any, any> {
                       textStyle={styles.btnTextStyle}
                       title={word.submit}
                       onPress={handleSubmit}
-                      disabled={!isValid || isSubmitting}
+                      disabled={
+                        !isValid ||
+                        isSubmitting ||
+                        (values.location && !this.state.location)
+                      }
                       loading={isSubmitting}
                     />
                   </View>

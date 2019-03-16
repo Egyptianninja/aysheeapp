@@ -35,6 +35,7 @@ import {
   UserLocation
 } from '../../../utils';
 import { getPureNumber } from '../../../utils/call';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 
 const { width } = Dimensions.get('window');
 
@@ -480,6 +481,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
                       selected={values.location}
                     />
                   </Group>
+                  {values.location && !this.state.location && <LoadingTiny />}
                   {values.location && (
                     <UserLocation
                       getCurrentLocation={this.getCurrentLocation}
@@ -493,7 +495,11 @@ class AddRealEstateScreen extends React.Component<any, any> {
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
                     onPress={handleSubmit}
-                    disabled={!isValid || isSubmitting}
+                    disabled={
+                      !isValid ||
+                      isSubmitting ||
+                      (values.location && !this.state.location)
+                    }
                   />
                   {isSubmitting && (
                     <View

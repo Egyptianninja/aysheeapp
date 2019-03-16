@@ -6,7 +6,8 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   ScrollView,
-  View
+  View,
+  Text
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
@@ -35,6 +36,7 @@ import {
   uploadPhotos,
   UserLocation
 } from '../../../utils';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 
 const { width } = Dimensions.get('window');
 
@@ -234,7 +236,8 @@ class AddCarScreen extends React.Component<any, any> {
                 brand: '',
                 subBrand: '',
                 kind: '',
-                location: false
+                location: false,
+                truelocation: ''
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -527,6 +530,7 @@ class AddCarScreen extends React.Component<any, any> {
                       selected={values.location}
                     />
                   </Group>
+                  {values.location && !this.state.location && <LoadingTiny />}
                   {values.location && (
                     <UserLocation
                       getCurrentLocation={this.getCurrentLocation}
@@ -541,7 +545,11 @@ class AddCarScreen extends React.Component<any, any> {
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
                     onPress={handleSubmit}
-                    disabled={!isValid || isSubmitting}
+                    disabled={
+                      !isValid ||
+                      isSubmitting ||
+                      (values.location && !this.state.location)
+                    }
                   />
                   {isSubmitting && (
                     <View

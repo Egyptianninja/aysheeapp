@@ -28,6 +28,7 @@ import {
   pickImageWithoutUpload,
   uploadPickedImage
 } from '../../../utils';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 const { width } = Dimensions.get('window');
 
 class UpgradeToStore extends React.Component<any, any> {
@@ -375,6 +376,7 @@ class UpgradeToStore extends React.Component<any, any> {
                       selected={values.location}
                     />
                   </Group>
+                  {values.location && !this.state.location && <LoadingTiny />}
                   {values.location && (
                     <UserLocation
                       getCurrentLocation={this.getCurrentLocation}
@@ -387,7 +389,11 @@ class UpgradeToStore extends React.Component<any, any> {
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.save}
-                    disabled={!isValid || isSubmitting}
+                    disabled={
+                      !isValid ||
+                      isSubmitting ||
+                      (values.location && !this.state.location)
+                    }
                     onPress={handleSubmit}
                   />
                   {isSubmitting && (

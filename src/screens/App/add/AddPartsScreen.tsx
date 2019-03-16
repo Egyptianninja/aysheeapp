@@ -35,6 +35,7 @@ import {
   uploadPhotos,
   UserLocation
 } from '../../../utils';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 const { width } = Dimensions.get('window');
 
 class AddPartsScreen extends React.Component<any, any> {
@@ -450,6 +451,7 @@ class AddPartsScreen extends React.Component<any, any> {
                       selected={values.location}
                     />
                   </Group>
+                  {values.location && !this.state.location && <LoadingTiny />}
                   {values.location && (
                     <UserLocation
                       getCurrentLocation={this.getCurrentLocation}
@@ -464,7 +466,11 @@ class AddPartsScreen extends React.Component<any, any> {
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
                     onPress={handleSubmit}
-                    disabled={!isValid || isSubmitting}
+                    disabled={
+                      !isValid ||
+                      isSubmitting ||
+                      (values.location && !this.state.location)
+                    }
                   />
                   {isSubmitting && (
                     <View
