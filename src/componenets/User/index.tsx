@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { call } from '../../utils';
+import { call, rtlos } from '../../utils';
 
 import { AvatarCircle } from '../Avatar';
 
@@ -34,7 +34,12 @@ export const renderUser = ({
           <AvatarCircle user={user} size={50} />
         </TouchableOpacity>
 
-        <View style={{ paddingLeft: 10, alignItems: 'center' }}>
+        <View
+          style={{
+            paddingHorizontal: 10,
+            alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
+          }}
+        >
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('ProfileScreen', { user });
@@ -47,7 +52,7 @@ export const renderUser = ({
               {user.uniquename}
             </Text>
           </TouchableOpacity>
-          {user.postsQty > 0 && (
+          {user.onlineqty > 0 && (
             <Text
               style={{
                 fontSize: 12,
@@ -55,7 +60,7 @@ export const renderUser = ({
                 paddingTop: 5
               }}
             >
-              {user.postsQty} {word.moreads}
+              {user.onlineqty} {word.moreads}
             </Text>
           )}
         </View>

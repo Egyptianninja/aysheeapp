@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, TouchableOpacity, Text, Platform } from 'react-native';
 import { AutoInput } from '../../../lib';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, isArabic } from '../../../utils';
+import { StyleSheet, isArabic, rtlos } from '../../../utils';
 
 export default class InputBar extends React.Component<any, any> {
   autogrowInput: any;
@@ -119,7 +119,7 @@ export default class InputBar extends React.Component<any, any> {
 const styles = StyleSheet.create({
   inputBar: {
     backgroundColor: '#fff',
-    flexDirection: 'row',
+    flexDirection: rtlos() ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
     paddingLeft: 10,
     paddingVertical: 10

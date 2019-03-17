@@ -52,8 +52,8 @@ const BottonNew = ({ showCategoriesModal, title }: any) => (
             height: 8,
             borderRadius: 4,
             position: 'absolute',
-            left: 12,
-            top: 12,
+            left: 31,
+            top: 13,
             backgroundColor: '#fbbc93'
           }}
         />

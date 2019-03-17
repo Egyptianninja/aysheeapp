@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { rtlos } from '../../utils';
 
 export default class BodyView extends React.Component<any, any> {
   state = {
@@ -41,7 +42,11 @@ export default class BodyView extends React.Component<any, any> {
             style={{
               fontSize: 14,
               color: '#ababab',
-              alignSelf: isrtl ? 'flex-end' : 'flex-start'
+              alignSelf: isrtl
+                ? rtlos() === 3
+                  ? 'flex-start'
+                  : 'flex-end'
+                : 'flex-start'
             }}
           >
             {time}

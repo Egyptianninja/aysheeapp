@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { since } from '../../utils';
+import { since, rtlos } from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
 const Item = (props: any) => {
@@ -12,7 +12,9 @@ const Item = (props: any) => {
       style={{
         flex: 1,
         justifyContent: 'center',
-        alignItems: isRTL ? 'flex-end' : 'flex-start',
+        alignItems:
+          rtlos() === 3 ? 'flex-start' : isRTL ? 'flex-end' : 'flex-start',
+
         padding: 5,
         marginHorizontal: 16,
         marginVertical: 5,
@@ -38,7 +40,8 @@ const Item = (props: any) => {
           style={{
             flex: 1,
             justifyContent: 'center',
-            alignItems: isRTL ? 'flex-end' : 'flex-start'
+            alignItems:
+              rtlos() === 3 ? 'flex-start' : isRTL ? 'flex-end' : 'flex-start'
           }}
         >
           <Text
@@ -55,7 +58,13 @@ const Item = (props: any) => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-      <View style={{ position: 'absolute', top: 5, left: 0 }}>
+      <View
+        style={{
+          position: 'absolute',
+          top: 5,
+          right: 0
+        }}
+      >
         <Text
           style={{
             color: '#999',
