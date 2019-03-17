@@ -53,7 +53,11 @@ export default class SelectDate extends React.Component<any, any> {
           {value !== '' && period && (
             <React.Fragment>
               <Text
-                style={{ fontSize: 16, paddingRight: 20, color: '#7678ED' }}
+                style={{
+                  fontSize: 16,
+                  paddingHorizontal: 20,
+                  color: '#7678ED'
+                }}
               >
                 {Object.keys(this.props.value.name[0])[0]}
               </Text>

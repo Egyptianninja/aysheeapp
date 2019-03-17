@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-
+import { words } from '../../store/getStore';
 import { Popup } from 'react-native-map-link';
 
 export default class Link extends Component<any, any> {
@@ -9,6 +9,8 @@ export default class Link extends Component<any, any> {
   };
 
   render() {
+    const word = words();
+
     return (
       <View style={styles.container}>
         <Popup
@@ -20,10 +22,9 @@ export default class Link extends Component<any, any> {
           options={{
             latitude: this.props.latitude,
             longitude: this.props.longitude,
-            title: this.props.title,
-            dialogTitle: 'Open Maps',
-            dialogMessage: 'Open this location on Maps',
-            cancelText: 'Close'
+            dialogTitle: word.dialogTitle,
+            dialogMessage: word.dialogMessage,
+            cancelText: word.cancelText
           }}
         />
         <TouchableOpacity
@@ -31,7 +32,7 @@ export default class Link extends Component<any, any> {
             this.setState({ isVisible: true });
           }}
         >
-          <Text style={styles.welcome}>Show in Maps</Text>
+          <Text style={styles.welcome}>{word.showinmap}</Text>
         </TouchableOpacity>
       </View>
     );

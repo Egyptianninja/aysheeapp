@@ -8,10 +8,12 @@ import { MapView, Location, Permissions } from 'expo';
 
 class UserLocation extends React.Component<any, any> {
   timerHandle: any;
+  initLocation: any;
   map: any;
   state = {
     loading: false,
-    granted: false
+    granted: false,
+    initLocation: null
   };
 
   componentDidMount() {
@@ -61,6 +63,12 @@ class UserLocation extends React.Component<any, any> {
           <MapView
             ref={mapView => {
               this.map = mapView;
+            }}
+            initialRegion={{
+              latitude: 25.291442,
+              longitude: 51.534011,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
             }}
             style={{
               alignSelf: 'stretch',

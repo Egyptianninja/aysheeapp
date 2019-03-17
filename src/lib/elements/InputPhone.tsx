@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { ErrorMessage } from './Common';
-import { arabicToNum } from '../../utils';
+import { arabicToNum, rtlos } from '../../utils';
 class InputPhone extends React.PureComponent<any, any> {
   handleChange = (value: any) => {
     if (this.props.num) {
@@ -24,7 +24,7 @@ class InputPhone extends React.PureComponent<any, any> {
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
             borderBottomWidth: 1,
@@ -57,7 +57,7 @@ class InputPhone extends React.PureComponent<any, any> {
                 width: 200,
                 paddingHorizontal: 10,
                 backgroundColor: '#fff',
-                writingDirection: 'auto',
+                textAlign: 'left',
                 letterSpacing: 1,
                 fontSize: 20,
                 color: '#777',

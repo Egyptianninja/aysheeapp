@@ -87,6 +87,12 @@ export const AppStackNavigator = createStackNavigator(
     AddOfferScreen: {
       screen: AddOfferScreen,
       navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     },

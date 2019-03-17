@@ -108,7 +108,6 @@ export default class FilterSelect extends React.Component<any, any> {
     const { rest, itemKind, isRTL, rtlOS } = this.props;
     const selected =
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
-    console.log(rtlOS);
 
     return (
       <View>

@@ -14,7 +14,7 @@ const Header = ({ navigation, title }: any) => {
         alignItems: 'center',
         zIndex: 100,
         backgroundColor: '#7678ED',
-        flexDirection: rtlos() ? 'row-reverse' : 'row'
+        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
       }}
     >
       <TouchableOpacity

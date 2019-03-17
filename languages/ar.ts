@@ -500,6 +500,10 @@ export default {
     editprofile: 'تعديل الملف الشخصي',
     back: 'عودة',
     unpublished: 'غير منشور',
+    dialogTitle: 'الخرائط المتاحة',
+    dialogMessage: 'افتح الموقع بواسطة برنامج الخرائط',
+    cancelText: 'الغاء',
+    showinmap: 'فتح بواسطة الخرائط',
 
     popmenu: [
       { id: 1, name: 'اضافة الى المفضلة' },

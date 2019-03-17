@@ -494,6 +494,10 @@ export default {
     editprofile: 'Edit your profile',
     back: 'Back',
     unpublished: 'Unpublished',
+    dialogTitle: 'Open Maps',
+    dialogMessage: 'Open this location on Maps',
+    cancelText: 'Close',
+    showinmap: 'Show in Maps',
 
     popmenu: [
       { id: 1, name: 'Add to favorite' },

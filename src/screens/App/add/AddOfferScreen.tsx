@@ -35,7 +35,8 @@ import {
   registerForPushNotificationsAsync,
   StyleSheet,
   uploadPickedImage,
-  UserLocation
+  UserLocation,
+  rtlos
 } from '../../../utils';
 import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 
@@ -250,7 +251,15 @@ class AddServiceScreen extends React.Component<any, any> {
                       <Text
                         style={[
                           styles.labelStyle,
-                          { alignSelf: 'flex-end', paddingRight: 35 }
+                          {
+                            paddingHorizontal: 30,
+                            alignSelf:
+                              rtlos() === 3
+                                ? 'flex-start'
+                                : isRTL
+                                ? 'flex-end'
+                                : 'flex-start'
+                          }
                         ]}
                       >
                         {word.selectphoto}
