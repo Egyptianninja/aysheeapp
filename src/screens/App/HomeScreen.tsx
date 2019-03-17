@@ -39,7 +39,7 @@ class HomeScreen extends React.Component<any, any> {
   clampedScrollValue = 0;
   offsetValue = 0;
   scrollValue = 0;
-  NAVBAR_HEIGHT = 95;
+  NAVBAR_HEIGHT = 96;
 
   constructor(props: any) {
     super(props);
@@ -407,9 +407,9 @@ class HomeScreen extends React.Component<any, any> {
             backgroundColor: '#fff',
             height: this.NAVBAR_HEIGHT,
             transform: [{ translateY: navbarTranslate }],
-            minHeight: this.NAVBAR_HEIGHT
-            // borderBottomWidth: 1,
-            // borderBottomColor: '#eee'
+            minHeight: this.NAVBAR_HEIGHT,
+            borderBottomWidth: 1,
+            borderBottomColor: '#eee'
           }}
         >
           <CategoriesScroll

@@ -23,7 +23,7 @@ import {
   phoneRemoved,
   updateUser
 } from '../../store/actions/userAtions';
-import { getCountryCityFromToken, StyleSheet } from '../../utils';
+import { getCountryCityFromToken, StyleSheet, rtlos } from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
 class Drawer extends React.Component<any, any> {
@@ -103,6 +103,7 @@ class Drawer extends React.Component<any, any> {
     return usermenu.map((menu: any) => {
       const iconFunc = icons.menu.filter(ic => ic.id === menu.id);
       const icon = iconFunc[0].icon;
+      const rtlOS = rtlos();
       return (
         <TouchableOpacity
           onPress={() => this.menuAction(menu.id)}
@@ -114,7 +115,7 @@ class Drawer extends React.Component<any, any> {
               flex: 1,
               marginHorizontal: 20,
               marginVertical: 7,
-              flexDirection: 'row',
+              flexDirection: rtlOS === 3 ? 'row-reverse' : 'row',
               alignItems: 'center',
               justifyContent: 'flex-start'
             }}
@@ -126,12 +127,7 @@ class Drawer extends React.Component<any, any> {
                 justifyContent: 'center'
               }}
             >
-              <Ionicons
-                name={icon}
-                size={33}
-                color="#777"
-                style={{ marginHorizontal: 5 }}
-              />
+              <Ionicons name={icon} size={30} color="#777" />
             </View>
             <Text
               style={{

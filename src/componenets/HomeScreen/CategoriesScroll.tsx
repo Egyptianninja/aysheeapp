@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { icons } from '../../load';
 import BottonNew from './BottonNew';
 import CategoryIcon from './CategoryIcon';
-import CategoryIconSingle from './CategoryIconSingle';
+import { rtlos } from '../../utils';
 import HeaderFilter from './HeaderFilter';
 import OfferIcon from './OffersIcon';
 import FilterSelect from './filters/FilterSelect';
@@ -104,6 +104,7 @@ class CategoriesScroll extends React.Component<any, any> {
 
   render() {
     const sortData = this.getSortBucket();
+    const rtlOS = rtlos();
     const {
       categories,
       addFilter,
@@ -127,7 +128,7 @@ class CategoriesScroll extends React.Component<any, any> {
             style={{
               justifyContent: 'space-between',
               alignItems: 'center',
-              flexDirection: 'row'
+              flexDirection: rtlOS === 3 ? 'row-reverse' : 'row'
             }}
           >
             {back && (
@@ -139,7 +140,7 @@ class CategoriesScroll extends React.Component<any, any> {
                   zIndex: 10,
                   paddingVertical: 3,
                   paddingLeft: 7,
-                  paddingHorizontal: 13
+                  paddingHorizontal: 5
                 }}
                 onPress={() => this.props.removeAllFilters()}
               >
@@ -208,11 +209,12 @@ class CategoriesScroll extends React.Component<any, any> {
                 zIndex: 10,
                 paddingVertical: 5,
                 justifyContent: 'flex-end',
-                flexDirection: 'row'
+                flexDirection: rtlOS === 3 ? 'row-reverse' : 'row'
               }}
             >
               <FilterSelect
                 isRTL={isRTL}
+                rtlOS={rtlOS}
                 data={sortData}
                 sort={true}
                 itemKind="sortType"
@@ -229,8 +231,8 @@ class CategoriesScroll extends React.Component<any, any> {
                   alignSelf: 'center',
                   height: 30,
                   width: 50,
-                  paddingRight: 12,
-                  paddingLeft: 6,
+                  paddingRight: rtlOS === 3 ? 10 : 12,
+                  paddingLeft: rtlOS === 3 ? 12 : 6,
                   marginRight: 2,
                   top: -4
                   // backgroundColor: 'red'
@@ -248,7 +250,7 @@ class CategoriesScroll extends React.Component<any, any> {
                     height: 8,
                     borderRadius: 4,
                     position: 'absolute',
-                    left: 8,
+                    left: rtlOS === 3 ? 31 : 8,
                     top: 5,
                     backgroundColor: '#fbbc93'
                   }}
@@ -291,7 +293,7 @@ class CategoriesScroll extends React.Component<any, any> {
             }}
             style={{
               backgroundColor: '#fff',
-              height: selected ? 50 : 95
+              height: selected ? 60 : 95
             }}
           >
             {!selected && (

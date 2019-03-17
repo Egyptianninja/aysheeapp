@@ -21,8 +21,8 @@ import {
   ShopsScreen,
   UpgradeToStore
 } from '../../screens';
-import { StyleSheet } from '../../utils';
-import { BackIcon } from '../../componenets';
+import { StyleSheet, rtlos } from '../../utils';
+import { BackIcon, Header } from '../../componenets';
 
 export const AppStackNavigator = createStackNavigator(
   {
@@ -50,14 +50,24 @@ export const AppStackNavigator = createStackNavigator(
     ChoiseScreen: {
       screen: ChoiseScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: navigation.getParam('title'),
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     },
     UpgradeToStore: {
       screen: UpgradeToStore,
       navigationOptions: ({ navigation }: any) => ({
-        title: navigation.getParam('title'),
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     },
@@ -65,6 +75,12 @@ export const AppStackNavigator = createStackNavigator(
       screen: AddClassifiedScreen,
       navigationOptions: ({ navigation }: any) => ({
         title: navigation.getParam('item').name,
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('item').name}
+          />
+        ),
         headerBackTitle: null
       })
     },
@@ -78,6 +94,12 @@ export const AppStackNavigator = createStackNavigator(
       screen: AddServiceScreen,
       navigationOptions: ({ navigation }: any) => ({
         title: navigation.getParam('item').name,
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('item').name}
+          />
+        ),
         headerBackTitle: null
       })
     },
@@ -85,6 +107,12 @@ export const AppStackNavigator = createStackNavigator(
       screen: AddRealEstateScreen,
       navigationOptions: ({ navigation }: any) => ({
         title: navigation.getParam('item').name,
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('item').name}
+          />
+        ),
         headerBackTitle: null
       })
     },
@@ -92,6 +120,12 @@ export const AppStackNavigator = createStackNavigator(
       screen: AddCarScreen,
       navigationOptions: ({ navigation }: any) => ({
         title: navigation.getParam('item').name,
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('item').name}
+          />
+        ),
         headerBackTitle: null
       })
     },
@@ -99,40 +133,72 @@ export const AppStackNavigator = createStackNavigator(
       screen: AddPartsScreen,
       navigationOptions: ({ navigation }: any) => ({
         title: navigation.getParam('item').name,
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('item').name}
+          />
+        ),
         headerBackTitle: null
       })
     },
     AddJobScreen: {
       screen: AddJobScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: navigation.getParam('item').name,
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('item').name}
+          />
+        ),
         headerBackTitle: null
       })
     },
     MyFavScreen: {
       screen: MyFavScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: navigation.getParam('title'),
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     },
     ProfileScreen: {
       screen: ProfileScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: navigation.getParam('user').name,
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('user').name}
+          />
+        ),
         headerBackTitle: null
       })
     },
     NotificationsScreen: {
       screen: NotificationsScreen,
-      navigationOptions: () => ({
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     },
     ShopsScreen: {
       screen: ShopsScreen,
       navigationOptions: ({ navigation }: any) => ({
-        title: navigation.getParam('title'),
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     },
@@ -145,6 +211,12 @@ export const AppStackNavigator = createStackNavigator(
     EditProfileScreen: {
       screen: EditProfileScreen,
       navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     }
@@ -158,56 +230,8 @@ export const AppStackNavigator = createStackNavigator(
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold'
-      },
-      headerBackImage: <BackIcon />
+      }
+      // headerBackImage: <BackIcon />
     }
   }
 );
-
-const styles = StyleSheet.create({
-  imageView: {
-    marginHorizontal: 10,
-    height: 36,
-    width: 36,
-    borderRadius: 18,
-    borderColor: '#eee',
-    borderWidth: 1,
-    overflow: 'hidden'
-  },
-  image: {
-    flex: 1,
-    width: '100%',
-    height: '100%'
-  },
-  headerStyle: {
-    height: 40,
-    backgroundColor: '#fff',
-    borderBottomWidth: 0,
-    shadowOffset: { width: 3, height: 3 },
-    shadowColor: '#777',
-    shadowOpacity: 0.1
-  },
-  headerTitleStyle: {
-    fontFamily: 'cairo-regular',
-    fontSize: 18,
-    color: '#000'
-  },
-  mainheaderTitleStyle: {
-    fontFamily: 'multaqa-font',
-    fontSize: 18,
-    color: '#000'
-  },
-  icon: {
-    paddingTop: 5,
-    paddingHorizontal: 10
-  },
-  imageViewChat: {
-    backgroundColor: 'red',
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    overflow: 'hidden',
-    marginRight: 50,
-    marginBottom: 2
-  }
-});

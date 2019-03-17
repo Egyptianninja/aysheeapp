@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { rtlos } from '../../utils';
 
 export const User = ({ name, avatar, about, navigation, user }: any) => {
   const uri = `http://res.cloudinary.com/arflon/image/upload/w_${100}/${avatar}`;
@@ -11,10 +12,11 @@ export const User = ({ name, avatar, about, navigation, user }: any) => {
       }}
       style={{
         alignItems: 'center',
-        flexDirection: 'row',
+        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
         justifyContent: 'flex-end',
         margin: 10,
-        paddingTop: 10
+        paddingTop: 15,
+        marginLeft: 60
       }}
     >
       <View
@@ -27,7 +29,7 @@ export const User = ({ name, avatar, about, navigation, user }: any) => {
             fontWeight: 'bold',
             fontSize: 16,
             color: '#fff',
-            textAlign: 'right'
+            textAlign: rtlos() === 3 ? 'left' : 'right'
           }}
         >
           {name}

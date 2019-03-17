@@ -35,7 +35,8 @@ import {
   ImageViewer,
   ItemLocation,
   Message,
-  StyleSheet
+  StyleSheet,
+  rtlos
 } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
@@ -388,12 +389,14 @@ class ItemView extends React.Component<any, any> {
           style={{
             position: 'absolute',
             top: Constants.statusBarHeight + 3,
-            left: this.ardroid ? undefined : 8,
+            left: this.ardroid ? undefined : 10,
             right: this.ardroid ? 10 : undefined,
             zIndex: 860,
             width: 60,
             height: 50,
-            borderRadius: 16
+            borderRadius: 16,
+            justifyContent: 'flex-start',
+            alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
           }}
         >
           <View
@@ -439,7 +442,7 @@ class ItemView extends React.Component<any, any> {
         >
           <View
             style={{
-              flex: 5,
+              flex: 1,
               justifyContent: 'center',
               alignItems: 'center'
             }}
@@ -454,6 +457,7 @@ class ItemView extends React.Component<any, any> {
               {post.title.substring(0, 20)}
             </Text>
           </View>
+
           <MenuIconHeader showMenuModal={this.showMenuModal} />
         </Animated.View>
         <ScrollView

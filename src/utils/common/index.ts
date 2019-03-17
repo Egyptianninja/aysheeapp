@@ -11,7 +11,7 @@ import {
 } from './getCountryCode';
 import { getCurrency } from './getCurrency';
 import { getDate } from './getDate';
-import { getLang, getLocale } from './getlang';
+import { getLang, getLocale, rtlos } from './getlang';
 import { getLocation } from './getLocation';
 import Orientation from './orientation';
 import { parseJwt } from './parseJwt';
@@ -37,5 +37,6 @@ export {
   getCodeFromCountry,
   getCountryCityFromToken,
   getDate,
-  getCurrency
+  getCurrency,
+  rtlos
 };

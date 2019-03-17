@@ -105,29 +105,39 @@ export default class FilterSelect extends React.Component<any, any> {
         data = { buckets, label, name };
       }
     }
-    const { rest, itemKind, isRTL } = this.props;
+    const { rest, itemKind, isRTL, rtlOS } = this.props;
     const selected =
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
+    console.log(rtlOS);
 
     return (
       <View>
         <TouchableOpacity
           style={[
             {
-              flexDirection: !this.props.sort ? 'row-reverse' : 'row',
+              flexDirection:
+                rtlOS < 1 ? 'row' : rtlOS === 3 ? 'row-reverse' : 'row',
               height: 38,
               minWidth: this.props.sort ? undefined : 65,
               borderRadius: 18,
-              marginHorizontal: 3,
+              marginHorizontal: 4,
               justifyContent: 'center',
               alignItems: 'center'
             },
             !this.props.sort
               ? {
-                  borderWidth: 1,
-                  borderColor: '#ddd',
-                  paddingLeft: 10,
-                  marginTop: 10
+                  backgroundColor: '#fff',
+                  paddingHorizontal: 10,
+                  marginTop: Platform.OS === 'ios' ? 5 : 10,
+                  shadowColor: '#777',
+                  shadowOffset: {
+                    width: 0,
+                    height: 2
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+
+                  elevation: 5
                 }
               : {}
           ]}
@@ -141,10 +151,9 @@ export default class FilterSelect extends React.Component<any, any> {
                   : this.props.disable
                   ? '#aaa'
                   : '#555',
-              fontSize: this.props.sort ? 12 : 15,
+              fontSize: this.props.sort ? 12 : 16,
               fontWeight: selected ? 'bold' : '300',
-              fontFamily: 'cairo-regular',
-              paddingLeft: 5
+              fontFamily: 'cairo-regular'
             }}
           >
             {selected
@@ -155,14 +164,14 @@ export default class FilterSelect extends React.Component<any, any> {
                 : data.label
               : this.state.label}
           </Text>
-          {!this.props.sort && (
+          {/* {!this.props.sort && (
             <Ionicons
               style={{ paddingLeft: 10, top: 2 }}
               name="md-arrow-dropdown"
               size={24}
               color={selected ? '#7678ED' : '#555'}
             />
-          )}
+          )} */}
           {this.props.sort && (
             <Ionicons
               // style={{ paddingRight: 5 }}

@@ -5,6 +5,7 @@ import Noresult from './Noresult';
 import Logo from './Logo';
 import MessageModal from './MessageModal';
 import BackIcon from './BackIcon';
+import Header from './Header';
 
 export {
   Loading,
@@ -13,5 +14,6 @@ export {
   LoadingSmall,
   HomeLoading,
   Logo,
-  BackIcon
+  BackIcon,
+  Header
 };

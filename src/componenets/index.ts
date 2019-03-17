@@ -22,7 +22,8 @@ import {
   LoadingSmall,
   HomeLoading,
   Logo,
-  BackIcon
+  BackIcon,
+  Header
 } from './Common';
 
 export {
@@ -48,5 +49,6 @@ export {
   HomeLoading,
   AvatarCircle,
   Logo,
-  BackIcon
+  BackIcon,
+  Header
 };

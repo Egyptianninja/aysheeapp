@@ -29,7 +29,8 @@ import {
   Orientation,
   parseJwt,
   StyleSheet,
-  ZoomView
+  ZoomView,
+  rtlos
 } from './common';
 import {
   compressImage,
@@ -113,5 +114,6 @@ export {
   uploadPickedImage,
   getDate,
   getCurrency,
-  isIphoneX
+  isIphoneX,
+  rtlos
 };

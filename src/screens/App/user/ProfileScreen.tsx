@@ -20,11 +20,17 @@ import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import favoritePost from '../../../graphql/mutation/favoritePost';
 import getUserPosts from '../../../graphql/query/getUserPosts';
 import { updateQty } from '../../../store/actions/userAtions';
-import { getNextPosts, Message, readyUserPosts, call } from '../../../utils';
+import {
+  getNextPosts,
+  Message,
+  readyUserPosts,
+  call,
+  rtlos
+} from '../../../utils';
 import MapModal from '../../../componenets/ProfileScreen/MapModal';
 const { width, height } = Dimensions.get('window');
 
-const HEADER_HEIGHT = 175;
+const HEADER_HEIGHT = 205;
 const PROFILE_IMAGE_HEIGHT = 80;
 
 class ProfileScreen extends React.Component<any, any> {
@@ -139,6 +145,11 @@ class ProfileScreen extends React.Component<any, any> {
     });
     const topPaddingIcons = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_HEIGHT],
+      outputRange: [HEADER_HEIGHT - 90, -90],
+      extrapolate: 'clamp'
+    });
+    const topPaddinTab = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_HEIGHT],
       outputRange: [HEADER_HEIGHT - 50, -50],
       extrapolate: 'clamp'
     });
@@ -146,8 +157,8 @@ class ProfileScreen extends React.Component<any, any> {
     const imageMarginTop = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_HEIGHT],
       outputRange: [
-        HEADER_HEIGHT / 2 - PROFILE_IMAGE_HEIGHT,
-        -HEADER_HEIGHT / 2 - PROFILE_IMAGE_HEIGHT
+        HEADER_HEIGHT / 2.3 - PROFILE_IMAGE_HEIGHT,
+        -HEADER_HEIGHT / 2.3 - PROFILE_IMAGE_HEIGHT
       ],
       extrapolate: 'clamp'
     });
@@ -243,13 +254,13 @@ class ProfileScreen extends React.Component<any, any> {
             backgroundColor: '#fff',
             height: headerHeight,
             zIndex: 200,
-            flexDirection: 'row'
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
           }}
         >
           <Animated.View
             style={{
               marginTop: imageMarginTop,
-              marginLeft: 20
+              marginHorizontal: 10
             }}
           >
             <AvatarCircle user={user} size={PROFILE_IMAGE_HEIGHT} />
@@ -258,7 +269,8 @@ class ProfileScreen extends React.Component<any, any> {
             style={{
               marginTop: imageMarginTop,
               marginLeft: 10,
-              zIndex: 10
+              zIndex: 10,
+              alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
             }}
           >
             {!user.name && (
@@ -339,7 +351,7 @@ class ProfileScreen extends React.Component<any, any> {
               height: 40,
               zIndex: 100,
               backgroundColor: '#fff',
-              flexDirection: 'row',
+              flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
               justifyContent: 'space-around',
               alignItems: 'center',
               paddingHorizontal: 10
@@ -352,7 +364,6 @@ class ProfileScreen extends React.Component<any, any> {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 5,
-
                 paddingVertical: 5
               }}
             >
@@ -442,7 +453,7 @@ class ProfileScreen extends React.Component<any, any> {
             style={{
               position: 'absolute',
               width,
-              top: headerHeight,
+              top: topPaddinTab,
               left: 0,
               height: 50,
               zIndex: 300,
@@ -568,7 +579,7 @@ class ProfileScreen extends React.Component<any, any> {
                   this.getNextPosts(data, fetchMore, 'getUserPosts')
                 }
                 contentContainerStyle={{
-                  marginTop: HEADER_HEIGHT + 50,
+                  marginTop: HEADER_HEIGHT,
                   paddingBottom: 160
                 }}
                 refreshing={this.state.refreshing}

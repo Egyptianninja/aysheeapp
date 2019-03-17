@@ -14,7 +14,7 @@ import { Loading, Noresult } from '../../componenets';
 import { OffersSlider } from '../../componenets/OffersScreen';
 import { User } from '../../componenets/User/User';
 import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
-import { readyUserPosts, isIphoneX } from '../../utils';
+import { readyUserPosts, isIphoneX, rtlos } from '../../utils';
 
 const HEIGHT = Dimensions.get('window').height;
 const iphoneX = isIphoneX();
@@ -64,8 +64,9 @@ class OffersScreen extends Component<any, any> {
           onPress={() => this.props.navigation.goBack()}
           style={{
             position: 'absolute',
-            top: iphoneX ? 55 : 25,
-            left: 0,
+            top: iphoneX ? 55 : 30,
+            left: rtlos() === 3 ? undefined : 0,
+            right: rtlos() === 3 ? 0 : undefined,
             zIndex: 100,
             width: 40,
             height: 40,
@@ -102,7 +103,7 @@ class OffersScreen extends Component<any, any> {
                 contentContainerStyle={styles.scrollviewContentContainer}
                 indicatorStyle={'white'}
                 scrollEventThrottle={16}
-                decelerationRate={0}
+                decelerationRate={0.96}
                 // snapToInterval={HEIGHT - 55}
                 snapToInterval={iphoneX ? HEIGHT - 155 : HEIGHT - 55}
                 snapToAlignment={'start'}

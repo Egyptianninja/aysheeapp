@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { icons } from '../../load';
-import { StyleSheet } from '../../utils';
+import { StyleSheet, rtlos } from '../../utils';
 import SearchBox from './SearchBox';
 const home = icons.home.icon();
 const mainmenu = icons.mainmenu.icon();
@@ -171,6 +171,7 @@ class HomeHeader extends React.Component<any, any> {
                   flex: 1.75,
                   justifyContent: 'center',
                   alignItems: 'center',
+                  top: rtlos() === 3 ? 4 : undefined,
                   paddingVertical: 9,
                   paddingLeft: 5
                 }}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 
 const BackIcon = ({ navigation }: any) => {
   return (
