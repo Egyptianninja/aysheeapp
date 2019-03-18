@@ -5,10 +5,11 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native';
 import { connect } from 'react-redux';
-import { icons } from '../../load';
+import { icons, images } from '../../load';
 import BottonNew from './BottonNew';
 import CategoryIcon from './CategoryIcon';
 import { rtlos } from '../../utils';
@@ -121,6 +122,7 @@ class CategoriesScroll extends React.Component<any, any> {
       (cat: any) => cat.id === rest.categoryId
     )[0];
     const back = Object.values(rest).length === 1;
+
     return (
       <View style={{ width: '100%' }}>
         {selected && (
@@ -212,17 +214,19 @@ class CategoriesScroll extends React.Component<any, any> {
                 flexDirection: rtlOS === 3 ? 'row-reverse' : 'row'
               }}
             >
-              <FilterSelect
-                isRTL={isRTL}
-                rtlOS={rtlOS}
-                data={sortData}
-                sort={true}
-                itemKind="sortType"
-                addFilter={addFilter}
-                removeFilter={removeFilter}
-                rest={rest}
-                words={words}
-              />
+              {this.props.buckets && (
+                <FilterSelect
+                  isRTL={isRTL}
+                  rtlOS={rtlOS}
+                  data={sortData}
+                  sort={true}
+                  itemKind="sortType"
+                  addFilter={addFilter}
+                  removeFilter={removeFilter}
+                  rest={rest}
+                  words={words}
+                />
+              )}
               <TouchableOpacity
                 onPress={() => this.props.showCategoriesModal()}
                 style={{
@@ -233,27 +237,18 @@ class CategoriesScroll extends React.Component<any, any> {
                   width: 50,
                   paddingRight: rtlOS === 3 ? 10 : 12,
                   paddingLeft: rtlOS === 3 ? 12 : 6,
-                  marginRight: 2,
-                  top: -4
-                  // backgroundColor: 'red'
+                  marginRight: 0,
+                  top: 0
                 }}
               >
-                <Ionicons
-                  name="ios-keypad"
-                  size={34}
-                  color="#7678ED"
-                  style={{ top: 1 }}
-                />
-                <View
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: 4,
-                    position: 'absolute',
-                    left: rtlOS === 3 ? 31 : 8,
-                    top: 5,
-                    backgroundColor: '#fbbc93'
-                  }}
+                <Image
+                  style={[
+                    {
+                      width: 30,
+                      height: 30
+                    }
+                  ]}
+                  source={images.pointsmenu}
                 />
               </TouchableOpacity>
             </View>

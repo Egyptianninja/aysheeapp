@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import { Photo } from '../../lib';
+import { rtlos } from '../../utils';
 // import { Image } from 'react-native-expo-image-cache';
 // import { preview } from '../../constants';
 const { width } = Dimensions.get('window');
@@ -71,7 +72,12 @@ export default class PhotoSlider extends React.Component<any, any> {
           })}
         </ScrollView>
         {photos.length > 1 && (
-          <View style={[styles.layoutIndicator]}>
+          <View
+            style={[
+              styles.layoutIndicator,
+              { flexDirection: rtlos() === 3 ? 'row-reverse' : 'row' }
+            ]}
+          >
             {photos.map((image: any, index: any) => {
               return (
                 <View
@@ -117,7 +123,6 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
     backgroundColor: 'transparent',
     zIndex: 150
   },

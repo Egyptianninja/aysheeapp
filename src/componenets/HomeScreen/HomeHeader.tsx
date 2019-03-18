@@ -171,7 +171,7 @@ class HomeHeader extends React.Component<any, any> {
                   flex: 1.75,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  top: rtlos() === 3 ? 4 : undefined,
+                  top: Platform.OS === 'android' ? 4 : undefined,
                   paddingVertical: 9,
                   paddingLeft: 5
                 }}

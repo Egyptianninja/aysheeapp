@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Text, TouchableOpacity, View, Image } from 'react-native';
+import { images } from '../../load';
 import { StyleSheet } from '../../utils';
 const BottonNew = ({ showCategoriesModal, title }: any) => (
   <View
@@ -33,29 +33,20 @@ const BottonNew = ({ showCategoriesModal, title }: any) => (
           justifyContent: 'center',
           alignItems: 'center',
           alignSelf: 'center',
-          height: 52,
-          width: 52,
-          borderRadius: 26,
-          overflow: 'hidden',
-          backgroundColor: '#fff'
+          height: 50,
+          width: 50,
+          borderRadius: 25,
+          overflow: 'hidden'
         }}
       >
-        <Ionicons
-          name="ios-keypad"
-          size={34}
-          color="#7678ED"
-          style={{ top: 1 }}
-        />
-        <View
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: 4,
-            position: 'absolute',
-            left: 31,
-            top: 13,
-            backgroundColor: '#fbbc93'
-          }}
+        <Image
+          style={[
+            {
+              width: 34,
+              height: 34
+            }
+          ]}
+          source={images.pointsmenu}
         />
       </View>
     </TouchableOpacity>

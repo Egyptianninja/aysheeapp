@@ -6,6 +6,7 @@ import {
   Dimensions,
   StyleSheet
 } from 'react-native';
+import { Platform } from 'expo-core';
 
 const { width } = Dimensions.get('window');
 const cube = width / 8;
@@ -45,7 +46,7 @@ export default class ColorPicker extends React.Component<any, any> {
     return (
       <Text
         // style={{ color: ColorPicker.getContrastColor(color), fontSize: 60 }}
-        style={{ color: '#fff', fontSize: 60 }}
+        style={{ color: '#fff', fontSize: Platform.OS === 'android' ? 30 : 50 }}
         adjustsFontSizeToFit
       >
         ✔︎

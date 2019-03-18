@@ -22,6 +22,7 @@ export const images = {
   bell: require('../../assets/icons/header/bell.png'),
   search: require('../../assets/icons/header/search.png'),
   menu: require('../../assets/icons/header/menu.png'),
+  pointsmenu: require('../../assets/icons/header/points-menu.png'),
 
   namelogo: require('../../assets/icons/header/namelogo.png'),
   namelogofull: require('../../assets/icons/header/namelogofull.png'),

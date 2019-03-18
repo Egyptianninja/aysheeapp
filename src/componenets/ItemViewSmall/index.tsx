@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { StyleSheet } from '../../utils';
+import { StyleSheet, rtlos } from '../../utils';
 import { MenuIcon } from './MenuIcon';
 import { PostImage } from './PostImage';
 
@@ -74,16 +74,14 @@ const ItemViewSmall = (props: any) => {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection:
-                      Platform.OS === 'android' ? 'row-reverse' : 'row',
+                    flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
                     justifyContent: 'space-between'
                   }}
                 >
                   {(price || price === 0) && (
                     <View
                       style={{
-                        flexDirection:
-                          Platform.OS === 'android' ? 'row-reverse' : 'row'
+                        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
                       }}
                     >
                       <Text

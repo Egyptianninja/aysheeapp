@@ -9,14 +9,12 @@ const HeaderFilter: any = ({
   rest,
   buckets,
   addFilter,
-  // sortData,
   removeFilter,
   isRTL,
   words
 }: any) => {
   if (categoryId === 0) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'realestateId', data: getItems(buckets, 'realestateId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
@@ -44,7 +42,6 @@ const HeaderFilter: any = ({
   } else if (categoryId === 1) {
     const brandId = rest.brandId;
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'brandId', data: getItems(buckets, 'brandId') },
@@ -87,7 +84,6 @@ const HeaderFilter: any = ({
   } else if (categoryId === 15) {
     const brandId = rest.brandId;
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'brandId', data: getItems(buckets, 'brandId') },
       { name: 'subBrandId', data: getItems(buckets, 'subBrandId') },
@@ -128,7 +124,6 @@ const HeaderFilter: any = ({
   } else if (categoryId === 2) {
     const kindId = rest.kindId;
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
@@ -172,7 +167,6 @@ const HeaderFilter: any = ({
     categoryId === 14
   ) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') }
@@ -195,7 +189,6 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 19) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
       { name: 'issale', data: getItems(buckets, 'issale') }
@@ -218,7 +211,6 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 9) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'isservicereq', data: getItems(buckets, 'isservicereq') },
       { name: 'serviceId', data: getItems(buckets, 'serviceId') }
@@ -241,7 +233,6 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 17 || categoryId === 18) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') }
     ];
@@ -269,7 +260,6 @@ const HeaderFilter: any = ({
     categoryId === 16
   ) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') },
@@ -293,7 +283,6 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 5) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'isjobreq', data: getItems(buckets, 'isjobreq') }
     ];
@@ -315,7 +304,6 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 6) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
@@ -340,7 +328,6 @@ const HeaderFilter: any = ({
     );
   } else if (categoryId === 13) {
     const catFilters = [
-      // { name: 'sortType', data: sortData },
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'kindId', data: getItems(buckets, 'kindId') },
       { name: 'isnew', data: getItems(buckets, 'isnew') }
