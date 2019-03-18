@@ -41,13 +41,13 @@ export default class PhotoSlider extends React.Component<any, any> {
       animated: false
     });
     // TODO: check for what
-    InteractionManager.runAfterInteractions(() => {
-      this.scrollView.scrollTo({
-        x: this.props.width * this.state.position,
-        animated: false
-      });
-      console.log('called DidMount');
-    });
+    // InteractionManager.runAfterInteractions(() => {
+    //   this.scrollView.scrollTo({
+    //     x: this.props.width * this.state.position,
+    //     animated: false
+    //   });
+    //   console.log('called DidMount');
+    // });
   }
 
   handlePageChange = (e: any) => {

@@ -217,10 +217,10 @@ class Drawer extends React.Component<any, any> {
             style={{
               flex: 1,
               width: '100%',
-              height: '100%',
-              tintColor: '#7678ED'
+              height: '100%'
+              // tintColor: '#7678ED'
             }}
-            source={images.namelogowhite}
+            source={images.namelogofull}
           />
         </View>
       </View>
