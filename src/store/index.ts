@@ -36,7 +36,7 @@ export const store = createStore(
   enhancer(applyMiddleware(thunk))
 );
 export const persistor = persistStore(store, undefined, async () => {
-  const appVersion = '1.2.09';
+  const appVersion = '1.2.11';
   const localAppVersion = await AsyncStorage.getItem('appVersion');
   const languageName = store.getState().glob.languageName;
   const locale = getLocale();
@@ -50,7 +50,9 @@ export const persistor = persistStore(store, undefined, async () => {
   ) {
     const { ar, en, tr } = require('../../languages');
     const { brands, subBrands } = require('../constants');
-    const lang = systemLang === 'ar' ? ar : systemLang === 'tr' ? tr : en;
+    // TODO: add turkey language after file is ready
+    // const lang = systemLang === 'ar' ? ar : systemLang === 'tr' ? tr : en;
+    const lang = systemLang === 'ar' ? ar : en;
     await store.dispatch(setLanguage(lang, systemLang || 'en', isRTL));
     await store.dispatch(initBrands(brands));
     await store.dispatch(initSubBrands(subBrands));

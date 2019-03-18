@@ -23,7 +23,7 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.ishee.emadjumaah",
       "infoPlist": {
-        "LSApplicationQueriesSchemes": ["comgooglemaps", "waze"]
+        "LSApplicationQueriesSchemes": ["comgooglemaps", "uber", "waze"]
       }
     },
     "android": {

@@ -42,8 +42,8 @@ const BottonNew = ({ showCategoriesModal, title }: any) => (
         <Image
           style={[
             {
-              width: 34,
-              height: 34
+              width: 32,
+              height: 32
             }
           ]}
           source={images.pointsmenu}

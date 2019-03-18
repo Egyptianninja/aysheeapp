@@ -126,14 +126,14 @@ export default {
     { pid: 3, id: 16, name: 'Bedrooms', nameGlob: 'Bedrooms' },
     { pid: 3, id: 17, name: 'Other', nameGlob: 'Other' },
 
-    { pid: 4, id: 120, name: 'العاب اطفال', nameGlob: 'العاب اطفال' },
-    { pid: 4, id: 121, name: 'مستلزمات اطفال', nameGlob: 'مستلزمات اطفال' },
-    { pid: 4, id: 122, name: 'أخرى', nameGlob: 'أخرى' },
+    { pid: 4, id: 120, name: 'Toys', nameGlob: 'العاب اطفال' },
+    { pid: 4, id: 121, name: 'childs needs', nameGlob: 'مستلزمات اطفال' },
+    { pid: 4, id: 122, name: 'Other', nameGlob: 'أخرى' },
 
-    { pid: 7, id: 123, name: 'معدات رياضية', nameGlob: 'معدات رياضية' },
-    { pid: 7, id: 124, name: 'دراجات هوائية', nameGlob: 'دراجات هوائية' },
-    { pid: 7, id: 125, name: 'اجهزة طبية', nameGlob: 'اجهزة طبية' },
-    { pid: 7, id: 126, name: 'أخرى', nameGlob: 'أخرى' },
+    { pid: 7, id: 123, name: 'Sports Equipment', nameGlob: 'معدات رياضية' },
+    { pid: 7, id: 124, name: 'Bicycles', nameGlob: 'دراجات هوائية' },
+    { pid: 7, id: 125, name: 'Medical Equipment', nameGlob: 'اجهزة طبية' },
+    { pid: 7, id: 126, name: 'Other', nameGlob: 'أخرى' },
 
     {
       pid: 5,
@@ -160,16 +160,21 @@ export default {
       nameGlob: 'Request Sercvice, طلب خدمة'
     },
 
-    { pid: 10, id: 88, name: 'خرسانة', nameGlob: 'خرسانة' },
-    { pid: 10, id: 89, name: 'حديد', nameGlob: 'حديد' },
-    { pid: 10, id: 90, name: 'حجر ورخام', nameGlob: 'حجر ورخام' },
-    { pid: 10, id: 91, name: 'سيراميك وانترلوك', nameGlob: 'سيراميك وانترلوك' },
-    { pid: 10, id: 92, name: 'أخشاب', nameGlob: 'أخشاب' },
-    { pid: 10, id: 93, name: 'بلوك - طابوق', nameGlob: 'بلوك - طابوق' },
-    { pid: 10, id: 94, name: 'رمل وحصى', nameGlob: 'رمل وحصى' },
-    { pid: 10, id: 95, name: 'جبس ودهانات', nameGlob: 'جبس ودهانات' },
-    { pid: 10, id: 96, name: 'عدد ومولدات', nameGlob: 'عدد ومولدات' },
-    { pid: 10, id: 97, name: 'أخرى', nameGlob: 'أخرى' },
+    { pid: 10, id: 88, name: 'Concrete', nameGlob: 'خرسانة' },
+    { pid: 10, id: 89, name: 'ٍSteel', nameGlob: 'حديد' },
+    { pid: 10, id: 90, name: 'Stone and Marble', nameGlob: 'حجر ورخام' },
+    {
+      pid: 10,
+      id: 91,
+      name: 'Ceramic & Interlock',
+      nameGlob: 'سيراميك وانترلوك'
+    },
+    { pid: 10, id: 92, name: 'Wood', nameGlob: 'أخشاب' },
+    { pid: 10, id: 93, name: 'Block', nameGlob: 'بلوك - طابوق' },
+    { pid: 10, id: 94, name: 'Sand', nameGlob: 'رمل وحصى' },
+    { pid: 10, id: 95, name: 'Gypsum and Paint', nameGlob: 'جبس ودهانات' },
+    { pid: 10, id: 96, name: 'Generators and Tools', nameGlob: 'عدد ومولدات' },
+    { pid: 10, id: 97, name: 'Othes', nameGlob: 'أخرى' },
 
     { pid: 11, id: 106, name: 'Handcrafts', nameGlob: 'حرف يدوية' },
     { pid: 11, id: 107, name: 'Music Instruments', nameGlob: 'آلات موسيقية' },
@@ -498,6 +503,7 @@ export default {
     dialogMessage: 'Open this location on Maps',
     cancelText: 'Close',
     showinmap: 'Show in Maps',
+    drivetolocation: 'Drive To Location',
 
     popmenu: [
       { id: 1, name: 'Add to favorite' },

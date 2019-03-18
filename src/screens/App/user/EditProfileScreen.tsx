@@ -190,7 +190,7 @@ class EditProfileScreen extends React.Component<any, any> {
           width={width}
           height={100}
         />
-        <ScrollView>
+        <ScrollView keyboardShouldPersistTaps="handled">
           <View style={styles.container}>
             <Formik
               initialValues={{

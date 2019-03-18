@@ -195,15 +195,7 @@ export default class CategoriesModal extends React.Component<any, any> {
           flexDirection: 'row',
           width: width - 20,
           height: 50,
-          backgroundColor: '#ddd',
-          shadowColor: '#555',
-          shadowOffset: {
-            width: 0,
-            height: 5
-          },
-          shadowOpacity: 0.4,
-          shadowRadius: 5,
-          elevation: 5
+          backgroundColor: '#eee'
         }}
       >
         <TouchableOpacity
@@ -224,9 +216,9 @@ export default class CategoriesModal extends React.Component<any, any> {
               color: '#171717',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
-              fontSize: 18,
+              fontSize: 40,
               paddingHorizontal: 15,
-              paddingVertical: 10
+              top: -7
             }}
           >
             ⤬

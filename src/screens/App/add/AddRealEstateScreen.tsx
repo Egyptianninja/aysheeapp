@@ -207,7 +207,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
           width={width}
           height={120}
         />
-        <ScrollView>
+        <ScrollView keyboardShouldPersistTaps="handled">
           <View style={styles.container}>
             <Formik
               initialValues={{

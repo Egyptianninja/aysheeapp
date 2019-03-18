@@ -504,6 +504,7 @@ export default {
     dialogMessage: 'افتح الموقع بواسطة برنامج الخرائط',
     cancelText: 'الغاء',
     showinmap: 'فتح بواسطة الخرائط',
+    drivetolocation: 'القيادة الى الموقع',
 
     popmenu: [
       { id: 1, name: 'اضافة الى المفضلة' },
