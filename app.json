@@ -15,6 +15,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#7678ED"
     },
+    "locales": {
+      "ar": "./languages/ar.js",
+      "en": "./languages/en.js"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -23,9 +27,11 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.ishee.emadjumaah",
       "infoPlist": {
-        "LSApplicationQueriesSchemes": ["comgooglemaps", "uber", "waze"]
+        "LSApplicationQueriesSchemes": ["comgooglemaps", "uber", "waze"],
+        "NSCameraUsageDescription": "This app uses the camera to take photos of products."
       }
     },
+
     "android": {
       "package": "com.ishee.emadjumaah"
     },
