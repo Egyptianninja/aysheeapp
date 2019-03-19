@@ -3,6 +3,7 @@ import HomeLoading from './HomeLoading';
 import LoadingSmall from './LoadingSmall';
 import Noresult from './Noresult';
 import Logo from './Logo';
+import WhitLogo from './WhitLogo';
 import MessageModal from './MessageModal';
 import BackIcon from './BackIcon';
 import Header from './Header';
@@ -15,5 +16,6 @@ export {
   HomeLoading,
   Logo,
   BackIcon,
-  Header
+  Header,
+  WhitLogo
 };

@@ -19,49 +19,62 @@ class InputPhone extends React.PureComponent<any, any> {
   render() {
     const { label, countryCode, placeholder, error, ...rest } = this.props;
     return (
-      <View style={[this.props.outerStyle, { alignItems: 'center' }]}>
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'flex-start'
+        }}
+      >
         <Text style={this.props.labelStyle}>{label}</Text>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {error && <ErrorMessage color="#fff">{error}</ErrorMessage>}
         <View
           style={{
             flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            borderBottomWidth: 1,
-            borderBottomColor: '#aaa',
-            marginVertical: 20
+            borderWidth: 1,
+            borderColor: '#ddd',
+            marginVertical: 10,
+            borderRadius: 5,
+            backgroundColor: '#6163C2'
           }}
         >
-          <Text
+          <View
             style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              color: '#aaa',
               height: 50,
-              paddingTop: 13,
-              paddingHorizontal: 10,
-              backgroundColor: '#f7f7f7'
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#4C4D97',
+              borderBottomLeftRadius: 5,
+              borderTopLeftRadius: 5,
+              paddingHorizontal: 10
             }}
           >
-            +{countryCode}
-          </Text>
+            <Text
+              style={{
+                fontSize: 20,
+                color: '#8E90F0'
+              }}
+            >
+              +{countryCode}
+            </Text>
+          </View>
 
           <TextInput
             onChangeText={this.handleChange}
-            placeholder="1234567890"
-            placeholderTextColor="#eee"
+            // placeholder="1234567890"
+            // placeholderTextColor="#8E90F0"
             onBlur={this.handleTouch}
+            selectionColor={'#fff'}
             autoFocus
             style={[
               {
                 width: 200,
                 paddingHorizontal: 10,
-                backgroundColor: '#fff',
                 textAlign: 'left',
                 letterSpacing: 1,
                 fontSize: 20,
-                color: '#777',
-                fontWeight: 'bold'
+                color: '#fff'
               }
             ]}
             {...rest}

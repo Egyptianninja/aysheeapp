@@ -64,14 +64,12 @@ class CountDownTimer extends React.Component<any, any> {
     return (
       <View
         style={{
-          flex: 1,
           justifyContent: 'center',
           alignItems: 'center'
         }}
       >
         <View
           style={{
-            flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
@@ -80,7 +78,7 @@ class CountDownTimer extends React.Component<any, any> {
         >
           <Text
             style={{
-              color: '#999',
+              color: '#fff',
               fontSize: size,
               fontWeight: '200'
             }}
@@ -89,7 +87,7 @@ class CountDownTimer extends React.Component<any, any> {
           </Text>
           <Text
             style={{
-              color: '#999',
+              color: '#fff',
               fontSize: size,
               fontWeight: '200'
             }}
@@ -98,7 +96,7 @@ class CountDownTimer extends React.Component<any, any> {
           </Text>
           <Text
             style={{
-              color: '#999',
+              color: '#fff',
               fontSize: size,
               fontWeight: '200'
             }}

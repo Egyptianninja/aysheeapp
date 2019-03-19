@@ -142,7 +142,8 @@ class CategoriesScroll extends React.Component<any, any> {
                   zIndex: 10,
                   paddingVertical: 3,
                   paddingLeft: 7,
-                  paddingHorizontal: 5
+                  paddingHorizontal: 5,
+                  flexDirection: 'row'
                 }}
                 onPress={() => this.props.removeAllFilters()}
               >
@@ -152,6 +153,17 @@ class CategoriesScroll extends React.Component<any, any> {
                   size={33}
                   color="#8E90F0"
                 />
+                <Text
+                  style={{
+                    top: 5,
+                    left: -5,
+                    color: '#7678ED',
+                    fontSize: 13,
+                    fontFamily: 'cairo-regular'
+                  }}
+                >
+                  {words.back}
+                </Text>
               </TouchableOpacity>
             )}
             {!back && (
@@ -174,10 +186,11 @@ class CategoriesScroll extends React.Component<any, any> {
                 />
                 <Text
                   style={{
-                    top: 10,
+                    top: 5,
                     left: -5,
                     color: '#7678ED',
-                    fontSize: 15
+                    fontSize: 13,
+                    fontFamily: 'cairo-regular'
                   }}
                 >
                   {words.reset}

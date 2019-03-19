@@ -1,11 +1,11 @@
-import * as React from "react";
-import { View, Text } from "react-native";
+import * as React from 'react';
+import { View, Text } from 'react-native';
 
 const ErrorMessage = (props: any) => {
-  const { label, error, ...rest } = props;
+  const { label, color, error, ...rest } = props;
   return (
     <View>
-      <Text style={{ color: "#ff5959", paddingHorizontal: 5 }}>
+      <Text style={{ color: color ? color : '#ff5959', paddingHorizontal: 5 }}>
         {props.children}
       </Text>
     </View>

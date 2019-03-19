@@ -28,7 +28,7 @@ import {
   smsSent
 } from '../../store/actions/userAtions';
 import { StyleSheet } from '../../utils';
-import { Logo } from '../../componenets';
+import { Logo, WhitLogo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
 class PhoneScreen extends React.Component<any, any> {
@@ -154,32 +154,39 @@ class PhoneScreen extends React.Component<any, any> {
     const { localePhone }: any = this.state;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+        <View
+          style={[
+            styles.container,
+            {
+              backgroundColor: '#7678ED'
+            }
+          ]}
+        >
           <TouchableOpacity
             style={{ position: 'absolute', left: 20, top: 30, zIndex: 150 }}
             onPress={() => this.props.navigation.navigate('App')}
           >
-            <Ionicons name="ios-arrow-back" size={30} color="#555" />
+            <Ionicons name="ios-arrow-back" size={30} color="#fff" />
           </TouchableOpacity>
-          <View style={{ flex: 2 }}>
-            <CountDownTimer
-              counter={this.state.interval}
-              cb={this.counterCllBack}
-              size={32}
-            />
+          <View
+            style={{
+              flex: 2,
+              justifyContent: 'flex-end',
+              alignItems: 'center'
+            }}
+          >
+            <WhitLogo size={150} />
           </View>
 
           <KeyboardAvoidingView
             style={{
-              flex: 5,
+              flex: 3,
               justifyContent: 'center',
               alignItems: 'center'
             }}
             behavior="padding"
             enabled
           >
-            <Logo size={120} />
-
             <Formik
               initialValues={{
                 phone: localePhone
@@ -203,6 +210,11 @@ class PhoneScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
+                  <CountDownTimer
+                    counter={this.state.interval}
+                    cb={this.counterCllBack}
+                    size={32}
+                  />
                   <InputPhone
                     num
                     name="phone"
@@ -210,8 +222,6 @@ class PhoneScreen extends React.Component<any, any> {
                     value={values.phone}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
                     error={touched.phone && errors.phone}
                     keyboardType="number-pad"
@@ -219,7 +229,7 @@ class PhoneScreen extends React.Component<any, any> {
                     countryCode={this.props.code}
                   />
                   <Button
-                    background="#7678ED"
+                    background="#fff"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={words.send}
@@ -240,7 +250,6 @@ class PhoneScreen extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -264,18 +273,21 @@ const styles = StyleSheet.create({
   labelStyle: {
     fontSize: 18,
     padding: 5,
-    marginVertical: 20
+    marginBottom: 10,
+    fontFamily: 'cairo-regular',
+    color: '#fff'
   },
   btnStyle: {
-    height: 40,
-    width: 150,
+    height: 50,
+    width: width - 140,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
+    marginTop: 10,
+    margin: 10,
     borderRadius: 5
   },
   btnTextStyle: {
-    color: '#fff',
+    color: '#7678ED',
     fontSize: 16,
     fontFamily: 'cairo-regular'
   }

@@ -22,6 +22,7 @@ import {
   LoadingSmall,
   HomeLoading,
   Logo,
+  WhitLogo,
   BackIcon,
   Header
 } from './Common';
@@ -50,5 +51,6 @@ export {
   AvatarCircle,
   Logo,
   BackIcon,
-  Header
+  Header,
+  WhitLogo
 };

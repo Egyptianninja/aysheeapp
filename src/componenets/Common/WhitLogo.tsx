@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { View, Image } from 'react-native';
 import { images } from '../../load';
-const Logo = ({ size = 150 }) => (
+const WhitLogo = ({ size = 150 }) => (
   <View
     style={{
-      backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 500
@@ -23,10 +22,10 @@ const Logo = ({ size = 150 }) => (
           width: '100%',
           height: '100%'
         }}
-        source={images.namelogofull}
+        source={images.namelogowhite}
       />
     </View>
   </View>
 );
 
-export default Logo;
+export default WhitLogo;
