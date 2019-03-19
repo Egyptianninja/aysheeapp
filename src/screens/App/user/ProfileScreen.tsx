@@ -75,7 +75,9 @@ class ProfileScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = ({ seconds, screen }: any) => {
+
+  showMessageModal = async ({ seconds, screen, message }: any) => {
+    await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
       setTimeout(() => {

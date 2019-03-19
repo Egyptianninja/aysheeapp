@@ -173,7 +173,7 @@ const Option = ({
           } else {
             editClassifieds({
               variables: {
-                postId: post.id,
+                postId,
                 updates: 1
               }
             });
@@ -187,7 +187,7 @@ const Option = ({
         } else if (itemData.id === 6) {
           editClassifieds({
             variables: {
-              postId: post.id,
+              postId,
               islive: true
             }
           });
@@ -205,7 +205,7 @@ const Option = ({
         } else if (itemData.id === 7) {
           editClassifieds({
             variables: {
-              postId: post.id,
+              postId,
               islive: false
             }
           });
