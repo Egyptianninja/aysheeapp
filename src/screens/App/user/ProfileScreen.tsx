@@ -31,7 +31,7 @@ import {
 import MapModal from '../../../componenets/ProfileScreen/MapModal';
 const { width, height } = Dimensions.get('window');
 
-const HEADER_HEIGHT = 205;
+const HEADER_HEIGHT = 240;
 const PROFILE_IMAGE_HEIGHT = 80;
 
 class ProfileScreen extends React.Component<any, any> {
@@ -148,7 +148,7 @@ class ProfileScreen extends React.Component<any, any> {
     });
     const topPaddingIcons = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_HEIGHT],
-      outputRange: [HEADER_HEIGHT - 90, -90],
+      outputRange: [HEADER_HEIGHT - 100, -100],
       extrapolate: 'clamp'
     });
     const topPaddinTab = this.state.scrollY.interpolate({
@@ -351,9 +351,9 @@ class ProfileScreen extends React.Component<any, any> {
               position: 'absolute',
               width,
               top: topPaddingIcons,
-              height: 40,
+              height: 50,
               zIndex: 100,
-              backgroundColor: '#fff',
+              // backgroundColor: 'red',
               flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
               justifyContent: 'space-around',
               alignItems: 'center',

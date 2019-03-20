@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { LoadingSmall } from '../../componenets';
-import { rtlos } from '../../utils';
 
 const Button = (props: any) => {
   const {
