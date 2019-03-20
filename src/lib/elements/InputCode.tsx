@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { ErrorMessage } from './Common';
-import { arabicToNum } from '../../utils';
+import { arabicToNum, rtlos } from '../../utils';
 class InputCode extends React.PureComponent<any, any> {
   handleChange = (value: any) => {
     if (this.props.num) {
@@ -21,32 +21,35 @@ class InputCode extends React.PureComponent<any, any> {
     return (
       <View style={[this.props.outerStyle, { alignItems: 'center' }]}>
         <Text style={this.props.labelStyle}>{label}</Text>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {error && <ErrorMessage color="#fff">{error}</ErrorMessage>}
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            borderBottomWidth: 1,
-            borderBottomColor: '#aaa',
-            marginVertical: 20
+            borderWidth: 1,
+            borderColor: '#ddd',
+            marginVertical: 20,
+            borderRadius: 5,
+            backgroundColor: '#7678ED'
           }}
         >
           <TextInput
             onChangeText={this.handleChange}
             placeholderTextColor="#eee"
             onBlur={this.handleTouch}
-            autoFocus
+            // autoFocus
             style={[
               {
-                width: 175,
+                width: 270,
                 paddingHorizontal: 10,
                 paddingVertical: 5,
-                backgroundColor: '#fff',
+                backgroundColor: '#7678ED',
                 textAlign: 'center',
+                borderRadius: 5,
                 letterSpacing: 1,
                 fontSize: 40,
-                color: '#777',
+                color: '#fff',
                 fontWeight: '300'
               }
             ]}

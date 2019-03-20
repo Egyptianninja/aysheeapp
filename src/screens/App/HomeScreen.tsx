@@ -25,7 +25,8 @@ import {
   getTimeLineBuckets,
   Message,
   readyPosts,
-  registerForPushNotificationsAsync
+  registerForPushNotificationsAsync,
+  isTablet
 } from '../../utils';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
@@ -435,7 +436,12 @@ class HomeScreen extends React.Component<any, any> {
             if (postsQuery && postsQuery.length === 0) {
               return <Noresult isRTL={isRTL} title={words.noresults} />;
             }
-            const posts = readyPosts(postsQuery, 200, 79, lang);
+            const posts = readyPosts(
+              postsQuery,
+              isTablet() ? 400 : 200,
+              79,
+              lang
+            );
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
             this.props.setBuckets(buckets);
 

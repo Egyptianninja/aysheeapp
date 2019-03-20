@@ -9,7 +9,12 @@ import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Menu, Report } from '../../../componenets/Menu';
 import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
 import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
-import { getDBNextPosts, Message, readyUserPosts } from '../../../utils';
+import {
+  getDBNextPosts,
+  Message,
+  readyUserPosts,
+  isTablet
+} from '../../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -125,7 +130,12 @@ class MyFavScreen extends React.Component<any, any> {
             if (posts && posts.length === 0) {
               return <Noresult />;
             }
-            const rPosts = readyUserPosts(posts, 200, 79, lang);
+            const rPosts = readyUserPosts(
+              posts,
+              isTablet() ? 400 : 200,
+              79,
+              lang
+            );
 
             return (
               <MasonryList

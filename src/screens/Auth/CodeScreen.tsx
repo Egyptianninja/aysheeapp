@@ -26,8 +26,8 @@ import {
   login,
   smsSent
 } from '../../store/actions/userAtions';
-import { StyleSheet } from '../../utils';
-import { Logo } from '../../componenets';
+import { StyleSheet, isIphoneX } from '../../utils';
+import { Logo, WhitLogo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
 
@@ -155,17 +155,41 @@ class CodeScreen extends React.Component<any, any> {
     const { words } = this.props;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+        <View
+          style={[
+            styles.container,
+            {
+              backgroundColor: '#8E90F0'
+            }
+          ]}
+        >
           <TouchableOpacity
-            style={{ position: 'absolute', left: 20, top: 30, zIndex: 150 }}
-            onPress={() => this.props.navigation.navigate('App')}
+            style={{
+              position: 'absolute',
+              left: 20,
+              top: isIphoneX() ? 50 : 30,
+              zIndex: 150
+            }}
+            onPress={() => this.props.navigation.goBack()}
           >
-            <Ionicons name="ios-arrow-back" size={30} color="#555" />
+            <Ionicons name="ios-arrow-back" size={30} color="#fff" />
           </TouchableOpacity>
+          <View
+            style={{
+              flex: 2,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <WhitLogo size={150} />
+            <Text style={{ fontSize: 20, color: '#fff', fontWeight: '300' }}>
+              +{this.state.phone}
+            </Text>
+          </View>
           <KeyboardAvoidingView
             style={{
-              flex: 1,
-              justifyContent: 'center',
+              flex: 2,
+              justifyContent: 'flex-start',
               alignItems: 'center'
             }}
             behavior="padding"
@@ -191,13 +215,6 @@ class CodeScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <Logo size={120} />
-
-                  <Text
-                    style={{ fontSize: 24, color: '#555', fontWeight: '200' }}
-                  >
-                    +{this.state.phone}
-                  </Text>
                   <InputCode
                     name="code"
                     num
@@ -214,7 +231,7 @@ class CodeScreen extends React.Component<any, any> {
                   />
                   <View style={{ flexDirection: 'row' }}>
                     <Button
-                      background="#7678ED"
+                      background="#fff"
                       disabled={this.state.codeInterval > 0 ? true : false}
                       style={styles.btnStyle}
                       textStyle={styles.btnTextStyle}
@@ -223,7 +240,7 @@ class CodeScreen extends React.Component<any, any> {
                       loading={isSubmitting}
                     />
                     <Button
-                      background="#7678ED"
+                      background="#fff"
                       disabled={this.state.interval > 0 ? true : false}
                       style={styles.btnStyle}
                       textStyle={styles.btnTextStyle}
@@ -306,19 +323,19 @@ const styles = StyleSheet.create({
   labelStyle: {
     fontSize: 18,
     padding: 5,
-    marginVertical: 15
+    marginVertical: 15,
+    color: '#fff'
   },
   btnStyle: {
-    height: 40,
-    width: 150,
+    height: 50,
+    width: 121,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 20,
-    marginTop: 20,
+    marginHorizontal: 15,
     borderRadius: 5
   },
   btnTextStyle: {
-    color: '#fff',
+    color: '#7678ED',
     fontSize: 16,
     fontFamily: 'cairo-regular'
   }

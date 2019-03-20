@@ -36,15 +36,16 @@ class InputPhone extends React.PureComponent<any, any> {
             borderColor: '#ddd',
             marginVertical: 10,
             borderRadius: 5,
-            backgroundColor: '#6163C2'
+            backgroundColor: '#7678ED'
           }}
         >
           <View
             style={{
               height: 50,
+              width: 68,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: '#4C4D97',
+              backgroundColor: '#6163C2',
               borderBottomLeftRadius: 5,
               borderTopLeftRadius: 5,
               paddingHorizontal: 10
@@ -53,7 +54,7 @@ class InputPhone extends React.PureComponent<any, any> {
             <Text
               style={{
                 fontSize: 20,
-                color: '#8E90F0'
+                color: '#A7A9F3'
               }}
             >
               +{countryCode}
@@ -66,7 +67,7 @@ class InputPhone extends React.PureComponent<any, any> {
             // placeholderTextColor="#8E90F0"
             onBlur={this.handleTouch}
             selectionColor={'#fff'}
-            autoFocus
+            // autoFocus
             style={[
               {
                 width: 200,

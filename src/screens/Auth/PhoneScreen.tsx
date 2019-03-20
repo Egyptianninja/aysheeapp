@@ -27,7 +27,7 @@ import {
   phoneRemoved,
   smsSent
 } from '../../store/actions/userAtions';
-import { StyleSheet } from '../../utils';
+import { StyleSheet, isIphoneX } from '../../utils';
 import { Logo, WhitLogo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
@@ -158,12 +158,17 @@ class PhoneScreen extends React.Component<any, any> {
           style={[
             styles.container,
             {
-              backgroundColor: '#7678ED'
+              backgroundColor: '#8E90F0'
             }
           ]}
         >
           <TouchableOpacity
-            style={{ position: 'absolute', left: 20, top: 30, zIndex: 150 }}
+            style={{
+              position: 'absolute',
+              left: 20,
+              top: isIphoneX() ? 50 : 30,
+              zIndex: 150
+            }}
             onPress={() => this.props.navigation.navigate('App')}
           >
             <Ionicons name="ios-arrow-back" size={30} color="#fff" />
@@ -171,7 +176,7 @@ class PhoneScreen extends React.Component<any, any> {
           <View
             style={{
               flex: 2,
-              justifyContent: 'flex-end',
+              justifyContent: 'center',
               alignItems: 'center'
             }}
           >
@@ -180,9 +185,10 @@ class PhoneScreen extends React.Component<any, any> {
 
           <KeyboardAvoidingView
             style={{
-              flex: 3,
-              justifyContent: 'center',
+              flex: 2,
+              justifyContent: 'flex-start',
               alignItems: 'center'
+              // backgroundColor: 'red'
             }}
             behavior="padding"
             enabled
@@ -213,7 +219,7 @@ class PhoneScreen extends React.Component<any, any> {
                   <CountDownTimer
                     counter={this.state.interval}
                     cb={this.counterCllBack}
-                    size={32}
+                    size={22}
                   />
                   <InputPhone
                     num
@@ -260,16 +266,7 @@ const styles = StyleSheet.create({
   outerStyle: {
     justifyContent: 'flex-start'
   },
-  innerStyle: {
-    width: width - 80,
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-    writingDirection: 'auto',
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 5
-  },
+
   labelStyle: {
     fontSize: 18,
     padding: 5,
@@ -279,7 +276,7 @@ const styles = StyleSheet.create({
   },
   btnStyle: {
     height: 50,
-    width: width - 140,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,

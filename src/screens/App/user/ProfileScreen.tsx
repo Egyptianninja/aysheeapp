@@ -25,7 +25,8 @@ import {
   Message,
   readyUserPosts,
   call,
-  rtlos
+  rtlos,
+  isTablet
 } from '../../../utils';
 import MapModal from '../../../componenets/ProfileScreen/MapModal';
 const { width, height } = Dimensions.get('window');
@@ -566,7 +567,12 @@ class ProfileScreen extends React.Component<any, any> {
               return <Noresult title="network issue" />;
             }
             const { posts } = data.getUserPosts;
-            const rPosts = readyUserPosts(posts, 200, 79, lang);
+            const rPosts = readyUserPosts(
+              posts,
+              isTablet() ? 400 : 200,
+              79,
+              lang
+            );
             return (
               <MasonryList
                 ref={(ref: any) => {

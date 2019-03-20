@@ -59,7 +59,7 @@ import {
 } from './notifications';
 import { onShare } from './share';
 import { since } from './since';
-import { isIphoneX } from './platform/iphonex';
+import { isIphoneX, isTablet } from './platform/device';
 export {
   StyleSheet,
   uploadPhoto,
@@ -115,5 +115,6 @@ export {
   getDate,
   getCurrency,
   isIphoneX,
+  isTablet,
   rtlos
 };
