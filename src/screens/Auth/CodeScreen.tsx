@@ -240,10 +240,16 @@ class CodeScreen extends React.Component<any, any> {
                       loading={isSubmitting}
                     />
                     <Button
-                      background="#fff"
+                      background="#8E90F0"
                       disabled={this.state.interval > 0 ? true : false}
-                      style={styles.btnStyle}
-                      textStyle={styles.btnTextStyle}
+                      style={[
+                        styles.btnStyle,
+                        {
+                          borderWidth: 1,
+                          borderColor: '#fff'
+                        }
+                      ]}
+                      textStyle={[styles.btnTextStyle, { color: '#fff' }]}
                       title={words.resend}
                       onPress={this.handleResendCode}
                     />

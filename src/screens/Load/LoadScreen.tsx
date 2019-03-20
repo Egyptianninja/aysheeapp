@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { AsyncStorage, Dimensions, Image, View, StatusBar } from 'react-native';
+import {
+  AsyncStorage,
+  Dimensions,
+  Image,
+  View,
+  StatusBar,
+  Animated
+} from 'react-native';
 import { connect } from 'react-redux';
 import getMyCountry from '../../graphql/mutation/getMyCountry';
 import refreshToken from '../../graphql/mutation/refreshToken';
@@ -13,10 +20,21 @@ class LoadScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
+  animatedValue: any;
   timer: any;
   constructor(props: any) {
     super(props);
     this.getCountryToken();
+    this.state = {};
+  }
+  componentWillMount() {
+    this.animatedValue = new Animated.Value(1);
+  }
+  componentDidMount() {
+    Animated.timing(this.animatedValue, {
+      toValue: 2,
+      duration: 1000
+    }).start();
   }
   componentWillUnmount() {
     clearTimeout(this.timer);
@@ -42,22 +60,35 @@ class LoadScreen extends React.Component<any, any> {
   };
 
   render() {
+    const animatedStyle = {
+      transform: [
+        {
+          scale: this.animatedValue
+        }
+      ]
+    };
     return (
       <View
-        style={{
-          flex: 1,
-          backgroundColor: '#7678ED',
-          width,
-          height
-        }}
+        style={[
+          {
+            flex: 1,
+            backgroundColor: '#7678ED',
+            width,
+            height,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }
+        ]}
       >
         <StatusBar translucent={true} barStyle={'light-content'} />
-        <Image
-          source={images.load}
-          style={{ flex: 1, width: undefined, height: undefined }}
-          resizeMode="contain"
-          fadeDuration={0}
-        />
+        <Animated.View style={[{ width: 75, height: 75 }, animatedStyle]}>
+          <Image
+            source={images.namelogowhite}
+            style={{ flex: 1, width: undefined, height: undefined }}
+            resizeMode="contain"
+            fadeDuration={0}
+          />
+        </Animated.View>
       </View>
     );
   }

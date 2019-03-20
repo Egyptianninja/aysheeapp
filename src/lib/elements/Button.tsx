@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { LoadingSmall } from '../../componenets';
+import { rtlos } from '../../utils';
 
 const Button = (props: any) => {
   const {
@@ -25,16 +27,14 @@ const Button = (props: any) => {
     >
       <Text style={textStyle}>{title}</Text>
       {loading && (
-        <ActivityIndicator
+        <View
           style={{
             position: 'absolute',
-            right: isRTL ? 80 : undefined,
-            left: isRTL ? undefined : 80,
-            top: 20
+            top: 33
           }}
-          size="small"
-          color="#000"
-        />
+        >
+          <LoadingSmall />
+        </View>
       )}
     </TouchableOpacity>
   );
