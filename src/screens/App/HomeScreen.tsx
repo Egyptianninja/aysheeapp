@@ -399,7 +399,7 @@ class HomeScreen extends React.Component<any, any> {
             top: 0,
             left: 0,
             right: 0,
-            backgroundColor: '#fff',
+            // backgroundColor: '#f6f5f4',
             height: this.NAVBAR_HEIGHT,
             transform: [{ translateY: navbarTranslate }],
             minHeight: this.NAVBAR_HEIGHT,
@@ -423,7 +423,7 @@ class HomeScreen extends React.Component<any, any> {
         <Query
           query={getTimeLine}
           variables={{ ...rest, query }}
-          fetchPolicy="network-only"
+          // fetchPolicy="network-only"
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
@@ -454,7 +454,7 @@ class HomeScreen extends React.Component<any, any> {
                   }}
                   scrollEventThrottle={16}
                   contentContainerStyle={{
-                    marginTop: this.NAVBAR_HEIGHT,
+                    marginTop: this.NAVBAR_HEIGHT + 8,
                     paddingBottom: 160
                   }}
                   onScroll={Animated.event(

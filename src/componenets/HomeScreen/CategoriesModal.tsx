@@ -10,6 +10,7 @@ import {
 import Modal from 'react-native-modal';
 import { images, icons } from '../../load';
 import CategoryModalIcon from './CategoryModalIcon';
+import { Platform } from 'expo-core';
 
 const { width, height } = Dimensions.get('window');
 
@@ -215,10 +216,8 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               color: '#171717',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
-              fontSize: 40,
-              paddingHorizontal: 15,
-              top: -7
+              fontSize: Platform.OS === 'android' ? 40 : 22,
+              paddingHorizontal: 15
             }}
           >
             ⤬

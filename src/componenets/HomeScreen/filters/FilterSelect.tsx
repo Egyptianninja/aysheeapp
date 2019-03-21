@@ -10,6 +10,7 @@ import Modal from 'react-native-modal';
 import FilterOption from './FilterOption';
 import { Platform } from 'expo-core';
 import { Ionicons } from '@expo/vector-icons';
+import { rtlos } from '../../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -33,10 +34,27 @@ export default class FilterSelect extends React.Component<any, any> {
   handleLabel = (label: any) => {
     this.setState({ label });
   };
-  renderOptions = (data: any) => {
+  renderOptions = (data: any, selected: any) => {
     return (
       <React.Fragment>
-        {!this.props.sort && (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 40,
+            backgroundColor: '#8E90F0',
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15
+          }}
+        >
+          <Text
+            style={{ fontSize: 20, fontFamily: 'cairo-regular', color: '#fff' }}
+          >
+            {this.props.data.label}
+          </Text>
+        </View>
+        {!this.props.sort && selected && (
           <TouchableOpacity
             onPress={() => {
               const { itemKind, removeFilter } = this.props;
@@ -53,29 +71,39 @@ export default class FilterSelect extends React.Component<any, any> {
               this.toggleModal();
             }}
             style={{
-              flex: 1,
-              padding: 3,
-              margin: 7,
-              backgroundColor: '#eee',
-              borderWidth: 1,
-              borderColor: '#ddd',
-              borderRadius: 5
+              width,
+              marginVertical: 5,
+              paddingVertical: 5
             }}
           >
-            <Text
+            <View
               style={{
-                fontSize: 16,
-                fontFamily: 'cairo-regular',
-                textAlign:
-                  this.props.isRTL && Platform.OS !== 'android'
-                    ? 'right'
-                    : 'left',
-                paddingHorizontal: 10,
-                color: '#ff5959'
+                flexDirection:
+                  rtlos() === 3
+                    ? 'row'
+                    : this.props.isRTL
+                    ? 'row-reverse'
+                    : 'row',
+                paddingHorizontal: 20,
+                justifyContent: 'flex-start',
+                alignItems: 'center'
               }}
             >
-              {this.props.words.remove}
-            </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: 'cairo-regular',
+                  textAlign:
+                    this.props.isRTL && Platform.OS !== 'android'
+                      ? 'right'
+                      : 'left',
+                  paddingHorizontal: 10,
+                  color: '#ff5959'
+                }}
+              >
+                {this.props.words.remove}
+              </Text>
+            </View>
           </TouchableOpacity>
         )}
         {data.buckets.map((da: any) => {
@@ -119,15 +147,15 @@ export default class FilterSelect extends React.Component<any, any> {
               height: 38,
               minWidth: this.props.sort ? undefined : 65,
               borderRadius: 18,
-              marginHorizontal: 4,
+              marginHorizontal: 5,
               justifyContent: 'center',
               alignItems: 'center'
             },
             !this.props.sort
               ? {
                   backgroundColor: '#fff',
-                  paddingHorizontal: 10,
-                  marginTop: Platform.OS === 'ios' ? 5 : 10,
+                  paddingHorizontal: 8,
+                  // marginTop: Platform.OS === 'ios' ? 5 : 10,
                   shadowColor: '#777',
                   shadowOffset: {
                     width: 0,
@@ -163,47 +191,36 @@ export default class FilterSelect extends React.Component<any, any> {
                 : data.label
               : this.state.label}
           </Text>
-          {/* {!this.props.sort && (
-            <Ionicons
-              style={{ paddingLeft: 10, top: 2 }}
-              name="md-arrow-dropdown"
-              size={24}
-              color={selected ? '#7678ED' : '#555'}
-            />
-          )} */}
+
           {this.props.sort && (
-            <Ionicons
-              // style={{ paddingRight: 5 }}
-              name="ios-funnel"
-              size={26}
-              color="#8E90F0"
-            />
+            <Ionicons name="ios-funnel" size={26} color="#8E90F0" />
           )}
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}
           onBackdropPress={() => this.setState({ isModalVisible: false })}
           onBackButtonPress={() => this.setState({ isModalVisible: false })}
-          backdropOpacity={0.2}
-          useNativeDriver={true}
+          backdropOpacity={0.5}
           hideModalContentWhileAnimating={true}
-          style={{ flex: 1 }}
+          onSwipe={() => this.setState({ isModalVisible: false })}
+          swipeDirection="down"
+          style={{ margin: 0 }}
         >
           <View
             style={{
               backgroundColor: '#fff',
-              borderRadius: 10,
               position: 'absolute',
               bottom: 0,
               margin: 0,
-              height: 350,
-              paddingTop: 10,
-              width: width - 40,
-              justifyContent: 'space-around',
-              alignItems: 'center'
+              width,
+              height:
+                data.buckets.length < 7 ? data.buckets.length * 40 + 140 : 455,
+              // paddingTop: 20,
+              borderTopLeftRadius: 15,
+              borderTopRightRadius: 15
             }}
           >
-            <ScrollView>{this.renderOptions(data)}</ScrollView>
+            <ScrollView>{this.renderOptions(data, selected)}</ScrollView>
           </View>
         </Modal>
       </View>

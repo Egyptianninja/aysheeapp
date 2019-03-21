@@ -121,57 +121,51 @@ class CategoriesScroll extends React.Component<any, any> {
     const categoryName = categories.filter(
       (cat: any) => cat.id === rest.categoryId
     )[0];
-    const back = Object.values(rest).length === 1;
+    const reset = Object.values(rest).length === 1;
 
     return (
-      <View style={{ width: '100%' }}>
+      <View
+        style={{
+          width: '100%',
+          backgroundColor: selected ? '#f6f5f4' : '#fff'
+        }}
+      >
         {selected && (
           <View
             style={{
               justifyContent: 'space-between',
               alignItems: 'center',
-              flexDirection: rtlOS === 3 ? 'row-reverse' : 'row'
+              flexDirection: rtlOS === 3 ? 'row-reverse' : 'row',
+              backgroundColor: '#eaeaea',
+              paddingBottom: 7
             }}
           >
-            {back && (
+            <TouchableOpacity
+              style={{
+                position: 'absolute',
+                left: -4,
+                top: -2,
+                zIndex: 10,
+                paddingVertical: 3,
+                paddingLeft: 7,
+                paddingHorizontal: 5,
+                flexDirection: 'row'
+              }}
+              onPress={() => this.props.removeAllFilters()}
+            >
+              <Ionicons
+                style={{ paddingHorizontal: 10, paddingTop: 3 }}
+                name="ios-arrow-back"
+                size={33}
+                color="#8E90F0"
+              />
+            </TouchableOpacity>
+            {!reset && (
               <TouchableOpacity
                 style={{
                   position: 'absolute',
-                  left: -2,
+                  left: 25,
                   top: -2,
-                  zIndex: 10,
-                  paddingVertical: 3,
-                  paddingLeft: 7,
-                  paddingHorizontal: 5,
-                  flexDirection: 'row'
-                }}
-                onPress={() => this.props.removeAllFilters()}
-              >
-                <Ionicons
-                  style={{ paddingHorizontal: 10, paddingTop: 3 }}
-                  name="ios-arrow-back"
-                  size={33}
-                  color="#8E90F0"
-                />
-                <Text
-                  style={{
-                    top: 5,
-                    left: -5,
-                    color: '#7678ED',
-                    fontSize: 13,
-                    fontFamily: 'cairo-regular'
-                  }}
-                >
-                  {words.back}
-                </Text>
-              </TouchableOpacity>
-            )}
-            {!back && (
-              <TouchableOpacity
-                style={{
-                  position: 'absolute',
-                  left: -5,
-                  top: -4,
                   zIndex: 10,
                   padding: 5,
                   flexDirection: 'row'
@@ -181,12 +175,12 @@ class CategoriesScroll extends React.Component<any, any> {
                 <Ionicons
                   style={{ paddingHorizontal: 10, paddingTop: 3 }}
                   name="ios-close-circle"
-                  size={33}
+                  size={28}
                   color="#8E90F0"
                 />
                 <Text
                   style={{
-                    top: 5,
+                    top: 7,
                     left: -5,
                     color: '#7678ED',
                     fontSize: 13,
@@ -206,9 +200,10 @@ class CategoriesScroll extends React.Component<any, any> {
             >
               <Text
                 style={{
+                  top: 10,
                   fontSize: 18,
                   fontFamily: 'cairo-regular',
-                  color: '#333',
+                  color: '#999',
                   paddingHorizontal: 15
                 }}
               >
@@ -243,7 +238,6 @@ class CategoriesScroll extends React.Component<any, any> {
               <TouchableOpacity
                 onPress={() => this.props.showCategoriesModal()}
                 style={{
-                  // justifyContent: 'center',
                   alignItems: 'center',
                   alignSelf: 'center',
                   height: 30,
@@ -257,8 +251,8 @@ class CategoriesScroll extends React.Component<any, any> {
                 <Image
                   style={[
                     {
-                      width: 30,
-                      height: 30
+                      width: 28,
+                      height: 28
                     }
                   ]}
                   source={images.pointsmenu}
@@ -297,11 +291,12 @@ class CategoriesScroll extends React.Component<any, any> {
             contentContainerStyle={{
               flexDirection:
                 isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-              paddingTop: !selected ? 5 : undefined
+              paddingTop: !selected ? 5 : undefined,
+              // paddingHorizontal: 5,
+              paddingBottom: 0
             }}
             style={{
-              backgroundColor: '#fff',
-              height: selected ? 60 : 95
+              height: selected ? 55 : 95
             }}
           >
             {!selected && (

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { LoadingSmall } from '../../componenets';
+import { DotIndicatorSmall } from '../../utils';
 
 const Button = (props: any) => {
   const {
@@ -32,7 +32,7 @@ const Button = (props: any) => {
             top: 33
           }}
         >
-          <LoadingSmall />
+          <DotIndicatorSmall count={3} size={7} />
         </View>
       )}
     </TouchableOpacity>

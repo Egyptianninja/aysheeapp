@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import {
   Dimensions,
@@ -9,8 +10,20 @@ import {
 import Modal from 'react-native-modal';
 import { store } from '../../store';
 import { updateQty } from '../../store/actions/userAtions';
-import { filterOptions, onShare } from '../../utils';
+import { filterOptions, onShare, rtlos } from '../../utils';
 const { width } = Dimensions.get('window');
+
+const iconNames = [
+  { id: 1, name: 'Add to favorite', icon: 'ios-add-circle-outline' },
+  { id: 2, name: 'Remove from favorite', icon: 'ios-remove-circle-outline' },
+  { id: 3, name: 'Share', icon: 'md-share' },
+  { id: 4, name: 'Report', icon: 'ios-filing' },
+  { id: 5, name: 'Refresh', icon: 'ios-refresh' },
+  { id: 6, name: 'Publish', icon: 'ios-cloud-upload' },
+  { id: 7, name: 'Unpublish', icon: 'ios-cloud-download' },
+  { id: 8, name: 'Edit', icon: 'ios-create' },
+  { id: 9, name: 'Delete', icon: 'ios-trash' }
+];
 
 export default class Menu extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -86,26 +99,29 @@ export default class Menu extends React.Component<any, any> {
         isVisible={this.state.isMenuModalVisible}
         onBackdropPress={() => this.props.hideMenuModal()}
         onBackButtonPress={() => this.props.hideMenuModal()}
-        backdropOpacity={0.2}
-        useNativeDriver={true}
+        backdropOpacity={0.5}
+        // useNativeDriver={true}
         hideModalContentWhileAnimating={true}
-        style={{ flex: 1 }}
+        // animationIn="slideInUp"
+        // animationOut="slideOutDown"
+        onSwipe={() => this.props.hideMenuModal()}
+        swipeDirection="down"
+        style={{ margin: 0 }}
       >
         <View
           style={{
             backgroundColor: '#fff',
-            borderRadius: 10,
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
             position: 'absolute',
             bottom: 0,
             margin: 0,
-            height: 350,
-            paddingTop: 10,
-            width: width - 40,
-            justifyContent: 'space-around',
-            alignItems: 'center'
+            height: options.length * 55 + 70,
+            paddingTop: 20,
+            width
           }}
         >
-          <ScrollView>{this.renderOptions(options)}</ScrollView>
+          {this.renderOptions(options)}
         </View>
       </Modal>
     );
@@ -234,26 +250,38 @@ const Option = ({
         }
       }}
       style={{
-        flex: 1,
-        width: width - 80,
-        padding: 3,
-        margin: 7,
-        backgroundColor: '#eee',
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 5
+        width,
+        marginVertical: 5,
+        paddingVertical: 5
       }}
     >
-      <Text
+      <View
         style={{
-          fontSize: 18,
-          fontFamily: 'cairo-regular',
-          textAlign: isRTL ? 'right' : 'left',
-          paddingHorizontal: 10
+          flexDirection: rtlos() === 3 ? 'row' : isRTL ? 'row-reverse' : 'row',
+          paddingHorizontal: 20,
+          justifyContent: 'flex-start',
+          alignItems: 'center'
         }}
       >
-        {itemData.name}
-      </Text>
+        <Ionicons
+          name={
+            iconNames.filter((icon: any) => icon.id === itemData.id)[0].icon
+          }
+          size={30}
+          color="#555"
+          style={{ paddingHorizontal: 10 }}
+        />
+        <Text
+          style={{
+            fontSize: 18,
+            fontFamily: 'cairo-regular',
+            textAlign: isRTL ? 'right' : 'left',
+            paddingHorizontal: 10
+          }}
+        >
+          {itemData.name}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };

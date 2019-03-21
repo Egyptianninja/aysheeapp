@@ -398,7 +398,8 @@ const RenderFilter = (props: any) => {
       contentContainerStyle={{
         flex: 1,
         justifyContent:
-          props.isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
+          props.isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
+        paddingHorizontal: 5
       }}
       style={{
         minWidth: width - 85

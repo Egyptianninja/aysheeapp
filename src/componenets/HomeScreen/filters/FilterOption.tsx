@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
-import { getUserLocation } from '../../../utils';
+import { getUserLocation, rtlos } from '../../../utils';
 import LoadingTiny from '../../Common/LoadingTiny';
 
 export default class FilterOption extends React.Component<any, any> {
@@ -68,40 +68,45 @@ export default class FilterOption extends React.Component<any, any> {
           toggleModal();
         }}
         style={{
-          flex: 1,
-          width: width - 80,
-          padding: 3,
-          margin: 7,
-          backgroundColor: '#eee',
-          borderWidth: 1,
-          borderColor: '#ddd',
-          borderRadius: 5
+          width,
+          marginVertical: 5,
+          paddingVertical: 5
         }}
       >
-        {this.state.loadinLocation &&
-          itemKind === 'sortType' &&
-          itemData.id === 3 && (
-            <View
-              style={{
-                position: 'absolute',
-                left: (width - 120) / 2,
-                top: 8
-              }}
-            >
-              <LoadingTiny />
-            </View>
-          )}
-        <Text
+        <View
           style={{
-            fontSize: 16,
-            fontFamily: 'cairo-regular',
-            paddingHorizontal: 10,
-            alignSelf:
-              isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
+            flexDirection:
+              rtlos() === 3 ? 'row' : isRTL ? 'row-reverse' : 'row',
+            paddingHorizontal: 20,
+            justifyContent: 'flex-start',
+            alignItems: 'center'
           }}
         >
-          {itemData.name}
-        </Text>
+          {this.state.loadinLocation &&
+            itemKind === 'sortType' &&
+            itemData.id === 3 && (
+              <View
+                style={{
+                  position: 'absolute',
+                  left: (width - 120) / 2,
+                  top: 8
+                }}
+              >
+                <LoadingTiny />
+              </View>
+            )}
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'cairo-regular',
+              paddingHorizontal: 10,
+              alignSelf:
+                isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
+            }}
+          >
+            {itemData.name}
+          </Text>
+        </View>
       </TouchableOpacity>
     );
   }
