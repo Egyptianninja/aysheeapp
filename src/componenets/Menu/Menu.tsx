@@ -100,12 +100,12 @@ export default class Menu extends React.Component<any, any> {
         onBackdropPress={() => this.props.hideMenuModal()}
         onBackButtonPress={() => this.props.hideMenuModal()}
         backdropOpacity={0.5}
-        // useNativeDriver={true}
+        useNativeDriver={true}
         hideModalContentWhileAnimating={true}
         // animationIn="slideInUp"
         // animationOut="slideOutDown"
-        onSwipe={() => this.props.hideMenuModal()}
-        swipeDirection="down"
+        // onSwipe={() => this.props.hideMenuModal()}
+        // swipeDirection="down"
         style={{ margin: 0 }}
       >
         <View

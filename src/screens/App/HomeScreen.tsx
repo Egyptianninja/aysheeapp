@@ -17,7 +17,7 @@ import favoritePost from '../../graphql/mutation/favoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import getTimeLine from '../../graphql/query/getTimeLine';
-import { setBuckets } from '../../store/actions/postActions';
+import { setBuckets, delQuery } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
 import * as store from '../../store/getStore';
 import {
@@ -236,6 +236,8 @@ class HomeScreen extends React.Component<any, any> {
         this.flatListRef
           .getNode()
           .scrollToOffset({ offset: 0, animated: true });
+      } else {
+        this.removeAllFilters();
       }
     }
   };
@@ -277,6 +279,7 @@ class HomeScreen extends React.Component<any, any> {
     this.setState({
       rest: {}
     });
+    this.props.delQuery();
   };
   removeAllCategoryFilters = () => {
     const newrest = { categoryId: this.state.rest.categoryId };
@@ -423,7 +426,10 @@ class HomeScreen extends React.Component<any, any> {
         <Query
           query={getTimeLine}
           variables={{ ...rest, query }}
-          // fetchPolicy="network-only"
+          onCompleted={data => {
+            const buckets = getTimeLineBuckets(rest.categoryId, store, data);
+            this.props.setBuckets(buckets);
+          }}
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
@@ -442,9 +448,6 @@ class HomeScreen extends React.Component<any, any> {
               79,
               lang
             );
-            const buckets = getTimeLineBuckets(rest.categoryId, store, data);
-            this.props.setBuckets(buckets);
-
             return (
               <React.Fragment>
                 <AnimatedListView
@@ -520,7 +523,7 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(
   mapStateToProps,
-  { setBuckets, updateQty }
+  { setBuckets, updateQty, delQuery }
 )(
   graphql(refreshToken, {
     name: 'refreshToken'

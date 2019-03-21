@@ -201,9 +201,10 @@ export default class FilterSelect extends React.Component<any, any> {
           onBackdropPress={() => this.setState({ isModalVisible: false })}
           onBackButtonPress={() => this.setState({ isModalVisible: false })}
           backdropOpacity={0.5}
+          useNativeDriver={true}
           hideModalContentWhileAnimating={true}
-          onSwipe={() => this.setState({ isModalVisible: false })}
-          swipeDirection="down"
+          // onSwipe={() => this.setState({ isModalVisible: false })}
+          // swipeDirection="down"
           style={{ margin: 0 }}
         >
           <View
