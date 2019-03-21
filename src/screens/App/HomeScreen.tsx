@@ -402,7 +402,6 @@ class HomeScreen extends React.Component<any, any> {
             top: 0,
             left: 0,
             right: 0,
-            // backgroundColor: '#f6f5f4',
             height: this.NAVBAR_HEIGHT,
             transform: [{ translateY: navbarTranslate }],
             minHeight: this.NAVBAR_HEIGHT,
@@ -435,10 +434,11 @@ class HomeScreen extends React.Component<any, any> {
             if (loading) {
               return <HomeLoading categoryId={rest.categoryId} />;
             }
-            if (error) {
+            if (error || !data.getTimeLine.posts) {
               return <Noresult title="error" />;
             }
             const postsQuery = data.getTimeLine.posts;
+
             if (postsQuery && postsQuery.length === 0) {
               return <Noresult isRTL={isRTL} title={words.noresults} />;
             }

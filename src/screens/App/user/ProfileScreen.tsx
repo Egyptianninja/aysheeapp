@@ -563,12 +563,21 @@ class ProfileScreen extends React.Component<any, any> {
             if (loading) {
               return <Loading />;
             }
-            if (error) {
-              return <Noresult title="network issue" />;
+            if (error || !data.getUserPosts.posts) {
+              return <Noresult title="error" top={HEADER_HEIGHT} />;
             }
-            const { posts } = data.getUserPosts;
+            const postsQuery = data.getUserPosts.posts;
+            if (postsQuery && postsQuery.length === 0) {
+              return (
+                <Noresult
+                  isRTL={isRTL}
+                  title={words.noresults}
+                  top={HEADER_HEIGHT}
+                />
+              );
+            }
             const rPosts = readyUserPosts(
-              posts,
+              postsQuery,
               isTablet() ? 400 : 200,
               79,
               lang
