@@ -161,7 +161,7 @@ export default {
     },
 
     { pid: 10, id: 88, name: 'Concrete', nameGlob: 'خرسانة' },
-    { pid: 10, id: 89, name: 'ٍSteel', nameGlob: 'حديد' },
+    { pid: 10, id: 89, name: 'Steel', nameGlob: 'حديد' },
     { pid: 10, id: 90, name: 'Stone and Marble', nameGlob: 'حجر ورخام' },
     {
       pid: 10,
@@ -238,14 +238,14 @@ export default {
     { pid: 18, id: 49, name: 'Cereals', nameGlob: 'Cereals' },
     { pid: 18, id: 50, name: 'Other', nameGlob: 'Other' },
 
-    { pid: 8, id: 51, name: 'ساعات', nameGlob: 'ساعات' },
-    { pid: 8, id: 52, name: 'نظارات', nameGlob: 'نظارات' },
+    { pid: 8, id: 51, name: 'Watch', nameGlob: 'ساعات' },
+    { pid: 8, id: 52, name: 'glasses', nameGlob: 'نظارات' },
     { pid: 8, id: 53, name: 'Bags', nameGlob: 'Bags' },
     { pid: 8, id: 54, name: 'Perfumes', nameGlob: 'Perfumes' },
     { pid: 8, id: 55, name: 'Makeup', nameGlob: 'Makeup' },
     { pid: 8, id: 56, name: 'Jewelry', nameGlob: 'Jewelry' },
     { pid: 8, id: 57, name: 'Gifts', nameGlob: 'Gifts' },
-    { pid: 8, id: 58, name: 'ادوات زينة', nameGlob: 'ادوات زينة' },
+    { pid: 8, id: 58, name: 'Accessories', nameGlob: 'ادوات زينة' },
     { pid: 8, id: 111, name: 'Other', nameGlob: 'Other' },
 
     { pid: 14, id: 70, name: 'Samsung', nameGlob: 'Samsung' },

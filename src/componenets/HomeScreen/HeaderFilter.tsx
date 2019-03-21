@@ -397,9 +397,11 @@ const RenderFilter = (props: any) => {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{
         flex: 1,
+        minWidth: width,
         justifyContent:
           props.isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
-        paddingHorizontal: 5
+        paddingHorizontal: 5,
+        backgroundColor: 'red'
       }}
       style={{
         minWidth: width - 85
