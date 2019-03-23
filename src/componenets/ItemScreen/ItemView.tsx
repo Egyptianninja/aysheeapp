@@ -435,8 +435,8 @@ class ItemView extends React.Component<any, any> {
               shadowOffset: { width: 3, height: 3 },
               shadowColor: '#555',
               shadowOpacity: 0.2,
-              backgroundColor: '#7678ED',
-              opacity: opacityStyle
+              backgroundColor: '#7678ED'
+              // opacity: opacityStyle
             }
           ]}
         >
@@ -457,16 +457,24 @@ class ItemView extends React.Component<any, any> {
               {post.title.substring(0, 20)}
             </Text>
           </View>
-
-          <MenuIconHeader showMenuModal={this.showMenuModal} />
+          <View
+            style={{
+              position: 'absolute',
+              top: 23,
+              right: 2
+            }}
+          >
+            <MenuIconHeader showMenuModal={this.showMenuModal} />
+          </View>
         </Animated.View>
         <ScrollView
-          onContentSizeChange={this.getScrollLength}
+          // onContentSizeChange={this.getScrollLength}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             backgroundColor: '#fff',
-            paddingBottom: 50
+            paddingBottom: 50,
+            paddingTop: Constants.statusBarHeight + 40
           }}
           onScroll={Animated.event([
             {
@@ -479,6 +487,14 @@ class ItemView extends React.Component<any, any> {
             this.scrollView = ref;
           }}
           style={{ backgroundColor: '#eee' }}
+          // onLayout={event => {
+          //   const layout = event.nativeEvent.layout;
+          //   console.log('height:', layout.height);
+          //   console.log('width:', layout.width);
+          //   console.log('x:', layout.x);
+          //   console.log('y:', layout.y);
+          //   console.log('y:', layout);
+          // }}
         >
           {photos.length > 0 && (
             <View>
