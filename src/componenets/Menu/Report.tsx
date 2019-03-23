@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import * as Yup from 'yup';
-import { Button, Input } from '../../lib';
+import { Button, Input, Group, RadioButton } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
@@ -23,11 +23,23 @@ class Report extends React.Component<any, any> {
   }
 
   handleSubmit = async (values: any, bag: any) => {
+    const { spam, fake, content, other, body } = values;
+
+    const data = spam
+      ? 'Spam'
+      : fake
+      ? 'Fake content'
+      : content
+      ? 'Violence or harmful'
+      : other
+      ? body
+      : body;
+
     const res = await this.props.createReport({
       variables: {
         postId: this.props.post.id,
         postOwnerId: this.props.post.userId,
-        body: values.body
+        body: data
       }
     });
     if (res.data.createReport.ok) {
@@ -77,13 +89,15 @@ class Report extends React.Component<any, any> {
           <ScrollView>
             <Formik
               initialValues={{
-                body: ''
+                body: '',
+                spam: false,
+                fake: false,
+                content: false,
+                other: false
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
-                body: Yup.string()
-                  .max(200)
-                  .required('Required')
+                body: Yup.string().max(200)
               })}
               render={({
                 values,
@@ -95,11 +109,48 @@ class Report extends React.Component<any, any> {
                 isValid,
                 isSubmitting
               }: any) => (
-                <React.Fragment>
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                >
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={isRTL}
+                    column={true}
+                  >
+                    <RadioButton
+                      name="spam"
+                      label="Spam"
+                      value={values.spam}
+                      selected={values.spam}
+                    />
+                    <RadioButton
+                      name="fake"
+                      label="Fake content"
+                      value={values.fake}
+                      selected={values.fake}
+                    />
+                    <RadioButton
+                      name="content"
+                      label="Violence or harmful"
+                      value={values.content}
+                      selected={values.content}
+                    />
+                    <RadioButton
+                      name="other"
+                      label="Other"
+                      value={values.other}
+                      selected={values.other}
+                    />
+                  </Group>
                   <Input
                     rtl={isRTL}
                     name="body"
-                    label={word.body}
+                    // label="Other"
                     value={values.body}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -123,7 +174,7 @@ class Report extends React.Component<any, any> {
                     disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
                   />
-                </React.Fragment>
+                </View>
               )}
             />
           </ScrollView>
@@ -152,7 +203,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 40,
+    width: width - 80,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
     writingDirection: 'auto',

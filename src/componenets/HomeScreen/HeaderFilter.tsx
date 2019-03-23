@@ -399,9 +399,8 @@ const RenderFilter = (props: any) => {
         flex: 1,
         minWidth: width,
         justifyContent:
-          props.isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
-        paddingHorizontal: 5,
-        backgroundColor: 'red'
+          props.isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
+        // paddingHorizontal: 5
       }}
       style={{
         minWidth: width - 85

@@ -5,6 +5,7 @@ export default gql`
     $postId: String!
     $title: String
     $body: String
+    $isrtl: Boolean
     $updates: Int
     $islive: Boolean
     $isoffer: Boolean
@@ -48,6 +49,7 @@ export default gql`
       postId: $postId
       title: $title
       body: $body
+      isrtl: $isrtl
       updates: $updates
       islive: $islive
       isoffer: $isoffer

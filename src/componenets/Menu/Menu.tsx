@@ -55,6 +55,7 @@ export default class Menu extends React.Component<any, any> {
           editClassifieds={this.props.editClassifieds}
           showEditModal={this.props.showEditModal}
           showCheckMessageModal={this.props.showCheckMessageModal}
+          isAuthenticated={this.props.isAuthenticated}
           postId={this.props.postId}
           post={this.props.post}
           word={this.props.word}
@@ -92,7 +93,8 @@ export default class Menu extends React.Component<any, any> {
           : fav
           ? [2, 3, 4]
           : [1, 3, 4]
-        : [3]
+        : [1, 3, 4]
+      // : [3]
     );
     return (
       <Modal
@@ -141,19 +143,27 @@ const Option = ({
   showCheckMessageModal,
   postId,
   word,
-  post
+  post,
+  isAuthenticated
 }: any) => {
   return (
     <TouchableOpacity
       onPress={async () => {
         if (itemData.id === 1) {
-          await favoritePost({
-            variables: { postId }
-          });
-          hideMenuModal();
-          setTimeout(() => {
-            showMessageModal({ seconds: 1, message: word.successadded });
-          }, 1000);
+          if (!isAuthenticated) {
+            hideMenuModal();
+            setTimeout(() => {
+              showMessageModal({ seconds: 2, message: 'you have to login!' });
+            }, 1000);
+          } else {
+            await favoritePost({
+              variables: { postId }
+            });
+            hideMenuModal();
+            setTimeout(() => {
+              showMessageModal({ seconds: 1, message: word.successadded });
+            }, 1000);
+          }
         } else if (itemData.id === 2) {
           await unFavoritePost({
             variables: { postId }
@@ -174,10 +184,17 @@ const Option = ({
           ${post.price}`;
           onShare(message, hideMenuModal);
         } else if (itemData.id === 4) {
-          await hideMenuModal();
-          setTimeout(() => {
-            showReportModal();
-          }, 1000);
+          if (!isAuthenticated) {
+            hideMenuModal();
+            setTimeout(() => {
+              showMessageModal({ seconds: 2, message: 'you have to login!' });
+            }, 1000);
+          } else {
+            await hideMenuModal();
+            setTimeout(() => {
+              showReportModal();
+            }, 1000);
+          }
         } else if (itemData.id === 5) {
           if (post.updates) {
             editClassifieds({

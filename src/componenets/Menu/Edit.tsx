@@ -174,6 +174,8 @@ export default class Edit extends React.Component<any, any> {
         salary: salary ? Number(salary) : undefined
       }
     });
+    console.log(res.data);
+
     if (res.data.updatePost.ok) {
       this.props.hideEditModal();
       setTimeout(() => {
@@ -327,35 +329,49 @@ export default class Edit extends React.Component<any, any> {
                 currency: post.currency,
                 phone: post.phone,
                 isnew: post.isnew,
-                isold: !post.isnew,
+                isold: post.isnew || post.isnew === false ? !post.isnew : null,
                 issale: post.issale,
-                isrent: !post.issale,
+                isrent:
+                  post.issale || post.issale === false ? !post.issale : null,
                 iswarranty: post.iswarranty,
                 isforman: post.isforman,
+                isforwomen:
+                  post.isforman || post.isforman === false
+                    ? !post.isforman
+                    : null,
                 isjobreq: post.isjobreq,
-                isjoboffer: !post.isjobreq,
+                isjoboffer:
+                  post.isjobreq || post.isjobreq === false
+                    ? !post.isjobreq
+                    : null,
                 isservicereq: post.isservicereq,
-                isserviceoffer: !post.isservicereq,
-                isforwomen: !post.isforman,
+                isserviceoffer:
+                  post.isservicereq || post.isservicereq === false
+                    ? !post.isservicereq
+                    : null,
                 space: post.space ? post.space.toString() : post.space,
                 rooms: post.rooms ? post.rooms.toString() : post.rooms,
                 bathrooms: post.bathrooms
                   ? post.bathrooms.toString()
                   : post.bathrooms,
                 isfurnishered: post.isfurnishered,
-                isUnfurnishered: !post.isfurnishered,
+                isUnfurnishered:
+                  post.isfurnishered || post.isfurnishered === false
+                    ? !post.isfurnishered
+                    : null,
                 year: post.year ? post.year.toString() : post.year,
                 km: post.km ? post.km.toString() : post.km,
                 color: post.color,
                 jobTitle: post.jobTitle,
                 jobIndustry: post.jobIndustry,
                 isfullTime: post.isfullTime,
-                isPartTime: !post.isfullTime,
+                isPartTime:
+                  post.isfullTime || post.isfullTime === false
+                    ? !post.isfullTime
+                    : null,
                 education: post.education,
                 experience: post.experience,
                 salary: post.salary ? post.salary.toString() : post.salary,
-
-                trueLocation: post.trueLocation,
                 location: false
               }}
               onSubmit={this.handleSubmit}

@@ -292,7 +292,7 @@ class CategoriesScroll extends React.Component<any, any> {
               flexDirection:
                 isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
               paddingTop: !selected ? 5 : undefined,
-              // paddingHorizontal: 5,
+              paddingHorizontal: 10,
               paddingBottom: 0
             }}
             style={{
