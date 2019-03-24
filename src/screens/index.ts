@@ -8,6 +8,8 @@ import AddServiceScreen from './App/add/AddServiceScreen';
 import CameraScreen from './App/CameraScreen';
 import ChoiseScreen from './App/ChoiseScreen';
 import HomeScreen from './App/HomeScreen';
+import HomeScreenSingle from './App/HomeScreenSingle';
+import SearchScreen from './App/SearchScreen';
 import ItemScreen from './App/ItemScreen';
 import NotificationsScreen from './App/NotificationsScreen';
 import OffersScreen from './App/OffersScreen';
@@ -15,6 +17,7 @@ import ShopsScreen from './App/ShopsScreen';
 import EditProfileScreen from './App/user/EditProfileScreen';
 import MyFavScreen from './App/user/MyFavScreen';
 import ProfileScreen from './App/user/ProfileScreen';
+import MyProfileScreen from './App/user/MyProfileScreen';
 import UpgradeToStore from './App/user/UpgradeToStore';
 import CodeScreen from './Auth/CodeScreen';
 import NameScreen from './Auth/NameScreen';
@@ -23,6 +26,7 @@ import LoadScreen from './Load/LoadScreen';
 
 export {
   HomeScreen,
+  HomeScreenSingle,
   ItemScreen,
   ChoiseScreen,
   NotificationsScreen,
@@ -43,5 +47,7 @@ export {
   UpgradeToStore,
   OffersScreen,
   ProfileScreen,
-  ShopsScreen
+  MyProfileScreen,
+  ShopsScreen,
+  SearchScreen
 };

@@ -12,6 +12,17 @@ export function cacheImages(imgs: any) {
 }
 
 export const images = {
+  homeicon: require('../../assets/icons/tab/home.png'),
+  homeiconout: require('../../assets/icons/tab/home-out.png'),
+  searchicon: require('../../assets/icons/tab/search.png'),
+  searchiconout: require('../../assets/icons/tab/search-out.png'),
+  notificationicon: require('../../assets/icons/tab/notifecation.png'),
+  notificationiconout: require('../../assets/icons/tab/notifecation-out.png'),
+  personicon: require('../../assets/icons/tab/person.png'),
+  personiconout: require('../../assets/icons/tab/person-out.png'),
+  barcodeicon: require('../../assets/icons/tab/barcode.png'),
+  barcoseiconout: require('../../assets/icons/tab/barcode-out.png'),
+
   logo: require('../../assets/logo.png'),
   icon: require('../../assets/icon.png'),
   offers: require('../../assets/icons/header/offers.png'),

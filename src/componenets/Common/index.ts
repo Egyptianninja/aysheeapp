@@ -7,6 +7,7 @@ import WhitLogo from './WhitLogo';
 import MessageModal from './MessageModal';
 import BackIcon from './BackIcon';
 import Header from './Header';
+import ImageIcon from './ImageIcon';
 
 export {
   Loading,
@@ -17,5 +18,6 @@ export {
   Logo,
   BackIcon,
   Header,
-  WhitLogo
+  WhitLogo,
+  ImageIcon
 };

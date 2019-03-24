@@ -1,9 +1,9 @@
 import { createDrawerNavigator } from 'react-navigation';
-import { AppStackNavigator } from './AppStackNav';
+import AppTabNavigation from './AppTabNavigation';
 import Drawer from '../../componenets/Drawer';
 
 export const AppDrawerNavigator = createDrawerNavigator(
-  { Home: AppStackNavigator },
+  { Home: AppTabNavigation },
   {
     drawerPosition: 'left',
     contentComponent: Drawer,

@@ -24,7 +24,8 @@ import {
   Logo,
   WhitLogo,
   BackIcon,
-  Header
+  Header,
+  ImageIcon
 } from './Common';
 
 export {
@@ -52,5 +53,6 @@ export {
   Logo,
   BackIcon,
   Header,
-  WhitLogo
+  WhitLogo,
+  ImageIcon
 };

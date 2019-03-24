@@ -22,10 +22,7 @@ export default class InputBar extends React.Component<any, any> {
         style={{
           width: '99%',
           backgroundColor: '#fff',
-          padding: 5,
-          shadowOffset: { width: 0, height: 0 },
-          shadowColor: '#555',
-          shadowOpacity: 0.2
+          padding: 5
         }}
       >
         {this.props.replay && this.props.replay.id && (

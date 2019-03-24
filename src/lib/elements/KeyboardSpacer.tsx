@@ -1,8 +1,8 @@
 /**
  * Created by andrewhurst on 10/5/15.
  */
-import * as React from "react";
-import PropTypes from "prop-types";
+import * as React from 'react';
+import PropTypes from 'prop-types';
 import {
   Keyboard,
   LayoutAnimation,
@@ -11,14 +11,14 @@ import {
   ViewPropTypes,
   Platform,
   StyleSheet
-} from "react-native";
+} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    left: 0,
-    right: 0,
-    bottom: 0
-  }
+  // container: {
+  //   left: 0,
+  //   right: 0,
+  //   bottom: 0
+  // }
 });
 
 // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
@@ -61,9 +61,9 @@ export default class KeyboardSpacer extends React.Component<any, any> {
 
   componentDidMount() {
     const updateListener =
-      Platform.OS === "android" ? "keyboardDidShow" : "keyboardWillShow";
+      Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
     const resetListener =
-      Platform.OS === "android" ? "keyboardDidHide" : "keyboardWillHide";
+      Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
     this.listeners = [
       Keyboard.addListener(updateListener, this.updateKeyboardSpace),
       Keyboard.addListener(resetListener, this.resetKeyboardSpace)
@@ -80,7 +80,7 @@ export default class KeyboardSpacer extends React.Component<any, any> {
     }
 
     let animationConfig = defaultAnimation;
-    if (Platform.OS === "ios") {
+    if (Platform.OS === 'ios') {
       animationConfig = LayoutAnimation.create(
         event.duration,
         LayoutAnimation.Types[event.easing],
@@ -90,7 +90,7 @@ export default class KeyboardSpacer extends React.Component<any, any> {
     LayoutAnimation.configureNext(animationConfig);
 
     // get updated on rotation
-    const screenHeight = Dimensions.get("window").height;
+    const screenHeight = Dimensions.get('window').height;
     // when external physical keyboard is connected
     // event.endCoordinates.height still equals virtual keyboard height
     // however only the keyboard toolbar is showing if there should be one
@@ -107,7 +107,7 @@ export default class KeyboardSpacer extends React.Component<any, any> {
 
   resetKeyboardSpace(event: any) {
     let animationConfig = defaultAnimation;
-    if (Platform.OS === "ios") {
+    if (Platform.OS === 'ios') {
       animationConfig = LayoutAnimation.create(
         event.duration,
         LayoutAnimation.Types[event.easing],

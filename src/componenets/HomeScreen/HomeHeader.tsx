@@ -3,9 +3,9 @@ import { Constants } from 'expo';
 import * as React from 'react';
 import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-import { icons } from '../../load';
+import { icons, images } from '../../load';
 import { StyleSheet, rtlos } from '../../utils';
-import SearchBox from './SearchBox';
+import imageViewerStyle from '../../utils/image/viewer/image-viewer.style';
 const home = icons.home.icon();
 const mainmenu = icons.mainmenu.icon();
 const namelogo = icons.namelogo.icon();
@@ -22,17 +22,9 @@ class HomeHeader extends React.Component<any, any> {
   }
 
   state = {
-    isSearch: false,
     notification: false
   };
   ardroid = Platform.OS === 'android' && this.props.lang === 'ar';
-
-  showSearch = () => {
-    this.setState({ isSearch: true });
-  };
-  hideSearch = () => {
-    this.setState({ isSearch: false });
-  };
 
   render() {
     return (
@@ -52,7 +44,7 @@ class HomeHeader extends React.Component<any, any> {
           style={[
             styles.leftIconView,
             {
-              flex: this.props.isAuthenticated ? 3.5 : 1.5,
+              flex: 1.5,
               flexDirection: this.ardroid ? 'row-reverse' : 'row',
               justifyContent: 'flex-start'
             }
@@ -61,18 +53,16 @@ class HomeHeader extends React.Component<any, any> {
           <TouchableOpacity
             onPress={() => this.props.navigation.toggleDrawer()}
             style={{
-              paddingLeft: 8,
-              paddingRight: 5,
+              flex: 1,
               paddingVertical: 8,
               justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 5
+              alignItems: 'center'
             }}
           >
             <View
               style={{
-                width: 32,
-                height: 22
+                width: 29,
+                height: 23
               }}
             >
               <Image
@@ -85,135 +75,45 @@ class HomeHeader extends React.Component<any, any> {
               />
             </View>
           </TouchableOpacity>
-
-          {this.props.isAuthenticated && (
-            <TouchableOpacity
-              onPress={() => {
-                const clearNotification = this.props.navigation.getParam(
-                  'clearNotification'
-                );
-                clearNotification();
-                this.props.navigation.navigate('NotificationsScreen');
-              }}
-              style={{
-                paddingHorizontal: 10,
-                paddingTop: 8,
-                paddingRight: 12
-              }}
-            >
-              <Ionicons
-                name="ios-notifications-outline"
-                size={30}
-                color="#fff"
-              />
-              {this.state.notification && (
-                <View
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: 6,
-                    backgroundColor: '#ff00ff',
-                    position: 'absolute',
-                    right: 8,
-                    top: 10
-                  }}
-                />
-              )}
-            </TouchableOpacity>
-          )}
         </View>
 
         <View
-          style={[
-            styles.searchView,
-            {
-              flex: 10,
-              flexDirection: this.ardroid ? 'row-reverse' : 'row'
-            }
-          ]}
+          style={{
+            flex: 9,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
         >
-          {(this.props.query !== '' || this.state.isSearch) && (
-            <View style={{ flex: 1, paddingRight: 10 }}>
-              <SearchBox
-                navigation={this.props.navigation}
-                hideSearch={this.hideSearch}
-              />
-            </View>
-          )}
-          {!this.state.isSearch && this.props.query === '' && (
-            <React.Fragment>
-              <View
-                style={{
-                  flex: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
-              >
-                <View
-                  style={{
-                    width: 85,
-                    height: 20
-                  }}
-                >
-                  <Image
-                    style={{
-                      flex: 1,
-                      width: '100%',
-                      height: '100%'
-                    }}
-                    source={namelogo}
-                  />
-                </View>
-              </View>
-              <TouchableOpacity
-                onPress={() => this.showSearch()}
-                style={{
-                  flex: 1.75,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  top: Platform.OS === 'android' ? 4 : undefined,
-                  paddingVertical: 9,
-                  paddingLeft: 5
-                }}
-              >
-                <Ionicons
-                  style={{ color: '#fff' }}
-                  name="ios-search"
-                  size={28}
-                />
-              </TouchableOpacity>
-            </React.Fragment>
-          )}
+          <View
+            style={{
+              width: 90,
+              height: 22
+            }}
+          >
+            <Image
+              style={{
+                flex: 1,
+                width: '100%',
+                height: '100%'
+              }}
+              source={namelogo}
+            />
+          </View>
         </View>
-        <View style={[styles.rightIconView, { flex: 1.75 }]}>
+        <View style={{ flex: 1.5 }}>
           <TouchableOpacity
             onPress={() => {
               const handleHome = this.props.navigation.getParam('handleHome');
-              this.hideSearch();
               handleHome();
             }}
             style={{
-              paddingHorizontal: 8,
-              paddingRight: 10,
-              paddingVertical: 7
+              flex: 1,
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center'
             }}
           >
-            <View
-              style={{
-                width: 26,
-                height: 26
-              }}
-            >
-              <Image
-                style={{
-                  flex: 1,
-                  width: '100%',
-                  height: '100%',
-                  tintColor: '#fff'
-                }}
-                source={home}
-              />
-            </View>
+            <Ionicons name="ios-add" size={40} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>

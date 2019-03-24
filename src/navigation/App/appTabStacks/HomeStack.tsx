@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
+import HomeHeader from '../../../componenets/HomeScreen/HomeHeader';
 import {
   AddCarScreen,
   AddClassifiedScreen,
@@ -11,22 +11,17 @@ import {
   AddServiceScreen,
   CameraScreen,
   ChoiseScreen,
-  EditProfileScreen,
-  HomeScreen,
+  HomeScreenSingle,
   ItemScreen,
-  MyFavScreen,
-  NotificationsScreen,
   OffersScreen,
-  ProfileScreen,
-  ShopsScreen,
-  UpgradeToStore
-} from '../../screens';
-import { Header } from '../../componenets';
+  ShopsScreen
+} from '../../../screens';
+import { Header } from '../../../componenets';
 
-export const AppStackNavigator = createStackNavigator(
+export const HomeStack = createStackNavigator(
   {
     HomeScreen: {
-      screen: HomeScreen,
+      screen: HomeScreenSingle,
       navigationOptions: ({ navigation }: any) => ({
         header: <HomeHeader navigation={navigation} />,
         headerBackTitle: null
@@ -48,18 +43,6 @@ export const AppStackNavigator = createStackNavigator(
 
     ChoiseScreen: {
       screen: ChoiseScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <Header
-            navigation={navigation}
-            title={navigation.getParam('title')}
-          />
-        ),
-        headerBackTitle: null
-      })
-    },
-    UpgradeToStore: {
-      screen: UpgradeToStore,
       navigationOptions: ({ navigation }: any) => ({
         header: (
           <Header
@@ -159,42 +142,7 @@ export const AppStackNavigator = createStackNavigator(
         headerBackTitle: null
       })
     },
-    MyFavScreen: {
-      screen: MyFavScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <Header
-            navigation={navigation}
-            title={navigation.getParam('title')}
-          />
-        ),
-        headerBackTitle: null
-      })
-    },
-    ProfileScreen: {
-      screen: ProfileScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <Header
-            navigation={navigation}
-            title={navigation.getParam('user').name}
-          />
-        ),
-        headerBackTitle: null
-      })
-    },
-    NotificationsScreen: {
-      screen: NotificationsScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <Header
-            navigation={navigation}
-            title={navigation.getParam('title')}
-          />
-        ),
-        headerBackTitle: null
-      })
-    },
+
     ShopsScreen: {
       screen: ShopsScreen,
       navigationOptions: ({ navigation }: any) => ({
@@ -210,18 +158,6 @@ export const AppStackNavigator = createStackNavigator(
     CameraScreen: {
       screen: CameraScreen,
       navigationOptions: () => ({
-        headerBackTitle: null
-      })
-    },
-    EditProfileScreen: {
-      screen: EditProfileScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <Header
-            navigation={navigation}
-            title={navigation.getParam('title')}
-          />
-        ),
         headerBackTitle: null
       })
     }

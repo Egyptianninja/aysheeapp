@@ -17,25 +17,6 @@ const Header = ({ navigation, title }: any) => {
         flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
       }}
     >
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{
-          flex: 1,
-          alignItems: 'center'
-        }}
-      >
-        <View
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: 16,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Ionicons name="ios-arrow-back" size={30} color="#fff" />
-        </View>
-      </TouchableOpacity>
       <View
         style={{
           flex: 6,
@@ -46,7 +27,7 @@ const Header = ({ navigation, title }: any) => {
         <Text
           style={{
             fontFamily: 'cairo-regular',
-            fontSize: 18,
+            fontSize: 22,
             color: '#fff'
           }}
         >
