@@ -4,26 +4,16 @@ import { TouchableOpacity, Text, View, Image, Platform } from 'react-native';
 export const Choise = ({
   item,
   icon,
-  navigation,
   isRTL,
+  addcategory,
+  showSearch,
   iconsize = 48
 }: any) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        if (item.id === 0) {
-          navigation.navigate('AddRealEstateScreen', { item });
-        } else if (item.id === 1) {
-          navigation.navigate('AddCarScreen', { item });
-        } else if (item.id === 5) {
-          navigation.navigate('AddJobScreen', { item });
-        } else if (item.id === 9) {
-          navigation.navigate('AddServiceScreen', { item });
-        } else if (item.id === 15) {
-          navigation.navigate('AddPartsScreen', { item });
-        } else {
-          navigation.navigate('AddClassifiedScreen', { item });
-        }
+        addcategory(item);
+        showSearch();
       }}
       style={{
         flexDirection:

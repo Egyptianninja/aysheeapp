@@ -7,13 +7,13 @@ import {
   OffersScreen
 } from '../../../screens';
 import { Header } from '../../../componenets';
-
+import SearchHeader from '../../../componenets/HomeScreen/SearchHeader';
 export const SearchStack = createStackNavigator(
   {
     SearchScreen: {
       screen: SearchScreen,
       navigationOptions: ({ navigation }: any) => ({
-        header: <Header navigation={navigation} title="Search" />,
+        header: null,
         headerBackTitle: null
       })
     },

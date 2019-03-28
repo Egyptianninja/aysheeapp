@@ -21,25 +21,35 @@ const CategoryIcon = ({
         }
       }}
     >
-      <View style={styles.container}>
+      <View style={{ marginTop: 7, backgroundColor: '#fff' }}>
         <View
           style={{
             justifyContent: 'center',
             alignItems: 'center',
             alignSelf: 'center',
             backgroundColor: '#fff',
+            marginHorizontal: 5,
             height: 60,
-            width: 60,
-            borderRadius: 30,
+            width: 90,
+            borderRadius: 10,
             borderColor: '#7678ED',
-            borderWidth: 2,
-            shadowOffset: { width: 3, height: 3 },
-            shadowColor: '#555',
-            shadowOpacity: 0.3
+            borderWidth: 1
           }}
         >
-          <View style={styles.iconView}>
-            <View style={styles.imageView}>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'center',
+              height: 56,
+              width: 86,
+              borderRadius: 10,
+              // borderColor: '#7678ED',
+              // borderWidth: 2,
+              overflow: 'hidden'
+            }}
+          >
+            <View style={{ width: 86, height: 56 }}>
               <Image
                 style={[
                   {
@@ -54,7 +64,7 @@ const CategoryIcon = ({
           </View>
         </View>
 
-        <View style={styles.textView}>
+        <View>
           <Text style={[styles.text, { color: '#171717' }]}>{item.name}</Text>
         </View>
       </View>
@@ -86,7 +96,8 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     fontFamily: 'cairo-regular',
-    fontSize: 12
+    fontSize: 14,
+    marginTop: 3
   }
 });
 

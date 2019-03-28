@@ -37,23 +37,6 @@ export default class FilterSelect extends React.Component<any, any> {
   renderOptions = (data: any, selected: any) => {
     return (
       <React.Fragment>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 40,
-            backgroundColor: '#8E90F0',
-            borderTopLeftRadius: 15,
-            borderTopRightRadius: 15
-          }}
-        >
-          <Text
-            style={{ fontSize: 20, fontFamily: 'cairo-regular', color: '#fff' }}
-          >
-            {this.props.data.label}
-          </Text>
-        </View>
         {!this.props.sort && selected && (
           <TouchableOpacity
             onPress={() => {
@@ -138,33 +121,41 @@ export default class FilterSelect extends React.Component<any, any> {
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
 
     return (
-      <View>
+      <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View
+          style={{
+            height: 38,
+            width: 90,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginVertical: 10,
+            backgroundColor: '#efefef',
+            marginLeft: 10,
+            borderRadius: 5
+          }}
+        >
+          <Text style={{ padding: 5 }}>{data.label}</Text>
+        </View>
         <TouchableOpacity
           style={[
             {
               flexDirection:
                 rtlOS < 1 ? 'row' : rtlOS === 3 ? 'row-reverse' : 'row',
               height: 38,
-              minWidth: this.props.sort ? undefined : 65,
-              borderRadius: 18,
+              width: this.props.sort ? undefined : 150,
+              borderRadius: 5,
               marginHorizontal: 5,
-              justifyContent: 'center',
-              alignItems: 'center'
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingHorizontal: 10
             },
             !this.props.sort
               ? {
+                  marginVertical: 10,
+                  marginHorizontal: 10,
                   backgroundColor: '#fff',
-                  paddingHorizontal: 8,
-                  // marginTop: Platform.OS === 'ios' ? 5 : 10,
-                  shadowColor: '#777',
-                  shadowOffset: {
-                    width: 0,
-                    height: 2
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 3.84,
-
-                  elevation: 5
+                  borderColor: '#eee',
+                  borderWidth: 1
                 }
               : {}
           ]}
@@ -191,6 +182,7 @@ export default class FilterSelect extends React.Component<any, any> {
                 : data.label
               : this.state.label}
           </Text>
+          <Ionicons name="md-arrow-dropdown" size={30} color="#aaa" />
 
           {this.props.sort && (
             <Ionicons name="ios-funnel" size={26} color="#8E90F0" />
@@ -221,6 +213,26 @@ export default class FilterSelect extends React.Component<any, any> {
               borderTopRightRadius: 15
             }}
           >
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 40,
+                backgroundColor: '#8E90F0',
+                borderTopLeftRadius: 15,
+                borderTopRightRadius: 15
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontFamily: 'cairo-regular',
+                  color: '#fff'
+                }}
+              >
+                {this.props.data.label}
+              </Text>
+            </View>
             <ScrollView>{this.renderOptions(data, selected)}</ScrollView>
           </View>
         </Modal>

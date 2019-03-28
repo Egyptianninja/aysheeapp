@@ -10,17 +10,18 @@ import {
   TouchableOpacity,
   View,
   Linking,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-import { AvatarCircle, Loading, Noresult } from '../../../componenets';
-import ItemViewSmall from '../../../componenets/ItemViewSmall';
-import { Edit, Menu, Report } from '../../../componenets/Menu';
-import deletePost from '../../../graphql/mutation/deletePost';
-import editClassifieds from '../../../graphql/mutation/editClassifieds';
-import favoritePost from '../../../graphql/mutation/favoritePost';
-import getUserPosts from '../../../graphql/query/getUserPosts';
-import { updateQty } from '../../../store/actions/userAtions';
+import { AvatarCircle, Loading, Noresult } from '../../../../componenets';
+import ItemViewSmall from '../../../../componenets/ItemViewSmall';
+import { Edit, Menu, Report } from '../../../../componenets/Menu';
+import deletePost from '../../../../graphql/mutation/deletePost';
+import editClassifieds from '../../../../graphql/mutation/editClassifieds';
+import favoritePost from '../../../../graphql/mutation/favoritePost';
+import getUserPosts from '../../../../graphql/query/getUserPosts';
+import { updateQty } from '../../../../store/actions/userAtions';
 import {
   getNextPosts,
   Message,
@@ -28,10 +29,23 @@ import {
   call,
   rtlos,
   isTablet
-} from '../../../utils';
-import MapModal from '../../../componenets/ProfileScreen/MapModal';
+} from '../../../../utils';
+import MapModal from '../../../../componenets/ProfileScreen/MapModal';
 const { width, height } = Dimensions.get('window');
-
+// import { TabView, SceneMap } from 'react-native-tab-view';
+import UserOnlinePosts from './UserOnlinePosts';
+import UserOflinePosts from './UserOflinePosts';
+import UserOfferPosts from './UserOfferPosts';
+const FirstRoute = () => (
+  <ScrollView
+    style={[styles.scene, { backgroundColor: '#ff4081', height: 1000 }]}
+  />
+);
+const SecondRoute = () => (
+  <ScrollView
+    style={[styles.scene, { backgroundColor: '#673ab7', height: 1000 }]}
+  />
+);
 const HEADER_HEIGHT = 240;
 const PROFILE_IMAGE_HEIGHT = 80;
 
@@ -52,7 +66,13 @@ class MyProfileScreen extends React.Component<any, any> {
       isMapModalVisible: false,
       modalPost: null,
       rest: { islive: true },
-      tab: 1
+      tab: 1,
+      index: 0,
+      routes: [
+        { key: 'first', title: 'First' },
+        { key: 'second', title: 'Second' },
+        { key: 'third', title: 'Third' }
+      ]
     };
   }
 
@@ -593,41 +613,33 @@ class MyProfileScreen extends React.Component<any, any> {
             height={height}
           />
         )}
-
-        <Animated.View
-          style={{
-            position: 'absolute',
-            marginTop: headerHeight,
-            top: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: '#fff',
-            zIndex: 200
-          }}
-        >
-          {this.renderHeader({
-            user,
-            words,
-            callargs,
-            maincolor
-          })}
-          {this.renderTabs({
-            tab,
-            maincolor,
-            words,
-            user,
-            isshop
-          })}
-        </Animated.View>
-
-        <View style={{ flex: 1, width, borderStartColor: 'blue' }}>
-          {this.renderQuery({
-            variables: { userId: user._id, ...this.state.rest },
-            isRTL,
-            words,
-            lang
-          })}
-        </View>
+        <ScrollView>
+          <View>
+            {this.renderHeader({
+              user,
+              words,
+              callargs,
+              maincolor
+            })}
+            {this.renderTabs({
+              tab,
+              maincolor,
+              words,
+              user,
+              isshop
+            })}
+          </View>
+          {/* <TabView
+            navigationState={this.state}
+            renderScene={SceneMap({
+              first: UserOnlinePosts,
+              second: UserOflinePosts,
+              third: UserOfferPosts
+            })}
+            onIndexChange={(index: any) => this.setState({ index })}
+            initialLayout={{ width: Dimensions.get('window').width }}
+          /> */}
+        </ScrollView>
       </View>
     );
   }
@@ -660,3 +672,8 @@ export default connect(
     )
   )
 );
+const styles = StyleSheet.create({
+  scene: {
+    flex: 1
+  }
+});

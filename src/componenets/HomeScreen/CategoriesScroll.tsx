@@ -264,22 +264,10 @@ class CategoriesScroll extends React.Component<any, any> {
         <View
           style={{
             flexDirection:
-              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-            paddingHorizontal: 5
+              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
+            // paddingHorizontal: 5
           }}
         >
-          {!selected && (
-            <BottonNew
-              allbtnactive={allbtnactive}
-              addFilter={addFilter}
-              showCategoriesModal={this.props.showCategoriesModal}
-              scrollView={this.scrollView}
-              removeAllFilters={removeAllFilters}
-              isAuthenticated={this.props.isAuthenticated}
-              navigation={this.props.navigation}
-              title={words.allcategories}
-            />
-          )}
           <ScrollView
             ref={(ref: any) => {
               this.scrollView = ref;
@@ -291,12 +279,11 @@ class CategoriesScroll extends React.Component<any, any> {
             contentContainerStyle={{
               flexDirection:
                 isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-              paddingTop: !selected ? 5 : undefined,
-              paddingHorizontal: 10,
-              paddingBottom: 0
+              // paddingTop: !selected ? 5 : undefined,
+              paddingHorizontal: 5
             }}
             style={{
-              height: selected ? 55 : 95
+              height: selected ? 60 : 95
             }}
           >
             {!selected && (
@@ -306,10 +293,10 @@ class CategoriesScroll extends React.Component<any, any> {
                     isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
                 }}
               >
-                <OfferIcon
+                {/* <OfferIcon
                   navigation={this.props.navigation}
                   title={words.offers}
-                />
+                /> */}
                 {this.renderCategories(categories)}
               </View>
             )}

@@ -9,6 +9,7 @@ import CameraScreen from './App/CameraScreen';
 import ChoiseScreen from './App/ChoiseScreen';
 import HomeScreen from './App/HomeScreen';
 import HomeScreenSingle from './App/HomeScreenSingle';
+import CategoryScreen from './App/CategoryScreen';
 import SearchScreen from './App/SearchScreen';
 import ItemScreen from './App/ItemScreen';
 import NotificationsScreen from './App/NotificationsScreen';
@@ -49,5 +50,6 @@ export {
   ProfileScreen,
   MyProfileScreen,
   ShopsScreen,
-  SearchScreen
+  SearchScreen,
+  CategoryScreen
 };

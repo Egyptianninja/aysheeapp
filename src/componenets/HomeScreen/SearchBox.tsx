@@ -1,101 +1,154 @@
 import * as React from 'react';
-import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  Animated
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import { setQuery, delQuery } from '../../store/actions/postActions';
 import { StyleSheet, isArabic } from '../../utils';
+const { width } = Dimensions.get('window');
 
 class SearchBox extends React.Component<any, any> {
-  searchInput: any;
-  state = {
-    query: ''
-  };
-  componentDidMount() {
-    this.searchInput.focus();
+  static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    if (nextProps.isSearchVisible !== prevState.isSearchVisible) {
+      return {
+        isSearchVisible: nextProps.isSearchVisible,
+        query: nextProps.isSearchVisible === false ? '' : prevState.query
+      };
+    } else {
+      return { ...prevState };
+    }
   }
+  searchInput: any;
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      isSearchVisible: false,
+      query: '',
+      animation: new Animated.Value(1)
+    };
+  }
+  componentDidUpdate() {
+    if (!this.state.isSearchVisible) {
+      this.searchInput.blur();
+      Animated.timing(this.state.animation, {
+        toValue: 1,
+        delay: 200,
+        duration: 200
+      }).start();
+    }
+    if (this.state.isSearchVisible) {
+      this.searchInput.focus();
+      Animated.timing(this.state.animation, {
+        toValue: 0,
+        duration: 200
+      }).start();
+    }
+  }
+
   render() {
     const { query } = this.props;
     const q = query !== '' ? query : this.state.query;
     const rtl = q ? isArabic(q) : undefined;
+    const animatedBox = this.state.animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [width - 90, width - 20]
+    });
+    const animatedOpacity = this.state.animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0]
+    });
     return (
-      <View
-        style={[
-          styles.container,
-          {
+      <View style={{ flexDirection: 'row', paddingLeft: 5 }}>
+        <Animated.View
+          style={{
             backgroundColor: '#fafafa',
-            borderColor: '#aaa'
-          }
-        ]}
-      >
-        {this.props.query !== '' && (
+            borderColor: '#aaa',
+            flexDirection: 'row',
+            width: animatedBox,
+            height: 32,
+            borderRadius: 10,
+            paddingLeft: 15,
+            borderWidth: 1,
+            opacity: 0.8,
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          <TextInput
+            style={[
+              styles.input,
+              {
+                writingDirection: rtl ? 'rtl' : 'ltr'
+              }
+            ]}
+            ref={input => {
+              this.searchInput = input;
+            }}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={this.state.query}
+            onChangeText={e => {
+              {
+                this.setState({ query: e });
+              }
+            }}
+            onSubmitEditing={() => {
+              this.props.setQuery(this.state.query);
+            }}
+            onFocus={() => this.props.showSearch()}
+          />
           <TouchableOpacity
             onPress={() => {
-              this.props.delQuery();
-              this.setState({ query: '' });
+              this.searchInput.focus();
             }}
           >
             <Ionicons
-              style={{ left: -13, top: -1 }}
-              name="ios-close-circle"
-              size={31}
-              color="#8E90F0"
+              style={[styles.icon, { color: '#7678ED' }]}
+              name="ios-search"
+              size={22}
             />
           </TouchableOpacity>
-        )}
-        <TextInput
-          style={[
-            query !== '' && styles.queryinput,
-            styles.input,
-            {
-              writingDirection: rtl ? 'rtl' : 'ltr'
-            }
-          ]}
-          ref={input => {
-            this.searchInput = input;
-          }}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-          autoCorrect={false}
-          onBlur={this.props.hideSearch}
-          value={query === '' ? this.state.query : query}
-          onChangeText={e => {
-            {
-              this.setState({ query: e });
-              if (e === '') {
+        </Animated.View>
+        {this.state.isSearchVisible && (
+          <Animated.View
+            style={{
+              flex: 1,
+              opacity: animatedOpacity
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => {
                 this.props.delQuery();
-                this.setState({ query: '' });
-              }
-            }
-          }}
-          onSubmitEditing={() => {
-            this.props.setQuery(this.state.query);
-          }}
-        />
-        <TouchableOpacity
-          onPress={() => (query !== '' ? null : this.props.hideSearch())}
-        >
-          <Ionicons
-            style={[styles.icon, { color: '#7678ED' }]}
-            name="ios-search"
-            size={22}
-          />
-        </TouchableOpacity>
+                this.props.hideSearch();
+                this.props.removecategory();
+              }}
+              style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                width: 70,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingVertical: 10
+              }}
+            >
+              <Text style={{ color: '#fff', bottom: 2, right: 5 }}>Cancel</Text>
+            </TouchableOpacity>
+          </Animated.View>
+        )}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    height: 32,
-    borderRadius: 16,
-    paddingLeft: 15,
-    borderWidth: 1,
-    opacity: 0.8,
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
   input: {
     flex: 1,
     direction: 'rtl',

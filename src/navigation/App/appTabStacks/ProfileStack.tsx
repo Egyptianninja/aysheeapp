@@ -8,7 +8,6 @@ import {
 } from '../../../screens';
 import { Header } from '../../../componenets';
 import { user } from '../../../store/getStore';
-
 export const ProfileStack = createStackNavigator(
   {
     ProfileScreen: {

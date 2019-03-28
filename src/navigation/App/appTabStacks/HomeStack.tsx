@@ -14,7 +14,8 @@ import {
   HomeScreenSingle,
   ItemScreen,
   OffersScreen,
-  ShopsScreen
+  ShopsScreen,
+  CategoryScreen
 } from '../../../screens';
 import { Header } from '../../../componenets';
 
@@ -24,6 +25,13 @@ export const HomeStack = createStackNavigator(
       screen: HomeScreenSingle,
       navigationOptions: ({ navigation }: any) => ({
         header: <HomeHeader navigation={navigation} />,
+        headerBackTitle: null
+      })
+    },
+    CategoryScreen: {
+      screen: CategoryScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: null,
         headerBackTitle: null
       })
     },

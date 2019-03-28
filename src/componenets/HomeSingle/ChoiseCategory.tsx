@@ -4,7 +4,13 @@ import { category, isRTL } from '../../store/getStore';
 import { icons } from '../../load';
 import { Choise } from './Choise';
 
-const renderChoices = (items: any, navigation: any, iconsize: any) => {
+const renderChoices = (
+  items: any,
+  navigation: any,
+  iconsize: any,
+  addcategory: any,
+  showSearch: any
+) => {
   return items.map((item: any) => {
     const iconFunc = icons.category.filter(ic => ic.id === item.id);
     const icon = iconFunc[0].icon();
@@ -16,6 +22,8 @@ const renderChoices = (items: any, navigation: any, iconsize: any) => {
         key={item.id}
         isRTL={isRTL()}
         iconsize={iconsize}
+        addcategory={addcategory}
+        showSearch={showSearch}
       />
     );
   });
@@ -41,7 +49,13 @@ const ChoiseCategory = (props: any) => {
           paddingBottom: 20
         }}
       >
-        {renderChoices(categories, props.navigation, props.iconsize)}
+        {renderChoices(
+          categories,
+          props.navigation,
+          props.iconsize,
+          props.addcategory,
+          props.showSearch
+        )}
       </ScrollView>
     </View>
   );

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Dimensions, Platform, ScrollView, View } from 'react-native';
 import FilterSelect from './filters/FilterSelect';
+import PickerUI from '../../lib/ios/Picker';
+import SwitchUI from '../../lib/ios/Switch';
 
 const { width } = Dimensions.get('window');
 
@@ -15,18 +17,18 @@ const HeaderFilter: any = ({
 }: any) => {
   if (categoryId === 0) {
     const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'realestateId', data: getItems(buckets, 'realestateId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'issale', data: getItems(buckets, 'issale') },
-      { name: 'isfurnishered', data: getItems(buckets, 'isfurnishered') },
-      { name: 'rooms', data: getItems(buckets, 'rooms') },
-      { name: 'bathrooms', data: getItems(buckets, 'bathrooms') }
+      // { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'realestateId', data: getItems(buckets, 'realestateId') }
+      // { name: 'isnew', data: getItems(buckets, 'isnew') },
+      // { name: 'issale', data: getItems(buckets, 'issale') },
+      // { name: 'isfurnishered', data: getItems(buckets, 'isfurnishered') }
+      // { name: 'rooms', data: getItems(buckets, 'rooms') },
+      // { name: 'bathrooms', data: getItems(buckets, 'bathrooms') }
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
       <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
+        {/* {filters.map((filter: any) => {
           return renderSelectRow(
             words,
             rest,
@@ -36,7 +38,83 @@ const HeaderFilter: any = ({
             removeFilter,
             isRTL
           );
+        })} */}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 10
+          }}
+        >
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'city',
+            bucket: getItems(buckets, 'city'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'realestateId',
+            bucket: getItems(buckets, 'realestateId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+        </View>
+        {renderSwitch({
+          words,
+          rest,
+          itemKind: 'issale',
+          bucket: getItems(buckets, 'issale'),
+          addFilter,
+          removeFilter,
+          isRTL,
+          originalTitle: 'Sale',
+          seconTitle: 'Rent'
         })}
+        {renderSwitch({
+          words,
+          rest,
+          itemKind: 'isfurnishered',
+          bucket: getItems(buckets, 'isfurnishered'),
+          addFilter,
+          removeFilter,
+          isRTL,
+          originalTitle: 'Furnished',
+          seconTitle: 'Unfurnished'
+        })}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 10
+          }}
+        >
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'rooms',
+            bucket: getItems(buckets, 'rooms'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'bathrooms',
+            bucket: getItems(buckets, 'bathrooms'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 1) {
@@ -384,38 +462,73 @@ const renderSelectRow = (
     </View>
   );
 };
+const renderPicker = ({
+  words,
+  rest,
+  itemKind,
+  bucket,
+  addFilter,
+  removeFilter,
+  isRTL,
+  pid = null
+}: any) => {
+  return (
+    <PickerUI
+      isRTL={isRTL}
+      data={bucket}
+      pid={pid}
+      icon
+      propsValue={rest[itemKind]}
+      value={[itemKind]}
+      itemKind={itemKind}
+      addFilter={addFilter}
+      removeFilter={removeFilter}
+      rest={rest}
+      words={words}
+    />
+  );
+};
+
+const renderSwitch = ({
+  words,
+  rest,
+  itemKind,
+  bucket,
+  addFilter,
+  removeFilter,
+  isRTL,
+  originalTitle,
+  seconTitle
+}: any) => {
+  return (
+    <SwitchUI
+      isRTL={isRTL}
+      data={bucket}
+      icon
+      propsValue={rest[itemKind]}
+      value={[itemKind]}
+      itemKind={itemKind}
+      addFilter={addFilter}
+      removeFilter={removeFilter}
+      rest={rest}
+      words={words}
+      originalTitle={originalTitle}
+      seconTitle={seconTitle}
+    />
+  );
+};
 
 const getItems = (buckets: any, item: any) => {
   return buckets.filter((bk: any) => bk.name === item)[0];
 };
 
 const RenderFilter = (props: any) => {
-  return (
-    <ScrollView
-      scrollEventThrottle={16}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{
-        flex: 1,
-        minWidth: width,
-        justifyContent:
-          props.isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'
-        // paddingHorizontal: 5
-      }}
-      style={{
-        minWidth: width - 85
-      }}
-    >
-      <View
-        style={{
-          flexDirection:
-            props.isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        {props.children}
-      </View>
-    </ScrollView>
-  );
+  return <View>{props.children}</View>;
 };
+// const RenderFilter = (props: any) => {
+//   return (
+//     <ScrollView scrollEventThrottle={16} showsHorizontalScrollIndicator={false}>
+//       {props.children}
+//     </ScrollView>
+//   );
+// };

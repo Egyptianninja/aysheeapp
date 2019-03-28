@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { Constants } from 'expo';
 import { rtlos } from '../../utils';
 
-const Header = ({ navigation, title }: any) => {
+const Header = ({ navigation, title, showFilterModal }: any) => {
   return (
     <View
       style={{
@@ -22,9 +22,12 @@ const Header = ({ navigation, title }: any) => {
         style={{
           position: 'absolute',
           left: 0,
-          top: 15,
+          top: 18,
           alignItems: 'center',
-          padding: 8
+          paddingVertical: 7,
+          paddingLeft: 5,
+          paddingRight: 20,
+          zIndex: 120
         }}
       >
         <View
@@ -56,6 +59,29 @@ const Header = ({ navigation, title }: any) => {
           {title}
         </Text>
       </View>
+      <TouchableOpacity
+        onPress={() => showFilterModal()}
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: 22,
+          alignItems: 'center',
+          padding: 5,
+          paddingLeft: 20,
+          zIndex: 120
+        }}
+      >
+        <View
+          style={{
+            width: 32,
+            height: 32,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Ionicons name="ios-options" size={30} color="#fff" />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
