@@ -7,7 +7,7 @@ const PickerUI = ({
   removeFilter,
   data,
   propsValue,
-  width = 80,
+  width = 95,
   height = 80,
   innerStyle
 }: any) => {
@@ -26,12 +26,18 @@ const PickerUI = ({
       style={{
         height: 100,
         marginHorizontal: 10,
-        backgroundColor: '#efefef',
+        backgroundColor: '#eee',
         borderRadius: 10,
         padding: 10,
-        shadowOffset: { width: 2, height: 2 },
-        shadowColor: '#666',
-        shadowOpacity: 0.25
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5
       }}
     >
       <Picker
@@ -53,7 +59,13 @@ const PickerUI = ({
               : addFilter(itemKind, Number(value));
           }
         }}
-        itemStyle={{ height: 120, fontSize: 14 }}
+        itemStyle={{
+          height: 120,
+          width: 80,
+          fontSize: 16,
+          alignSelf: 'center'
+          // backgroundColor: 'red'
+        }}
       >
         {newdata.map((item: any) => {
           return (

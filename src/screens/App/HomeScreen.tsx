@@ -109,6 +109,7 @@ class HomeScreen extends React.Component<any, any> {
     });
     Notifications.addListener(this.handleNotification);
     this.props.navigation.setParams({ handleHome: this.handleHome });
+    this.props.navigation.setParams({ addItem: this.addItem });
     this.props.navigation.setParams({
       clearNotification: this.clearNotification
     });
@@ -239,6 +240,17 @@ class HomeScreen extends React.Component<any, any> {
       } else {
         this.removeAllFilters();
       }
+    }
+  };
+  addItem = () => {
+    if (this.props.isAuthenticated) {
+      this.props.navigation.navigate('ChoiseScreen', {
+        title: this.props.words.addnewad
+      });
+    } else {
+      this.props.navigation.navigate('PhoneScreen', {
+        add: true
+      });
     }
   };
 

@@ -103,8 +103,10 @@ class HomeHeader extends React.Component<any, any> {
         <View style={{ flex: 1.5 }}>
           <TouchableOpacity
             onPress={() => {
-              const handleHome = this.props.navigation.getParam('handleHome');
-              handleHome();
+              // const handleHome = this.props.navigation.getParam('handleHome');
+              // handleHome();
+              const addItem = this.props.navigation.getParam('addItem');
+              addItem();
             }}
             style={{
               flex: 1,

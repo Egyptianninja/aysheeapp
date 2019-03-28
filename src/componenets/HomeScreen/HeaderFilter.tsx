@@ -16,29 +16,8 @@ const HeaderFilter: any = ({
   words
 }: any) => {
   if (categoryId === 0) {
-    const catFilters = [
-      // { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'realestateId', data: getItems(buckets, 'realestateId') }
-      // { name: 'isnew', data: getItems(buckets, 'isnew') },
-      // { name: 'issale', data: getItems(buckets, 'issale') },
-      // { name: 'isfurnishered', data: getItems(buckets, 'isfurnishered') }
-      // { name: 'rooms', data: getItems(buckets, 'rooms') },
-      // { name: 'bathrooms', data: getItems(buckets, 'bathrooms') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {/* {filters.map((filter: any) => {
-          return renderSelectRow(
-            words,
-            rest,
-            filter.name,
-            filter.data,
-            addFilter,
-            removeFilter,
-            isRTL
-          );
-        })} */}
+      <RenderFilter isRTL={isRTL}>
         <View
           style={{
             flexDirection: 'row',

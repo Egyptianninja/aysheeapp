@@ -30,19 +30,18 @@ import secrets from '../../constants/secrets';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
-import { KeyboardSpacer, LoadingView } from '../../lib';
 import {
   getDate,
   ImageViewer,
   ItemLocation,
   Message,
-  StyleSheet,
-  rtlos
+  StyleSheet
 } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
 import { MenuIconHeader } from './MenuIconHeader';
+import { LoadingView } from '../../lib';
 
 const { width, height } = Dimensions.get('window');
 
@@ -81,7 +80,8 @@ class ItemView extends React.Component<any, any> {
     inputBarText: '',
     cursor: 0,
     opacity: 1,
-    bottomPadding: 0
+    bottomPadding: 0,
+    scrollEnabled: true
   };
 
   componentWillMount() {
@@ -324,164 +324,146 @@ class ItemView extends React.Component<any, any> {
 
     return (
       <View style={styles.container}>
+        <Menu
+          postId={postId}
+          post={post}
+          myItem={myItem}
+          live={live}
+          fav={fav}
+          word={word}
+          isRTL={isRTL}
+          favoritePost={this.props.favoritePost}
+          unFavoritePost={this.props.unFavoritePost}
+          editClassifieds={this.props.editClassifieds}
+          isMenuModalVisible={this.state.isMenuModalVisible}
+          hideMenuModal={this.hideMenuModal}
+          showEditModal={this.showEditModal}
+          showReportModal={this.showReportModal}
+          showMessageModal={this.showMessageModal}
+          showCheckMessageModal={this.showCheckMessageModal}
+          isAuthenticated={isAuthenticated}
+          user={this.props.user}
+        />
+        <Report
+          isReportModalVisible={this.state.isReportModalVisible}
+          hideReportModal={this.hideReportModal}
+          word={word}
+          isRTL={isRTL}
+        />
+        {this.state.isEditModalVisible && (
+          <Edit
+            isEditModalVisible={this.state.isEditModalVisible}
+            editClassifieds={this.props.editClassifieds}
+            hideEditModal={this.hideEditModal}
+            showMessageModal={this.showMessageModal}
+            showEditModal={this.showEditModal}
+            showCheckMessageModal={this.showCheckMessageModal}
+            word={word}
+            isRTL={isRTL}
+            post={post}
+          />
+        )}
+        <Message
+          isVisible={this.state.isMessageVisible}
+          title={this.state.message}
+          word={word}
+          icon="ios-checkmark-circle"
+          isRTL={isRTL}
+          width={width}
+          height={120}
+        />
+        <Message
+          isVisible={this.state.isCheckMessaheVisible}
+          body={word.deleteareyousure}
+          icon="ios-information-circle"
+          width={width}
+          okbtnTitle={word.yes}
+          cancelbtnTitle={word.cancel}
+          okAction={this.deletePost}
+          cancelAction={this.canceldeletePost}
+          isRTL={isRTL}
+          iconColor="#E85255"
+          height={200}
+        />
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{
+            position: 'absolute',
+            top: Constants.statusBarHeight + 3,
+            left: this.ardroid ? undefined : 8,
+            right: this.ardroid ? 10 : undefined,
+            zIndex: 860,
+            width: 32,
+            height: 32,
+            borderRadius: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.1)'
+          }}
+        >
+          <Ionicons
+            name="ios-arrow-back"
+            size={30}
+            style={styles.icon}
+            color="#fff"
+          />
+        </TouchableOpacity>
+        {/* header */}
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              flexDirection: this.ardroid ? 'row-reverse' : 'row',
+              paddingTop: Constants.statusBarHeight,
+              height: Constants.statusBarHeight + 40,
+              justifyContent: 'space-between',
+              // paddingHorizontal: 10,
+              alignItems: 'center',
+              zIndex: 850,
+              shadowOffset: { width: 3, height: 3 },
+              shadowColor: '#555',
+              shadowOpacity: 0.2,
+              backgroundColor: '#7678ED',
+              opacity: opacityStyle
+            }
+          ]}
+        >
+          <View
+            style={{
+              flex: 5,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'cairo-regular',
+                fontSize: 20,
+                color: '#fff'
+              }}
+            >
+              {post.title.substring(0, 20)}
+            </Text>
+          </View>
+          <MenuIconHeader showMenuModal={this.showMenuModal} />
+        </Animated.View>
         <KeyboardAvoidingView
           style={styles.container}
           behavior="padding"
           enabled
         >
-          <Menu
-            postId={postId}
-            post={post}
-            myItem={myItem}
-            live={live}
-            fav={fav}
-            word={word}
-            isRTL={isRTL}
-            favoritePost={this.props.favoritePost}
-            unFavoritePost={this.props.unFavoritePost}
-            editClassifieds={this.props.editClassifieds}
-            isMenuModalVisible={this.state.isMenuModalVisible}
-            hideMenuModal={this.hideMenuModal}
-            showEditModal={this.showEditModal}
-            showReportModal={this.showReportModal}
-            showMessageModal={this.showMessageModal}
-            showCheckMessageModal={this.showCheckMessageModal}
-            isAuthenticated={isAuthenticated}
-            user={this.props.user}
-          />
-          <Report
-            isReportModalVisible={this.state.isReportModalVisible}
-            hideReportModal={this.hideReportModal}
-            word={word}
-            isRTL={isRTL}
-          />
-          {this.state.isEditModalVisible && (
-            <Edit
-              isEditModalVisible={this.state.isEditModalVisible}
-              editClassifieds={this.props.editClassifieds}
-              hideEditModal={this.hideEditModal}
-              showMessageModal={this.showMessageModal}
-              showEditModal={this.showEditModal}
-              showCheckMessageModal={this.showCheckMessageModal}
-              word={word}
-              isRTL={isRTL}
-              post={post}
-            />
-          )}
-          <Message
-            isVisible={this.state.isMessageVisible}
-            title={this.state.message}
-            word={word}
-            icon="ios-checkmark-circle"
-            isRTL={isRTL}
-            width={width}
-            height={120}
-          />
-          <Message
-            isVisible={this.state.isCheckMessaheVisible}
-            body={word.deleteareyousure}
-            icon="ios-information-circle"
-            width={width}
-            okbtnTitle={word.yes}
-            cancelbtnTitle={word.cancel}
-            okAction={this.deletePost}
-            cancelAction={this.canceldeletePost}
-            isRTL={isRTL}
-            iconColor="#E85255"
-            height={200}
-          />
-          <TouchableOpacity
-            onPress={() => this.props.navigation.goBack()}
-            style={{
-              position: 'absolute',
-              top: Constants.statusBarHeight + 3,
-              left: this.ardroid ? undefined : 10,
-              right: this.ardroid ? 10 : undefined,
-              zIndex: 860,
-              width: 60,
-              height: 50,
-              borderRadius: 16,
-              justifyContent: 'flex-start',
-              alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
-            }}
-          >
-            <View
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: 16,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.1)'
-              }}
-            >
-              <Ionicons
-                name="ios-arrow-back"
-                size={30}
-                style={styles.icon}
-                color="#fff"
-              />
-            </View>
-          </TouchableOpacity>
-          {/* header */}
-          <View
-            style={[
-              {
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                flexDirection: this.ardroid ? 'row-reverse' : 'row',
-                paddingTop: Constants.statusBarHeight,
-                height: Constants.statusBarHeight + 40,
-                justifyContent: 'space-between',
-                // paddingHorizontal: 10,
-                alignItems: 'center',
-                zIndex: 850,
-                shadowOffset: { width: 3, height: 3 },
-                shadowColor: '#555',
-                shadowOpacity: 0.2,
-                backgroundColor: '#7678ED'
-                // opacity: opacityStyle
-              }
-            ]}
-          >
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  fontSize: 20,
-                  color: '#fff'
-                }}
-              >
-                {post.title.substring(0, 20)}
-              </Text>
-            </View>
-            <View
-              style={{
-                position: 'absolute',
-                top: 23,
-                right: 2
-              }}
-            >
-              <MenuIconHeader showMenuModal={this.showMenuModal} />
-            </View>
-          </View>
           <ScrollView
-            // onContentSizeChange={this.getScrollLength}
             keyboardShouldPersistTaps="handled"
+            onContentSizeChange={this.getScrollLength}
             scrollEventThrottle={16}
             showsVerticalScrollIndicator={false}
+            scrollEnabled={this.state.scrollEnabled}
             contentContainerStyle={{
               backgroundColor: '#fff',
-              // paddingBottom: 50,
-              paddingTop: Constants.statusBarHeight + 40
+              paddingBottom: 30
             }}
             onScroll={Animated.event([
               {
@@ -494,14 +476,6 @@ class ItemView extends React.Component<any, any> {
               this.scrollView = ref;
             }}
             style={{ backgroundColor: '#eee' }}
-            // onLayout={event => {
-            //   const layout = event.nativeEvent.layout;
-            //   console.log('height:', layout.height);
-            //   console.log('width:', layout.width);
-            //   console.log('x:', layout.x);
-            //   console.log('y:', layout.y);
-            //   console.log('y:', layout);
-            // }}
           >
             {photos.length > 0 && (
               <View>

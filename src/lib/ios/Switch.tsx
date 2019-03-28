@@ -58,7 +58,9 @@ class SwitchUI extends React.Component<any, any> {
             borderBottomColor: '#eee'
           }}
         >
-          <Text style={{ alignSelf: 'center' }}>{originalTitle}</Text>
+          <Text style={{ alignSelf: 'center', fontSize: 16 }}>
+            {originalTitle}
+          </Text>
           <Switch
             onValueChange={async value => {
               await this.setState({ original: value });
@@ -77,7 +79,9 @@ class SwitchUI extends React.Component<any, any> {
             borderBottomColor: '#eee'
           }}
         >
-          <Text style={{ alignSelf: 'center' }}>{seconTitle}</Text>
+          <Text style={{ alignSelf: 'center', fontSize: 16 }}>
+            {seconTitle}
+          </Text>
           <Switch
             onValueChange={async value => {
               await this.setState({ second: value });

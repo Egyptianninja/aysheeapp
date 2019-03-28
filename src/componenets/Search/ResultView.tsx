@@ -79,6 +79,9 @@ class ResultView extends React.Component<any, any> {
       </TouchableOpacity>
     );
   };
+  selectePost = (post: any, word: any, lang: any, isRTL: any) => {
+    this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
+  };
 
   renderQuery = ({ query, isRTL, words, lang }: any) => {
     if (!query || query === '') {
@@ -130,6 +133,7 @@ class ResultView extends React.Component<any, any> {
                 <ItemViewSearch
                   post={item}
                   navigation={this.props.navigation}
+                  selectePost={this.selectePost}
                   word={this.props.words}
                   isRTL={isRTL}
                   lang={lang}

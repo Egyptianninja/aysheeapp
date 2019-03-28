@@ -44,6 +44,9 @@ export const images = {
 
   load: require('../../assets/icons/main/load.png'),
 
+  mainpageshops: require('../../assets/images/categories/shops.jpg'),
+  mainpageoffers: require('../../assets/images/categories/offers.jpg'),
+
   icon1: require('../../assets/icons/main/realestate.jpg'),
   icon2: require('../../assets/icons/main/car.jpg'),
   icon3: require('../../assets/icons/main/home-electronics.png'),

@@ -506,8 +506,39 @@ class MyProfileScreen extends React.Component<any, any> {
       </View>
     );
   };
+  renderAuthRequire = () => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('PhoneScreen')}
+          style={{
+            width: 150,
+            height: 40,
+            backgroundColor: '#7678ED',
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>
+            Login
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   render() {
+    if (!this.props.isAuthenticated) {
+      return this.renderAuthRequire();
+    }
+
     const { lang, words, isRTL } = this.props;
 
     const headerHeight = this.state.scrollY.interpolate({

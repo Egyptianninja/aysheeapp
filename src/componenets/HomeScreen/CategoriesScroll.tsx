@@ -73,6 +73,7 @@ class CategoriesScroll extends React.Component<any, any> {
           categoryId={this.props.rest.categoryId}
           iconColor="#777"
           textColor="#777"
+          navigation={this.props.navigation}
           item={item}
           key={item.id}
         />

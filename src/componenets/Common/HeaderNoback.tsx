@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { Constants } from 'expo';
 import { rtlos } from '../../utils';
 
-const Header = ({ navigation, title }: any) => {
+const HeaderNoBack = ({ navigation, title }: any) => {
   return (
     <View
       style={{
@@ -17,30 +17,6 @@ const Header = ({ navigation, title }: any) => {
         flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
       }}
     >
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: 15,
-          alignItems: 'center',
-          padding: 7,
-          paddingRight: 15,
-          zIndex: 100
-        }}
-      >
-        <View
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: 16,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Ionicons name="ios-arrow-back" size={30} color="#fff" />
-        </View>
-      </TouchableOpacity>
       <View
         style={{
           flex: 1,
@@ -62,4 +38,4 @@ const Header = ({ navigation, title }: any) => {
   );
 };
 
-export default Header;
+export default HeaderNoBack;

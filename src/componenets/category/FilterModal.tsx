@@ -6,9 +6,12 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
 import HeaderFilter from '../HomeScreen/HeaderFilter';
+import { Constants } from 'expo';
 const { width, height } = Dimensions.get('window');
 
 class FilterModal extends React.Component<any, any> {
@@ -23,8 +26,14 @@ class FilterModal extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      isFilterModalVisible: false
+      isFilterModalVisible: false,
+      rest: null
     };
+  }
+
+  componentDidMount() {
+    const category = this.props.navigation.getParam('item');
+    this.setState({ rest: { categoryId: category.id } });
   }
   getSortBucket = () => {
     return {
@@ -34,30 +43,55 @@ class FilterModal extends React.Component<any, any> {
     };
   };
 
+  addFilter = (itemKind: any, value: any) => {
+    this.setState({ rest: { ...this.state.rest, [itemKind]: value } });
+    if (itemKind === 'sortType' && value === 3) {
+      this.setState({ loadinLocation: true });
+    }
+  };
+  removeFilter = (itemKind: any) => {
+    const filters = this.state.rest;
+    delete filters[itemKind];
+    this.setState({
+      rest: filters
+    });
+  };
+
+  removeAllCategoryFilters = () => {
+    const newrest = { categoryId: this.state.rest.categoryId };
+    this.setState({
+      rest: newrest
+    });
+  };
+
+  initRest = () => {
+    this.setState({ rest: this.props.rest });
+  };
   render() {
     const sortData = this.getSortBucket();
-    const {
-      addFilter,
-      removeFilter,
-      removeAllCategoryFilters,
-      rest,
-      words,
-      isRTL,
-      buckets,
-      category
-    } = this.props;
+    const { applyFilters, words, isRTL, buckets, category } = this.props;
+    const { rest } = this.state;
     return (
       <Modal
         isVisible={this.state.isFilterModalVisible}
-        onBackdropPress={() => this.props.hideFilterModal()}
-        onBackButtonPress={() => this.props.hideFilterModal()}
-        backdropOpacity={0.7}
-        useNativeDriver={true}
+        onBackdropPress={() => {
+          this.initRest();
+          this.props.hideFilterModal();
+        }}
+        onBackButtonPress={() => {
+          this.initRest();
+          this.props.hideFilterModal();
+        }}
+        backdropOpacity={0.5}
+        // useNativeDriver={true}
         animationIn="slideInRight"
         animationOut="slideOutRight"
         hideModalContentWhileAnimating={true}
-        // onSwipe={() => this.props.hideFilterModal()}
-        // swipeDirection="right"
+        onSwipe={() => {
+          this.initRest();
+          this.props.hideFilterModal();
+        }}
+        swipeDirection="right"
         style={{ flex: 1, margin: 0 }}
       >
         <View
@@ -65,54 +99,41 @@ class FilterModal extends React.Component<any, any> {
             backgroundColor: 'rgba(255, 255, 255, 1)',
             position: 'absolute',
             right: 0,
-            top: 0,
+            top: Constants.statusBarHeight + 40,
             bottom: 45,
             margin: 0,
-            paddingTop: 10,
             width: width - 100,
-            height
+            height: height - (Constants.statusBarHeight + 40),
+            borderTopLeftRadius: 15
+            // borderBottomLeftRadius: 15
           }}
         >
-          <View
-            style={{
-              shadowColor: '#777',
-              shadowOffset: {
-                width: 0,
-                height: 2
-              },
-              shadowOpacity: 0.5,
-              shadowRadius: 5.84,
-
-              elevation: 5
-            }}
-          >
-            <View
-              style={{
-                height: 40,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  color: '#777'
-                }}
-              >
-                {category.name}
-              </Text>
-            </View>
+          <View>
             <TouchableOpacity
               style={{
-                padding: 10,
-                alignItems: 'flex-end',
-                alignSelf: 'flex-end',
-                width: 100
+                top: -4,
+                padding: 8,
+                alignItems: 'center',
+                alignSelf: 'flex-start',
+                width: 100,
+                flexDirection: 'row'
               }}
-              onPress={() => removeAllCategoryFilters()}
+              onPress={() => this.removeAllCategoryFilters()}
             >
-              <Text style={{ color: '#777' }}>Clear all</Text>
+              <Ionicons
+                name="ios-close-circle-outline"
+                size={26}
+                color="#aaa"
+              />
+              <Text
+                style={{
+                  color: '#aaa',
+                  fontSize: 14,
+                  paddingHorizontal: 5
+                }}
+              >
+                Clear
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -122,11 +143,33 @@ class FilterModal extends React.Component<any, any> {
               rest={rest}
               sortData={sortData}
               buckets={buckets}
-              addFilter={addFilter}
-              removeFilter={removeFilter}
+              addFilter={this.addFilter}
+              removeFilter={this.removeFilter}
               words={words}
             />
           )}
+          <TouchableOpacity
+            style={{
+              padding: 10,
+              paddingHorizontal: 20,
+              width: 100,
+              borderRadius: 10,
+              backgroundColor: '#7678ED',
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'center',
+              marginTop: 30,
+              shadowOffset: { width: 2, height: 2 },
+              shadowColor: '#666',
+              shadowOpacity: 0.25
+            }}
+            onPress={() => {
+              applyFilters(this.state.rest);
+              this.props.hideFilterModal();
+            }}
+          >
+            <Text style={{ color: '#fff', fontSize: 16 }}>Apply</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     );

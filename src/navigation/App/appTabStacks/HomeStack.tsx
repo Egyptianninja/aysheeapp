@@ -11,18 +11,22 @@ import {
   AddServiceScreen,
   CameraScreen,
   ChoiseScreen,
-  HomeScreenSingle,
+  HomeScreen,
   ItemScreen,
   OffersScreen,
   ShopsScreen,
-  CategoryScreen
+  CategoryScreen,
+  ProfileScreen,
+  UpgradeToStore,
+  MyFavScreen,
+  EditProfileScreen
 } from '../../../screens';
 import { Header } from '../../../componenets';
 
 export const HomeStack = createStackNavigator(
   {
     HomeScreen: {
-      screen: HomeScreenSingle,
+      screen: HomeScreen,
       navigationOptions: ({ navigation }: any) => ({
         header: <HomeHeader navigation={navigation} />,
         headerBackTitle: null
@@ -150,6 +154,18 @@ export const HomeStack = createStackNavigator(
         headerBackTitle: null
       })
     },
+    ProfileScreen: {
+      screen: ProfileScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('user').name}
+          />
+        ),
+        headerBackTitle: null
+      })
+    },
 
     ShopsScreen: {
       screen: ShopsScreen,
@@ -166,6 +182,44 @@ export const HomeStack = createStackNavigator(
     CameraScreen: {
       screen: CameraScreen,
       navigationOptions: () => ({
+        headerBackTitle: null
+      })
+    },
+    UpgradeToStore: {
+      screen: UpgradeToStore,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
+        headerBackTitle: null
+      })
+    },
+
+    MyFavScreen: {
+      screen: MyFavScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
+        headerBackTitle: null
+      })
+    },
+
+    EditProfileScreen: {
+      screen: EditProfileScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
         headerBackTitle: null
       })
     }

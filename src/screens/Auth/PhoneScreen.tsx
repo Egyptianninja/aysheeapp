@@ -188,7 +188,6 @@ class PhoneScreen extends React.Component<any, any> {
               flex: 2,
               justifyContent: 'flex-start',
               alignItems: 'center'
-              // backgroundColor: 'red'
             }}
             behavior="padding"
             enabled

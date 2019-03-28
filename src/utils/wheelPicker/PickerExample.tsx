@@ -16,8 +16,6 @@ export default class PickerExample extends React.Component<any, any> {
     this.setState({ zoom });
   };
   render() {
-    console.log(this.state);
-
     return (
       <View style={{ flex: 1 }}>
         <PickerIOS
@@ -25,7 +23,6 @@ export default class PickerExample extends React.Component<any, any> {
           style={{ height: 40, width: 60 }}
           onValueChange={(itemValue: any, itemIndex: any) => {
             this.setState({ language: itemValue });
-            console.log(itemValue);
           }}
         >
           <Picker.Item label="Java" value="java" />

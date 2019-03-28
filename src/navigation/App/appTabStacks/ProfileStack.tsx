@@ -4,16 +4,19 @@ import {
   EditProfileScreen,
   MyFavScreen,
   UpgradeToStore,
-  MyProfileScreen
+  MyProfileScreen,
+  ItemScreen
 } from '../../../screens';
 import { Header } from '../../../componenets';
+import HeaderNoBack from '../../../componenets/Common/HeaderNoback';
+
 import { user } from '../../../store/getStore';
 export const ProfileStack = createStackNavigator(
   {
-    ProfileScreen: {
+    MyProfileScreen: {
       screen: MyProfileScreen,
       navigationOptions: ({ navigation }: any) => ({
-        header: <Header navigation={navigation} title={user().user.name} />,
+        header: <HeaderNoBack navigation={navigation} title="Profile" />,
         headerBackTitle: null
       })
     },
@@ -52,6 +55,12 @@ export const ProfileStack = createStackNavigator(
             title={navigation.getParam('title')}
           />
         ),
+        headerBackTitle: null
+      })
+    },
+    ItemScreen: {
+      screen: ItemScreen,
+      navigationOptions: ({ navigation }: any) => ({
         headerBackTitle: null
       })
     }

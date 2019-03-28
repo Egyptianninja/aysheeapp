@@ -10,6 +10,7 @@ const ItemViewSearch = (props: any) => {
       imageWidth,
       imageHeight,
       subTitle,
+      body,
       time,
       isrtl: isPostRTL,
       uri,
@@ -26,7 +27,8 @@ const ItemViewSearch = (props: any) => {
     <View
       style={{
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginHorizontal: 10
       }}
     >
       <TouchableWithoutFeedback
@@ -69,7 +71,10 @@ const ItemViewSearch = (props: any) => {
             }}
           >
             <View>
-              <Text style={{ color: '#555', fontSize: 16 }}>{subTitle}</Text>
+              <Text style={{ color: '#555', fontSize: 16, fontWeight: 'bold' }}>
+                {subTitle}
+              </Text>
+              <Text style={{ fontSize: 14 }}>{body.substring(0, 55)}</Text>
             </View>
             <View>
               {(price || price === 0) && (

@@ -18,7 +18,6 @@ class ChoiseScreen extends React.Component<any, any> {
     this.setState({ isSearchVisible: true });
     Animated.timing(this.state.animation, {
       toValue: 1,
-      delay: 200,
       duration: 200
     }).start();
   };
@@ -76,6 +75,7 @@ class ChoiseScreen extends React.Component<any, any> {
             category={this.state.category}
             hideSearch={this.hideSearch}
             removecategory={this.removecategory}
+            navigation={this.props.navigation}
           />
         </Animated.View>
       </View>

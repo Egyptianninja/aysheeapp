@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { NotificationsScreen } from '../../../screens';
+import {
+  NotificationsScreen,
+  ItemScreen,
+  ProfileScreen
+} from '../../../screens';
+import HeaderNoBack from '../../../componenets/Common/HeaderNoback';
 import { Header } from '../../../componenets';
 
 export const NotificationStack = createStackNavigator(
@@ -8,7 +13,25 @@ export const NotificationStack = createStackNavigator(
     NotificationsScreen: {
       screen: NotificationsScreen,
       navigationOptions: ({ navigation }: any) => ({
-        header: <Header navigation={navigation} title="Notifications" />,
+        header: <HeaderNoBack navigation={navigation} title="Notifications" />,
+        headerBackTitle: null
+      })
+    },
+    ItemScreen: {
+      screen: ItemScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        headerBackTitle: null
+      })
+    },
+    ProfileScreen: {
+      screen: ProfileScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('user').name}
+          />
+        ),
         headerBackTitle: null
       })
     }

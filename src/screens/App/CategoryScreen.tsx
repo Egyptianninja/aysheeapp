@@ -165,20 +165,24 @@ class CategoryScreen extends React.Component<any, any> {
       rest: newrest
     });
   };
+
+  applyFilters = (rest: any) => {
+    this.setState({ rest });
+  };
+
   selectePost = (post: any, word: any, lang: any, isRTL: any) => {
     this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
   };
 
   render() {
     const { rest } = this.state;
-    const { lang, words, query, isRTL } = this.props;
+    const { lang, words, isRTL } = this.props;
     const category = this.props.navigation.getParam('item');
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
-    console.log(this.state.rest);
 
     return (
       <View style={{ flex: 1 }}>
@@ -194,9 +198,7 @@ class CategoryScreen extends React.Component<any, any> {
           setHome={(click: any) => (this.catScrollHome = click)}
           isRTL={isRTL}
           currentCategory={this.state.rest.categoryId}
-          addFilter={this.addFilter}
-          removeFilter={this.removeFilter}
-          removeAllCategoryFilters={this.removeAllCategoryFilters}
+          applyFilters={this.applyFilters}
           navigation={this.props.navigation}
           rest={this.state.rest}
           category={category}
@@ -260,7 +262,7 @@ class CategoryScreen extends React.Component<any, any> {
         />
         <Query
           query={getTimeLine}
-          variables={{ ...rest, query }}
+          variables={{ ...rest }}
           onCompleted={data => {
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
             this.props.setBuckets(buckets);
@@ -344,12 +346,9 @@ class CategoryScreen extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   isRTL: state.glob.isRTL,
-  permissions: state.glob.permissions,
-  categories: state.glob.language.category,
   words: state.glob.language.words,
   isAuthenticated: state.user.isAuthenticated,
-  user: state.user.user,
-  query: state.post.query
+  user: state.user.user
 });
 
 export default connect(

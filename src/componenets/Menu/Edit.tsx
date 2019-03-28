@@ -174,7 +174,6 @@ export default class Edit extends React.Component<any, any> {
         salary: salary ? Number(salary) : undefined
       }
     });
-    console.log(res.data);
 
     if (res.data.updatePost.ok) {
       this.props.hideEditModal();

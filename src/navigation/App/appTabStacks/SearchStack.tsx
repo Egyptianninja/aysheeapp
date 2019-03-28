@@ -4,7 +4,8 @@ import {
   ItemScreen,
   SearchScreen,
   ShopsScreen,
-  OffersScreen
+  OffersScreen,
+  ProfileScreen
 } from '../../../screens';
 import { Header } from '../../../componenets';
 import SearchHeader from '../../../componenets/HomeScreen/SearchHeader';
@@ -40,6 +41,18 @@ export const SearchStack = createStackNavigator(
           <Header
             navigation={navigation}
             title={navigation.getParam('title')}
+          />
+        ),
+        headerBackTitle: null
+      })
+    },
+    ProfileScreen: {
+      screen: ProfileScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('user').name}
           />
         ),
         headerBackTitle: null

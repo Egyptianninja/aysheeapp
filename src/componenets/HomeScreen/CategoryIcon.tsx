@@ -4,6 +4,7 @@ import { StyleSheet } from '../../utils';
 
 const CategoryIcon = ({
   item,
+  navigation,
   icon,
   addFilter,
   removeAllFilters,
@@ -12,14 +13,15 @@ const CategoryIcon = ({
   const active = categoryId === item.id;
   return (
     <TouchableOpacity
-      onPress={async () => {
-        if (categoryId === item.id) {
-          removeAllFilters();
-        } else {
-          await removeAllFilters();
-          addFilter('categoryId', item.id);
-        }
-      }}
+      // onPress={async () => {
+      //   if (categoryId === item.id) {
+      //     removeAllFilters();
+      //   } else {
+      //     await removeAllFilters();
+      //     addFilter('categoryId', item.id);
+      //   }
+      // }}
+      onPress={() => navigation.navigate('CategoryScreen', { item })}
     >
       <View style={{ marginTop: 7, backgroundColor: '#fff' }}>
         <View

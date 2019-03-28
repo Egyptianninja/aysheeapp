@@ -38,7 +38,6 @@ class SearchBox extends React.Component<any, any> {
       this.searchInput.blur();
       Animated.timing(this.state.animation, {
         toValue: 1,
-        delay: 200,
         duration: 200
       }).start();
     }
