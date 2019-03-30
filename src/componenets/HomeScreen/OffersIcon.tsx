@@ -5,7 +5,7 @@ import { images } from '../../load';
 const OfferIcon = ({ navigation, title }: any) => {
   return (
     <TouchableOpacity
-      onPress={async () => {
+      onPress={() => {
         navigation.navigate('OffersScreen');
       }}
     >

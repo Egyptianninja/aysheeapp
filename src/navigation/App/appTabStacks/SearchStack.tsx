@@ -23,6 +23,7 @@ export const SearchStack = createStackNavigator(
       screen: OffersScreen,
       navigationOptions: ({ navigation }: any) => ({
         headerBackTitle: null,
+        tabBarVisible: false,
         drawerLockMode: 'locked-closed'
       })
     },

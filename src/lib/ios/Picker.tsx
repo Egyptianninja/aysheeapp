@@ -16,7 +16,7 @@ const PickerUI = ({
 
   const pickervalue =
     propsValue || propsValue === 0
-      ? itemKind === 'realestateId'
+      ? itemKind === 'realestateId' || itemKind === 'kindId'
         ? propsValue
         : propsValue.toString()
       : undefined;

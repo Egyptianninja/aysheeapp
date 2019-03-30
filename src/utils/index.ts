@@ -60,6 +60,7 @@ import {
 import { onShare } from './share';
 import { since } from './since';
 import { isIphoneX, isTablet } from './platform/device';
+import BottomDrawer from './bottomDrawar';
 export {
   StyleSheet,
   uploadPhoto,
@@ -116,5 +117,6 @@ export {
   getCurrency,
   isIphoneX,
   isTablet,
-  rtlos
+  rtlos,
+  BottomDrawer
 };

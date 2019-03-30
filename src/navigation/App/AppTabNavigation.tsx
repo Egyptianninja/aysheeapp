@@ -13,23 +13,30 @@ const AppTabNavigation = createBottomTabNavigator(
   {
     Home: {
       screen: HomeStack,
-      navigationOptions: {
-        // tabBarLable: 'Home',
-        tabBarIcon: ({ focused, tintColor }: any) => (
-          <ImageIcon
-            icon={images.homeicon}
-            iconout={images.homeiconout}
-            size={30}
-            focused={focused}
-            tintColor={tintColor}
-          />
-        )
+      navigationOptions: ({ navigation }: any) => {
+        const { routeName } = navigation.state.routes[navigation.state.index];
+        const navigationOptions: any = {};
+
+        if (routeName === 'OffersScreen') {
+          navigationOptions.tabBarVisible = false;
+        } else {
+          navigationOptions.tabBarIcon = ({ focused, tintColor }: any) => (
+            <ImageIcon
+              icon={images.homeicon}
+              iconout={images.homeiconout}
+              size={30}
+              focused={focused}
+              tintColor={tintColor}
+            />
+          );
+        }
+
+        return navigationOptions;
       }
     },
     Search: {
       screen: SearchStack,
       navigationOptions: {
-        // tabBarLable: 'Home',
         tabBarIcon: ({ focused, tintColor }: any) => (
           <ImageIcon
             icon={images.searchicon}
@@ -41,26 +48,9 @@ const AppTabNavigation = createBottomTabNavigator(
         )
       }
     },
-
-    // CategoryStack: {
-    //   screen: CategoryStack,
-    //   navigationOptions: {
-    //     // tabBarLable: 'Home',
-    //     tabBarIcon: ({ focused, tintColor }: any) => (
-    //       <ImageIcon
-    //         icon={images.barcodeicon}
-    //         iconout={images.barcoseiconout}
-    //         size={28}
-    //         focused={focused}
-    //         tintColor={tintColor}
-    //       />
-    //     )
-    //   }
-    // },
     Notification: {
       screen: NotificationStack,
       navigationOptions: {
-        // tabBarLable: 'Home',
         tabBarIcon: ({ focused, tintColor }: any) => (
           <ImageIcon
             icon={images.notificationicon}
@@ -75,7 +65,6 @@ const AppTabNavigation = createBottomTabNavigator(
     Shipment: {
       screen: ProfileStack,
       navigationOptions: {
-        // tabBarLable: "My Shipments",
         tabBarIcon: ({ focused, tintColor }: any) => (
           <ImageIcon
             icon={images.personicon}
@@ -94,7 +83,6 @@ const AppTabNavigation = createBottomTabNavigator(
       activeTintColor: '#7678ED',
       showLabel: false
     }
-    // initialRouteName: "Notification"
   }
 );
 

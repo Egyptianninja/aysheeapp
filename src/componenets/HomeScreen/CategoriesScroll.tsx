@@ -294,10 +294,10 @@ class CategoriesScroll extends React.Component<any, any> {
                     isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
                 }}
               >
-                {/* <OfferIcon
+                <OfferIcon
                   navigation={this.props.navigation}
                   title={words.offers}
-                /> */}
+                />
                 {this.renderCategories(categories)}
               </View>
             )}

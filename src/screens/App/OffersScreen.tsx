@@ -19,7 +19,7 @@ import { readyUserPosts, isIphoneX, rtlos } from '../../utils';
 const HEIGHT = Dimensions.get('window').height;
 const iphoneX = isIphoneX();
 class OffersScreen extends Component<any, any> {
-  static navigationOptions = { header: null };
+  static navigationOptions = { header: null, tabBarVisible: false };
   constructor(props: any) {
     super(props);
     this.state = {

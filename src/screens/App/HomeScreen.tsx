@@ -3,7 +3,7 @@ import { Notifications } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Animated, Dimensions, StatusBar, View } from 'react-native';
+import { Animated, Dimensions, StatusBar, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
@@ -26,13 +26,15 @@ import {
   Message,
   readyPosts,
   registerForPushNotificationsAsync,
-  isTablet
+  isTablet,
+  isIphoneX
 } from '../../utils';
-
+import BottomDrawer from '../../componenets/HomeScreen/HomeDrawer';
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 class HomeScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
+
   catScrollHome: any;
   flatListRef: any;
   getNextPosts: any;
@@ -41,6 +43,7 @@ class HomeScreen extends React.Component<any, any> {
   offsetValue = 0;
   scrollValue = 0;
   NAVBAR_HEIGHT = 96;
+  TAB_BAR_HEIGHT = 49;
 
   constructor(props: any) {
     super(props);
@@ -329,6 +332,7 @@ class HomeScreen extends React.Component<any, any> {
     return (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
         <StatusBar translucent={true} barStyle={'light-content'} />
+
         {this.state.isNotificationModalVisible && (
           <NotificationModal
             isNotificationModalVisible={this.state.isNotificationModalVisible}
@@ -397,7 +401,7 @@ class HomeScreen extends React.Component<any, any> {
           iconColor="#E85255"
           height={200}
         />
-        <CategoriesModal
+        {/* <CategoriesModal
           isCategoriesModalVisible={this.state.isCategoriesModalVisible}
           hideCategoriesModal={this.hideCategoriesModal}
           categories={this.props.categories}
@@ -406,7 +410,7 @@ class HomeScreen extends React.Component<any, any> {
           addFilter={this.addFilter}
           removeAllFilters={this.removeAllFilters}
           word={words}
-        />
+        /> */}
         <Animated.View
           style={{
             zIndex: 100,
@@ -469,7 +473,7 @@ class HomeScreen extends React.Component<any, any> {
                   }}
                   scrollEventThrottle={16}
                   contentContainerStyle={{
-                    marginTop: this.NAVBAR_HEIGHT + 8,
+                    marginTop: this.NAVBAR_HEIGHT + 5,
                     paddingBottom: 160
                   }}
                   onScroll={Animated.event(
@@ -505,7 +509,6 @@ class HomeScreen extends React.Component<any, any> {
                       lang={lang}
                     />
                   )}
-                  // ListHeaderComponent={() => <Swiper />}
                   getHeightForItem={({ item }: any) => item.height}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}
@@ -517,6 +520,18 @@ class HomeScreen extends React.Component<any, any> {
             );
           }}
         </Query>
+        {/* <BottomDrawer
+          containerHeight={height - 50}
+          offset={this.TAB_BAR_HEIGHT + 35}
+          downDisplay={isIphoneX() ? height - 50 - 105 : height - 50 - 45}
+          startUp={false}
+          roundedEdges={false}
+          shadow={false}
+          categories={this.props.categories}
+          isRTL={this.props.isRTL}
+          navigation={this.props.navigation}
+          word={words}
+        /> */}
       </View>
     );
   }

@@ -43,6 +43,7 @@ export const HomeStack = createStackNavigator(
       screen: OffersScreen,
       navigationOptions: ({ navigation }: any) => ({
         headerBackTitle: null,
+        tabBarVisible: false,
         drawerLockMode: 'locked-closed'
       })
     },
@@ -234,7 +235,6 @@ export const HomeStack = createStackNavigator(
       headerTitleStyle: {
         fontWeight: 'bold'
       }
-      // headerBackImage: <BackIcon />
     }
   }
 );

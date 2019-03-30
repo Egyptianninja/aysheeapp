@@ -53,8 +53,8 @@ const HeaderFilter: any = ({
           addFilter,
           removeFilter,
           isRTL,
-          originalTitle: 'Sale',
-          seconTitle: 'Rent'
+          originalTitle: 'For Sale',
+          seconTitle: 'For Rent'
         })}
         {renderSwitch({
           words,
@@ -111,6 +111,33 @@ const HeaderFilter: any = ({
 
     return (
       <RenderFilter isRTL={isRTL} filters={filters}>
+        {/* <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 10
+          }}
+        >
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'city',
+            bucket: getItems(buckets, 'city'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'kindId',
+            bucket: getItems(buckets, 'kindId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+        </View> */}
         {filters.map((filter: any) => {
           if (filter.name === 'subBrandId') {
             return renderSelectRow(
@@ -136,6 +163,46 @@ const HeaderFilter: any = ({
             );
           }
         })}
+        {/* {renderSwitch({
+          words,
+          rest,
+          itemKind: 'isnew',
+          bucket: getItems(buckets, 'isnew'),
+          addFilter,
+          removeFilter,
+          isRTL,
+          originalTitle: 'New',
+          seconTitle: 'Used'
+        })}
+        {renderSwitch({
+          words,
+          rest,
+          itemKind: 'issale',
+          bucket: getItems(buckets, 'issale'),
+          addFilter,
+          removeFilter,
+          isRTL,
+          originalTitle: 'For Sale',
+          seconTitle: 'For Rent'
+        })}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 10
+          }}
+        >
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'year',
+            bucket: getItems(buckets, 'year'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+        </View> */}
       </RenderFilter>
     );
   } else if (categoryId === 15) {

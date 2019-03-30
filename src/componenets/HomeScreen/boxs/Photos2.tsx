@@ -1,22 +1,32 @@
 import * as React from 'react';
-import { View, Image, Text, Dimensions } from 'react-native';
+import { View, Image, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { images } from '../../../load';
 const { width } = Dimensions.get('window');
-const Photos2 = () => {
-  const imagewidth = width / 2 - 15;
+const Photos2 = ({ navigation }: any) => {
+  const imagewidth = width / 2 - 20;
   const imageHeight = imagewidth / 2;
   return (
     <View
       style={{
         width: width - 20,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingBottom: 10,
+        paddingTop: 3,
+        paddingHorizontal: 3.5,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd'
       }}
     >
-      <View
+      <TouchableOpacity
+        onPress={async () => {
+          navigation.navigate('OffersScreen');
+        }}
         style={{
           width: imagewidth,
-          height: imageHeight
+          height: imageHeight,
+          borderRadius: imageHeight / 2,
+          overflow: 'hidden'
         }}
       >
         <Image
@@ -32,20 +42,24 @@ const Photos2 = () => {
             position: 'absolute',
             left: 0,
             bottom: 0,
-            height: 30,
+            height: imageHeight / 2,
             backgroundColor: 'rgba(0, 0, 0, 0.4)',
             width: imagewidth,
             alignItems: 'center',
             justifyContent: 'center'
           }}
         >
-          <Text style={{ color: '#fff' }}>OFFERS</Text>
+          <Text style={{ color: '#fff', fontSize: 18 }}>OFFERS</Text>
         </View>
-      </View>
-      <View
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('ShopsScreen')}
         style={{
           width: imagewidth,
-          height: imageHeight
+          height: imageHeight,
+
+          borderRadius: imageHeight / 2,
+          overflow: 'hidden'
         }}
       >
         <Image
@@ -61,16 +75,16 @@ const Photos2 = () => {
             position: 'absolute',
             left: 0,
             bottom: 0,
-            height: 30,
+            height: imageHeight / 2,
             backgroundColor: 'rgba(0, 0, 0, 0.4)',
             width: imagewidth,
             alignItems: 'center',
             justifyContent: 'center'
           }}
         >
-          <Text style={{ color: '#fff' }}>SHOPS</Text>
+          <Text style={{ color: '#fff', fontSize: 18 }}>SHOPS</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

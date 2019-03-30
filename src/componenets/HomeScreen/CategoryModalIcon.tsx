@@ -5,21 +5,14 @@ import { StyleSheet } from '../../utils';
 const CategoryModalIcon = ({
   item,
   icon,
-  addFilter,
-  removeAllFilters,
-  hideCategoriesModal,
+  navigation,
   categoryId,
-  width,
-  height
+  width
 }: any) => {
   const active = categoryId === item.id;
   return (
     <TouchableOpacity
-      onPress={async () => {
-        await removeAllFilters();
-        addFilter('categoryId', item.id);
-        hideCategoriesModal();
-      }}
+      onPress={() => navigation.navigate('CategoryScreen', { item })}
       style={{
         paddingHorizontal: 10,
         paddingVertical: 10

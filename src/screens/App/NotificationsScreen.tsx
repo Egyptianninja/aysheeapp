@@ -32,13 +32,22 @@ class NotificationsScreen extends React.Component<any, any> {
           style={{
             width: 150,
             height: 40,
-            backgroundColor: '#7678ED',
+            backgroundColor: '#ddd',
             borderRadius: 10,
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2
+            },
+            shadowOpacity: 0.27,
+            shadowRadius: 3.65,
+
+            elevation: 5
           }}
         >
-          <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>
+          <Text style={{ color: '#7678ED', fontSize: 16, fontWeight: 'bold' }}>
             Login
           </Text>
         </TouchableOpacity>
