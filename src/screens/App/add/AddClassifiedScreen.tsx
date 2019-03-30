@@ -59,7 +59,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
 
   noKind = [19];
   kind = [2, 3, 4, 6, 7, 8, 10, 11, 12, 13, 14, 16, 17, 18];
-  eBrand = [2, 6];
+  eBrand = [2, 6, 14];
 
   acc = [8];
 
@@ -223,6 +223,10 @@ class AddClassifiedScreen extends React.Component<any, any> {
       electricalBrands = this.props.electroBrands.filter(
         (eb: any) => eb.pid === 6
       );
+    } else if (category.id === 14) {
+      electricalBrands = this.props.electroBrands.filter(
+        (eb: any) => eb.pid === 14
+      );
     }
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -337,16 +341,19 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       <Select
                         name="eBrand"
                         data={eBrands}
+                        words={this.props.words}
                         label={word.eBrand}
                         value={values.eBrand}
                         onChange={setFieldValue}
                         isRTL={isRTL}
                       />
                     )}
-                  {category.id === 6 && (
+                  {(category.id === 6 || category.id === 14) && (
                     <Select
                       name="eBrand"
+                      required
                       data={electricalBrands}
+                      words={this.props.words}
                       label={word.eBrand}
                       value={values.eBrand}
                       onChange={setFieldValue}

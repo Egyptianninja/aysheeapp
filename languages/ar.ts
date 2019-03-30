@@ -252,15 +252,10 @@ export default {
     { pid: 8, id: 58, name: 'ادوات زينة', nameGlob: 'ادوات زينة' },
     { pid: 8, id: 111, name: 'أخرى', nameGlob: 'أخرى' },
 
-    { pid: 14, id: 70, name: 'سامسونج', nameGlob: 'سامسونج' },
-    { pid: 14, id: 71, name: 'أبل', nameGlob: 'أبل' },
-    { pid: 14, id: 72, name: 'هواوي', nameGlob: 'هواوي ' },
-    { pid: 14, id: 73, name: 'نوكيا', nameGlob: 'نوكيا' },
-    { pid: 14, id: 74, name: 'أل جي', nameGlob: 'أل جي' },
-    { pid: 14, id: 75, name: 'تي سي أل', nameGlob: 'تي سي أل' },
-    { pid: 14, id: 76, name: 'لينوفو', nameGlob: 'لينوفو' },
-    { pid: 14, id: 77, name: 'سوني', nameGlob: 'سوني' },
-    { pid: 14, id: 78, name: 'أخرى', nameGlob: 'أخرى' }
+    { pid: 14, id: 70, name: 'جوال', nameGlob: 'جوال' },
+    { pid: 14, id: 71, name: 'تابلت', nameGlob: 'تابلت' },
+    { pid: 14, id: 72, name: 'ساعة', nameGlob: 'ساعة ' },
+    { pid: 14, id: 73, name: 'اكسسوارات', nameGlob: 'اكسسوارات' }
   ],
 
   electroBrands: [
@@ -316,7 +311,17 @@ export default {
     { pid: 9, id: 50, name: 'بورز ', nameGlob: 'بورز ' },
     { pid: 9, id: 51, name: 'ويلكنس ', nameGlob: 'ويلكنس ' },
     { pid: 9, id: 52, name: 'دوال', nameGlob: 'دوال' },
-    { pid: 9, id: 53, name: 'أخرى', nameGlob: 'أخرى' }
+    { pid: 9, id: 53, name: 'أخرى', nameGlob: 'أخرى' },
+
+    { pid: 14, id: 70, name: 'سامسونج', nameGlob: 'سامسونج' },
+    { pid: 14, id: 71, name: 'أبل', nameGlob: 'أبل' },
+    { pid: 14, id: 72, name: 'هواوي', nameGlob: 'هواوي ' },
+    { pid: 14, id: 73, name: 'نوكيا', nameGlob: 'نوكيا' },
+    { pid: 14, id: 74, name: 'أل جي', nameGlob: 'أل جي' },
+    { pid: 14, id: 75, name: 'تي سي أل', nameGlob: 'تي سي أل' },
+    { pid: 14, id: 76, name: 'لينوفو', nameGlob: 'لينوفو' },
+    { pid: 14, id: 77, name: 'سوني', nameGlob: 'سوني' },
+    { pid: 14, id: 78, name: 'أخرى', nameGlob: 'أخرى' }
   ],
   realestate: [
     { id: 0, name: 'شقة', nameGlob: 'شقة, Flat, Flat' },

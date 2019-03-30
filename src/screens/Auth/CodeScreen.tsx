@@ -123,7 +123,7 @@ class CodeScreen extends React.Component<any, any> {
         await this.props.initCode();
         directstore
           ? isstore
-            ? this.props.navigation.navigate('App')
+            ? this.props.navigation.navigate('HomeScreen')
             : this.props.navigation.navigate('UpgradeToStore', {
                 title: this.props.words.apdateaccount
               })
@@ -131,7 +131,7 @@ class CodeScreen extends React.Component<any, any> {
           ? this.props.navigation.navigate('ChoiseScreen', {
               title: this.props.words.addnewad
             })
-          : this.props.navigation.navigate('App');
+          : this.props.navigation.navigate('HomeScreen');
       } else {
         if (res.data.smsLoginWithCode.ok === false) {
           const nowTime = Math.floor(new Date().getTime() / 1000);

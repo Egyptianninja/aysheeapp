@@ -34,7 +34,7 @@ class Drawer extends React.Component<any, any> {
   menuAction = async (id: number) => {
     switch (id) {
       case 0:
-        return this.props.navigation.navigate('Auth');
+        return this.props.navigation.navigate('PhoneScreen');
 
       case 1:
         if (this.props.isAuthenticated) {

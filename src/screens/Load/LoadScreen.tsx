@@ -56,7 +56,7 @@ class LoadScreen extends React.Component<any, any> {
     await this.refreshUserToken({ country: ipCountry, city, lang });
     const code = getCodeFromCountry(ipCountry);
     await this.props.initApp(ipCountry, code);
-    this.props.navigation.navigate('App');
+    this.props.navigation.navigate('HomeScreen');
   };
 
   render() {

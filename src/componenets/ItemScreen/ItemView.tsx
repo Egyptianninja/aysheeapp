@@ -35,7 +35,8 @@ import {
   ImageViewer,
   ItemLocation,
   Message,
-  StyleSheet
+  StyleSheet,
+  rtlos
 } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
@@ -390,23 +391,33 @@ class ItemView extends React.Component<any, any> {
           style={{
             position: 'absolute',
             top: Constants.statusBarHeight + 3,
-            left: this.ardroid ? undefined : 8,
+            left: this.ardroid ? undefined : 10,
             right: this.ardroid ? 10 : undefined,
             zIndex: 860,
-            width: 32,
-            height: 32,
+            width: 60,
+            height: 50,
             borderRadius: 16,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            justifyContent: 'flex-start',
+            alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
           }}
         >
-          <Ionicons
-            name="ios-arrow-back"
-            size={30}
-            style={styles.icon}
-            color="#fff"
-          />
+          <View
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 16,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }}
+          >
+            <Ionicons
+              name="ios-arrow-back"
+              size={30}
+              style={styles.icon}
+              color="#fff"
+            />
+          </View>
         </TouchableOpacity>
         {/* header */}
         <Animated.View
@@ -448,7 +459,15 @@ class ItemView extends React.Component<any, any> {
               {post.title.substring(0, 20)}
             </Text>
           </View>
-          <MenuIconHeader showMenuModal={this.showMenuModal} />
+          <View
+            style={{
+              position: 'absolute',
+              top: 23,
+              right: 2
+            }}
+          >
+            <MenuIconHeader showMenuModal={this.showMenuModal} />
+          </View>
         </Animated.View>
         <KeyboardAvoidingView
           style={styles.container}

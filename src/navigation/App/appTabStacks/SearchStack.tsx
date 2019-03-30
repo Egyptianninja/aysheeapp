@@ -8,7 +8,6 @@ import {
   ProfileScreen
 } from '../../../screens';
 import { Header } from '../../../componenets';
-import SearchHeader from '../../../componenets/HomeScreen/SearchHeader';
 export const SearchStack = createStackNavigator(
   {
     SearchScreen: {

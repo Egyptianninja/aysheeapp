@@ -29,9 +29,9 @@ import {
   isTablet,
   isIphoneX
 } from '../../utils';
-import BottomDrawer from '../../componenets/HomeScreen/HomeDrawer';
+// import BottomDrawer from '../../componenets/HomeScreen/HomeDrawer';
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 class HomeScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
 

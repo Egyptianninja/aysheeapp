@@ -17,7 +17,14 @@ const AppTabNavigation = createBottomTabNavigator(
         const { routeName } = navigation.state.routes[navigation.state.index];
         const navigationOptions: any = {};
 
-        if (routeName === 'OffersScreen') {
+        if (
+          routeName === 'OffersScreen' ||
+          routeName.indexOf('Add') !== -1 ||
+          routeName === 'ItemScreen' ||
+          routeName === 'ChoiseScreen' ||
+          routeName === 'PhoneScreen' ||
+          routeName === 'CodeScreen'
+        ) {
           navigationOptions.tabBarVisible = false;
         } else {
           navigationOptions.tabBarIcon = ({ focused, tintColor }: any) => (
@@ -50,30 +57,52 @@ const AppTabNavigation = createBottomTabNavigator(
     },
     Notification: {
       screen: NotificationStack,
-      navigationOptions: {
-        tabBarIcon: ({ focused, tintColor }: any) => (
-          <ImageIcon
-            icon={images.notificationicon}
-            iconout={images.notificationiconout}
-            size={28}
-            focused={focused}
-            tintColor={tintColor}
-          />
-        )
+      navigationOptions: ({ navigation }: any) => {
+        const { routeName } = navigation.state.routes[navigation.state.index];
+        const navigationOptions: any = {};
+        if (
+          routeName === 'ItemScreen' ||
+          routeName === 'PhoneScreen' ||
+          routeName === 'CodeScreen'
+        ) {
+          navigationOptions.tabBarVisible = false;
+        } else {
+          navigationOptions.tabBarIcon = ({ focused, tintColor }: any) => (
+            <ImageIcon
+              icon={images.notificationicon}
+              iconout={images.notificationiconout}
+              size={28}
+              focused={focused}
+              tintColor={tintColor}
+            />
+          );
+        }
+        return navigationOptions;
       }
     },
     Shipment: {
       screen: ProfileStack,
-      navigationOptions: {
-        tabBarIcon: ({ focused, tintColor }: any) => (
-          <ImageIcon
-            icon={images.personicon}
-            iconout={images.personiconout}
-            size={31}
-            focused={focused}
-            tintColor={tintColor}
-          />
-        )
+      navigationOptions: ({ navigation }: any) => {
+        const { routeName } = navigation.state.routes[navigation.state.index];
+        const navigationOptions: any = {};
+        if (
+          routeName === 'ItemScreen' ||
+          routeName === 'PhoneScreen' ||
+          routeName === 'CodeScreen'
+        ) {
+          navigationOptions.tabBarVisible = false;
+        } else {
+          navigationOptions.tabBarIcon = ({ focused, tintColor }: any) => (
+            <ImageIcon
+              icon={images.personicon}
+              iconout={images.personiconout}
+              size={31}
+              focused={focused}
+              tintColor={tintColor}
+            />
+          );
+        }
+        return navigationOptions;
       }
     }
   },

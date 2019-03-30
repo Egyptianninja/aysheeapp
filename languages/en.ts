@@ -248,15 +248,10 @@ export default {
     { pid: 8, id: 58, name: 'Accessories', nameGlob: 'ادوات زينة' },
     { pid: 8, id: 111, name: 'Other', nameGlob: 'Other' },
 
-    { pid: 14, id: 70, name: 'Samsung', nameGlob: 'Samsung' },
-    { pid: 14, id: 71, name: 'Apple', nameGlob: 'Apple' },
-    { pid: 14, id: 72, name: 'Huawei', nameGlob: 'Huawei ' },
-    { pid: 14, id: 73, name: 'Nokia', nameGlob: 'Nokia' },
-    { pid: 14, id: 74, name: 'LG', nameGlob: 'LG' },
-    { pid: 14, id: 75, name: 'TCL', nameGlob: 'TCL' },
-    { pid: 14, id: 76, name: 'Lenovo', nameGlob: 'Lenovo' },
-    { pid: 14, id: 77, name: 'Sony', nameGlob: 'Sony' },
-    { pid: 14, id: 78, name: 'Other', nameGlob: 'Other' }
+    { pid: 14, id: 70, name: 'Mobile', nameGlob: 'Mobile' },
+    { pid: 14, id: 71, name: 'Tablet', nameGlob: 'Tablet' },
+    { pid: 14, id: 72, name: 'Watch', nameGlob: 'Watch ' },
+    { pid: 14, id: 73, name: 'Accessories', nameGlob: 'Accessories' }
   ],
   electroBrands: [
     { pid: 5, id: 0, name: 'Canon', nameGlob: 'Canon' },
@@ -311,7 +306,17 @@ export default {
     { pid: 9, id: 50, name: 'Bowers ', nameGlob: 'Bowers ' },
     { pid: 9, id: 51, name: 'Wilkins ', nameGlob: 'Wilkins ' },
     { pid: 9, id: 52, name: 'Dual', nameGlob: 'Dual' },
-    { pid: 9, id: 53, name: 'Other', nameGlob: 'Other' }
+    { pid: 9, id: 53, name: 'Other', nameGlob: 'Other' },
+
+    { pid: 14, id: 70, name: 'Samsung', nameGlob: 'Samsung' },
+    { pid: 14, id: 71, name: 'Apple', nameGlob: 'Apple' },
+    { pid: 14, id: 72, name: 'Huawei', nameGlob: 'Huawei ' },
+    { pid: 14, id: 73, name: 'Nokia', nameGlob: 'Nokia' },
+    { pid: 14, id: 74, name: 'LG', nameGlob: 'LG' },
+    { pid: 14, id: 75, name: 'TCL', nameGlob: 'TCL' },
+    { pid: 14, id: 76, name: 'Lenovo', nameGlob: 'Lenovo' },
+    { pid: 14, id: 77, name: 'Sony', nameGlob: 'Sony' },
+    { pid: 14, id: 78, name: 'Other', nameGlob: 'Other' }
   ],
 
   realestate: [

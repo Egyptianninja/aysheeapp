@@ -103,7 +103,7 @@ class PhoneScreen extends React.Component<any, any> {
 
           directstore
             ? isstore
-              ? this.props.navigation.navigate('App')
+              ? this.props.navigation.navigate('HomeScreen')
               : this.props.navigation.navigate('UpgradeToStore', {
                   title: this.props.words.apdateaccount
                 })
@@ -111,7 +111,7 @@ class PhoneScreen extends React.Component<any, any> {
             ? this.props.navigation.navigate('ChoiseScreen', {
                 title: this.props.words.addnewad
               })
-            : this.props.navigation.navigate('App');
+            : this.props.navigation.navigate('HomeScreen');
         }
       } else {
         const res = await this.props.smsRequestCode({
@@ -165,11 +165,13 @@ class PhoneScreen extends React.Component<any, any> {
           <TouchableOpacity
             style={{
               position: 'absolute',
-              left: 20,
-              top: isIphoneX() ? 50 : 30,
-              zIndex: 150
+              left: 10,
+              top: isIphoneX() ? 40 : 20,
+              zIndex: 150,
+              padding: 10,
+              paddingRight: 20
             }}
-            onPress={() => this.props.navigation.navigate('App')}
+            onPress={() => this.props.navigation.goBack()}
           >
             <Ionicons name="ios-arrow-back" size={30} color="#fff" />
           </TouchableOpacity>
