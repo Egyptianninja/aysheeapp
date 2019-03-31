@@ -47,20 +47,14 @@ class SwitchUI extends React.Component<any, any> {
   render() {
     const { originalTitle, seconTitle } = this.props;
     return (
-      <View style={{ marginVertical: 10 }}>
+      <View style={{ margin: 5, flexDirection: 'row' }}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            padding: 5,
-            marginHorizontal: 10,
-            borderBottomWidth: 1,
-            borderBottomColor: '#eee'
+            padding: 5
           }}
         >
-          <Text style={{ alignSelf: 'center', fontSize: 16 }}>
-            {originalTitle}
-          </Text>
           <Switch
             onValueChange={async value => {
               await this.setState({ original: value });
@@ -68,20 +62,26 @@ class SwitchUI extends React.Component<any, any> {
             }}
             value={this.state.original}
           />
+          <Text
+            style={{
+              alignSelf: 'center',
+              width: 65,
+              fontSize: 14,
+              marginHorizontal: 5,
+              color: '#363636'
+            }}
+          >
+            {originalTitle}
+          </Text>
         </View>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             padding: 5,
-            marginHorizontal: 10,
-            borderBottomWidth: 1,
-            borderBottomColor: '#eee'
+            marginHorizontal: 5
           }}
         >
-          <Text style={{ alignSelf: 'center', fontSize: 16 }}>
-            {seconTitle}
-          </Text>
           <Switch
             onValueChange={async value => {
               await this.setState({ second: value });
@@ -89,6 +89,16 @@ class SwitchUI extends React.Component<any, any> {
             }}
             value={this.state.second}
           />
+          <Text
+            style={{
+              alignSelf: 'center',
+              fontSize: 14,
+              marginHorizontal: 5,
+              color: '#363636'
+            }}
+          >
+            {seconTitle}
+          </Text>
         </View>
       </View>
     );

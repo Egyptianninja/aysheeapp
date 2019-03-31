@@ -83,15 +83,10 @@ class FilterModal extends React.Component<any, any> {
           this.props.hideFilterModal();
         }}
         backdropOpacity={0.5}
-        // useNativeDriver={true}
+        useNativeDriver={true}
         animationIn="slideInRight"
         animationOut="slideOutRight"
         hideModalContentWhileAnimating={true}
-        onSwipe={() => {
-          this.initRest();
-          this.props.hideFilterModal();
-        }}
-        swipeDirection="right"
         style={{ flex: 1, margin: 0 }}
       >
         <View
@@ -102,10 +97,10 @@ class FilterModal extends React.Component<any, any> {
             top: Constants.statusBarHeight + 40,
             bottom: 45,
             margin: 0,
-            width: width - 100,
-            height: height - (Constants.statusBarHeight + 40),
-            borderTopLeftRadius: 15
-            // borderBottomLeftRadius: 15
+            width: 300,
+            height: height - (Constants.statusBarHeight + 40 + 49),
+            borderTopLeftRadius: 15,
+            borderBottomLeftRadius: 15
           }}
         >
           <View>
@@ -148,28 +143,54 @@ class FilterModal extends React.Component<any, any> {
               words={words}
             />
           )}
-          <TouchableOpacity
-            style={{
-              padding: 10,
-              paddingHorizontal: 20,
-              width: 100,
-              borderRadius: 10,
-              backgroundColor: '#7678ED',
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignSelf: 'center',
-              marginTop: 30,
-              shadowOffset: { width: 2, height: 2 },
-              shadowColor: '#666',
-              shadowOpacity: 0.25
-            }}
-            onPress={() => {
-              applyFilters(this.state.rest);
-              this.props.hideFilterModal();
-            }}
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-around' }}
           >
-            <Text style={{ color: '#fff', fontSize: 16 }}>Apply</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                padding: 10,
+                paddingHorizontal: 20,
+                width: 100,
+                borderRadius: 10,
+                backgroundColor: '#666',
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                marginTop: 30,
+                shadowOffset: { width: 2, height: 2 },
+                shadowColor: '#666',
+                shadowOpacity: 0.25
+              }}
+              onPress={() => {
+                this.initRest();
+                this.props.hideFilterModal();
+              }}
+            >
+              <Text style={{ color: '#fff', fontSize: 16 }}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                padding: 10,
+                paddingHorizontal: 20,
+                width: 100,
+                borderRadius: 10,
+                backgroundColor: '#7678ED',
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                marginTop: 30,
+                shadowOffset: { width: 2, height: 2 },
+                shadowColor: '#666',
+                shadowOpacity: 0.25
+              }}
+              onPress={() => {
+                applyFilters(this.state.rest);
+                this.props.hideFilterModal();
+              }}
+            >
+              <Text style={{ color: '#fff', fontSize: 16 }}>Apply</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     );

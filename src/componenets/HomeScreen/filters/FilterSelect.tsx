@@ -121,28 +121,14 @@ export default class FilterSelect extends React.Component<any, any> {
       rest[itemKind] || rest[itemKind] === 0 || rest[itemKind] === false;
 
     return (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
-        <View
-          style={{
-            height: 38,
-            width: 90,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginVertical: 10,
-            backgroundColor: '#efefef',
-            marginLeft: 10,
-            borderRadius: 5
-          }}
-        >
-          <Text style={{ padding: 5 }}>{data.label}</Text>
-        </View>
+      <View style={{ flexDirection: 'row' }}>
         <TouchableOpacity
           style={[
             {
               flexDirection:
                 rtlOS < 1 ? 'row' : rtlOS === 3 ? 'row-reverse' : 'row',
               height: 38,
-              width: this.props.sort ? undefined : 150,
+              width: this.props.sort ? undefined : 130,
               borderRadius: 5,
               marginHorizontal: 5,
               justifyContent: 'space-between',
@@ -152,10 +138,14 @@ export default class FilterSelect extends React.Component<any, any> {
             !this.props.sort
               ? {
                   marginVertical: 10,
-                  marginHorizontal: 10,
+                  borderRadius: 19,
+                  marginHorizontal: 5,
                   backgroundColor: '#fff',
                   borderColor: '#eee',
-                  borderWidth: 1
+                  borderWidth: 1,
+                  shadowOffset: { width: 2, height: 2 },
+                  shadowColor: '#666',
+                  shadowOpacity: 0.25
                 }
               : {}
           ]}

@@ -7,7 +7,7 @@ const PickerUI = ({
   removeFilter,
   data,
   propsValue,
-  width = 95,
+  width = 80,
   height = 80,
   innerStyle
 }: any) => {
@@ -25,19 +25,15 @@ const PickerUI = ({
     <View
       style={{
         height: 100,
-        marginHorizontal: 10,
-        backgroundColor: '#eee',
+        margin: 10,
         borderRadius: 10,
+        backgroundColor: '#eee',
+        borderColor: '#eee',
+        borderWidth: 1,
         padding: 10,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-
-        elevation: 5
+        shadowOffset: { width: 2, height: 2 },
+        shadowColor: '#666',
+        shadowOpacity: 0.25
       }}
     >
       <Picker
@@ -63,9 +59,10 @@ const PickerUI = ({
           height: 120,
           width: 80,
           fontSize: 16,
-          alignSelf: 'center'
-          // backgroundColor: 'red'
+          alignSelf: 'center',
+          color: '#363636'
         }}
+        mode="dropdown"
       >
         {newdata.map((item: any) => {
           return (
@@ -77,4 +74,31 @@ const PickerUI = ({
   );
 };
 
+const pickerStyle = {
+  inputIOS: {
+    color: 'white',
+    paddingTop: 13,
+    paddingHorizontal: 10,
+    paddingBottom: 12
+  },
+  inputAndroid: {
+    color: 'white'
+  },
+  placeholderColor: 'white',
+  underline: { borderTopWidth: 0 },
+  icon: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    borderTopWidth: 5,
+    borderTopColor: '#00000099',
+    borderRightWidth: 5,
+    borderRightColor: 'transparent',
+    borderLeftWidth: 5,
+    borderLeftColor: 'transparent',
+    width: 0,
+    height: 0,
+    top: 20,
+    right: 15
+  }
+};
 export default PickerUI;

@@ -16,6 +16,11 @@ const HeaderFilter: any = ({
   words
 }: any) => {
   if (categoryId === 0) {
+    const catFilters = [
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'realestateId', data: getItems(buckets, 'realestateId') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
     return (
       <RenderFilter isRTL={isRTL}>
         <View
@@ -26,23 +31,16 @@ const HeaderFilter: any = ({
             padding: 10
           }}
         >
-          {renderPicker({
-            words,
-            rest,
-            itemKind: 'city',
-            bucket: getItems(buckets, 'city'),
-            addFilter,
-            removeFilter,
-            isRTL
-          })}
-          {renderPicker({
-            words,
-            rest,
-            itemKind: 'realestateId',
-            bucket: getItems(buckets, 'realestateId'),
-            addFilter,
-            removeFilter,
-            isRTL
+          {filters.map((filter: any) => {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              isRTL
+            );
           })}
         </View>
         {renderSwitch({
