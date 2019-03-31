@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Query } from 'react-apollo';
 import { debounce } from 'lodash';
 import { connect } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons';
 import { HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
 import {
@@ -15,6 +16,8 @@ import search from '../../graphql/query/search';
 import { delQuery } from '../../store/actions/postActions';
 import { readyPosts, isTablet, getNextPosts } from '../../utils';
 import ItemViewSearch from './ItemViewSearch';
+import { ImageIcon } from '../Common';
+import { images } from '../../load';
 
 class ResultView extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -57,7 +60,10 @@ class ResultView extends React.Component<any, any> {
           marginHorizontal: 50,
           borderBottomLeftRadius: 12.5,
           borderBottomRightRadius: 12.5,
-          flexDirection: 'row'
+          flexDirection: 'row',
+          shadowOffset: { width: 0, height: 2 },
+          shadowColor: '#666',
+          shadowOpacity: 0.25
         }}
       >
         <Text
@@ -67,14 +73,14 @@ class ResultView extends React.Component<any, any> {
         >
           Search in{' '}
         </Text>
-        <Text style={{ color: 'green', fontWeight: 'bold' }}>
+        <Text style={{ color: '#00B77C', fontWeight: 'bold' }}>
           {this.state.category ? this.state.category.name : 'All'}
         </Text>
         <Text
           style={{
             position: 'absolute',
             right: 15,
-            color: '#888'
+            color: '#00B77C'
           }}
         >
           X
@@ -89,7 +95,20 @@ class ResultView extends React.Component<any, any> {
   renderQuery = ({ query, isRTL, words, lang }: any) => {
     if (!query || query === '') {
       return (
-        <ScrollView style={{}} contentContainerStyle={{ height: '100%' }} />
+        <ScrollView
+          style={{}}
+          contentContainerStyle={{
+            flex: 1,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            paddingTop: 100
+          }}
+        >
+          <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
+            <ImageIcon icon={images.searchicon} size={150} tintColor="#ddd" />
+            <Text style={{ fontSize: 24, color: '#ccc' }}>Search in ishee</Text>
+          </View>
+        </ScrollView>
       );
     }
     return (

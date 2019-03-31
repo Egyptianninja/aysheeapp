@@ -2,7 +2,6 @@ import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-
 export const PhotoPicker = ({ label, pickImage, icon, width }: any) => {
   return (
     <TouchableOpacity

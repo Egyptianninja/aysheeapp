@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { since, rtlos } from '../../utils';
+import { since, rtlos, isArabic } from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
 const Item = (props: any) => {
   const { item, lang, navigation, isRTL } = props;
   const time = since(item.createdAt, lang);
   const { postId, user } = JSON.parse(item.data);
+  const rtl = isArabic(item.body);
   return (
     <View
       style={{
@@ -24,7 +25,18 @@ const Item = (props: any) => {
         borderRadius: 10
       }}
     >
-      {user && <AvatarCircle user={user} size={40} />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          padding: 10
+        }}
+      >
+        {user && <AvatarCircle user={user} size={40} />}
+        <Text style={{ paddingHorizontal: 10, fontWeight: 'bold' }}>
+          {user.name}
+        </Text>
+      </View>
 
       <TouchableWithoutFeedback
         onPress={() =>
@@ -40,21 +52,33 @@ const Item = (props: any) => {
           style={{
             flex: 1,
             justifyContent: 'center',
+            marginHorizontal: 10,
             alignItems:
-              rtlos() === 3 ? 'flex-start' : isRTL ? 'flex-end' : 'flex-start'
+              rtlos() === 3 ? 'flex-start' : isRTL ? 'flex-end' : 'flex-start',
+            width: '100%'
           }}
         >
           <Text
             style={{
               padding: 5,
-              paddingTop: 10,
-              fontWeight: 'bold'
+              paddingBottom: 10
             }}
           >
             {item.title}
           </Text>
-          <View style={{ padding: 10 }}>
-            <Text>{item.body}</Text>
+          <View
+            style={{
+              flex: 1,
+              padding: 10,
+              marginBottom: 5,
+              backgroundColor: '#f8f8f8',
+              borderRadius: 5,
+              width: '94%'
+            }}
+          >
+            <Text style={{ alignSelf: rtl ? 'flex-end' : 'flex-start' }}>
+              {item.body}
+            </Text>
           </View>
         </View>
       </TouchableWithoutFeedback>

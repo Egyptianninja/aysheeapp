@@ -51,7 +51,7 @@ class Drawer extends React.Component<any, any> {
         }
 
       case 2:
-        return this.props.navigation.navigate('ProfileScreen', {
+        return this.props.navigation.navigate('MyProfileScreen', {
           user: this.props.user
         });
       case 3:
@@ -68,7 +68,7 @@ class Drawer extends React.Component<any, any> {
       case 4:
         return this.props.navigation.navigate('AddOfferScreen');
       case 5:
-        return this.props.navigation.navigate('ProfileScreen', {
+        return this.props.navigation.navigate('MyProfileScreen', {
           user: this.props.user
         });
       case 6:
@@ -153,7 +153,7 @@ class Drawer extends React.Component<any, any> {
       <View style={[styles.drawer, { borderBottomColor: '#555' }]}>
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('ProfileScreen', {
+            this.props.navigation.navigate('MyProfileScreen', {
               user: this.props.user
             });
           }}
@@ -162,7 +162,7 @@ class Drawer extends React.Component<any, any> {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('ProfileScreen', {
+            this.props.navigation.navigate('MyProfileScreen', {
               user: this.props.user
             });
           }}
