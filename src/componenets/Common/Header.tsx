@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { Constants } from 'expo';
 import { rtlos } from '../../utils';
 
-const Header = ({ navigation, title }: any) => {
+const Header = ({ navigation, title, backhome }: any) => {
   return (
     <View
       style={{
@@ -18,7 +18,9 @@ const Header = ({ navigation, title }: any) => {
       }}
     >
       <TouchableOpacity
-        onPress={() => navigation.goBack()}
+        onPress={() =>
+          backhome ? navigation.navigate('HomeScreen') : navigation.goBack()
+        }
         style={{
           position: 'absolute',
           left: 0,

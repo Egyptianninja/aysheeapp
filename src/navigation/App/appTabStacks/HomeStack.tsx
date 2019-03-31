@@ -63,6 +63,7 @@ export const HomeStack = createStackNavigator(
           <Header
             navigation={navigation}
             title={navigation.getParam('title')}
+            backhome={true}
           />
         ),
         headerBackTitle: null
@@ -195,6 +196,7 @@ export const HomeStack = createStackNavigator(
           <Header
             navigation={navigation}
             title={navigation.getParam('title')}
+            backhome={true}
           />
         ),
         headerBackTitle: null

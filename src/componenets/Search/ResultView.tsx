@@ -56,7 +56,8 @@ class ResultView extends React.Component<any, any> {
           alignItems: 'center',
           marginHorizontal: 50,
           borderBottomLeftRadius: 12.5,
-          borderBottomRightRadius: 12.5
+          borderBottomRightRadius: 12.5,
+          flexDirection: 'row'
         }}
       >
         <Text
@@ -65,7 +66,9 @@ class ResultView extends React.Component<any, any> {
           }}
         >
           Search in{' '}
-          {this.state.category ? this.state.category.name : 'all categories'}
+        </Text>
+        <Text style={{ color: 'green', fontWeight: 'bold' }}>
+          {this.state.category ? this.state.category.name : 'All'}
         </Text>
         <Text
           style={{

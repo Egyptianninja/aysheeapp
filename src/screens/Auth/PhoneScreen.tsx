@@ -80,9 +80,34 @@ class PhoneScreen extends React.Component<any, any> {
     }
   };
 
+  getDestinationRout = ({ directstore, add, origin, isstore }: any) => {
+    if (origin === 'profile') {
+      return { screen: 'MyProfileScreen' };
+    } else if (origin === 'notification') {
+      return { screen: 'NotificationsScreen' };
+    } else {
+      if (directstore) {
+        if (isstore) {
+          return { screen: 'HomeScreen' };
+        } else {
+          return {
+            screen: 'UpgradeToStore',
+            title: this.props.words.apdateaccount
+          };
+        }
+      }
+      if (add) {
+        return { screen: 'ChoiseScreen', title: this.props.words.addnewad };
+      } else {
+        return { screen: 'HomeScreen' };
+      }
+    }
+  };
+
   handleCodeSubmit = async (values: any, bag: any) => {
     const directstore = this.props.navigation.getParam('directstore');
     const add = this.props.navigation.getParam('add');
+    const origin = this.props.navigation.getParam('origin');
 
     try {
       const { phone } = values;
@@ -100,18 +125,13 @@ class PhoneScreen extends React.Component<any, any> {
           await this.props.login(token, data);
           await this.props.initTime();
           await this.props.initCode();
-
-          directstore
-            ? isstore
-              ? this.props.navigation.navigate('HomeScreen')
-              : this.props.navigation.navigate('UpgradeToStore', {
-                  title: this.props.words.apdateaccount
-                })
-            : add
-            ? this.props.navigation.navigate('ChoiseScreen', {
-                title: this.props.words.addnewad
-              })
-            : this.props.navigation.navigate('HomeScreen');
+          const rout = this.getDestinationRout({
+            directstore,
+            add,
+            origin,
+            isstore
+          });
+          this.props.navigation.navigate(rout.screen, { title: rout.title });
         }
       } else {
         const res = await this.props.smsRequestCode({
@@ -133,7 +153,8 @@ class PhoneScreen extends React.Component<any, any> {
             phone: phoneNumber,
             name,
             directstore,
-            add
+            add,
+            origin
           });
         } else {
           bag.setErrors({ phone: res.data.smsRequestCode.error });

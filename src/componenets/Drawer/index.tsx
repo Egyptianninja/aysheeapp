@@ -34,7 +34,9 @@ class Drawer extends React.Component<any, any> {
   menuAction = async (id: number) => {
     switch (id) {
       case 0:
-        return this.props.navigation.navigate('PhoneScreen');
+        return this.props.navigation.navigate('PhoneScreen', {
+          origin: 'home'
+        });
 
       case 1:
         if (this.props.isAuthenticated) {
@@ -43,7 +45,8 @@ class Drawer extends React.Component<any, any> {
           });
         } else {
           return this.props.navigation.navigate('PhoneScreen', {
-            directstore: true
+            directstore: true,
+            origin: 'home'
           });
         }
 
@@ -58,7 +61,8 @@ class Drawer extends React.Component<any, any> {
           });
         } else {
           return this.props.navigation.navigate('PhoneScreen', {
-            add: true
+            add: true,
+            origin: 'home'
           });
         }
       case 4:

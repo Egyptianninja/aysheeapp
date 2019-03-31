@@ -516,7 +516,11 @@ class MyProfileScreen extends React.Component<any, any> {
         }}
       >
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('PhoneScreen')}
+          onPress={() =>
+            this.props.navigation.navigate('PhoneScreen', {
+              origin: 'profile'
+            })
+          }
           style={{
             width: 150,
             height: 40,

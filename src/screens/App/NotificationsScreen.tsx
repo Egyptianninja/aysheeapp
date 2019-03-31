@@ -28,7 +28,11 @@ class NotificationsScreen extends React.Component<any, any> {
         }}
       >
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('PhoneScreen')}
+          onPress={() =>
+            this.props.navigation.navigate('PhoneScreen', {
+              origin: 'notification'
+            })
+          }
           style={{
             width: 150,
             height: 40,

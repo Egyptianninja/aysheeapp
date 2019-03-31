@@ -521,6 +521,12 @@ export default {
       { id: 8, name: 'Edit' },
       { id: 9, name: 'Delete' }
     ],
+    addmenu: [
+      { id: 1, name: 'New Ad' },
+      { id: 2, name: 'New Offer' },
+      { id: 3, name: 'Cancel' }
+    ],
+
     itemmenu: [
       { id: 1, name: 'Add to favorite' },
       { id: 2, name: 'Share' },

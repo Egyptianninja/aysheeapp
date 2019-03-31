@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
-import { Edit, Menu, Report } from '../../componenets/Menu';
+import { Edit, Menu, Report, OfferAdChoise } from '../../componenets/Menu';
 import NotificationModal from '../../componenets/NotificationScreen/NotificationModal';
 import createReport from '../../graphql/mutation/createReport';
 import deletePost from '../../graphql/mutation/deletePost';
@@ -59,6 +59,7 @@ class HomeScreen extends React.Component<any, any> {
       isCheckMessaheVisible: false,
       isCategoriesModalVisible: false,
       isNotificationModalVisible: false,
+      isOfferAdChoiseModalVisible: false,
       modalPost: null,
       pressed: null,
       refreshing: false,
@@ -199,6 +200,13 @@ class HomeScreen extends React.Component<any, any> {
   hideNotificationModal = () => {
     this.setState({ isNotificationModalVisible: false });
   };
+
+  showOfferAdChoiseModal = () => {
+    this.setState({ isOfferAdChoiseModalVisible: true });
+  };
+  hideOfferAdChoiseModal = () => {
+    this.setState({ isOfferAdChoiseModalVisible: false });
+  };
   deletePost = async () => {
     await this.props.deletePost({
       variables: {
@@ -245,14 +253,20 @@ class HomeScreen extends React.Component<any, any> {
       }
     }
   };
+
   addItem = () => {
     if (this.props.isAuthenticated) {
-      this.props.navigation.navigate('ChoiseScreen', {
-        title: this.props.words.addnewad
-      });
+      if (this.props.user.isstore) {
+        this.showOfferAdChoiseModal();
+      } else {
+        this.props.navigation.navigate('ChoiseScreen', {
+          title: this.props.words.addnewad
+        });
+      }
     } else {
       this.props.navigation.navigate('PhoneScreen', {
-        add: true
+        add: true,
+        origin: 'home'
       });
     }
   };
@@ -360,6 +374,16 @@ class HomeScreen extends React.Component<any, any> {
           isAuthenticated={this.props.isAuthenticated}
           user={this.props.user}
         />
+
+        <OfferAdChoise
+          isOfferAdChoiseModalVisible={this.state.isOfferAdChoiseModalVisible}
+          hideOfferAdChoiseModal={this.hideOfferAdChoiseModal}
+          navigation={this.props.navigation}
+          word={words}
+          isRTL={isRTL}
+          user={this.props.user}
+        />
+
         {this.state.isEditModalVisible && (
           <Edit
             isEditModalVisible={this.state.isEditModalVisible}

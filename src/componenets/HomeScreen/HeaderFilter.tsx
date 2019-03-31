@@ -311,6 +311,29 @@ const HeaderFilter: any = ({
         })}
       </RenderFilter>
     );
+  } else if (categoryId === 14) {
+    const catFilters = [
+      { name: 'city', data: getItems(buckets, 'city') },
+      { name: 'kindId', data: getItems(buckets, 'kindId') },
+      { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
+      { name: 'isnew', data: getItems(buckets, 'isnew') }
+    ];
+    const filters = catFilters.filter((fl: any) => fl.data);
+    return (
+      <RenderFilter isRTL={isRTL} filters={filters}>
+        {filters.map((filter: any) => {
+          return renderSelectRow(
+            words,
+            rest,
+            filter.name,
+            filter.data,
+            addFilter,
+            removeFilter,
+            isRTL
+          );
+        })}
+      </RenderFilter>
+    );
   } else if (categoryId === 19) {
     const catFilters = [
       { name: 'city', data: getItems(buckets, 'city') },
