@@ -42,16 +42,16 @@ export const Choise = ({
           overflow: 'hidden',
           justifyContent: 'center',
           alignItems: 'center',
-          borderWidth: 2,
+          borderWidth: 1,
           backgroundColor: '#fff',
           borderColor: '#7678ED'
         }}
       >
         <View
           style={{
-            width: iconsize - 8,
-            height: iconsize - 8,
-            borderRadius: (iconsize - 8) / 2,
+            width: iconsize - 4,
+            height: iconsize - 4,
+            borderRadius: (iconsize - 4) / 2,
             overflow: 'hidden',
             marginHorizontal: 10
           }}
@@ -61,6 +61,7 @@ export const Choise = ({
               flex: 1,
               width: '100%',
               height: '100%'
+              // tintColor: 'rgba(118, 120, 237, 0.1)'
             }}
             source={icon}
           />

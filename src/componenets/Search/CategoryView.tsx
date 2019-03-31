@@ -7,7 +7,7 @@ class CategoryView extends React.Component<any, any> {
       <ChoiseCategory
         addcategory={this.props.addcategory}
         showSearch={this.props.showSearch}
-        iconsize={44}
+        iconsize={24}
         navigation={this.props.navigation}
       />
     );

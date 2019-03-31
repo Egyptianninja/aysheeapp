@@ -20,24 +20,10 @@ class LoadScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
   };
-  animatedValue: any;
-  timer: any;
   constructor(props: any) {
     super(props);
     this.getCountryToken();
     this.state = {};
-  }
-  componentWillMount() {
-    this.animatedValue = new Animated.Value(1);
-  }
-  componentDidMount() {
-    Animated.timing(this.animatedValue, {
-      toValue: 2,
-      duration: 1000
-    }).start();
-  }
-  componentWillUnmount() {
-    clearTimeout(this.timer);
   }
 
   refreshUserToken = async ({ country, city, lang }: any) => {
@@ -60,13 +46,6 @@ class LoadScreen extends React.Component<any, any> {
   };
 
   render() {
-    const animatedStyle = {
-      transform: [
-        {
-          scale: this.animatedValue
-        }
-      ]
-    };
     return (
       <View
         style={[
@@ -81,7 +60,7 @@ class LoadScreen extends React.Component<any, any> {
         ]}
       >
         <StatusBar translucent={true} barStyle={'light-content'} />
-        <Animated.View style={[{ width: 75, height: 75 }, animatedStyle]}>
+        <Animated.View style={{ width: 100, height: 100 }}>
           <Image
             source={images.namelogowhite}
             style={{ flex: 1, width: undefined, height: undefined }}

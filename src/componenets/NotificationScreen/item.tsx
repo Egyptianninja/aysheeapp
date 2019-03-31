@@ -29,7 +29,7 @@ const Item = (props: any) => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          padding: 10
+          padding: 5
         }}
       >
         {user && <AvatarCircle user={user} size={40} />}

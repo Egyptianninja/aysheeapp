@@ -27,7 +27,6 @@ const ItemViewSearch = (props: any) => {
     <View
       style={{
         flex: 1,
-        flexDirection: 'row',
         marginHorizontal: 10
       }}
     >
@@ -35,19 +34,26 @@ const ItemViewSearch = (props: any) => {
         onPress={() => {
           selectePost(post, word, lang, isRTL);
         }}
-        style={{ flexDirection: 'row' }}
+        style={{ backgroundColor: 'red' }}
       >
-        <View style={styles.interContainer}>
+        <View
+          style={{
+            flex: 1,
+            marginVertical: 5,
+            paddingVertical: 5,
+            borderBottomWidth: 1,
+            borderBottomColor: '#e5e5e5',
+
+            backgroundColor: '#fff',
+            flexDirection: isRTL ? 'row-reverse' : 'row'
+          }}
+        >
           <View
             style={{
               paddingHorizontal: 10
             }}
           >
-            {uri && (
-              <View>
-                <PostImage width={100} height={100} uri={uri} />
-              </View>
-            )}
+            {uri && <PostImage width={100} height={100} uri={uri} />}
 
             {!uri && (
               <View
@@ -67,14 +73,34 @@ const ItemViewSearch = (props: any) => {
             style={{
               flex: 1,
               paddingHorizontal: 10,
-              justifyContent: 'space-around'
+              alignItems: isRTL ? 'flex-end' : 'flex-start'
+              // justifyContent: 'space-around',
             }}
           >
-            <View>
-              <Text style={{ color: '#555', fontSize: 16, fontWeight: 'bold' }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: isRTL ? 'flex-end' : 'flex-start'
+              }}
+            >
+              <Text
+                style={{
+                  color: '#555',
+                  fontSize: 16,
+                  fontWeight: 'bold',
+                  textAlign: isRTL ? 'right' : 'left'
+                }}
+              >
                 {subTitle}
               </Text>
-              <Text style={{ fontSize: 14 }}>{body.substring(0, 55)}</Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  textAlign: isRTL ? 'right' : 'left'
+                }}
+              >
+                {body.substring(0, 55)}
+              </Text>
             </View>
             <View>
               {(price || price === 0) && (
@@ -126,16 +152,7 @@ const ItemViewSearch = (props: any) => {
 };
 
 const styles = StyleSheet.create({
-  interContainer: {
-    flex: 1,
-    marginVertical: 5,
-    paddingVertical: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e5e5',
-
-    backgroundColor: '#fff',
-    flexDirection: 'row'
-  },
+  interContainer: {},
   center: {
     flex: 1,
     justifyContent: 'center',
