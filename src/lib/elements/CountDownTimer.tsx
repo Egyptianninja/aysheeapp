@@ -78,7 +78,7 @@ class CountDownTimer extends React.Component<any, any> {
         >
           <Text
             style={{
-              color: '#fff',
+              color: '#aaa',
               fontSize: size,
               fontWeight: '200'
             }}
@@ -87,7 +87,7 @@ class CountDownTimer extends React.Component<any, any> {
           </Text>
           <Text
             style={{
-              color: '#fff',
+              color: '#aaa',
               fontSize: size,
               fontWeight: '200'
             }}
@@ -96,7 +96,7 @@ class CountDownTimer extends React.Component<any, any> {
           </Text>
           <Text
             style={{
-              color: '#fff',
+              color: '#aaa',
               fontSize: size,
               fontWeight: '200'
             }}

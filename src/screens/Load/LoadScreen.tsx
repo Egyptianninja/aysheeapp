@@ -51,23 +51,18 @@ class LoadScreen extends React.Component<any, any> {
         style={[
           {
             flex: 1,
-            backgroundColor: '#7678ED',
-            width,
-            height,
             justifyContent: 'center',
             alignItems: 'center'
           }
         ]}
       >
-        <StatusBar translucent={true} barStyle={'light-content'} />
-        <Animated.View style={{ width: 100, height: 100 }}>
-          <Image
-            source={images.namelogowhite}
-            style={{ flex: 1, width: undefined, height: undefined }}
-            resizeMode="contain"
-            fadeDuration={0}
-          />
-        </Animated.View>
+        <StatusBar translucent={true} barStyle={'dark-content'} />
+        <Image
+          source={images.load}
+          style={{ flex: 1 }}
+          resizeMode="contain"
+          fadeDuration={0}
+        />
       </View>
     );
   }

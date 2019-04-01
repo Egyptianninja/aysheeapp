@@ -210,11 +210,8 @@ class Drawer extends React.Component<any, any> {
       >
         <View
           style={{
-            width: 150,
-            height: 150
-            // shadowOffset: { width: 3, height: 3 },
-            // shadowColor: '#000',
-            // shadowOpacity: 0.5
+            width: 100,
+            height: 100
           }}
         >
           <Image
@@ -222,7 +219,7 @@ class Drawer extends React.Component<any, any> {
               flex: 1,
               width: '100%',
               height: '100%'
-              // tintColor: '#7678ED'
+              // tintColor: '#636363'
             }}
             source={images.namelogofull}
           />

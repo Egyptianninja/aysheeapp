@@ -13,8 +13,10 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 100,
-        backgroundColor: '#7678ED',
-        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
+        backgroundColor: '#f3f3f3',
+        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd'
       }}
     >
       <TouchableOpacity
@@ -39,7 +41,7 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
             alignItems: 'center'
           }}
         >
-          <Ionicons name="ios-arrow-back" size={30} color="#fff" />
+          <Ionicons name="ios-arrow-back" size={30} color="#636363" />
         </View>
       </TouchableOpacity>
       <View
@@ -53,7 +55,7 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
           style={{
             fontFamily: 'cairo-regular',
             fontSize: 18,
-            color: '#fff'
+            color: '#636363'
           }}
         >
           {title}
@@ -79,7 +81,7 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
             alignItems: 'center'
           }}
         >
-          <Ionicons name="ios-options" size={30} color="#fff" />
+          <Ionicons name="ios-options" size={30} color="#636363" />
         </View>
       </TouchableOpacity>
     </View>

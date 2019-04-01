@@ -30,6 +30,7 @@ import {
   isTablet
 } from '../../../utils';
 import MapModal from '../../../componenets/ProfileScreen/MapModal';
+import { AuthRequire } from '../../../componenets/User/AuthRequire';
 const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 240;
@@ -506,50 +507,10 @@ class MyProfileScreen extends React.Component<any, any> {
       </View>
     );
   };
-  renderAuthRequire = () => {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <TouchableOpacity
-          onPress={() =>
-            this.props.navigation.navigate('PhoneScreen', {
-              origin: 'profile'
-            })
-          }
-          style={{
-            width: 150,
-            height: 40,
-            backgroundColor: '#ddd',
-            borderRadius: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2
-            },
-            shadowOpacity: 0.27,
-            shadowRadius: 3.65,
-
-            elevation: 5
-          }}
-        >
-          <Text style={{ color: '#7678ED', fontSize: 16, fontWeight: 'bold' }}>
-            Login
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   render() {
     if (!this.props.isAuthenticated) {
-      return this.renderAuthRequire();
+      return <AuthRequire navigation={this.props.navigation} />;
     }
 
     const { lang, words, isRTL } = this.props;

@@ -15,6 +15,7 @@ export const images = {
   homeicon: require('../../assets/icons/tab/home.png'),
   homeiconout: require('../../assets/icons/tab/home-out.png'),
   searchicon: require('../../assets/icons/tab/search.png'),
+  searchbig: require('../../assets/icons/main/search-icon.png'),
   searchiconout: require('../../assets/icons/tab/search-out.png'),
   notificationicon: require('../../assets/icons/tab/notifecation.png'),
   notificationiconout: require('../../assets/icons/tab/notifecation-out.png'),

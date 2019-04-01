@@ -4,7 +4,6 @@ import { images } from '../../load';
 const Logo = ({ size = 150 }) => (
   <View
     style={{
-      backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 500

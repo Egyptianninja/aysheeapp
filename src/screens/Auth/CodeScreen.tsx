@@ -181,7 +181,7 @@ class CodeScreen extends React.Component<any, any> {
           style={[
             styles.container,
             {
-              backgroundColor: '#8E90F0'
+              backgroundColor: '#eee'
             }
           ]}
         >
@@ -194,7 +194,7 @@ class CodeScreen extends React.Component<any, any> {
             }}
             onPress={() => this.props.navigation.goBack()}
           >
-            <Ionicons name="ios-arrow-back" size={30} color="#fff" />
+            <Ionicons name="ios-arrow-back" size={30} color="#636363" />
           </TouchableOpacity>
           <View
             style={{
@@ -203,8 +203,8 @@ class CodeScreen extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <WhitLogo size={150} />
-            <Text style={{ fontSize: 20, color: '#fff', fontWeight: '300' }}>
+            <Logo size={150} />
+            <Text style={{ fontSize: 20, color: '#aaa', fontWeight: '300' }}>
               +{this.state.phone}
             </Text>
           </View>
@@ -264,13 +264,7 @@ class CodeScreen extends React.Component<any, any> {
                     <Button
                       background="#8E90F0"
                       disabled={this.state.interval > 0 ? true : false}
-                      style={[
-                        styles.btnStyle,
-                        {
-                          borderWidth: 1,
-                          borderColor: '#fff'
-                        }
-                      ]}
+                      style={styles.btnStyle}
                       textStyle={[styles.btnTextStyle, { color: '#fff' }]}
                       title={words.resend}
                       onPress={this.handleResendCode}
@@ -352,19 +346,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 5,
     marginVertical: 15,
-    color: '#fff'
+    color: '#aaa'
   },
   btnStyle: {
     height: 50,
-    width: 121,
+    width: 125,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 15,
-    borderRadius: 5
+    marginHorizontal: 10,
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
     color: '#7678ED',
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'cairo-regular'
   }
 });

@@ -38,7 +38,15 @@ export default class ImageIcon extends React.Component<any, any> {
   };
 
   render() {
-    const { icon, iconout, size, focused, tintColor, width }: any = this.props;
+    const {
+      icon,
+      iconout,
+      size,
+      focused,
+      tintColor,
+      width,
+      flip
+    }: any = this.props;
     this.scaleStyle = { transform: [{ scale: this.scale }] };
 
     return (
@@ -56,7 +64,8 @@ export default class ImageIcon extends React.Component<any, any> {
           style={[
             { flex: 1, width: '100%', height: '100%' },
             {
-              tintColor: focused ? tintColor : iconout ? '#777' : tintColor
+              tintColor: focused ? tintColor : iconout ? '#777' : tintColor,
+              transform: flip ? [{ rotateY: '180deg' }] : undefined
             }
           ]}
           source={focused ? icon : iconout ? iconout : icon}

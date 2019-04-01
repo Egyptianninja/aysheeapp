@@ -74,7 +74,6 @@ export const renderUser = ({
           borderRadius: 18,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#7678ED',
           flexDirection: ardroid ? 'row-reverse' : 'row'
         }}
       >

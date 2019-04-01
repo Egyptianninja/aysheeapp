@@ -66,8 +66,8 @@ class SearchBox extends React.Component<any, any> {
       <View style={{ flexDirection: 'row', paddingLeft: 5 }}>
         <Animated.View
           style={{
-            backgroundColor: '#fafafa',
-            borderColor: '#aaa',
+            backgroundColor: '#fff',
+            borderColor: '#ddd',
             flexDirection: 'row',
             width: animatedBox,
             height: 32,
@@ -138,7 +138,9 @@ class SearchBox extends React.Component<any, any> {
                 paddingVertical: 10
               }}
             >
-              <Text style={{ color: '#fff', bottom: 2, right: 5 }}>Cancel</Text>
+              <Text style={{ color: '#7678ED', bottom: 2, right: 5 }}>
+                Cancel
+              </Text>
             </TouchableOpacity>
           </Animated.View>
         )}

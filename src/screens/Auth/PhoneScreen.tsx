@@ -9,7 +9,8 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -28,9 +29,8 @@ import {
   smsSent
 } from '../../store/actions/userAtions';
 import { StyleSheet, isIphoneX } from '../../utils';
-import { Logo, WhitLogo } from '../../componenets';
+import { Logo } from '../../componenets';
 
-const { width } = Dimensions.get('window');
 class PhoneScreen extends React.Component<any, any> {
   subs: any;
   state = {
@@ -179,7 +179,7 @@ class PhoneScreen extends React.Component<any, any> {
           style={[
             styles.container,
             {
-              backgroundColor: '#8E90F0'
+              backgroundColor: '#eee'
             }
           ]}
         >
@@ -194,7 +194,7 @@ class PhoneScreen extends React.Component<any, any> {
             }}
             onPress={() => this.props.navigation.goBack()}
           >
-            <Ionicons name="ios-arrow-back" size={30} color="#fff" />
+            <Ionicons name="ios-arrow-back" size={30} color="#636363" />
           </TouchableOpacity>
           <View
             style={{
@@ -203,7 +203,7 @@ class PhoneScreen extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <WhitLogo size={150} />
+            <Logo size={150} />
           </View>
 
           <KeyboardAvoidingView
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginBottom: 10,
     fontFamily: 'cairo-regular',
-    color: '#fff'
+    color: '#aaa'
   },
   btnStyle: {
     height: 50,
@@ -303,11 +303,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     margin: 10,
-    borderRadius: 5
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
     color: '#7678ED',
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });

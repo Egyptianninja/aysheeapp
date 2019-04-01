@@ -21,17 +21,15 @@ class InputCode extends React.PureComponent<any, any> {
     return (
       <View style={[this.props.outerStyle, { alignItems: 'center' }]}>
         <Text style={this.props.labelStyle}>{label}</Text>
-        {error && <ErrorMessage color="#fff">{error}</ErrorMessage>}
+        {error && <ErrorMessage color="#aaa">{error}</ErrorMessage>}
         <View
           style={{
             flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            borderWidth: 1,
-            borderColor: '#ddd',
             marginVertical: 20,
-            borderRadius: 5,
-            backgroundColor: '#7678ED'
+            borderRadius: 25,
+            backgroundColor: '#fff'
           }}
         >
           <TextInput
@@ -44,12 +42,11 @@ class InputCode extends React.PureComponent<any, any> {
                 width: 270,
                 paddingHorizontal: 10,
                 paddingVertical: 5,
-                backgroundColor: '#7678ED',
                 textAlign: 'center',
-                borderRadius: 5,
+                borderRadius: 25,
                 letterSpacing: 1,
                 fontSize: 40,
-                color: '#fff',
+                color: '#636363',
                 fontWeight: '300'
               }
             ]}

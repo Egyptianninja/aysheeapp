@@ -33,10 +33,9 @@ class HomeHeader extends React.Component<any, any> {
           styles.container,
           {
             flexDirection: this.ardroid ? 'row-reverse' : 'row',
-            backgroundColor: '#7678ED',
-            shadowOffset: { width: 3, height: 3 },
-            shadowColor: '#777',
-            shadowOpacity: 0.1
+            backgroundColor: '#f3f3f3',
+            borderBottomWidth: 1,
+            borderBottomColor: '#ddd'
           }
         ]}
       >
@@ -61,15 +60,16 @@ class HomeHeader extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 29,
-                height: 23
+                width: 30,
+                height: 21
               }}
             >
               <Image
                 style={{
                   flex: 1,
                   width: undefined,
-                  height: undefined
+                  height: undefined,
+                  tintColor: '#636363'
                 }}
                 source={mainmenu}
               />
@@ -87,7 +87,8 @@ class HomeHeader extends React.Component<any, any> {
           <View
             style={{
               width: 90,
-              height: 22
+              height: 24,
+              top: 5
             }}
           >
             <Image
@@ -115,7 +116,7 @@ class HomeHeader extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <Ionicons name="ios-add" size={40} color="#fff" />
+            <Ionicons name="ios-add" size={40} color="#636363" />
           </TouchableOpacity>
         </View>
       </View>

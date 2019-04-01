@@ -8,8 +8,9 @@ class SwitchUI extends React.Component<any, any> {
         return { rest: nextProps.rest, original: true, second: false };
       } else if (nextProps.rest[nextProps.itemKind] === false) {
         return { rest: nextProps.rest, original: false, second: true };
+      } else if (!nextProps.rest[nextProps.itemKind]) {
+        return { rest: nextProps.rest, original: false, second: false };
       }
-      return { rest: nextProps.rest, original: false, second: false };
     } else {
       return { ...prevState };
     }

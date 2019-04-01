@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    width: 65,
-    height: 61
+    width: 70,
+    height: 66
   },
   imageView: {
-    width: 65,
-    height: 65
+    width: 70,
+    height: 70
   },
   text: {
     textAlign: 'center',

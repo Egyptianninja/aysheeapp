@@ -105,8 +105,22 @@ class ResultView extends React.Component<any, any> {
           }}
         >
           <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
-            <ImageIcon icon={images.searchicon} size={120} tintColor="#ddd" />
-            <Text style={{ fontSize: 24, color: '#ccc' }}>ishee search</Text>
+            <ImageIcon
+              icon={images.searchbig}
+              size={200}
+              tintColor="#ddd"
+              flip={true}
+            />
+            <Text
+              style={{
+                top: -30,
+                fontSize: 24,
+                color: '#bbb',
+                fontWeight: '200'
+              }}
+            >
+              ishee search
+            </Text>
           </View>
         </ScrollView>
       );

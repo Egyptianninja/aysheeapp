@@ -215,7 +215,6 @@ class CameraScreen extends React.Component<any, any> {
     } else {
       return (
         <View style={{ flex: 1, backgroundColor: '#000' }}>
-          <StatusBar backgroundColor="#000" barStyle="dark-content" />
           <Orientation accuracy={0.8} orientation={this.orientation} />
           <View
             style={{

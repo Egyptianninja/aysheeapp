@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Loading, Noresult, NotificationItem } from '../../componenets';
 import getMyNotifications from '../../graphql/query/getMyNotifications';
 import { getDBNextPosts } from '../../utils';
+import { AuthRequire } from '../../componenets/User/AuthRequire';
 
 class NotificationsScreen extends React.Component<any, any> {
   flatListRef: any;
@@ -63,7 +64,9 @@ class NotificationsScreen extends React.Component<any, any> {
     const { lang, words, isRTL } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        {!this.props.isAuthenticated && this.renderAuthRequire()}
+        {!this.props.isAuthenticated && (
+          <AuthRequire navigation={this.props.navigation} />
+        )}
         {this.props.isAuthenticated && (
           <Query
             query={getMyNotifications}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Image } from 'react-native';
 import { images } from '../../load';
-const WhitLogo = ({ size = 150 }) => (
+const WhitLogo = ({ size = 150, tintColor }: any) => (
   <View
     style={{
       justifyContent: 'center',
@@ -20,7 +20,8 @@ const WhitLogo = ({ size = 150 }) => (
         style={{
           flex: 1,
           width: '100%',
-          height: '100%'
+          height: '100%',
+          tintColor: tintColor ? tintColor : undefined
         }}
         source={images.namelogowhite}
       />

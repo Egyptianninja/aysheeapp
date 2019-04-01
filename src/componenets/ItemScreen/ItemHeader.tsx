@@ -21,7 +21,7 @@ const ItemHeader = ({ title, navigation }: any) => {
           backgroundColor: 'rgba(255, 255, 255, 0.1)'
         }}
       >
-        <Ionicons name="ios-arrow-back" size={30} color="#9C949A" />
+        <Ionicons name="ios-arrow-back" size={30} color="#636363" />
       </TouchableOpacity>
       <View
         style={[

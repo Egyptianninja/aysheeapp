@@ -13,7 +13,7 @@ const Header = ({ navigation, title, backhome }: any) => {
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 100,
-        backgroundColor: '#7678ED',
+        backgroundColor: '#f3f3f3',
         flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
       }}
     >
@@ -40,7 +40,7 @@ const Header = ({ navigation, title, backhome }: any) => {
             alignItems: 'center'
           }}
         >
-          <Ionicons name="ios-arrow-back" size={30} color="#fff" />
+          <Ionicons name="ios-arrow-back" size={30} color="#636363" />
         </View>
       </TouchableOpacity>
       <View
@@ -54,7 +54,7 @@ const Header = ({ navigation, title, backhome }: any) => {
           style={{
             fontFamily: 'cairo-regular',
             fontSize: 18,
-            color: '#fff'
+            color: '#636363'
           }}
         >
           {title}

@@ -26,17 +26,17 @@ class InputPhone extends React.PureComponent<any, any> {
         }}
       >
         <Text style={this.props.labelStyle}>{label}</Text>
-        {error && <ErrorMessage color="#fff">{error}</ErrorMessage>}
+        {error && <ErrorMessage color="#aaa">{error}</ErrorMessage>}
         <View
           style={{
             flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            borderWidth: 1,
-            borderColor: '#ddd',
+            // borderBottomWidth: 2,
+            // borderBottomColor: '#aaa',
             marginVertical: 10,
-            borderRadius: 5,
-            backgroundColor: '#7678ED'
+            borderRadius: 25,
+            backgroundColor: '#fff'
           }}
         >
           <View
@@ -45,16 +45,18 @@ class InputPhone extends React.PureComponent<any, any> {
               width: 68,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: '#6163C2',
-              borderBottomLeftRadius: 5,
-              borderTopLeftRadius: 5,
-              paddingHorizontal: 10
+              backgroundColor: '#A7A9F3',
+              borderBottomLeftRadius: 25,
+              borderTopLeftRadius: 25,
+              paddingHorizontal: 10,
+
+              paddingVertical: 10
             }}
           >
             <Text
               style={{
                 fontSize: 20,
-                color: '#A7A9F3'
+                color: '#ddd'
               }}
             >
               +{countryCode}
@@ -75,7 +77,7 @@ class InputPhone extends React.PureComponent<any, any> {
                 textAlign: 'left',
                 letterSpacing: 1,
                 fontSize: 20,
-                color: '#fff'
+                color: '#636363'
               }
             ]}
             {...rest}

@@ -26,12 +26,14 @@ class SearchHeader extends React.Component<any, any> {
       <View
         style={{
           flexDirection: 'row',
-          backgroundColor: '#7678ED',
+          backgroundColor: '#f3f3f3',
           paddingTop: Constants.statusBarHeight,
           height: Constants.statusBarHeight + 40,
           justifyContent: 'center',
           alignItems: 'center',
-          zIndex: 100
+          zIndex: 100,
+          borderBottomWidth: 1,
+          borderBottomColor: '#ddd'
         }}
       >
         <View style={{ flex: 1, paddingLeft: 5 }}>

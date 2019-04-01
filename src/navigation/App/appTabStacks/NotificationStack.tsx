@@ -53,7 +53,7 @@ export const NotificationStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#7678ED',
+        backgroundColor: '#f3f3f3',
         height: 40
       },
       headerTintColor: '#fff',

@@ -22,8 +22,11 @@ import {
   getTimeLineBuckets,
   Message,
   readyPosts,
-  isTablet
+  isTablet,
+  rtlos
 } from '../../utils';
+import FilterSelect from '../../componenets/HomeScreen/filters/FilterSelect';
+import SortView from '../../componenets/category/SortView';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -37,7 +40,7 @@ class CategoryScreen extends React.Component<any, any> {
   offsetValue = 0;
   scrollValue = 0;
   NAVBAR_HEIGHT = 96;
-
+  filter = true;
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
@@ -66,6 +69,10 @@ class CategoryScreen extends React.Component<any, any> {
 
   showFilterModal = () => {
     this.setState({ isFilterModalVisible: true });
+    // const keys = Object.keys(this.state.rest);
+    // if (this.filter || keys.length > 1) {
+    //   this.setState({ isFilterModalVisible: true });
+    // }
   };
   hideFilterModal = () => {
     this.setState({ isFilterModalVisible: false });
@@ -174,6 +181,14 @@ class CategoryScreen extends React.Component<any, any> {
     this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
   };
 
+  getSortBucket = () => {
+    return {
+      name: 'sortType',
+      buckets: this.props.sort,
+      label: this.props.words.sort
+    };
+  };
+
   render() {
     const { rest } = this.state;
     const { lang, words, isRTL } = this.props;
@@ -183,7 +198,8 @@ class CategoryScreen extends React.Component<any, any> {
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
-
+    const rtlOS = rtlos();
+    const sortData = this.getSortBucket();
     return (
       <View style={{ flex: 1 }}>
         <Header
@@ -204,6 +220,7 @@ class CategoryScreen extends React.Component<any, any> {
           rest={this.state.rest}
           category={category}
         />
+
         <Menu
           post={this.state.modalPost}
           favoritePost={this.props.favoritePost}
@@ -274,11 +291,13 @@ class CategoryScreen extends React.Component<any, any> {
               return <HomeLoading categoryId={rest.categoryId} />;
             }
             if (error || !data.getTimeLine.posts) {
+              this.filter = false;
               return <Noresult title="error" />;
             }
             const postsQuery = data.getTimeLine.posts;
 
             if (postsQuery && postsQuery.length === 0) {
+              this.filter = false;
               return <Noresult isRTL={isRTL} title={words.noresults} />;
             }
             const posts = readyPosts(
@@ -296,7 +315,7 @@ class CategoryScreen extends React.Component<any, any> {
                   }}
                   scrollEventThrottle={16}
                   contentContainerStyle={{
-                    marginTop: 8,
+                    // marginTop: 8,
                     paddingBottom: 30
                   }}
                   onScroll={Animated.event(
@@ -328,6 +347,19 @@ class CategoryScreen extends React.Component<any, any> {
                     />
                   )}
                   getHeightForItem={({ item }: any) => item.height}
+                  ListHeaderComponent={() => (
+                    <SortView
+                      isRTL={isRTL}
+                      rtlOS={rtlOS}
+                      data={sortData}
+                      sort={true}
+                      itemKind="sortType"
+                      addFilter={this.addFilter}
+                      removeFilter={this.removeFilter}
+                      rest={rest}
+                      words={words}
+                    />
+                  )}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}
                   onEndReachedThreshold={0.5}
@@ -346,6 +378,7 @@ class CategoryScreen extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   isRTL: state.glob.isRTL,
+  sort: state.glob.language.sort,
   words: state.glob.language.words,
   isAuthenticated: state.user.isAuthenticated,
   user: state.user.user

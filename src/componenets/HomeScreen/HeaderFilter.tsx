@@ -280,8 +280,6 @@ const HeaderFilter: any = ({
       </RenderFilter>
     );
   } else if (categoryId === 2 || categoryId === 14) {
-    const kindId = rest.kindId;
-
     return (
       <RenderFilter isRTL={isRTL}>
         <View

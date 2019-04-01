@@ -345,8 +345,6 @@ class HomeScreen extends React.Component<any, any> {
     });
     return (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
-        <StatusBar translucent={true} barStyle={'light-content'} />
-
         {this.state.isNotificationModalVisible && (
           <NotificationModal
             isNotificationModalVisible={this.state.isNotificationModalVisible}

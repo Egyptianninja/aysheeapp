@@ -27,7 +27,7 @@ export default class FilterSelect extends React.Component<any, any> {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
   componentWillMount() {
-    if (!this.state.lable) {
+    if (!this.state.lable && this.props.data) {
       this.setState({ label: this.props.data.label });
     }
   }
