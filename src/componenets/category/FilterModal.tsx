@@ -106,24 +106,24 @@ class FilterModal extends React.Component<any, any> {
           <View>
             <TouchableOpacity
               style={{
-                top: -4,
-                padding: 8,
                 alignItems: 'center',
-                alignSelf: 'flex-start',
+                justifyContent: 'center',
+                alignSelf: 'center',
                 width: 100,
-                flexDirection: 'row'
+                flexDirection: 'row',
+                paddingTop: 10
               }}
               onPress={() => this.removeAllCategoryFilters()}
             >
               <Ionicons
-                name="ios-close-circle-outline"
+                name="ios-remove-circle-outline"
                 size={26}
                 color="#aaa"
               />
               <Text
                 style={{
                   color: '#aaa',
-                  fontSize: 14,
+                  fontSize: 16,
                   paddingHorizontal: 5
                 }}
               >

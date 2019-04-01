@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { Dimensions, Platform, ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import FilterSelect from './filters/FilterSelect';
 import PickerUI from '../../lib/ios/Picker';
 import SwitchUI from '../../lib/ios/Switch';
-
-const { width } = Dimensions.get('window');
 
 const HeaderFilter: any = ({
   rest: { categoryId },
@@ -98,18 +96,13 @@ const HeaderFilter: any = ({
     const brandId = rest.brandId;
     const catFilters = [
       { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') },
-      { name: 'brandId', data: getItems(buckets, 'brandId') },
-      { name: 'subBrandId', data: getItems(buckets, 'subBrandId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'issale', data: getItems(buckets, 'issale') },
-      { name: 'year', data: getItems(buckets, 'year') }
+      { name: 'kindId', data: getItems(buckets, 'kindId') }
     ];
     const filters = catFilters.filter((fl: any) => fl.data);
 
     return (
       <RenderFilter isRTL={isRTL} filters={filters}>
-        {/* <View
+        <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -117,39 +110,7 @@ const HeaderFilter: any = ({
             padding: 10
           }}
         >
-          {renderPicker({
-            words,
-            rest,
-            itemKind: 'city',
-            bucket: getItems(buckets, 'city'),
-            addFilter,
-            removeFilter,
-            isRTL
-          })}
-          {renderPicker({
-            words,
-            rest,
-            itemKind: 'kindId',
-            bucket: getItems(buckets, 'kindId'),
-            addFilter,
-            removeFilter,
-            isRTL
-          })}
-        </View> */}
-        {filters.map((filter: any) => {
-          if (filter.name === 'subBrandId') {
-            return renderSelectRow(
-              words,
-              rest,
-              filter.name,
-              filter.data,
-              addFilter,
-              removeFilter,
-              isRTL,
-              !(brandId || brandId === 0),
-              { id: brandId, label: words.subBrand, name: 'subBrandId' }
-            );
-          } else {
+          {filters.map((filter: any) => {
             return renderSelectRow(
               words,
               rest,
@@ -159,35 +120,67 @@ const HeaderFilter: any = ({
               removeFilter,
               isRTL
             );
-          }
-        })}
-        {/* {renderSwitch({
-          words,
-          rest,
-          itemKind: 'isnew',
-          bucket: getItems(buckets, 'isnew'),
-          addFilter,
-          removeFilter,
-          isRTL,
-          originalTitle: 'New',
-          seconTitle: 'Used'
-        })}
-        {renderSwitch({
-          words,
-          rest,
-          itemKind: 'issale',
-          bucket: getItems(buckets, 'issale'),
-          addFilter,
-          removeFilter,
-          isRTL,
-          originalTitle: 'For Sale',
-          seconTitle: 'For Rent'
-        })}
+          })}
+        </View>
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
+            paddingHorizontal: 10,
+            paddingBottom: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'brandId',
+            getItems(buckets, 'brandId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+          {renderSelectRow(
+            words,
+            rest,
+            'subBrandId',
+            getItems(buckets, 'subBrandId'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            !(brandId || brandId === 0),
+            { id: brandId, label: words.subBrand, name: 'subBrandId' }
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'issale',
+            bucket: getItems(buckets, 'issale'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'For Sale',
+            seconTitle: 'For Rent'
+          })}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
             padding: 10
           }}
         >
@@ -200,180 +193,300 @@ const HeaderFilter: any = ({
             removeFilter,
             isRTL
           })}
-        </View> */}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 15) {
     const brandId = rest.brandId;
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'brandId', data: getItems(buckets, 'brandId') },
-      { name: 'subBrandId', data: getItems(buckets, 'subBrandId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'year', data: getItems(buckets, 'year') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
-
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          if (filter.name === 'subBrandId') {
-            return renderSelectRow(
-              words,
-              rest,
-              filter.name,
-              filter.data,
-              addFilter,
-              removeFilter,
-              isRTL,
-              !(brandId || brandId === 0),
-              { id: brandId, label: words.subBrand, name: 'subBrandId' }
-            );
-          } else {
-            return renderSelectRow(
-              words,
-              rest,
-              filter.name,
-              filter.data,
-              addFilter,
-              removeFilter,
-              isRTL
-            );
-          }
-        })}
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'city',
+            getItems(buckets, 'city'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 10,
+            paddingBottom: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'brandId',
+            getItems(buckets, 'brandId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+          {renderSelectRow(
+            words,
+            rest,
+            'subBrandId',
+            getItems(buckets, 'subBrandId'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            !(brandId || brandId === 0),
+            { id: brandId, label: words.subBrand, name: 'subBrandId' }
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+            padding: 10
+          }}
+        >
+          {renderPicker({
+            words,
+            rest,
+            itemKind: 'year',
+            bucket: getItems(buckets, 'year'),
+            addFilter,
+            removeFilter,
+            isRTL
+          })}
+        </View>
       </RenderFilter>
     );
-  } else if (categoryId === 2) {
+  } else if (categoryId === 2 || categoryId === 14) {
     const kindId = rest.kindId;
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') },
-      { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
 
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          if (filter.name === 'eBrandId') {
-            return renderSelectRow(
-              words,
-              rest,
-              filter.name,
-              filter.data,
-              addFilter,
-              removeFilter,
-              isRTL,
-              !(kindId || kindId === 0),
-              { id: kindId, label: words.brand, name: 'eBrandId' }
-            );
-          } else {
-            return renderSelectRow(
-              words,
-              rest,
-              filter.name,
-              filter.data,
-              addFilter,
-              removeFilter,
-              isRTL
-            );
-          }
-        })}
-      </RenderFilter>
-    );
-  } else if (
-    categoryId === 3 ||
-    categoryId === 7 ||
-    categoryId === 8 ||
-    categoryId === 14
-  ) {
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
-    return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'city',
+            getItems(buckets, 'city'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
-      </RenderFilter>
-    );
-  } else if (categoryId === 14) {
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') },
-      { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
-    return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 10,
+            paddingBottom: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'kindId',
+            getItems(buckets, 'kindId'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
+          )}
+          {renderSelectRow(
+            words,
+            rest,
+            'eBrandId',
+            getItems(buckets, 'eBrandId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+        </View>
+      </RenderFilter>
+    );
+  } else if (categoryId === 3 || categoryId === 7 || categoryId === 8) {
+    return (
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'city',
+            getItems(buckets, 'city'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+            paddingBottom: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'kindId',
+            getItems(buckets, 'kindId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 19) {
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'issale', data: getItems(buckets, 'issale') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'city',
+            getItems(buckets, 'city'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'issale',
+            bucket: getItems(buckets, 'issale'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'For Sale',
+            seconTitle: 'For Rent'
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 9) {
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'isservicereq', data: getItems(buckets, 'isservicereq') },
-      { name: 'serviceId', data: getItems(buckets, 'serviceId') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'city',
+            getItems(buckets, 'city'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'serviceId',
+            getItems(buckets, 'serviceId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isservicereq',
+            bucket: getItems(buckets, 'isservicereq'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'Request Service',
+            seconTitle: 'Offer Service'
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 17 || categoryId === 18) {
@@ -384,17 +497,24 @@ const HeaderFilter: any = ({
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
       <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
-            words,
-            rest,
-            filter.name,
-            filter.data,
-            addFilter,
-            removeFilter,
-            isRTL
-          );
-        })}
+        <View
+          style={{
+            // flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {filters.map((filter: any) => {
+            return renderSelectRow(
+              words,
+              rest,
+              filter.name,
+              filter.data,
+              addFilter,
+              removeFilter,
+              isRTL
+            );
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (
@@ -404,71 +524,172 @@ const HeaderFilter: any = ({
     categoryId === 12 ||
     categoryId === 16
   ) {
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'issale', data: getItems(buckets, 'issale') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'city',
+            getItems(buckets, 'city'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+            paddingBottom: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'kindId',
+            getItems(buckets, 'kindId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'issale',
+            bucket: getItems(buckets, 'issale'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'For Sale',
+            seconTitle: 'For Rent'
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 5) {
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'isjobreq', data: getItems(buckets, 'isjobreq') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'city',
+            getItems(buckets, 'city'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isjobreq',
+            bucket: getItems(buckets, 'isjobreq'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'Request',
+            seconTitle: 'Offer'
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 6) {
-    const catFilters = [
-      { name: 'city', data: getItems(buckets, 'city') },
-      { name: 'kindId', data: getItems(buckets, 'kindId') },
-      { name: 'eBrandId', data: getItems(buckets, 'eBrandId') },
-      { name: 'isnew', data: getItems(buckets, 'isnew') },
-      { name: 'issale', data: getItems(buckets, 'issale') }
-    ];
-    const filters = catFilters.filter((fl: any) => fl.data);
     return (
-      <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'city',
+            getItems(buckets, 'city'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 10,
+            paddingBottom: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'kindId',
+            getItems(buckets, 'kindId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+          {renderSelectRow(
+            words,
+            rest,
+            'eBrandId',
+            getItems(buckets, 'eBrandId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'issale',
+            bucket: getItems(buckets, 'issale'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'For Sale',
+            seconTitle: 'For Rent'
+          })}
+        </View>
       </RenderFilter>
     );
   } else if (categoryId === 13) {
@@ -480,17 +701,51 @@ const HeaderFilter: any = ({
     const filters = catFilters.filter((fl: any) => fl.data);
     return (
       <RenderFilter isRTL={isRTL} filters={filters}>
-        {filters.map((filter: any) => {
-          return renderSelectRow(
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
             words,
             rest,
-            filter.name,
-            filter.data,
+            'city',
+            getItems(buckets, 'city'),
             addFilter,
             removeFilter,
             isRTL
-          );
-        })}
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'kindId',
+            getItems(buckets, 'kindId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+        </View>
       </RenderFilter>
     );
   } else {

@@ -109,6 +109,9 @@ export default class FilterSelect extends React.Component<any, any> {
 
   render() {
     let data = this.props.data;
+    if (!data || data.buckets.length === 0) {
+      return null;
+    }
     if (this.props.pid) {
       if (this.props.pid.id || this.props.pid.id === 0) {
         const { id, label, name } = this.props.pid;

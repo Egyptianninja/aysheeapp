@@ -11,6 +11,10 @@ const PickerUI = ({
   height = 80,
   innerStyle
 }: any) => {
+  if (!data || data.buckets.length === 0) {
+    return null;
+  }
+
   const allItem = { id: '-1', name: data.label };
   const newdata = [allItem, ...data.buckets];
 
