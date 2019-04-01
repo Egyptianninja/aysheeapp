@@ -64,7 +64,7 @@ class CategoryScreen extends React.Component<any, any> {
     this.setState({ rest: { categoryId: category.id } });
   }
 
-  showFilterModal = (post: any) => {
+  showFilterModal = () => {
     this.setState({ isFilterModalVisible: true });
   };
   hideFilterModal = () => {
@@ -191,6 +191,7 @@ class CategoryScreen extends React.Component<any, any> {
           title={this.props.navigation.getParam('item').name}
           showFilterModal={this.showFilterModal}
         />
+
         <FilterModal
           showFilterModal={this.showFilterModal}
           hideFilterModal={this.hideFilterModal}
@@ -326,7 +327,6 @@ class CategoryScreen extends React.Component<any, any> {
                       lang={lang}
                     />
                   )}
-                  // ListHeaderComponent={() => <Swiper />}
                   getHeightForItem={({ item }: any) => item.height}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}

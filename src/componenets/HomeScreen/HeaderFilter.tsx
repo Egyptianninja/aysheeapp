@@ -343,7 +343,7 @@ const HeaderFilter: any = ({
         </View>
       </RenderFilter>
     );
-  } else if (categoryId === 3 || categoryId === 7 || categoryId === 8) {
+  } else if (categoryId === 3 || categoryId === 7) {
     return (
       <RenderFilter isRTL={isRTL}>
         <View
@@ -378,6 +378,70 @@ const HeaderFilter: any = ({
             removeFilter,
             isRTL
           )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isnew',
+            bucket: getItems(buckets, 'isnew'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'New',
+            seconTitle: 'Used'
+          })}
+        </View>
+      </RenderFilter>
+    );
+  } else if (categoryId === 8) {
+    return (
+      <RenderFilter isRTL={isRTL}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'city',
+            getItems(buckets, 'city'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+            paddingBottom: 10
+          }}
+        >
+          {renderSelectRow(
+            words,
+            rest,
+            'kindId',
+            getItems(buckets, 'kindId'),
+            addFilter,
+            removeFilter,
+            isRTL
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 10 }}>
+          {renderSwitch({
+            words,
+            rest,
+            itemKind: 'isforman',
+            bucket: getItems(buckets, 'isforman'),
+            addFilter,
+            removeFilter,
+            isRTL,
+            originalTitle: 'Man',
+            seconTitle: 'Woman'
+          })}
         </View>
         <View style={{ paddingHorizontal: 10 }}>
           {renderSwitch({
