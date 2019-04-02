@@ -21,7 +21,7 @@ class InputCode extends React.PureComponent<any, any> {
     return (
       <View style={[this.props.outerStyle, { alignItems: 'center' }]}>
         <Text style={this.props.labelStyle}>{label}</Text>
-        {error && <ErrorMessage color="#aaa">{error}</ErrorMessage>}
+        {error && <ErrorMessage color="#E85255">{error}</ErrorMessage>}
         <View
           style={{
             flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',

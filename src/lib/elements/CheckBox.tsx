@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Platform } from 'expo-core';
+import { Ionicons } from '@expo/vector-icons';
 
 const CheckBox = (props: any) => {
   const {
@@ -26,7 +27,7 @@ const CheckBox = (props: any) => {
         props.onChange(name, !value);
       }}
     >
-      <View
+      {/* <View
         style={[
           styles.border,
           {
@@ -48,7 +49,15 @@ const CheckBox = (props: any) => {
             }}
           />
         )}
-      </View>
+      </View> */}
+
+      {!selected && (
+        <Ionicons name="ios-radio-button-off" size={30} color="#aaa" />
+      )}
+      {selected && (
+        <Ionicons name="ios-checkmark-circle" size={30} color="#7678ED" />
+      )}
+
       <View>
         <Text
           style={{

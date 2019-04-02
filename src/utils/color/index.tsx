@@ -9,7 +9,7 @@ import {
 import { Platform } from 'expo-core';
 
 const { width } = Dimensions.get('window');
-const cube = width / 8;
+const cube = width / 10;
 
 export default class ColorPicker extends React.Component<any, any> {
   static getContrastColor(hex: any) {
@@ -94,7 +94,8 @@ export default class ColorPicker extends React.Component<any, any> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingHorizontal: 30
   },
   titleStyles: {
     color: 'black'

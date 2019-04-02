@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Animated } from 'react-native';
+import { Image, Animated, View } from 'react-native';
 
 export default class ImageIcon extends React.Component<any, any> {
   scaleStyle: any;
@@ -45,7 +45,8 @@ export default class ImageIcon extends React.Component<any, any> {
       focused,
       tintColor,
       width,
-      flip
+      flip,
+      notification
     }: any = this.props;
     this.scaleStyle = { transform: [{ scale: this.scale }] };
 
@@ -70,6 +71,19 @@ export default class ImageIcon extends React.Component<any, any> {
           ]}
           source={focused ? icon : iconout ? iconout : icon}
         />
+        {notification && (
+          <View
+            style={{
+              width: 15,
+              height: 15,
+              borderRadius: 7.5,
+              backgroundColor: '#FBBC93',
+              position: 'absolute',
+              right: 0,
+              top: 0
+            }}
+          />
+        )}
       </Animated.View>
     );
   }

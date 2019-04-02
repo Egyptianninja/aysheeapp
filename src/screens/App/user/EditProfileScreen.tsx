@@ -4,7 +4,6 @@ import * as React from 'react';
 import { graphql } from 'react-apollo';
 import {
   Dimensions,
-  Image,
   KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
@@ -166,7 +165,7 @@ class EditProfileScreen extends React.Component<any, any> {
       const { data } = res.data.updateProfile;
       await this.props.updateUser(data);
       this.updateProgressBar(1 / 3);
-      this.showMessage({ seconds: 2, screen: 'ProfileScreen' });
+      this.showMessage({ seconds: 2, screen: 'MyProfileScreen' });
     }
     if (!res.data.updateProfile.ok) {
       bag.setErrors({ name: res.data.updateProfile.error });
@@ -190,7 +189,10 @@ class EditProfileScreen extends React.Component<any, any> {
           width={width}
           height={100}
         />
-        <ScrollView keyboardShouldPersistTaps="handled">
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          style={{ backgroundColor: '#eee' }}
+        >
           <View style={styles.container}>
             <Formik
               initialValues={{
@@ -219,7 +221,7 @@ class EditProfileScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
-                  <View style={[styles.container, { zIndex: 10 }]}>
+                  <View>
                     <TouchableOpacity
                       style={{
                         padding: 20
@@ -402,6 +404,7 @@ class EditProfileScreen extends React.Component<any, any> {
                           selected={values.location}
                         />
                       </Group>
+
                       {values.location && !this.state.location && (
                         <LoadingTiny />
                       )}
@@ -415,7 +418,7 @@ class EditProfileScreen extends React.Component<any, any> {
                   )}
                   <Button
                     isRTL={isRTL}
-                    background="#7678ED"
+                    background="#fff"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.save}
@@ -431,7 +434,7 @@ class EditProfileScreen extends React.Component<any, any> {
                       style={{
                         position: 'relative',
                         left: 65,
-                        bottom: 65
+                        bottom: 50
                       }}
                     >
                       <Progress.Circle
@@ -447,7 +450,6 @@ class EditProfileScreen extends React.Component<any, any> {
               )}
             />
           </View>
-          <View style={{ height: 60 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );
@@ -457,9 +459,10 @@ class EditProfileScreen extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 30
   },
   button: {
     marginTop: 20,
@@ -471,31 +474,42 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 40,
-    paddingHorizontal: 10,
+    width: width - 60,
+
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
     writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5
+    borderRadius: 20
   },
   labelStyle: {
-    fontSize: 18,
-    padding: 5
+    fontSize: 14,
+    padding: 5,
+    color: '#777',
+    paddingHorizontal: 15
   },
   btnStyle: {
     marginTop: 30,
-    height: 60,
-    width: width - 80,
+    height: 50,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
-    borderRadius: 5
+    margin: 10,
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
-    color: '#fff',
-    fontSize: 20,
+    color: '#7678ED',
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });

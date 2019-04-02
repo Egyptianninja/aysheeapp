@@ -73,7 +73,7 @@ class UserLocation extends React.Component<any, any> {
             style={{
               alignSelf: 'stretch',
               height: 200,
-              width: this.props.width - 40
+              width: this.props.width - 60
             }}
             showsUserLocation={true}
             userLocationAnnotationTitle="Ad Location"
@@ -88,13 +88,13 @@ class UserLocation extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
     marginTop: 10,
-    borderWidth: 1,
-    borderColor: '#eee',
-    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#fff',
+    // borderRadius: 5,
     overflow: 'hidden'
   }
 });

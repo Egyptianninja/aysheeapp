@@ -26,14 +26,12 @@ class InputPhone extends React.PureComponent<any, any> {
         }}
       >
         <Text style={this.props.labelStyle}>{label}</Text>
-        {error && <ErrorMessage color="#aaa">{error}</ErrorMessage>}
+        {error && <ErrorMessage color="#E85255">{error}</ErrorMessage>}
         <View
           style={{
             flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            // borderBottomWidth: 2,
-            // borderBottomColor: '#aaa',
             marginVertical: 10,
             borderRadius: 25,
             backgroundColor: '#fff'
@@ -56,7 +54,7 @@ class InputPhone extends React.PureComponent<any, any> {
             <Text
               style={{
                 fontSize: 20,
-                color: '#ddd'
+                color: '#fff'
               }}
             >
               +{countryCode}
@@ -65,8 +63,8 @@ class InputPhone extends React.PureComponent<any, any> {
 
           <TextInput
             onChangeText={this.handleChange}
-            // placeholder="1234567890"
-            // placeholderTextColor="#8E90F0"
+            placeholder="1234567890"
+            placeholderTextColor="#ddd"
             onBlur={this.handleTouch}
             selectionColor={'#fff'}
             // autoFocus

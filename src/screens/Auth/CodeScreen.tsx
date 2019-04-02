@@ -203,8 +203,8 @@ class CodeScreen extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <Logo size={150} />
-            <Text style={{ fontSize: 20, color: '#aaa', fontWeight: '300' }}>
+            <Logo size={120} />
+            <Text style={{ fontSize: 20, color: '#636363', fontWeight: '300' }}>
               +{this.state.phone}
             </Text>
           </View>
@@ -262,10 +262,10 @@ class CodeScreen extends React.Component<any, any> {
                       loading={isSubmitting}
                     />
                     <Button
-                      background="#8E90F0"
+                      background="#fff"
                       disabled={this.state.interval > 0 ? true : false}
                       style={styles.btnStyle}
-                      textStyle={[styles.btnTextStyle, { color: '#fff' }]}
+                      textStyle={[styles.btnTextStyle, { color: '#636363' }]}
                       title={words.resend}
                       onPress={this.handleResendCode}
                     />
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 5,
     marginVertical: 15,
-    color: '#aaa'
+    color: '#777'
   },
   btnStyle: {
     height: 50,
@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
   },
   btnTextStyle: {
     color: '#7678ED',
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'cairo-regular'
   }
 });

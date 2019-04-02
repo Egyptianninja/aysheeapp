@@ -6,7 +6,6 @@ import { graphql, Query } from 'react-apollo';
 import { Animated, Dimensions, StatusBar, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
-import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
 import { Edit, Menu, Report, OfferAdChoise } from '../../componenets/Menu';
 import NotificationModal from '../../componenets/NotificationScreen/NotificationModal';
@@ -26,10 +25,8 @@ import {
   Message,
   readyPosts,
   registerForPushNotificationsAsync,
-  isTablet,
-  isIphoneX
+  isTablet
 } from '../../utils';
-// import BottomDrawer from '../../componenets/HomeScreen/HomeDrawer';
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
 class HomeScreen extends React.Component<any, any> {
@@ -44,6 +41,7 @@ class HomeScreen extends React.Component<any, any> {
   scrollValue = 0;
   NAVBAR_HEIGHT = 96;
   TAB_BAR_HEIGHT = 49;
+  subs: any;
 
   constructor(props: any) {
     super(props);
@@ -86,20 +84,28 @@ class HomeScreen extends React.Component<any, any> {
   }
 
   async componentDidMount() {
-    if (!this.props.permissions.NOTIFICATIONS) {
-      if (this.props.isAuthenticated) {
-        const pushToken = await registerForPushNotificationsAsync();
-        await this.setState({ pushToken });
-      }
-    }
-    if (this.state.pushToken) {
-      await this.props.notificationSub({
-        variables: {
-          userId: this.props.user._id,
-          pushToken: this.state.pushToken
+    this.subs = [
+      this.props.navigation.addListener('didFocus', async () => {
+        if (!this.props.permissions.NOTIFICATIONS) {
+          if (this.props.isAuthenticated) {
+            const pushToken = await registerForPushNotificationsAsync();
+            await this.setState({ pushToken });
+          }
         }
-      });
-    }
+        if (this.state.pushToken) {
+          await this.props.notificationSub({
+            variables: {
+              userId: this.props.user._id,
+              pushToken: this.state.pushToken
+            }
+          });
+        }
+      }),
+      this.props.navigation.addListener('willBlur', () => {
+        //
+      })
+    ];
+
     this.state.scrollAnim.addListener(({ value }: any) => {
       const diff = value - this.scrollValue;
       this.scrollValue = value;
@@ -122,6 +128,7 @@ class HomeScreen extends React.Component<any, any> {
   componentWillUnmount() {
     this.state.scrollAnim.removeAllListeners();
     this.state.offsetAnim.removeAllListeners();
+    this.subs.forEach((sub: any) => sub.remove());
   }
 
   _onScrollEndDrag = () => {

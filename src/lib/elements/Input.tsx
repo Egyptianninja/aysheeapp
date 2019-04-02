@@ -45,8 +45,8 @@ class Input extends React.PureComponent<any, any> {
             this.props.innerStyle,
             {
               textAlign: this.props.rtl ? 'right' : 'left',
-              backgroundColor: color ? color : undefined,
-              color: color ? '#fff' : undefined
+              backgroundColor: color ? color : '#fff',
+              color: color ? '#fff' : '#636363'
             }
           ]}
           {...rest}

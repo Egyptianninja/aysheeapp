@@ -277,7 +277,7 @@ class MyProfileScreen extends React.Component<any, any> {
                   marginTop: 5,
                   borderColor: '#ddd',
                   borderWidth: 1,
-                  borderRadius: 5,
+                  borderRadius: 15,
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'space-around'

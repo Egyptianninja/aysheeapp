@@ -18,10 +18,10 @@ export const registerForPushNotificationsAsync = async () => {
       return false;
     }
   }
-  const pushToken = await Notifications.getExpoPushTokenAsync();
-  store.dispatch(addPushToken(pushToken));
-  store.dispatch(addPermission('NOTIFICATIONS'));
-  return pushToken;
+  // const pushToken = await Notifications.getExpoPushTokenAsync();
+  // store.dispatch(addPushToken(pushToken));
+  // store.dispatch(addPermission('NOTIFICATIONS'));
+  // return pushToken;
 };
 export const getPushToken = async () => {
   return Notifications.getExpoPushTokenAsync();

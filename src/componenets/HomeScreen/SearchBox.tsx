@@ -71,7 +71,7 @@ class SearchBox extends React.Component<any, any> {
             flexDirection: 'row',
             width: animatedBox,
             height: 32,
-            borderRadius: 10,
+            borderRadius: 16,
             paddingLeft: 15,
             borderWidth: 1,
             opacity: 0.8,

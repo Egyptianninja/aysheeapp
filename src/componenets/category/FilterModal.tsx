@@ -91,7 +91,7 @@ class FilterModal extends React.Component<any, any> {
       >
         <View
           style={{
-            backgroundColor: 'rgba(255, 255, 255, 1)',
+            backgroundColor: '#f3f3f3',
             position: 'absolute',
             right: 0,
             top: Constants.statusBarHeight + 40,
@@ -108,9 +108,9 @@ class FilterModal extends React.Component<any, any> {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                alignSelf: 'center',
+                alignSelf: 'flex-end',
                 width: 100,
-                flexDirection: 'row',
+                flexDirection: 'row-reverse',
                 paddingTop: 10
               }}
               onPress={() => this.removeAllCategoryFilters()}
@@ -118,11 +118,11 @@ class FilterModal extends React.Component<any, any> {
               <Ionicons
                 name="ios-remove-circle-outline"
                 size={26}
-                color="#aaa"
+                color="#8E90F0"
               />
               <Text
                 style={{
-                  color: '#aaa',
+                  color: '#8E90F0',
                   fontSize: 16,
                   paddingHorizontal: 5
                 }}
@@ -148,40 +148,48 @@ class FilterModal extends React.Component<any, any> {
           >
             <TouchableOpacity
               style={{
-                padding: 10,
-                paddingHorizontal: 20,
-                width: 100,
-                borderRadius: 10,
-                backgroundColor: '#666',
-                alignItems: 'center',
+                height: 40,
+                width: 125,
+                backgroundColor: '#fff',
                 justifyContent: 'center',
-                alignSelf: 'center',
+                alignItems: 'center',
                 marginTop: 30,
-                shadowOffset: { width: 2, height: 2 },
-                shadowColor: '#666',
-                shadowOpacity: 0.25
+                marginHorizontal: 10,
+                borderRadius: 25,
+                shadowColor: '#999',
+                shadowOffset: {
+                  width: 0,
+                  height: 5
+                },
+                shadowOpacity: 0.3,
+                shadowRadius: 5,
+                elevation: 5
               }}
               onPress={() => {
                 this.initRest();
                 this.props.hideFilterModal();
               }}
             >
-              <Text style={{ color: '#fff', fontSize: 16 }}>Cancel</Text>
+              <Text style={{ color: '#636363', fontSize: 16 }}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
-                padding: 10,
-                paddingHorizontal: 20,
-                width: 100,
-                borderRadius: 10,
+                height: 40,
+                width: 125,
                 backgroundColor: '#7678ED',
-                alignItems: 'center',
                 justifyContent: 'center',
-                alignSelf: 'center',
+                alignItems: 'center',
                 marginTop: 30,
-                shadowOffset: { width: 2, height: 2 },
-                shadowColor: '#666',
-                shadowOpacity: 0.25
+                marginHorizontal: 10,
+                borderRadius: 25,
+                shadowColor: '#999',
+                shadowOffset: {
+                  width: 0,
+                  height: 5
+                },
+                shadowOpacity: 0.3,
+                shadowRadius: 5,
+                elevation: 5
               }}
               onPress={() => {
                 applyFilters(this.state.rest);

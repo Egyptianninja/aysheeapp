@@ -18,14 +18,14 @@ export const AuthRequire = ({ navigation }: any) => {
           borderWidth: 3,
           justifyContent: 'center',
           alignItems: 'center',
-          width: 150,
-          height: 150,
+          width: 140,
+          height: 140,
           borderRadius: 75
         }}
       >
-        <Ionicons name="md-person" size={130} color="#fff" />
+        <Ionicons name="md-person" size={110} color="#fff" />
       </View>
-      <Text style={{ marginTop: 20, color: '#aaa' }}>
+      <Text style={{ marginTop: 40, color: '#777' }}>
         Please login to your accout
       </Text>
 
@@ -42,7 +42,15 @@ export const AuthRequire = ({ navigation }: any) => {
           borderRadius: 20,
           marginTop: 100,
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          shadowColor: '#999',
+          shadowOffset: {
+            width: 0,
+            height: 5
+          },
+          shadowOpacity: 0.3,
+          shadowRadius: 5,
+          elevation: 5
         }}
       >
         <Text style={{ color: '#7678ED', fontSize: 16 }}>

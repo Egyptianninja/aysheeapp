@@ -193,7 +193,7 @@ class ResultView extends React.Component<any, any> {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#eee'
+          backgroundColor: 'rgba(238, 238, 238, 0.5)'
         }}
       >
         {this.rendderSearchIn()}

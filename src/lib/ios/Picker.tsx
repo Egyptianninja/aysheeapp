@@ -31,8 +31,8 @@ const PickerUI = ({
         height: 100,
         margin: 10,
         borderRadius: 10,
-        backgroundColor: '#eee',
-        borderColor: '#eee',
+        backgroundColor: '#e3e3e3',
+        borderColor: '#ddd',
         borderWidth: 1,
         padding: 10,
         shadowOffset: { width: 2, height: 2 },
@@ -78,31 +78,4 @@ const PickerUI = ({
   );
 };
 
-const pickerStyle = {
-  inputIOS: {
-    color: 'white',
-    paddingTop: 13,
-    paddingHorizontal: 10,
-    paddingBottom: 12
-  },
-  inputAndroid: {
-    color: 'white'
-  },
-  placeholderColor: 'white',
-  underline: { borderTopWidth: 0 },
-  icon: {
-    position: 'absolute',
-    backgroundColor: 'transparent',
-    borderTopWidth: 5,
-    borderTopColor: '#00000099',
-    borderRightWidth: 5,
-    borderRightColor: 'transparent',
-    borderLeftWidth: 5,
-    borderLeftColor: 'transparent',
-    width: 0,
-    height: 0,
-    top: 20,
-    right: 15
-  }
-};
 export default PickerUI;

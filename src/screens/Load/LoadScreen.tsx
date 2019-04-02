@@ -14,7 +14,6 @@ import refreshToken from '../../graphql/mutation/refreshToken';
 import { images } from '../../load';
 import { initApp } from '../../store/actions/globActions';
 import { getCodeFromCountry, getLang } from '../../utils';
-const { width, height } = Dimensions.get('window');
 
 class LoadScreen extends React.Component<any, any> {
   static navigationOptions = {

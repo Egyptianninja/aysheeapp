@@ -88,7 +88,7 @@ class HomeHeader extends React.Component<any, any> {
             style={{
               width: 90,
               height: 24,
-              top: 5
+              top: 2
             }}
           >
             <Image

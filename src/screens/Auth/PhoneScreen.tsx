@@ -4,13 +4,11 @@ import * as React from 'react';
 import { graphql } from 'react-apollo';
 import {
   AsyncStorage,
-  Dimensions,
   Keyboard,
   KeyboardAvoidingView,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-  StatusBar
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -203,7 +201,7 @@ class PhoneScreen extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <Logo size={150} />
+            <Logo size={120} />
           </View>
 
           <KeyboardAvoidingView
@@ -290,11 +288,11 @@ const styles = StyleSheet.create({
   },
 
   labelStyle: {
-    fontSize: 18,
+    fontSize: 16,
     padding: 5,
     marginBottom: 10,
     fontFamily: 'cairo-regular',
-    color: '#aaa'
+    color: '#777'
   },
   btnStyle: {
     height: 50,

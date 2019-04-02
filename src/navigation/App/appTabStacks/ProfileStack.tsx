@@ -54,7 +54,8 @@ export const ProfileStack = createStackNavigator(
         header: (
           <Header
             navigation={navigation}
-            title={navigation.getParam('title')}
+            // title={navigation.getParam('title')}
+            title="Edit Profile"
           />
         ),
         headerBackTitle: null
