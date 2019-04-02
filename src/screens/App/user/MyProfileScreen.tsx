@@ -260,46 +260,63 @@ class MyProfileScreen extends React.Component<any, any> {
                 color: '#777'
               }}
             >
-              {user.about}
+              {user.about.substring(0, 70)}
             </Text>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.navigation.navigate('EditProfileScreen');
-              }}
+
+            <View
               style={{
-                paddingTop: 5,
-                paddingBottom: 10,
-                paddingRight: 10
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between'
               }}
             >
-              <View
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate('EditProfileScreen');
+                }}
                 style={{
-                  marginTop: 5,
-                  borderColor: '#ddd',
-                  borderWidth: 1,
-                  borderRadius: 15,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-around'
+                  paddingTop: 5,
+                  paddingBottom: 10,
+                  paddingRight: 10
                 }}
               >
-                <Text
+                <View
                   style={{
-                    fontFamily: 'cairo-regular',
-                    fontSize: 12,
-                    paddingHorizontal: 10
+                    marginTop: 5,
+                    borderColor: '#ddd',
+                    borderWidth: 1,
+                    borderRadius: 15,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-around'
                   }}
                 >
-                  {words.editprofile}
-                </Text>
-                <Ionicons
-                  style={{ paddingRight: 10 }}
-                  name="md-person"
-                  size={24}
-                  color="#000"
-                />
-              </View>
-            </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontFamily: 'cairo-regular',
+                      fontSize: 12,
+                      paddingHorizontal: 10
+                    }}
+                  >
+                    {words.editprofile}
+                  </Text>
+                  <Ionicons
+                    style={{ paddingRight: 10 }}
+                    name="md-person"
+                    size={24}
+                    color="#000"
+                  />
+                </View>
+              </TouchableOpacity>
+              <Text
+                style={{
+                  fontFamily: 'cairo-regular',
+                  fontSize: 14
+                }}
+              >
+                + {user.phone}
+              </Text>
+            </View>
           </View>
         </View>
         <View

@@ -107,6 +107,7 @@ class Drawer extends React.Component<any, any> {
     return usermenu.map((menu: any) => {
       const iconFunc = icons.menu.filter(ic => ic.id === menu.id);
       const icon = iconFunc[0].icon;
+      const size = iconFunc[0].size;
       const rtlOS = rtlos();
       return (
         <TouchableOpacity
@@ -117,7 +118,7 @@ class Drawer extends React.Component<any, any> {
           <View
             style={{
               flex: 1,
-              marginHorizontal: 20,
+              marginHorizontal: 10,
               marginVertical: 7,
               flexDirection: rtlOS === 3 ? 'row-reverse' : 'row',
               alignItems: 'center',
@@ -126,12 +127,12 @@ class Drawer extends React.Component<any, any> {
           >
             <View
               style={{
-                width: 50,
+                width: 40,
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
             >
-              <Ionicons name={icon} size={30} color="#777" />
+              <Ionicons name={icon} size={size} color="#777" />
             </View>
             <Text
               style={{
@@ -150,7 +151,15 @@ class Drawer extends React.Component<any, any> {
 
   renderHeader = (user: any) => {
     return (
-      <View style={[styles.drawer, { borderBottomColor: '#555' }]}>
+      <View
+        style={[
+          styles.drawer,
+          {
+            borderBottomColor: '#ddd',
+            flexDirection: 'row'
+          }
+        ]}
+      >
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('MyProfileScreen', {
@@ -158,7 +167,7 @@ class Drawer extends React.Component<any, any> {
             });
           }}
         >
-          <AvatarCircle user={user} size={88} />
+          <AvatarCircle user={user} size={50} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -173,22 +182,14 @@ class Drawer extends React.Component<any, any> {
         >
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 18,
               color: '#555',
-              paddingVertical: 10,
-              fontFamily: 'cairo-light'
+              padding: 10,
+              fontFamily: 'cairo-light',
+              fontWeight: 'bold'
             }}
           >
-            {user.name}
-          </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              color: '#555',
-              paddingVertical: 10
-            }}
-          >
-            + {user.phone}
+            {user.name ? user.name.substring(0, 18) : user.uniquename}
           </Text>
         </TouchableOpacity>
       </View>
@@ -237,13 +238,12 @@ class Drawer extends React.Component<any, any> {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: '#fff'
+          backgroundColor: '#eee'
         }}
       >
-        <ScrollView style={{ flex: 2 }} scrollEventThrottle={60}>
-          {!this.props.isAuthenticated && this.nunLogedHeader()}
+        <ScrollView style={{ flex: 1, marginTop: 40 }} scrollEventThrottle={60}>
           {this.props.isAuthenticated && (
-            <View style={{ flex: 4, marginTop: 20 }}>
+            <View style={{ flex: 4 }}>
               {this.renderHeader(user)}
               <View style={{ height: 20 }} />
             </View>
@@ -258,12 +258,12 @@ class Drawer extends React.Component<any, any> {
 const styles = StyleSheet.create({
   drawer: {
     flex: 1,
-    height: 200,
+    height: 70,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     borderBottomWidth: 1,
     borderBottomColor: '#aaa',
-    marginHorizontal: 30
+    marginHorizontal: 10
   },
   drawerImage: {
     height: 80,

@@ -145,15 +145,15 @@ export const icons = {
   itemmenuiconup: { id: 'itemmenuiconup', icon: () => images.itemmenuiconup },
 
   menu: [
-    { id: 0, icon: 'md-person' },
-    { id: 1, icon: 'ios-briefcase' },
-    { id: 2, icon: 'md-person' },
-    { id: 3, icon: 'md-add' },
-    { id: 4, icon: 'ios-bookmark' },
-    { id: 5, icon: 'ios-calendar' },
-    { id: 6, icon: 'ios-heart' },
-    { id: 7, icon: 'ios-help-circle' },
-    { id: 8, icon: 'ios-exit' }
+    { id: 0, icon: 'ios-person', size: 28 },
+    { id: 1, icon: 'ios-briefcase', size: 28 },
+    { id: 2, icon: 'ios-person', size: 28 },
+    { id: 3, icon: 'ios-add', size: 30 },
+    { id: 4, icon: 'ios-bookmark', size: 28 },
+    { id: 5, icon: 'ios-calendar', size: 28 },
+    { id: 6, icon: 'ios-heart', size: 28 },
+    { id: 7, icon: 'ios-help-circle', size: 28 },
+    { id: 8, icon: 'ios-exit', size: 28 }
   ],
 
   flag: [
