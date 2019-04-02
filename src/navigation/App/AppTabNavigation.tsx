@@ -8,7 +8,6 @@ import {
   SearchStack
 } from './appTabStacks';
 import { ImageIcon } from '../../componenets';
-import { View } from 'react-native';
 
 const AppTabNavigation = createBottomTabNavigator(
   {

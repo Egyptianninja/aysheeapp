@@ -138,7 +138,8 @@ const ItemViewSearch = (props: any) => {
               <Text
                 style={{
                   fontSize: 10,
-                  color: '#ababab'
+                  color: '#ababab',
+                  alignSelf: 'flex-end'
                 }}
               >
                 {time}

@@ -9,15 +9,21 @@ import {
 } from '../../../screens';
 import HeaderNoBack from '../../../componenets/Common/HeaderNoback';
 import { Header } from '../../../componenets';
+import { words } from '../../../store/getStore';
 
 export const NotificationStack = createStackNavigator(
   {
     NotificationsScreen: {
       screen: NotificationsScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: <HeaderNoBack navigation={navigation} title="Notifications" />,
-        headerBackTitle: null
-      })
+      navigationOptions: ({ navigation }: any) => {
+        const word = words();
+        return {
+          header: (
+            <HeaderNoBack navigation={navigation} title={word.notifications} />
+          ),
+          headerBackTitle: null
+        };
+      }
     },
     ItemScreen: {
       screen: ItemScreen,

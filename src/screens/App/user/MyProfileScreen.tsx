@@ -277,7 +277,7 @@ class MyProfileScreen extends React.Component<any, any> {
                 style={{
                   paddingTop: 5,
                   paddingBottom: 10,
-                  paddingRight: 10
+                  left: -15
                 }}
               >
                 <View

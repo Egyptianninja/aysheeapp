@@ -126,7 +126,8 @@ class Report extends React.Component<any, any> {
                     onPress={() => this.props.hideReportModal()}
                     style={{
                       position: 'absolute',
-                      right: -20,
+                      right: isRTL ? undefined : -20,
+                      left: isRTL ? 20 : undefined,
                       top: 10,
                       alignItems: 'center',
                       paddingVertical: 7,
@@ -151,6 +152,7 @@ class Report extends React.Component<any, any> {
                       />
                     </View>
                   </TouchableOpacity>
+
                   <Group
                     color="#444"
                     size={24}
@@ -160,25 +162,25 @@ class Report extends React.Component<any, any> {
                   >
                     <RadioButton
                       name="spam"
-                      label="Spam"
+                      label={word.spam}
                       value={values.spam}
                       selected={values.spam}
                     />
                     <RadioButton
                       name="fake"
-                      label="Fake content"
+                      label={word.fake}
                       value={values.fake}
                       selected={values.fake}
                     />
                     <RadioButton
                       name="content"
-                      label="Violence or harmful"
+                      label={word.content}
                       value={values.content}
                       selected={values.content}
                     />
                     <RadioButton
                       name="other"
-                      label="Other"
+                      label={word.other}
                       value={values.other}
                       selected={values.other}
                     />

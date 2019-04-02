@@ -2,9 +2,7 @@ import * as React from 'react';
 import { Query } from 'react-apollo';
 import { debounce } from 'lodash';
 import { connect } from 'react-redux';
-import { Ionicons } from '@expo/vector-icons';
 import { HomeLoading, Noresult } from '../../componenets';
-import ItemViewSmall from '../../componenets/ItemViewSmall';
 import {
   View,
   FlatList,
@@ -39,7 +37,7 @@ class ResultView extends React.Component<any, any> {
     };
   }
 
-  renderSearchIn = () => {
+  renderSearchIn = ({ words, isRTL }: any) => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -60,7 +58,7 @@ class ResultView extends React.Component<any, any> {
           marginHorizontal: 50,
           borderBottomLeftRadius: 12.5,
           borderBottomRightRadius: 12.5,
-          flexDirection: 'row',
+          flexDirection: isRTL ? 'row-reverse' : 'row',
           shadowOffset: { width: 0, height: 2 },
           shadowColor: '#666',
           shadowOpacity: 0.25
@@ -68,13 +66,14 @@ class ResultView extends React.Component<any, any> {
       >
         <Text
           style={{
-            color: '#888'
+            color: '#888',
+            paddingHorizontal: 5
           }}
         >
-          Search in{' '}
+          {words.searchin}
         </Text>
         <Text style={{ color: '#00B77C', fontWeight: 'bold' }}>
-          {this.state.category ? this.state.category.name : 'All'}
+          {this.state.category ? this.state.category.name : words.all}
         </Text>
         <Text
           style={{
@@ -114,12 +113,12 @@ class ResultView extends React.Component<any, any> {
             <Text
               style={{
                 top: -30,
-                fontSize: 24,
+                fontSize: 20,
                 color: '#bbb',
                 fontWeight: '200'
               }}
             >
-              ishee search
+              {words.isheesearch}
             </Text>
           </View>
         </ScrollView>
@@ -197,7 +196,7 @@ class ResultView extends React.Component<any, any> {
           // backgroundColor: 'rgba(238, 238, 238, 0.2)'
         }}
       >
-        {this.renderSearchIn()}
+        {this.renderSearchIn({ words, isRTL })}
         {this.renderQuery({ query, isRTL, words, lang })}
       </View>
     );

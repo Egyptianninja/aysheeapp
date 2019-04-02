@@ -11,16 +11,19 @@ import {
 } from '../../../screens';
 import { Header } from '../../../componenets';
 import HeaderNoBack from '../../../componenets/Common/HeaderNoback';
-
-import { user } from '../../../store/getStore';
+import { words } from '../../../store/getStore';
 export const ProfileStack = createStackNavigator(
   {
     MyProfileScreen: {
       screen: MyProfileScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: <HeaderNoBack navigation={navigation} title="Profile" />,
-        headerBackTitle: null
-      })
+      navigationOptions: ({ navigation }: any) => {
+        const word = words();
+
+        return {
+          header: <HeaderNoBack navigation={navigation} title={word.profile} />,
+          headerBackTitle: null
+        };
+      }
     },
     UpgradeToStore: {
       screen: UpgradeToStore,

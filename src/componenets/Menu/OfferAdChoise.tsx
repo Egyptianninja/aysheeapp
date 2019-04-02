@@ -102,7 +102,9 @@ const Option = ({
           });
         } else if (itemData.id === 2) {
           hideOfferAdChoiseModal();
-          navigation.navigate('AddOfferScreen');
+          navigation.navigate('AddOfferScreen', {
+            title: word.addnewoffer
+          });
         } else if (itemData.id === 3) {
           hideOfferAdChoiseModal();
         }

@@ -12,7 +12,11 @@ const Group = (props: any) => {
     <View
       style={{
         width: props.column ? width - 80 : width - 40,
-        alignItems: props.column ? 'flex-start' : 'center',
+        alignItems: props.rtl
+          ? 'flex-end'
+          : props.column
+          ? 'flex-start'
+          : 'center',
         flexDirection: props.column
           ? 'column'
           : props.rtl && Platform.OS !== 'android'

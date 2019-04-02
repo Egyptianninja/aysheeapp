@@ -175,7 +175,7 @@ class PhotoView extends React.Component<any, any> {
       <React.Fragment>
         <Text
           style={{
-            alignSelf: 'flex-start',
+            alignSelf: isRTL ? 'flex-end' : 'flex-start',
             paddingHorizontal: 45,
             color: '#777',
             paddingVertical: 20

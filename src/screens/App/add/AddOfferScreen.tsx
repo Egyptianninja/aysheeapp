@@ -178,7 +178,11 @@ class AddServiceScreen extends React.Component<any, any> {
           width={width}
           height={120}
         />
-        <ScrollView keyboardShouldPersistTaps="handled">
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          style={{ backgroundColor: '#eee' }}
+          contentContainerStyle={{ paddingBottom: 30 }}
+        >
           <View style={styles.container}>
             <Formik
               initialValues={{
@@ -252,7 +256,7 @@ class AddServiceScreen extends React.Component<any, any> {
                         style={[
                           styles.labelStyle,
                           {
-                            paddingHorizontal: 30,
+                            paddingHorizontal: 45,
                             alignSelf:
                               rtlos() === 3
                                 ? 'flex-start'
@@ -406,7 +410,6 @@ class AddServiceScreen extends React.Component<any, any> {
               )}
             />
           </View>
-          <View style={{ height: 60 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

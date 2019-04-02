@@ -6,7 +6,10 @@
     "slug": "ishee",
     "privacy": "public",
     "sdkVersion": "32.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "orientation": "portrait",
     "primaryColor": "#7678ED",
     "icon": "./assets/icon.png",
@@ -18,12 +21,18 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.ishee.emadjumaah",
       "infoPlist": {
-        "LSApplicationQueriesSchemes": ["comgooglemaps", "uber", "waze"],
+        "LSApplicationQueriesSchemes": [
+          "comgooglemaps",
+          "uber",
+          "waze"
+        ],
         "NSCameraUsageDescription": "This app uses the camera to take photos of products."
       }
     },
@@ -37,7 +46,10 @@
       "androidCollapsedTitle": "ishee"
     },
     "packagerOpts": {
-      "sourceExts": ["ts", "tsx"],
+      "sourceExts": [
+        "ts",
+        "tsx"
+      ],
       "transformer": "node_modules/react-native-typescript-transformer/index.js"
     }
   }

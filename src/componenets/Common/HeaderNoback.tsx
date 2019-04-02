@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Constants } from 'expo';
 import { rtlos } from '../../utils';
-
 const HeaderNoBack = ({ navigation, title }: any) => {
   return (
     <View

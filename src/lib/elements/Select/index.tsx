@@ -53,17 +53,10 @@ export default class Select extends React.Component<any, any> {
         <View
           style={{
             flex: 1,
-            flexDirection: 'row'
+            flexDirection: 'row',
+            justifyContent: isRTL ? 'flex-end' : 'flex-start'
           }}
         >
-          <Text
-            style={{
-              fontSize: 16,
-              color: '#FF5959'
-            }}
-          >
-            *{/* {this.props.words.require} */}
-          </Text>
           <Text style={{ fontSize: 14, paddingHorizontal: 10, color: '#777' }}>
             {label}
           </Text>
@@ -131,6 +124,16 @@ export default class Select extends React.Component<any, any> {
             size={24}
             color="#999"
           />
+          <Text
+            style={{
+              fontSize: 16,
+              color: '#FF5959',
+              top: 0,
+              right: -10
+            }}
+          >
+            *{/* {this.props.words.require} */}
+          </Text>
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}

@@ -46,6 +46,8 @@ class SearchHeader extends React.Component<any, any> {
             showSearch={this.props.showSearch}
             hideSearch={this.props.hideSearch}
             removecategory={this.props.removecategory}
+            words={this.props.words}
+            isRTL={this.props.isRTL}
           />
         </View>
       </View>
@@ -55,6 +57,7 @@ class SearchHeader extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => ({
   words: state.glob.language.words,
+  isRTL: state.glob.isRTL,
   lang: state.glob.languageName,
   isAuthenticated: state.user.isAuthenticated,
   query: state.post.query

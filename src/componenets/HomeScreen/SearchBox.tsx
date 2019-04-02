@@ -51,7 +51,7 @@ class SearchBox extends React.Component<any, any> {
   }
 
   render() {
-    const { query } = this.props;
+    const { query, words, isRTL } = this.props;
     const q = query !== '' ? query : this.state.query;
     const rtl = q ? isArabic(q) : undefined;
     const animatedBox = this.state.animation.interpolate({
@@ -138,8 +138,15 @@ class SearchBox extends React.Component<any, any> {
                 paddingVertical: 10
               }}
             >
-              <Text style={{ color: '#7678ED', bottom: 2, right: 5 }}>
-                Cancel
+              <Text
+                style={{
+                  fontSize: isRTL ? 18 : undefined,
+                  color: '#7678ED',
+                  bottom: isRTL ? 5 : 2,
+                  right: 5
+                }}
+              >
+                {words.cancel}
               </Text>
             </TouchableOpacity>
           </Animated.View>

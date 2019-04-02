@@ -27,7 +27,7 @@ const Item = (props: any) => {
     >
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: isRTL ? 'row-reverse' : 'row',
           alignItems: 'center',
           padding: 5
         }}
