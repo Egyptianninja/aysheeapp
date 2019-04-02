@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Platform } from 'expo-core';
+import { Ionicons } from '@expo/vector-icons';
 
 const RadioButton = (props: any) => {
   const { label, color, size, labelColor, selected, name, rtl, group } = props;
@@ -20,29 +21,12 @@ const RadioButton = (props: any) => {
         });
       }}
     >
-      <View
-        style={[
-          styles.border,
-          {
-            borderColor: color,
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            alignSelf: 'center'
-          }
-        ]}
-      >
-        {selected && (
-          <View
-            style={{
-              backgroundColor: color,
-              width: size / 2,
-              height: size / 2,
-              borderRadius: size / 2
-            }}
-          />
-        )}
-      </View>
+      {!selected && (
+        <Ionicons name="ios-radio-button-off" size={30} color="#aaa" />
+      )}
+      {selected && (
+        <Ionicons name="ios-checkmark-circle" size={30} color="#7678ED" />
+      )}
       <Text
         style={{
           alignSelf: 'center',

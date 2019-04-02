@@ -6,7 +6,8 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  View
+  View,
+  Text
 } from 'react-native';
 import Modal from 'react-native-modal';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
@@ -101,6 +102,27 @@ class PhotoView extends React.Component<any, any> {
           return (
             <View key={uri}>
               <TouchableOpacity
+                onPress={() => {
+                  const currentImage: any = this.state.images[i];
+                  const url = currentImage.file
+                    ? currentImage.file
+                    : currentImage.uri;
+                  this.props.hendleSelectedImage(url);
+                }}
+                style={{
+                  position: 'absolute',
+                  zIndex: 280,
+                  top: 8,
+                  right: 10,
+                  paddingHorizontal: 5,
+                  borderRadius: 5,
+                  borderColor: '#fff',
+                  borderWidth: 1
+                }}
+              >
+                <Ionicons name="ios-bookmark" size={24} color="#00B77C" />
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={async () => this.deleteImage(i)}
                 style={{
                   position: 'absolute',
@@ -109,10 +131,11 @@ class PhotoView extends React.Component<any, any> {
                   left: 10,
                   paddingHorizontal: 5,
                   borderRadius: 5,
-                  backgroundColor: '#aaa'
+                  borderColor: '#fff',
+                  borderWidth: 1
                 }}
               >
-                <Ionicons name="ios-trash" size={24} color="#fff" />
+                <Ionicons name="ios-trash" size={24} color="#E85255" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -124,7 +147,7 @@ class PhotoView extends React.Component<any, any> {
                   height: size,
                   margin: 5,
                   borderRadius: 5,
-                  borderColor: main ? '#7678ED' : undefined,
+                  borderColor: main ? '#00B77C' : undefined,
                   borderWidth: main ? 5 : 0,
                   opacity: i > 5 ? 0.2 : 1
                 }}
@@ -147,21 +170,43 @@ class PhotoView extends React.Component<any, any> {
     );
   };
   render() {
-    const { word, returnData, pickCameraImage, isRTL } = this.props;
+    const { word, returnData, pickCameraImage, width, isRTL } = this.props;
     return (
       <React.Fragment>
-        <View style={{ flexDirection: 'row' }}>
+        <Text
+          style={{
+            alignSelf: 'flex-start',
+            paddingHorizontal: 45,
+            color: '#777',
+            paddingVertical: 20
+          }}
+        >
+          {word.photos}
+        </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: width - 60,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#fff',
+            paddingVertical: 10,
+            borderRadius: 20,
+            marginBottom: 20
+          }}
+        >
           <ImageAlbumPicker
             imgqty={this.state.images.length}
-            label={word.photos}
+            // label={word.photos}
             sublabel={word.subphotos}
             returnData={returnData}
             width={SCREEN_WIDTH}
           />
+          <View style={{ height: '90%', width: 3, backgroundColor: '#eee' }} />
           <PhotoPicker
             imgqty={this.state.images.length}
             icon="ios-camera"
-            label={word.photos}
+            // label={word.photos}
             pickImage={pickCameraImage}
             width={SCREEN_WIDTH}
             sublabel={word.subphotos}

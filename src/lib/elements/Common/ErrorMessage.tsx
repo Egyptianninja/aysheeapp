@@ -5,7 +5,7 @@ const ErrorMessage = (props: any) => {
   const { label, color, error, ...rest } = props;
   return (
     <View>
-      <Text style={{ color: color ? color : '#ff5959', paddingHorizontal: 5 }}>
+      <Text style={{ color: color ? color : '#E85255', paddingHorizontal: 5 }}>
         {props.children}
       </Text>
     </View>

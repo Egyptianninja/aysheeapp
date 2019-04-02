@@ -45,7 +45,7 @@ export default class ImageBrowser extends React.Component<any, any> {
   };
 
   getPhotos = () => {
-    const params: any = { first: 50, mimeTypes: ['image/jpeg'] }; // TODO: Android
+    const params: any = { first: 150, mimeTypes: ['image/jpeg'] }; // TODO: Android
     // const params: any = { first: 300, mimeTypes: ['image/jpeg'] };
     if (this.state.after) {
       params.after = this.state.after;

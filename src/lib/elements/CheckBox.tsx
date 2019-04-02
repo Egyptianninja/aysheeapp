@@ -27,30 +27,6 @@ const CheckBox = (props: any) => {
         props.onChange(name, !value);
       }}
     >
-      {/* <View
-        style={[
-          styles.border,
-          {
-            borderColor: color,
-            width: size,
-            height: size,
-            borderRadius: 5,
-            alignSelf: 'center'
-          }
-        ]}
-      >
-        {selected && (
-          <View
-            style={{
-              backgroundColor: color,
-              width: size / 1.5,
-              height: size / 1.5,
-              borderRadius: 2
-            }}
-          />
-        )}
-      </View> */}
-
       {!selected && (
         <Ionicons name="ios-radio-button-off" size={30} color="#aaa" />
       )}

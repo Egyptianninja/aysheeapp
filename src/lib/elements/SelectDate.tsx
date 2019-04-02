@@ -43,8 +43,8 @@ export default class SelectDate extends React.Component<any, any> {
             marginVertical: 10,
             height: 100,
             width: '100%',
-            borderRadius: 8,
-            backgroundColor: '#eee',
+            borderRadius: 20,
+            backgroundColor: '#fff',
             justifyContent: 'center',
             alignItems: 'center'
           }}
@@ -76,7 +76,7 @@ export default class SelectDate extends React.Component<any, any> {
             </Text>
           )}
           {!this.props.value.name && (
-            <Ionicons name={this.props.iconName} size={80} color="#8E90F0" />
+            <Ionicons name={this.props.iconName} size={55} color="#8E90F0" />
           )}
         </TouchableOpacity>
         <Modal

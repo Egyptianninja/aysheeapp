@@ -113,10 +113,9 @@ class AddJobScreen extends React.Component<any, any> {
       body,
       isjobreq,
       phone,
-      jobTitle,
-      jobIndustry,
+
       isfullTime,
-      education,
+
       experience,
       salary,
       location
@@ -141,10 +140,7 @@ class AddJobScreen extends React.Component<any, any> {
         photos,
         isrtl,
         phone,
-        jobTitle,
-        jobIndustry,
         isfullTime,
-        education,
         experience,
         salary: Number(salary),
         trueLocation
@@ -186,7 +182,10 @@ class AddJobScreen extends React.Component<any, any> {
           width={width}
           height={120}
         />
-        <ScrollView keyboardShouldPersistTaps="handled">
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          style={{ backgroundColor: '#eee' }}
+        >
           <View style={styles.container}>
             <Formik
               initialValues={{
@@ -195,11 +194,8 @@ class AddJobScreen extends React.Component<any, any> {
                 isjobreq: true,
                 isjoboffer: false,
                 phone: getPureNumber(user.phone),
-                jobTitle: '',
-                jobIndustry: '',
                 isfullTime: true,
                 isPartTime: false,
-                education: '',
                 experience: '',
                 salary: '',
                 location: false
@@ -212,9 +208,6 @@ class AddJobScreen extends React.Component<any, any> {
                 body: Yup.string()
                   .max(1000)
                   .required('Required'),
-                jobTitle: Yup.string().max(100),
-                jobIndustry: Yup.string().max(100),
-                education: Yup.string().max(100),
                 phone: Yup.string()
                   .max(25)
                   .required('Required')
@@ -230,6 +223,17 @@ class AddJobScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
+                  <PhotoView
+                    width={width}
+                    word={word}
+                    isRTL={isRTL}
+                    images={this.state.images}
+                    selectedImage={this.state.selectedImage}
+                    returnData={this.returnData}
+                    pickCameraImage={this.pickCameraImage}
+                    updateImagesList={this.updateImagesList}
+                    hendleSelectedImage={this.hendleSelectedImage}
+                  />
                   <Group
                     color="#444"
                     size={24}
@@ -280,16 +284,7 @@ class AddJobScreen extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
-                  <PhotoView
-                    word={word}
-                    isRTL={isRTL}
-                    images={this.state.images}
-                    selectedImage={this.state.selectedImage}
-                    returnData={this.returnData}
-                    pickCameraImage={this.pickCameraImage}
-                    updateImagesList={this.updateImagesList}
-                    hendleSelectedImage={this.hendleSelectedImage}
-                  />
+
                   <Group
                     color="#444"
                     size={24}
@@ -324,51 +319,7 @@ class AddJobScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
-                  <Input
-                    rtl={isRTL}
-                    name="jobTitle"
-                    label={word.jobtitle}
-                    value={values.jobTitle}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.jobTitle && errors.jobTitle}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    height={40}
-                  />
-                  <Input
-                    rtl={isRTL}
-                    name="jobIndustry"
-                    label={word.jobindustry}
-                    value={values.jobIndustry}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.jobIndustry && errors.jobIndustry}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    height={40}
-                  />
-                  <Input
-                    rtl={isRTL}
-                    name="education"
-                    label={word.education}
-                    value={values.education}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    outerStyle={styles.outerStyle}
-                    innerStyle={styles.innerStyle}
-                    labelStyle={styles.labelStyle}
-                    error={touched.education && errors.education}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    height={40}
-                  />
+
                   <Input
                     rtl={isRTL}
                     name="experience"
@@ -422,7 +373,7 @@ class AddJobScreen extends React.Component<any, any> {
                   )}
                   <Button
                     isRTL={isRTL}
-                    background="#7678ED"
+                    background="#fff"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
@@ -438,7 +389,7 @@ class AddJobScreen extends React.Component<any, any> {
                       style={{
                         position: 'relative',
                         left: 65,
-                        bottom: 65
+                        bottom: 50
                       }}
                     >
                       <Progress.Circle
@@ -454,7 +405,6 @@ class AddJobScreen extends React.Component<any, any> {
               )}
             />
           </View>
-          <View style={{ height: 60 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );
@@ -464,9 +414,10 @@ class AddJobScreen extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 30
   },
   button: {
     marginTop: 20,
@@ -478,31 +429,42 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 40,
-    paddingHorizontal: 10,
+    width: width - 60,
+
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
     writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5
+    borderRadius: 20
   },
   labelStyle: {
-    fontSize: 18,
-    padding: 5
+    fontSize: 14,
+    padding: 5,
+    color: '#777',
+    paddingHorizontal: 15
   },
   btnStyle: {
     marginTop: 30,
-    height: 60,
-    width: width - 80,
+    height: 50,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
-    borderRadius: 5
+    margin: 10,
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
-    color: '#fff',
-    fontSize: 20,
+    color: '#7678ED',
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });

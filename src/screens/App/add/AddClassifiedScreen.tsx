@@ -238,7 +238,10 @@ class AddClassifiedScreen extends React.Component<any, any> {
           width={width}
           height={120}
         />
-        <ScrollView keyboardShouldPersistTaps="handled">
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          style={{ backgroundColor: '#eee' }}
+        >
           <View style={styles.container}>
             <Formik
               initialValues={{
@@ -285,6 +288,17 @@ class AddClassifiedScreen extends React.Component<any, any> {
                 isSubmitting
               }: any) => (
                 <React.Fragment>
+                  <PhotoView
+                    width={width}
+                    word={word}
+                    isRTL={isRTL}
+                    images={this.state.images}
+                    selectedImage={this.state.selectedImage}
+                    returnData={this.returnData}
+                    pickCameraImage={this.pickCameraImage}
+                    updateImagesList={this.updateImagesList}
+                    hendleSelectedImage={this.hendleSelectedImage}
+                  />
                   <Input
                     rtl={isRTL}
                     name="title"
@@ -376,16 +390,6 @@ class AddClassifiedScreen extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
-                  <PhotoView
-                    word={word}
-                    isRTL={isRTL}
-                    images={this.state.images}
-                    selectedImage={this.state.selectedImage}
-                    returnData={this.returnData}
-                    pickCameraImage={this.pickCameraImage}
-                    updateImagesList={this.updateImagesList}
-                    hendleSelectedImage={this.hendleSelectedImage}
-                  />
                   {!this.noNew.includes(category.id) && (
                     <Group
                       color="#444"
@@ -444,7 +448,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       <View
                         style={{
                           flex: 1,
-                          alignItems: 'center'
+                          alignItems: 'center',
+                          width: width - 60
                         }}
                       >
                         <Input
@@ -458,7 +463,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                           outerStyle={[styles.outerStyle, { paddingBottom: 5 }]}
                           innerStyle={[
                             styles.innerStyle,
-                            { width: (width - 40) / 2 - 20 }
+                            { width: (width - 60) / 2 - 30 }
                           ]}
                           labelStyle={styles.labelStyle}
                           error={touched.price && errors.price}
@@ -475,7 +480,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                         <Select
                           name="currency"
                           nosubLabel={true}
-                          width={(width - 40) / 2 - 20}
+                          width={(width - 60) / 2 - 30}
                           value={values.currency}
                           data={currencyTypes}
                           label={word.currency}
@@ -540,7 +545,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                   )}
                   <Button
                     isRTL={isRTL}
-                    background="#7678ED"
+                    background="#fff"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
@@ -556,7 +561,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       style={{
                         position: 'relative',
                         left: 65,
-                        bottom: 65
+                        bottom: 50
                       }}
                     >
                       <Progress.Circle
@@ -572,7 +577,6 @@ class AddClassifiedScreen extends React.Component<any, any> {
               )}
             />
           </View>
-          <View style={{ height: 60 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );
@@ -582,9 +586,10 @@ class AddClassifiedScreen extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 30
   },
   button: {
     marginTop: 20,
@@ -596,31 +601,42 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 40,
-    paddingHorizontal: 10,
+    width: width - 60,
+
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
     writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5
+    borderRadius: 20
   },
   labelStyle: {
-    fontSize: 18,
-    padding: 5
+    fontSize: 14,
+    padding: 5,
+    color: '#777',
+    paddingHorizontal: 15
   },
   btnStyle: {
     marginTop: 30,
-    height: 60,
-    width: width - 80,
+    height: 50,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
-    borderRadius: 5
+    margin: 10,
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
-    color: '#fff',
-    fontSize: 20,
+    color: '#7678ED',
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });

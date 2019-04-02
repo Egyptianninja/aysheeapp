@@ -7,9 +7,9 @@ export const PhotoPicker = ({ label, pickImage, icon, width }: any) => {
     <TouchableOpacity
       onPress={pickImage}
       style={{
-        width: (width - 60) / 2,
-        height: 45,
-        backgroundColor: '#eee',
+        width: (width - 80) / 2,
+        height: 75,
+        backgroundColor: '#fff',
         borderRadius: 5,
         paddingHorizontal: 20,
         paddingVertical: 6,
@@ -30,24 +30,19 @@ export const PhotoPicker = ({ label, pickImage, icon, width }: any) => {
             alignItems: 'center'
           }}
         >
-          <Ionicons name={icon} size={36} color="#777" />
+          <Ionicons name={icon} size={50} color="#8E90F0" />
         </View>
-        <View
+        <Text
           style={{
-            justifyContent: 'center',
-            alignItems: 'flex-end'
+            fontSize: 30,
+            position: 'absolute',
+            top: -12,
+            right: 10,
+            color: '#8E90F0'
           }}
         >
-          <Text
-            style={{
-              fontSize: 16,
-              color: '#777',
-              paddingHorizontal: 10
-            }}
-          >
-            {label}
-          </Text>
-        </View>
+          +
+        </Text>
       </View>
     </TouchableOpacity>
   );

@@ -270,19 +270,30 @@ class AddServiceScreen extends React.Component<any, any> {
                         <View
                           style={{
                             width: width - 60,
-                            backgroundColor: '#eee',
+                            backgroundColor: '#fff',
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginVertical: 10,
                             height: 100,
-                            borderRadius: 8
+                            borderRadius: 20
                           }}
                         >
                           <Ionicons
-                            name="ios-camera"
-                            size={100}
+                            name="ios-images"
+                            size={50}
                             color="#8E90F0"
                           />
+                          <Text
+                            style={{
+                              fontSize: 30,
+                              position: 'absolute',
+                              top: 15,
+                              right: 110,
+                              color: '#8E90F0'
+                            }}
+                          >
+                            +
+                          </Text>
                         </View>
                       </TouchableWithoutFeedback>
                     </React.Fragment>
@@ -298,7 +309,8 @@ class AddServiceScreen extends React.Component<any, any> {
                           width: width - 60,
                           height: (image.height / image.width) * (width - 60),
                           resizeMode: 'cover',
-                          borderRadius: 8
+                          borderRadius: 20,
+                          marginTop: 20
                         }}
                       />
                     </TouchableWithoutFeedback>
@@ -309,9 +321,7 @@ class AddServiceScreen extends React.Component<any, any> {
                       flexDirection: 'row',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      marginHorizontal: 30,
-                      borderBottomWidth: 1,
-                      borderBottomColor: '#bbb'
+                      marginHorizontal: 30
                     }}
                   >
                     <SelectDate
@@ -364,7 +374,7 @@ class AddServiceScreen extends React.Component<any, any> {
 
                   <Button
                     isRTL={isRTL}
-                    background="#7678ED"
+                    background="#fff"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
@@ -380,7 +390,7 @@ class AddServiceScreen extends React.Component<any, any> {
                       style={{
                         position: 'relative',
                         left: 65,
-                        bottom: 65
+                        bottom: 50
                       }}
                     >
                       <Progress.Circle
@@ -406,9 +416,10 @@ class AddServiceScreen extends React.Component<any, any> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 30
   },
   button: {
     marginTop: 20,
@@ -421,30 +432,41 @@ const styles = StyleSheet.create({
   },
   innerStyle: {
     width: width - 60,
-    paddingHorizontal: 10,
+
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
     writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5
+    borderRadius: 20
   },
   labelStyle: {
-    fontSize: 18,
-    padding: 5
+    fontSize: 14,
+    padding: 5,
+    color: '#777',
+    paddingHorizontal: 15
   },
   btnStyle: {
     marginTop: 30,
-    height: 60,
-    width: width - 80,
+    height: 50,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
-    borderRadius: 5
+    margin: 10,
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
-    color: '#fff',
-    fontSize: 20,
+    color: '#7678ED',
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });

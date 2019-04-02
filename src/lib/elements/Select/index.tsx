@@ -53,26 +53,27 @@ export default class Select extends React.Component<any, any> {
         <View
           style={{
             flex: 1,
-            justifyContent: 'space-between',
-            flexDirection:
-              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
+            flexDirection: 'row'
           }}
         >
-          <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>{label}</Text>
           <Text
             style={{
               fontSize: 16,
-              paddingHorizontal: 10,
               color: '#FF5959'
             }}
           >
-            {this.props.words.require}
+            *{/* {this.props.words.require} */}
+          </Text>
+          <Text style={{ fontSize: 14, paddingHorizontal: 10, color: '#777' }}>
+            {label}
           </Text>
         </View>
       );
     } else if (value === '') {
       return (
-        <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>{label}</Text>
+        <Text style={{ fontSize: 14, paddingHorizontal: 10, color: '#777' }}>
+          {label}
+        </Text>
       );
     } else if (value !== '') {
       return (
@@ -109,23 +110,27 @@ export default class Select extends React.Component<any, any> {
         <TouchableOpacity
           style={{
             flexDirection: isRTL ? 'row-reverse' : 'row',
-            width: this.props.width ? this.props.width : width - 40,
+            width: this.props.width ? this.props.width : width - 60,
             height: 40,
             marginTop: 10,
             marginVertical: 10,
-            justifyContent: 'flex-start',
+            justifyContent: 'space-between',
             alignItems: 'center',
-            paddingHorizontal: 10,
+            paddingHorizontal: 15,
             borderWidth: 1,
             borderColor: '#ddd',
-            borderRadius: 5,
-            backgroundColor: '#eee'
+            borderRadius: 20,
+            backgroundColor: '#fff'
           }}
           onPress={() => this.toggleModal()}
         >
-          <Ionicons name="ios-arrow-down" size={26} color="#555" />
-
           {this.renderlabel(value, label, required, isRTL)}
+          <Ionicons
+            style={{ top: 3 }}
+            name="ios-arrow-down"
+            size={24}
+            color="#999"
+          />
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}
