@@ -28,7 +28,7 @@ const Properties = ({ data, words, isRTL, android }: any) => {
                 style={{
                   fontSize: 12,
                   fontWeight: 'bold',
-                  color: '#ababab',
+                  color: '#aaa',
                   paddingHorizontal: 10
                 }}
               >

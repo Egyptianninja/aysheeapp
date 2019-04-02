@@ -22,8 +22,7 @@ import {
   Group,
   Input,
   RadioButton,
-  Select,
-  Title
+  Select
 } from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
 import {

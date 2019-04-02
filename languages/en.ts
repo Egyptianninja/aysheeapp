@@ -388,7 +388,7 @@ export default {
     all: 'ALL',
     login: 'Login',
     new: 'New',
-    old: 'Old',
+    old: 'Used',
     forsale: 'For Sale',
     forrent: 'For Rent',
     furnishered: 'Furnishered',

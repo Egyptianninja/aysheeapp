@@ -222,7 +222,7 @@ export default class Edit extends React.Component<any, any> {
           flexDirection: 'row',
           width,
           height: 50,
-          backgroundColor: '#aaa',
+          backgroundColor: '#8E90F0',
           paddingHorizontal: 20,
           alignSelf: 'center'
         }}
@@ -304,7 +304,7 @@ export default class Edit extends React.Component<any, any> {
       >
         <View
           style={{
-            backgroundColor: '#fff',
+            backgroundColor: '#eee',
             position: 'absolute',
             bottom: 0,
             margin: 0,
@@ -316,7 +316,12 @@ export default class Edit extends React.Component<any, any> {
         >
           {this.renderHeader(word.editadd)}
 
-          <ScrollView>
+          <ScrollView
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+            style={{ backgroundColor: '#eee' }}
+            contentContainerStyle={{ paddingBottom: 30 }}
+          >
             <Formik
               initialValues={{
                 title: post.title,
@@ -441,7 +446,7 @@ export default class Edit extends React.Component<any, any> {
                           >
                             <View
                               style={{
-                                width: width - 60,
+                                width: width - 50,
                                 backgroundColor: '#eee',
                                 justifyContent: 'center',
                                 alignItems: 'center',
@@ -473,8 +478,8 @@ export default class Edit extends React.Component<any, any> {
                               source={{ uri: photo.uri }}
                               style={{
                                 flex: 1,
-                                width: width - 60,
-                                height: photo.ratio * (width - 60),
+                                width: width - 50,
+                                height: photo.ratio * (width - 50),
                                 resizeMode: 'cover',
                                 borderRadius: 8
                               }}
@@ -489,9 +494,9 @@ export default class Edit extends React.Component<any, any> {
                               source={{ uri: image.uri }}
                               style={{
                                 flex: 1,
-                                width: width - 60,
+                                width: width - 50,
                                 height:
-                                  (image.height / image.width) * (width - 60),
+                                  (image.height / image.width) * (width - 50),
                                 resizeMode: 'cover',
                                 borderRadius: 8
                               }}
@@ -890,7 +895,7 @@ export default class Edit extends React.Component<any, any> {
                   >
                     <Button
                       isRTL={isRTL}
-                      background="#7678ED"
+                      background="#fff"
                       style={styles.btnStyle}
                       textStyle={styles.btnTextStyle}
                       title={word.submit}
@@ -906,56 +911,66 @@ export default class Edit extends React.Component<any, any> {
                 </React.Fragment>
               )}
             />
-            <View style={{ height: 60 }} />
           </ScrollView>
         </View>
       </Modal>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 30
   },
   button: {
-    marginTop: 20
+    marginTop: 20,
+    width: '100%'
   },
   outerStyle: {
     flex: 1,
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 60,
-    paddingHorizontal: 10,
+    width: width - 50,
+
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
     writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5
+    borderRadius: 20
   },
   labelStyle: {
-    fontSize: 18,
-    padding: 5
+    fontSize: 14,
+    padding: 5,
+    color: '#777',
+    paddingHorizontal: 15
   },
   btnStyle: {
     marginTop: 30,
-    height: 60,
-    width: 200,
+    height: 50,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
-    borderRadius: 5
+    margin: 10,
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
-    color: '#fff',
-    fontSize: 20,
+    color: '#7678ED',
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });

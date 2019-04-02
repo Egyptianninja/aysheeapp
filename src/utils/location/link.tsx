@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { words } from '../../store/getStore';
 import { Popup } from 'react-native-map-link';
 import { getUserLocation } from './getUserLocation';
@@ -58,16 +59,23 @@ export default class Link extends Component<any, any> {
         <View
           style={{
             flex: 1,
-            width: '80%',
+            width: '90%',
             flexDirection: 'row',
-            justifyContent: 'space-around'
+            justifyContent: 'space-around',
+            marginTop: 10
           }}
         >
           <TouchableOpacity
             onPress={() => {
               this.setState({ isViewModeVisible: true });
             }}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderRadius: 20
+            }}
           >
+            <Ionicons name="ios-map" size={30} color="#7678ED" />
             <Text style={styles.welcome}>{word.showinmap}</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -84,7 +92,13 @@ export default class Link extends Component<any, any> {
               this.setState({ loadinLocation: false });
               this.setState({ isDriveModeVisible: true });
             }}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderRadius: 20
+            }}
           >
+            <Ionicons name="ios-car" size={30} color="#7678ED" />
             <Text style={styles.welcome}>{word.drivetolocation}</Text>
             {this.state.loadinLocation && <LoadingTiny />}
           </TouchableOpacity>
@@ -101,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   welcome: {
-    fontSize: 16,
+    fontSize: 12,
     textAlign: 'center',
     color: '#7678ED',
     margin: 10

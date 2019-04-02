@@ -139,20 +139,20 @@ export default class Select extends React.Component<any, any> {
           backdropOpacity={0.2}
           useNativeDriver={true}
           hideModalContentWhileAnimating={true}
-          style={{ flex: 1 }}
+          style={{ margin: 0 }}
         >
           <View
             style={{
               backgroundColor: '#fff',
-              borderRadius: 10,
+              borderTopLeftRadius: 15,
+              borderTopRightRadius: 15,
               position: 'absolute',
               bottom: 0,
               margin: 0,
-              height: 350,
-              paddingTop: 10,
-              width: width - 40,
-              justifyContent: 'space-around',
-              alignItems: 'center'
+              height:
+                this.props.data < 8 ? this.props.data.length * 55 + 70 : 500,
+              paddingTop: 20,
+              width
             }}
           >
             <ScrollView>{this.renderOptions(this.props.data)}</ScrollView>

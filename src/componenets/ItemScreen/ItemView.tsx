@@ -687,7 +687,6 @@ class ItemView extends React.Component<any, any> {
               <Text
                 style={{
                   fontSize: 18,
-                  fontWeight: 'bold',
                   color: '#999'
                 }}
               >

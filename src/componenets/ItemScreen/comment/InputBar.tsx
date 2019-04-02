@@ -22,7 +22,7 @@ export default class InputBar extends React.Component<any, any> {
         style={{
           width: '99%',
           backgroundColor: '#fff',
-          padding: 5
+          paddingHorizontal: 5
         }}
       >
         {this.props.replay && this.props.replay.id && (
@@ -100,7 +100,7 @@ export default class InputBar extends React.Component<any, any> {
           >
             <Ionicons
               name="ios-paper-plane"
-              color="#555"
+              color="#7678ed"
               size={36}
               style={{
                 width: 30
@@ -118,19 +118,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: rtlos() ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
-    paddingLeft: 10,
-    paddingVertical: 10
+    paddingLeft: 10
+    // paddingVertical: 10
   },
 
   textBox: {
     writingDirection: 'auto',
-    backgroundColor: '#F7F7F7',
-    borderRadius: 10,
+    backgroundColor: '#f3f3f3',
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: '#ddd',
     flex: 1,
-    paddingHorizontal: 10,
-    marginVertical: 2
+    paddingHorizontal: 10
   },
 
   sendButton: {

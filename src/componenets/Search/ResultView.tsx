@@ -39,7 +39,7 @@ class ResultView extends React.Component<any, any> {
     };
   }
 
-  rendderSearchIn = () => {
+  renderSearchIn = () => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -193,10 +193,11 @@ class ResultView extends React.Component<any, any> {
       <View
         style={{
           flex: 1,
-          backgroundColor: 'rgba(238, 238, 238, 0.5)'
+          backgroundColor: '#eee'
+          // backgroundColor: 'rgba(238, 238, 238, 0.2)'
         }}
       >
-        {this.rendderSearchIn()}
+        {this.renderSearchIn()}
         {this.renderQuery({ query, isRTL, words, lang })}
       </View>
     );

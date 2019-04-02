@@ -45,13 +45,14 @@ export const Option = ({
         toggleModal();
       }}
       style={{
+        width,
+        marginVertical: 5,
+        paddingVertical: 5,
         flex: 1,
-        width: SCREEN_WIDTH - 80,
-        padding: 3,
-        margin: 7,
-        backgroundColor: '#eee',
-        borderWidth: 1,
-        borderColor: '#ddd',
+        paddingHorizontal: 10,
+        marginHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee',
         borderRadius: 5,
         flexDirection:
           isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'

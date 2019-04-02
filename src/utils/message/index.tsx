@@ -29,7 +29,7 @@ const Message = ({
         height,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#eee'
       }}
     >
       <View
@@ -75,16 +75,16 @@ const Message = ({
       <View style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
         {okbtnTitle && (
           <Button
-            background="#E85255"
+            background="#fff"
             style={styles.btnStyle}
-            textStyle={styles.btnTextStyle}
+            textStyle={[styles.btnTextStyle, { color: '#E85255' }]}
             title={okbtnTitle}
             onPress={okAction}
           />
         )}
         {cancelbtnTitle && (
           <Button
-            background="#7678ED"
+            background="#fff"
             style={styles.btnStyle}
             textStyle={styles.btnTextStyle}
             title={cancelbtnTitle}
@@ -98,17 +98,26 @@ const Message = ({
 
 const styles = StyleSheet.create({
   btnStyle: {
-    height: 30,
-    width: 100,
+    marginTop: 30,
+    height: 40,
+    width: 120,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 40,
-    marginTop: 30,
-    borderRadius: 5
+    margin: 10,
+    marginHorizontal: 20,
+    borderRadius: 20,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
-    color: '#fff',
-    fontSize: 16,
+    color: '#7678ED',
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });

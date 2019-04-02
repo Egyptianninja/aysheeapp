@@ -36,18 +36,15 @@ const styles = StyleSheet.create({
   botton: {
     padding: 5,
     marginHorizontal: 3,
-    borderBottomLeftRadius: 10,
-    borderTopLeftRadius: 10,
+    borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f7f7f7',
-    borderColor: '#eee',
-    borderWidth: 1,
-    marginVertical: 5
+    backgroundColor: '#f3f3f3',
+    borderColor: '#ddd'
   },
   txt: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#7678ED',
-    paddingHorizontal: 5
+    paddingHorizontal: 7
   }
 });

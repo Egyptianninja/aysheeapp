@@ -1,6 +1,13 @@
 import { Formik } from 'formik';
 import * as React from 'react';
-import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  View,
+  TouchableOpacity
+} from 'react-native';
 import Modal from 'react-native-modal';
 import * as Yup from 'yup';
 import { Button, Input, Group, RadioButton } from '../../lib';
@@ -67,21 +74,21 @@ class Report extends React.Component<any, any> {
         onBackButtonPress={() => this.props.hideReportModal()}
         backdropOpacity={0.2}
         useNativeDriver={true}
-        animationIn="zoomInDown"
-        animationOut="zoomOutUp"
+        animationIn="slideInDown"
+        animationOut="slideOutUp"
         hideModalContentWhileAnimating={true}
-        style={{ flex: 1 }}
+        style={{ margin: 0 }}
       >
         <View
           style={{
-            backgroundColor: '#fff',
+            backgroundColor: '#eee',
             borderRadius: 10,
             position: 'absolute',
-            bottom: 0,
+            top: 0,
             margin: 0,
             height: 500,
-            paddingTop: 10,
-            width: width - 40,
+            paddingTop: 30,
+            width,
             justifyContent: 'space-around',
             alignItems: 'center'
           }}
@@ -115,6 +122,35 @@ class Report extends React.Component<any, any> {
                     alignItems: 'center'
                   }}
                 >
+                  <TouchableOpacity
+                    onPress={() => this.props.hideReportModal()}
+                    style={{
+                      position: 'absolute',
+                      right: -20,
+                      top: 10,
+                      alignItems: 'center',
+                      paddingVertical: 7,
+                      paddingLeft: 5,
+                      paddingRight: 20,
+                      zIndex: 120
+                    }}
+                  >
+                    <View
+                      style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: 16,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Ionicons
+                        name="ios-close-circle"
+                        size={30}
+                        color="#636363"
+                      />
+                    </View>
+                  </TouchableOpacity>
                   <Group
                     color="#444"
                     size={24}
@@ -150,7 +186,6 @@ class Report extends React.Component<any, any> {
                   <Input
                     rtl={isRTL}
                     name="body"
-                    // label="Other"
                     value={values.body}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
@@ -166,7 +201,7 @@ class Report extends React.Component<any, any> {
 
                   <Button
                     isRTL={isRTL}
-                    background="#7678ED"
+                    background="#fff"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
@@ -189,9 +224,10 @@ export default Report;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 30
   },
   button: {
     marginTop: 20,
@@ -203,31 +239,42 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   innerStyle: {
-    width: width - 80,
-    paddingHorizontal: 10,
+    width: width - 100,
+
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
     writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5
+    borderRadius: 20
   },
   labelStyle: {
-    fontSize: 18,
-    padding: 5
+    fontSize: 14,
+    padding: 5,
+    color: '#777',
+    paddingHorizontal: 15
   },
   btnStyle: {
     marginTop: 30,
-    height: 60,
-    width: width - 80,
+    height: 50,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
-    borderRadius: 5
+    margin: 10,
+    borderRadius: 25,
+    shadowColor: '#999',
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5
   },
   btnTextStyle: {
-    color: '#fff',
-    fontSize: 20,
+    color: '#7678ED',
+    fontSize: 18,
     fontFamily: 'cairo-regular'
   }
 });
