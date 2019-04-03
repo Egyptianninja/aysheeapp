@@ -23,6 +23,7 @@ const AppTabNavigation = createBottomTabNavigator(
           routeName === 'ItemScreen' ||
           routeName === 'ChoiseScreen' ||
           routeName === 'PhoneScreen' ||
+          routeName === 'CameraScreen' ||
           routeName === 'CodeScreen'
         ) {
           navigationOptions.tabBarVisible = false;

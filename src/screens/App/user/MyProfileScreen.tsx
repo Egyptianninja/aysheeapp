@@ -145,8 +145,8 @@ class MyProfileScreen extends React.Component<any, any> {
       <Query
         query={getUserPosts}
         variables={variables}
+        fetchPolicy="network-only"
         // variables={{ userId: user._id, ...this.state.rest }}
-        // fetchPolicy="network-only"
       >
         {({ loading, error, data, fetchMore, refetch }) => {
           if (loading) {
@@ -260,7 +260,7 @@ class MyProfileScreen extends React.Component<any, any> {
                 color: '#777'
               }}
             >
-              {user.about.substring(0, 70)}
+              {user.about ? user.about.substring(0, 70) : ''}
             </Text>
 
             <View

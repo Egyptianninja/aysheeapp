@@ -27,7 +27,7 @@ import {
   smsSent
 } from '../../store/actions/userAtions';
 import { StyleSheet, isIphoneX } from '../../utils';
-import { Logo, WhitLogo } from '../../componenets';
+import { Logo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
 

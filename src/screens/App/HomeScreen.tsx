@@ -66,7 +66,6 @@ class HomeScreen extends React.Component<any, any> {
       rest: {},
       scrollAnim,
       offsetAnim,
-      pushToken: null,
       message: null,
       clampedScroll: Animated.diffClamp(
         Animated.add(
@@ -89,16 +88,15 @@ class HomeScreen extends React.Component<any, any> {
         if (!this.props.permissions.NOTIFICATIONS) {
           if (this.props.isAuthenticated) {
             const pushToken = await registerForPushNotificationsAsync();
-            await this.setState({ pushToken });
-          }
-        }
-        if (this.state.pushToken) {
-          await this.props.notificationSub({
-            variables: {
-              userId: this.props.user._id,
-              pushToken: this.state.pushToken
+            if (pushToken) {
+              await this.props.notificationSub({
+                variables: {
+                  userId: this.props.user._id,
+                  pushToken
+                }
+              });
             }
-          });
+          }
         }
       }),
       this.props.navigation.addListener('willBlur', () => {
@@ -327,15 +325,6 @@ class HomeScreen extends React.Component<any, any> {
     this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
   };
 
-  handleonPressIn = (id: any) => {
-    // TODO:
-    // this.setState({ pressed: id });
-  };
-  handleonPressOut = () => {
-    // TODO:
-    // this.setState({ pressed: null });
-  };
-
   render() {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query, isRTL } = this.props;
@@ -430,6 +419,7 @@ class HomeScreen extends React.Component<any, any> {
           iconColor="#E85255"
           height={200}
         />
+
         {/* <CategoriesModal
           isCategoriesModalVisible={this.state.isCategoriesModalVisible}
           hideCategoriesModal={this.hideCategoriesModal}
@@ -440,6 +430,20 @@ class HomeScreen extends React.Component<any, any> {
           removeAllFilters={this.removeAllFilters}
           word={words}
         /> */}
+
+        {/* <BottomDrawer
+          containerHeight={height - 50}
+          offset={this.TAB_BAR_HEIGHT + 35}
+          downDisplay={isIphoneX() ? height - 50 - 105 : height - 50 - 45}
+          startUp={false}
+          roundedEdges={false}
+          shadow={false}
+          categories={this.props.categories}
+          isRTL={this.props.isRTL}
+          navigation={this.props.navigation}
+          word={words}
+        /> */}
+
         <Animated.View
           style={{
             zIndex: 100,
@@ -527,8 +531,6 @@ class HomeScreen extends React.Component<any, any> {
                   renderItem={({ item }: any) => (
                     <ItemViewSmall
                       post={item}
-                      handleonPressIn={this.handleonPressIn}
-                      handleonPressOut={this.handleonPressOut}
                       pressed={this.state.pressed}
                       navigation={this.props.navigation}
                       showMenuModal={this.showMenuModal}
@@ -549,18 +551,6 @@ class HomeScreen extends React.Component<any, any> {
             );
           }}
         </Query>
-        {/* <BottomDrawer
-          containerHeight={height - 50}
-          offset={this.TAB_BAR_HEIGHT + 35}
-          downDisplay={isIphoneX() ? height - 50 - 105 : height - 50 - 45}
-          startUp={false}
-          roundedEdges={false}
-          shadow={false}
-          categories={this.props.categories}
-          isRTL={this.props.isRTL}
-          navigation={this.props.navigation}
-          word={words}
-        /> */}
       </View>
     );
   }

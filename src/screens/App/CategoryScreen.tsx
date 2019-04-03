@@ -281,6 +281,7 @@ class CategoryScreen extends React.Component<any, any> {
         <Query
           query={getTimeLine}
           variables={{ ...rest }}
+          fetchPolicy="network-only"
           onCompleted={data => {
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
             this.props.setBuckets(buckets);

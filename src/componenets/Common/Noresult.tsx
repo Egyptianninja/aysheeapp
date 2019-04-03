@@ -5,8 +5,8 @@ const Noresult = ({ title, isRTL, top = 150 }: any) => (
   <View
     style={{
       flex: 1,
-      marginTop: top,
-      backgroundColor: '#fff',
+      paddingTop: top,
+      backgroundColor: '#eee',
       justifyContent: 'flex-start',
       alignItems: 'center',
       zIndex: 500
@@ -14,17 +14,16 @@ const Noresult = ({ title, isRTL, top = 150 }: any) => (
   >
     <View
       style={{
-        width: 150,
-        height: 150,
-        opacity: 0.4
+        width: 100,
+        height: 100
       }}
     >
       <Image
         style={{
           flex: 1,
           width: '100%',
-          height: '100%'
-          // tintColor: '#7678ED'
+          height: '100%',
+          tintColor: '#ccc'
         }}
         source={images.namelogofull}
       />
@@ -33,9 +32,9 @@ const Noresult = ({ title, isRTL, top = 150 }: any) => (
     <Text
       style={{
         textAlign: isRTL ? 'right' : 'left',
-        fontSize: 20,
-        color: '#9C949A',
-        marginTop: 40
+        fontSize: 16,
+        color: '#bbb',
+        marginTop: 20
       }}
     >
       {title}
