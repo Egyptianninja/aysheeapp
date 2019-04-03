@@ -606,8 +606,13 @@ class ItemView extends React.Component<any, any> {
                 time={post.time}
                 word={word}
               />
+              <Properties
+                android={Platform.OS === 'android'}
+                isRTL={isRTL}
+                words={word}
+                data={pdata}
+              />
               <View style={{ height: 20 }} />
-
               {myItem &&
                 renderUser({
                   user: this.props.user,
@@ -644,12 +649,7 @@ class ItemView extends React.Component<any, any> {
               )}
             </View>
             <View style={{ height: 20 }} />
-            <Properties
-              android={Platform.OS === 'android'}
-              isRTL={isRTL}
-              words={word}
-              data={pdata}
-            />
+
             {(post.categoryId === 5 || post.categoryId === 6) && (
               <Properties
                 android={Platform.OS === 'android'}
@@ -686,8 +686,8 @@ class ItemView extends React.Component<any, any> {
             >
               <Text
                 style={{
-                  fontSize: 18,
-                  color: '#999'
+                  fontSize: 16,
+                  color: '#aaa'
                 }}
               >
                 {word.comments}

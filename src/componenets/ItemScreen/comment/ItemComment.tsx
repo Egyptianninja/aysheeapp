@@ -51,7 +51,7 @@ class ItemComment extends React.PureComponent<any, any> {
 
     return (
       <View
-        style={{ paddingBottom: 4, borderTopColor: '#ddd', borderTopWidth: 1 }}
+        style={{ paddingBottom: 4, borderTopColor: '#eee', borderTopWidth: 1 }}
       >
         <TouchableOpacity
           onPress={async () => {

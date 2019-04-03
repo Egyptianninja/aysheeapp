@@ -2,6 +2,13 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 
 const Properties = ({ data, words, isRTL, android }: any) => {
+  function hasValue(dt: any) {
+    return !(dt.value && dt.value !== true);
+  }
+  const display = data.every(hasValue);
+  if (display) {
+    return <View />;
+  }
   return (
     <View
       style={{
@@ -9,7 +16,11 @@ const Properties = ({ data, words, isRTL, android }: any) => {
         alignItems: 'center',
         justifyContent: 'flex-start',
         flexDirection: isRTL && !android ? 'row-reverse' : 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderRadius: 10
       }}
     >
       {data.map((dt: any) => {

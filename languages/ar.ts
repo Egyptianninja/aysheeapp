@@ -469,7 +469,7 @@ export default {
     onlineposts: 'الاعلانات المنشورة',
     offlineposts: 'الاعلانات غير المنشورة',
     replay: 'اكتب رداً',
-    moreads: 'اعلانات اخرى',
+    moreads: 'اعلان',
     favorites: 'المفضلة',
     addedtovafavorites: 'تم اضافة الاعلان الى المفضلة',
     removeedtovafavorites: 'تم ازالة الاعلان من المفضلة',

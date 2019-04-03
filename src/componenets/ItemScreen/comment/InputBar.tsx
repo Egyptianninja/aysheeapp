@@ -3,7 +3,6 @@ import { View, TouchableOpacity, Text, Platform } from 'react-native';
 import { AutoInput } from '../../../lib';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, isArabic, rtlos } from '../../../utils';
-import { isRTL } from '../../../store/getStore';
 
 export default class InputBar extends React.Component<any, any> {
   autogrowInput: any;
@@ -105,8 +104,10 @@ export default class InputBar extends React.Component<any, any> {
               size={36}
               style={{
                 width: 30,
-                transform: isRTL ? [{ rotateY: '180deg' }] : undefined,
-                top: isRTL ? 3 : undefined
+                transform: this.props.isRTL
+                  ? [{ rotateY: '180deg' }]
+                  : undefined,
+                top: this.props.isRTL ? 3 : undefined
               }}
             />
           </TouchableOpacity>

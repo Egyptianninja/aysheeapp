@@ -468,7 +468,7 @@ export default {
     onlineposts: 'Online Posts',
     offlineposts: 'Offline Posts',
     replay: 'Replay',
-    moreads: 'more ads',
+    moreads: 'ads',
     favorites: 'Favorites',
     addedtovafavorites: 'Successfully added to favorites',
     removeedtovafavorites: 'Successfully removed to favorites',
