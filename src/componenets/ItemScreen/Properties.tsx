@@ -20,7 +20,7 @@ const Properties = ({ data, words, isRTL, android }: any) => {
         paddingVertical: 10,
         borderWidth: 1,
         borderColor: '#ddd',
-        borderRadius: 10
+        borderRadius: 20
       }}
     >
       {data.map((dt: any) => {

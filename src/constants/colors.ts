@@ -25,7 +25,11 @@ export const appcolors = [
   '#272727',
   '#171717',
   '#000000',
-  '#ff00ff'
+  '#ff00ff',
+  '#9B9CF1',
+  '#A7A9F3',
+  '#C0C1F6',
+  '#D9DAFA'
 ];
 
 export const colors = [

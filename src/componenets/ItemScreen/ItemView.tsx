@@ -494,7 +494,13 @@ class ItemView extends React.Component<any, any> {
             ref={ref => {
               this.scrollView = ref;
             }}
-            style={{ backgroundColor: '#eee' }}
+            style={{
+              backgroundColor: '#eee',
+              marginTop:
+                Platform.OS === 'android'
+                  ? Constants.statusBarHeight
+                  : undefined
+            }}
           >
             {photos.length > 0 && (
               <View>

@@ -1,14 +1,33 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from '../common';
 import { MapView } from 'expo';
 
 const { Marker }: any = MapView;
 
 export default class ItemLocation extends React.Component<any, any> {
+  map: any;
+
+  animateToCenter = () => {
+    this.map.animateToCoordinate(
+      {
+        latitude: this.props.latitude,
+        longitude: this.props.longitude
+      },
+      350
+    );
+  };
+
   render() {
     return (
       <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => this.animateToCenter()}
+          style={{ position: 'absolute', right: 8, top: 5, zIndex: 100 }}
+        >
+          <Ionicons name="ios-locate" size={30} color="#9B9CF1" />
+        </TouchableOpacity>
         <MapView
           style={{
             alignSelf: 'stretch',
@@ -20,6 +39,9 @@ export default class ItemLocation extends React.Component<any, any> {
             longitude: this.props.longitude,
             latitudeDelta: 0.0062,
             longitudeDelta: 0.0041
+          }}
+          ref={mapView => {
+            this.map = mapView;
           }}
           // showsUserLocation={true}
         >
@@ -66,9 +88,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ecf0f1',
     marginHorizontal: 10,
-    borderWidth: 1,
-    borderColor: '#eee',
-    borderRadius: 5,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    borderColor: '#D9DAFA',
+    borderWidth: 2,
     overflow: 'hidden'
   }
 });

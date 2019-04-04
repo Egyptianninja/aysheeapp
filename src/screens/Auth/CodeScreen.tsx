@@ -344,8 +344,7 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: 18,
-    padding: 5,
-    marginVertical: 15,
+    marginBottom: 15,
     color: '#777'
   },
   btnStyle: {

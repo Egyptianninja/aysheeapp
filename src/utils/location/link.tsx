@@ -61,8 +61,7 @@ export default class Link extends Component<any, any> {
             flex: 1,
             width: '90%',
             flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginTop: 10
+            justifyContent: 'space-around'
           }}
         >
           <TouchableOpacity
@@ -75,9 +74,10 @@ export default class Link extends Component<any, any> {
               borderRadius: 20
             }}
           >
-            <Ionicons name="ios-map" size={30} color="#7678ED" />
+            <Ionicons name="ios-map" size={30} color="#fff" />
             <Text style={styles.welcome}>{word.showinmap}</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={async () => {
               this.setState({ loadinLocation: true });
@@ -98,7 +98,16 @@ export default class Link extends Component<any, any> {
               borderRadius: 20
             }}
           >
-            <Ionicons name="ios-car" size={30} color="#7678ED" />
+            <View
+              style={{
+                position: 'absolute',
+                height: 30,
+                width: 2,
+                left: -10,
+                backgroundColor: '#fff'
+              }}
+            />
+            <Ionicons name="ios-car" size={30} color="#fff" />
             <Text style={styles.welcome}>{word.drivetolocation}</Text>
             {this.state.loadinLocation && <LoadingTiny />}
           </TouchableOpacity>
@@ -112,12 +121,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#8E90F0',
+    marginHorizontal: 10,
+    marginTop: -1,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
   },
   welcome: {
     fontSize: 12,
     textAlign: 'center',
-    color: '#7678ED',
+    color: '#fff',
     margin: 10
   }
 });
