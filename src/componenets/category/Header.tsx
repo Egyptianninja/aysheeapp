@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Platform } from 'react-native';
 import { Constants } from 'expo';
 import { rtlos } from '../../utils';
 
@@ -24,7 +24,7 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
         style={{
           position: 'absolute',
           left: 0,
-          top: 18,
+          top: Platform.OS === 'android' ? 22 : 18,
           alignItems: 'center',
           paddingVertical: 7,
           paddingLeft: 5,

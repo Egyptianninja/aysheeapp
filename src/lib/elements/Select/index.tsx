@@ -11,6 +11,7 @@ import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import { Option } from './Option';
 import { icons } from '../../../load';
+import { rtlos } from '../../../utils';
 
 const { width } = Dimensions.get('window');
 
@@ -53,12 +54,23 @@ export default class Select extends React.Component<any, any> {
         <View
           style={{
             flex: 1,
-            flexDirection: 'row',
-            justifyContent: isRTL ? 'flex-end' : 'flex-start'
+            justifyContent: 'space-between',
+            flexDirection:
+              isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
           }}
         >
           <Text style={{ fontSize: 14, paddingHorizontal: 10, color: '#777' }}>
             {label}
+          </Text>
+          <Text
+            style={{
+              top: 5,
+              fontSize: 12,
+              paddingHorizontal: 10,
+              color: 'rgba(255, 89, 89, 0.7)'
+            }}
+          >
+            {this.props.words.require}
           </Text>
         </View>
       );
@@ -74,7 +86,7 @@ export default class Select extends React.Component<any, any> {
           style={{
             flex: 1,
             justifyContent: 'space-between',
-            flexDirection: isRTL ? 'row-reverse' : 'row'
+            flexDirection: isRTL && rtlos() !== 3 ? 'row-reverse' : 'row'
           }}
         >
           <Text style={{ fontSize: 16, paddingHorizontal: 10 }}>
@@ -102,7 +114,7 @@ export default class Select extends React.Component<any, any> {
       <View>
         <TouchableOpacity
           style={{
-            flexDirection: isRTL ? 'row-reverse' : 'row',
+            flexDirection: isRTL && rtlos() !== 3 ? 'row-reverse' : 'row',
             width: this.props.width ? this.props.width : width - 60,
             height: 40,
             marginTop: 10,
@@ -124,16 +136,6 @@ export default class Select extends React.Component<any, any> {
             size={24}
             color="#999"
           />
-          <Text
-            style={{
-              fontSize: 16,
-              color: '#FF5959',
-              top: 0,
-              right: -10
-            }}
-          >
-            *{/* {this.props.words.require} */}
-          </Text>
         </TouchableOpacity>
         <Modal
           isVisible={this.state.isModalVisible}

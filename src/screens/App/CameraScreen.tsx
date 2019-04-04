@@ -148,6 +148,7 @@ class CameraScreen extends React.Component<any, any> {
   };
 
   orientation = async (orientation: any) => {
+
     await this.setState({ orientation });
     if (orientation === 'pu') {
       this.spinIcon(0);

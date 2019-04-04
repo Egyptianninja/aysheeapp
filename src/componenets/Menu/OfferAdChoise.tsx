@@ -129,7 +129,7 @@ const Option = ({
           }
           size={30}
           color="#555"
-          style={{ paddingHorizontal: 10, width: 40 }}
+          style={{ paddingHorizontal: 10, width: 50, textAlign: 'center' }}
         />
         <Text
           style={{

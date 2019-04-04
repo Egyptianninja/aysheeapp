@@ -218,17 +218,17 @@ class MyProfileScreen extends React.Component<any, any> {
 
   renderHeader = ({ user, words, callargs, maincolor }: any) => {
     return (
-      <View>
+      <View style={{}}>
         <View
           style={{
             padding: 10,
-            flexDirection: 'row'
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
           }}
         >
           <AvatarCircle user={user} size={PROFILE_IMAGE_HEIGHT} />
           <View
             style={{
-              marginLeft: 10,
+              marginHorizontal: 10,
               zIndex: 10,
               alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
             }}
@@ -265,7 +265,7 @@ class MyProfileScreen extends React.Component<any, any> {
 
             <View
               style={{
-                flexDirection: 'row',
+                flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between'
               }}
@@ -277,7 +277,7 @@ class MyProfileScreen extends React.Component<any, any> {
                 style={{
                   paddingTop: 5,
                   paddingBottom: 10,
-                  left: -15
+                  left: -5
                 }}
               >
                 <View
@@ -286,7 +286,7 @@ class MyProfileScreen extends React.Component<any, any> {
                     borderColor: '#ddd',
                     borderWidth: 1,
                     borderRadius: 15,
-                    flexDirection: 'row',
+                    flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
                     alignItems: 'center',
                     justifyContent: 'space-around'
                   }}
@@ -295,16 +295,16 @@ class MyProfileScreen extends React.Component<any, any> {
                     style={{
                       fontFamily: 'cairo-regular',
                       fontSize: 12,
-                      paddingHorizontal: 10
+                      paddingHorizontal: 8
                     }}
                   >
                     {words.editprofile}
                   </Text>
                   <Ionicons
-                    style={{ paddingRight: 10 }}
+                    style={{ paddingRight: 8 }}
                     name="md-person"
                     size={24}
-                    color="#000"
+                    color="#555"
                   />
                 </View>
               </TouchableOpacity>

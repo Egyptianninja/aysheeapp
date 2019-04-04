@@ -8,7 +8,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,7 +24,12 @@ import {
   phoneRemoved,
   updateUser
 } from '../../store/actions/userAtions';
-import { getCountryCityFromToken, StyleSheet, rtlos } from '../../utils';
+import {
+  getCountryCityFromToken,
+  StyleSheet,
+  rtlos,
+  isIphoneX
+} from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
 class Drawer extends React.Component<any, any> {
@@ -233,7 +239,7 @@ class Drawer extends React.Component<any, any> {
     const lang = this.props.languageName;
     const menus = this.props.menu;
     const { user } = this.props;
-
+    const marginTop = Platform.OS === 'android' ? 60 : 40;
     return (
       <SafeAreaView
         style={{
@@ -241,7 +247,7 @@ class Drawer extends React.Component<any, any> {
           backgroundColor: '#f3f3f3'
         }}
       >
-        <ScrollView style={{ flex: 1, marginTop: 40 }} scrollEventThrottle={60}>
+        <ScrollView style={{ flex: 1, marginTop }} scrollEventThrottle={60}>
           {this.props.isAuthenticated && (
             <View style={{ flex: 4 }}>
               {this.renderHeader(user)}

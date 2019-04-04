@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
+import { Platform } from 'expo-core';
 
 const ItemHeader = ({ title, navigation }: any) => {
   return (
@@ -10,7 +11,10 @@ const ItemHeader = ({ title, navigation }: any) => {
         onPress={() => navigation.goBack()}
         style={{
           position: 'absolute',
-          top: Constants.statusBarHeight + 6,
+          top:
+            Platform.OS === 'android'
+              ? Constants.statusBarHeight + 11
+              : Constants.statusBarHeight + 6,
           left: 10,
           zIndex: 860,
           width: 32,

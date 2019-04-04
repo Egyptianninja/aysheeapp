@@ -394,7 +394,10 @@ class ItemView extends React.Component<any, any> {
             onPress={() => this.props.navigation.goBack()}
             style={{
               position: 'absolute',
-              top: Constants.statusBarHeight + 3,
+              top:
+                Platform.OS === 'android'
+                  ? Constants.statusBarHeight + 8
+                  : Constants.statusBarHeight + 3,
               left: this.ardroid ? undefined : 10,
               right: this.ardroid ? 10 : undefined,
               zIndex: 860,

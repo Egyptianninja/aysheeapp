@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import search from '../../graphql/query/search';
 import { delQuery } from '../../store/actions/postActions';
-import { readyPosts, isTablet, getNextPosts } from '../../utils';
+import { readyPosts, isTablet, getNextPosts, rtlos } from '../../utils';
 import ItemViewSearch from './ItemViewSearch';
 import { ImageIcon } from '../Common';
 import { images } from '../../load';
@@ -58,7 +58,7 @@ class ResultView extends React.Component<any, any> {
           marginHorizontal: 50,
           borderBottomLeftRadius: 12.5,
           borderBottomRightRadius: 12.5,
-          flexDirection: isRTL ? 'row-reverse' : 'row',
+          flexDirection: isRTL && rtlos() !== 3 ? 'row-reverse' : 'row',
           shadowOffset: { width: 0, height: 2 },
           shadowColor: '#666',
           shadowOpacity: 0.25

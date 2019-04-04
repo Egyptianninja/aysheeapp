@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from '../common';
+import { StyleSheet, rtlos } from '../common';
 import { MapView } from 'expo';
 
 const { Marker }: any = MapView;
@@ -24,7 +24,13 @@ export default class ItemLocation extends React.Component<any, any> {
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => this.animateToCenter()}
-          style={{ position: 'absolute', right: 8, top: 5, zIndex: 100 }}
+          style={{
+            position: 'absolute',
+            right: rtlos() === 3 ? undefined : 8,
+            left: rtlos() === 3 ? 8 : undefined,
+            top: 5,
+            zIndex: 100
+          }}
         >
           <Ionicons name="ios-locate" size={30} color="#9B9CF1" />
         </TouchableOpacity>

@@ -5,6 +5,7 @@ import { words } from '../../store/getStore';
 import { Popup } from 'react-native-map-link';
 import { getUserLocation } from './getUserLocation';
 import LoadingTiny from '../../componenets/Common/LoadingTiny';
+import { rtlos } from '../common';
 
 export default class Link extends Component<any, any> {
   state = {
@@ -60,7 +61,7 @@ export default class Link extends Component<any, any> {
           style={{
             flex: 1,
             width: '90%',
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             justifyContent: 'space-around'
           }}
         >
@@ -69,7 +70,7 @@ export default class Link extends Component<any, any> {
               this.setState({ isViewModeVisible: true });
             }}
             style={{
-              flexDirection: 'row',
+              flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
               alignItems: 'center',
               borderRadius: 20
             }}
@@ -93,7 +94,7 @@ export default class Link extends Component<any, any> {
               this.setState({ isDriveModeVisible: true });
             }}
             style={{
-              flexDirection: 'row',
+              flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
               alignItems: 'center',
               borderRadius: 20
             }}

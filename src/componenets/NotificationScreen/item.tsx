@@ -27,7 +27,7 @@ const Item = (props: any) => {
     >
       <View
         style={{
-          flexDirection: isRTL ? 'row-reverse' : 'row',
+          flexDirection: isRTL && rtlos() !== 3 ? 'row-reverse' : 'row',
           alignItems: 'center',
           padding: 5
         }}
@@ -76,7 +76,11 @@ const Item = (props: any) => {
               width: '94%'
             }}
           >
-            <Text style={{ alignSelf: rtl ? 'flex-end' : 'flex-start' }}>
+            <Text
+              style={{
+                alignSelf: rtl && rtlos() !== 3 ? 'flex-end' : undefined
+              }}
+            >
               {item.body}
             </Text>
           </View>

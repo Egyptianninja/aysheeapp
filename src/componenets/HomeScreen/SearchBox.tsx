@@ -10,7 +10,7 @@ import {
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import { setQuery, delQuery } from '../../store/actions/postActions';
-import { StyleSheet, isArabic } from '../../utils';
+import { StyleSheet, isArabic, rtlos } from '../../utils';
 const { width } = Dimensions.get('window');
 
 class SearchBox extends React.Component<any, any> {
@@ -63,12 +63,17 @@ class SearchBox extends React.Component<any, any> {
       outputRange: [1, 0]
     });
     return (
-      <View style={{ flexDirection: 'row', paddingLeft: 5 }}>
+      <View
+        style={{
+          flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+          paddingLeft: 5
+        }}
+      >
         <Animated.View
           style={{
             backgroundColor: '#fff',
             borderColor: '#ddd',
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             width: animatedBox,
             height: 32,
             borderRadius: 16,
