@@ -20,7 +20,13 @@ export default class FilterOption extends React.Component<any, any> {
     };
   }
   render() {
-    const { itemData, itemKind, addFilter, isRTL } = this.props;
+    const {
+      itemData,
+      itemKind,
+      addFilter,
+      isRTL,
+      setUserLocation
+    } = this.props;
     const rst: any = this.state.rest;
     const sortId = rst.sortType ? rst.sortType : 1;
     return (
@@ -36,6 +42,7 @@ export default class FilterOption extends React.Component<any, any> {
                   lat: Number(userLocation.coords.latitude),
                   lon: Number(userLocation.coords.longitude)
                 };
+                setUserLocation(trueLocation);
                 addFilter(itemKind, itemData.id);
                 addFilter('trueLocation', trueLocation);
               }

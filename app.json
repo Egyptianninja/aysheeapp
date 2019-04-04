@@ -37,7 +37,8 @@
       }
     },
     "android": {
-      "package": "com.ishee.emadjumaah"
+      "package": "com.ishee.emadjumaah",
+      "versionCode": 2
     },
     "notification": {
       "icon": "./assets/nicon.png",

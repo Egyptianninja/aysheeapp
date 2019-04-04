@@ -7,7 +7,6 @@ import Navigation from './navigation';
 import { store, persistor } from './store';
 import { client } from './graphql';
 import { images, loadFonts, cacheImages } from './load';
-import { getCountryCityFromToken } from './utils';
 
 class App extends React.Component<any, any> {
   constructor(props: any) {

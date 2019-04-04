@@ -2,7 +2,16 @@ import MasonryList from '@appandflow/masonry-list';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Animated, Dimensions, StatusBar, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+import {
+  Animated,
+  Dimensions,
+  StatusBar,
+  View,
+  TouchableOpacity,
+  Text
+} from 'react-native';
 import { connect } from 'react-redux';
 import { HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
@@ -27,9 +36,10 @@ import {
 } from '../../utils';
 import FilterSelect from '../../componenets/HomeScreen/filters/FilterSelect';
 import SortView from '../../componenets/category/SortView';
+import MultiLocations from '../../utils/location/MultiLocations';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 class CategoryScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
   catScrollHome: any;
@@ -41,6 +51,7 @@ class CategoryScreen extends React.Component<any, any> {
   scrollValue = 0;
   NAVBAR_HEIGHT = 96;
   filter = true;
+  posts: any;
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
@@ -52,6 +63,7 @@ class CategoryScreen extends React.Component<any, any> {
       isMessageVisible: false,
       isEditModalVisible: false,
       isCheckMessaheVisible: false,
+      isMapModalVisible: false,
       modalPost: null,
       pressed: null,
       refreshing: false,
@@ -118,6 +130,13 @@ class CategoryScreen extends React.Component<any, any> {
   };
   hideCheckMessageModal = () => {
     this.setState({ isCheckMessaheVisible: false });
+  };
+
+  showMapModal = async () => {
+    this.setState({ isMapModalVisible: true });
+  };
+  hideMapModal = () => {
+    this.setState({ isMapModalVisible: false });
   };
 
   deletePost = async () => {
@@ -188,6 +207,9 @@ class CategoryScreen extends React.Component<any, any> {
       label: this.props.words.sort
     };
   };
+  setUserLocation = (userlocation: any) => {
+    this.setState({ userlocation });
+  };
 
   render() {
     const { rest } = this.state;
@@ -220,7 +242,18 @@ class CategoryScreen extends React.Component<any, any> {
           rest={this.state.rest}
           category={category}
         />
-
+        {this.state.rest.sortType === 3 && (
+          <MultiLocations
+            isMapModalVisible={this.state.isMapModalVisible}
+            hideMapModal={this.hideMapModal}
+            showMapModal={this.showMapModal}
+            latitude={this.state.userlocation.lat}
+            longitude={this.state.userlocation.lon}
+            posts={this.posts}
+            width={width}
+            height={height}
+          />
+        )}
         <Menu
           post={this.state.modalPost}
           favoritePost={this.props.favoritePost}
@@ -307,6 +340,8 @@ class CategoryScreen extends React.Component<any, any> {
               79,
               lang
             );
+            this.posts = posts;
+
             return (
               <React.Fragment>
                 <AnimatedListView
@@ -348,19 +383,44 @@ class CategoryScreen extends React.Component<any, any> {
                     />
                   )}
                   getHeightForItem={({ item }: any) => item.height}
-                  ListHeaderComponent={() => (
-                    <SortView
-                      isRTL={isRTL}
-                      rtlOS={rtlOS}
-                      data={sortData}
-                      sort={true}
-                      itemKind="sortType"
-                      addFilter={this.addFilter}
-                      removeFilter={this.removeFilter}
-                      rest={rest}
-                      words={words}
-                    />
-                  )}
+                  ListHeaderComponent={() => {
+                    return (
+                      <View>
+                        {this.state.rest.sortType === 3 && (
+                          <TouchableOpacity
+                            style={{
+                              position: 'absolute',
+                              top: 5,
+                              right: isRTL ? undefined : 0,
+                              left: isRTL ? 0 : undefined,
+                              paddingHorizontal: 20,
+                              zIndex: 100
+                            }}
+                            onPress={() => this.showMapModal()}
+                          >
+                            <Ionicons
+                              name="ios-map"
+                              size={31}
+                              color="#9B9CF1"
+                            />
+                          </TouchableOpacity>
+                        )}
+                        <SortView
+                          isRTL={isRTL}
+                          rtlOS={rtlOS}
+                          data={sortData}
+                          sort={true}
+                          itemKind="sortType"
+                          addFilter={this.addFilter}
+                          removeFilter={this.removeFilter}
+                          // TODO: fix this setstate
+                          setUserLocation={this.setUserLocation}
+                          rest={rest}
+                          words={words}
+                        />
+                      </View>
+                    );
+                  }}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}
                   onEndReachedThreshold={0.5}

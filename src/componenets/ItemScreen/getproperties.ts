@@ -5,6 +5,7 @@ export const getproperties = (post: any) => {
     iswarranty,
     realestate,
     space,
+    areaunit,
     rooms,
     bathrooms,
     isfurnishered,
@@ -23,7 +24,7 @@ export const getproperties = (post: any) => {
     { name: 'issale', value: issale },
     { name: 'iswarranty', value: iswarranty },
     { name: 'realestate', value: realestate },
-    { name: 'space', value: space },
+    { name: 'space', value: `${space} ${areaunit}` },
     { name: 'rooms', value: rooms },
     { name: 'bathrooms', value: bathrooms },
     { name: 'isfurnishered', value: isfurnishered },
@@ -40,11 +41,9 @@ export const getproperties = (post: any) => {
   ];
 };
 export const getJobProperties = (post: any) => {
-  const { jobTitle, jobIndustry, education, experience, salary } = post;
+  const { education, experience, salary } = post;
 
   return [
-    { name: 'jobtitle', value: jobTitle },
-    { name: 'jobindustry', value: jobIndustry },
     { name: 'education', value: education },
     { name: 'experience', value: experience },
     { name: 'salary', value: salary }
