@@ -52,6 +52,7 @@ class CategoryScreen extends React.Component<any, any> {
   NAVBAR_HEIGHT = 96;
   filter = true;
   posts: any;
+  userlocation: any;
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
@@ -208,7 +209,7 @@ class CategoryScreen extends React.Component<any, any> {
     };
   };
   setUserLocation = (userlocation: any) => {
-    this.setState({ userlocation });
+    this.userlocation = userlocation;
   };
 
   render() {
@@ -247,8 +248,8 @@ class CategoryScreen extends React.Component<any, any> {
             isMapModalVisible={this.state.isMapModalVisible}
             hideMapModal={this.hideMapModal}
             showMapModal={this.showMapModal}
-            latitude={this.state.userlocation.lat}
-            longitude={this.state.userlocation.lon}
+            latitude={this.userlocation.lat}
+            longitude={this.userlocation.lon}
             posts={this.posts}
             width={width}
             height={height}
@@ -391,10 +392,12 @@ class CategoryScreen extends React.Component<any, any> {
                             style={{
                               position: 'absolute',
                               top: 5,
-                              right: isRTL ? undefined : 0,
-                              left: isRTL ? 0 : undefined,
-                              paddingHorizontal: 20,
-                              zIndex: 100
+                              right: !isRTL || rtlos() === 3 ? 0 : undefined,
+                              left: rtlos() === 2 ? 0 : undefined,
+                              marginHorizontal: 10,
+                              paddingHorizontal: 10,
+                              zIndex: 100,
+                              width: 60
                             }}
                             onPress={() => this.showMapModal()}
                           >

@@ -3,9 +3,10 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { MapView, Constants } from 'expo';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
+import { Platform } from 'expo-core';
 
 const { Marker }: any = MapView;
-
+const types = ['standard', 'satellite', 'hybrid', 'terrain'];
 class MultiLocations extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
     if (nextProps.isMapModalVisible !== prevState.isMapModalVisible) {
@@ -26,7 +27,8 @@ class MultiLocations extends React.Component<any, any> {
       longitude: 0
     },
     markers: null,
-    latlons: null
+    latlons: null,
+    mapType: 'standard'
   };
 
   componentDidMount() {
@@ -67,9 +69,53 @@ class MultiLocations extends React.Component<any, any> {
     );
   };
 
+  renderType = (type: any) => {
+    return (
+      <TouchableOpacity
+        style={{
+          paddingHorizontal: 10,
+          paddingVertical: 5,
+          marginVertical: 10,
+          marginLeft: 5,
+          borderColor: '#fff',
+          borderWidth: 2,
+          borderRadius: 10,
+          backgroundColor: 'rgba(0, 0, 0, 0.4)'
+        }}
+        onPress={() => {
+          this.setMapType(type);
+        }}
+      >
+        <Text style={{ color: '#fff' }}>{type}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  renderMapTypesButtons = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          flexDirection: 'row',
+          left: 0,
+          bottom: 0,
+          zIndex: 150
+        }}
+      >
+        {this.renderType('standard')}
+        {this.renderType('hybrid')}
+      </View>
+    );
+  };
+
+  setMapType = (mapType: any) => {
+    this.setState({ mapType });
+  };
+
   render() {
     const markers: any = this.state.markers;
     const latlons: any = this.state.latlons;
+    const mapType: any = this.state.mapType;
     return (
       <Modal
         isVisible={this.state.isMapModalVisible}
@@ -87,7 +133,8 @@ class MultiLocations extends React.Component<any, any> {
           style={{
             backgroundColor: '#f3f3f3',
             position: 'absolute',
-            top: Constants.statusBarHeight + 40,
+            top:
+              Platform.OS === 'android' ? 40 : Constants.statusBarHeight + 40,
             bottom: 0,
             margin: 0,
             width: this.props.width,
@@ -109,13 +156,13 @@ class MultiLocations extends React.Component<any, any> {
               height: this.props.height,
               width: this.props.width
             }}
+            mapType={mapType}
             onLayout={() =>
               this.map.fitToCoordinates(latlons, {
                 edgePadding: { top: 30, right: 30, bottom: 30, left: 30 },
                 animated: false
               })
             }
-            showsUserLocation={true}
           >
             {markers &&
               markers.map((marker: any) => (
@@ -127,6 +174,7 @@ class MultiLocations extends React.Component<any, any> {
                 />
               ))}
           </MapView>
+          {this.renderMapTypesButtons()}
         </View>
       </Modal>
     );

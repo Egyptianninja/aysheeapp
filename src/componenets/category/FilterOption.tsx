@@ -46,10 +46,9 @@ export default class FilterOption extends React.Component<any, any> {
                 addFilter(itemKind, itemData.id);
                 addFilter('trueLocation', trueLocation);
               }
-              this.setState({ loadinLocation: false });
             } else {
               this.setState({ active: itemData.id });
-              addFilter(itemKind, Number(itemData.id));
+              await addFilter(itemKind, Number(itemData.id));
             }
           }
         }}
