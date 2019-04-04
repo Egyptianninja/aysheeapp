@@ -23,7 +23,7 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
         onPress={() => navigation.goBack()}
         style={{
           position: 'absolute',
-          left: 0,
+          left: rtlos() === 3 ? -15 : 0,
           top: Platform.OS === 'android' ? 22 : 18,
           alignItems: 'center',
           paddingVertical: 7,

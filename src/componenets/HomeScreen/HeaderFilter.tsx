@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import FilterSelect from './filters/FilterSelect';
 import PickerUI from '../../lib/ios/Picker';
 import SwitchUI from '../../lib/ios/Switch';
+import PickerAndroid from '../../lib/android/PickerAndroid';
 
 const HeaderFilter: any = ({
   rest: { categoryId },
@@ -49,8 +50,8 @@ const HeaderFilter: any = ({
           addFilter,
           removeFilter,
           isRTL,
-          originalTitle: 'For Sale',
-          seconTitle: 'For Rent'
+          originalTitle: words.forsale,
+          seconTitle: words.forrent
         })}
         {renderSwitch({
           words,
@@ -60,8 +61,8 @@ const HeaderFilter: any = ({
           addFilter,
           removeFilter,
           isRTL,
-          originalTitle: 'Furnished',
-          seconTitle: 'Unfurnished'
+          originalTitle: words.furnishered,
+          seconTitle: words.unfurnishered
         })}
         <View
           style={{
@@ -161,8 +162,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
           {renderSwitch({
             words,
@@ -172,8 +173,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'For Sale',
-            seconTitle: 'For Rent'
+            originalTitle: words.forsale,
+            seconTitle: words.forrent
           })}
         </View>
         <View
@@ -255,8 +256,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
         </View>
         <View
@@ -335,8 +336,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
         </View>
       </RenderFilter>
@@ -386,8 +387,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
         </View>
       </RenderFilter>
@@ -437,8 +438,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'Man',
-            seconTitle: 'Woman'
+            originalTitle: words.isforman,
+            seconTitle: words.isforwomen
           })}
         </View>
         <View style={{ paddingHorizontal: 10 }}>
@@ -450,8 +451,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
         </View>
       </RenderFilter>
@@ -484,8 +485,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
           {renderSwitch({
             words,
@@ -495,8 +496,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'For Sale',
-            seconTitle: 'For Rent'
+            originalTitle: words.forsale,
+            seconTitle: words.forrent
           })}
         </View>
       </RenderFilter>
@@ -545,8 +546,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'Request Service',
-            seconTitle: 'Offer Service'
+            originalTitle: words.isservicereq,
+            seconTitle: words.isserviceoffer
           })}
         </View>
       </RenderFilter>
@@ -630,8 +631,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
           {renderSwitch({
             words,
@@ -641,8 +642,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'For Sale',
-            seconTitle: 'For Rent'
+            originalTitle: words.forsale,
+            seconTitle: words.forrent
           })}
         </View>
       </RenderFilter>
@@ -737,8 +738,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
           {renderSwitch({
             words,
@@ -748,8 +749,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'For Sale',
-            seconTitle: 'For Rent'
+            originalTitle: words.forsale,
+            seconTitle: words.forrent
           })}
         </View>
       </RenderFilter>
@@ -804,8 +805,8 @@ const HeaderFilter: any = ({
             addFilter,
             removeFilter,
             isRTL,
-            originalTitle: 'New',
-            seconTitle: 'Used'
+            originalTitle: words.new,
+            seconTitle: words.old
           })}
         </View>
       </RenderFilter>
@@ -856,6 +857,23 @@ const renderPicker = ({
   isRTL,
   pid = null
 }: any) => {
+  if (Platform.OS === 'android') {
+    return (
+      <PickerAndroid
+        isRTL={isRTL}
+        data={bucket}
+        pid={pid}
+        icon
+        propsValue={rest[itemKind]}
+        value={[itemKind]}
+        itemKind={itemKind}
+        addFilter={addFilter}
+        removeFilter={removeFilter}
+        rest={rest}
+        words={words}
+      />
+    );
+  }
   return (
     <PickerUI
       isRTL={isRTL}

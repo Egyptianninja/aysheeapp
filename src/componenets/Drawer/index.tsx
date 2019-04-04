@@ -24,12 +24,7 @@ import {
   phoneRemoved,
   updateUser
 } from '../../store/actions/userAtions';
-import {
-  getCountryCityFromToken,
-  StyleSheet,
-  rtlos,
-  isIphoneX
-} from '../../utils';
+import { getCountryCityFromToken, StyleSheet, rtlos } from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
 class Drawer extends React.Component<any, any> {
@@ -162,7 +157,7 @@ class Drawer extends React.Component<any, any> {
           styles.drawer,
           {
             borderBottomColor: '#ddd',
-            flexDirection: 'row'
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
           }
         ]}
       >

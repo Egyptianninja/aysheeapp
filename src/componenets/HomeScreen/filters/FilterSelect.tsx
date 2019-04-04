@@ -162,7 +162,7 @@ export default class FilterSelect extends React.Component<any, any> {
                   : this.props.disable
                   ? '#aaa'
                   : '#555',
-              fontSize: this.props.sort ? 12 : 16,
+              fontSize: this.props.sort ? 12 : isRTL ? 14 : 16,
               fontWeight: selected ? 'bold' : '300',
               fontFamily: 'cairo-regular'
             }}

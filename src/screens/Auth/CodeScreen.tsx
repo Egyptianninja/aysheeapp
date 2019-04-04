@@ -26,7 +26,7 @@ import {
   login,
   smsSent
 } from '../../store/actions/userAtions';
-import { StyleSheet, isIphoneX } from '../../utils';
+import { StyleSheet, isIphoneX, rtlos } from '../../utils';
 import { Logo } from '../../componenets';
 
 const { width } = Dimensions.get('window');
@@ -188,7 +188,8 @@ class CodeScreen extends React.Component<any, any> {
           <TouchableOpacity
             style={{
               position: 'absolute',
-              left: 20,
+              left: rtlos() ? undefined : 20,
+              right: rtlos() ? 10 : undefined,
               top: isIphoneX() ? 50 : 30,
               zIndex: 150
             }}

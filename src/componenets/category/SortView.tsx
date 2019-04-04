@@ -26,7 +26,7 @@ export default class SortView extends React.Component<any, any> {
     return (
       <View
         style={{
-          flexDirection: rtlos() === 2 || rtlos() === 3 ? 'row-reverse' : 'row'
+          flexDirection: rtlos() === 2 ? 'row-reverse' : 'row'
         }}
       >
         {data.buckets.map((da: any) => {

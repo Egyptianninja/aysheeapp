@@ -26,7 +26,7 @@ import {
   phoneRemoved,
   smsSent
 } from '../../store/actions/userAtions';
-import { StyleSheet, isIphoneX } from '../../utils';
+import { StyleSheet, isIphoneX, rtlos } from '../../utils';
 import { Logo } from '../../componenets';
 
 class PhoneScreen extends React.Component<any, any> {
@@ -184,7 +184,8 @@ class PhoneScreen extends React.Component<any, any> {
           <TouchableOpacity
             style={{
               position: 'absolute',
-              left: 10,
+              left: rtlos() ? undefined : 10,
+              right: rtlos() ? 0 : undefined,
               top: isIphoneX() ? 40 : 20,
               zIndex: 150,
               padding: 10,

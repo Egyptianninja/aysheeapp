@@ -4,7 +4,8 @@ import {
   ScrollView,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -12,6 +13,7 @@ import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
 import HeaderFilter from '../HomeScreen/HeaderFilter';
 import { Constants } from 'expo';
+import { rtlos } from '../../utils';
 const { width, height } = Dimensions.get('window');
 
 class FilterModal extends React.Component<any, any> {
@@ -93,14 +95,18 @@ class FilterModal extends React.Component<any, any> {
           style={{
             backgroundColor: '#f3f3f3',
             position: 'absolute',
-            right: 0,
-            top: Constants.statusBarHeight + 40,
+            right: rtlos() === 3 ? undefined : 0,
+            left: rtlos() === 3 ? 0 : undefined,
+            top:
+              Platform.OS === 'android' ? 40 : Constants.statusBarHeight + 40,
             bottom: 45,
             margin: 0,
             width: 300,
             height: height - (Constants.statusBarHeight + 40 + 49),
-            borderTopLeftRadius: 15,
-            borderBottomLeftRadius: 15
+            borderTopLeftRadius: rtlos() === 3 ? undefined : 15,
+            borderBottomLeftRadius: rtlos() === 3 ? undefined : 15,
+            borderTopRightRadius: rtlos() === 3 ? 15 : undefined,
+            borderBottomRightRadius: rtlos() === 3 ? 15 : undefined
           }}
         >
           <View>
@@ -108,9 +114,9 @@ class FilterModal extends React.Component<any, any> {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                alignSelf: 'flex-end',
+                alignSelf: rtlos() === 3 ? 'flex-start' : 'flex-end',
                 width: 100,
-                flexDirection: 'row-reverse',
+                flexDirection: rtlos() === 3 ? 'row' : 'row-reverse',
                 paddingTop: 10
               }}
               onPress={() => this.removeAllCategoryFilters()}
@@ -127,7 +133,7 @@ class FilterModal extends React.Component<any, any> {
                   paddingHorizontal: 5
                 }}
               >
-                Clear
+                {words.clear}
               </Text>
             </TouchableOpacity>
           </View>
@@ -170,7 +176,9 @@ class FilterModal extends React.Component<any, any> {
                 this.props.hideFilterModal();
               }}
             >
-              <Text style={{ color: '#636363', fontSize: 16 }}>Cancel</Text>
+              <Text style={{ color: '#636363', fontSize: 16 }}>
+                {words.cancel}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -196,7 +204,7 @@ class FilterModal extends React.Component<any, any> {
                 this.props.hideFilterModal();
               }}
             >
-              <Text style={{ color: '#fff', fontSize: 16 }}>Apply</Text>
+              <Text style={{ color: '#fff', fontSize: 16 }}>{words.apply}</Text>
             </TouchableOpacity>
           </View>
         </View>

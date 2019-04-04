@@ -519,6 +519,8 @@ export default {
     fake: 'محتوى مزيف',
     content: 'محتوى غير ملائم',
     other: 'اخرى',
+    apply: 'تطبيق',
+    clear: 'مسح',
 
     popmenu: [
       { id: 1, name: 'اضافة الى المفضلة' },

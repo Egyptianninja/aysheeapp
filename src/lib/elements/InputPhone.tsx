@@ -44,8 +44,10 @@ class InputPhone extends React.PureComponent<any, any> {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: '#A7A9F3',
-              borderBottomLeftRadius: 25,
-              borderTopLeftRadius: 25,
+              borderBottomLeftRadius: rtlos() === 3 ? undefined : 25,
+              borderTopLeftRadius: rtlos() === 3 ? undefined : 25,
+              borderBottomRightRadius: rtlos() === 3 ? 25 : undefined,
+              borderTopRightRadius: rtlos() === 3 ? 25 : undefined,
               paddingHorizontal: 10,
 
               paddingVertical: 10
