@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
-import { ImagePicker as ImageAlbumPicker } from '../../utils';
+import { ImagePicker as ImageAlbumPicker, rtlos } from '../../utils';
 import { PhotoPicker } from './photoPicker';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
@@ -175,10 +175,11 @@ class PhotoView extends React.Component<any, any> {
       <React.Fragment>
         <Text
           style={{
-            alignSelf: isRTL ? 'flex-end' : 'flex-start',
+            alignSelf: rtlos() === 2 ? 'flex-end' : 'flex-start',
             paddingHorizontal: 45,
             color: '#777',
-            paddingVertical: 20
+            paddingTop: 20,
+            paddingBottom: 10
           }}
         >
           {word.photos}

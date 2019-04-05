@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { Platform, Text, TextInput, View } from 'react-native';
-import { arabicToNum } from '../../utils';
+import { arabicToNum, isArabic } from '../../utils';
 import { ErrorMessage } from './Common';
 class Input extends React.PureComponent<any, any> {
+  state = {
+    inputValue: ''
+  };
   handleChange = async (value: any) => {
     if (this.props.num) {
       const toEn = arabicToNum(value);
       this.props.onChange(this.props.name, toEn);
     } else {
-      if (this.props.handleUniqueName) {
-        this.props.setLoading();
-        this.props.onChange(this.props.name, value);
-        this.props.handleUniqueName(value);
-      } else {
-        this.props.onChange(this.props.name, value);
-      }
+      this.setState({ inputValue: value });
+      this.props.onChange(this.props.name, value);
     }
   };
 
@@ -44,7 +42,7 @@ class Input extends React.PureComponent<any, any> {
           style={[
             this.props.innerStyle,
             {
-              textAlign: this.props.rtl ? 'right' : 'left',
+              writingDirection: isArabic(this.state.inputValue) ? 'rtl' : 'ltr',
               backgroundColor: color ? color : '#fff',
               color: color ? '#fff' : '#636363'
             }

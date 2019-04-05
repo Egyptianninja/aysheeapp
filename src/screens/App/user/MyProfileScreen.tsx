@@ -141,7 +141,11 @@ class MyProfileScreen extends React.Component<any, any> {
 
   renderQuery = ({ variables, isRTL, words, lang }: any) => {
     return (
-      <Query query={getUserPosts} variables={variables}>
+      <Query
+        query={getUserPosts}
+        variables={variables}
+        fetchPolicy="network-only"
+      >
         {({ loading, error, data, fetchMore, refetch }) => {
           if (loading) {
             return <Loading />;
@@ -212,11 +216,12 @@ class MyProfileScreen extends React.Component<any, any> {
 
   renderHeader = ({ user, words, callargs, maincolor }: any) => {
     return (
-      <View style={{}}>
+      <View style={{ height: HEADER_HEIGHT - 50 }}>
         <View
           style={{
             padding: 10,
-            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+            height: HEADER_HEIGHT - 100
           }}
         >
           <AvatarCircle user={user} size={PROFILE_IMAGE_HEIGHT} />

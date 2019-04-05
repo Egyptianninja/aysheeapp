@@ -582,10 +582,8 @@ const styles = StyleSheet.create({
   },
   innerStyle: {
     width: width - 60,
-
     paddingHorizontal: 15,
     backgroundColor: '#fff',
-    writingDirection: 'auto',
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
