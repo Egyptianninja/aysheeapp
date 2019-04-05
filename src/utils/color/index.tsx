@@ -45,7 +45,6 @@ export default class ColorPicker extends React.Component<any, any> {
     }
     return (
       <Text
-        // style={{ color: ColorPicker.getContrastColor(color), fontSize: 60 }}
         style={{ color: '#fff', fontSize: Platform.OS === 'android' ? 30 : 50 }}
         adjustsFontSizeToFit
       >

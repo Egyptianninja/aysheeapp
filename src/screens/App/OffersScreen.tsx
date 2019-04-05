@@ -65,8 +65,8 @@ class OffersScreen extends Component<any, any> {
           style={{
             position: 'absolute',
             top: iphoneX ? 55 : 30,
-            left: rtlos() === 3 ? undefined : 0,
-            right: rtlos() === 3 ? 0 : undefined,
+            left: rtlos() === 3 ? undefined : 5,
+            right: rtlos() === 3 ? 5 : undefined,
             zIndex: 100,
             width: 40,
             height: 40,
@@ -75,7 +75,22 @@ class OffersScreen extends Component<any, any> {
             alignItems: 'center'
           }}
         >
-          <Ionicons name="ios-arrow-back" size={31} color="#ddd" />
+          <View
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 16,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.2)'
+            }}
+          >
+            <Ionicons
+              name="ios-arrow-back"
+              size={30}
+              color="rgba(255, 255, 255, 0.7)"
+            />
+          </View>
         </TouchableOpacity>
 
         <Query
@@ -88,12 +103,12 @@ class OffersScreen extends Component<any, any> {
               return <Loading />;
             }
             if (error) {
-              return <Text>{error}</Text>;
+              return <Noresult title="No Offers" top={100} />;
             }
             const shops = data.getShopsWithOffers;
 
             if (shops && shops.length === 0) {
-              return <Noresult title="No Offers" />;
+              return <Noresult title="No Offers" top={100} />;
             }
 
             return (

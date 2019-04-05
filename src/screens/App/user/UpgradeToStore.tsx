@@ -4,7 +4,6 @@ import * as React from 'react';
 import { graphql } from 'react-apollo';
 import {
   Dimensions,
-  Image,
   KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
@@ -14,7 +13,7 @@ import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Yup from 'yup';
-import { Avatar, AvatarCircle } from '../../../componenets';
+import { AvatarCircle } from '../../../componenets';
 import { colors } from '../../../constants';
 import upgradeToStore from '../../../graphql/mutation/upgradeToStore';
 import { Button, CheckBox, Group, Input, Title } from '../../../lib';

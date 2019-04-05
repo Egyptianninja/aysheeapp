@@ -30,7 +30,6 @@ import {
   getPureNumber,
   isArabic,
   Message,
-  registerForPushNotificationsAsync,
   StyleSheet,
   uploadPhotos,
   UserLocation
@@ -49,15 +48,9 @@ class AddCarScreen extends React.Component<any, any> {
       selectedBrand: null,
       isShowMessage: false,
       location: null,
-      pushToken: null,
       images: [],
       bar: 0
     };
-  }
-
-  async componentWillMount() {
-    const pushToken = await registerForPushNotificationsAsync();
-    await this.setState({ pushToken });
   }
 
   componentWillUnmount() {
@@ -179,14 +172,7 @@ class AddCarScreen extends React.Component<any, any> {
     });
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      if (this.state.pushToken) {
-        this.props.notificationSub({
-          variables: {
-            userId: this.props.user._id,
-            pushToken: this.state.pushToken
-          }
-        });
-      }
+
       await this.props.updateQty('online', 1);
       this.updateProgressBar(1 / (3 + this.state.images.length));
       this.showMessage({ seconds: 2, screen: 'HomeScreen' });

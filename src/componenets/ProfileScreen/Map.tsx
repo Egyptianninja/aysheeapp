@@ -84,9 +84,7 @@ export default class Map extends React.Component<any, any> {
     this.map.animateToCoordinate(
       {
         latitude,
-        longitude,
-        latitudeDelta: 0.00783,
-        longitudeDelta: 0.01299
+        longitude
       },
       350
     );

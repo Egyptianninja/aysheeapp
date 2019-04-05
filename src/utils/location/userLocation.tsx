@@ -34,9 +34,7 @@ class UserLocation extends React.Component<any, any> {
     this.map.animateToCoordinate(
       {
         latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.00783,
-        longitudeDelta: 0.01299
+        longitude: location.coords.longitude
       },
       350
     );
