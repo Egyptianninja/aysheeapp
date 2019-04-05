@@ -3,18 +3,17 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import {
   Dimensions,
-  Text,
-  TouchableOpacity,
-  View,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Loading, Noresult } from '../../componenets';
 import { OffersSlider } from '../../componenets/OffersScreen';
 import { User } from '../../componenets/User/User';
 import getShopsWithOffers from '../../graphql/query/getShopsWithOffers';
-import { readyUserPosts, isIphoneX, rtlos } from '../../utils';
+import { isIphoneX, readyUserPosts, rtlos } from '../../utils';
 
 const HEIGHT = Dimensions.get('window').height;
 const iphoneX = isIphoneX();

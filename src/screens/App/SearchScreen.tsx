@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { CategoryView, ResultView } from '../../componenets/Search';
-import { View, Animated, Dimensions } from 'react-native';
-import SearchHeader from '../../componenets/HomeScreen/SearchHeader';
 import { Constants } from 'expo';
+import * as React from 'react';
+import { Animated, Dimensions, View } from 'react-native';
+import SearchHeader from '../../componenets/HomeScreen/SearchHeader';
+import { CategoryView, ResultView } from '../../componenets/Search';
 const { height } = Dimensions.get('window');
 
 const finalTop = Constants.statusBarHeight + 40;

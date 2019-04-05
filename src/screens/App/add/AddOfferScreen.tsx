@@ -15,29 +15,21 @@ import {
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
-import { updateQty } from '../../../store/actions/userAtions';
-
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import {
-  Button,
-  CheckBox,
-  Group,
-  Input,
-  SelectDate,
-  Title
-} from '../../../lib';
+import { Button, CheckBox, Group, Input, SelectDate } from '../../../lib';
+import { updateQty } from '../../../store/actions/userAtions';
 import {
   getPureNumber,
   isArabic,
   Message,
   pickImageWithoutUpload,
+  rtlos,
   StyleSheet,
   uploadPickedImage,
-  UserLocation,
-  rtlos
+  UserLocation
 } from '../../../utils';
-import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 
 const { width } = Dimensions.get('window');
 
@@ -61,7 +53,6 @@ class AddServiceScreen extends React.Component<any, any> {
     if (finalStatus !== 'granted') {
       return;
     }
-    // this.props.addPermission('CAMERA_ROLL');
     const image = await pickImageWithoutUpload(false);
 
     if (image) {

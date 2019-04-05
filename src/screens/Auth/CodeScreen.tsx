@@ -8,12 +8,13 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-  TouchableOpacity
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
+import { Logo } from '../../componenets';
 import { codeTimes, smsTimes } from '../../constants';
 import smsLoginWithCode from '../../graphql/mutation/smsLoginWithCode';
 import smsRequestCode from '../../graphql/mutation/smsRequestCode';
@@ -26,8 +27,7 @@ import {
   login,
   smsSent
 } from '../../store/actions/userAtions';
-import { StyleSheet, isIphoneX, rtlos } from '../../utils';
-import { Logo } from '../../componenets';
+import { isIphoneX, rtlos, StyleSheet } from '../../utils';
 
 const { width } = Dimensions.get('window');
 

@@ -1,41 +1,32 @@
 import MasonryList from '@appandflow/masonry-list';
+import { Ionicons } from '@expo/vector-icons';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Ionicons } from '@expo/vector-icons';
-
-import {
-  Animated,
-  Dimensions,
-  StatusBar,
-  View,
-  TouchableOpacity,
-  Text
-} from 'react-native';
+import { Animated, Dimensions, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { HomeLoading, Noresult } from '../../componenets';
+import FilterModal from '../../componenets/category/FilterModal';
+import Header from '../../componenets/category/Header';
+import SortView from '../../componenets/category/SortView';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
 import { Edit, Menu, Report } from '../../componenets/Menu';
-import FilterModal from '../../componenets/category/FilterModal';
 import createReport from '../../graphql/mutation/createReport';
 import deletePost from '../../graphql/mutation/deletePost';
 import editClassifieds from '../../graphql/mutation/editClassifieds';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import getTimeLine from '../../graphql/query/getTimeLine';
-import { setBuckets, delQuery } from '../../store/actions/postActions';
+import { delQuery, setBuckets } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
-import Header from '../../componenets/category/Header';
 import * as store from '../../store/getStore';
 import {
   getNextPosts,
   getTimeLineBuckets,
+  isTablet,
   Message,
   readyPosts,
-  isTablet,
   rtlos
 } from '../../utils';
-import FilterSelect from '../../componenets/HomeScreen/filters/FilterSelect';
-import SortView from '../../componenets/category/SortView';
 import MultiLocations from '../../utils/location/MultiLocations';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);

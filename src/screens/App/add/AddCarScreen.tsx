@@ -6,13 +6,13 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   ScrollView,
-  View,
-  Text
+  View
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import PhotoView from '../../../componenets/Add/PhotoView';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
@@ -34,7 +34,6 @@ import {
   uploadPhotos,
   UserLocation
 } from '../../../utils';
-import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 
 const { width } = Dimensions.get('window');
 
@@ -163,7 +162,7 @@ class AddCarScreen extends React.Component<any, any> {
         km: Number(km),
         color,
         brand,
-        subBrand,
+        subBrand: subBrand === '' ? undefined : subBrand,
         kind,
         trueLocation
       }

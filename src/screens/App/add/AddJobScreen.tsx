@@ -10,19 +10,12 @@ import {
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
-import { updateQty } from '../../../store/actions/userAtions';
-
 import PhotoView from '../../../componenets/Add/PhotoView';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import {
-  Button,
-  CheckBox,
-  Group,
-  Input,
-  RadioButton,
-  Title
-} from '../../../lib';
+import { Button, CheckBox, Group, Input, RadioButton } from '../../../lib';
+import { updateQty } from '../../../store/actions/userAtions';
 import {
   isArabic,
   Message,
@@ -31,7 +24,6 @@ import {
   UserLocation
 } from '../../../utils';
 import { getPureNumber } from '../../../utils/call';
-import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 
 const { width } = Dimensions.get('window');
 

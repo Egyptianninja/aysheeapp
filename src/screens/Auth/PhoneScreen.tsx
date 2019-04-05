@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
+import { Logo } from '../../componenets';
 import { smsTimes } from '../../constants';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import smsLoginWithPhone from '../../graphql/mutation/smsLoginWithPhone';
@@ -26,8 +27,7 @@ import {
   phoneRemoved,
   smsSent
 } from '../../store/actions/userAtions';
-import { StyleSheet, isIphoneX, rtlos } from '../../utils';
-import { Logo } from '../../componenets';
+import { isIphoneX, rtlos, StyleSheet } from '../../utils';
 
 class PhoneScreen extends React.Component<any, any> {
   subs: any;

@@ -3,11 +3,11 @@ import { Notifications } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Animated, Dimensions, StatusBar, View, Text } from 'react-native';
+import { Animated, Dimensions, View } from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
-import { Edit, Menu, Report, OfferAdChoise } from '../../componenets/Menu';
+import { Edit, Menu, OfferAdChoise, Report } from '../../componenets/Menu';
 import NotificationModal from '../../componenets/NotificationScreen/NotificationModal';
 import createReport from '../../graphql/mutation/createReport';
 import deletePost from '../../graphql/mutation/deletePost';
@@ -16,17 +16,19 @@ import favoritePost from '../../graphql/mutation/favoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import getTimeLine from '../../graphql/query/getTimeLine';
-import { setBuckets, delQuery } from '../../store/actions/postActions';
+import { addPermission } from '../../store/actions/globActions';
+import { delQuery, setBuckets } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
 import * as store from '../../store/getStore';
 import {
   getNextPosts,
   getTimeLineBuckets,
+  isTablet,
   Message,
   readyPosts,
-  registerForPushNotificationsAsync,
-  isTablet
+  registerForPushNotificationsAsync
 } from '../../utils';
+
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
 class HomeScreen extends React.Component<any, any> {
@@ -89,19 +91,22 @@ class HomeScreen extends React.Component<any, any> {
           if (this.props.isAuthenticated) {
             const pushToken = await registerForPushNotificationsAsync();
             if (pushToken) {
-              await this.props.notificationSub({
+              const res = await this.props.notificationSub({
                 variables: {
                   userId: this.props.user._id,
                   pushToken
                 }
               });
+              if (res.data.notificationSub.ok) {
+                this.props.addPermission('NOTIFICATIONS');
+              }
             }
           }
         }
-      }),
-      this.props.navigation.addListener('willBlur', () => {
-        //
       })
+      // this.props.navigation.addListener('willBlur', () => {
+      //   //
+      // })
     ];
 
     this.state.scrollAnim.addListener(({ value }: any) => {
@@ -566,12 +571,13 @@ const mapStateToProps = (state: any) => ({
   words: state.glob.language.words,
   isAuthenticated: state.user.isAuthenticated,
   user: state.user.user,
+  pushToken: state.user.pushToken,
   query: state.post.query
 });
 
 export default connect(
   mapStateToProps,
-  { setBuckets, updateQty, delQuery }
+  { setBuckets, updateQty, delQuery, addPermission }
 )(
   graphql(refreshToken, {
     name: 'refreshToken'

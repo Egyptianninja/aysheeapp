@@ -12,6 +12,7 @@ import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import PhotoView from '../../../componenets/Add/PhotoView';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import { currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
@@ -21,8 +22,7 @@ import {
   Group,
   Input,
   RadioButton,
-  Select,
-  Title
+  Select
 } from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
 import {
@@ -34,7 +34,6 @@ import {
   uploadPhotos,
   UserLocation
 } from '../../../utils';
-import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 const { width } = Dimensions.get('window');
 
 class AddPartsScreen extends React.Component<any, any> {

@@ -1,11 +1,8 @@
-import * as React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
-import { addPermission } from '../../store/actions/globActions';
 import { Ionicons } from '@expo/vector-icons';
-
-import { StyleSheet, rtlos } from '../common';
 import { MapView } from 'expo';
+import * as React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { rtlos, StyleSheet } from '../common';
 import { getUserLocation } from './getUserLocation';
 
 class UserLocation extends React.Component<any, any> {
@@ -99,7 +96,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  null,
-  { addPermission }
-)(UserLocation);
+export default UserLocation;

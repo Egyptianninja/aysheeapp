@@ -1,13 +1,6 @@
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import {
-  AsyncStorage,
-  Dimensions,
-  Image,
-  View,
-  StatusBar,
-  Animated
-} from 'react-native';
+import { AsyncStorage, Image, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import getMyCountry from '../../graphql/mutation/getMyCountry';
 import refreshToken from '../../graphql/mutation/refreshToken';

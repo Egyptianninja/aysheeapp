@@ -8,10 +8,9 @@ import {
   SearchStack
 } from './appTabStacks';
 import { ImageIcon } from '../../componenets';
-import { Platform } from 'expo-core';
 import { rtlos } from '../../utils';
 
-let AppTabNavigation;
+let AppTabNavigation: any;
 if (rtlos() === 3) {
   AppTabNavigation = createBottomTabNavigator(
     {
