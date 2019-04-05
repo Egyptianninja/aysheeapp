@@ -12,14 +12,12 @@ import {
 import { getCurrency } from './getCurrency';
 import { getDate } from './getDate';
 import { getLang, getLocale, rtlos } from './getlang';
-import { getLocation } from './getLocation';
 import Orientation from './orientation';
 import { parseJwt } from './parseJwt';
 import { StyleSheet } from './stylesheet';
 import ZoomView from './zoomView';
 
 export {
-  getLocation,
   parseJwt,
   StyleSheet,
   isArabic,

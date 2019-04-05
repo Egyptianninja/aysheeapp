@@ -25,7 +25,8 @@ import {
   StyleSheet,
   UserLocation,
   pickImageWithoutUpload,
-  uploadPickedImage
+  uploadPickedImage,
+  getCameraRollPermission
 } from '../../../utils';
 import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 const { width } = Dimensions.get('window');
@@ -40,21 +41,13 @@ class UpgradeToStore extends React.Component<any, any> {
   };
 
   onAvatarUpload = async () => {
-    const permissions = Permissions.CAMERA_ROLL;
-    const { status: existingStatus } = await Permissions.getAsync(permissions);
-    let finalStatus = existingStatus;
-    if (finalStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(permissions);
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      return;
-    }
-    this.props.addPermission('CAMERA_ROLL');
-    const avatar = await pickImageWithoutUpload(true);
+    const getCameraRoll = await getCameraRollPermission();
+    if (getCameraRoll) {
+      const avatar = await pickImageWithoutUpload(true);
 
-    if (avatar) {
-      this.setState({ avatar });
+      if (avatar) {
+        this.setState({ avatar });
+      }
     }
   };
 

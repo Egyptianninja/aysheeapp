@@ -26,7 +26,8 @@ import {
   isArabic,
   pickImageWithoutUpload,
   uploadPickedImage,
-  UserLocation
+  UserLocation,
+  getCameraRollPermission
 } from '../../utils';
 import LoadingTiny from '../Common/LoadingTiny';
 
@@ -74,21 +75,13 @@ export default class Edit extends React.Component<any, any> {
   };
 
   onPhotoUpload = async (setFieldValue: any) => {
-    const permissions = Permissions.CAMERA_ROLL;
-    const { status: existingStatus } = await Permissions.getAsync(permissions);
-    let finalStatus = existingStatus;
-    if (finalStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(permissions);
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      return;
-    }
-    const image = await pickImageWithoutUpload(false);
-
-    if (image) {
-      this.setState({ image });
-      setFieldValue('photo', image);
+    const getCameraRoll = await getCameraRollPermission();
+    if (getCameraRoll) {
+      const image = await pickImageWithoutUpload(false);
+      if (image) {
+        this.setState({ image });
+        setFieldValue('photo', image);
+      }
     }
   };
 

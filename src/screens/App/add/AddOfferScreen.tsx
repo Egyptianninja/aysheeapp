@@ -28,7 +28,8 @@ import {
   rtlos,
   StyleSheet,
   uploadPickedImage,
-  UserLocation
+  UserLocation,
+  getCameraRollPermission
 } from '../../../utils';
 
 const { width } = Dimensions.get('window');
@@ -43,21 +44,14 @@ class AddServiceScreen extends React.Component<any, any> {
   };
 
   onPhotoUpload = async (setFieldValue: any) => {
-    const permissions = Permissions.CAMERA_ROLL;
-    const { status: existingStatus } = await Permissions.getAsync(permissions);
-    let finalStatus = existingStatus;
-    if (finalStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(permissions);
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      return;
-    }
-    const image = await pickImageWithoutUpload(false);
+    const getCameraRoll = await getCameraRollPermission();
+    if (getCameraRoll) {
+      const image = await pickImageWithoutUpload(false);
 
-    if (image) {
-      this.setState({ image });
-      setFieldValue('photo', image);
+      if (image) {
+        this.setState({ image });
+        setFieldValue('photo', image);
+      }
     }
   };
 

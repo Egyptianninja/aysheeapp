@@ -18,7 +18,7 @@ import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
 import { addPermission } from '../../store/actions/globActions';
-import { Orientation } from '../../utils';
+import { Orientation, getCameraPermission } from '../../utils';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
 
@@ -42,9 +42,8 @@ class CameraScreen extends React.Component<any, any> {
   };
 
   async componentDidMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-    this.props.addPermission('CAMERA');
+    const getCamera = await getCameraPermission();
+    this.setState({ hasCameraPermission: getCamera });
   }
 
   componentWillUnmount = () => {

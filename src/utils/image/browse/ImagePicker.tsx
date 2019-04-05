@@ -5,6 +5,7 @@ import ImageModal from './ImageModal';
 import { connect } from 'react-redux';
 import { addPermission } from '../../../store/actions/globActions';
 import { PhotoPicker } from '../../../componenets/Add/photoPicker';
+import { getCameraRollPermission } from '../../camera';
 
 class ImagePicker extends React.PureComponent<any, any> {
   constructor(props: any) {
@@ -26,19 +27,11 @@ class ImagePicker extends React.PureComponent<any, any> {
     this.setState({ isModalVisible: !this.state.isPhotoModalVisible });
 
   pickImage = async () => {
-    const permissions = Permissions.CAMERA_ROLL;
-    const { status: existingStatus } = await Permissions.getAsync(permissions);
-    let finalStatus = existingStatus;
-    if (finalStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(permissions);
-      finalStatus = status;
+    const getCameraRoll = await getCameraRollPermission();
+    if (getCameraRoll) {
+      this.setState({ imageBrowserOpen: true });
+      this.setState({ isPhotoModalVisible: true });
     }
-    if (finalStatus !== 'granted') {
-      return;
-    }
-    this.props.addPermission('CAMERA_ROLL');
-    this.setState({ imageBrowserOpen: true });
-    this.setState({ isPhotoModalVisible: true });
   };
   imageBrowserCallback = (callback: any) => {
     callback

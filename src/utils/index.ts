@@ -8,7 +8,9 @@ import {
   readyPosts,
   readyUserPosts
 } from './apollo';
+import BottomDrawer from './bottomDrawar';
 import { call, getPureNumber } from './call';
+import { getCameraPermission, getCameraRollPermission } from './camera';
 import ColorPicker from './color';
 import {
   arabicToNum,
@@ -23,14 +25,13 @@ import {
   getLang,
   getLocale,
   getLocaleCountry,
-  getLocation,
   isArabic,
   nameToColor,
   Orientation,
   parseJwt,
+  rtlos,
   StyleSheet,
-  ZoomView,
-  rtlos
+  ZoomView
 } from './common';
 import {
   compressImage,
@@ -53,14 +54,10 @@ import DotIndicator from './loading';
 import DotIndicatorSmall from './loading/small';
 import { getUserLocation, ItemLocation, UserLocation } from './location';
 import Message from './message';
-import {
-  getPushToken,
-  registerForPushNotificationsAsync
-} from './notifications';
+import { registerForPushNotificationsAsync } from './notifications';
+import { isIphoneX, isTablet } from './platform/device';
 import { onShare } from './share';
 import { since } from './since';
-import { isIphoneX, isTablet } from './platform/device';
-import BottomDrawer from './bottomDrawar';
 export {
   StyleSheet,
   uploadPhoto,
@@ -69,7 +66,6 @@ export {
   compressImage,
   ImagePicker,
   since,
-  getLocation,
   getNextPosts,
   getNewPosts,
   readyPosts,
@@ -91,7 +87,6 @@ export {
   getSecondsDistance,
   getSendSmsInterval,
   getCountryCode,
-  getPushToken,
   ImageViewer,
   getCountryCodeQatar,
   nameToColor,
@@ -118,5 +113,7 @@ export {
   isIphoneX,
   isTablet,
   rtlos,
-  BottomDrawer
+  BottomDrawer,
+  getCameraRollPermission,
+  getCameraPermission
 };
