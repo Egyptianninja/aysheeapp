@@ -1,12 +1,24 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { MapView, Constants } from 'expo';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+  Image,
+  StyleSheet
+} from 'react-native';
+import { MapView } from 'expo';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
-import { Platform } from 'expo-core';
 
 const { Marker }: any = MapView;
-const types = ['standard', 'satellite', 'hybrid', 'terrain'];
+
+const { width, height } = Dimensions.get('window');
+
+const CARD_HEIGHT = height / 4;
+const CARD_WIDTH = CARD_HEIGHT - 50;
+
 class MultiLocations extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
     if (nextProps.isMapModalVisible !== prevState.isMapModalVisible) {
@@ -19,6 +31,8 @@ class MultiLocations extends React.Component<any, any> {
   }
   timerHandle: any;
   map: any;
+  index: any;
+  animation: any;
   state = {
     isMapModalVisible: false,
     granted: false,
@@ -42,11 +56,25 @@ class MultiLocations extends React.Component<any, any> {
         coordinate: {
           latitude: post.trueLocation.lat,
           longitude: post.trueLocation.lon
-        }
+        },
+        image: post.uri,
+        price: post.price
       };
     });
     this.setState({ markers });
     this.setState({ latlons: markers.map((m: any) => m.coordinate) });
+    this.index = 0;
+    this.animation = new Animated.Value(0);
+
+    this.animation.addListener(({ value }: any) => {
+      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      if (index >= markers.length) {
+        index = markers.length - 1;
+      }
+      if (index <= 0) {
+        index = 0;
+      }
+    });
   }
 
   renderBack = () => {
@@ -55,16 +83,20 @@ class MultiLocations extends React.Component<any, any> {
         onPress={() => this.props.hideMapModal()}
         style={{
           position: 'absolute',
-          top: 80,
+          top: 40,
           left: 10,
           zIndex: 160,
-          width: 60,
-          height: 60,
+          width: 40,
+          height: 40,
           borderRadius: 16,
           justifyContent: 'flex-start'
         }}
       >
-        <Ionicons name="ios-close-circle" size={33} color="#777" />
+        <Ionicons
+          name="ios-close-circle"
+          size={33}
+          color="rgba(0, 0, 0, 0.4)"
+        />
       </TouchableOpacity>
     );
   };
@@ -76,7 +108,7 @@ class MultiLocations extends React.Component<any, any> {
           paddingHorizontal: 10,
           paddingVertical: 5,
           marginVertical: 10,
-          marginLeft: 5,
+          marginRight: 5,
           borderColor: '#fff',
           borderWidth: 2,
           borderRadius: 10,
@@ -97,8 +129,8 @@ class MultiLocations extends React.Component<any, any> {
         style={{
           position: 'absolute',
           flexDirection: 'row',
-          left: 0,
-          bottom: 0,
+          right: 0,
+          top: 30,
           zIndex: 150
         }}
       >
@@ -116,6 +148,27 @@ class MultiLocations extends React.Component<any, any> {
     const markers: any = this.state.markers;
     const latlons: any = this.state.latlons;
     const mapType: any = this.state.mapType;
+
+    const interpolations = markers
+      ? markers.map((marker: any, index: any) => {
+          const inputRange = [
+            (index - 1) * CARD_WIDTH,
+            index * CARD_WIDTH,
+            (index + 1) * CARD_WIDTH
+          ];
+          const scale = this.animation.interpolate({
+            inputRange,
+            outputRange: [1, 2.5, 1],
+            extrapolate: 'clamp'
+          });
+          const opacity = this.animation.interpolate({
+            inputRange,
+            outputRange: [0.35, 1, 0.35],
+            extrapolate: 'clamp'
+          });
+          return { scale, opacity };
+        })
+      : undefined;
     return (
       <Modal
         isVisible={this.state.isMapModalVisible}
@@ -129,16 +182,15 @@ class MultiLocations extends React.Component<any, any> {
         style={{ margin: 0 }}
       >
         {this.renderBack()}
+        {this.renderMapTypesButtons()}
+
         <View
           style={{
             backgroundColor: '#f3f3f3',
             position: 'absolute',
-            top:
-              Platform.OS === 'android' ? 40 : Constants.statusBarHeight + 40,
-            bottom: 0,
             margin: 0,
-            width: this.props.width,
-            height: this.props.height - (Constants.statusBarHeight + 40)
+            width,
+            height
           }}
         >
           <MapView
@@ -153,32 +205,175 @@ class MultiLocations extends React.Component<any, any> {
             }}
             style={{
               alignSelf: 'stretch',
-              height: this.props.height,
-              width: this.props.width
+              left: 0,
+              top: 0,
+              height,
+              width
             }}
             mapType={mapType}
             onLayout={() =>
               this.map.fitToCoordinates(latlons, {
-                edgePadding: { top: 30, right: 30, bottom: 30, left: 30 },
+                edgePadding: {
+                  top: 30,
+                  right: 30,
+                  bottom: CARD_HEIGHT + 10,
+                  left: 30
+                },
                 animated: false
               })
             }
           >
             {markers &&
-              markers.map((marker: any) => (
-                <Marker
-                  key={marker.id}
-                  coordinate={marker.coordinate}
-                  title={marker.title}
-                  description={marker.description}
-                />
-              ))}
+              markers.map((marker: any, index: any) => {
+                const scaleStyle = {
+                  transform: [
+                    {
+                      scale: interpolations[index].scale
+                    }
+                  ]
+                };
+                const opacityStyle = {
+                  opacity: interpolations[index].opacity
+                };
+                return (
+                  <Marker key={index} coordinate={marker.coordinate}>
+                    <Animated.View style={[styles.markerWrap, opacityStyle]}>
+                      <Animated.View style={[styles.ring, scaleStyle]} />
+                      <View style={styles.marker} />
+                    </Animated.View>
+                  </Marker>
+                  // <Marker
+                  //   key={marker.id}
+                  //   coordinate={marker.coordinate}
+                  //   title={marker.title}
+                  //   description={marker.description}
+                  // />
+                );
+              })}
           </MapView>
-          {this.renderMapTypesButtons()}
+          <Animated.ScrollView
+            horizontal
+            scrollEventThrottle={1}
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={CARD_WIDTH}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {
+                      x: this.animation
+                    }
+                  }
+                }
+              ],
+              { useNativeDriver: true }
+            )}
+            style={styles.scrollView}
+            contentContainerStyle={styles.endPadding}
+          >
+            {markers &&
+              markers.map((marker: any, index: any) => (
+                <View style={styles.card} key={index}>
+                  <Image
+                    source={{ uri: marker.image }}
+                    style={styles.cardImage}
+                    resizeMode="cover"
+                  />
+                  <Text
+                    style={{
+                      position: 'absolute',
+                      right: 5,
+                      top: 5,
+                      fontSize: 14,
+                      fontWeight: 'bold',
+                      color: '#26A65B',
+                      paddingLeft: 5,
+                      paddingBottom: 3,
+                      backgroundColor: 'rgba(255, 255, 255, 1)'
+                    }}
+                  >
+                    {marker.price.toLocaleString('en')}
+                  </Text>
+                  <View style={styles.textContent}>
+                    <Text numberOfLines={1} style={styles.cardtitle}>
+                      {marker.title}
+                    </Text>
+                    <Text numberOfLines={1} style={styles.cardDescription}>
+                      {marker.description}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+          </Animated.ScrollView>
         </View>
       </Modal>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  scrollView: {
+    position: 'absolute',
+    bottom: 10,
+    left: 0,
+    right: 0
+  },
+  endPadding: {
+    paddingRight: width - CARD_WIDTH
+  },
+  card: {
+    padding: 10,
+    elevation: 2,
+    backgroundColor: '#FFF',
+    marginHorizontal: 10,
+    shadowColor: '#000',
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 2, height: -2 },
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    overflow: 'hidden'
+  },
+  cardImage: {
+    flex: 3,
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center'
+  },
+  textContent: {
+    flex: 1
+  },
+  cardtitle: {
+    fontSize: 12,
+    marginTop: 5,
+    fontWeight: 'bold'
+  },
+  cardDescription: {
+    fontSize: 12,
+    color: '#444'
+  },
+  markerWrap: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  marker: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(130,4,150, 0.9)'
+  },
+  ring: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: 'rgba(130,4,150, 0.3)',
+    position: 'absolute',
+    borderWidth: 1,
+    borderColor: 'rgba(130,4,150, 0.5)'
+  }
+});
 
 export default MultiLocations;

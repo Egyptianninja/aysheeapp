@@ -394,7 +394,6 @@ class CategoryScreen extends React.Component<any, any> {
                               top: 5,
                               right: !isRTL || rtlos() === 3 ? 0 : undefined,
                               left: rtlos() === 2 ? 0 : undefined,
-                              marginHorizontal: 10,
                               paddingHorizontal: 10,
                               zIndex: 100,
                               width: 60
