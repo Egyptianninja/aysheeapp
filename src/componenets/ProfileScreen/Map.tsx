@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 const { Marker }: any = MapView;
 
 export default class Map extends React.Component<any, any> {
+  map: any;
   state = {
     mapType: 'standard'
   };
@@ -15,8 +16,8 @@ export default class Map extends React.Component<any, any> {
         onPress={() => this.props.hideMapModal()}
         style={{
           position: 'absolute',
-          top: 38,
-          left: 10,
+          top: 34,
+          left: 5,
           zIndex: 160,
           width: 34,
           height: 34,
@@ -30,9 +31,9 @@ export default class Map extends React.Component<any, any> {
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
       >
         <Ionicons
-          style={{ left: 1, bottom: 3 }}
+          style={{ left: 0, bottom: 3 }}
           name="ios-close"
-          size={34}
+          size={36}
           color="#fff"
         />
       </TouchableOpacity>
@@ -69,7 +70,7 @@ export default class Map extends React.Component<any, any> {
           position: 'absolute',
           flexDirection: 'row',
           right: 0,
-          top: 30,
+          bottom: 10,
           zIndex: 150
         }}
       >
@@ -78,6 +79,36 @@ export default class Map extends React.Component<any, any> {
       </View>
     );
   };
+
+  animateToLocation = ({ latitude, longitude }: any) => {
+    this.map.animateToCoordinate(
+      {
+        latitude,
+        longitude,
+        latitudeDelta: 0.00783,
+        longitudeDelta: 0.01299
+      },
+      350
+    );
+  };
+
+  renderCenter = ({ latitude, longitude }: any) => {
+    const color = this.state.mapType === 'standard' ? '#777' : '#fff';
+    return (
+      <TouchableOpacity
+        onPress={() => this.animateToLocation({ latitude, longitude })}
+        style={{
+          position: 'absolute',
+          right: 10,
+          top: 34,
+          zIndex: 180
+        }}
+      >
+        <Ionicons name="ios-locate" size={36} color={color} />
+      </TouchableOpacity>
+    );
+  };
+
   setMapType = (mapType: any) => {
     this.setState({ mapType });
   };
@@ -100,7 +131,11 @@ export default class Map extends React.Component<any, any> {
       >
         {this.renderBack()}
         {this.renderMapTypesButtons()}
+        {this.renderCenter({ latitude, longitude })}
         <MapView
+          ref={mapView => {
+            this.map = mapView;
+          }}
           style={{
             flex: 1,
             width,

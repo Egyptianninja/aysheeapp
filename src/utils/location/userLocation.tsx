@@ -21,7 +21,7 @@ class UserLocation extends React.Component<any, any> {
   }
 
   getLocation = async () => {
-    const location = await getUserLocation();
+    const location = await getUserLocation(true);
     if (location.coords) {
       this.props.getCurrentLocation(location);
       this.setState({ location });
@@ -77,9 +77,9 @@ class UserLocation extends React.Component<any, any> {
             showsUserLocation={true}
             followsUserLocation={true}
             userLocationAnnotationTitle="Location"
-            onRegionChangeComplete={region => {
-              console.log(region);
-            }}
+            // onRegionChangeComplete={region => {
+            //   console.log(region);
+            // }}
           />
         )}
       </View>
