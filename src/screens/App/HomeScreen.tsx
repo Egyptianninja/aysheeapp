@@ -416,30 +416,6 @@ class HomeScreen extends React.Component<any, any> {
           height={200}
         />
 
-        {/* <CategoriesModal
-          isCategoriesModalVisible={this.state.isCategoriesModalVisible}
-          hideCategoriesModal={this.hideCategoriesModal}
-          categories={this.props.categories}
-          isRTL={this.props.isRTL}
-          navigation={this.props.navigation}
-          addFilter={this.addFilter}
-          removeAllFilters={this.removeAllFilters}
-          word={words}
-        /> */}
-
-        {/* <BottomDrawer
-          containerHeight={height - 50}
-          offset={this.TAB_BAR_HEIGHT + 35}
-          downDisplay={isIphoneX() ? height - 50 - 105 : height - 50 - 45}
-          startUp={false}
-          roundedEdges={false}
-          shadow={false}
-          categories={this.props.categories}
-          isRTL={this.props.isRTL}
-          navigation={this.props.navigation}
-          word={words}
-        /> */}
-
         <Animated.View
           style={{
             zIndex: 100,
@@ -582,11 +558,11 @@ export default connect(
       })(
         graphql(deletePost, {
           name: 'deletePost',
-          options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+          options: { refetchQueries: ['getMyPosts'] }
         })(
           graphql(editClassifieds, {
             name: 'editClassifieds',
-            options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+            options: { refetchQueries: ['getMyPosts'] }
           })(
             graphql(createReport, {
               name: 'createReport'

@@ -1,13 +1,7 @@
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import {
-  Dimensions,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  View
-} from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -16,23 +10,9 @@ import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import { areaUnits, currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import {
-  Button,
-  CheckBox,
-  Group,
-  Input,
-  RadioButton,
-  Select
-} from '../../../lib';
+import { Button, CheckBox, Group, Input, RadioButton, Select } from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
-import {
-  getCurrency,
-  isArabic,
-  Message,
-  StyleSheet,
-  uploadPhotos,
-  UserLocation
-} from '../../../utils';
+import { getCurrency, isArabic, Message, StyleSheet, uploadPhotos, UserLocation } from '../../../utils';
 import { getPureNumber } from '../../../utils/call';
 
 const { width } = Dimensions.get('window');
@@ -163,8 +143,6 @@ class AddRealEstateScreen extends React.Component<any, any> {
         currency: currency.name,
         trueLocation
       }
-      // refetchQueries: ['getTimeLine'],
-      // awaitRefetchQueries: true
     });
 
     if (res.data.createPost.ok) {
@@ -589,7 +567,7 @@ export default connect(
 )(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: { refetchQueries: ['getTimeLine'] }
+    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

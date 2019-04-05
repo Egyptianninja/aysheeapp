@@ -166,8 +166,6 @@ class AddCarScreen extends React.Component<any, any> {
         kind,
         trueLocation
       }
-      // refetchQueries: ['getTimeLine'],
-      // awaitRefetchQueries: true
     });
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + this.state.images.length));
@@ -638,7 +636,7 @@ export default connect(
 )(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: { refetchQueries: ['getTimeLine'] }
+    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

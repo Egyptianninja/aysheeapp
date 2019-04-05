@@ -476,7 +476,6 @@ class ProfileScreen extends React.Component<any, any> {
                 alignItems: 'center',
                 marginHorizontal: 2,
                 backgroundColor: tab === 1 ? '#eee' : '#fff'
-                // marginLeft: 9
               }}
               onPress={() => {
                 this.setState({ rest: { islive: true }, tab: 1 });
@@ -557,7 +556,6 @@ class ProfileScreen extends React.Component<any, any> {
         <Query
           query={getUserPosts}
           variables={{ userId: user._id, ...this.state.rest }}
-          // fetchPolicy="network-only"
         >
           {({ loading, error, data, fetchMore, refetch }) => {
             if (loading) {
@@ -647,11 +645,11 @@ export default connect(
   })(
     graphql(deletePost, {
       name: 'deletePost',
-      options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+      options: { refetchQueries: ['getMyPosts'] }
     })(
       graphql(editClassifieds, {
         name: 'editClassifieds',
-        options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+        options: { refetchQueries: ['getMyPosts'] }
       })(ProfileScreen)
     )
   )

@@ -124,11 +124,11 @@ export default connect(mapStateToProps)(
       })(
         graphql(editClassifieds, {
           name: 'editClassifieds',
-          options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+          options: { refetchQueries: ['getMyPosts'] }
         })(
           graphql(deletePost, {
             name: 'deletePost',
-            options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+            options: { refetchQueries: ['getMyPosts'] }
           })(ItemScreen)
         )
       )

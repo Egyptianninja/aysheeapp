@@ -125,8 +125,6 @@ class AddServiceScreen extends React.Component<any, any> {
         service,
         trueLocation
       }
-      // refetchQueries: ['getTimeLine'],
-      // awaitRefetchQueries: true
     });
 
     if (res.data.createPost.ok) {
@@ -415,7 +413,7 @@ export default connect(
 )(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: { refetchQueries: ['getTimeLine'] }
+    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

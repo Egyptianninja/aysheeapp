@@ -15,9 +15,7 @@ import {
   View
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { connect } from 'react-redux';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
-import { addPermission } from '../../store/actions/globActions';
 import { getCameraPermission, Orientation } from '../../utils';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
@@ -506,7 +504,4 @@ class CameraScreen extends React.Component<any, any> {
   }
 }
 
-export default connect(
-  null,
-  { addPermission }
-)(CameraScreen);
+export default CameraScreen;

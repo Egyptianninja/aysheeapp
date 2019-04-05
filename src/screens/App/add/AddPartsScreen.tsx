@@ -562,7 +562,7 @@ export default connect(
 )(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: { refetchQueries: ['getTimeLine'] }
+    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

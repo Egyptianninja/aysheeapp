@@ -1,12 +1,7 @@
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import {
-  Dimensions,
-  KeyboardAvoidingView,
-  ScrollView,
-  View
-} from 'react-native';
+import { Dimensions, KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -16,13 +11,7 @@ import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 import { Button, CheckBox, Group, Input, RadioButton } from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
-import {
-  isArabic,
-  Message,
-  StyleSheet,
-  uploadPhotos,
-  UserLocation
-} from '../../../utils';
+import { isArabic, Message, StyleSheet, uploadPhotos, UserLocation } from '../../../utils';
 import { getPureNumber } from '../../../utils/call';
 
 const { width } = Dimensions.get('window');
@@ -130,8 +119,6 @@ class AddJobScreen extends React.Component<any, any> {
         salary: Number(salary),
         trueLocation
       }
-      // refetchQueries: ['getTimeLine'],
-      // awaitRefetchQueries: true
     });
 
     if (res.data.createPost.ok) {
@@ -460,7 +447,7 @@ export default connect(
 )(
   graphql(addClassifiedMutation, {
     name: 'addClassifiedMutation',
-    options: { refetchQueries: ['getTimeLine'] }
+    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
   })(
     graphql(notificationSub, {
       name: 'notificationSub'

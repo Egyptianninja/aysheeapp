@@ -306,7 +306,6 @@ class CategoryScreen extends React.Component<any, any> {
         <Query
           query={getTimeLine}
           variables={{ ...rest }}
-          fetchPolicy="network-only"
           onCompleted={data => {
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
             this.props.setBuckets(buckets);
@@ -443,13 +442,16 @@ export default connect(
   { setBuckets, updateQty, delQuery }
 )(
   graphql(favoritePost, {
-    name: 'favoritePost'
+    name: 'favoritePost',
+    options: { refetchQueries: ['getMyFavoritePosts'] }
   })(
     graphql(deletePost, {
-      name: 'deletePost'
+      name: 'deletePost',
+      options: { refetchQueries: ['getMyPosts'] }
     })(
       graphql(editClassifieds, {
-        name: 'editClassifieds'
+        name: 'editClassifieds',
+        options: { refetchQueries: ['getMyPosts'] }
       })(
         graphql(createReport, {
           name: 'createReport'

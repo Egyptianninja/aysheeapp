@@ -141,12 +141,7 @@ class MyProfileScreen extends React.Component<any, any> {
 
   renderQuery = ({ variables, isRTL, words, lang }: any) => {
     return (
-      <Query
-        query={getUserPosts}
-        variables={variables}
-        fetchPolicy="network-only"
-        // variables={{ userId: user._id, ...this.state.rest }}
-      >
+      <Query query={getUserPosts} variables={variables}>
         {({ loading, error, data, fetchMore, refetch }) => {
           if (loading) {
             return <Loading />;
@@ -672,11 +667,11 @@ export default connect(
   })(
     graphql(deletePost, {
       name: 'deletePost',
-      options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+      options: { refetchQueries: ['getMyPosts'] }
     })(
       graphql(editClassifieds, {
         name: 'editClassifieds',
-        options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+        options: { refetchQueries: ['getMyPosts'] }
       })(MyProfileScreen)
     )
   )

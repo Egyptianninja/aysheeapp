@@ -497,7 +497,6 @@ export default connect(
   mapDispatchToProps
 )(
   graphql(upgradeToStore, {
-    name: 'upgradeToStore',
-    options: { refetchQueries: ['getTimeLine'] }
+    name: 'upgradeToStore'
   })(UpgradeToStore)
 );
