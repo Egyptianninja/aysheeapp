@@ -4,6 +4,7 @@ import { preview } from './image';
 import { colors } from './colors';
 import { smsTimes, codeTimes } from './login';
 import { currencyTypes, areaUnits } from './units';
+import { locationExpiryTiem } from './common';
 export {
   brands,
   subBrands,
@@ -13,5 +14,6 @@ export {
   preview,
   currencyTypes,
   areaUnits,
-  colors
+  colors,
+  locationExpiryTiem
 };

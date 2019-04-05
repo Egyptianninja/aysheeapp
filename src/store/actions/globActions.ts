@@ -3,7 +3,8 @@ import {
   SET_BRANDS,
   SET_SUB_BRANDS,
   INIT_APP,
-  ADD_PERMISSION
+  ADD_PERMISSION,
+  SET_RECENT_LOCATION
 } from '../types';
 
 export function setLanguage(language: any, languageName: string, isRTL: any) {
@@ -40,5 +41,12 @@ export function addPermission(permission: any) {
   return {
     type: ADD_PERMISSION,
     permission
+  };
+}
+export function setRecentLocation({ location, expiresAt }: any) {
+  return {
+    type: SET_RECENT_LOCATION,
+    location,
+    expiresAt
   };
 }

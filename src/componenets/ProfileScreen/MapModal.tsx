@@ -32,24 +32,25 @@ class MapModal extends React.Component<any, any> {
         hideModalContentWhileAnimating={true}
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        // onSwipe={() => hideMapModal()}
-        // swipeDirection="down"
         style={{ justifyContent: 'center', margin: 0 }}
       >
         <View
           style={{
-            backgroundColor: '#fff',
-            borderRadius: 10,
+            backgroundColor: '#f3f3f3',
             position: 'absolute',
-            bottom: height / 2 - 250,
             margin: 0,
-            height: 500,
             width,
-            justifyContent: 'space-around',
-            alignItems: 'center'
+            height
           }}
         >
-          <Map latitude={lat} longitude={lon} title={title} width={width} />
+          <Map
+            hideMapModal={hideMapModal}
+            latitude={lat}
+            longitude={lon}
+            title={title}
+            width={width}
+            height={height}
+          />
         </View>
       </Modal>
     );

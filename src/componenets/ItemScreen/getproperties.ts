@@ -24,7 +24,7 @@ export const getproperties = (post: any) => {
     { name: 'issale', value: issale },
     { name: 'iswarranty', value: iswarranty },
     { name: 'realestate', value: realestate },
-    { name: 'space', value: `${space} ${areaunit}` },
+    { name: 'space', value: space ? `${space} ${areaunit}` : undefined },
     { name: 'rooms', value: rooms },
     { name: 'bathrooms', value: bathrooms },
     { name: 'isfurnishered', value: isfurnishered },

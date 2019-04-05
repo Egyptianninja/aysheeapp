@@ -17,3 +17,4 @@ export const post = () => store.getState().glob.language.post;
 export const brands = () => store.getState().glob.brands;
 export const subBrands = () => store.getState().glob.subBrands;
 export const buckets = () => store.getState().post.buckets;
+export const recentLocation = () => store.getState().glob.recentLocation;

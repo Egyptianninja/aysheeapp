@@ -1,74 +1,73 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { addPermission } from '../../store/actions/globActions';
+import { Ionicons } from '@expo/vector-icons';
 
-import { StyleSheet } from '../common';
-import { MapView, Location, Permissions } from 'expo';
+import { StyleSheet, rtlos } from '../common';
+import { MapView } from 'expo';
+import { getUserLocation } from './getUserLocation';
 
 class UserLocation extends React.Component<any, any> {
-  timerHandle: any;
-  initLocation: any;
   map: any;
   state = {
     loading: false,
-    granted: false,
-    initLocation: null
+    location: null
   };
 
   componentDidMount() {
-    this.getLocationAsync();
+    this.getLocation();
     this.setState({ loading: true });
+  }
 
-    this.timerHandle = setInterval(async () => {
-      const location = await this.updateLocation();
+  getLocation = async () => {
+    const location = await getUserLocation();
+    if (location.coords) {
       this.props.getCurrentLocation(location);
-    }, 5000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerHandle);
-  }
-
-  getLocationAsync = async () => {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.props.onChange('location', false);
-      return;
+      this.setState({ location });
+      this.setState({ loading: false });
+      return location;
     }
-    this.props.addPermission('LOCATION');
-    this.setState({ granted: true });
-    return this.updateLocation();
   };
 
-  updateLocation = async () => {
-    if (!this.state.granted) {
-      return;
-    }
-    const location = await Location.getCurrentPositionAsync({});
+  animateToLocation = (location: any) => {
     this.map.animateToCoordinate(
       {
         latitude: location.coords.latitude,
-        longitude: location.coords.longitude
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.00783,
+        longitudeDelta: 0.01299
       },
-      1000
+      350
     );
-    this.setState({ loading: false });
-    return location;
   };
 
   render() {
+    const location: any = this.state.location;
     return (
       <View style={styles.container}>
-        {this.state.granted && (
+        <TouchableOpacity
+          onPress={() => this.animateToLocation(location)}
+          style={{
+            position: 'absolute',
+            right: rtlos() === 3 ? undefined : 8,
+            left: rtlos() === 3 ? 8 : undefined,
+            top: 5,
+            zIndex: 100
+          }}
+        >
+          <Ionicons name="ios-locate" size={30} color="#9B9CF1" />
+        </TouchableOpacity>
+        {location && (
           <MapView
             ref={mapView => {
               this.map = mapView;
             }}
             initialRegion={{
-              latitude: 25.291442,
-              longitude: 51.534011,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+              latitudeDelta: 0.00783,
+              longitudeDelta: 0.01299
             }}
             style={{
               alignSelf: 'stretch',
@@ -76,8 +75,11 @@ class UserLocation extends React.Component<any, any> {
               width: this.props.width - 60
             }}
             showsUserLocation={true}
-            userLocationAnnotationTitle="Ad Location"
             followsUserLocation={true}
+            userLocationAnnotationTitle="Location"
+            onRegionChangeComplete={region => {
+              console.log(region);
+            }}
           />
         )}
       </View>

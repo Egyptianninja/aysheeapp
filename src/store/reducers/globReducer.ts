@@ -3,7 +3,8 @@ import {
   SET_BRANDS,
   SET_SUB_BRANDS,
   INIT_APP,
-  ADD_PERMISSION
+  ADD_PERMISSION,
+  SET_RECENT_LOCATION
 } from '../types';
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   code: '',
   brands: '',
   subBrands: '',
-  permissions: {}
+  permissions: {},
+  recentLocation: {}
 };
 
 export default function(state = initialState, action: any) {
@@ -48,6 +50,14 @@ export default function(state = initialState, action: any) {
         permissions: {
           ...state.permissions,
           [action.permission]: true
+        }
+      };
+    case SET_RECENT_LOCATION:
+      return {
+        ...state,
+        recentLocation: {
+          location: action.location,
+          expiresAt: action.expiresAt
         }
       };
 

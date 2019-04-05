@@ -219,7 +219,7 @@ class MultiLocations extends React.Component<any, any> {
                   bottom: CARD_HEIGHT + 10,
                   left: 30
                 },
-                animated: false
+                animated: true
               })
             }
           >

@@ -1,10 +1,90 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { MapView } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
+
 const { Marker }: any = MapView;
 
 export default class Map extends React.Component<any, any> {
+  state = {
+    mapType: 'standard'
+  };
+  renderBack = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => this.props.hideMapModal()}
+        style={{
+          position: 'absolute',
+          top: 38,
+          left: 10,
+          zIndex: 160,
+          width: 34,
+          height: 34,
+          borderRadius: 17,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderColor: '#fff',
+          borderWidth: 2,
+          backgroundColor: 'rgba(0, 0, 0, 0.4)'
+        }}
+        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+      >
+        <Ionicons
+          style={{ left: 1, bottom: 3 }}
+          name="ios-close"
+          size={34}
+          color="#fff"
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  renderType = (type: any) => {
+    return (
+      <TouchableOpacity
+        style={{
+          paddingHorizontal: 10,
+          paddingVertical: 5,
+          marginVertical: 10,
+          marginRight: 5,
+          borderColor: '#fff',
+          borderWidth: 2,
+          borderRadius: 10,
+          backgroundColor: 'rgba(0, 0, 0, 0.4)'
+        }}
+        // hitSlop={{ top: 20, bottom: 20 }}
+        onPress={() => {
+          this.setMapType(type);
+        }}
+      >
+        <Text style={{ color: '#fff' }}>{type}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  renderMapTypesButtons = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          flexDirection: 'row',
+          right: 0,
+          top: 30,
+          zIndex: 150
+        }}
+      >
+        {this.renderType('standard')}
+        {this.renderType('hybrid')}
+      </View>
+    );
+  };
+  setMapType = (mapType: any) => {
+    this.setState({ mapType });
+  };
+
   render() {
+    const mapType: any = this.state.mapType;
+    const { width, height, latitude, longitude, title, body } = this.props;
     return (
       <View
         style={{
@@ -18,27 +98,30 @@ export default class Map extends React.Component<any, any> {
           overflow: 'hidden'
         }}
       >
+        {this.renderBack()}
+        {this.renderMapTypesButtons()}
         <MapView
           style={{
-            alignSelf: 'stretch',
-            height: 500,
-            width: this.props.width
+            flex: 1,
+            width,
+            height
           }}
           region={{
-            latitude: this.props.latitude,
-            longitude: this.props.longitude,
+            latitude,
+            longitude,
             latitudeDelta: 0.0062,
             longitudeDelta: 0.0041
           }}
           // showsUserLocation={true}
+          mapType={mapType}
         >
           <Marker
             coordinate={{
-              latitude: this.props.latitude,
-              longitude: this.props.longitude
+              latitude,
+              longitude
             }}
-            title={this.props.title}
-            description={this.props.body}
+            title={title}
+            description={body}
           >
             <View
               style={{
