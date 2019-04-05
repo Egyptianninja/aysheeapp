@@ -245,7 +245,6 @@ class AddCarScreen extends React.Component<any, any> {
               validationSchema={Yup.object().shape({
                 kind: Yup.string().required('Required'),
                 brand: Yup.string().required('Required'),
-                subBrand: Yup.string().required('Required'),
                 title: Yup.string()
                   .max(100)
                   .required('Required'),
@@ -324,7 +323,6 @@ class AddCarScreen extends React.Component<any, any> {
                     />
                     <Select
                       name="subBrand"
-                      required
                       disable={this.state.selectedBrand === null}
                       words={this.props.words}
                       data={subBrands}
