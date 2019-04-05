@@ -97,7 +97,7 @@ export default {
     { id: 19, sort: 19, name: 'اخرى', nameGlob: 'اخرى, Other, Other' }
   ],
   kind: [
-    { pid: 1, id: 0, name: 'صالون / سيدان', nameGlob: 'صالون سيدان' },
+    { pid: 1, id: 0, name: 'سيدان', nameGlob: 'سيدان' },
     { pid: 1, id: 1, name: 'دفع رباعي', nameGlob: 'دفع رباعي' },
     { pid: 1, id: 2, name: 'فان', nameGlob: 'فان' },
     { pid: 1, id: 3, name: 'بيك أب', nameGlob: 'بيك أب' },
@@ -122,17 +122,20 @@ export default {
     },
     { pid: 2, id: 11, name: 'أخرى', nameGlob: 'أخرى' },
 
-    { pid: 3, id: 12, name: 'أدوات مطبخ', nameGlob: 'أدوات مطبخ' },
-    { pid: 3, id: 13, name: 'فرش مكتب', nameGlob: 'فرش مكتب' },
+    { pid: 3, id: 130, name: 'اثاث مكتب', nameGlob: 'اثاث مكتب' },
+    { pid: 3, id: 131, name: 'أدوات مطبخ', nameGlob: 'أدوات مطبخ' },
+    { pid: 3, id: 132, name: 'غرف نوم', nameGlob: 'غرف نوم' },
+    { pid: 3, id: 134, name: 'طاولات وكراسي', nameGlob: 'طاولات وكراسي' },
     {
       pid: 3,
-      id: 14,
-      name: 'سجاد وبطانيات',
-      nameGlob: 'سجاد وبطانيات'
+      id: 135,
+      name: 'سجاد وحصر',
+      nameGlob: 'سجاد وحصر'
     },
-    { pid: 3, id: 15, name: 'طاولات وكراسي', nameGlob: 'طاولات وكراسي' },
-    { pid: 3, id: 16, name: 'غرف نوم', nameGlob: 'غرف نوم' },
-    { pid: 3, id: 17, name: 'أخرى', nameGlob: 'أخرى' },
+    { pid: 3, id: 136, name: 'مراتب وبطانيات', nameGlob: 'مراتب وبطانيات' },
+    { pid: 3, id: 137, name: 'كنب ومجالس', nameGlob: 'كنب ومجالس' },
+    { pid: 3, id: 138, name: 'ادوات زينة', nameGlob: 'ادوات زينة' },
+    { pid: 3, id: 139, name: 'أخرى', nameGlob: 'أخرى' },
 
     { pid: 4, id: 120, name: 'العاب اطفال', nameGlob: 'العاب اطفال' },
     { pid: 4, id: 121, name: 'مستلزمات اطفال', nameGlob: 'مستلزمات اطفال' },

@@ -114,17 +114,20 @@ export default {
     { pid: 2, id: 10, name: 'Video Games', nameGlob: 'Video Games' },
     { pid: 2, id: 11, name: 'Other', nameGlob: 'Other' },
 
-    { pid: 3, id: 12, name: 'Kitchen Tools', nameGlob: 'Kitchen Tools' },
-    { pid: 3, id: 13, name: 'Office Furniture', nameGlob: 'Office Furniture' },
+    { pid: 3, id: 130, name: 'Office Furniture', nameGlob: 'Office Furniture' },
+    { pid: 3, id: 131, name: 'Kitchen Tools', nameGlob: 'Kitchen Tools' },
+    { pid: 3, id: 132, name: 'Bedrooms', nameGlob: 'Bedrooms' },
+    { pid: 3, id: 134, name: 'Tables & Chairs', nameGlob: 'Tables & Chairs' },
     {
       pid: 3,
-      id: 14,
-      name: 'Carpet & Mattress',
-      nameGlob: 'Carpet & Mattress'
+      id: 135,
+      name: 'Carpet',
+      nameGlob: 'Carpet'
     },
-    { pid: 3, id: 15, name: 'Tables & Chairs', nameGlob: 'Tables & Chairs' },
-    { pid: 3, id: 16, name: 'Bedrooms', nameGlob: 'Bedrooms' },
-    { pid: 3, id: 17, name: 'Other', nameGlob: 'Other' },
+    { pid: 3, id: 136, name: 'Mattress', nameGlob: 'Mattress' },
+    { pid: 3, id: 137, name: 'Sofas', nameGlob: 'Sofas' },
+    { pid: 3, id: 138, name: 'Accessories', nameGlob: 'Accessories' },
+    { pid: 3, id: 139, name: 'Other', nameGlob: 'Other' },
 
     { pid: 4, id: 120, name: 'Toys', nameGlob: 'العاب اطفال' },
     { pid: 4, id: 121, name: 'childs needs', nameGlob: 'مستلزمات اطفال' },
