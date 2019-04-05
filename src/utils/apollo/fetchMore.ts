@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native';
+import secrets from '../../constants/secrets';
 import * as getStore from '../../store/getStore';
 import { since } from '../since';
-import secrets from '../../constants/secrets';
 const { width } = Dimensions.get('window');
 
 export const getNextPosts = (

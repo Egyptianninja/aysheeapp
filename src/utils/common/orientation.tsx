@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Accelerometer } from 'expo';
 import { Platform } from 'expo-core';
+import * as React from 'react';
 
 export default class Orientation extends React.Component<any, any> {
   subscription: any;

@@ -1,21 +1,21 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 import {
-  View,
-  PanResponder,
   Animated,
   Dimensions,
+  Image,
+  PanResponder,
+  Platform,
+  ScrollView,
   Text,
   TouchableOpacity,
-  ScrollView,
-  Platform,
-  Image
+  View
 } from 'react-native';
-const SCREEN_HEIGHT = Dimensions.get('window').height;
-const SCREEN_WIDTH = Dimensions.get('window').width;
-import CategoryModalIcon from './CategoryModalIcon';
 import { icons, images } from '../../load';
 import { isIphoneX } from '../../utils/platform/iphonex';
+import CategoryModalIcon from './CategoryModalIcon';
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 export default class BottomDrawer extends React.Component<any, any> {
   static propTypes = {
     /**

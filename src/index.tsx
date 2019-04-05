@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Provider } from 'react-redux';
-import { ApolloProvider } from 'react-apollo';
 import { AppLoading } from 'expo';
+import * as React from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
-import Navigation from './navigation';
-import { store, persistor } from './store';
 import { client } from './graphql';
-import { images, loadFonts, cacheImages } from './load';
+import { cacheImages, images, loadFonts } from './load';
+import Navigation from './navigation';
+import { persistor, store } from './store';
 
 class App extends React.Component<any, any> {
   constructor(props: any) {

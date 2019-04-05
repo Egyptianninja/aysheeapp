@@ -1,16 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
+import { Platform } from 'expo-core';
 import * as React from 'react';
 import {
-  View,
-  TouchableOpacity,
-  Text,
   Dimensions,
-  ScrollView
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Modal from 'react-native-modal';
-import FilterOption from './FilterOption';
-import { Platform } from 'expo-core';
-import { Ionicons } from '@expo/vector-icons';
 import { rtlos } from '../../../utils';
+import FilterOption from './FilterOption';
 
 const { width } = Dimensions.get('window');
 

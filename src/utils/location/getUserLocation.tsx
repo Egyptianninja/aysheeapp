@@ -1,10 +1,10 @@
 import { Location, Permissions } from 'expo';
+import { locationExpiryTiem } from '../../constants';
 import { store } from '../../store';
 import {
   addPermission,
   setRecentLocation
 } from '../../store/actions/globActions';
-import { locationExpiryTiem } from '../../constants';
 import { notExpire } from '../interval';
 export const getUserLocation = async (current = false) => {
   const { status } = await Permissions.askAsync(Permissions.LOCATION);

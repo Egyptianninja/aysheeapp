@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { ErrorMessage } from './Common';
+import { TextInput, View } from 'react-native';
 import { arabicToNum } from '../../utils';
 class Comment extends React.PureComponent<any, any> {
   handleChange = (value: any) => {

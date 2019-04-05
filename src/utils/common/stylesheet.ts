@@ -1,9 +1,9 @@
 import {
+  ImageStyle,
   StyleSheet as RnStyleSheet,
-  ViewStyle,
   TextStyle,
-  ImageStyle
-} from "react-native";
+  ViewStyle
+} from 'react-native';
 
 type StyleProps = Partial<ViewStyle | TextStyle | ImageStyle>;
 

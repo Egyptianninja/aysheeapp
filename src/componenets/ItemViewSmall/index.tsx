@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { StyleSheet, rtlos } from '../../utils';
+import { rtlos, StyleSheet } from '../../utils';
 import { MenuIcon } from './MenuIcon';
 import { PostImage } from './PostImage';
 

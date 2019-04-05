@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
-import { MapView } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
+import { MapView } from 'expo';
+import * as React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 const { Marker }: any = MapView;
 

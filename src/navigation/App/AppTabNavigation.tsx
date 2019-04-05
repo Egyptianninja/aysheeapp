@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { images } from '../../load';
 import { createBottomTabNavigator } from 'react-navigation';
+import { ImageIcon } from '../../componenets';
+import { images } from '../../load';
+import { rtlos } from '../../utils';
 import {
   HomeStack,
   NotificationStack,
   ProfileStack,
   SearchStack
 } from './appTabStacks';
-import { ImageIcon } from '../../componenets';
-import { rtlos } from '../../utils';
 
 let AppTabNavigation: any;
 if (rtlos() === 3) {

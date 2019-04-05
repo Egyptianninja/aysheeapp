@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Accelerometer } from 'expo';
+import * as React from 'react';
 
 export default class AccelerometerSensor extends React.Component<any, any> {
   subscription: any;

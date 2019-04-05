@@ -1,21 +1,20 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import {
+  Image,
   Platform,
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
-  Image
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { icons, images } from '../../load';
-import BottonNew from './BottonNew';
-import CategoryIcon from './CategoryIcon';
 import { rtlos } from '../../utils';
+import CategoryIcon from './CategoryIcon';
+import FilterSelect from './filters/FilterSelect';
 import HeaderFilter from './HeaderFilter';
 import OfferIcon from './OffersIcon';
-import FilterSelect from './filters/FilterSelect';
 
 class CategoriesScroll extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {

@@ -1,13 +1,6 @@
-import * as React from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Animated,
-  InteractionManager
-} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import * as React from 'react';
+import { Animated, ScrollView, StyleSheet, View } from 'react-native';
 import { Photo } from '../../lib';
 
 export default class PhotoSlider extends React.Component<any, any> {
@@ -40,14 +33,6 @@ export default class PhotoSlider extends React.Component<any, any> {
       x: this.props.width * this.state.position,
       animated: false
     });
-    // TODO: check for what
-    // InteractionManager.runAfterInteractions(() => {
-    //   this.scrollView.scrollTo({
-    //     x: this.props.width * this.state.position,
-    //     animated: false
-    //   });
-    //   console.log('called DidMount');
-    // });
   }
 
   handlePageChange = (e: any) => {

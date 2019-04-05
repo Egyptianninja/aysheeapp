@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { images } from '../../load';
 const Logo = ({ size = 150 }) => (
   <View

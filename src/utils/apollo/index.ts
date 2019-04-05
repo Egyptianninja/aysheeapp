@@ -1,10 +1,10 @@
-import { getTimeLineBuckets, getNamedAggs } from './buckets';
+import { getNamedAggs, getTimeLineBuckets } from './buckets';
 import {
-  getNextPosts,
   getDBNextPosts,
   getNewPosts,
-  readyPosts,
+  getNextPosts,
   readyPost,
+  readyPosts,
   readyUserPosts
 } from './fetchMore';
 

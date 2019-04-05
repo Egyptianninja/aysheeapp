@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Image, Text } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { images } from '../../load';
 const Noresult = ({ title, isRTL, top }: any) => (
   <View

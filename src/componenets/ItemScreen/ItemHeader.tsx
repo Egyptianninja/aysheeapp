@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import { Platform } from 'expo-core';
+import * as React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 const ItemHeader = ({ title, navigation }: any) => {
   return (

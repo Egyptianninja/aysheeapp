@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { StyleSheet } from '../../utils';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { images } from '../../load';
+import { StyleSheet } from '../../utils';
 const OfferIcon = ({ navigation, title }: any) => {
   return (
     <TouchableOpacity

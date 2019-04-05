@@ -2,7 +2,6 @@ import { Constants } from 'expo';
 import * as React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-
 import SearchBox from './SearchBox';
 
 class SearchHeader extends React.Component<any, any> {

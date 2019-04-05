@@ -1,16 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import {
-  View,
-  TextInput,
-  Text,
-  TouchableOpacity,
+  Animated,
   Dimensions,
-  Animated
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Ionicons } from '@expo/vector-icons';
-import { setQuery, delQuery } from '../../store/actions/postActions';
-import { StyleSheet, isArabic, rtlos } from '../../utils';
+import { delQuery, setQuery } from '../../store/actions/postActions';
+import { isArabic, rtlos, StyleSheet } from '../../utils';
 const { width } = Dimensions.get('window');
 
 class SearchBox extends React.Component<any, any> {

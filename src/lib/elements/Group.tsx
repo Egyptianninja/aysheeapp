@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, View } from 'react-native';
 const { width } = Dimensions.get('window');
 
 const Group = (props: any) => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableOpacity, Text, View, Image, Platform } from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 export const Choise = ({
   item,

@@ -1,4 +1,4 @@
-import { Share } from "react-native";
+import { Share } from 'react-native';
 
 export const onShare = async (message: any, toggleModal: any) => {
   try {

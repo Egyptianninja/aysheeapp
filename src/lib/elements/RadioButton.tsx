@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Platform } from 'expo-core';
 import { Ionicons } from '@expo/vector-icons';
+import { Platform } from 'expo-core';
+import * as React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const RadioButton = (props: any) => {
   const { label, color, size, labelColor, selected, name, rtl, group } = props;

@@ -1,4 +1,3 @@
-import { Permissions } from 'expo';
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
@@ -14,21 +13,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Yup from 'yup';
 import { AvatarCircle } from '../../../componenets';
+import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import { colors } from '../../../constants';
 import upgradeToStore from '../../../graphql/mutation/upgradeToStore';
-import { Button, CheckBox, Group, Input, Title } from '../../../lib';
+import { Button, CheckBox, Group, Input } from '../../../lib';
 import { addPermission } from '../../../store/actions/globActions';
 import { updateUser } from '../../../store/actions/userAtions';
 import {
   ColorPicker,
+  getCameraRollPermission,
   Message,
-  StyleSheet,
-  UserLocation,
   pickImageWithoutUpload,
+  StyleSheet,
   uploadPickedImage,
-  getCameraRollPermission
+  UserLocation
 } from '../../../utils';
-import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 const { width } = Dimensions.get('window');
 
 class UpgradeToStore extends React.Component<any, any> {

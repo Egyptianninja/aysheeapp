@@ -1,5 +1,5 @@
-import UserLocation from './userLocation';
-import ItemLocation from './itemLocation';
 import { getUserLocation } from './getUserLocation';
+import ItemLocation from './itemLocation';
+import UserLocation from './userLocation';
 
 export { UserLocation, ItemLocation, getUserLocation };

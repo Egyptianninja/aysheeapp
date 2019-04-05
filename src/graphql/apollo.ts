@@ -1,16 +1,16 @@
-import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
-import { AsyncStorage } from 'react-native';
+import { ApolloClient } from 'apollo-client';
+import { split } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
-import { NavigationActions } from 'react-navigation';
-import { split } from 'apollo-link';
+import { createHttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-import { logout, phoneRemoved } from '../store/actions/userAtions';
+import { AsyncStorage } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import secrets from '../constants/secrets';
 import { store } from '../store';
+import { logout, phoneRemoved } from '../store/actions/userAtions';
 
 // const host = 'http://192.168.100.22:4000/';
 // const uri = 'http://192.168.100.22:4000/';

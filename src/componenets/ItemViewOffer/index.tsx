@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { View, Text, TouchableWithoutFeedback, Platform } from 'react-native';
+import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { StyleSheet } from '../../utils';
-import { PostImage } from './PostImage';
 import { MenuIcon } from './MenuIcon';
+import { PostImage } from './PostImage';
 
 const ItemViewSmall = (props: any) => {
   const {

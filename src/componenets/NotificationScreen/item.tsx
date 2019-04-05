@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { since, rtlos, isArabic } from '../../utils';
+import { isArabic, rtlos, since } from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
 const Item = (props: any) => {

@@ -1,32 +1,32 @@
 import { Avatar, AvatarCircle } from './Avatar';
 import ChoiseCategory from './ChoiseScreen/ChoiseCategory';
+import {
+  BackIcon,
+  Header,
+  HomeLoading,
+  ImageIcon,
+  Loading,
+  LoadingSmall,
+  Logo,
+  MessageModal,
+  Noresult,
+  WhitLogo
+} from './Common';
 import Drawer from './Drawer';
 import { CategoriesScroll } from './HomeScreen';
 import {
-  ItemHeader,
-  Properties,
-  PriceView,
-  FullTimeView,
   BodyView,
+  FullTimeView,
+  getJobProperties,
+  getproperties,
   InputBar,
   ItemComment,
+  ItemHeader,
   PhotoSlider,
-  getproperties,
-  getJobProperties
+  PriceView,
+  Properties
 } from './ItemScreen';
 import NotificationItem from './NotificationScreen/item';
-import {
-  MessageModal,
-  Loading,
-  Noresult,
-  LoadingSmall,
-  HomeLoading,
-  Logo,
-  WhitLogo,
-  BackIcon,
-  Header,
-  ImageIcon
-} from './Common';
 
 export {
   Avatar,

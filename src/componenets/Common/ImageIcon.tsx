@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Animated, View } from 'react-native';
+import { Animated, Image, View } from 'react-native';
 
 export default class ImageIcon extends React.Component<any, any> {
   scaleStyle: any;

@@ -1,19 +1,19 @@
-import React, { Component } from "react";
+import { Constants } from 'expo';
+import React, { Component } from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
+  Alert,
   Linking,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  Alert
-} from "react-native";
-import { Constants } from "expo";
+  View
+} from 'react-native';
 
 export default class LinkMap extends Component {
   openGps = () => {
     // const scheme = Platform.OS === "ios" ? "maps:" : "geo:";
-    const scheme = "geo:";
-    const url = scheme + "37.484847,-122.148386";
+    const scheme = 'geo:';
+    const url = scheme + '37.484847,-122.148386';
     this.openExternalApp(url);
   };
 
@@ -22,7 +22,7 @@ export default class LinkMap extends Component {
       if (supported) {
         Linking.openURL(url);
       } else {
-        Alert.alert("ERROR", "Unable to open: " + url, [{ text: "OK" }]);
+        Alert.alert('ERROR', 'Unable to open: ' + url, [{ text: 'OK' }]);
       }
     });
   };
@@ -41,9 +41,9 @@ export default class LinkMap extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1"
+    backgroundColor: '#ecf0f1'
   }
 });

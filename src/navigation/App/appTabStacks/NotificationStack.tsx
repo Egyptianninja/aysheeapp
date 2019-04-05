@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import {
-  NotificationsScreen,
-  ItemScreen,
-  ProfileScreen,
-  PhoneScreen,
-  CodeScreen
-} from '../../../screens';
-import HeaderNoBack from '../../../componenets/Common/HeaderNoback';
 import { Header } from '../../../componenets';
+import HeaderNoBack from '../../../componenets/Common/HeaderNoback';
+import {
+  CodeScreen,
+  ItemScreen,
+  NotificationsScreen,
+  PhoneScreen,
+  ProfileScreen
+} from '../../../screens';
 import { words } from '../../../store/getStore';
 
 export const NotificationStack = createStackNavigator(

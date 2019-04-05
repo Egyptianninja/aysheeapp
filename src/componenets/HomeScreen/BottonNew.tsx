@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, TouchableOpacity, View, Image } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { images } from '../../load';
 import { StyleSheet } from '../../utils';
 const BottonNew = ({ showCategoriesModal, title }: any) => (

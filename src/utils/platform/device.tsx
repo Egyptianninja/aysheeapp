@@ -1,4 +1,4 @@
-import { PixelRatio, Platform, Dimensions } from 'react-native';
+import { Dimensions, PixelRatio, Platform } from 'react-native';
 
 export function isIphoneX() {
   const dim = Dimensions.get('window');

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated, StyleSheet } from 'react-native';
-
+import { Animated, StyleSheet, View } from 'react-native';
 import Indicator from './Indicator';
 
 export default class BallIndicator extends PureComponent<any, any> {

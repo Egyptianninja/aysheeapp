@@ -1,4 +1,4 @@
-import { GET_BUCKETS, SET_QUERY, DEL_QUERY } from '../types';
+import { DEL_QUERY, GET_BUCKETS, SET_QUERY } from '../types';
 
 const initialState = {
   buckets: null,

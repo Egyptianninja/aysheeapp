@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { View } from 'react-native';
 import Modal from 'react-native-modal';
 import Map from './Map';
-import { View } from 'react-native';
 
 class MapModal extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {

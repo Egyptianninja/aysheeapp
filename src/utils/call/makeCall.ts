@@ -1,11 +1,11 @@
-import { Platform, Linking } from "react-native";
+import { Linking, Platform } from 'react-native';
 
 const isString = (str: any) =>
-  Object.prototype.toString.call(str) === "[object String]";
+  Object.prototype.toString.call(str) === '[object String]';
 const isBool = (bool: any) =>
-  Object.prototype.toString.call(bool) === "[object Boolean]";
+  Object.prototype.toString.call(bool) === '[object Boolean]';
 
-const createError = (msg = "") => Promise.reject(new Error(msg));
+const createError = (msg = '') => Promise.reject(new Error(msg));
 
 const openLink = (url: any) => {
   return Linking.canOpenURL(url).then(canOpen => {
@@ -24,17 +24,17 @@ const call = (args = {}) => {
   };
 
   if (!settings.number) {
-    return createError("no number provided");
+    return createError('no number provided');
   }
   if (!isString(settings.number)) {
-    return createError("number should be string");
+    return createError('number should be string');
   }
   if (!isBool(settings.prompt)) {
-    return createError("prompt should be bool");
+    return createError('prompt should be bool');
   }
 
   const url = `${
-    Platform.OS === "ios" && settings.prompt ? "telprompt:" : "tel:"
+    Platform.OS === 'ios' && settings.prompt ? 'telprompt:' : 'tel:'
   }${settings.number}`;
 
   return openLink(url);

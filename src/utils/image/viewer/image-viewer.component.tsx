@@ -1,23 +1,18 @@
 import * as React from 'react';
-
 import {
   Animated,
   CameraRoll,
-  Dimensions,
   I18nManager,
   Image,
-  PanResponder,
-  Platform,
   Text,
   TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-  ViewStyle
+  View
 } from 'react-native';
-import ImageZoom from './image-zoom.component';
 import styles from './image-viewer.style';
 import { IImageInfo, IImageSize, Props, State } from './image-viewer.type';
+import ImageZoom from './image-zoom.component';
 
 export default class ImageViewer extends React.Component<Props, State> {
   public static defaultProps = new Props();

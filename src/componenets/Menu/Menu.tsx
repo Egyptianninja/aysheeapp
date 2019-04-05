@@ -1,12 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import {
-  Dimensions,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { store } from '../../store';
 import { updateQty } from '../../store/actions/userAtions';

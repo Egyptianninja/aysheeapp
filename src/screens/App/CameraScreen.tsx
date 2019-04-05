@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Camera, Constants, ImageManipulator, Permissions } from 'expo';
+import { Camera, Constants, ImageManipulator } from 'expo';
 import * as React from 'react';
 import {
   Animated,
@@ -18,7 +18,7 @@ import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';
 import { addPermission } from '../../store/actions/globActions';
-import { Orientation, getCameraPermission } from '../../utils';
+import { getCameraPermission, Orientation } from '../../utils';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEGHT = Dimensions.get('window').height;
 

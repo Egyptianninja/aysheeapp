@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { Animated, Easing, StyleSheet } from 'react-native';
-
 import Indicator from './Indicator';
 
 export default class DotIndicator extends React.PureComponent<any, any> {

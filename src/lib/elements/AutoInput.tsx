@@ -1,5 +1,5 @@
-import * as React from "react";
-import { TextInput } from "react-native";
+import * as React from 'react';
+import { TextInput } from 'react-native';
 
 export default class AutogrowInput extends React.PureComponent<any, any> {
   inputRef: any;
@@ -30,7 +30,7 @@ export default class AutogrowInput extends React.PureComponent<any, any> {
 
   resetInputText = () => {
     if (this.inputRef) {
-      this.inputRef.setNativeProps({ text: "" });
+      this.inputRef.setNativeProps({ text: '' });
       this.setState({
         height: this.props.defaultHeight
       });

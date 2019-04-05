@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ImagePicker, ImageManipulator } from 'expo';
+import { ImageManipulator, ImagePicker } from 'expo';
 import secrets from '../../../constants/secrets';
 
 export const uploadPhoto = async (

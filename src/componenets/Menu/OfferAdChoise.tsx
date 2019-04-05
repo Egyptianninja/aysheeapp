@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
-import { rtlos, filterOptions } from '../../utils';
+import { filterOptions, rtlos } from '../../utils';
 const { width } = Dimensions.get('window');
 
 const iconNames = [

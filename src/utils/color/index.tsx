@@ -1,12 +1,12 @@
+import { Platform } from 'expo-core';
 import * as React from 'react';
 import {
-  TouchableOpacity,
-  View,
-  Text,
   Dimensions,
-  StyleSheet
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { Platform } from 'expo-core';
 
 const { width } = Dimensions.get('window');
 const cube = width / 10;

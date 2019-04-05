@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { View, Text, TextInput, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as React from 'react';
+import { ActivityIndicator, Text, TextInput, View } from 'react-native';
 import { ErrorMessage } from './Common';
 class InputName extends React.PureComponent<any, any> {
   state = {

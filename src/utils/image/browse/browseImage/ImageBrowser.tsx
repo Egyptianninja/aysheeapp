@@ -1,17 +1,17 @@
+import { FileSystem } from 'expo';
 import * as React from 'react';
 import {
+  Button,
+  CameraRoll,
+  Dimensions,
+  FlatList,
   StyleSheet,
   Text,
-  View,
-  CameraRoll,
-  FlatList,
-  Dimensions,
-  Button
+  View
 } from 'react-native';
-import { FileSystem } from 'expo';
+import { words } from '../../../../store/getStore';
 import ImageTile from './ImageTile';
 const { width } = Dimensions.get('window');
-import { words } from '../../../../store/getStore';
 
 export default class ImageBrowser extends React.Component<any, any> {
   constructor(props: any) {

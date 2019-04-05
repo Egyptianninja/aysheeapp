@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableOpacity, View, Image } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { icons } from '../../load';
 const icon = icons.itemmenuiconup.icon();
 

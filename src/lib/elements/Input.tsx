@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, Text, TextInput, Platform } from 'react-native';
-import { ErrorMessage } from './Common';
+import { Platform, Text, TextInput, View } from 'react-native';
 import { arabicToNum } from '../../utils';
+import { ErrorMessage } from './Common';
 class Input extends React.PureComponent<any, any> {
   handleChange = async (value: any) => {
     if (this.props.num) {

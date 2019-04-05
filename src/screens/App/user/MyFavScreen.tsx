@@ -11,9 +11,9 @@ import unFavoritePost from '../../../graphql/mutation/unFavoritePost';
 import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
 import {
   getDBNextPosts,
+  isTablet,
   Message,
-  readyUserPosts,
-  isTablet
+  readyUserPosts
 } from '../../../utils';
 
 const { width } = Dimensions.get('window');

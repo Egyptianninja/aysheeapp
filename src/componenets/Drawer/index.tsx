@@ -3,13 +3,13 @@ import * as React from 'react';
 import { graphql } from 'react-apollo';
 import {
   AsyncStorage,
+  Image,
+  Platform,
   SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
-  Image,
-  Platform
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,7 +24,7 @@ import {
   phoneRemoved,
   updateUser
 } from '../../store/actions/userAtions';
-import { getCountryCityFromToken, StyleSheet, rtlos } from '../../utils';
+import { getCountryCityFromToken, rtlos, StyleSheet } from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
 class Drawer extends React.Component<any, any> {

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View, Dimensions, Image, TouchableHighlight } from "react-native";
-const { width } = Dimensions.get("window");
+import * as React from 'react';
+import { Dimensions, Image, TouchableHighlight, View } from 'react-native';
+const { width } = Dimensions.get('window');
 
 class ImageTile extends React.PureComponent<any, any> {
   render() {
@@ -18,15 +18,15 @@ class ImageTile extends React.PureComponent<any, any> {
           {selected && (
             <View
               style={{
-                position: "absolute",
+                position: 'absolute',
                 right: 8,
                 top: 8,
                 width: 16,
                 height: 16,
                 borderRadius: 8,
-                backgroundColor: "#e0364f",
+                backgroundColor: '#e0364f',
                 borderWidth: 2,
-                borderColor: "#fff",
+                borderColor: '#fff',
                 zIndex: 100,
                 opacity: 1
               }}

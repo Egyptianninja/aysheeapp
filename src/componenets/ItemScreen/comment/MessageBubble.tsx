@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Text, View, Image, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, isArabic, since } from '../../../utils';
-import { Avatar, AvatarCircle } from '../../Avatar';
+import * as React from 'react';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { isArabic, since, StyleSheet } from '../../../utils';
+import { AvatarCircle } from '../../Avatar';
 export default class MessageBubble extends React.Component<any, any> {
   render() {
     const { message, lang, isRTL, width, words, isAuthenticated } = this.props;

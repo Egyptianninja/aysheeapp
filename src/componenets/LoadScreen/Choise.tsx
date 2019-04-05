@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TouchableOpacity, Text, View, Image } from 'react-native';
-import { icons } from '../../load';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { telecode } from '../../constants';
+import { icons } from '../../load';
 
 export const Choise = ({ country, city, action, width }: any) => {
   let icon;

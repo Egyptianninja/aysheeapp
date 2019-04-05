@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Image } from 'react-native';
+import { Image, View } from 'react-native';
 import LoadingView from './Common/LoadingView';
 export default class Photo extends React.PureComponent<any, any> {
   state = {

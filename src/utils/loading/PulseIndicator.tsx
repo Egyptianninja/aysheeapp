@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated, Easing, StyleSheet } from 'react-native';
-
+import { Animated, Easing, StyleSheet, View } from 'react-native';
 import Indicator from './Indicator';
 
 export default class PulseIndicator extends PureComponent<any, any> {

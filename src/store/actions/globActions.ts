@@ -1,10 +1,10 @@
 import {
-  SET_LANGUAGE,
-  SET_BRANDS,
-  SET_SUB_BRANDS,
-  INIT_APP,
   ADD_PERMISSION,
-  SET_RECENT_LOCATION
+  INIT_APP,
+  SET_BRANDS,
+  SET_LANGUAGE,
+  SET_RECENT_LOCATION,
+  SET_SUB_BRANDS
 } from '../types';
 
 export function setLanguage(language: any, languageName: string, isRTL: any) {

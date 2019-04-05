@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, View, Text } from 'react-native';
+import { Switch, Text, View } from 'react-native';
 
 class SwitchUI extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {

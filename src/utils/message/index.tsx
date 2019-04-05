@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
-import Button from './Button';
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import Modal from 'react-native-modal';
 import { StyleSheet } from '../common';
+import Button from './Button';
 const Message = ({
   title,
   body,

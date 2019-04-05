@@ -1,11 +1,11 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 import {
-  View,
-  PanResponder,
   Animated,
   Dimensions,
-  StyleSheet
+  PanResponder,
+  StyleSheet,
+  View
 } from 'react-native';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;

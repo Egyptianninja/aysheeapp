@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { DotIndicator } from '../../../utils';
 import { View } from 'react-native';
+import { DotIndicator } from '../../../utils';
 const LoadingView = ({ width, height }: any) => (
   <View
     style={{

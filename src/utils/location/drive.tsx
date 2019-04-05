@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
+  Linking,
   StyleSheet,
   Text,
-  View,
-  Linking,
-  TouchableHighlight
-} from "react-native";
+  TouchableHighlight,
+  View
+} from 'react-native';
 
 export default class StackOverflow extends Component {
   startNavigation(url: any) {
@@ -24,23 +24,23 @@ export default class StackOverflow extends Component {
     // bicycling bicycle
     // transit transit
     this.startNavigation(
-      "google.navigation:q=American Century Investments&mode=" + mode
+      'google.navigation:q=American Century Investments&mode=' + mode
     );
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={this._onPressButton.bind(this, "d")}>
+        <TouchableHighlight onPress={this._onPressButton.bind(this, 'd')}>
           <Text>Driving</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this._onPressButton.bind(this, "walking")}>
+        <TouchableHighlight onPress={this._onPressButton.bind(this, 'walking')}>
           <Text>Walking</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this._onPressButton.bind(this, "bicycle")}>
+        <TouchableHighlight onPress={this._onPressButton.bind(this, 'bicycle')}>
           <Text>Bicycle</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this._onPressButton.bind(this, "transit")}>
+        <TouchableHighlight onPress={this._onPressButton.bind(this, 'transit')}>
           <Text>Transit</Text>
         </TouchableHighlight>
       </View>
@@ -51,8 +51,8 @@ export default class StackOverflow extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
   }
 });

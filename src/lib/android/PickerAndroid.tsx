@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Picker, View, Text } from 'react-native';
+import { Picker, Text, View } from 'react-native';
 
 const PickerAndroid = ({
   itemKind,

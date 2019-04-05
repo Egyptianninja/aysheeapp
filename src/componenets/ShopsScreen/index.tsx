@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { AvatarCircle } from '../Avatar';
 
 const ShopItem = ({ user, navigation, width, words }: any) => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { rtlos } from '../../utils';
 
 export const User = ({ name, avatar, about, navigation, user }: any) => {

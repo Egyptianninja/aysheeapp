@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Image, Animated } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 
 class ProgressiveImage extends React.Component<any, any> {
   thumbnailAnimated = new Animated.Value(0);

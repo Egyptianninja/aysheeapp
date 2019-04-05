@@ -1,13 +1,13 @@
 const chars =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 export const Base64 = {
-  btoa: (input: string = "") => {
+  btoa: (input: string = '') => {
     const str = input;
-    let output = "";
+    let output = '';
 
     for (
       let block = 0, charCode, i = 0, map = chars;
-      str.charAt(i | 0) || ((map = "="), i % 1);
+      str.charAt(i | 0) || ((map = '='), i % 1);
       output += map.charAt(63 & (block >> (8 - (i % 1) * 8)))
     ) {
       charCode = str.charCodeAt((i += 3 / 4));
@@ -24,9 +24,9 @@ export const Base64 = {
     return output;
   },
 
-  atob: (input: string = "") => {
-    const str = input.replace(/=+$/, "");
-    let output = "";
+  atob: (input: string = '') => {
+    const str = input.replace(/=+$/, '');
+    let output = '';
 
     if (str.length % 4 == 1) {
       throw new Error(
@@ -48,7 +48,7 @@ export const Base64 = {
 };
 
 export const parseJwt = (token: any) => {
-  const base64Url = token.split(".")[1];
-  const base64 = base64Url.replace("-", "+").replace("_", "/");
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace('-', '+').replace('_', '/');
   return JSON.parse(Base64.atob(base64));
 };

@@ -1,7 +1,7 @@
+import { Ionicons } from '@expo/vector-icons';
+import { Platform } from 'expo-core';
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Platform } from 'expo-core';
-import { Ionicons } from '@expo/vector-icons';
 
 const CheckBox = (props: any) => {
   const {

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
 import { Constants } from 'expo';
+import * as React from 'react';
+import { Text, View } from 'react-native';
 import { rtlos } from '../../utils';
 const HeaderNoBack = ({ navigation, title }: any) => {
   return (

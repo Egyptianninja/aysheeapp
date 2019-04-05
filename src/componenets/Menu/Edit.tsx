@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Permissions } from 'expo';
 import { Formik } from 'formik';
 import * as React from 'react';
 import {
@@ -23,11 +22,11 @@ import {
   SelectDate
 } from '../../lib';
 import {
+  getCameraRollPermission,
   isArabic,
   pickImageWithoutUpload,
   uploadPickedImage,
-  UserLocation,
-  getCameraRollPermission
+  UserLocation
 } from '../../utils';
 import LoadingTiny from '../Common/LoadingTiny';
 

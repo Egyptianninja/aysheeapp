@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Permissions } from 'expo';
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
@@ -21,6 +20,7 @@ import notificationSub from '../../../graphql/mutation/notificationSub';
 import { Button, CheckBox, Group, Input, SelectDate } from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
 import {
+  getCameraRollPermission,
   getPureNumber,
   isArabic,
   Message,
@@ -28,8 +28,7 @@ import {
   rtlos,
   StyleSheet,
   uploadPickedImage,
-  UserLocation,
-  getCameraRollPermission
+  UserLocation
 } from '../../../utils';
 
 const { width } = Dimensions.get('window');

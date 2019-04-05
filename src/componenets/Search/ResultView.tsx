@@ -1,21 +1,21 @@
+import { debounce } from 'lodash';
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import { debounce } from 'lodash';
-import { connect } from 'react-redux';
-import { HomeLoading, Noresult } from '../../componenets';
 import {
-  View,
   FlatList,
+  ScrollView,
   Text,
   TouchableOpacity,
-  ScrollView
+  View
 } from 'react-native';
+import { connect } from 'react-redux';
+import { HomeLoading, Noresult } from '../../componenets';
 import search from '../../graphql/query/search';
-import { delQuery } from '../../store/actions/postActions';
-import { readyPosts, isTablet, getNextPosts, rtlos } from '../../utils';
-import ItemViewSearch from './ItemViewSearch';
-import { ImageIcon } from '../Common';
 import { images } from '../../load';
+import { delQuery } from '../../store/actions/postActions';
+import { getNextPosts, isTablet, readyPosts, rtlos } from '../../utils';
+import { ImageIcon } from '../Common';
+import ItemViewSearch from './ItemViewSearch';
 
 class ResultView extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {

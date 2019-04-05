@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, Dimensions } from 'react-native';
-import FilterOption from './FilterOption';
+import { Dimensions, View } from 'react-native';
 import { rtlos } from '../../utils';
+import FilterOption from './FilterOption';
 
 const { width } = Dimensions.get('window');
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { View, Platform } from 'react-native';
-import FilterSelect from './filters/FilterSelect';
+import { Platform, View } from 'react-native';
+import PickerAndroid from '../../lib/android/PickerAndroid';
 import PickerUI from '../../lib/ios/Picker';
 import SwitchUI from '../../lib/ios/Switch';
-import PickerAndroid from '../../lib/android/PickerAndroid';
+import FilterSelect from './filters/FilterSelect';
 
 const HeaderFilter: any = ({
   rest: { categoryId },

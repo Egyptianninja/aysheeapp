@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Dimensions,
   Animated,
-  TouchableWithoutFeedback
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
 import OfferPhoto from './OfferPhoto';
 const { width } = Dimensions.get('window');

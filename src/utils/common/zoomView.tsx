@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { View, StyleSheet, PanResponder } from 'react-native';
+import { PanResponder, StyleSheet, View } from 'react-native';
 
 // Fallback when RN version is < 0.44
 

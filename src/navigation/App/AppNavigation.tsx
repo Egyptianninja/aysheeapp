@@ -1,6 +1,6 @@
 import { createDrawerNavigator } from 'react-navigation';
-import AppTabNavigation from './AppTabNavigation';
 import Drawer from '../../componenets/Drawer';
+import AppTabNavigation from './AppTabNavigation';
 
 export const AppDrawerNavigator = createDrawerNavigator(
   { Home: AppTabNavigation },

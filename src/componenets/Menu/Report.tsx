@@ -1,16 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as React from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import {
   Dimensions,
   ScrollView,
   StyleSheet,
-  View,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Modal from 'react-native-modal';
 import * as Yup from 'yup';
-import { Button, Input, Group, RadioButton } from '../../lib';
+import { Button, Group, Input, RadioButton } from '../../lib';
 
 const { width } = Dimensions.get('window');
 

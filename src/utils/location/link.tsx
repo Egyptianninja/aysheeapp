@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { words } from '../../store/getStore';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Popup } from 'react-native-map-link';
-import { getUserLocation } from './getUserLocation';
 import LoadingTiny from '../../componenets/Common/LoadingTiny';
+import { words } from '../../store/getStore';
 import { rtlos } from '../common';
+import { getUserLocation } from './getUserLocation';
 
 export default class Link extends Component<any, any> {
   state = {

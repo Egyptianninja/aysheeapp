@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import MessageBubble from './MessageBubble';
 
 class ItemComment extends React.PureComponent<any, any> {

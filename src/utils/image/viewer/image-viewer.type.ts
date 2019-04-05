@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Image, ImageURISource, Text, View, ViewStyle } from "react-native";
-import { simpleStyle } from "./image-viewer.style";
+import * as React from 'react';
+import { Image, Text, View, ViewStyle } from 'react-native';
+import { simpleStyle } from './image-viewer.style';
 
 export class Props {
   /**
@@ -36,7 +36,7 @@ export class Props {
   /**
    * 背景颜色
    */
-  public backgroundColor?: string = "black";
+  public backgroundColor?: string = 'black';
 
   /**
    * style props for the footer container
@@ -47,8 +47,8 @@ export class Props {
    * Menu Context Values
    */
   public menuContext?: any = {
-    saveToLocal: "save to the album",
-    cancel: "cancel"
+    saveToLocal: 'save to the album',
+    cancel: 'cancel'
   };
 
   /**
@@ -149,7 +149,7 @@ export class Props {
       React.createElement(
         Text,
         { style: simpleStyle.countText },
-        currentIndex + "/" + allSize
+        currentIndex + '/' + allSize
       )
     );
   };
@@ -288,5 +288,5 @@ export interface IImageSize {
   width: number;
   height: number;
   // 图片加载状态
-  status: "loading" | "success" | "fail";
+  status: 'loading' | 'success' | 'fail';
 }

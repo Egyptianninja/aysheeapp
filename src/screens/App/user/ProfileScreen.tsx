@@ -6,29 +6,29 @@ import { graphql, Query } from 'react-apollo';
 import {
   Animated,
   Dimensions,
+  Linking,
   Text,
   TouchableOpacity,
-  View,
-  Linking
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { AvatarCircle, Loading, Noresult } from '../../../componenets';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Edit, Menu, Report } from '../../../componenets/Menu';
+import MapModal from '../../../componenets/ProfileScreen/MapModal';
 import deletePost from '../../../graphql/mutation/deletePost';
 import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import favoritePost from '../../../graphql/mutation/favoritePost';
 import getUserPosts from '../../../graphql/query/getUserPosts';
 import { updateQty } from '../../../store/actions/userAtions';
 import {
+  call,
   getNextPosts,
+  isTablet,
   Message,
   readyUserPosts,
-  call,
-  rtlos,
-  isTablet
+  rtlos
 } from '../../../utils';
-import MapModal from '../../../componenets/ProfileScreen/MapModal';
 const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 240;

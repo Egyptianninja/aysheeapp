@@ -1,16 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
+import { MapView } from 'expo';
 import * as React from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
   Animated,
   Dimensions,
   Image,
-  StyleSheet
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { MapView } from 'expo';
 import Modal from 'react-native-modal';
-import { Ionicons } from '@expo/vector-icons';
 
 const { Marker }: any = MapView;
 

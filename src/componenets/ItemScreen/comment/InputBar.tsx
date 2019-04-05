@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { View, TouchableOpacity, Text, Platform } from 'react-native';
-import { AutoInput } from '../../../lib';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, isArabic, rtlos } from '../../../utils';
+import * as React from 'react';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { AutoInput } from '../../../lib';
+import { isArabic, rtlos, StyleSheet } from '../../../utils';
 
 export default class InputBar extends React.Component<any, any> {
   autogrowInput: any;

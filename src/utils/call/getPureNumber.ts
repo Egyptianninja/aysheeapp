@@ -1,5 +1,5 @@
-import { user } from '../../store/getStore';
 import { telecode } from '../../constants';
+import { user } from '../../store/getStore';
 import { parseJwt } from '../common/parseJwt';
 
 export const getPureNumber = (phone: any) => {

@@ -5,9 +5,9 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  Text,
   TouchableOpacity,
-  View,
-  Text
+  View
 } from 'react-native';
 import Modal from 'react-native-modal';
 import PhotoSlider from '../../componenets/Camera/PhotoSlider';

@@ -3,10 +3,8 @@ import { Constants } from 'expo';
 import * as React from 'react';
 import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-import { icons, images } from '../../load';
-import { StyleSheet, rtlos } from '../../utils';
-import imageViewerStyle from '../../utils/image/viewer/image-viewer.style';
-const home = icons.home.icon();
+import { icons } from '../../load';
+import { rtlos, StyleSheet } from '../../utils';
 const mainmenu = icons.mainmenu.icon();
 const namelogo = icons.namelogo.icon();
 

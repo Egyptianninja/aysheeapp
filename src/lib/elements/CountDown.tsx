@@ -1,5 +1,5 @@
-import * as React from "react";
-import { View, Text } from "react-native";
+import * as React from 'react';
+import { Text } from 'react-native';
 
 class CountDown extends React.Component<any, any> {
   intervalId: any;
@@ -25,7 +25,7 @@ class CountDown extends React.Component<any, any> {
 
   render() {
     return (
-      <Text style={{ color: "#272727", fontSize: 18 }}>
+      <Text style={{ color: '#272727', fontSize: 18 }}>
         {this.state.counter}
       </Text>
     );

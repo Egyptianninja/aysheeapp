@@ -1,19 +1,18 @@
+import { Ionicons } from '@expo/vector-icons';
+import { Constants } from 'expo';
 import * as React from 'react';
 import {
   Dimensions,
-  ScrollView,
-  View,
+  Platform,
   Text,
   TouchableOpacity,
-  Platform
+  View
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
-import HeaderFilter from '../HomeScreen/HeaderFilter';
-import { Constants } from 'expo';
 import { rtlos } from '../../utils';
+import HeaderFilter from '../HomeScreen/HeaderFilter';
+
 const { width, height } = Dimensions.get('window');
 
 class FilterModal extends React.Component<any, any> {

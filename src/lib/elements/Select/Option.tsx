@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { TouchableOpacity, Text, View, Image, Dimensions } from 'react-native';
 import { Platform } from 'expo-core';
+import * as React from 'react';
+import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export const Option = ({

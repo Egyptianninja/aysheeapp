@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-
 import Orientation from './accelerometer';
+
 const Sensors = () => (
   <View>
     <Orientation accuracy={0.7} orientation={orient} />

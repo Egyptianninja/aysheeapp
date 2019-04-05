@@ -1,17 +1,14 @@
 import * as React from 'react';
 import {
-  StyleSheet,
-  View,
-  Image,
-  ScrollView,
-  Dimensions,
   Animated,
-  TouchableWithoutFeedback
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
 import { Photo } from '../../lib';
 import { rtlos } from '../../utils';
-// import { Image } from 'react-native-expo-image-cache';
-// import { preview } from '../../constants';
 const { width } = Dimensions.get('window');
 
 export default class PhotoSlider extends React.Component<any, any> {

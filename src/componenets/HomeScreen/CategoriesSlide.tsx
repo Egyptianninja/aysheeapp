@@ -1,15 +1,15 @@
+import { Platform } from 'expo-core';
 import * as React from 'react';
 import {
-  View,
   Dimensions,
-  Text,
-  ScrollView,
   Image,
-  TouchableOpacity
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { images, icons } from '../../load';
+import { icons, images } from '../../load';
 import CategoryModalIcon from './CategoryModalIcon';
-import { Platform } from 'expo-core';
 
 const { width, height } = Dimensions.get('window');
 

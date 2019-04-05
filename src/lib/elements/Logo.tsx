@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { StyleSheet } from '../../../src/utils';
 
 const Logo = () => (

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { getUserLocation, rtlos } from '../../utils';
 import LoadingTiny from '../Common/LoadingTiny';
 

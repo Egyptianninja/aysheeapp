@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Modal, Image, Animated } from 'react-native';
+import { Animated, Image, Modal, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 class AnimatedLogo extends React.Component<any, any> {

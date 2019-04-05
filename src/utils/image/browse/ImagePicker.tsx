@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Permissions } from 'expo';
-import ImageModal from './ImageModal';
 import { connect } from 'react-redux';
-import { addPermission } from '../../../store/actions/globActions';
 import { PhotoPicker } from '../../../componenets/Add/photoPicker';
+import { addPermission } from '../../../store/actions/globActions';
 import { getCameraRollPermission } from '../../camera';
+import ImageModal from './ImageModal';
 
 class ImagePicker extends React.PureComponent<any, any> {
   constructor(props: any) {

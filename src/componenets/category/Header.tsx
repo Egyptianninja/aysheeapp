@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { View, TouchableOpacity, Text, Platform } from 'react-native';
 import { Constants } from 'expo';
+import * as React from 'react';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { rtlos } from '../../utils';
 
 const Header = ({ navigation, title, showFilterModal }: any) => {

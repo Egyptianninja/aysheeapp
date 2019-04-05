@@ -1,17 +1,17 @@
+import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import {
-  View,
-  TouchableOpacity,
-  Text,
   Dimensions,
+  Platform,
   ScrollView,
-  Platform
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Ionicons } from '@expo/vector-icons';
-import { Option } from './Option';
 import { icons } from '../../../load';
 import { rtlos } from '../../../utils';
+import { Option } from './Option';
 
 const { width } = Dimensions.get('window');
 

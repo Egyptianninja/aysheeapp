@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
-import { category, isRTL } from '../../store/getStore';
+import { ScrollView, View } from 'react-native';
 import { icons } from '../../load';
+import { category, isRTL } from '../../store/getStore';
 import { Choise } from './Choise';
 
 const renderChoices = (items: any, navigation: any, iconsize: any) => {

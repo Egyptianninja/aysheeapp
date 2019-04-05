@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation';
+import { Header } from '../../../componenets';
 import {
   ItemScreen,
-  SearchScreen,
-  ShopsScreen,
   OffersScreen,
-  ProfileScreen
+  ProfileScreen,
+  SearchScreen,
+  ShopsScreen
 } from '../../../screens';
-import { Header } from '../../../componenets';
 export const SearchStack = createStackNavigator(
   {
     SearchScreen: {

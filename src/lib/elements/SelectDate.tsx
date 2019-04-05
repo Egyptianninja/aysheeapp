@@ -1,15 +1,7 @@
-import * as React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  Dimensions,
-  ScrollView,
-  Platform
-} from 'react-native';
-import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
-
+import * as React from 'react';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import Modal from 'react-native-modal';
 import CalendarsPeriod from '../../utils/calendar/period';
 import CalendarsSingle from '../../utils/calendar/single';
 

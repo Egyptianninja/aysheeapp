@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import {
-  EditProfileScreen,
-  MyFavScreen,
-  UpgradeToStore,
-  MyProfileScreen,
-  ItemScreen,
-  PhoneScreen,
-  CodeScreen
-} from '../../../screens';
 import { Header } from '../../../componenets';
 import HeaderNoBack from '../../../componenets/Common/HeaderNoback';
+import {
+  CodeScreen,
+  EditProfileScreen,
+  ItemScreen,
+  MyFavScreen,
+  MyProfileScreen,
+  PhoneScreen,
+  UpgradeToStore
+} from '../../../screens';
 import { words } from '../../../store/getStore';
 export const ProfileStack = createStackNavigator(
   {

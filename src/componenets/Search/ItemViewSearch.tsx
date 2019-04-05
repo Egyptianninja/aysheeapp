@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { StyleSheet, rtlos } from '../../utils';
+import { rtlos, StyleSheet } from '../../utils';
 import { PostImage } from './PostImage';
 
 const ItemViewSearch = (props: any) => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, View } from 'react-native';
 import { rtlos } from '../../utils';
 
 export default class BodyView extends React.Component<any, any> {

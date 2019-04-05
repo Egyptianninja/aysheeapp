@@ -6,12 +6,12 @@ import {
   Animated,
   Dimensions,
   Keyboard,
+  KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
-  KeyboardAvoidingView
+  View
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -30,19 +30,19 @@ import secrets from '../../constants/secrets';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
+import { LoadingView } from '../../lib';
 import {
   getDate,
   ImageViewer,
   ItemLocation,
   Message,
-  StyleSheet,
-  rtlos
+  rtlos,
+  StyleSheet
 } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
 import { MenuIconHeader } from './MenuIconHeader';
-import { LoadingView } from '../../lib';
 
 const { width, height } = Dimensions.get('window');
 

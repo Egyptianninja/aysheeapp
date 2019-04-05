@@ -101,31 +101,6 @@ class HomeScreen extends React.Component<any, any> {
         }
       }
     }
-
-    // this.subs = [
-    //   this.props.navigation.addListener('didFocus', async () => {
-    //     if (!this.props.permissions.NOTIFICATIONS) {
-    //       if (this.props.isAuthenticated) {
-    //         const pushToken = await registerForPushNotificationsAsync();
-    //         if (pushToken) {
-    //           const res = await this.props.notificationSub({
-    //             variables: {
-    //               userId: this.props.user._id,
-    //               pushToken
-    //             }
-    //           });
-    //           if (res.data.notificationSub.ok) {
-    //             this.props.addPermission('NOTIFICATIONS');
-    //           }
-    //         }
-    //       }
-    //     }
-    //   })
-    //   // this.props.navigation.addListener('willBlur', () => {
-    //   //   //
-    //   // })
-    // ];
-
     this.state.scrollAnim.addListener(({ value }: any) => {
       const diff = value - this.scrollValue;
       this.scrollValue = value;
@@ -148,7 +123,6 @@ class HomeScreen extends React.Component<any, any> {
   componentWillUnmount() {
     this.state.scrollAnim.removeAllListeners();
     this.state.offsetAnim.removeAllListeners();
-    // this.subs.forEach((sub: any) => sub.remove());
   }
 
   _onScrollEndDrag = () => {

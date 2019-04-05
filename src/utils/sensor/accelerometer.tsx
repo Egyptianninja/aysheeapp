@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Accelerometer } from 'expo';
-import { View, Text, TouchableOpacity } from 'react-native';
+import * as React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 export default class AccelerometerSensor extends React.Component<any, any> {
   subscription: any;

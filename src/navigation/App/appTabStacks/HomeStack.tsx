@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation';
+import { Header } from '../../../componenets';
 import HomeHeader from '../../../componenets/HomeScreen/HomeHeader';
 import {
   AddCarScreen,
@@ -10,20 +11,19 @@ import {
   AddRealEstateScreen,
   AddServiceScreen,
   CameraScreen,
+  CategoryScreen,
   ChoiseScreen,
+  CodeScreen,
+  EditProfileScreen,
   HomeScreen,
   ItemScreen,
-  OffersScreen,
-  ShopsScreen,
-  CategoryScreen,
-  ProfileScreen,
-  UpgradeToStore,
   MyFavScreen,
-  EditProfileScreen,
+  OffersScreen,
   PhoneScreen,
-  CodeScreen
+  ProfileScreen,
+  ShopsScreen,
+  UpgradeToStore
 } from '../../../screens';
-import { Header } from '../../../componenets';
 
 export const HomeStack = createStackNavigator(
   {
