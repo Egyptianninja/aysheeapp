@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View, Image, Text } from 'react-native';
 import { images } from '../../load';
-const Noresult = ({ title, isRTL, top = 150 }: any) => (
+const Noresult = ({ title, isRTL, top }: any) => (
   <View
     style={{
       flex: 1,
-      paddingTop: top,
+      marginTop: top ? top : 0,
       backgroundColor: '#eee',
       justifyContent: 'flex-start',
       alignItems: 'center',

@@ -484,12 +484,14 @@ class HomeScreen extends React.Component<any, any> {
               return <HomeLoading categoryId={rest.categoryId} />;
             }
             if (error || !data.getTimeLine.posts) {
-              return <Noresult title="error" />;
+              return <Noresult title="error" top={100} />;
             }
             const postsQuery = data.getTimeLine.posts;
 
             if (postsQuery && postsQuery.length === 0) {
-              return <Noresult isRTL={isRTL} title={words.noresults} />;
+              return (
+                <Noresult isRTL={isRTL} title={words.noresults} top={100} />
+              );
             }
             const posts = readyPosts(
               postsQuery,
