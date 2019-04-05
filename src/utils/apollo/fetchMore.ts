@@ -276,6 +276,8 @@ export const readyOfferPosts = (
 };
 
 const getPostLangValues = (post: any, lang: any) => {
+  console.log(post);
+
   const brands = getStore.brands();
   const brand = post.brandId
     ? brands.filter((brd: any) => brd.id === post.brandId)[0][lang]
@@ -288,22 +290,22 @@ const getPostLangValues = (post: any, lang: any) => {
 
   const eBrands = getStore.electroBrands();
   const eBrand = post.eBrandId
-    ? eBrands.filter((brd: any) => brd.id === post.eBrandId)[0][lang]
+    ? eBrands.filter((brd: any) => brd.id === post.eBrandId)[0].name
     : null;
 
   const kinds = getStore.kind();
   const kind = post.kindId
-    ? kinds.filter((brd: any) => brd.id === post.kindId)[0][lang]
+    ? kinds.filter((brd: any) => brd.id === post.kindId)[0].name
     : null;
 
   const realestates = getStore.realestate();
   const realestate = post.realestateId
-    ? realestates.filter((brd: any) => brd.id === post.realestateId)[0][lang]
+    ? realestates.filter((brd: any) => brd.id === post.realestateId)[0].name
     : null;
 
   const services = getStore.service();
   const service = post.serviceId
-    ? services.filter((brd: any) => brd.id === post.serviceId)[0][lang]
+    ? services.filter((brd: any) => brd.id === post.serviceId)[0].name
     : null;
 
   return {

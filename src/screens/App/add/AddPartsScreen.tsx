@@ -151,7 +151,7 @@ class AddPartsScreen extends React.Component<any, any> {
         currency: currency.name,
         color,
         brand,
-        subBrand,
+        subBrand: subBrand === '' ? undefined : subBrand,
         trueLocation
       }
     });
@@ -207,7 +207,6 @@ class AddPartsScreen extends React.Component<any, any> {
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
                 brand: Yup.string().required('Required'),
-                subBrand: Yup.string().required('Required'),
                 title: Yup.string()
                   .max(100)
                   .required('Required'),
@@ -273,7 +272,6 @@ class AddPartsScreen extends React.Component<any, any> {
                     />
                     <Select
                       name="subBrand"
-                      required
                       disable={this.state.selectedBrand === null}
                       words={this.props.words}
                       data={subBrands}

@@ -2,43 +2,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import {
-  Animated,
-  Dimensions,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Animated, Dimensions, Keyboard, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
-import {
-  BodyView,
-  FullTimeView,
-  getJobProperties,
-  getproperties,
-  InputBar,
-  ItemComment,
-  Loading,
-  PhotoSlider,
-  PriceView,
-  Properties
-} from '..';
+import { BodyView, FullTimeView, getJobProperties, getproperties, InputBar, ItemComment, Loading, PhotoSlider, PriceView, Properties } from '..';
 import secrets from '../../constants/secrets';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
 import { LoadingView } from '../../lib';
-import {
-  getDate,
-  ImageViewer,
-  ItemLocation,
-  Message,
-  rtlos,
-  StyleSheet
-} from '../../utils';
+import { getDate, ImageViewer, ItemLocation, Message, rtlos, StyleSheet } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
@@ -322,6 +294,8 @@ class ItemView extends React.Component<any, any> {
       inputRange: [0, 200],
       outputRange: [0, 1]
     });
+    console.log(post);
+
 
     return (
       <View style={styles.container}>
