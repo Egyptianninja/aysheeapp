@@ -141,7 +141,7 @@ class ItemView extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = async ({ screen, message }: any) => {
+  showMessageModal = async ({ message }: any) => {
     await this.setState({ message, screen });
     this.setState({ isMessageVisible: true });
   };

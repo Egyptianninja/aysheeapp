@@ -111,8 +111,8 @@ class CategoryScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = async ({ screen, message }: any) => {
-    await this.setState({ message, screen });
+  showMessageModal = async ({ message }: any) => {
+    await this.setState({ message });
     this.setState({ isMessageVisible: true });
   };
   hideMessageModal = () => {

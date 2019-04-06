@@ -25,17 +25,14 @@ class Report extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      isReportModalVisible: false,
-      message: null
+      isReportModalVisible: false
     };
   }
 
   reportMessageShow = () => {
-    if (this.state.message) {
-      this.props.showMessageModal({
-        message: this.state.message
-      });
-    }
+    this.props.showMessageModal({
+      message: this.props.word.successadded
+    });
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -59,7 +56,6 @@ class Report extends React.Component<any, any> {
       }
     });
     if (res.data.createReport.ok) {
-      await this.setState({ message: this.props.word.successadded });
       this.props.hideReportModal();
     }
     if (!res.data.createReport.ok) {
