@@ -64,7 +64,8 @@ export default class Edit extends React.Component<any, any> {
     this.state = {
       isEditModalVisible: false,
       location: null,
-      image: null
+      image: null,
+      message: null
     };
   }
 
@@ -84,10 +85,11 @@ export default class Edit extends React.Component<any, any> {
   };
 
   editMessageShow = () => {
-    this.props.showMessageModal({
-      seconds: 1,
-      message: this.props.word.adupdated
-    });
+    if (this.state.message) {
+      this.props.showMessageModal({
+        message: this.state.message
+      });
+    }
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -174,6 +176,7 @@ export default class Edit extends React.Component<any, any> {
     });
 
     if (res.data.updatePost.ok) {
+      await this.setState({ message: this.props.word.adupdated });
       this.props.hideEditModal();
     }
     if (!res.data.updatePost.ok) {

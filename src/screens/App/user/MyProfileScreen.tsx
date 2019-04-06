@@ -31,6 +31,7 @@ import {
   readyUserPosts,
   rtlos
 } from '../../../utils';
+import MessageAlert from '../../../utils/message/MessageAlert';
 const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 240;
@@ -39,7 +40,6 @@ const PROFILE_IMAGE_HEIGHT = 80;
 class MyProfileScreen extends React.Component<any, any> {
   flatListRef: any;
   getNextPosts: any;
-  timer: any;
   constructor(p: any) {
     super(p);
     this.getNextPosts = debounce(getNextPosts, 100);
@@ -56,10 +56,6 @@ class MyProfileScreen extends React.Component<any, any> {
       rest: { islive: true },
       tab: 1
     };
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
   }
 
   selectePost = (post: any, word: any, lang: any, isRTL: any) => {
@@ -95,23 +91,12 @@ class MyProfileScreen extends React.Component<any, any> {
     this.setState({ isReportModalVisible: false });
   };
 
-  showMessageModal = async ({ seconds, screen, message }: any) => {
-    await this.setState({ message });
+  showMessageModal = async ({ screen, message }: any) => {
+    await this.setState({ message, screen });
     this.setState({ isMessageVisible: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
   };
   hideMessageModal = () => {
-    this.setState({ isMessageVisible: false });
+    this.setState({ isMessageVisible: false, message: null, screen: null });
   };
   showEditModal = () => {
     this.setState({ isEditModalVisible: true });
@@ -144,12 +129,9 @@ class MyProfileScreen extends React.Component<any, any> {
       await this.props.updateQty('online', -1);
     }
     this.hideCheckMessageModal();
-    this.timer = setTimeout(() => {
-      this.showMessageModal({
-        seconds: 1,
-        message: this.props.words.addeleted
-      });
-    }, 1000);
+    this.showMessageModal({
+      message: this.props.words.addeleted
+    });
   };
 
   canceldeletePost = async () => {
@@ -163,13 +145,12 @@ class MyProfileScreen extends React.Component<any, any> {
     const { menuId, postId, post } = this.state.hideMenuData;
     if (menuId === 1) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         await this.props.favoritePost({
           variables: { postId }
         });
         this.showMessageModal({
-          seconds: 1,
           message: this.props.words.successadded
         });
       }
@@ -178,7 +159,6 @@ class MyProfileScreen extends React.Component<any, any> {
         variables: { postId }
       });
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.removeedtovafavorites
       });
     } else if (menuId === 3) {
@@ -191,7 +171,7 @@ class MyProfileScreen extends React.Component<any, any> {
       onShare(message, this.hideMenuModal);
     } else if (menuId === 4) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         this.showReportModal();
       }
@@ -213,7 +193,6 @@ class MyProfileScreen extends React.Component<any, any> {
       }
 
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adrefreshed
       });
     } else if (menuId === 6) {
@@ -230,7 +209,6 @@ class MyProfileScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', -1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adpublished
       });
     } else if (menuId === 7) {
@@ -247,7 +225,6 @@ class MyProfileScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', 1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adunpupished
       });
     } else if (menuId === 8) {
@@ -702,9 +679,11 @@ class MyProfileScreen extends React.Component<any, any> {
           word={words}
           isRTL={isRTL}
         />
-        <Message
-          isVisible={this.state.isMessageVisible}
-          title={this.state.message}
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          message={this.state.message}
+          screen={this.state.screen}
           icon="ios-checkmark-circle"
           isRTL={isRTL}
           height={120}

@@ -44,6 +44,7 @@ import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
 import { MenuIconHeader } from './MenuIconHeader';
+import MessageAlert from '../../utils/message/MessageAlert';
 
 const { width, height } = Dimensions.get('window');
 
@@ -63,7 +64,6 @@ class ItemView extends React.Component<any, any> {
   scrollViewHeight: any;
 
   childRef: any = React.createRef();
-  timer: any;
   state = {
     isImageViewVisible: true,
     isMenuModalVisible: false,
@@ -116,7 +116,6 @@ class ItemView extends React.Component<any, any> {
     this.keyboardDidHideListener.remove();
     this.keyboardWillShowListener.remove();
     this.keyboardWillHideListener.remove();
-    clearTimeout(this.timer);
   }
 
   showMenuModal = () => {
@@ -142,23 +141,12 @@ class ItemView extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = async ({ seconds, screen, message }: any) => {
-    await this.setState({ message });
+  showMessageModal = async ({ screen, message }: any) => {
+    await this.setState({ message, screen });
     this.setState({ isMessageVisible: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
   };
   hideMessageModal = () => {
-    this.setState({ isMessageVisible: false });
+    this.setState({ isMessageVisible: false, message: null, screen: null });
   };
   showEditModal = () => {
     this.setState({ isEditModalVisible: true });
@@ -180,12 +168,9 @@ class ItemView extends React.Component<any, any> {
       }
     });
     this.hideCheckMessageModal();
-    this.timer = setTimeout(() => {
-      this.showMessageModal({
-        seconds: 1,
-        message: this.props.word.addeleted
-      });
-    }, 1000);
+    this.showMessageModal({
+      message: this.props.word.addeleted
+    });
   };
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
@@ -199,13 +184,12 @@ class ItemView extends React.Component<any, any> {
     const { post, postId, word } = this.props;
     if (menuId === 1) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         await this.props.favoritePost({
           variables: { postId }
         });
         this.showMessageModal({
-          seconds: 1,
           message: word.successadded
         });
       }
@@ -214,7 +198,6 @@ class ItemView extends React.Component<any, any> {
         variables: { postId }
       });
       this.showMessageModal({
-        seconds: 1,
         message: word.removeedtovafavorites
       });
     } else if (menuId === 3) {
@@ -227,7 +210,7 @@ class ItemView extends React.Component<any, any> {
       onShare(message, this.hideMenuModal);
     } else if (menuId === 4) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         this.showReportModal();
       }
@@ -249,7 +232,6 @@ class ItemView extends React.Component<any, any> {
       }
 
       this.showMessageModal({
-        seconds: 1,
         message: word.adrefreshed
       });
     } else if (menuId === 6) {
@@ -266,7 +248,6 @@ class ItemView extends React.Component<any, any> {
       }
       this.props.updateQty('offline', -1);
       this.showMessageModal({
-        seconds: 1,
         message: word.adpublished
       });
     } else if (menuId === 7) {
@@ -283,7 +264,6 @@ class ItemView extends React.Component<any, any> {
       }
       this.props.updateQty('offline', 1);
       this.showMessageModal({
-        seconds: 1,
         message: word.adunpupished
       });
     } else if (menuId === 8) {
@@ -488,13 +468,12 @@ class ItemView extends React.Component<any, any> {
             post={post}
           />
         )}
-        <Message
-          isVisible={this.state.isMessageVisible}
-          title={this.state.message}
-          word={word}
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          message={this.state.message}
           icon="ios-checkmark-circle"
           isRTL={isRTL}
-          width={width}
           height={120}
         />
         <Message

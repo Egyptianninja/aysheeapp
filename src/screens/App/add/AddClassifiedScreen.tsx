@@ -59,39 +59,17 @@ class AddClassifiedScreen extends React.Component<any, any> {
   eBrand = [2, 6, 14];
 
   acc = [8];
-  timer: any;
   componentDidMount() {
     const category = this.props.navigation.getParam('item');
     if (category.id === 2) {
       this.setState({ isElectronics: true });
     }
   }
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
 
   onSelecteOption = (id: number) => this.setState({ selectedElectronics: id });
 
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
-  };
-
-  showMessage = ({ seconds, screen }: any) => {
-    this.setState({ isShowMessage: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isShowMessage: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isShowMessage: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
-  };
-  hideMessage = () => {
-    this.setState({ isShowMessage: false });
   };
 
   getCurrentLocation = (location: any) => {
@@ -182,7 +160,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
       this.updateProgressBar(1 / (3 + this.state.images.length));
       await this.props.updateQty('online', 1);
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      this.showMessage({ seconds: 2, screen: 'HomeScreen' });
+      this.props.navigation.navigate('HomeScreen');
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -213,14 +191,6 @@ class AddClassifiedScreen extends React.Component<any, any> {
     }
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-        <Message
-          isVisible={this.state.isShowMessage}
-          title={word.successadded}
-          icon="ios-checkmark-circle"
-          isRTL={isRTL}
-          width={width}
-          height={120}
-        />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{ backgroundColor: '#eee' }}

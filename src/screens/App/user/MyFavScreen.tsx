@@ -16,13 +16,13 @@ import {
   onShare,
   readyUserPosts
 } from '../../../utils';
+import MessageAlert from '../../../utils/message/MessageAlert';
 
 const { width } = Dimensions.get('window');
 
 class MyFavScreen extends React.Component<any, any> {
   flatListRef: any;
   getDBNextPosts: any;
-  timer: any;
 
   constructor(p: any) {
     super(p);
@@ -35,10 +35,6 @@ class MyFavScreen extends React.Component<any, any> {
       modalPost: null,
       message: null
     };
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
   }
 
   showMenuModal = (post: any) => {
@@ -64,23 +60,12 @@ class MyFavScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = async ({ seconds, screen, message }: any) => {
-    await this.setState({ message });
+  showMessageModal = async ({ screen, message }: any) => {
+    await this.setState({ message, screen });
     this.setState({ isMessageVisible: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
   };
   hideMessageModal = () => {
-    this.setState({ isMessageVisible: false });
+    this.setState({ isMessageVisible: false, message: null, screen: null });
   };
 
   selectePost = (post: any, word: any, lang: any, isRTL: any) => {
@@ -100,13 +85,12 @@ class MyFavScreen extends React.Component<any, any> {
     const { menuId, postId, post } = this.state.hideMenuData;
     if (menuId === 1) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         await this.props.favoritePost({
           variables: { postId }
         });
         this.showMessageModal({
-          seconds: 1,
           message: this.props.words.successadded
         });
       }
@@ -115,7 +99,6 @@ class MyFavScreen extends React.Component<any, any> {
         variables: { postId }
       });
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.removeedtovafavorites
       });
     } else if (menuId === 3) {
@@ -128,7 +111,7 @@ class MyFavScreen extends React.Component<any, any> {
       onShare(message, this.hideMenuModal);
     } else if (menuId === 4) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         this.showReportModal();
       }
@@ -150,7 +133,6 @@ class MyFavScreen extends React.Component<any, any> {
       }
 
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adrefreshed
       });
     } else if (menuId === 6) {
@@ -167,7 +149,6 @@ class MyFavScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', -1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adpublished
       });
     } else if (menuId === 7) {
@@ -184,7 +165,6 @@ class MyFavScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', 1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adunpupished
       });
     }
@@ -220,12 +200,13 @@ class MyFavScreen extends React.Component<any, any> {
           word={words}
           isRTL={isRTL}
         />
-        <Message
-          isVisible={this.state.isMessageVisible}
-          title={words.removeedtovafavorites}
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          message={this.state.message}
+          screen={this.state.screen}
           icon="ios-checkmark-circle"
           isRTL={isRTL}
-          width={width}
           height={120}
         />
         <Query

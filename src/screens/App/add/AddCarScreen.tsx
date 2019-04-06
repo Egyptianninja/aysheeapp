@@ -34,26 +34,23 @@ import {
   uploadPhotos,
   UserLocation
 } from '../../../utils';
+import MessageAlert from '../../../utils/message/MessageAlert';
 
 const { width } = Dimensions.get('window');
 
 class AddCarScreen extends React.Component<any, any> {
-  timer: any;
   constructor(props: any) {
     super(props);
-    this.timer = null;
     this.state = {
       selectedImage: null,
       selectedBrand: null,
-      isShowMessage: false,
+      isMessageVisible: false,
       location: null,
       images: [],
-      bar: 0
+      bar: 0,
+      message: null,
+      screen: null
     };
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
   }
 
   returnData = (imgs: any) => {
@@ -77,24 +74,6 @@ class AddCarScreen extends React.Component<any, any> {
 
   updateProgressBar = (value: any) => {
     this.setState({ bar: this.state.bar + value });
-  };
-
-  showMessage = ({ seconds, screen }: any) => {
-    this.setState({ isShowMessage: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isShowMessage: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isShowMessage: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
-  };
-  hideMessage = () => {
-    this.setState({ isShowMessage: false });
   };
 
   pickCameraImage = () => {
@@ -172,7 +151,7 @@ class AddCarScreen extends React.Component<any, any> {
 
       await this.props.updateQty('online', 1);
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      this.showMessage({ seconds: 2, screen: 'HomeScreen' });
+      this.props.navigation.navigate('HomeScreen');
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -190,14 +169,6 @@ class AddCarScreen extends React.Component<any, any> {
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-        <Message
-          isVisible={this.state.isShowMessage}
-          title={word.successadded}
-          icon="ios-checkmark-circle"
-          isRTL={isRTL}
-          width={width}
-          height={120}
-        />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{ backgroundColor: '#eee' }}

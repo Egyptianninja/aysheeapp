@@ -29,6 +29,7 @@ import {
   rtlos
 } from '../../utils';
 import MultiLocations from '../../utils/location/MultiLocations';
+import MessageAlert from '../../utils/message/MessageAlert';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width, height } = Dimensions.get('window');
@@ -45,7 +46,6 @@ class CategoryScreen extends React.Component<any, any> {
   filter = true;
   posts: any;
   userlocation: any;
-  timer: any;
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
@@ -70,10 +70,6 @@ class CategoryScreen extends React.Component<any, any> {
   componentDidMount() {
     const category = this.props.navigation.getParam('item');
     this.setState({ rest: { categoryId: category.id } });
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
   }
 
   showFilterModal = () => {
@@ -115,23 +111,12 @@ class CategoryScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = async ({ seconds, screen, message }: any) => {
-    await this.setState({ message });
+  showMessageModal = async ({ screen, message }: any) => {
+    await this.setState({ message, screen });
     this.setState({ isMessageVisible: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
   };
   hideMessageModal = () => {
-    this.setState({ isMessageVisible: false });
+    this.setState({ isMessageVisible: false, message: null, screen: null });
   };
   showCheckMessageModal = async () => {
     this.setState({ isCheckMessaheVisible: true });
@@ -159,12 +144,10 @@ class CategoryScreen extends React.Component<any, any> {
       await this.props.updateQty('online', -1);
     }
     this.hideCheckMessageModal();
-    this.timer = setTimeout(() => {
-      this.showMessageModal({
-        seconds: 1,
-        message: this.props.words.addeleted
-      });
-    }, 1000);
+
+    this.showMessageModal({
+      message: this.props.words.addeleted
+    });
   };
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
@@ -177,13 +160,12 @@ class CategoryScreen extends React.Component<any, any> {
     const { menuId, postId, post } = this.state.hideMenuData;
     if (menuId === 1) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         await this.props.favoritePost({
           variables: { postId }
         });
         this.showMessageModal({
-          seconds: 1,
           message: this.props.words.successadded
         });
       }
@@ -192,7 +174,6 @@ class CategoryScreen extends React.Component<any, any> {
         variables: { postId }
       });
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.removeedtovafavorites
       });
     } else if (menuId === 3) {
@@ -205,7 +186,7 @@ class CategoryScreen extends React.Component<any, any> {
       onShare(message, this.hideMenuModal);
     } else if (menuId === 4) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         this.showReportModal();
       }
@@ -227,7 +208,6 @@ class CategoryScreen extends React.Component<any, any> {
       }
 
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adrefreshed
       });
     } else if (menuId === 6) {
@@ -244,7 +224,6 @@ class CategoryScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', -1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adpublished
       });
     } else if (menuId === 7) {
@@ -261,7 +240,6 @@ class CategoryScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', 1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adunpupished
       });
     } else if (menuId === 8) {
@@ -401,9 +379,11 @@ class CategoryScreen extends React.Component<any, any> {
           word={words}
           isRTL={isRTL}
         />
-        <Message
-          isVisible={this.state.isMessageVisible}
-          title={this.state.message}
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          message={this.state.message}
+          screen={this.state.screen}
           icon="ios-checkmark-circle"
           isRTL={isRTL}
           height={120}

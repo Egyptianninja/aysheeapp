@@ -29,6 +29,7 @@ import {
   readyPosts,
   registerForPushNotificationsAsync
 } from '../../utils';
+import MessageAlert from '../../utils/message/MessageAlert';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -44,7 +45,6 @@ class HomeScreen extends React.Component<any, any> {
   scrollValue = 0;
   NAVBAR_HEIGHT = 96;
   TAB_BAR_HEIGHT = 49;
-  timer: any;
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
@@ -123,7 +123,6 @@ class HomeScreen extends React.Component<any, any> {
   componentWillUnmount() {
     this.state.scrollAnim.removeAllListeners();
     this.state.offsetAnim.removeAllListeners();
-    clearTimeout(this.timer);
   }
 
   _onScrollEndDrag = () => {
@@ -177,23 +176,12 @@ class HomeScreen extends React.Component<any, any> {
   hideReportModal = () => {
     this.setState({ isReportModalVisible: false });
   };
-  showMessageModal = async ({ seconds, screen, message }: any) => {
-    await this.setState({ message });
+  showMessageModal = async ({ screen, message }: any) => {
+    await this.setState({ message, screen });
     this.setState({ isMessageVisible: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isMessageVisible: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
   };
   hideMessageModal = () => {
-    this.setState({ isMessageVisible: false });
+    this.setState({ isMessageVisible: false, message: null, screen: null });
   };
   showCheckMessageModal = async () => {
     this.setState({ isCheckMessaheVisible: true });
@@ -232,12 +220,9 @@ class HomeScreen extends React.Component<any, any> {
       await this.props.updateQty('online', -1);
     }
     this.hideCheckMessageModal();
-    this.timer = setTimeout(() => {
-      this.showMessageModal({
-        seconds: 1,
-        message: this.props.words.addeleted
-      });
-    }, 1000);
+    this.showMessageModal({
+      message: this.props.words.addeleted
+    });
   };
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
@@ -340,13 +325,12 @@ class HomeScreen extends React.Component<any, any> {
     const { menuId, postId, post } = this.state.hideMenuData;
     if (menuId === 1) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         await this.props.favoritePost({
           variables: { postId }
         });
         this.showMessageModal({
-          seconds: 1,
           message: this.props.words.successadded
         });
       }
@@ -355,10 +339,10 @@ class HomeScreen extends React.Component<any, any> {
         variables: { postId }
       });
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.removeedtovafavorites
       });
     } else if (menuId === 3) {
+      // TODO:
       console.log('Emad');
 
       const message = `
@@ -370,7 +354,7 @@ class HomeScreen extends React.Component<any, any> {
       await onShare(message, this.hideMenuModal);
     } else if (menuId === 4) {
       if (!this.props.isAuthenticated) {
-        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+        this.showMessageModal({ message: 'you have to login!' });
       } else {
         this.showReportModal();
       }
@@ -392,7 +376,6 @@ class HomeScreen extends React.Component<any, any> {
       }
 
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adrefreshed
       });
     } else if (menuId === 6) {
@@ -409,7 +392,6 @@ class HomeScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', -1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adpublished
       });
     } else if (menuId === 7) {
@@ -426,7 +408,6 @@ class HomeScreen extends React.Component<any, any> {
       }
       this.props.updateQty('offline', 1);
       this.showMessageModal({
-        seconds: 1,
         message: this.props.words.adunpupished
       });
     } else if (menuId === 8) {
@@ -511,9 +492,11 @@ class HomeScreen extends React.Component<any, any> {
           word={words}
           isRTL={isRTL}
         />
-        <Message
-          isVisible={this.state.isMessageVisible}
-          title={this.state.message}
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          message={this.state.message}
+          screen={this.state.screen}
           icon="ios-checkmark-circle"
           isRTL={isRTL}
           height={120}

@@ -37,7 +37,6 @@ import {
 const { width } = Dimensions.get('window');
 
 class AddPartsScreen extends React.Component<any, any> {
-  timer: any;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -49,10 +48,6 @@ class AddPartsScreen extends React.Component<any, any> {
       bar: 0
     };
   }
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
-
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
   };
@@ -65,24 +60,6 @@ class AddPartsScreen extends React.Component<any, any> {
 
   updateProgressBar = (value: any) => {
     this.setState({ bar: this.state.bar + value });
-  };
-
-  showMessage = ({ seconds, screen }: any) => {
-    this.setState({ isShowMessage: true });
-    if (seconds && !screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isShowMessage: false });
-      }, seconds * 1000);
-    }
-    if (seconds && screen) {
-      this.timer = setTimeout(() => {
-        this.setState({ isShowMessage: false });
-        this.props.navigation.navigate(screen);
-      }, seconds * 1000);
-    }
-  };
-  hideMessage = () => {
-    this.setState({ isShowMessage: false });
   };
 
   returnData = (imgs: any) => {
@@ -163,7 +140,7 @@ class AddPartsScreen extends React.Component<any, any> {
       this.updateProgressBar(1 / (3 + this.state.images.length));
       await this.props.updateQty('online', 1);
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      this.showMessage({ seconds: 2, screen: 'HomeScreen' });
+      this.props.navigation.navigate('HomeScreen');
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -178,14 +155,6 @@ class AddPartsScreen extends React.Component<any, any> {
     );
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-        <Message
-          isVisible={this.state.isShowMessage}
-          title={word.successadded}
-          icon="ios-checkmark-circle"
-          isRTL={isRTL}
-          width={width}
-          height={120}
-        />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{ backgroundColor: '#eee' }}
