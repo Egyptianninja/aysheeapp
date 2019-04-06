@@ -35,6 +35,7 @@ import { getPureNumber } from '../../../utils/call';
 const { width } = Dimensions.get('window');
 
 class AddServiceScreen extends React.Component<any, any> {
+  timer: any;
   state = {
     selectedImage: null,
     isShowMessage: false,
@@ -43,18 +44,22 @@ class AddServiceScreen extends React.Component<any, any> {
     bar: 0
   };
 
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
   };
   showMessage = ({ seconds, screen }: any) => {
     this.setState({ isShowMessage: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);

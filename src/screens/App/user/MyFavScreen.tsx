@@ -13,6 +13,7 @@ import {
   getDBNextPosts,
   isTablet,
   Message,
+  onShare,
   readyUserPosts
 } from '../../../utils';
 
@@ -21,6 +22,7 @@ const { width } = Dimensions.get('window');
 class MyFavScreen extends React.Component<any, any> {
   flatListRef: any;
   getDBNextPosts: any;
+  timer: any;
 
   constructor(p: any) {
     super(p);
@@ -35,11 +37,26 @@ class MyFavScreen extends React.Component<any, any> {
     };
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
   showMenuModal = (post: any) => {
     this.setState({ isMenuModalVisible: true, modalPost: post });
   };
-  hideMenuModal = () => {
-    this.setState({ isMenuModalVisible: false, modalPost: null });
+  hideMenuModal = (payload: any) => {
+    if (payload) {
+      const { menuId, postId, post } = payload;
+      this.setState({
+        isMenuModalVisible: false,
+        hideMenuData: { menuId, postId, post }
+      });
+    } else {
+      this.setState({
+        isMenuModalVisible: false,
+        hideMenuData: null
+      });
+    }
   };
   showReportModal = () => {
     this.setState({ isReportModalVisible: true });
@@ -51,12 +68,12 @@ class MyFavScreen extends React.Component<any, any> {
     await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isMessageVisible: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isMessageVisible: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);
@@ -76,6 +93,103 @@ class MyFavScreen extends React.Component<any, any> {
     });
   };
 
+  handleOnMenuModalHide = async () => {
+    if (!this.state.hideMenuData || !this.state.hideMenuData.menuId) {
+      return;
+    }
+    const { menuId, postId, post } = this.state.hideMenuData;
+    if (menuId === 1) {
+      if (!this.props.isAuthenticated) {
+        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+      } else {
+        await this.props.favoritePost({
+          variables: { postId }
+        });
+        this.showMessageModal({
+          seconds: 1,
+          message: this.props.words.successadded
+        });
+      }
+    } else if (menuId === 2) {
+      await this.props.unFavoritePost({
+        variables: { postId }
+      });
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.removeedtovafavorites
+      });
+    } else if (menuId === 3) {
+      const message = `
+      ${post.title}
+
+      ${post.body}
+
+      ${post.price}`;
+      onShare(message, this.hideMenuModal);
+    } else if (menuId === 4) {
+      if (!this.props.isAuthenticated) {
+        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+      } else {
+        this.showReportModal();
+      }
+    } else if (menuId === 5) {
+      if (post.updates) {
+        this.props.editClassifieds({
+          variables: {
+            postId: post.id,
+            updates: post.updates + 1
+          }
+        });
+      } else {
+        this.props.editClassifieds({
+          variables: {
+            postId,
+            updates: 1
+          }
+        });
+      }
+
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.adrefreshed
+      });
+    } else if (menuId === 6) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          islive: true
+        }
+      });
+      if (post.isoffer) {
+        this.props.updateQty('offers', 1);
+      } else {
+        this.props.updateQty('online', 1);
+      }
+      this.props.updateQty('offline', -1);
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.adpublished
+      });
+    } else if (menuId === 7) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          islive: false
+        }
+      });
+      if (post.isoffer) {
+        this.props.updateQty('offers', -1);
+      } else {
+        this.props.updateQty('online', -1);
+      }
+      this.props.updateQty('offline', 1);
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.adunpupished
+      });
+    }
+  };
+
   render() {
     const { lang, words, isRTL } = this.props;
     const postId = this.state.modalPost
@@ -93,6 +207,7 @@ class MyFavScreen extends React.Component<any, any> {
           hideMenuModal={this.hideMenuModal}
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
+          handleOnMenuModalHide={this.handleOnMenuModalHide}
           postId={postId}
           word={words}
           isRTL={isRTL}

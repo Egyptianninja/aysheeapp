@@ -37,6 +37,7 @@ import {
 const { width } = Dimensions.get('window');
 
 class AddPartsScreen extends React.Component<any, any> {
+  timer: any;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -47,6 +48,9 @@ class AddPartsScreen extends React.Component<any, any> {
       images: [],
       bar: 0
     };
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   hendleSelectedImage = (selectedImage: any) => {
@@ -66,12 +70,12 @@ class AddPartsScreen extends React.Component<any, any> {
   showMessage = ({ seconds, screen }: any) => {
     this.setState({ isShowMessage: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);

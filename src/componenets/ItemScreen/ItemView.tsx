@@ -2,15 +2,44 @@ import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import { Animated, Dimensions, Keyboard, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import Modal from 'react-native-modal';
-import { BodyView, FullTimeView, getJobProperties, getproperties, InputBar, ItemComment, Loading, PhotoSlider, PriceView, Properties } from '..';
+import {
+  BodyView,
+  FullTimeView,
+  getJobProperties,
+  getproperties,
+  InputBar,
+  ItemComment,
+  Loading,
+  PhotoSlider,
+  PriceView,
+  Properties
+} from '..';
 import secrets from '../../constants/secrets';
 import getPostComments from '../../graphql/query/getPostComments';
 import getUser from '../../graphql/query/getUser';
 import commentAdded from '../../graphql/subscription/commentAdded';
 import { LoadingView } from '../../lib';
-import { getDate, ImageViewer, ItemLocation, Message, rtlos, StyleSheet } from '../../utils';
+import {
+  getDate,
+  ImageViewer,
+  ItemLocation,
+  Message,
+  onShare,
+  rtlos,
+  StyleSheet
+} from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
@@ -34,6 +63,7 @@ class ItemView extends React.Component<any, any> {
   scrollViewHeight: any;
 
   childRef: any = React.createRef();
+  timer: any;
   state = {
     isImageViewVisible: true,
     isMenuModalVisible: false,
@@ -54,7 +84,12 @@ class ItemView extends React.Component<any, any> {
     cursor: 0,
     opacity: 1,
     bottomPadding: 0,
-    scrollEnabled: true
+    scrollEnabled: true,
+    hideMenuData: {
+      menuId: null,
+      postId: null,
+      post: null
+    }
   };
 
   componentWillMount() {
@@ -79,13 +114,25 @@ class ItemView extends React.Component<any, any> {
   componentWillUnmount() {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
+    clearTimeout(this.timer);
   }
 
   showMenuModal = () => {
     this.setState({ isMenuModalVisible: true });
   };
-  hideMenuModal = () => {
-    this.setState({ isMenuModalVisible: false });
+  hideMenuModal = (payload: any) => {
+    if (payload) {
+      const { menuId, postId, post } = payload;
+      this.setState({
+        isMenuModalVisible: false,
+        hideMenuData: { menuId, postId, post }
+      });
+    } else {
+      this.setState({
+        isMenuModalVisible: false,
+        hideMenuData: null
+      });
+    }
   };
   showReportModal = () => {
     this.setState({ isReportModalVisible: true });
@@ -97,12 +144,12 @@ class ItemView extends React.Component<any, any> {
     await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isMessageVisible: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isMessageVisible: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);
@@ -131,7 +178,7 @@ class ItemView extends React.Component<any, any> {
       }
     });
     this.hideCheckMessageModal();
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.showMessageModal({
         seconds: 1,
         message: this.props.word.addeleted
@@ -140,6 +187,108 @@ class ItemView extends React.Component<any, any> {
   };
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
+  };
+
+  handleOnMenuModalHide = async () => {
+    if (!this.state.hideMenuData || !this.state.hideMenuData.menuId) {
+      return;
+    }
+    const { menuId } = this.state.hideMenuData;
+    const { post, postId, word } = this.props;
+    if (menuId === 1) {
+      if (!this.props.isAuthenticated) {
+        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+      } else {
+        await this.props.favoritePost({
+          variables: { postId }
+        });
+        this.showMessageModal({
+          seconds: 1,
+          message: word.successadded
+        });
+      }
+    } else if (menuId === 2) {
+      await this.props.unFavoritePost({
+        variables: { postId }
+      });
+      this.showMessageModal({
+        seconds: 1,
+        message: word.removeedtovafavorites
+      });
+    } else if (menuId === 3) {
+      const message = `
+      ${post.title}
+
+      ${post.body}
+
+      ${post.price}`;
+      onShare(message, this.hideMenuModal);
+    } else if (menuId === 4) {
+      if (!this.props.isAuthenticated) {
+        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+      } else {
+        this.showReportModal();
+      }
+    } else if (menuId === 5) {
+      if (post.updates) {
+        this.props.editClassifieds({
+          variables: {
+            postId: post.id,
+            updates: post.updates + 1
+          }
+        });
+      } else {
+        this.props.editClassifieds({
+          variables: {
+            postId,
+            updates: 1
+          }
+        });
+      }
+
+      this.showMessageModal({
+        seconds: 1,
+        message: word.adrefreshed
+      });
+    } else if (menuId === 6) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          islive: true
+        }
+      });
+      if (post.isoffer) {
+        this.props.updateQty('offers', 1);
+      } else {
+        this.props.updateQty('online', 1);
+      }
+      this.props.updateQty('offline', -1);
+      this.showMessageModal({
+        seconds: 1,
+        message: word.adpublished
+      });
+    } else if (menuId === 7) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          islive: false
+        }
+      });
+      if (post.isoffer) {
+        this.props.updateQty('offers', -1);
+      } else {
+        this.props.updateQty('online', -1);
+      }
+      this.props.updateQty('offline', 1);
+      this.showMessageModal({
+        seconds: 1,
+        message: word.adunpupished
+      });
+    } else if (menuId === 8) {
+      this.showEditModal();
+    } else if (menuId === 9) {
+      this.showCheckMessageModal();
+    }
   };
 
   keyboardWillShow(e: any) {
@@ -294,8 +443,6 @@ class ItemView extends React.Component<any, any> {
       inputRange: [0, 200],
       outputRange: [0, 1]
     });
-    console.log(post);
-
 
     return (
       <View style={styles.container}>
@@ -316,6 +463,7 @@ class ItemView extends React.Component<any, any> {
           showReportModal={this.showReportModal}
           showMessageModal={this.showMessageModal}
           showCheckMessageModal={this.showCheckMessageModal}
+          handleOnMenuModalHide={this.handleOnMenuModalHide}
           isAuthenticated={isAuthenticated}
           user={this.props.user}
         />

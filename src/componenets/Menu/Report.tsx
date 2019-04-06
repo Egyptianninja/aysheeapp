@@ -29,6 +29,13 @@ class Report extends React.Component<any, any> {
     };
   }
 
+  repostMessageShow = () => {
+    this.props.showMessageModal({
+      seconds: 1,
+      message: this.props.word.successadded
+    });
+  };
+
   handleSubmit = async (values: any, bag: any) => {
     const { spam, fake, content, other, body } = values;
 
@@ -51,12 +58,6 @@ class Report extends React.Component<any, any> {
     });
     if (res.data.createReport.ok) {
       this.props.hideReportModal();
-      setTimeout(() => {
-        this.props.showMessageModal({
-          seconds: 1,
-          message: this.props.word.successadded
-        });
-      }, 1000);
     }
     if (!res.data.createReport.ok) {
       bag.setErrors({ title: res.data.createReport.error });
@@ -72,6 +73,7 @@ class Report extends React.Component<any, any> {
         isVisible={this.state.isReportModalVisible}
         onBackdropPress={() => this.props.hideReportModal()}
         onBackButtonPress={() => this.props.hideReportModal()}
+        onModalHide={() => this.repostMessageShow()}
         backdropOpacity={0.2}
         useNativeDriver={true}
         animationIn="slideInDown"

@@ -31,6 +31,7 @@ import {
 const { width } = Dimensions.get('window');
 
 class EditProfileScreen extends React.Component<any, any> {
+  timer: any;
   state = {
     selectedImage: null,
     isShowMessage: false,
@@ -38,6 +39,10 @@ class EditProfileScreen extends React.Component<any, any> {
     avatar: null,
     bar: 0
   };
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
 
   onAvatarUpload = async (setFieldValue: any) => {
     const getCameraRoll = await getCameraRollPermission();
@@ -53,12 +58,12 @@ class EditProfileScreen extends React.Component<any, any> {
   showMessage = ({ seconds, screen }: any) => {
     this.setState({ isShowMessage: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
         this.props.navigation.navigate(screen, { user: this.props.user });
       }, seconds * 1000);

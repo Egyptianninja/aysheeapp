@@ -24,6 +24,7 @@ import {
   getTimeLineBuckets,
   isTablet,
   Message,
+  onShare,
   readyPosts,
   rtlos
 } from '../../utils';
@@ -44,10 +45,10 @@ class CategoryScreen extends React.Component<any, any> {
   filter = true;
   posts: any;
   userlocation: any;
+  timer: any;
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
-
     this.state = {
       isFilterModalVisible: false,
       isMenuModalVisible: false,
@@ -71,6 +72,10 @@ class CategoryScreen extends React.Component<any, any> {
     this.setState({ rest: { categoryId: category.id } });
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
   showFilterModal = () => {
     this.setState({ isFilterModalVisible: true });
     // const keys = Object.keys(this.state.rest);
@@ -84,8 +89,19 @@ class CategoryScreen extends React.Component<any, any> {
   showMenuModal = (post: any) => {
     this.setState({ isMenuModalVisible: true, modalPost: post });
   };
-  hideMenuModal = () => {
-    this.setState({ isMenuModalVisible: false });
+  hideMenuModal = (payload: any) => {
+    if (payload) {
+      const { menuId, postId, post } = payload;
+      this.setState({
+        isMenuModalVisible: false,
+        hideMenuData: { menuId, postId, post }
+      });
+    } else {
+      this.setState({
+        isMenuModalVisible: false,
+        hideMenuData: null
+      });
+    }
   };
   showEditModal = () => {
     this.setState({ isEditModalVisible: true });
@@ -103,12 +119,12 @@ class CategoryScreen extends React.Component<any, any> {
     await this.setState({ message });
     this.setState({ isMessageVisible: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isMessageVisible: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isMessageVisible: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);
@@ -143,7 +159,7 @@ class CategoryScreen extends React.Component<any, any> {
       await this.props.updateQty('online', -1);
     }
     this.hideCheckMessageModal();
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.showMessageModal({
         seconds: 1,
         message: this.props.words.addeleted
@@ -152,6 +168,107 @@ class CategoryScreen extends React.Component<any, any> {
   };
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
+  };
+
+  handleOnMenuModalHide = async () => {
+    if (!this.state.hideMenuData || !this.state.hideMenuData.menuId) {
+      return;
+    }
+    const { menuId, postId, post } = this.state.hideMenuData;
+    if (menuId === 1) {
+      if (!this.props.isAuthenticated) {
+        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+      } else {
+        await this.props.favoritePost({
+          variables: { postId }
+        });
+        this.showMessageModal({
+          seconds: 1,
+          message: this.props.words.successadded
+        });
+      }
+    } else if (menuId === 2) {
+      await this.props.unFavoritePost({
+        variables: { postId }
+      });
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.removeedtovafavorites
+      });
+    } else if (menuId === 3) {
+      const message = `
+      ${post.title}
+
+      ${post.body}
+
+      ${post.price}`;
+      onShare(message, this.hideMenuModal);
+    } else if (menuId === 4) {
+      if (!this.props.isAuthenticated) {
+        this.showMessageModal({ seconds: 2, message: 'you have to login!' });
+      } else {
+        this.showReportModal();
+      }
+    } else if (menuId === 5) {
+      if (post.updates) {
+        this.props.editClassifieds({
+          variables: {
+            postId: post.id,
+            updates: post.updates + 1
+          }
+        });
+      } else {
+        this.props.editClassifieds({
+          variables: {
+            postId,
+            updates: 1
+          }
+        });
+      }
+
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.adrefreshed
+      });
+    } else if (menuId === 6) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          islive: true
+        }
+      });
+      if (post.isoffer) {
+        this.props.updateQty('offers', 1);
+      } else {
+        this.props.updateQty('online', 1);
+      }
+      this.props.updateQty('offline', -1);
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.adpublished
+      });
+    } else if (menuId === 7) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          islive: false
+        }
+      });
+      if (post.isoffer) {
+        this.props.updateQty('offers', -1);
+      } else {
+        this.props.updateQty('online', -1);
+      }
+      this.props.updateQty('offline', 1);
+      this.showMessageModal({
+        seconds: 1,
+        message: this.props.words.adunpupished
+      });
+    } else if (menuId === 8) {
+      this.showEditModal();
+    } else if (menuId === 9) {
+      this.showCheckMessageModal();
+    }
   };
 
   handleTop = () => {
@@ -256,6 +373,7 @@ class CategoryScreen extends React.Component<any, any> {
           editClassifieds={this.props.editClassifieds}
           showEditModal={this.showEditModal}
           showCheckMessageModal={this.showCheckMessageModal}
+          handleOnMenuModalHide={this.handleOnMenuModalHide}
           postId={postId}
           word={words}
           isRTL={isRTL}

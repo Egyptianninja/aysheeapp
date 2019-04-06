@@ -59,7 +59,6 @@ export default class Edit extends React.Component<any, any> {
   car = [1];
   job = [5];
   serv = [9];
-
   constructor(props: any) {
     super(props);
     this.state = {
@@ -82,6 +81,13 @@ export default class Edit extends React.Component<any, any> {
         setFieldValue('photo', image);
       }
     }
+  };
+
+  editMessageShow = () => {
+    this.props.showMessageModal({
+      seconds: 1,
+      message: this.props.word.adupdated
+    });
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -169,12 +175,6 @@ export default class Edit extends React.Component<any, any> {
 
     if (res.data.updatePost.ok) {
       this.props.hideEditModal();
-      setTimeout(() => {
-        this.props.showMessageModal({
-          seconds: 1,
-          message: this.props.word.adupdated
-        });
-      }, 1000);
     }
     if (!res.data.updatePost.ok) {
       bag.setErrors({ title: res.data.updatePost.error });
@@ -287,6 +287,7 @@ export default class Edit extends React.Component<any, any> {
         isVisible={this.state.isEditModalVisible}
         onBackdropPress={() => this.props.hideEditModal()}
         onBackButtonPress={() => this.props.hideEditModal()}
+        onModalHide={() => this.editMessageShow()}
         backdropOpacity={0.8}
         useNativeDriver={true}
         animationIn="slideInUp"

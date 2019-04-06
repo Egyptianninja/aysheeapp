@@ -276,8 +276,6 @@ export const readyOfferPosts = (
 };
 
 const getPostLangValues = (post: any, lang: any) => {
-  console.log(post);
-
   const brands = getStore.brands();
   const brand = post.brandId
     ? brands.filter((brd: any) => brd.id === post.brandId)[0][lang]

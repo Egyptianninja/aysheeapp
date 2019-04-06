@@ -59,12 +59,15 @@ class AddClassifiedScreen extends React.Component<any, any> {
   eBrand = [2, 6, 14];
 
   acc = [8];
-
+  timer: any;
   componentDidMount() {
     const category = this.props.navigation.getParam('item');
     if (category.id === 2) {
       this.setState({ isElectronics: true });
     }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   onSelecteOption = (id: number) => this.setState({ selectedElectronics: id });
@@ -76,12 +79,12 @@ class AddClassifiedScreen extends React.Component<any, any> {
   showMessage = ({ seconds, screen }: any) => {
     this.setState({ isShowMessage: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);

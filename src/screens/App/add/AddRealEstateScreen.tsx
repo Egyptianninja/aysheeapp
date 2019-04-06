@@ -1,7 +1,13 @@
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View
+} from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -10,9 +16,23 @@ import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import { areaUnits, currencyTypes } from '../../../constants';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import { Button, CheckBox, Group, Input, RadioButton, Select } from '../../../lib';
+import {
+  Button,
+  CheckBox,
+  Group,
+  Input,
+  RadioButton,
+  Select
+} from '../../../lib';
 import { updateQty } from '../../../store/actions/userAtions';
-import { getCurrency, isArabic, Message, StyleSheet, uploadPhotos, UserLocation } from '../../../utils';
+import {
+  getCurrency,
+  isArabic,
+  Message,
+  StyleSheet,
+  uploadPhotos,
+  UserLocation
+} from '../../../utils';
 import { getPureNumber } from '../../../utils/call';
 
 const { width } = Dimensions.get('window');
@@ -31,6 +51,7 @@ const roomsData = [
 ];
 
 class AddRealEstateScreen extends React.Component<any, any> {
+  timer: any;
   state = {
     selectedImage: null,
     isShowMessage: false,
@@ -39,18 +60,22 @@ class AddRealEstateScreen extends React.Component<any, any> {
     bar: 0
   };
 
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
   hendleSelectedImage = (selectedImage: any) => {
     this.setState({ selectedImage });
   };
   showMessage = ({ seconds, screen }: any) => {
     this.setState({ isShowMessage: true });
     if (seconds && !screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
       }, seconds * 1000);
     }
     if (seconds && screen) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({ isShowMessage: false });
         this.props.navigation.navigate(screen);
       }, seconds * 1000);

@@ -19,7 +19,7 @@ const Message = ({
 }: any) => (
   <Modal
     isVisible={isVisible}
-    backdropOpacity={0.2}
+    backdropOpacity={0}
     useNativeDriver={true}
     hideModalContentWhileAnimating={true}
     style={{ justifyContent: 'flex-end', margin: 0 }}
