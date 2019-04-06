@@ -342,9 +342,6 @@ class HomeScreen extends React.Component<any, any> {
         message: this.props.words.removeedtovafavorites
       });
     } else if (menuId === 3) {
-      // TODO:
-      console.log('Emad');
-
       const message = `
       ${post.title}
 

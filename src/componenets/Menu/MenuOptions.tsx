@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
-import { rtlos } from '../../utils';
+import { rtlos, onShare } from '../../utils';
 const { width } = Dimensions.get('window');
 
 const iconNames = [
@@ -26,7 +26,15 @@ export default class MenuOption extends React.Component<any, any> {
     return (
       <TouchableOpacity
         onPress={async () => {
-          hideMenuModal({ menuId: itemData.id, postId, post });
+          if (itemData.id === 3) {
+            const message = `
+            ${post.title}
+            ${post.body}
+            ${post.price}`;
+            await onShare(message, hideMenuModal);
+          } else {
+            hideMenuModal({ menuId: itemData.id, postId, post });
+          }
         }}
         style={{
           width,

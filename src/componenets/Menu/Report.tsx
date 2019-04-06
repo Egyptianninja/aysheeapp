@@ -25,14 +25,17 @@ class Report extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      isReportModalVisible: false
+      isReportModalVisible: false,
+      message: null
     };
   }
 
   reportMessageShow = () => {
-    this.props.showMessageModal({
-      message: this.props.word.successadded
-    });
+    if (this.state.message) {
+      this.props.showMessageModal({
+        message: this.state.message
+      });
+    }
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -56,6 +59,7 @@ class Report extends React.Component<any, any> {
       }
     });
     if (res.data.createReport.ok) {
+      await this.setState({ message: this.props.word.successadded });
       this.props.hideReportModal();
     }
     if (!res.data.createReport.ok) {
@@ -72,7 +76,9 @@ class Report extends React.Component<any, any> {
         isVisible={this.state.isReportModalVisible}
         onBackdropPress={() => this.props.hideReportModal()}
         onBackButtonPress={() => this.props.hideReportModal()}
-        onModalHide={() => this.reportMessageShow()}
+        onModalHide={() =>
+          this.state.message ? this.reportMessageShow() : undefined
+        }
         backdropOpacity={0.2}
         useNativeDriver={true}
         animationIn="slideInDown"
