@@ -114,6 +114,8 @@ class ItemView extends React.Component<any, any> {
   componentWillUnmount() {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
+    this.keyboardWillShowListener.remove();
+    this.keyboardWillHideListener.remove();
     clearTimeout(this.timer);
   }
 

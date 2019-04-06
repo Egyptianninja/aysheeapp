@@ -76,6 +76,9 @@ class MultiLocations extends React.Component<any, any> {
       }
     });
   }
+  componentWillUnmount() {
+    this.animation.removeAllListeners();
+  }
 
   renderBack = () => {
     return (
