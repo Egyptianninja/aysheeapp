@@ -160,6 +160,9 @@ class ItemView extends React.Component<any, any> {
   hideCheckMessageModal = () => {
     this.setState({ isCheckMessaheVisible: false });
   };
+  onCheckMessageModalHide = () => {
+    this.showMessageModal({ message: this.props.words.addeleted });
+  };
 
   deletePost = async () => {
     await this.props.deletePost({
@@ -168,9 +171,6 @@ class ItemView extends React.Component<any, any> {
       }
     });
     this.hideCheckMessageModal();
-    this.showMessageModal({
-      message: this.props.word.addeleted
-    });
   };
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
@@ -478,6 +478,7 @@ class ItemView extends React.Component<any, any> {
         />
         <Message
           isVisible={this.state.isCheckMessaheVisible}
+          onCheckMessageModalHide={this.onCheckMessageModalHide}
           body={word.deleteareyousure}
           icon="ios-information-circle"
           width={width}

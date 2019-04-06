@@ -189,6 +189,9 @@ class HomeScreen extends React.Component<any, any> {
   hideCheckMessageModal = () => {
     this.setState({ isCheckMessaheVisible: false });
   };
+  onCheckMessageModalHide = () => {
+    this.showMessageModal({ message: this.props.words.addeleted });
+  };
   showCategoriesModal = () => {
     this.setState({ isCategoriesModalVisible: true });
   };
@@ -220,9 +223,6 @@ class HomeScreen extends React.Component<any, any> {
       await this.props.updateQty('online', -1);
     }
     this.hideCheckMessageModal();
-    this.showMessageModal({
-      message: this.props.words.addeleted
-    });
   };
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
@@ -510,6 +510,7 @@ class HomeScreen extends React.Component<any, any> {
           cancelbtnTitle={words.cancel}
           okAction={this.deletePost}
           cancelAction={this.canceldeletePost}
+          onCheckMessageModalHide={this.onCheckMessageModalHide}
           isRTL={isRTL}
           iconColor="#E85255"
           height={200}

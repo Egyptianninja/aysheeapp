@@ -110,6 +110,9 @@ class MyProfileScreen extends React.Component<any, any> {
   hideCheckMessageModal = () => {
     this.setState({ isCheckMessaheVisible: false });
   };
+  onCheckMessageModalHide = () => {
+    this.showMessageModal({ message: this.props.words.addeleted });
+  };
   showMapModal = async () => {
     this.setState({ isMapModalVisible: true });
   };
@@ -129,9 +132,6 @@ class MyProfileScreen extends React.Component<any, any> {
       await this.props.updateQty('online', -1);
     }
     this.hideCheckMessageModal();
-    this.showMessageModal({
-      message: this.props.words.addeleted
-    });
   };
 
   canceldeletePost = async () => {
@@ -690,6 +690,7 @@ class MyProfileScreen extends React.Component<any, any> {
         />
         <Message
           isVisible={this.state.isCheckMessaheVisible}
+          onCheckMessageModalHide={this.onCheckMessageModalHide}
           body={words.deleteareyousure}
           icon="ios-information-circle"
           width={width}

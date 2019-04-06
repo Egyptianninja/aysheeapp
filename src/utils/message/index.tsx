@@ -15,13 +15,17 @@ const Message = ({
   isVisible,
   isRTL,
   height,
-  iconColor
+  iconColor,
+  onCheckMessageModalHide
 }: any) => (
   <Modal
     isVisible={isVisible}
     backdropOpacity={0}
     useNativeDriver={true}
     hideModalContentWhileAnimating={true}
+    onModalHide={
+      onCheckMessageModalHide ? () => onCheckMessageModalHide() : undefined
+    }
     style={{ justifyContent: 'flex-end', margin: 0 }}
   >
     <View
