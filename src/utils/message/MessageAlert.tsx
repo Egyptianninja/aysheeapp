@@ -19,13 +19,20 @@ export default class MessageAlert extends React.Component<any, any> {
     };
   }
 
-  componentDidMount() {
-    this.timer = setInterval(() => this.props.hideMessageModal(), 1000);
-  }
   componentWillUnmount() {
     clearInterval(this.timer);
   }
   render() {
+    const { hideMessageModal, onMessageModalHide } = this.props;
+    if (this.state.isMessageVisible) {
+      this.timer = setTimeout(() => {
+        hideMessageModal();
+        if (onMessageModalHide) {
+          onMessageModalHide();
+        }
+      }, 1000);
+    }
+
     const { message, icon, isRTL, height, iconColor } = this.props;
 
     return (

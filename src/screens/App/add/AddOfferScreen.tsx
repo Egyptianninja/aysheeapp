@@ -30,16 +30,27 @@ import {
   uploadPickedImage,
   UserLocation
 } from '../../../utils';
+import MessageAlert from '../../../utils/message/MessageAlert';
 
 const { width } = Dimensions.get('window');
 
 class AddServiceScreen extends React.Component<any, any> {
   state = {
     selectedImage: null,
-    isShowMessage: false,
+    isMessageVisible: false,
     location: null,
     image: null,
     bar: 0
+  };
+
+  showMessageModal = async () => {
+    this.setState({ isMessageVisible: true });
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
+  };
+  onMessageModalHide = () => {
+    this.props.navigation.navigate('HomeScreen');
   };
 
   onPhotoUpload = async (setFieldValue: any) => {
@@ -109,7 +120,8 @@ class AddServiceScreen extends React.Component<any, any> {
       this.updateProgressBar(1 / 3);
       await this.props.updateQty('offers', 1);
       this.updateProgressBar(1 / 3);
-      this.props.navigation.navigate('HomeScreen');
+
+      this.showMessageModal();
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -122,6 +134,15 @@ class AddServiceScreen extends React.Component<any, any> {
     const image: any = this.state.image;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          onMessageModalHide={this.onMessageModalHide}
+          message={word.successadded}
+          icon="ios-checkmark-circle"
+          isRTL={isRTL}
+          height={120}
+        />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{ backgroundColor: '#eee' }}

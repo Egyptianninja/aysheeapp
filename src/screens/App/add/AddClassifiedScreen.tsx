@@ -34,6 +34,7 @@ import {
   uploadPhotos,
   UserLocation
 } from '../../../utils';
+import MessageAlert from '../../../utils/message/MessageAlert';
 
 const { width } = Dimensions.get('window');
 
@@ -42,7 +43,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
     selectedImage: null,
     selectedElectronics: null,
     isElectronics: null,
-    isShowMessage: false,
+    isMessageVisible: false,
     location: null,
     images: [],
     bar: 0
@@ -65,6 +66,16 @@ class AddClassifiedScreen extends React.Component<any, any> {
       this.setState({ isElectronics: true });
     }
   }
+
+  showMessageModal = async () => {
+    this.setState({ isMessageVisible: true });
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
+  };
+  onMessageModalHide = () => {
+    this.props.navigation.navigate('HomeScreen');
+  };
 
   onSelecteOption = (id: number) => this.setState({ selectedElectronics: id });
 
@@ -160,7 +171,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
       this.updateProgressBar(1 / (3 + this.state.images.length));
       await this.props.updateQty('online', 1);
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      this.props.navigation.navigate('HomeScreen');
+
+      this.showMessageModal();
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -191,6 +203,15 @@ class AddClassifiedScreen extends React.Component<any, any> {
     }
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          onMessageModalHide={this.onMessageModalHide}
+          message={word.successadded}
+          icon="ios-checkmark-circle"
+          isRTL={isRTL}
+          height={120}
+        />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{ backgroundColor: '#eee' }}

@@ -28,15 +28,23 @@ import {
   uploadPickedImage,
   UserLocation
 } from '../../../utils';
+import MessageAlert from '../../../utils/message/MessageAlert';
 const { width } = Dimensions.get('window');
 
 class EditProfileScreen extends React.Component<any, any> {
   state = {
     selectedImage: null,
-    isShowMessage: false,
+    isMessageVisible: false,
     location: null,
     avatar: null,
     bar: 0
+  };
+
+  showMessageModal = async () => {
+    this.setState({ isMessageVisible: true });
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
   };
 
   onAvatarUpload = async (setFieldValue: any) => {
@@ -139,12 +147,16 @@ class EditProfileScreen extends React.Component<any, any> {
       const { data } = res.data.updateProfile;
       await this.props.updateUser(data);
       this.updateProgressBar(1 / 3);
-      this.props.navigation.navigate('MyProfileScreen');
+      this.showMessageModal();
     }
     if (!res.data.updateProfile.ok) {
       bag.setErrors({ name: res.data.updateProfile.error });
     }
     bag.setSubmitting(false);
+  };
+
+  onMessageModalHide = () => {
+    this.props.navigation.navigate('MyProfileScreen');
   };
 
   render() {
@@ -155,6 +167,15 @@ class EditProfileScreen extends React.Component<any, any> {
 
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          onMessageModalHide={this.onMessageModalHide}
+          message={word.accountupdated}
+          icon="ios-checkmark-circle"
+          isRTL={isRTL}
+          height={120}
+        />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{ backgroundColor: '#eee' }}

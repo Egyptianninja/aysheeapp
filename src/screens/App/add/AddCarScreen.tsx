@@ -53,6 +53,16 @@ class AddCarScreen extends React.Component<any, any> {
     };
   }
 
+  showMessageModal = async () => {
+    this.setState({ isMessageVisible: true });
+  };
+  hideMessageModal = () => {
+    this.setState({ isMessageVisible: false });
+  };
+  onMessageModalHide = () => {
+    this.props.navigation.navigate('HomeScreen');
+  };
+
   returnData = (imgs: any) => {
     const stateImages = this.state.images;
     const images = [...stateImages, ...imgs];
@@ -148,10 +158,10 @@ class AddCarScreen extends React.Component<any, any> {
     });
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + this.state.images.length));
-
       await this.props.updateQty('online', 1);
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      this.props.navigation.navigate('HomeScreen');
+
+      this.showMessageModal();
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -169,6 +179,15 @@ class AddCarScreen extends React.Component<any, any> {
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <MessageAlert
+          isMessageVisible={this.state.isMessageVisible}
+          hideMessageModal={this.hideMessageModal}
+          onMessageModalHide={this.onMessageModalHide}
+          message={word.successadded}
+          icon="ios-checkmark-circle"
+          isRTL={isRTL}
+          height={120}
+        />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{ backgroundColor: '#eee' }}
