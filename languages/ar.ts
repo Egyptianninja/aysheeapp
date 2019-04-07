@@ -338,7 +338,8 @@ export default {
       name: 'ارض تجارية',
       nameGlob: 'ارض تجارية, Commercial Land , Commercial Land '
     },
-    { id: 7, name: 'مصنع', nameGlob: 'مصنع, Factory, Factory' }
+    { id: 7, name: 'مصنع', nameGlob: 'مصنع, Factory, Factory' },
+    { id: 99, name: 'اخرى', nameGlob: 'أخرى, Other, Other' }
   ],
 
   service: [
