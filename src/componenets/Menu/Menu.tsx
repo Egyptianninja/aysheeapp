@@ -69,10 +69,10 @@ export default class Menu extends React.Component<any, any> {
       isAuthenticated
         ? myItem || owner
           ? live === false
-            ? isfront
-              ? [6, 8, 9, 11]
-              : [6, 8, 9, 10]
-            : [5, 7, 8, 9]
+            ? [6, 8, 9]
+            : isfront
+            ? [5, 7, 8, 9, 11]
+            : [5, 7, 8, 9, 10]
           : fav
           ? [2, 3, 4]
           : [1, 3, 4]

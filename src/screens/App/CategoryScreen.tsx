@@ -15,7 +15,7 @@ import createReport from '../../graphql/mutation/createReport';
 import deletePost from '../../graphql/mutation/deletePost';
 import editClassifieds from '../../graphql/mutation/editClassifieds';
 import favoritePost from '../../graphql/mutation/favoritePost';
-import getTimeLine from '../../graphql/query/getTimeLine';
+import getCategoryPosts from '../../graphql/query/getCategoryPosts';
 import { delQuery, setBuckets } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
 import * as store from '../../store/getStore';
@@ -418,7 +418,7 @@ class CategoryScreen extends React.Component<any, any> {
           height={200}
         />
         <Query
-          query={getTimeLine}
+          query={getCategoryPosts}
           variables={{ ...rest }}
           onCompleted={data => {
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
@@ -429,24 +429,18 @@ class CategoryScreen extends React.Component<any, any> {
             if (loading) {
               return <HomeLoading categoryId={rest.categoryId} />;
             }
-            if (error || !data.getTimeLine.posts) {
+            if (error) {
               this.filter = false;
               return <Noresult title="error" />;
             }
-            const postsQuery = data.getTimeLine.posts;
 
-            if (postsQuery && postsQuery.length === 0) {
-              this.filter = false;
-              return <Noresult isRTL={isRTL} title={words.noresults} />;
-            }
-            const posts = readyPosts(
-              postsQuery,
-              isTablet() ? 400 : 200,
-              79,
-              lang
-            );
+            const postsQuery = data.getCategoryPosts.posts;
+            const posts =
+              postsQuery.length > 0
+                ? readyPosts(postsQuery, isTablet() ? 400 : 200, 79, lang)
+                : postsQuery;
+
             this.posts = posts;
-
             return (
               <React.Fragment>
                 <AnimatedListView
@@ -473,7 +467,7 @@ class CategoryScreen extends React.Component<any, any> {
                   onRefresh={() => refetch()}
                   refreshing={this.state.refreshing}
                   onEndReached={async () => {
-                    this.getNextPosts(data, fetchMore, 'getTimeLine');
+                    this.getNextPosts(data, fetchMore, 'getCategoryPosts');
                   }}
                   renderItem={({ item }: any) => (
                     <ItemViewSmall
@@ -489,43 +483,47 @@ class CategoryScreen extends React.Component<any, any> {
                   )}
                   getHeightForItem={({ item }: any) => item.height}
                   ListHeaderComponent={() => {
-                    return (
-                      <View>
-                        {this.state.rest.sortType === 3 && (
-                          <TouchableOpacity
-                            style={{
-                              position: 'absolute',
-                              top: 5,
-                              right: !isRTL || rtlos() === 3 ? 0 : undefined,
-                              left: rtlos() === 2 ? 0 : undefined,
-                              paddingHorizontal: 10,
-                              zIndex: 100,
-                              width: 60
-                            }}
-                            onPress={() => this.showMapModal()}
-                          >
-                            <Ionicons
-                              name="ios-map"
-                              size={31}
-                              color="#9B9CF1"
-                            />
-                          </TouchableOpacity>
-                        )}
-                        <SortView
-                          isRTL={isRTL}
-                          rtlOS={rtlOS}
-                          data={sortData}
-                          sort={true}
-                          itemKind="sortType"
-                          addFilter={this.addFilter}
-                          removeFilter={this.removeFilter}
-                          // TODO: fix this setstate
-                          setUserLocation={this.setUserLocation}
-                          rest={rest}
-                          words={words}
-                        />
-                      </View>
-                    );
+                    if (posts.length === 0) {
+                      return <Noresult />;
+                    } else {
+                      return (
+                        <View>
+                          {this.state.rest.sortType === 3 && (
+                            <TouchableOpacity
+                              style={{
+                                position: 'absolute',
+                                top: 5,
+                                right: !isRTL || rtlos() === 3 ? 0 : undefined,
+                                left: rtlos() === 2 ? 0 : undefined,
+                                paddingHorizontal: 10,
+                                zIndex: 100,
+                                width: 60
+                              }}
+                              onPress={() => this.showMapModal()}
+                            >
+                              <Ionicons
+                                name="ios-map"
+                                size={31}
+                                color="#9B9CF1"
+                              />
+                            </TouchableOpacity>
+                          )}
+                          <SortView
+                            isRTL={isRTL}
+                            rtlOS={rtlOS}
+                            data={sortData}
+                            sort={true}
+                            itemKind="sortType"
+                            addFilter={this.addFilter}
+                            removeFilter={this.removeFilter}
+                            // TODO: fix this setstate
+                            setUserLocation={this.setUserLocation}
+                            rest={rest}
+                            words={words}
+                          />
+                        </View>
+                      );
+                    }
                   }}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}

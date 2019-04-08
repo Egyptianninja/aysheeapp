@@ -1,6 +1,8 @@
 export const getTimeLineBuckets = (categoryId: any, store: any, data: any) => {
   if (categoryId) {
-    return getOtherBuckets(store, data, 'getTimeLine').filter((x: any) => x);
+    return getOtherBuckets(store, data, 'getCategoryPosts').filter(
+      (x: any) => x
+    );
   } else {
     return getCategoryBuckets(store, data, 'getTimeLine').filter((x: any) => x);
   }

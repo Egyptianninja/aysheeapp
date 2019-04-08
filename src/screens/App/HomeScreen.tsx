@@ -588,19 +588,10 @@ class HomeScreen extends React.Component<any, any> {
               return <Noresult title="error" top={100} />;
             }
             const postsQuery = data.getTimeLine.posts;
-
-            if (postsQuery && postsQuery.length === 0) {
-              return (
-                <Noresult isRTL={isRTL} title={words.noresults} top={100} />
-              );
-            }
-            const posts = readyPosts(
-              postsQuery,
-              isTablet() ? 400 : 200,
-              79,
-              lang
-            );
-            console.log(posts);
+            const posts =
+              postsQuery.length > 0
+                ? readyPosts(postsQuery, isTablet() ? 400 : 200, 79, lang)
+                : postsQuery;
 
             return (
               <React.Fragment>
@@ -646,6 +637,13 @@ class HomeScreen extends React.Component<any, any> {
                     />
                   )}
                   getHeightForItem={({ item }: any) => item.height}
+                  ListHeaderComponent={() => {
+                    if (posts.length === 0) {
+                      return <Noresult />;
+                    } else {
+                      return null;
+                    }
+                  }}
                   numColumns={2}
                   keyExtractor={(item: any) => item.id}
                   onEndReachedThreshold={0.5}
