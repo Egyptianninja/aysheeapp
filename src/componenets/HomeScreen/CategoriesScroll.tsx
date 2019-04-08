@@ -115,9 +115,7 @@ class CategoriesScroll extends React.Component<any, any> {
       words,
       isRTL
     } = this.props;
-    const allbtnactive = !(rest.categoryId || rest.categoryId === 0);
-    const selected =
-      this.props.currentCategory || this.props.currentCategory === 0;
+    const selected = this.props.currentCategory;
     const categoryName = categories.filter(
       (cat: any) => cat.id === rest.categoryId
     )[0];

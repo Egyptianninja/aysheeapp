@@ -11,7 +11,7 @@ export const Choise = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        if (item.id === 0) {
+        if (item.id === 19) {
           navigation.navigate('AddRealEstateScreen', { item });
         } else if (item.id === 1) {
           navigation.navigate('AddCarScreen', { item });

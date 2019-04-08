@@ -2,7 +2,7 @@ import { images } from './images';
 
 export const icons = {
   category: [
-    { id: 0, icon: () => images.icon1 },
+    { id: 19, icon: () => images.icon1 },
     { id: 1, icon: () => images.icon2 },
     { id: 2, icon: () => images.icon22 },
     { id: 3, icon: () => images.icon5 },
@@ -21,7 +21,7 @@ export const icons = {
     { id: 16, icon: () => images.icon13 },
     { id: 17, icon: () => images.icon14 },
     { id: 18, icon: () => images.icon15 },
-    { id: 19, icon: () => images.icon18 }
+    { id: 99, icon: () => images.icon18 }
   ],
   brands: [
     { id: 0, icon: () => images.b0 },

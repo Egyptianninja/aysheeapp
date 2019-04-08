@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { DotIndicator } from '../../utils';
 
 const HomeLoading = ({ categoryId }: any) => {
-  const isfilter = categoryId || categoryId === 0;
+  const isfilter = categoryId;
 
   return (
     <View

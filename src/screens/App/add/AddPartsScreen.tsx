@@ -101,6 +101,7 @@ class AddPartsScreen extends React.Component<any, any> {
         this.updateProgressBar
       );
     }
+    const isfront = this.props.user.frontqty < this.props.user.frontLimit;
     const category = this.props.navigation.getParam('item');
     delete category.sort;
     const {
@@ -133,6 +134,7 @@ class AddPartsScreen extends React.Component<any, any> {
       variables: {
         title,
         body,
+        isfront,
         category,
         photos,
         isrtl,

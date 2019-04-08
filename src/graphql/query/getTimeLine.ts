@@ -134,6 +134,7 @@ export default gql`
           lon
         }
         islive
+        isfront
         updates
         userId
         updatedAt

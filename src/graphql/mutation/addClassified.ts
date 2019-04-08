@@ -6,6 +6,7 @@ export default gql`
     $body: String
     $category: NameInput
     $isoffer: Boolean
+    $isfront: Boolean
     $start: Date
     $end: Date
     $kind: NameInput
@@ -48,6 +49,7 @@ export default gql`
       body: $body
       category: $category
       isoffer: $isoffer
+      isfront: $isfront
       start: $start
       end: $end
       kind: $kind

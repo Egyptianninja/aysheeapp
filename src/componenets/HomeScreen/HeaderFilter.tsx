@@ -14,7 +14,7 @@ const HeaderFilter: any = ({
   isRTL,
   words
 }: any) => {
-  if (categoryId === 0) {
+  if (categoryId === 19) {
     const catFilters = [
       { name: 'city', data: getItems(buckets, 'city') },
       { name: 'realestateId', data: getItems(buckets, 'realestateId') }
@@ -457,7 +457,7 @@ const HeaderFilter: any = ({
         </View>
       </RenderFilter>
     );
-  } else if (categoryId === 19) {
+  } else if (categoryId === 99) {
     return (
       <RenderFilter isRTL={isRTL}>
         <View

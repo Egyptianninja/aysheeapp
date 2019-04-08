@@ -4,12 +4,14 @@ export default gql`
   query getUserPosts(
     $userId: String!
     $isoffer: Boolean
+    $isfront: Boolean
     $islive: Boolean
     $cursor: [Float]
   ) {
     getUserPosts(
       userId: $userId
       isoffer: $isoffer
+      isfront: $isfront
       islive: $islive
       cursor: $cursor
     ) {
@@ -48,6 +50,7 @@ export default gql`
         isfurnishered
         islive
         isoffer
+        isfront
 
         categoryId
         category

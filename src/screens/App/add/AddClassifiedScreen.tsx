@@ -48,14 +48,14 @@ class AddClassifiedScreen extends React.Component<any, any> {
     images: [],
     bar: 0
   };
-  noClassified = [0, 1, 5, 9, 15];
+  noClassified = [19, 1, 5, 9, 15];
 
   noSale = [2, 3, 5, 7, 8, 9, 13, 14, 15, 17, 18];
   noPrice = [5, 9];
   noNew = [5, 9, 17, 18];
   noWaranty = [0, 5, 9, 12, 13, 17, 18];
 
-  noKind = [19];
+  noKind = [99];
   kind = [2, 3, 4, 6, 7, 8, 10, 11, 12, 13, 14, 16, 17, 18];
   eBrand = [2, 6, 14];
 
@@ -118,6 +118,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
         this.updateProgressBar
       );
     }
+    const isfront = this.props.user.frontqty < this.props.user.frontLimit;
     const category = this.props.navigation.getParam('item');
     delete category.sort;
     const {
@@ -149,6 +150,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
       variables: {
         title,
         body,
+        isfront,
         category,
         kind: kind !== '' ? kind : null,
         eBrand: eBrand !== '' ? eBrand : null,
@@ -324,8 +326,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
                     />
                   )}
                   {this.state.isElectronics &&
-                    values.kind.id > 4 &&
-                    values.kind.id < 10 && (
+                    values.kind.id > 99 &&
+                    values.kind.id < 103 && (
                       <Select
                         name="eBrand"
                         data={eBrands}

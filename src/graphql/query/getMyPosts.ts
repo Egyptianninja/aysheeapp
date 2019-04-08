@@ -1,8 +1,18 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query getMyPosts($islive: Boolean!, $isoffer: Boolean, $cursor: [Float]) {
-    getMyPosts(islive: $islive, isoffer: $isoffer, cursor: $cursor) {
+  query getMyPosts(
+    $islive: Boolean!
+    $isoffer: Boolean
+    $isfront: Boolean
+    $cursor: [Float]
+  ) {
+    getMyPosts(
+      islive: $islive
+      isoffer: $isoffer
+      isfront: $isfront
+      cursor: $cursor
+    ) {
       ok
       took
       total
@@ -36,6 +46,7 @@ export default gql`
         isfurnishered
         islive
         isoffer
+        isfront
 
         categoryId
         category

@@ -63,12 +63,15 @@ export default class Menu extends React.Component<any, any> {
     const { word, myItem, fav, user, isAuthenticated, post } = this.props;
     const owner = this.isOwner({ user, isAuthenticated, post });
     const live = post ? post.islive : false;
+    const isfront = post ? post.isfront : false;
     const options = filterOptions(
       word.popmenu,
       isAuthenticated
         ? myItem || owner
           ? live === false
-            ? [6, 8, 9]
+            ? isfront
+              ? [6, 8, 9, 11]
+              : [6, 8, 9, 10]
             : [5, 7, 8, 9]
           : fav
           ? [2, 3, 4]

@@ -29,7 +29,8 @@ export const appcolors = [
   '#9B9CF1',
   '#A7A9F3',
   '#C0C1F6',
-  '#D9DAFA'
+  '#D9DAFA',
+  '#6163C2'
 ];
 
 export const colors = [

@@ -42,10 +42,12 @@ export default gql`
         offersqty
         onlineqty
         offlineqty
+        frontqty
         lastoffer
         offersLimit
         onlineLimit
         offlineLimit
+        frontLimit
         avatar
         color
         lang

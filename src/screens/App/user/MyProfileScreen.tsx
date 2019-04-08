@@ -9,7 +9,8 @@ import {
   Linking,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 import { AvatarCircle, Loading, Noresult } from '../../../componenets';
@@ -231,6 +232,22 @@ class MyProfileScreen extends React.Component<any, any> {
       this.showEditModal();
     } else if (menuId === 9) {
       this.showCheckMessageModal();
+    } else if (menuId === 10) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          isfront: true
+        }
+      });
+      this.props.updateQty('front', 1);
+    } else if (menuId === 11) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          isfront: false
+        }
+      });
+      this.props.updateQty('front', -1);
     }
   };
 
@@ -525,15 +542,18 @@ class MyProfileScreen extends React.Component<any, any> {
 
   renderTabs = ({ tab, maincolor, words, user, isshop }: any) => {
     return (
-      <View
+      <ScrollView
+        horizontal
         style={{
           height: 50,
-          alignItems: 'center',
-          justifyContent: 'center',
           flexDirection: 'row',
           backgroundColor: '#fff',
           borderColor: '#ddd',
           borderWidth: 1
+        }}
+        contentContainerStyle={{
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         <TouchableOpacity
@@ -600,8 +620,34 @@ class MyProfileScreen extends React.Component<any, any> {
           }}
           onPress={() => {
             this.setState({
-              rest: { islive: false },
+              rest: { islive: true, isfront: true },
               tab: 3
+            });
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: 'cairo-regular',
+              color: tab === 3 ? maincolor : '#000',
+              fontSize: 16
+            }}
+          >
+            {words.infrontpage} ({user.frontqty})
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            flex: 1,
+            padding: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginHorizontal: 2,
+            backgroundColor: tab === 4 ? '#eee' : '#fff'
+          }}
+          onPress={() => {
+            this.setState({
+              rest: { islive: false },
+              tab: 4
             });
           }}
         >
@@ -615,7 +661,7 @@ class MyProfileScreen extends React.Component<any, any> {
             {words.unpublished} ({user.offlineqty})
           </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   };
 

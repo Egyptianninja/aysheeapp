@@ -178,12 +178,8 @@ class UpgradeToStore extends React.Component<any, any> {
                 email: Yup.string()
                   .email('Not valid email')
                   .required(word.isrequire),
-                addressCountry: Yup.string()
-                  .max(50)
-                  .required(word.isrequire),
-                addressCity: Yup.string()
-                  .max(50)
-                  .required(word.isrequire),
+                addressCountry: Yup.string().max(50),
+                addressCity: Yup.string().max(50),
                 tel: Yup.string()
                   .max(50)
                   .required(word.isrequire),

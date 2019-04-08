@@ -13,7 +13,9 @@ const iconNames = [
   { id: 6, name: 'Publish', icon: 'ios-cloud-upload' },
   { id: 7, name: 'Unpublish', icon: 'ios-cloud-download' },
   { id: 8, name: 'Edit', icon: 'ios-create' },
-  { id: 9, name: 'Delete', icon: 'ios-trash' }
+  { id: 9, name: 'Delete', icon: 'ios-trash' },
+  { id: 10, name: 'Add to front page', icon: 'ios-bookmark' },
+  { id: 11, name: 'Remove from front page', icon: 'ios-backspace' }
 ];
 
 export default class MenuOption extends React.Component<any, any> {

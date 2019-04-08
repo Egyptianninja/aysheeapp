@@ -1,5 +1,5 @@
 export const getTimeLineBuckets = (categoryId: any, store: any, data: any) => {
-  if (categoryId || categoryId === 0) {
+  if (categoryId) {
     return getOtherBuckets(store, data, 'getTimeLine').filter((x: any) => x);
   } else {
     return getCategoryBuckets(store, data, 'getTimeLine').filter((x: any) => x);

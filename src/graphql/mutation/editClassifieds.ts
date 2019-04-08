@@ -9,6 +9,7 @@ export default gql`
     $updates: Int
     $islive: Boolean
     $isoffer: Boolean
+    $isfront: Boolean
     $start: Date
     $end: Date
     $isnew: Boolean
@@ -53,6 +54,7 @@ export default gql`
       updates: $updates
       islive: $islive
       isoffer: $isoffer
+      isfront: $isfront
       start: $start
       end: $end
       isnew: $isnew

@@ -233,7 +233,7 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleHome = () => {
-    if (this.state.rest.categoryId || this.state.rest.categoryId === 0) {
+    if (this.state.rest.categoryId) {
       if (this.scrollValue > 0) {
         this.flatListRef
           .getNode()
@@ -411,6 +411,38 @@ class HomeScreen extends React.Component<any, any> {
       this.showEditModal();
     } else if (menuId === 9) {
       this.showCheckMessageModal();
+    } else if (menuId === 10) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          isfront: true
+        }
+      });
+      this.props.updateQty('front', 1);
+    } else if (menuId === 11) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          isfront: false
+        }
+      });
+      this.props.updateQty('front', -1);
+    } else if (menuId === 10) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          isfront: true
+        }
+      });
+      this.props.updateQty('front', 1);
+    } else if (menuId === 11) {
+      this.props.editClassifieds({
+        variables: {
+          postId,
+          isfront: false
+        }
+      });
+      this.props.updateQty('front', -1);
     }
   };
 
@@ -568,6 +600,8 @@ class HomeScreen extends React.Component<any, any> {
               79,
               lang
             );
+            console.log(posts);
+
             return (
               <React.Fragment>
                 <AnimatedListView
