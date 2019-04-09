@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { arabicToNum, rtlos } from '../../utils';
 import { ErrorMessage } from './Common';
-class InputPhone extends React.PureComponent<any, any> {
+class InputEmail extends React.PureComponent<any, any> {
   handleChange = (value: any) => {
     if (this.props.num) {
       const toEn = arabicToNum(value);
@@ -17,7 +17,7 @@ class InputPhone extends React.PureComponent<any, any> {
   };
 
   render() {
-    const { label, countryCode, placeholder, error, ...rest } = this.props;
+    const { label, placeholder, error, ...rest } = this.props;
     return (
       <View
         style={{
@@ -36,50 +36,25 @@ class InputPhone extends React.PureComponent<any, any> {
             // borderRadius: 25,
             borderTopLeftRadius: 25,
             borderTopRightRadius: 25,
-            // borderBottomLeftRadius: 25,
             backgroundColor: '#fff',
             borderColor: '#eee',
             borderWidth: 1
           }}
         >
-          <View
-            style={{
-              height: 50,
-              width: 68,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#A7A9F3',
-              borderTopLeftRadius: rtlos() === 3 ? undefined : 25,
-              borderTopRightRadius: rtlos() === 3 ? 25 : undefined,
-              paddingHorizontal: 10,
-
-              paddingVertical: 10
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 20,
-                color: '#fff'
-              }}
-            >
-              +{countryCode}
-            </Text>
-          </View>
-
           <TextInput
             onChangeText={this.handleChange}
-            placeholder="1234567890"
+            placeholder="emailaddress@gmail.com"
             placeholderTextColor="#ddd"
             onBlur={this.handleTouch}
             selectionColor={'#fff'}
             // autoFocus
             style={[
               {
-                width: 200,
-                paddingHorizontal: 10,
+                width: 268,
+                paddingHorizontal: 20,
                 textAlign: 'left',
                 letterSpacing: 1,
-                fontSize: 20,
+                fontSize: 18,
                 color: '#636363'
               }
             ]}
@@ -91,4 +66,4 @@ class InputPhone extends React.PureComponent<any, any> {
   }
 }
 
-export default InputPhone;
+export default InputEmail;

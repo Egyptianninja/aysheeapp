@@ -195,7 +195,7 @@ class AddPartsScreen extends React.Component<any, any> {
                 issale: true,
                 isrent: false,
                 iswarranty: false,
-                phone: getPureNumber(user.phone),
+                phone: user.phone ? getPureNumber(user.phone) : '',
                 year: '',
                 brand: '',
                 subBrand: '',
@@ -477,6 +477,7 @@ class AddPartsScreen extends React.Component<any, any> {
               )}
             />
           </View>
+          <View style={{ height: 50 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

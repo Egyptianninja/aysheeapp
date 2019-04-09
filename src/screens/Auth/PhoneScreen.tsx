@@ -8,7 +8,9 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
+  Text,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
@@ -17,23 +19,34 @@ import { smsTimes } from '../../constants';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import smsLoginWithPhone from '../../graphql/mutation/smsLoginWithPhone';
 import smsRequestCode from '../../graphql/mutation/smsRequestCode';
-import { Button, CountDownTimer, InputPhone } from '../../lib';
+import {
+  Button,
+  CountDownTimer,
+  InputPhone,
+  Input,
+  InputEmail
+} from '../../lib';
 import {
   addUniquename,
   initCode,
   initTime,
   login,
   phoneAdded,
+  emailAdded,
   phoneRemoved,
+  emailRemoved,
   smsSent
 } from '../../store/actions/userAtions';
 import { isIphoneX, rtlos, StyleSheet } from '../../utils';
-
+const { width } = Dimensions.get('window');
 class PhoneScreen extends React.Component<any, any> {
   subs: any;
   state = {
     localePhone: null,
+    localeEmail: null,
+    isEmailLogin: true,
     phone: null,
+    email: null,
     name: null,
     loading: false,
     interval: 0
@@ -41,9 +54,8 @@ class PhoneScreen extends React.Component<any, any> {
 
   async componentWillMount() {
     const phone = await AsyncStorage.getItem('phone');
-    if (phone) {
-      await this.setState({ localePhone: phone });
-    }
+    const email = await AsyncStorage.getItem('email');
+    await this.setState({ localePhone: phone, localeEmail: email });
   }
 
   async componentDidMount() {
@@ -101,63 +113,131 @@ class PhoneScreen extends React.Component<any, any> {
       }
     }
   };
+  validSchema = ({ words }: any) => {
+    if (this.state.isEmailLogin) {
+      return Yup.object().shape({
+        email: Yup.string()
+          .email('Not valid email')
+          .required(words.isrequire)
+      });
+    } else {
+      return Yup.object().shape({
+        phone: Yup.string()
+          .min(6, words.notvalidmobile)
+          .required(words.phoneisrequired)
+      });
+    }
+  };
 
   handleCodeSubmit = async (values: any, bag: any) => {
     const directstore = this.props.navigation.getParam('directstore');
     const add = this.props.navigation.getParam('add');
     const origin = this.props.navigation.getParam('origin');
-
     try {
-      const { phone } = values;
-      const phoneNumber = `${this.props.code}${phone}`;
-      if (phoneNumber === this.state.localePhone) {
-        const res = await this.props.smsLoginWithPhone({
-          variables: { phone: phoneNumber }
-        });
-        if (res.data.smsLoginWithPhone.ok) {
-          const { token, data } = res.data.smsLoginWithPhone;
-          const isstore = data.isstore;
-          await AsyncStorage.setItem('aysheetoken', token);
-          const name = await AsyncStorage.getItem('name');
-          await this.props.addUniquename(name);
-          await this.props.login(token, data);
-          await this.props.initTime();
-          await this.props.initCode();
-          const rout = this.getDestinationRout({
-            directstore,
-            add,
-            origin,
-            isstore
+      const { phone, email } = values;
+
+      if (this.state.isEmailLogin) {
+        if (email === this.state.localeEmail) {
+          const res = await this.props.smsLoginWithPhone({
+            variables: { email }
           });
-          this.props.navigation.navigate(rout.screen, { title: rout.title });
+          if (res.data.smsLoginWithPhone.ok) {
+            const { token, data } = res.data.smsLoginWithPhone;
+            const isstore = data.isstore;
+            await AsyncStorage.setItem('aysheetoken', token);
+            const name = await AsyncStorage.getItem('name');
+            await this.props.addUniquename(name);
+            await this.props.login(token, data);
+            await this.props.initTime();
+            await this.props.initCode();
+            const rout = this.getDestinationRout({
+              directstore,
+              add,
+              origin,
+              isstore
+            });
+            this.props.navigation.navigate(rout.screen, { title: rout.title });
+          }
+        } else {
+          const res = await this.props.smsRequestCode({
+            variables: { email }
+          });
+          if (res.data.smsRequestCode.ok) {
+            const name = res.data.smsRequestCode.message;
+            const nowTime = Math.floor(new Date().getTime() / 1000);
+            const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
+            await this.props.smsSent(nextTime);
+            const interval = nextTime - nowTime;
+            await this.setState({
+              email,
+              name,
+              interval: interval > 0 ? interval : 0
+            });
+            this.props.emailAdded(email, name);
+            this.props.navigation.navigate('CodeScreen', {
+              email,
+              name,
+              directstore,
+              add,
+              origin
+            });
+          } else {
+            bag.setErrors({ phone: res.data.smsRequestCode.error });
+          }
+          bag.setSubmitting(false);
         }
       } else {
-        const res = await this.props.smsRequestCode({
-          variables: { phone: phoneNumber }
-        });
-        if (res.data.smsRequestCode.ok) {
-          const name = res.data.smsRequestCode.message;
-          const nowTime = Math.floor(new Date().getTime() / 1000);
-          const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
-          await this.props.smsSent(nextTime);
-          const interval = nextTime - nowTime;
-          await this.setState({
-            phone: phoneNumber,
-            name,
-            interval: interval > 0 ? interval : 0
+        const phoneNumber = `${this.props.code}${phone}`;
+        if (phoneNumber === this.state.localePhone) {
+          const res = await this.props.smsLoginWithPhone({
+            variables: { phone: phoneNumber }
           });
-          this.props.phoneAdded(phoneNumber, name);
-          this.props.navigation.navigate('CodeScreen', {
-            phone: phoneNumber,
-            name,
-            directstore,
-            add,
-            origin
-          });
+          if (res.data.smsLoginWithPhone.ok) {
+            const { token, data } = res.data.smsLoginWithPhone;
+            const isstore = data.isstore;
+            await AsyncStorage.setItem('aysheetoken', token);
+            const name = await AsyncStorage.getItem('name');
+            await this.props.addUniquename(name);
+            await this.props.login(token, data);
+            await this.props.initTime();
+            await this.props.initCode();
+            const rout = this.getDestinationRout({
+              directstore,
+              add,
+              origin,
+              isstore
+            });
+            this.props.navigation.navigate(rout.screen, { title: rout.title });
+          }
         } else {
-          bag.setErrors({ phone: res.data.smsRequestCode.error });
+          const res = await this.props.smsRequestCode({
+            variables: { phone: phoneNumber }
+          });
+
+          if (res.data.smsRequestCode.ok) {
+            const name = res.data.smsRequestCode.message;
+            const nowTime = Math.floor(new Date().getTime() / 1000);
+            const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
+            await this.props.smsSent(nextTime);
+            const interval = nextTime - nowTime;
+            await this.setState({
+              phone: phoneNumber,
+              name,
+              interval: interval > 0 ? interval : 0
+            });
+            this.props.emailAdded(phoneNumber, name);
+            this.props.navigation.navigate('CodeScreen', {
+              phone: phoneNumber,
+              name,
+              directstore,
+              add,
+              origin
+            });
+          } else {
+            bag.setErrors({ phone: res.data.smsRequestCode.error });
+          }
+          bag.setSubmitting(false);
         }
-        bag.setSubmitting(false);
       }
     } catch (error) {
       bag.setErrors(error);
@@ -170,7 +250,7 @@ class PhoneScreen extends React.Component<any, any> {
 
   render() {
     const { words } = this.props;
-    const { localePhone }: any = this.state;
+    const { localePhone, localeEmail }: any = this.state;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
@@ -202,12 +282,12 @@ class PhoneScreen extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
-            <Logo size={120} />
+            <Logo size={100} />
           </View>
 
           <KeyboardAvoidingView
             style={{
-              flex: 2,
+              flex: 3,
               justifyContent: 'flex-start',
               alignItems: 'center'
             }}
@@ -218,15 +298,12 @@ class PhoneScreen extends React.Component<any, any> {
               initialValues={{
                 phone: localePhone
                   ? localePhone.replace(this.props.code, '')
-                  : ''
+                  : '',
+                email: localeEmail ? localeEmail : ''
               }}
               enableReinitialize={true}
               onSubmit={this.handleCodeSubmit}
-              validationSchema={Yup.object().shape({
-                phone: Yup.string()
-                  .min(6, words.notvalidmobile)
-                  .required(words.phoneisrequired)
-              })}
+              validationSchema={this.validSchema({ words })}
               render={({
                 values,
                 handleSubmit,
@@ -242,19 +319,82 @@ class PhoneScreen extends React.Component<any, any> {
                     cb={this.counterCllBack}
                     size={22}
                   />
-                  <InputPhone
-                    num
-                    name="phone"
-                    label={words.entermobilenumber}
-                    value={values.phone}
-                    onChange={setFieldValue}
-                    onTouch={setFieldTouched}
-                    labelStyle={styles.labelStyle}
-                    error={touched.phone && errors.phone}
-                    keyboardType="number-pad"
-                    height={50}
-                    countryCode={this.props.code}
-                  />
+
+                  {!this.state.isEmailLogin && (
+                    <InputPhone
+                      num
+                      name="phone"
+                      label={words.entermobilenumber}
+                      value={values.phone}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      labelStyle={styles.labelStyle}
+                      error={touched.phone && errors.phone}
+                      keyboardType="number-pad"
+                      height={50}
+                      countryCode={this.props.code}
+                    />
+                  )}
+                  {this.state.isEmailLogin && (
+                    <InputEmail
+                      name="email"
+                      label={words.enteremail}
+                      value={values.email}
+                      onChange={setFieldValue}
+                      onTouch={setFieldTouched}
+                      labelStyle={styles.labelStyle}
+                      error={touched.email && errors.email}
+                      autoCapitalize="none"
+                      keyboardType="email-address"
+                      autoCorrect={false}
+                      height={50}
+                    />
+                  )}
+                  <View
+                    style={{
+                      width: 268,
+                      height: 30,
+                      marginBottom: 10,
+                      flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-around'
+                    }}
+                  >
+                    <TouchableOpacity
+                      onPress={() => this.setState({ isEmailLogin: true })}
+                      style={{
+                        flex: 1,
+                        backgroundColor: !this.state.isEmailLogin
+                          ? '#eee'
+                          : '#fff',
+                        borderBottomLeftRadius: 5,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: 30
+                      }}
+                    >
+                      <Text style={{ fontSize: 12 }}>
+                        {words.loginwithemail}
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => this.setState({ isEmailLogin: false })}
+                      style={{
+                        flex: 1,
+                        backgroundColor: this.state.isEmailLogin
+                          ? '#eee'
+                          : '#fff',
+                        borderBottomRightRadius: 5,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: 30
+                      }}
+                    >
+                      <Text style={{ fontSize: 12 }}>
+                        {words.loginwithmobile}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                   <Button
                     background="#fff"
                     style={styles.btnStyle}
@@ -285,7 +425,18 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   outerStyle: {
-    justifyContent: 'flex-start'
+    flex: 1,
+    justifyContent: 'space-between',
+    marginVertical: 5
+  },
+  innerStyle: {
+    width: width - 60,
+    paddingHorizontal: 15,
+    backgroundColor: '#fff',
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 20
   },
 
   labelStyle: {
@@ -332,7 +483,9 @@ export default connect(
   {
     login,
     phoneAdded,
+    emailAdded,
     phoneRemoved,
+    emailRemoved,
     smsSent,
     initTime,
     initCode,

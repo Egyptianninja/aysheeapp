@@ -69,7 +69,8 @@ export default function(state = initialState, action: any) {
     case EMAIL_ADDED:
       return {
         ...state,
-        email: action.email
+        email: action.email,
+        name: action.name
       };
     case ADD_PUSH_TOKEN:
       return {
@@ -79,7 +80,8 @@ export default function(state = initialState, action: any) {
     case EMAIL_REMOVED:
       return {
         ...state,
-        email: null
+        email: null,
+        name: null
       };
     case PHONE_ADDED:
       return {

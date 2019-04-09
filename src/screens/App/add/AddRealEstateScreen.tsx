@@ -203,7 +203,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
                 issale: false,
                 isrent: true,
                 realestate: '',
-                phone: getPureNumber(user.phone),
+                phone: user.phone ? getPureNumber(user.phone) : '',
                 space: '',
                 ism: true,
                 isft: false,
@@ -507,6 +507,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
               )}
             />
           </View>
+          <View style={{ height: 50 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

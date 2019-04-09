@@ -4,8 +4,12 @@ import { parseJwt } from '../common/parseJwt';
 
 export const getPureNumber = (phone: any) => {
   const userData = user();
+  console.log(userData);
+
   const token = userData.token;
   const data = parseJwt(token);
+  console.log('data', data);
+
   // TODO:
   const countryCode =
     data.country === ''

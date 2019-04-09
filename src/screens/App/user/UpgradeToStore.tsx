@@ -85,7 +85,7 @@ class UpgradeToStore extends React.Component<any, any> {
       name,
       about,
       color,
-      email,
+      addressEmail,
       website,
       addressCountry,
       addressCity,
@@ -111,7 +111,7 @@ class UpgradeToStore extends React.Component<any, any> {
         about,
         avatar: avatar ? avatar : undefined,
         color,
-        email,
+        addressEmail,
         website,
         addressCountry,
         addressCity,
@@ -175,7 +175,7 @@ class UpgradeToStore extends React.Component<any, any> {
                 about: Yup.string()
                   .max(1000)
                   .required(word.isrequire),
-                email: Yup.string()
+                addressEmail: Yup.string()
                   .email('Not valid email')
                   .required(word.isrequire),
                 addressCountry: Yup.string().max(50),
@@ -183,9 +183,7 @@ class UpgradeToStore extends React.Component<any, any> {
                 tel: Yup.string()
                   .max(50)
                   .required(word.isrequire),
-                fax: Yup.string()
-                  .max(50)
-                  .required(word.isrequire)
+                fax: Yup.string().max(50)
               })}
               render={({
                 values,
@@ -275,15 +273,15 @@ class UpgradeToStore extends React.Component<any, any> {
                   />
                   <Input
                     rtl={isRTL}
-                    name="email"
+                    name="addressEmail"
                     label={word.email}
-                    value={values.email}
+                    value={values.addressEmail}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
                     outerStyle={styles.outerStyle}
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
-                    error={touched.email && errors.email}
+                    error={touched.addressEmail && errors.addressEmail}
                     autoCapitalize="none"
                     keyboardType="email-address"
                     autoCorrect={false}
@@ -412,6 +410,7 @@ class UpgradeToStore extends React.Component<any, any> {
               )}
             />
           </View>
+          <View style={{ height: 50 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

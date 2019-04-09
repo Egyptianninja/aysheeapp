@@ -429,8 +429,10 @@ export default {
     save: 'حفظ',
     addnewad: 'اضافة اعلان جديد',
     addnewoffer: 'اضافة عرض جديد',
-
     entermobilenumber: 'ادخل رقم الجوال',
+    enteremail: 'ادخل بريدك الالكتروني',
+    loginwithmobile: 'دخول بواسطة الجوال',
+    loginwithemail: 'دخول بواسطة البريد',
     send: 'ارسال',
     phoneisrequired: 'يرجى ادخال رقم الجوال',
     notvalidmobile: 'رقم الجوال غير صحيح',

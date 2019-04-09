@@ -9,6 +9,7 @@ export default gql`
         uniquename
         phone
         email
+        addressEmail
         name
         about
         isstore

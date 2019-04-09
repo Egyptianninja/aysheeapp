@@ -10,6 +10,7 @@ import Input from './elements/Input';
 import InputCode from './elements/InputCode';
 import InputName from './elements/InputName';
 import InputPhone from './elements/InputPhone';
+import InputEmail from './elements/InputEmail';
 import Logo from './elements/Logo';
 import Message from './elements/Message';
 import Photo from './elements/Photo';
@@ -37,5 +38,6 @@ export {
   Logo,
   Photo,
   LoadingView,
-  SelectDate
+  SelectDate,
+  InputEmail
 };

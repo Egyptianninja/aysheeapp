@@ -1,8 +1,13 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation smsLoginWithCode($phone: String!, $code: Int!, $name: String) {
-    smsLoginWithCode(phone: $phone, code: $code, name: $name) {
+  mutation smsLoginWithCode(
+    $phone: String
+    $email: String
+    $code: Int!
+    $name: String
+  ) {
+    smsLoginWithCode(phone: $phone, email: $email, code: $code, name: $name) {
       ok
       token
       data {
@@ -10,6 +15,7 @@ export default gql`
         uniquename
         phone
         email
+        addressEmail
         name
         about
         isstore

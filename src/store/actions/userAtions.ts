@@ -39,7 +39,7 @@ export function addPushToken(pushToken: any) {
     pushToken
   };
 }
-export function emailAdded(email: string) {
+export function emailAdded(email: string, name: string) {
   return {
     type: EMAIL_ADDED,
     email

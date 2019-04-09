@@ -167,7 +167,7 @@ class AddJobScreen extends React.Component<any, any> {
                 body: '',
                 isjobreq: true,
                 isjoboffer: false,
-                phone: getPureNumber(user.phone),
+                phone: user.phone ? getPureNumber(user.phone) : '',
                 isfullTime: true,
                 isPartTime: false,
                 experience: '',
@@ -379,6 +379,7 @@ class AddJobScreen extends React.Component<any, any> {
               )}
             />
           </View>
+          <View style={{ height: 50 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

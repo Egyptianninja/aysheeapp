@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { rtlos, StyleSheet } from '../../utils';
+import { rtlos, StyleSheet, getDate } from '../../utils';
 import { MenuIcon } from './MenuIcon';
 import { PostImage } from './PostImage';
 
@@ -107,8 +107,22 @@ const ItemViewSmall = (props: any) => {
                       </Text>
                     </View>
                   )}
-                  {!price && price !== 0 && (
+                  {!price && price !== 0 && !post.offer && (
                     <View style={{ height: 16, width: 100 }} />
+                  )}
+                  {post.offer && (
+                    <View>
+                      <Text
+                        style={{
+                          color: '#777',
+                          paddingTop: 5,
+                          fontSize: 12,
+                          fontWeight: '200'
+                        }}
+                      >
+                        >{getDate(post.start)} - {getDate(post.end)}
+                      </Text>
+                    </View>
                   )}
                   <Text
                     style={{

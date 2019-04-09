@@ -484,7 +484,7 @@ class CategoryScreen extends React.Component<any, any> {
                   getHeightForItem={({ item }: any) => item.height}
                   ListHeaderComponent={() => {
                     if (posts.length === 0) {
-                      return <Noresult />;
+                      return <Noresult title={words.noresults} />;
                     } else {
                       return (
                         <View>

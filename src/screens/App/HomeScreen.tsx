@@ -574,7 +574,7 @@ class HomeScreen extends React.Component<any, any> {
         </Animated.View>
         <Query
           query={getTimeLine}
-          variables={{ ...rest, query }}
+          variables={{ ...rest }}
           onCompleted={data => {
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
             this.props.setBuckets(buckets);
@@ -584,7 +584,7 @@ class HomeScreen extends React.Component<any, any> {
             if (loading) {
               return <HomeLoading categoryId={rest.categoryId} />;
             }
-            if (error || !data.getTimeLine.posts) {
+            if (error) {
               return <Noresult title="error" top={100} />;
             }
             const postsQuery = data.getTimeLine.posts;
@@ -639,7 +639,7 @@ class HomeScreen extends React.Component<any, any> {
                   getHeightForItem={({ item }: any) => item.height}
                   ListHeaderComponent={() => {
                     if (posts.length === 0) {
-                      return <Noresult />;
+                      return <Noresult title={words.noresults} />;
                     } else {
                       return null;
                     }

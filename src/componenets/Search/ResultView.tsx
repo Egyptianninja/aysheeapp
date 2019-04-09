@@ -136,20 +136,15 @@ class ResultView extends React.Component<any, any> {
           if (loading) {
             return <HomeLoading />;
           }
-          if (error || !data.search.posts) {
+          if (error) {
             return <Noresult title="error" />;
           }
           const postsQuery = data.search.posts;
+          const posts =
+            postsQuery.length > 0
+              ? readyPosts(postsQuery, isTablet() ? 400 : 200, 79, lang)
+              : postsQuery;
 
-          if (postsQuery && postsQuery.length === 0) {
-            return <Noresult isRTL={isRTL} title={words.noresults} />;
-          }
-          const posts = readyPosts(
-            postsQuery,
-            isTablet() ? 400 : 200,
-            79,
-            lang
-          );
           return (
             <FlatList
               data={posts}
@@ -174,6 +169,13 @@ class ResultView extends React.Component<any, any> {
                   lang={lang}
                 />
               )}
+              ListHeaderComponent={() => {
+                if (posts.length === 0) {
+                  return <Noresult title={words.noresults} bgColor="#eee" />;
+                } else {
+                  return null;
+                }
+              }}
               numColumns={1}
               keyExtractor={(item: any) => item.id}
               onEndReachedThreshold={0.5}

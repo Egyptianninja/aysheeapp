@@ -78,11 +78,11 @@ class NotificationsScreen extends React.Component<any, any> {
                 return <Loading />;
               }
               if (error) {
-                return <Noresult />;
+                return <Noresult title={words.noresults} />;
               }
               const notis = data.getMyNotifications.data;
               if (notis && notis.length === 0) {
-                return <Noresult />;
+                return <Noresult title={words.noresults} />;
               }
               return (
                 <View

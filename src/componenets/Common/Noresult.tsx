@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Image, Text, View } from 'react-native';
 import { images } from '../../load';
-const Noresult = ({ title, isRTL, top }: any) => (
+const Noresult = ({ title, isRTL, top, bgColor }: any) => (
   <View
     style={{
       flex: 1,
       marginTop: top ? top : 0,
-      backgroundColor: '#eee',
+      backgroundColor: bgColor ? bgColor : '#fff',
       justifyContent: 'flex-start',
       alignItems: 'center',
       zIndex: 500
@@ -14,8 +14,8 @@ const Noresult = ({ title, isRTL, top }: any) => (
   >
     <View
       style={{
-        width: 100,
-        height: 100
+        width: 150,
+        height: 150
       }}
     >
       <Image
@@ -23,9 +23,10 @@ const Noresult = ({ title, isRTL, top }: any) => (
           flex: 1,
           width: '100%',
           height: '100%',
-          tintColor: '#ccc'
+          tintColor: '#ccc',
+          transform: [{ rotateY: '180deg' }]
         }}
-        source={images.namelogofull}
+        source={images.searchbig}
       />
     </View>
 
@@ -34,7 +35,7 @@ const Noresult = ({ title, isRTL, top }: any) => (
         textAlign: isRTL ? 'right' : 'left',
         fontSize: 16,
         color: '#bbb',
-        marginTop: 20
+        top: -20
       }}
     >
       {title}

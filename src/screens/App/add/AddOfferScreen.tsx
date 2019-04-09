@@ -154,7 +154,9 @@ class AddServiceScreen extends React.Component<any, any> {
                 title: '',
                 body: '',
                 startend: '',
-                phone: getPureNumber(this.props.user.phone),
+                phone: this.props.user.phone
+                  ? getPureNumber(this.props.user.phone)
+                  : '',
                 photo: '',
                 location: false
               }}
@@ -375,6 +377,7 @@ class AddServiceScreen extends React.Component<any, any> {
               )}
             />
           </View>
+          <View style={{ height: 50 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

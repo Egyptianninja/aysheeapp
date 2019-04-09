@@ -6,7 +6,7 @@ export default gql`
     $about: String
     $avatar: String
     $color: String
-    $email: String
+    $addressEmail: String
     $website: String
     $addressCountry: String
     $addressCity: String
@@ -20,7 +20,7 @@ export default gql`
       about: $about
       avatar: $avatar
       color: $color
-      email: $email
+      addressEmail: $addressEmail
       website: $website
       addressCountry: $addressCountry
       addressCity: $addressCity
@@ -36,6 +36,7 @@ export default gql`
         uniquename
         phone
         email
+        addressEmail
         name
         about
         isstore

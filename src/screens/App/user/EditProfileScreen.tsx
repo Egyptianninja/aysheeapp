@@ -75,7 +75,7 @@ class EditProfileScreen extends React.Component<any, any> {
         about: Yup.string()
           .max(1000)
           .required(word.isrequire),
-        email: Yup.string()
+        addressEmail: Yup.string()
           .email('Not valid email')
           .required(word.isrequire),
         addressCountry: Yup.string()
@@ -106,7 +106,7 @@ class EditProfileScreen extends React.Component<any, any> {
       name,
       about,
       color,
-      email,
+      addressEmail,
       website,
       addressCountry,
       addressCity,
@@ -132,7 +132,7 @@ class EditProfileScreen extends React.Component<any, any> {
         about: isstore ? about : undefined,
         avatar: avatar ? avatar : undefined,
         color,
-        email,
+        addressEmail,
         website: isstore ? website : undefined,
         addressCountry,
         addressCity,
@@ -150,6 +150,8 @@ class EditProfileScreen extends React.Component<any, any> {
       this.showMessageModal();
     }
     if (!res.data.updateProfile.ok) {
+      console.log(res.data.updateProfile.error);
+
       bag.setErrors({ name: res.data.updateProfile.error });
     }
     bag.setSubmitting(false);
@@ -187,7 +189,7 @@ class EditProfileScreen extends React.Component<any, any> {
                 about: user.about,
                 color: user.color ? user.color : colors[0],
                 photo: '',
-                email: user.email,
+                addressEmail: user.addressEmail,
                 website: user.website,
                 addressCountry: user.addressCountry,
                 addressCity: user.addressCity,
@@ -287,15 +289,15 @@ class EditProfileScreen extends React.Component<any, any> {
                   />
                   <Input
                     rtl={isRTL}
-                    name="email"
+                    name="addressEmail"
                     label={word.email}
-                    value={values.email}
+                    value={values.addressEmail}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}
                     outerStyle={styles.outerStyle}
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
-                    error={touched.email && errors.email}
+                    error={touched.addressEmail && errors.addressEmail}
                     autoCapitalize="none"
                     keyboardType="email-address"
                     autoCorrect={false}
@@ -437,6 +439,7 @@ class EditProfileScreen extends React.Component<any, any> {
               )}
             />
           </View>
+          <View style={{ height: 50 }} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

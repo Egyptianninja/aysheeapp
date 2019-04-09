@@ -35,12 +35,19 @@ class CodeScreen extends React.Component<any, any> {
   state = {
     interval: 0,
     codeInterval: 0,
-    phone: null
+    phone: null,
+    email: null
   };
 
   componentDidMount() {
     const phone = this.props.navigation.getParam('phone');
-    this.setState({ phone });
+    const email = this.props.navigation.getParam('email');
+    if (phone) {
+      this.setState({ phone });
+    }
+    if (email) {
+      this.setState({ email });
+    }
     const interval =
       this.props.sms.nextTime - Math.floor(new Date().getTime() / 1000);
     if (interval > 86399) {
@@ -73,21 +80,39 @@ class CodeScreen extends React.Component<any, any> {
   }
 
   handleResendCode = async (bag: any) => {
-    const { phone } = this.state;
-    const res = await this.props.smsRequestCode({
-      variables: {
-        phone
-      }
-    });
-    if (res.data.smsRequestCode.ok) {
-      const nowTime = Math.floor(new Date().getTime() / 1000);
-      const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
-      await this.props.smsSent(nextTime);
-      const interval =
-        this.props.sms.nextTime - Math.floor(new Date().getTime() / 1000);
-      await this.setState({
-        interval: interval > 0 ? interval : 0
+    const { phone, email } = this.state;
+    if (email) {
+      const res = await this.props.smsRequestCode({
+        variables: {
+          email
+        }
       });
+      if (res.data.smsRequestCode.ok) {
+        const nowTime = Math.floor(new Date().getTime() / 1000);
+        const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
+        await this.props.smsSent(nextTime);
+        const interval =
+          this.props.sms.nextTime - Math.floor(new Date().getTime() / 1000);
+        await this.setState({
+          interval: interval > 0 ? interval : 0
+        });
+      }
+    } else {
+      const res = await this.props.smsRequestCode({
+        variables: {
+          phone
+        }
+      });
+      if (res.data.smsRequestCode.ok) {
+        const nowTime = Math.floor(new Date().getTime() / 1000);
+        const nextTime = Math.floor(nowTime + smsTimes[this.props.sms.qty]);
+        await this.props.smsSent(nextTime);
+        const interval =
+          this.props.sms.nextTime - Math.floor(new Date().getTime() / 1000);
+        await this.setState({
+          interval: interval > 0 ? interval : 0
+        });
+      }
     }
   };
 
@@ -129,20 +154,37 @@ class CodeScreen extends React.Component<any, any> {
 
     try {
       const { code } = values;
-      const res = await this.props.smsLoginWithCode({
-        variables: {
-          phone: this.state.phone,
-          code: Number(code)
-        }
-      });
+      let res;
+      if (this.state.email) {
+        res = await this.props.smsLoginWithCode({
+          variables: {
+            email: this.state.email,
+            code: Number(code)
+          }
+        });
+      } else {
+        res = await this.props.smsLoginWithCode({
+          variables: {
+            phone: this.state.phone,
+            code: Number(code)
+          }
+        });
+      }
+
       if (res.data.smsLoginWithCode.ok) {
         const { token, data } = res.data.smsLoginWithCode;
         const isstore = data.isstore;
         await AsyncStorage.setItem('aysheetoken', token);
         const name = this.props.navigation.getParam('name');
         const phone = this.props.navigation.getParam('phone');
-        await AsyncStorage.setItem('phone', phone);
+        const email = this.props.navigation.getParam('email');
         await AsyncStorage.setItem('name', name);
+        if (phone) {
+          await AsyncStorage.setItem('phone', phone);
+        }
+        if (email) {
+          await AsyncStorage.setItem('email', email);
+        }
         await this.props.addUniquename(name);
         await this.props.login(token, data);
         await this.props.initTime();
