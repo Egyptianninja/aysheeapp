@@ -33,11 +33,11 @@ class InputEmail extends React.PureComponent<any, any> {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 10,
-            // borderRadius: 25,
-            borderTopLeftRadius: 25,
-            borderTopRightRadius: 25,
+            borderRadius: 25,
+            // borderTopLeftRadius: 25,
+            // borderTopRightRadius: 25,
             backgroundColor: '#fff',
-            borderColor: '#eee',
+            borderColor: '#969696',
             borderWidth: 1
           }}
         >
@@ -50,8 +50,8 @@ class InputEmail extends React.PureComponent<any, any> {
             // autoFocus
             style={[
               {
-                width: 268,
-                paddingHorizontal: 20,
+                width: 298,
+                paddingHorizontal: 15,
                 textAlign: 'left',
                 letterSpacing: 1,
                 fontSize: 18,

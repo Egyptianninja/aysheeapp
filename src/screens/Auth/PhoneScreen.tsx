@@ -352,7 +352,8 @@ class PhoneScreen extends React.Component<any, any> {
                   )}
                   <View
                     style={{
-                      width: 268,
+                      // width: 268,
+                      width: 220,
                       height: 30,
                       marginBottom: 10,
                       flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
@@ -366,14 +367,20 @@ class PhoneScreen extends React.Component<any, any> {
                         flex: 1,
                         backgroundColor: !this.state.isEmailLogin
                           ? '#eee'
-                          : '#fff',
-                        borderBottomLeftRadius: 5,
+                          : '#636363',
+                        borderBottomLeftRadius: 10,
+                        borderBottomRightRadius: 10,
                         alignItems: 'center',
                         justifyContent: 'center',
                         height: 30
                       }}
                     >
-                      <Text style={{ fontSize: 12 }}>
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: !this.state.isEmailLogin ? '#636363' : '#fff'
+                        }}
+                      >
                         {words.loginwithemail}
                       </Text>
                     </TouchableOpacity>
@@ -383,14 +390,20 @@ class PhoneScreen extends React.Component<any, any> {
                         flex: 1,
                         backgroundColor: this.state.isEmailLogin
                           ? '#eee'
-                          : '#fff',
-                        borderBottomRightRadius: 5,
+                          : '#7678ED',
+                        borderBottomLeftRadius: 10,
+                        borderBottomRightRadius: 10,
                         alignItems: 'center',
                         justifyContent: 'center',
                         height: 30
                       }}
                     >
-                      <Text style={{ fontSize: 12 }}>
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: this.state.isEmailLogin ? '#7678ED' : '#fff'
+                        }}
+                      >
                         {words.loginwithmobile}
                       </Text>
                     </TouchableOpacity>

@@ -9,7 +9,8 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -17,6 +18,10 @@ import addAvatar from '../../graphql/mutation/addAvatar';
 import logoutFromAll from '../../graphql/mutation/logoutFromAll';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import upgradeToStore from '../../graphql/mutation/upgradeToStore';
+import getMyCountry from '../../graphql/mutation/getMyCountry';
+import Modal from 'react-native-modal';
+import { initApp } from '../../store/actions/globActions';
+
 import { icons, images } from '../../load';
 import {
   login,
@@ -24,12 +29,74 @@ import {
   phoneRemoved,
   updateUser
 } from '../../store/actions/userAtions';
-import { getCountryCityFromToken, rtlos, StyleSheet } from '../../utils';
+import {
+  getCountryCityFromToken,
+  rtlos,
+  StyleSheet,
+  getCountryFromLatLon,
+  getUserLocation,
+  getCodeFromCountry,
+  getLang
+} from '../../utils';
 import { AvatarCircle } from '../Avatar';
-
+import { Choise } from '../LoadScreen/Choise';
+import { Updates } from 'expo';
+import LoadingTiny from '../Common/LoadingTiny';
+const { width, height } = Dimensions.get('window');
 class Drawer extends React.Component<any, any> {
   state = {
-    avatar: null
+    isModalVisible: false,
+    avatar: null,
+    loading: false,
+    ipCountry: null,
+    locCountry: null,
+    country: null,
+    city: null
+  };
+
+  showModal = () => {
+    this.setState({ isModalVisible: true });
+  };
+
+  hideModal = () => {
+    this.setState({ isModalVisible: false });
+  };
+
+  renderOptions = () => {
+    const samedata = this.state.ipCountry === this.state.locCountry;
+    return (
+      <React.Fragment>
+        <View>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: 'bold',
+              color: '#aaa',
+              padding: 10,
+              alignSelf: 'center'
+            }}
+          >
+            Choose Market‎
+          </Text>
+        </View>
+        <View>
+          <Choise
+            action={this.chooseCountry}
+            country={this.state.ipCountry}
+            city={this.state.city}
+            width={width}
+          />
+          {!samedata && (
+            <Choise
+              action={this.chooseCountry}
+              country={this.state.locCountry}
+              city=""
+              width={width}
+            />
+          )}
+        </View>
+      </React.Fragment>
+    );
   };
 
   menuAction = async (id: number) => {
@@ -230,6 +297,46 @@ class Drawer extends React.Component<any, any> {
     );
   };
 
+  refreshUserToken = async ({ country, city, lang }: any) => {
+    const response = await this.props.refreshToken({
+      variables: { country, city, lang }
+    });
+    const { token } = response.data.refreshToken;
+    await AsyncStorage.setItem('aysheetoken', token);
+  };
+
+  loadCountries = async () => {
+    this.showModal();
+    this.setState({ loading: true });
+    const location = await getUserLocation();
+    const res = await this.props.getMyCountry();
+
+    const locCountry = getCountryFromLatLon(
+      location.coords.latitude,
+      location.coords.longitude
+    );
+    const ipCountry = res.data.getMyCountry.country;
+    const city = res.data.getMyCountry.city;
+
+    this.setState({
+      ipCountry,
+      locCountry,
+      city
+    });
+    this.setState({ loading: false });
+  };
+
+  chooseCountry = async ({ country, city }: any) => {
+    const lang = await getLang();
+    await this.refreshUserToken({ country, city, lang });
+    const code = getCodeFromCountry(country);
+    await this.props.initApp(country, code);
+    await AsyncStorage.setItem('country', country);
+    await this.hideModal();
+    Updates.reload();
+    // this.props.navigation.navigate('HomeScreen');
+  };
+
   render() {
     const lang = this.props.languageName;
     const menus = this.props.menu;
@@ -250,7 +357,44 @@ class Drawer extends React.Component<any, any> {
             </View>
           )}
           {this.renderMenu(menus, lang)}
+          <TouchableOpacity
+            onPress={async () => {
+              this.loadCountries();
+            }}
+            style={{ padding: 10, left: 40 }}
+          >
+            <Text>Change Zone</Text>
+          </TouchableOpacity>
         </ScrollView>
+        <Modal
+          isVisible={this.state.isModalVisible}
+          onBackdropPress={() => this.hideModal()}
+          onBackButtonPress={() => this.hideModal()}
+          backdropOpacity={0.2}
+          useNativeDriver={true}
+          hideModalContentWhileAnimating={true}
+          style={{ flex: 1, margin: 0 }}
+        >
+          <View
+            style={{
+              backgroundColor: '#f7f7f7',
+              borderTopLeftRadius: 15,
+              borderTopRightRadius: 15,
+              position: 'absolute',
+              bottom: 0,
+              margin: 0,
+              height: 300,
+              width,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            {this.state.loading && <LoadingTiny size={40} />}
+            {!this.state.loading && (
+              <View style={{ flex: 3 }}>{this.renderOptions()}</View>
+            )}
+          </View>
+        </Modal>
       </SafeAreaView>
     );
   }
@@ -294,7 +438,8 @@ const mapDispatchToProps = (dispatch: any) =>
       login,
       logout,
       updateUser,
-      phoneRemoved
+      phoneRemoved,
+      initApp
     },
     dispatch
   );
@@ -322,7 +467,11 @@ export default connect(
       })(
         graphql(upgradeToStore, {
           name: 'upgradeToStore'
-        })(Drawer)
+        })(
+          graphql(getMyCountry, {
+            name: 'getMyCountry'
+          })(Drawer)
+        )
       )
     )
   )

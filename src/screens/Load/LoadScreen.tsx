@@ -23,18 +23,25 @@ class LoadScreen extends React.Component<any, any> {
       variables: { country, city, lang }
     });
     const { token } = response.data.refreshToken;
+    await AsyncStorage.setItem('country', country);
+    await AsyncStorage.setItem('city', city);
     await AsyncStorage.setItem('aysheetoken', token);
   };
 
   getCountryToken = async () => {
-    const myCountry = await this.props.getMyCountry({});
-    const ipCountry = myCountry ? myCountry.data.getMyCountry.country : '';
-    const city = myCountry ? myCountry.data.getMyCountry.city : '';
-    const lang = await getLang();
-    await this.refreshUserToken({ country: ipCountry, city, lang });
-    const code = getCodeFromCountry(ipCountry);
-    await this.props.initApp(ipCountry, code);
-    this.props.navigation.navigate('HomeScreen');
+    const storageCountry = await AsyncStorage.getItem('country');
+    if (storageCountry) {
+      this.props.navigation.navigate('HomeScreen');
+    } else {
+      const myCountry = await this.props.getMyCountry({});
+      const ipCountry = myCountry ? myCountry.data.getMyCountry.country : '';
+      const city = myCountry ? myCountry.data.getMyCountry.city : '';
+      const lang = await getLang();
+      await this.refreshUserToken({ country: ipCountry, city, lang });
+      const code = getCodeFromCountry(ipCountry);
+      await this.props.initApp(ipCountry, code);
+      this.props.navigation.navigate('HomeScreen');
+    }
   };
 
   render() {

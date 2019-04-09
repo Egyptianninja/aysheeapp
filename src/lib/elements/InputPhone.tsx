@@ -33,12 +33,12 @@ class InputPhone extends React.PureComponent<any, any> {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 10,
-            // borderRadius: 25,
-            borderTopLeftRadius: 25,
-            borderTopRightRadius: 25,
+            borderRadius: 25,
+            // borderTopLeftRadius: 25,
+            // borderTopRightRadius: 25,
             // borderBottomLeftRadius: 25,
             backgroundColor: '#fff',
-            borderColor: '#eee',
+            borderColor: '#9B9CF1',
             borderWidth: 1
           }}
         >
@@ -48,9 +48,11 @@ class InputPhone extends React.PureComponent<any, any> {
               width: 68,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: '#A7A9F3',
+              backgroundColor: '#7678ED',
               borderTopLeftRadius: rtlos() === 3 ? undefined : 25,
               borderTopRightRadius: rtlos() === 3 ? 25 : undefined,
+              borderBottomLeftRadius: rtlos() === 3 ? undefined : 25,
+              borderBottomRightRadius: rtlos() === 3 ? 25 : undefined,
               paddingHorizontal: 10,
 
               paddingVertical: 10
@@ -75,7 +77,7 @@ class InputPhone extends React.PureComponent<any, any> {
             // autoFocus
             style={[
               {
-                width: 200,
+                width: 230,
                 paddingHorizontal: 10,
                 textAlign: 'left',
                 letterSpacing: 1,

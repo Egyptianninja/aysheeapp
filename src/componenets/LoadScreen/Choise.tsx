@@ -48,7 +48,7 @@ export const Choise = ({ country, city, action, width }: any) => {
         <View
           style={{
             width: 80,
-            height: 80,
+            height: 60,
             borderRadius: 40,
             overflow: 'hidden',
             marginHorizontal: 10
