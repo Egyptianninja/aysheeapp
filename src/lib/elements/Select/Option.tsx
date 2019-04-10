@@ -11,8 +11,7 @@ export const Option = ({
   isRTL,
   onSelectBrand,
   onSelecteOption,
-  initSearch,
-  icon
+  initSearch
 }: any) => {
   return (
     <TouchableOpacity
@@ -58,7 +57,7 @@ export const Option = ({
           isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
       }}
     >
-      {icon && (
+      {itemData.icon && (
         <View
           style={{
             width: 40,
@@ -71,7 +70,7 @@ export const Option = ({
               width: '100%',
               height: '100%'
             }}
-            source={icon}
+            source={itemData.icon}
           />
         </View>
       )}

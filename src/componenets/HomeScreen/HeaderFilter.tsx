@@ -4,6 +4,7 @@ import PickerAndroid from '../../lib/android/PickerAndroid';
 import PickerUI from '../../lib/ios/Picker';
 import SwitchUI from '../../lib/ios/Switch';
 import FilterSelect from './filters/FilterSelect';
+import { rtlos } from '../../utils';
 
 const HeaderFilter: any = ({
   rest: { categoryId },
@@ -24,7 +25,7 @@ const HeaderFilter: any = ({
       <RenderFilter isRTL={isRTL}>
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: rtlos() === 2 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
             padding: 10
@@ -105,7 +106,7 @@ const HeaderFilter: any = ({
       <RenderFilter isRTL={isRTL} filters={filters}>
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: rtlos() === 2 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
             padding: 10
@@ -125,7 +126,7 @@ const HeaderFilter: any = ({
         </View>
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: rtlos() === 2 ? 'row-reverse' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
             paddingHorizontal: 10,

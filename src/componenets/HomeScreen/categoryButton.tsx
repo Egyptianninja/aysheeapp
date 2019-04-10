@@ -14,7 +14,7 @@ class CategoryButton extends React.Component<any, any> {
           bottom: 20,
           left: width / 2 - 24,
           zIndex: 100,
-          backgroundColor: 'rgba(118, 120, 237, 0.8)',
+          backgroundColor: 'rgba(118, 120, 237, 0.9)',
           borderRadius: 25,
           width: 50,
           height: 50,
@@ -24,10 +24,10 @@ class CategoryButton extends React.Component<any, any> {
         onPress={() => this.props.showModal()}
       >
         <Ionicons
-          style={{ top: Platform.OS === 'android' ? undefined : 1, left: 0 }}
-          name="ios-keypad"
-          size={30}
-          color="#fff"
+          style={{ top: Platform.OS === 'android' ? undefined : 2, left: 0 }}
+          name="md-apps"
+          size={36}
+          color="#f3f3f3"
         />
       </TouchableOpacity>
     );

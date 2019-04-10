@@ -45,6 +45,7 @@ import { Edit, Menu, Report } from '../Menu';
 import { renderUser } from '../User';
 import { MenuIconHeader } from './MenuIconHeader';
 import MessageAlert from '../../utils/message/MessageAlert';
+import { code } from '../../store/getStore';
 
 const { width, height } = Dimensions.get('window');
 
@@ -436,7 +437,8 @@ class ItemView extends React.Component<any, any> {
       fulltimeObject,
       warrantyObject
     } = this.getTags(pdata);
-    const callargs = { number: post.phone, prompt: false };
+    const phone = post.phone.replace(code(), '');
+    const callargs = { number: phone, prompt: false };
     const opacityStyle = this.state.scrollY.interpolate({
       inputRange: [0, 200],
       outputRange: [0, 1]

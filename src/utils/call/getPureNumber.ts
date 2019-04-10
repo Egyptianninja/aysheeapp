@@ -1,8 +1,8 @@
 import { telecode } from '../../constants';
-import { user } from '../../store/getStore';
+import { user, code } from '../../store/getStore';
 import { parseJwt } from '../common/parseJwt';
 
-export const getPureNumber = (phone: any) => {
+export const getPureNumberFromToken = (phone: any) => {
   const userData = user();
 
   const token = userData.token;
@@ -14,4 +14,7 @@ export const getPureNumber = (phone: any) => {
       ? 974
       : telecode.filter((cc: any) => cc.name === data.country)[0].tel;
   return phone.replace(countryCode, '');
+};
+export const getPureNumber = (phone: any) => {
+  return phone.replace(code(), '');
 };

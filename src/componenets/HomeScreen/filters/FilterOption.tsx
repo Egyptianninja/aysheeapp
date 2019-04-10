@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, Text, TouchableOpacity, View, Image } from 'react-native';
 import { getUserLocation, rtlos } from '../../../utils';
 import LoadingTiny from '../../Common/LoadingTiny';
 
@@ -19,7 +19,8 @@ export default class FilterOption extends React.Component<any, any> {
       itemKind,
       addFilter,
       removeFilter,
-      isRTL
+      isRTL,
+      icon
     } = this.props;
 
     return (
@@ -95,6 +96,24 @@ export default class FilterOption extends React.Component<any, any> {
                 <LoadingTiny />
               </View>
             )}
+          {itemData.icon && (
+            <View
+              style={{
+                top: 5,
+                width: 40,
+                height: 40
+              }}
+            >
+              <Image
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  height: '100%'
+                }}
+                source={itemData.icon}
+              />
+            </View>
+          )}
           <Text
             style={{
               fontSize: 16,

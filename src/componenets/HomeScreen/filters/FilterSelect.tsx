@@ -11,6 +11,7 @@ import {
 import Modal from 'react-native-modal';
 import { rtlos } from '../../../utils';
 import FilterOption from './FilterOption';
+import { icons } from '../../../load';
 
 const { width } = Dimensions.get('window');
 
@@ -35,6 +36,19 @@ export default class FilterSelect extends React.Component<any, any> {
     this.setState({ label });
   };
   renderOptions = (data: any, selected: any) => {
+    let buckets;
+    if (data.name === 'brandId') {
+      buckets = data.buckets.map((buck: any) => {
+        const iconFunc = icons.brands.filter((ic: any) => ic.id === buck.id);
+        const icon = iconFunc ? iconFunc[0].icon() : null;
+        return {
+          ...buck,
+          icon
+        };
+      });
+    } else {
+      buckets = data.buckets;
+    }
     return (
       <React.Fragment>
         {!this.props.sort && selected && (
@@ -89,7 +103,7 @@ export default class FilterSelect extends React.Component<any, any> {
             </View>
           </TouchableOpacity>
         )}
-        {data.buckets.map((da: any) => {
+        {buckets.map((da: any) => {
           return (
             <FilterOption
               isRTL={this.props.isRTL}

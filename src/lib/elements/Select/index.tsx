@@ -33,20 +33,27 @@ export default class Select extends React.Component<any, any> {
   };
 
   renderOptions = (data: any) => {
-    return (
-      data &&
-      data.map((da: any) => {
-        const iconFunc = da.icon
-          ? icons.brands.filter(ic => ic.id === da.id)
-          : null;
+    let newData;
+    if (data && this.props.name === 'brand') {
+      newData = data.map((buck: any) => {
+        const iconFunc = icons.brands.filter((ic: any) => ic.id === buck.id);
         const icon = iconFunc ? iconFunc[0].icon() : null;
-
+        return {
+          ...buck,
+          icon
+        };
+      });
+    } else {
+      newData = data;
+    }
+    return (
+      newData &&
+      newData.map((da: any) => {
         return (
           <Option
             key={da.id}
             isRTL={this.props.isRTL}
             initSearch={this.initSearch}
-            icon={icon}
             toggleModal={this.toggleModal}
             onChange={this.props.onChange}
             itemData={da}
