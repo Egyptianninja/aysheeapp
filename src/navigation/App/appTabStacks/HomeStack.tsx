@@ -41,6 +41,7 @@ export const HomeStack = createStackNavigator(
         headerBackTitle: null
       })
     },
+
     OffersScreen: {
       screen: OffersScreen,
       navigationOptions: ({ navigation }: any) => ({

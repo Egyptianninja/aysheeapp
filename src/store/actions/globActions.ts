@@ -4,7 +4,9 @@ import {
   SET_BRANDS,
   SET_LANGUAGE,
   SET_RECENT_LOCATION,
-  SET_SUB_BRANDS
+  SET_SUB_BRANDS,
+  SHOW_MODAL,
+  HIDE_MODAL
 } from '../types';
 
 export function setLanguage(language: any, languageName: string, isRTL: any) {
@@ -27,6 +29,16 @@ export function initBrands(brands: any) {
   return {
     type: SET_BRANDS,
     brands
+  };
+}
+export function showModal() {
+  return {
+    type: SHOW_MODAL
+  };
+}
+export function hideModal() {
+  return {
+    type: HIDE_MODAL
   };
 }
 

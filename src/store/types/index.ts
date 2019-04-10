@@ -22,3 +22,5 @@ export const ADD_PUSH_TOKEN = 'ADD_PUSH_TOKEN';
 export const ADD_PERMISSION = 'ADD_PERMISSION';
 export const UPDATE_QTY = 'UPDATE_QTY';
 export const SET_RECENT_LOCATION = 'SET_RECENT_LOCATION';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';

@@ -11,6 +11,7 @@ import {
 import Modal from 'react-native-modal';
 import { icons, images } from '../../load';
 import CategoryModalIcon from './CategoryModalIcon';
+import { Constants } from 'expo';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,7 +37,7 @@ export default class CategoriesModal extends React.Component<any, any> {
       <View>
         <View
           style={{
-            width: width - 40,
+            width,
             height: 70,
             flexDirection: 'row',
             marginTop: 10
@@ -57,14 +58,6 @@ export default class CategoriesModal extends React.Component<any, any> {
               borderRadius: 8,
               borderColor: '#aaa',
               borderWidth: 1
-              // shadowColor: '#555',
-              // shadowOffset: {
-              //   width: 0,
-              //   height: 5
-              // },
-              // shadowOpacity: 0.4,
-              // shadowRadius: 5,
-              // elevation: 5
             }}
           >
             <Image
@@ -97,14 +90,6 @@ export default class CategoriesModal extends React.Component<any, any> {
               borderRadius: 8,
               borderColor: '#aaa',
               borderWidth: 1
-              // shadowColor: '#555',
-              // shadowOffset: {
-              //   width: 0,
-              //   height: 5
-              // },
-              // shadowOpacity: 0.4,
-              // shadowRadius: 5,
-              // elevation: 5
             }}
           >
             <Image
@@ -142,7 +127,6 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               color: '#171717',
               textAlign: 'center',
-              // fontFamily: 'cairo-regular',
               fontSize: 14
             }}
           >
@@ -199,7 +183,7 @@ export default class CategoriesModal extends React.Component<any, any> {
       <View
         style={{
           flexDirection: 'row',
-          width: width - 20,
+          width,
           height: 40,
           backgroundColor: '#A7A9F3',
           borderTopLeftRadius: 15,
@@ -269,9 +253,8 @@ export default class CategoriesModal extends React.Component<any, any> {
           style={{
             position: 'absolute',
             bottom: 0,
-            margin: 10,
-            height: height - 80,
-            width: width - 20,
+            height: height - (Constants.statusBarHeight + 40),
+            width,
             justifyContent: 'space-around',
             alignItems: 'center'
           }}
@@ -287,7 +270,7 @@ export default class CategoriesModal extends React.Component<any, any> {
           >
             <View
               style={{
-                width: width - 20,
+                width,
                 justifyContent: 'flex-start',
                 alignItems: 'center'
               }}
@@ -295,7 +278,7 @@ export default class CategoriesModal extends React.Component<any, any> {
               {this.renderOfferShop()}
               <View
                 style={{
-                  width: width - 20,
+                  width,
                   paddingTop: 10
                 }}
               >

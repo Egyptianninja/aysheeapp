@@ -3,14 +3,7 @@ import { Notifications } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Ionicons } from '@expo/vector-icons';
-import {
-  Animated,
-  Dimensions,
-  View,
-  TouchableOpacity,
-  Text
-} from 'react-native';
+import { Animated, Dimensions, View } from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
@@ -23,7 +16,11 @@ import favoritePost from '../../graphql/mutation/favoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import getTimeLine from '../../graphql/query/getTimeLine';
-import { addPermission } from '../../store/actions/globActions';
+import {
+  addPermission,
+  showModal,
+  hideModal
+} from '../../store/actions/globActions';
 import { delQuery, setBuckets } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
 import * as store from '../../store/getStore';
@@ -201,10 +198,10 @@ class HomeScreen extends React.Component<any, any> {
     this.showMessageModal({ message: this.props.words.addeleted });
   };
   showCategoriesModal = () => {
-    this.setState({ isCategoriesModalVisible: true });
+    this.props.showModal();
   };
   hideCategoriesModal = () => {
-    this.setState({ isCategoriesModalVisible: false });
+    this.props.hideModal();
   };
   showNotificationModal = () => {
     this.setState({ isNotificationModalVisible: true });
@@ -553,7 +550,7 @@ class HomeScreen extends React.Component<any, any> {
           height={200}
         />
         <CategoriesModal
-          isCategoriesModalVisible={this.state.isCategoriesModalVisible}
+          isCategoriesModalVisible={this.props.isShowModal}
           hideCategoriesModal={this.hideCategoriesModal}
           categories={this.props.categories}
           isRTL={this.props.isRTL}
@@ -562,28 +559,6 @@ class HomeScreen extends React.Component<any, any> {
           word={words}
           removeAllFilters={this.removeAllFilters}
         />
-        <TouchableOpacity
-          style={{
-            position: 'absolute',
-            bottom: 20,
-            left: 20,
-            zIndex: 100,
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            borderRadius: 25,
-            width: 50,
-            height: 50,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-          onPress={() => this.showCategoriesModal()}
-        >
-          <Ionicons
-            style={{ top: 2 }}
-            name="ios-keypad"
-            size={30}
-            color="#7678ED"
-          />
-        </TouchableOpacity>
 
         <Animated.View
           style={{
@@ -708,12 +683,13 @@ const mapStateToProps = (state: any) => ({
   isAuthenticated: state.user.isAuthenticated,
   user: state.user.user,
   pushToken: state.user.pushToken,
-  query: state.post.query
+  query: state.post.query,
+  isShowModal: state.glob.showModal
 });
 
 export default connect(
   mapStateToProps,
-  { setBuckets, updateQty, delQuery, addPermission }
+  { setBuckets, updateQty, delQuery, addPermission, showModal, hideModal }
 )(
   graphql(refreshToken, {
     name: 'refreshToken'

@@ -55,6 +55,8 @@ export default class ImageIcon extends React.Component<any, any> {
         style={[
           {
             padding: 2,
+            marginLeft: this.props.left,
+            marginRight: this.props.right,
             width: width ? width : size,
             height: size
           },

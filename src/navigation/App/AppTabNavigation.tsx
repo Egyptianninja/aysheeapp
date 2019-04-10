@@ -9,7 +9,10 @@ import {
   ProfileStack,
   SearchStack
 } from './appTabStacks';
-
+import { TouchableOpacity, Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import CategoryButton from '../../componenets/HomeScreen/categoryButton';
+const { width } = Dimensions.get('window');
 let AppTabNavigation: any;
 if (rtlos() === 3) {
   AppTabNavigation = createBottomTabNavigator(
@@ -64,6 +67,14 @@ if (rtlos() === 3) {
           }
           return navigationOptions;
         }
+      },
+      categories: {
+        screen: SearchStack,
+        navigationOptions: ({ navigation }: any) => ({
+          tabBarButtonComponent: () => {
+            return <CategoryButton />;
+          }
+        })
       },
       Search: {
         screen: SearchStack,
@@ -166,12 +177,22 @@ if (rtlos() === 3) {
               icon={images.searchicon}
               iconout={images.searchiconout}
               size={32}
+              right={20}
               focused={focused}
               tintColor={tintColor}
             />
           )
         }
       },
+      categories: {
+        screen: SearchStack,
+        navigationOptions: ({ navigation }: any) => ({
+          tabBarButtonComponent: () => {
+            return <CategoryButton />;
+          }
+        })
+      },
+
       Notification: {
         screen: NotificationStack,
         navigationOptions: ({ navigation }: any) => {
@@ -189,6 +210,7 @@ if (rtlos() === 3) {
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
+                left={20}
                 focused={focused}
                 tintColor={tintColor}
                 notification={false}

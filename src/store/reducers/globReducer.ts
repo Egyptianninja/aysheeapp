@@ -4,7 +4,9 @@ import {
   SET_BRANDS,
   SET_LANGUAGE,
   SET_RECENT_LOCATION,
-  SET_SUB_BRANDS
+  SET_SUB_BRANDS,
+  SHOW_MODAL,
+  HIDE_MODAL
 } from '../types';
 
 const initialState = {
@@ -16,7 +18,8 @@ const initialState = {
   brands: '',
   subBrands: '',
   permissions: {},
-  recentLocation: {}
+  recentLocation: {},
+  showModal: false
 };
 
 export default function(state = initialState, action: any) {
@@ -38,6 +41,16 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         brands: action.brands
+      };
+    case SHOW_MODAL:
+      return {
+        ...state,
+        showModal: true
+      };
+    case HIDE_MODAL:
+      return {
+        ...state,
+        showModal: false
       };
     case SET_SUB_BRANDS:
       return {
