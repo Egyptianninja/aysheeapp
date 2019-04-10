@@ -230,8 +230,8 @@ class CodeScreen extends React.Component<any, any> {
           <TouchableOpacity
             style={{
               position: 'absolute',
-              left: rtlos() ? undefined : 20,
-              right: rtlos() ? 10 : undefined,
+              left: rtlos() === 3 ? undefined : 20,
+              right: rtlos() === 3 ? 10 : undefined,
               top: isIphoneX() ? 50 : 30,
               zIndex: 150
             }}

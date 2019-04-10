@@ -114,7 +114,8 @@ export const icons = {
     { id: 86, icon: () => images.b86 },
     { id: 87, icon: () => images.b87 },
     { id: 88, icon: () => images.b88 },
-    { id: 89, icon: () => images.b89 }
+    { id: 89, icon: () => images.b89 },
+    { id: 90, icon: () => images.icon18 }
   ],
   filterIcons: [
     { id: 'sortType', icon: () => images.sortType },

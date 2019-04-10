@@ -3,7 +3,14 @@ import { Notifications } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Animated, Dimensions, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import {
+  Animated,
+  Dimensions,
+  View,
+  TouchableOpacity,
+  Text
+} from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
@@ -30,6 +37,7 @@ import {
   registerForPushNotificationsAsync
 } from '../../utils';
 import MessageAlert from '../../utils/message/MessageAlert';
+import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 
 const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width } = Dimensions.get('window');
@@ -544,6 +552,38 @@ class HomeScreen extends React.Component<any, any> {
           iconColor="#E85255"
           height={200}
         />
+        <CategoriesModal
+          isCategoriesModalVisible={this.state.isCategoriesModalVisible}
+          hideCategoriesModal={this.hideCategoriesModal}
+          categories={this.props.categories}
+          isRTL={this.props.isRTL}
+          navigation={this.props.navigation}
+          addFilter={this.addFilter}
+          word={words}
+          removeAllFilters={this.removeAllFilters}
+        />
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            bottom: 20,
+            left: 20,
+            zIndex: 100,
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            borderRadius: 25,
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          onPress={() => this.showCategoriesModal()}
+        >
+          <Ionicons
+            style={{ top: 2 }}
+            name="ios-keypad"
+            size={30}
+            color="#7678ED"
+          />
+        </TouchableOpacity>
 
         <Animated.View
           style={{

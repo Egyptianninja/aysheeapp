@@ -37,8 +37,9 @@ export default class CategoriesModal extends React.Component<any, any> {
         <View
           style={{
             width: width - 40,
-            height: (width - 20) / 3 - 15,
-            flexDirection: 'row'
+            height: 70,
+            flexDirection: 'row',
+            marginTop: 10
           }}
         >
           <TouchableOpacity
@@ -49,20 +50,21 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               flex: 1,
               margin: 5,
-              marginRight: 7,
+              height: 70,
+              marginRight: 12,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 8,
               borderColor: '#aaa',
-              borderWidth: 1,
-              shadowColor: '#555',
-              shadowOffset: {
-                width: 0,
-                height: 5
-              },
-              shadowOpacity: 0.4,
-              shadowRadius: 5,
-              elevation: 5
+              borderWidth: 1
+              // shadowColor: '#555',
+              // shadowOffset: {
+              //   width: 0,
+              //   height: 5
+              // },
+              // shadowOpacity: 0.4,
+              // shadowRadius: 5,
+              // elevation: 5
             }}
           >
             <Image
@@ -88,20 +90,21 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               flex: 1,
               margin: 5,
-              marginRight: 7,
+              height: 70,
+              marginRight: 12,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 8,
               borderColor: '#aaa',
-              borderWidth: 1,
-              shadowColor: '#555',
-              shadowOffset: {
-                width: 0,
-                height: 5
-              },
-              shadowOpacity: 0.4,
-              shadowRadius: 5,
-              elevation: 5
+              borderWidth: 1
+              // shadowColor: '#555',
+              // shadowOffset: {
+              //   width: 0,
+              //   height: 5
+              // },
+              // shadowOpacity: 0.4,
+              // shadowRadius: 5,
+              // elevation: 5
             }}
           >
             <Image
@@ -121,14 +124,15 @@ export default class CategoriesModal extends React.Component<any, any> {
           style={{
             justifyContent: 'space-around',
             alignItems: 'center',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            paddingTop: 5
           }}
         >
           <Text
             style={{
               color: '#171717',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
+              // fontFamily: 'cairo-regular',
               fontSize: 14
             }}
           >
@@ -138,7 +142,7 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               color: '#171717',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
+              // fontFamily: 'cairo-regular',
               fontSize: 14
             }}
           >
@@ -161,6 +165,7 @@ export default class CategoriesModal extends React.Component<any, any> {
         <CategoryModalIcon
           icon={icon}
           addFilter={this.props.addFilter}
+          navigation={this.props.navigation}
           removeAllFilters={this.props.removeAllFilters}
           hideCategoriesModal={this.props.hideCategoriesModal}
           iconColor="#777"
@@ -195,8 +200,10 @@ export default class CategoriesModal extends React.Component<any, any> {
         style={{
           flexDirection: 'row',
           width: width - 20,
-          height: 50,
-          backgroundColor: '#eee'
+          height: 40,
+          backgroundColor: '#A7A9F3',
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15
         }}
       >
         <TouchableOpacity
@@ -206,7 +213,7 @@ export default class CategoriesModal extends React.Component<any, any> {
             top: 0,
             zIndex: 10,
             width: 60,
-            height: 50,
+            height: 40,
             borderRadius: 16,
             justifyContent: 'center',
             alignItems: 'center'
@@ -214,9 +221,9 @@ export default class CategoriesModal extends React.Component<any, any> {
         >
           <Text
             style={{
-              color: '#171717',
+              color: '#fff',
               textAlign: 'center',
-              fontSize: Platform.OS === 'android' ? 40 : 22,
+              fontSize: Platform.OS === 'android' ? 30 : 18,
               paddingHorizontal: 15
             }}
           >
@@ -232,10 +239,10 @@ export default class CategoriesModal extends React.Component<any, any> {
         >
           <Text
             style={{
-              color: '#171717',
+              color: '#fff',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
-              fontSize: 18
+              fontSize: 15
             }}
           >
             {title}
@@ -260,7 +267,6 @@ export default class CategoriesModal extends React.Component<any, any> {
       >
         <View
           style={{
-            backgroundColor: '#fff',
             position: 'absolute',
             bottom: 0,
             margin: 10,
@@ -273,8 +279,11 @@ export default class CategoriesModal extends React.Component<any, any> {
           {this.renderHeader(this.props.word.allcategories)}
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{ paddingTop: 10 }}
-            contentContainerStyle={{ paddingBottom: 30 }}
+            style={{ paddingTop: 10, backgroundColor: '#fff' }}
+            contentContainerStyle={{
+              paddingBottom: 30,
+              backgroundColor: '#fff'
+            }}
           >
             <View
               style={{
@@ -290,13 +299,11 @@ export default class CategoriesModal extends React.Component<any, any> {
                   paddingTop: 10
                 }}
               >
-                {this.renderCategoryRow(0, 3)}
-                {this.renderCategoryRow(3, 6)}
-                {this.renderCategoryRow(6, 9)}
-                {this.renderCategoryRow(9, 12)}
-                {this.renderCategoryRow(12, 15)}
-                {this.renderCategoryRow(15, 18)}
-                {this.renderCategoryRow(18, 20)}
+                {this.renderCategoryRow(0, 4)}
+                {this.renderCategoryRow(4, 8)}
+                {this.renderCategoryRow(8, 12)}
+                {this.renderCategoryRow(12, 16)}
+                {this.renderCategoryRow(16, 20)}
               </View>
             </View>
           </ScrollView>

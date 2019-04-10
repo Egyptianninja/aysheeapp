@@ -118,7 +118,8 @@ export const brands = [
   { id: 86, icon: 'b86', name: 'Maserati', en: 'Maserati', ar: 'بوغـاتي' },
   { id: 87, icon: 'b87', name: 'Rover', en: 'Rover', ar: 'اولدز موبيل' },
   { id: 88, icon: 'b88', name: 'Tesla', en: 'Tesla', ar: 'جينبي' },
-  { id: 89, icon: 'b89', name: 'Tofaş', en: 'Tofaş', ar: 'هينو' }
+  { id: 89, icon: 'b89', name: 'Tofaş', en: 'Tofaş', ar: 'هينو' },
+  { id: 90, icon: 'b90', name: 'Othre', en: 'Other', ar: 'اخرى' }
 ];
 
 export const subBrands = [

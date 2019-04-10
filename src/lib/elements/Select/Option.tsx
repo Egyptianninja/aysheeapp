@@ -1,7 +1,6 @@
 import { Platform } from 'expo-core';
 import * as React from 'react';
-import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
-const SCREEN_WIDTH = Dimensions.get('window').width;
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 export const Option = ({
   itemData,
@@ -12,6 +11,7 @@ export const Option = ({
   isRTL,
   onSelectBrand,
   onSelecteOption,
+  initSearch,
   icon
 }: any) => {
   return (
