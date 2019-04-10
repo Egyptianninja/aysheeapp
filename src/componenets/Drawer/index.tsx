@@ -42,18 +42,32 @@ import { AvatarCircle } from '../Avatar';
 import { Choise } from '../LoadScreen/Choise';
 import { Updates } from 'expo';
 import LoadingTiny from '../Common/LoadingTiny';
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 class Drawer extends React.Component<any, any> {
   state = {
     isModalVisible: false,
-    avatar: null,
+    restartMessage: null,
     loading: false,
+    avatar: null,
+    originalCountry: null,
     ipCountry: null,
     locCountry: null,
-    country: null,
-    city: null
+    originalCity: null,
+    ipCity: null,
+    country: null
   };
 
+  async componentDidMount() {
+    const originalCountry = await AsyncStorage.getItem('originalCountry');
+    const originalCity = await AsyncStorage.getItem('originalCity');
+    const country = await AsyncStorage.getItem('country');
+
+    this.setState({
+      originalCountry,
+      originalCity,
+      country
+    });
+  }
   showModal = () => {
     this.setState({ isModalVisible: true });
   };
@@ -62,8 +76,84 @@ class Drawer extends React.Component<any, any> {
     this.setState({ isModalVisible: false });
   };
 
+  getListOfCountries = () => {
+    const {
+      ipCountry,
+      locCountry,
+      originalCountry,
+      originalCity,
+      ipCity
+    } = this.state;
+    if (ipCountry === locCountry && ipCountry === originalCountry) {
+      return [
+        {
+          country: originalCountry,
+          city: originalCity
+        }
+      ];
+    } else if (ipCountry === locCountry && ipCountry !== originalCountry) {
+      return [
+        {
+          country: originalCountry,
+          city: originalCity
+        },
+
+        {
+          country: ipCountry,
+          city: ipCity
+        }
+      ];
+    } else if (ipCountry !== locCountry && ipCountry === originalCountry) {
+      return [
+        {
+          country: originalCountry,
+          city: originalCity
+        },
+
+        {
+          country: locCountry,
+          city: ''
+        }
+      ];
+    } else if (
+      ipCountry !== locCountry &&
+      ipCountry !== originalCountry &&
+      locCountry !== originalCountry
+    ) {
+      return [
+        {
+          country: originalCountry,
+          city: originalCity
+        },
+        {
+          country: ipCountry,
+          city: ipCity
+        },
+        {
+          country: locCountry,
+          city: ''
+        }
+      ];
+    } else if (
+      ipCountry !== locCountry &&
+      ipCountry !== originalCountry &&
+      locCountry === originalCountry
+    ) {
+      return [
+        {
+          country: originalCountry,
+          city: originalCity
+        },
+        {
+          country: ipCountry,
+          city: ipCity
+        }
+      ];
+    }
+  };
+
   renderOptions = () => {
-    const samedata = this.state.ipCountry === this.state.locCountry;
+    const countries: any = this.getListOfCountries();
     return (
       <React.Fragment>
         <View>
@@ -76,24 +166,21 @@ class Drawer extends React.Component<any, any> {
               alignSelf: 'center'
             }}
           >
-            Choose Market‎
+            {this.props.words.availablemarket}
           </Text>
         </View>
         <View>
-          <Choise
-            action={this.chooseCountry}
-            country={this.state.ipCountry}
-            city={this.state.city}
-            width={width}
-          />
-          {!samedata && (
-            <Choise
-              action={this.chooseCountry}
-              country={this.state.locCountry}
-              city=""
-              width={width}
-            />
-          )}
+          {countries.map((country: any) => {
+            return (
+              <Choise
+                key={country.country}
+                action={this.chooseCountry}
+                country={country.country}
+                city={country.city}
+                width={width}
+              />
+            );
+          })}
         </View>
       </React.Fragment>
     );
@@ -327,14 +414,23 @@ class Drawer extends React.Component<any, any> {
   };
 
   chooseCountry = async ({ country, city }: any) => {
+    if (country === this.state.country) {
+      this.hideModal();
+      return;
+    }
     const lang = await getLang();
     await this.refreshUserToken({ country, city, lang });
     const code = getCodeFromCountry(country);
     await this.props.initApp(country, code);
     await AsyncStorage.setItem('country', country);
-    await this.hideModal();
-    Updates.reload();
-    // this.props.navigation.navigate('HomeScreen');
+    this.setState({
+      loading: true,
+      restartMessage: this.props.words.appwillrestart
+    });
+    setTimeout(() => {
+      this.hideModal();
+      Updates.reload();
+    }, 3000);
   };
 
   render() {
@@ -342,6 +438,7 @@ class Drawer extends React.Component<any, any> {
     const menus = this.props.menu;
     const { user } = this.props;
     const marginTop = Platform.OS === 'android' ? 60 : 40;
+
     return (
       <SafeAreaView
         style={{
@@ -350,21 +447,35 @@ class Drawer extends React.Component<any, any> {
         }}
       >
         <ScrollView style={{ flex: 1, marginTop }} scrollEventThrottle={60}>
+          <TouchableOpacity
+            onPress={async () => {
+              this.loadCountries();
+            }}
+            style={{
+              padding: 10,
+              flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+              justifyContent: 'flex-start',
+              alignItems: 'center'
+            }}
+          >
+            <Ionicons
+              style={{ paddingHorizontal: 10 }}
+              name="ios-cellular"
+              size={30}
+              color="#7678ED"
+            />
+            <Text style={{ color: '#7678ED' }}>
+              {this.state.country} Market
+            </Text>
+          </TouchableOpacity>
           {this.props.isAuthenticated && (
             <View style={{ flex: 4 }}>
               {this.renderHeader(user)}
               <View style={{ height: 20 }} />
             </View>
           )}
+
           {this.renderMenu(menus, lang)}
-          <TouchableOpacity
-            onPress={async () => {
-              this.loadCountries();
-            }}
-            style={{ padding: 10, left: 40 }}
-          >
-            <Text>Change Zone</Text>
-          </TouchableOpacity>
         </ScrollView>
         <Modal
           isVisible={this.state.isModalVisible}
@@ -389,6 +500,11 @@ class Drawer extends React.Component<any, any> {
               alignItems: 'center'
             }}
           >
+            {this.state.loading && (
+              <View style={{ padding: 10 }}>
+                <Text>{this.state.restartMessage}</Text>
+              </View>
+            )}
             {this.state.loading && <LoadingTiny size={40} />}
             {!this.state.loading && (
               <View style={{ flex: 3 }}>{this.renderOptions()}</View>

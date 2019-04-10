@@ -23,23 +23,26 @@ class LoadScreen extends React.Component<any, any> {
       variables: { country, city, lang }
     });
     const { token } = response.data.refreshToken;
+    await AsyncStorage.setItem('aysheetoken', token);
     await AsyncStorage.setItem('country', country);
     await AsyncStorage.setItem('city', city);
-    await AsyncStorage.setItem('aysheetoken', token);
   };
 
   getCountryToken = async () => {
     const storageCountry = await AsyncStorage.getItem('country');
-    if (storageCountry) {
+    const originalCountry = await AsyncStorage.getItem('originalCountry');
+    if (storageCountry && originalCountry) {
       this.props.navigation.navigate('HomeScreen');
     } else {
-      const myCountry = await this.props.getMyCountry({});
-      const ipCountry = myCountry ? myCountry.data.getMyCountry.country : '';
-      const city = myCountry ? myCountry.data.getMyCountry.city : '';
+      const ipCountry = await this.props.getMyCountry({});
+      const country = ipCountry ? ipCountry.data.getMyCountry.country : '';
+      const city = ipCountry ? ipCountry.data.getMyCountry.city : '';
       const lang = await getLang();
-      await this.refreshUserToken({ country: ipCountry, city, lang });
-      const code = getCodeFromCountry(ipCountry);
-      await this.props.initApp(ipCountry, code);
+      await this.refreshUserToken({ country, city, lang });
+      const code = getCodeFromCountry(country);
+      await this.props.initApp(country, code);
+      await AsyncStorage.setItem('originalCountry', country);
+      await AsyncStorage.setItem('originalCity', city);
       this.props.navigation.navigate('HomeScreen');
     }
   };

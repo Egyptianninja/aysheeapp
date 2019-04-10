@@ -37,9 +37,7 @@ class InputPhone extends React.PureComponent<any, any> {
             // borderTopLeftRadius: 25,
             // borderTopRightRadius: 25,
             // borderBottomLeftRadius: 25,
-            backgroundColor: '#fff',
-            borderColor: '#9B9CF1',
-            borderWidth: 1
+            backgroundColor: '#fff'
           }}
         >
           <View
@@ -48,7 +46,7 @@ class InputPhone extends React.PureComponent<any, any> {
               width: 68,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: '#7678ED',
+              backgroundColor: '#636363',
               borderTopLeftRadius: rtlos() === 3 ? undefined : 25,
               borderTopRightRadius: rtlos() === 3 ? 25 : undefined,
               borderBottomLeftRadius: rtlos() === 3 ? undefined : 25,

@@ -507,6 +507,8 @@ export default {
     apply: 'Apply',
     clear: 'Clear',
     infrontpage: 'Front Page',
+    availablemarket: 'Available Market‎s',
+    appwillrestart: 'ishee app will be restarted',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

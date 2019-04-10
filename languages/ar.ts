@@ -431,8 +431,8 @@ export default {
     addnewoffer: 'اضافة عرض جديد',
     entermobilenumber: 'ادخل رقم الجوال',
     enteremail: 'ادخل بريدك الالكتروني',
-    loginwithmobile: 'دخول بواسطة الجوال',
-    loginwithemail: 'دخول بواسطة البريد',
+    loginwithmobile: 'تسجيل برقم الجوال',
+    loginwithemail: 'تسجيل بالبريد',
     send: 'ارسال',
     phoneisrequired: 'يرجى ادخال رقم الجوال',
     notvalidmobile: 'رقم الجوال غير صحيح',
@@ -507,6 +507,8 @@ export default {
     apply: 'تطبيق',
     clear: 'مسح',
     infrontpage: 'الصفحة الرئيسية',
+    availablemarket: 'الاسواق المتاحة',
+    appwillrestart: 'سيتم اعادة تشغيل البرنامج',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

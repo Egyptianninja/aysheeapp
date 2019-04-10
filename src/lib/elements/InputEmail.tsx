@@ -36,9 +36,7 @@ class InputEmail extends React.PureComponent<any, any> {
             borderRadius: 25,
             // borderTopLeftRadius: 25,
             // borderTopRightRadius: 25,
-            backgroundColor: '#fff',
-            borderColor: '#969696',
-            borderWidth: 1
+            backgroundColor: '#fff'
           }}
         >
           <TextInput
