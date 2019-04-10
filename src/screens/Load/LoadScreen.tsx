@@ -15,6 +15,9 @@ class LoadScreen extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.getCountryToken();
+    // this.getSpecificCountryToken('Turkey', '');
+    // this.getSpecificCountryToken('Syria', '');
+    // this.getSpecificCountryToken('USA', '');
     this.state = {};
   }
 
@@ -45,6 +48,13 @@ class LoadScreen extends React.Component<any, any> {
       await AsyncStorage.setItem('originalCity', city);
       this.props.navigation.navigate('HomeScreen');
     }
+  };
+  getSpecificCountryToken = async (country: any, city: any) => {
+    const lang = await getLang();
+    await this.refreshUserToken({ country, city, lang });
+    const code = getCodeFromCountry(country);
+    await this.props.initApp(country, code);
+    this.props.navigation.navigate('HomeScreen');
   };
 
   render() {

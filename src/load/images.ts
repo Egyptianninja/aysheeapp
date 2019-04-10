@@ -33,6 +33,7 @@ export const images = {
   home: require('../../assets/icons/header/home.png'),
   bell: require('../../assets/icons/header/bell.png'),
   search: require('../../assets/icons/header/search.png'),
+  noresult: require('../../assets/icons/main/no.png'),
   menu: require('../../assets/icons/header/menu.png'),
   pointsmenu: require('../../assets/icons/header/points-menu.png'),
 

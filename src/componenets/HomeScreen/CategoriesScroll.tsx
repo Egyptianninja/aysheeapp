@@ -128,137 +128,6 @@ class CategoriesScroll extends React.Component<any, any> {
           backgroundColor: selected ? '#f6f5f4' : '#fff'
         }}
       >
-        {selected && (
-          <View
-            style={{
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexDirection: rtlOS === 3 ? 'row-reverse' : 'row',
-              backgroundColor: '#eaeaea',
-              paddingBottom: 7
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                position: 'absolute',
-                left: -4,
-                top: -2,
-                zIndex: 10,
-                paddingVertical: 3,
-                paddingLeft: 7,
-                paddingHorizontal: 5,
-                flexDirection: 'row'
-              }}
-              onPress={() => this.props.removeAllFilters()}
-            >
-              <Ionicons
-                style={{ paddingHorizontal: 10, paddingTop: 3 }}
-                name="ios-arrow-back"
-                size={33}
-                color="#8E90F0"
-              />
-            </TouchableOpacity>
-            {!reset && (
-              <TouchableOpacity
-                style={{
-                  position: 'absolute',
-                  left: 25,
-                  top: -2,
-                  zIndex: 10,
-                  padding: 5,
-                  flexDirection: 'row'
-                }}
-                onPress={() => this.props.removeAllCategoryFilters()}
-              >
-                <Ionicons
-                  style={{ paddingHorizontal: 10, paddingTop: 3 }}
-                  name="ios-close-circle"
-                  size={28}
-                  color="#8E90F0"
-                />
-                <Text
-                  style={{
-                    top: 7,
-                    left: -5,
-                    color: '#7678ED',
-                    fontSize: 13,
-                    fontFamily: 'cairo-regular'
-                  }}
-                >
-                  {words.reset}
-                </Text>
-              </TouchableOpacity>
-            )}
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Text
-                style={{
-                  top: 10,
-                  fontSize: 18,
-                  fontFamily: 'cairo-regular',
-                  color: '#999',
-                  paddingHorizontal: 15
-                }}
-              >
-                {categoryName.name}
-              </Text>
-            </View>
-
-            <View
-              style={{
-                position: 'absolute',
-                right: -5,
-                top: -2,
-                zIndex: 10,
-                paddingVertical: 5,
-                justifyContent: 'flex-end',
-                flexDirection: rtlOS === 3 ? 'row-reverse' : 'row'
-              }}
-            >
-              {this.props.buckets && (
-                <FilterSelect
-                  isRTL={isRTL}
-                  rtlOS={rtlOS}
-                  data={sortData}
-                  sort={true}
-                  itemKind="sortType"
-                  addFilter={addFilter}
-                  removeFilter={removeFilter}
-                  rest={rest}
-                  words={words}
-                />
-              )}
-              <TouchableOpacity
-                onPress={() => this.props.showCategoriesModal()}
-                style={{
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  height: 30,
-                  width: 50,
-                  paddingRight: rtlOS === 3 ? 10 : 12,
-                  paddingLeft: rtlOS === 3 ? 12 : 6,
-                  marginRight: 0,
-                  top: 0
-                }}
-              >
-                <Image
-                  style={[
-                    {
-                      width: 28,
-                      height: 28
-                    }
-                  ]}
-                  source={images.pointsmenu}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
         <View
           style={{
             flexDirection:
@@ -284,20 +153,18 @@ class CategoriesScroll extends React.Component<any, any> {
               height: selected ? 60 : 95
             }}
           >
-            {!selected && (
-              <View
-                style={{
-                  flexDirection:
-                    isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
-                }}
-              >
-                <OfferIcon
-                  navigation={this.props.navigation}
-                  title={words.offers}
-                />
-                {this.renderCategories(categories)}
-              </View>
-            )}
+            <View
+              style={{
+                flexDirection:
+                  isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
+              }}
+            >
+              <OfferIcon
+                navigation={this.props.navigation}
+                title={words.offers}
+              />
+              {this.renderCategories(categories)}
+            </View>
             {this.props.buckets && (
               <HeaderFilter
                 isRTL={this.props.isRTL}

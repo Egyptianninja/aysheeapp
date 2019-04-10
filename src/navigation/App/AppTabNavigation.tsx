@@ -59,6 +59,7 @@ if (rtlos() === 3) {
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
+                right={30}
                 focused={focused}
                 tintColor={tintColor}
                 notification={false}
@@ -84,6 +85,7 @@ if (rtlos() === 3) {
               icon={images.searchicon}
               iconout={images.searchiconout}
               size={32}
+              left={30}
               focused={focused}
               tintColor={tintColor}
             />
@@ -177,7 +179,7 @@ if (rtlos() === 3) {
               icon={images.searchicon}
               iconout={images.searchiconout}
               size={32}
-              right={20}
+              right={30}
               focused={focused}
               tintColor={tintColor}
             />
@@ -210,7 +212,7 @@ if (rtlos() === 3) {
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
-                left={20}
+                left={30}
                 focused={focused}
                 tintColor={tintColor}
                 notification={false}

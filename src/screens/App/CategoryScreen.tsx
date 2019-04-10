@@ -35,6 +35,14 @@ const AnimatedListView = Animated.createAnimatedComponent(MasonryList);
 const { width, height } = Dimensions.get('window');
 class CategoryScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
+  static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    const category = nextProps.navigation.getParam('item');
+    if (category.id !== prevState.rest.categoryId) {
+      return { rest: { categoryId: category.id } };
+    } else {
+      return { ...prevState };
+    }
+  }
   catScrollHome: any;
   flatListRef: any;
   getNextPosts: any;

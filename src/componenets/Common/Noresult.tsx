@@ -5,7 +5,7 @@ const Noresult = ({ title, isRTL, top, bgColor }: any) => (
   <View
     style={{
       flex: 1,
-      marginTop: top ? top : 0,
+      marginTop: top ? top + 20 : 20,
       backgroundColor: bgColor ? bgColor : '#fff',
       justifyContent: 'flex-start',
       alignItems: 'center',
@@ -14,8 +14,8 @@ const Noresult = ({ title, isRTL, top, bgColor }: any) => (
   >
     <View
       style={{
-        width: 150,
-        height: 150
+        width: 85,
+        height: 80
       }}
     >
       <Image
@@ -26,7 +26,7 @@ const Noresult = ({ title, isRTL, top, bgColor }: any) => (
           tintColor: '#ccc',
           transform: [{ rotateY: '180deg' }]
         }}
-        source={images.searchbig}
+        source={images.noresult}
       />
     </View>
 
@@ -35,7 +35,7 @@ const Noresult = ({ title, isRTL, top, bgColor }: any) => (
         textAlign: isRTL ? 'right' : 'left',
         fontSize: 16,
         color: '#bbb',
-        top: -20
+        top: 20
       }}
     >
       {title}
