@@ -6,7 +6,8 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  FlatList
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { rtlos } from '../../../utils';
@@ -19,6 +20,7 @@ export default class FilterSelect extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
+      refreshing: false,
       isModalVisible: false,
       label: null
     };
@@ -190,8 +192,6 @@ export default class FilterSelect extends React.Component<any, any> {
           backdropOpacity={0.5}
           useNativeDriver={true}
           hideModalContentWhileAnimating={true}
-          // onSwipe={() => this.setState({ isModalVisible: false })}
-          // swipeDirection="down"
           style={{ margin: 0 }}
         >
           <View
@@ -203,7 +203,6 @@ export default class FilterSelect extends React.Component<any, any> {
               width,
               height:
                 data.buckets.length < 7 ? data.buckets.length * 40 + 140 : 455,
-              // paddingTop: 20,
               borderTopLeftRadius: 15,
               borderTopRightRadius: 15
             }}
@@ -228,7 +227,32 @@ export default class FilterSelect extends React.Component<any, any> {
                 {this.props.data.label}
               </Text>
             </View>
-            <ScrollView>{this.renderOptions(data, selected)}</ScrollView>
+
+            <FlatList
+              onRefresh={() => null}
+              refreshing={this.state.refreshing}
+              data={data.buckets}
+              renderItem={({ item }: any) => (
+                <FilterOption
+                  isRTL={this.props.isRTL}
+                  key={item.id}
+                  toggleModal={this.toggleModal}
+                  handleLabel={this.handleLabel}
+                  onChange={this.props.onChange}
+                  width={width}
+                  itemData={item}
+                  bransIcon={data.name === 'brandId'}
+                  {...this.props}
+                />
+              )}
+              numColumns={1}
+              keyExtractor={(item: any) => `${item.id}`}
+              removeClippedSubviews={true}
+              disableVirtualization={false}
+              onEndReachedThreshold={0.5}
+            />
+
+            {/* <ScrollView>{this.renderOptions(data, selected)}</ScrollView> */}
           </View>
         </Modal>
       </View>

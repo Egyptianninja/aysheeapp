@@ -21,10 +21,10 @@ export default class FilterOption extends React.Component<any, any> {
       addFilter,
       removeFilter,
       isRTL,
-      icon
+      bransIcon
     } = this.props;
 
-    const src = icon ? images[`b${itemData.id}`] : undefined;
+    const src = bransIcon ? images[`b${itemData.id}`] : undefined;
 
     return (
       <TouchableOpacity
@@ -99,7 +99,7 @@ export default class FilterOption extends React.Component<any, any> {
                 <LoadingTiny />
               </View>
             )}
-          {icon && (
+          {bransIcon && (
             <View
               style={{
                 top: 5,

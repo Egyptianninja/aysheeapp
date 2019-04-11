@@ -7,10 +7,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  TextInput
+  TextInput,
+  FlatList
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { icons } from '../../../load';
 import { rtlos, getLang } from '../../../utils';
 import { Option } from './Option';
 
@@ -20,6 +20,7 @@ export default class Select extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
+      refreshing: false,
       isModalVisible: false,
       data: null
     };
@@ -30,26 +31,6 @@ export default class Select extends React.Component<any, any> {
 
   toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
-  };
-
-  renderOptions = (data: any) => {
-    return (
-      data &&
-      data.map((da: any) => {
-        return (
-          <Option
-            key={da.id}
-            icon={this.props.name === 'brand'}
-            isRTL={this.props.isRTL}
-            initSearch={this.initSearch}
-            toggleModal={this.toggleModal}
-            onChange={this.props.onChange}
-            itemData={da}
-            {...this.props}
-          />
-        );
-      })
-    );
   };
 
   renderlabel = (value: any, label: any, required: any, isRTL: any) => {
@@ -139,16 +120,7 @@ export default class Select extends React.Component<any, any> {
   };
 
   render() {
-    const {
-      value,
-      label,
-      required,
-      isRTL,
-      values,
-      data,
-      name,
-      words
-    } = this.props;
+    const { value, label, required, isRTL, name, words } = this.props;
     const lang = getLang();
 
     return (
@@ -263,11 +235,28 @@ export default class Select extends React.Component<any, any> {
                 </View>
               </React.Fragment>
             )}
-            <ScrollView keyboardShouldPersistTaps="handled">
-              {this.renderOptions(
-                name === 'brand' ? this.state.data : this.props.data
+            <FlatList
+              onRefresh={() => null}
+              refreshing={this.state.refreshing}
+              data={name === 'brand' ? this.state.data : this.props.data}
+              renderItem={({ item }: any) => (
+                <Option
+                  key={item.id}
+                  brandIcon={this.props.name === 'brand'}
+                  isRTL={this.props.isRTL}
+                  initSearch={this.initSearch}
+                  toggleModal={this.toggleModal}
+                  onChange={this.props.onChange}
+                  itemData={item}
+                  {...this.props}
+                />
               )}
-            </ScrollView>
+              numColumns={1}
+              keyExtractor={(item: any) => `${item.id}`}
+              removeClippedSubviews={true}
+              disableVirtualization={false}
+              onEndReachedThreshold={0.5}
+            />
           </View>
         </Modal>
       </View>

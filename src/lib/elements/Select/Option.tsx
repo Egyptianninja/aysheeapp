@@ -12,9 +12,10 @@ export const Option = ({
   isRTL,
   onSelectBrand,
   onSelecteOption,
-  icon
+  brandIcon
 }: any) => {
-  const src = images[`b${itemData.id}`];
+  const src = brandIcon ? images[`b${itemData.id}`] : undefined;
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -59,7 +60,7 @@ export const Option = ({
           isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
       }}
     >
-      {icon && (
+      {brandIcon && (
         <View
           style={{
             width: 40,
