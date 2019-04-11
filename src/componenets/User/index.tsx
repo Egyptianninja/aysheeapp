@@ -27,9 +27,10 @@ export const renderUser = ({
       <View style={{ flex: 2, flexDirection: ardroid ? 'row-reverse' : 'row' }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(me ? 'MyProfileScreen' : 'ProfileScreen', {
-              user
-            });
+            navigation.navigate('ProfileScreen', { user });
+            // navigation.navigate(me ? 'MyProfileScreen' : 'ProfileScreen', {
+            //   user
+            // });
           }}
         >
           <AvatarCircle user={user} size={50} />
@@ -43,9 +44,10 @@ export const renderUser = ({
         >
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate(me ? 'MyProfileScreen' : 'ProfileScreen', {
-                user
-              });
+              navigation.navigate('ProfileScreen', { user });
+              // navigation.navigate(me ? 'MyProfileScreen' : 'ProfileScreen', {
+              //   user
+              // });
             }}
           >
             {(user.name || user.name !== '') && (
