@@ -758,7 +758,8 @@ class ItemView extends React.Component<any, any> {
                   isAuthenticated: this.props.isAuthenticated,
                   userId: this.props.user._id,
                   navigation: this.props.navigation,
-                  ardroid: this.ardroid
+                  ardroid: this.ardroid,
+                  me: true
                 })}
               {!myItem && (
                 <Query query={getUser} variables={{ userId: post.userId }}>
@@ -779,7 +780,8 @@ class ItemView extends React.Component<any, any> {
                         ? this.props.user._id
                         : undefined,
                       navigation: this.props.navigation,
-                      ardroid: this.ardroid
+                      ardroid: this.ardroid,
+                      me: false
                     });
                   }}
                 </Query>
