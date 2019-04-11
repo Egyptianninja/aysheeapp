@@ -460,11 +460,11 @@ class Drawer extends React.Component<any, any> {
           >
             <Ionicons
               style={{ paddingHorizontal: 10 }}
-              name="ios-cellular"
+              name="ios-globe"
               size={30}
-              color="#7678ED"
+              color="#26A65B"
             />
-            <Text style={{ color: '#7678ED' }}>
+            <Text style={{ color: '#26A65B' }}>
               {this.state.country} Market
             </Text>
           </TouchableOpacity>
