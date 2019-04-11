@@ -171,8 +171,14 @@ class ItemView extends React.Component<any, any> {
         postId: this.props.post.id
       }
     });
+    if (this.props.post.isoffer) {
+      await this.props.updateQty('offers', -1);
+    } else {
+      await this.props.updateQty('online', -1);
+    }
     this.hideCheckMessageModal();
   };
+
   canceldeletePost = async () => {
     this.hideCheckMessageModal();
   };

@@ -91,6 +91,7 @@ class UpgradeToStore extends React.Component<any, any> {
       addressCity,
       tel,
       fax,
+      mob,
       location
     } = values;
     const loc: any = location ? this.state.location : null;
@@ -117,6 +118,7 @@ class UpgradeToStore extends React.Component<any, any> {
         addressCity,
         tel,
         fax,
+        mob,
         location: trueLocation
       }
     });
@@ -155,16 +157,16 @@ class UpgradeToStore extends React.Component<any, any> {
           <View style={styles.container}>
             <Formik
               initialValues={{
-                name: user.name,
-                about: user.about,
-                color: user.color,
-                email: user.email,
-                website: user.website,
-                addressCountry: user.addressCountry,
-                addressCity: user.addressCity,
-                tel: user.tel,
-                fax: user.fax,
-                mob: user.mob,
+                name: user.name ? user.name : '',
+                about: user.about ? user.about : '',
+                color: user.color ? user.color : colors[0],
+                email: user.email ? user.email : '',
+                website: user.website ? user.website : '',
+                addressCountry: user.addressCountry ? user.addressCountry : '',
+                addressCity: user.addressCity ? user.addressCity : '',
+                tel: user.tel ? user.tel : '',
+                fax: user.fax ? user.fax : '',
+                mob: user.mob ? user.mob : '',
                 location: false
               }}
               onSubmit={this.handleSubmit}
@@ -183,7 +185,8 @@ class UpgradeToStore extends React.Component<any, any> {
                 tel: Yup.string()
                   .max(50)
                   .required(word.isrequire),
-                fax: Yup.string().max(50)
+                fax: Yup.string().max(50),
+                mob: Yup.string().max(50)
               })}
               render={({
                 values,
@@ -352,6 +355,21 @@ class UpgradeToStore extends React.Component<any, any> {
                     innerStyle={styles.innerStyle}
                     labelStyle={styles.labelStyle}
                     error={touched.fax && errors.fax}
+                    keyboardType="number-pad"
+                    height={40}
+                  />
+                  <Input
+                    rtl={isRTL}
+                    num
+                    name="mob"
+                    label={word.mob}
+                    value={values.mob}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.mob && errors.mob}
                     keyboardType="number-pad"
                     height={40}
                   />

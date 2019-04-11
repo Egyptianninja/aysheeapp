@@ -183,14 +183,20 @@ export default class Select extends React.Component<any, any> {
                 <TouchableOpacity
                   style={{
                     position: 'absolute',
-                    top: 30,
+                    top: 20,
                     left: rtlos() === 3 ? undefined : isRTL ? 25 : 15,
                     right: rtlos() === 3 ? 25 : undefined,
-                    zIndex: 101
+                    zIndex: 101,
+                    padding: 10
                   }}
                   onPress={() => this.setState({ isModalVisible: false })}
                 >
-                  <Text style={{ color: '#7678ED', fontSize: 16 }}>
+                  <Text
+                    style={{
+                      color: '#7678ED',
+                      fontSize: 16
+                    }}
+                  >
                     {words.cancel}
                   </Text>
                 </TouchableOpacity>
@@ -256,6 +262,7 @@ export default class Select extends React.Component<any, any> {
               removeClippedSubviews={true}
               disableVirtualization={false}
               onEndReachedThreshold={0.5}
+              maxToRenderPerBatch={20}
             />
           </View>
         </Modal>

@@ -250,6 +250,7 @@ export default class FilterSelect extends React.Component<any, any> {
               removeClippedSubviews={true}
               disableVirtualization={false}
               onEndReachedThreshold={0.5}
+              maxToRenderPerBatch={20}
             />
 
             {/* <ScrollView>{this.renderOptions(data, selected)}</ScrollView> */}

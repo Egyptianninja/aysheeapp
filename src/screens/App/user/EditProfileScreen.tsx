@@ -87,9 +87,7 @@ class EditProfileScreen extends React.Component<any, any> {
         tel: Yup.string()
           .max(50)
           .required(word.isrequire),
-        fax: Yup.string()
-          .max(50)
-          .required(word.isrequire)
+        fax: Yup.string().max(50)
       });
     } else {
       return Yup.object().shape({
@@ -112,6 +110,7 @@ class EditProfileScreen extends React.Component<any, any> {
       addressCity,
       tel,
       fax,
+      mob,
       location
     } = values;
     const loc: any = location ? this.state.location : null;
@@ -138,6 +137,7 @@ class EditProfileScreen extends React.Component<any, any> {
         addressCity,
         tel: isstore ? tel : undefined,
         fax: isstore ? fax : undefined,
+        mob,
         location: isstore ? trueLocation : undefined
       }
     });
@@ -185,16 +185,16 @@ class EditProfileScreen extends React.Component<any, any> {
           <View style={styles.container}>
             <Formik
               initialValues={{
-                name: user.name,
-                about: user.about,
+                name: user.name ? user.name : '',
+                about: user.about ? user.about : '',
                 color: user.color ? user.color : colors[0],
-                photo: '',
-                addressEmail: user.addressEmail,
-                website: user.website,
-                addressCountry: user.addressCountry,
-                addressCity: user.addressCity,
-                tel: user.tel,
-                fax: user.fax,
+                addressEmail: user.email ? user.email : '',
+                website: user.website ? user.website : '',
+                addressCountry: user.addressCountry ? user.addressCountry : '',
+                addressCity: user.addressCity ? user.addressCity : '',
+                tel: user.tel ? user.tel : '',
+                fax: user.fax ? user.fax : '',
+                mob: user.mob ? user.mob : '',
                 location: false
               }}
               onSubmit={this.handleSubmit}
@@ -376,6 +376,21 @@ class EditProfileScreen extends React.Component<any, any> {
                       height={40}
                     />
                   )}
+                  <Input
+                    rtl={isRTL}
+                    num
+                    name="mob"
+                    label={word.mob}
+                    value={values.mob}
+                    onChange={setFieldValue}
+                    onTouch={setFieldTouched}
+                    outerStyle={styles.outerStyle}
+                    innerStyle={styles.innerStyle}
+                    labelStyle={styles.labelStyle}
+                    error={touched.mob && errors.mob}
+                    keyboardType="number-pad"
+                    height={40}
+                  />
 
                   {isstore && (
                     <React.Fragment>
