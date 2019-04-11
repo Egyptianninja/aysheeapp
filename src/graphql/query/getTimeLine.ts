@@ -6,6 +6,7 @@ export default gql`
     $cursor: [Float]
     $trueLocation: LocationInput
     $distance: Int
+    $maxPrice: Int
     $categoryId: Int
     $kindId: Int
     $isoffer: Boolean
@@ -38,6 +39,7 @@ export default gql`
       cursor: $cursor
       trueLocation: $trueLocation
       distance: $distance
+      maxPrice: $maxPrice
       categoryId: $categoryId
       kindId: $kindId
       isoffer: $isoffer

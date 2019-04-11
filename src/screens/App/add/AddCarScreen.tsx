@@ -180,7 +180,7 @@ class AddCarScreen extends React.Component<any, any> {
 
     const kinds = this.props.kind.filter((kn: any) => kn.pid === category.id);
     return (
-      <View>
+      <KeyboardAvoidingView behavior="padding" enabled>
         <MessageAlert
           isMessageVisible={this.state.isMessageVisible}
           hideMessageModal={this.hideMessageModal}
@@ -551,7 +551,7 @@ class AddCarScreen extends React.Component<any, any> {
           </View>
           <View style={{ height: 50 }} />
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

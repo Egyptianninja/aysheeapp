@@ -33,11 +33,13 @@ class InputPhone extends React.PureComponent<any, any> {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 10,
-            borderRadius: 25,
+            borderRadius: 26,
             // borderTopLeftRadius: 25,
             // borderTopRightRadius: 25,
             // borderBottomLeftRadius: 25,
-            backgroundColor: '#fff'
+            backgroundColor: '#fff',
+            borderColor: '#ddd',
+            borderWidth: 1
           }}
         >
           <View
@@ -71,7 +73,7 @@ class InputPhone extends React.PureComponent<any, any> {
             placeholder="1234567890"
             placeholderTextColor="#ddd"
             onBlur={this.handleTouch}
-            selectionColor={'#fff'}
+            selectionColor={'#aaa'}
             // autoFocus
             style={[
               {

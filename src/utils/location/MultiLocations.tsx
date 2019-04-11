@@ -49,8 +49,11 @@ class MultiLocations extends React.Component<any, any> {
     const { posts } = this.props;
     const filterPosts = posts.filter((post: any) => post.trueLocation);
     const markers = filterPosts.map((post: any) => {
+      console.log(post);
+
       return {
         id: post.id,
+        post,
         title: post.title,
         description: post.body,
         coordinate: {
@@ -276,7 +279,19 @@ class MultiLocations extends React.Component<any, any> {
           >
             {markers &&
               markers.map((marker: any, index: any) => (
-                <View style={styles.card} key={index}>
+                <TouchableOpacity
+                  // TODO: link to item
+                  // onPress={() =>
+                  //   this.props.navigation.navigate('ItemScreen', {
+                  //     post: marker.post,
+                  //     word: this.props.word,
+                  //     lang: this.props.lang,
+                  //     isRTL: this.props.isRTL
+                  //   })
+                  // }
+                  style={styles.card}
+                  key={index}
+                >
                   <Image
                     source={{ uri: marker.image }}
                     style={styles.cardImage}
@@ -305,7 +320,7 @@ class MultiLocations extends React.Component<any, any> {
                       {marker.description}
                     </Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               ))}
           </Animated.ScrollView>
         </View>

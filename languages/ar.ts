@@ -64,8 +64,8 @@ export default {
     {
       id: 11,
       sort: 16,
-      name: 'حرف يدوية وفن',
-      nameGlob: 'حرف يدوية وفن, Handcrafts, Handcrafts'
+      name: 'حرف وفنون',
+      nameGlob: 'حرف وفنون, Handcrafts, Handcrafts'
     },
     { id: 12, sort: 17, name: 'كتب', nameGlob: 'كتب, Books, Books' },
     { id: 13, sort: 7, name: 'ملابس', nameGlob: 'ملابس, Clothes, Clothes' },
@@ -106,7 +106,7 @@ export default {
     { pid: 1, id: 7, name: 'دراجة نارية', nameGlob: 'دراجة نارية' },
     { pid: 1, id: 99, name: 'أخرى', nameGlob: 'أخرى' },
 
-    { pid: 2, id: 100, name: 'كاميرا', nameGlob: 'كاميرا' },
+    { pid: 2, id: 100, name: 'كاميرات', nameGlob: 'كاميرات' },
     {
       pid: 2,
       id: 101,
@@ -117,8 +117,8 @@ export default {
     {
       pid: 2,
       id: 103,
-      name: 'أجهزة ألعاب فيديو',
-      nameGlob: 'أجهزة ألعاب فيديو'
+      name: 'ألعاب فيديو',
+      nameGlob: 'ألعاب فيديو'
     },
     { pid: 2, id: 199, name: 'أخرى', nameGlob: 'أخرى' },
 
@@ -386,8 +386,9 @@ export default {
     rooms: 'عدد الغرف',
     bathrooms: 'عدد الحمامات',
     year: 'سنة الصنع',
-    km: 'المسافة المقطوعة',
+    km: 'km',
     color: 'اللون',
+    profilecolor: 'تحديد لون الملف الشخصي',
     type: 'النوع',
     sale: 'للبيع',
     rent: 'للايجار',

@@ -367,30 +367,19 @@ class PhoneScreen extends React.Component<any, any> {
                         flex: 1,
                         backgroundColor: !this.state.isEmailLogin
                           ? '#eee'
-                          : '#fff',
+                          : '#636363',
                         borderBottomLeftRadius: 10,
                         borderBottomRightRadius: 10,
                         alignItems: 'center',
                         justifyContent: 'center',
                         height: 30
-                        // borderBottomColor: '#aaa',
-                        // borderBottomWidth: 1,
-                        // borderLeftColor: '#aaa',
-                        // borderLeftWidth: 1,
-                        // borderRightColor: '#aaa',
-                        // borderRightWidth: 1,
-
-                        // borderTopWidth: 1,
-                        // borderTopColor: !this.state.isEmailLogin
-                        //   ? '#aaa'
-                        //   : '#fff'
                       }}
                     >
                       <Text
                         style={{
                           fontSize: 12,
-                          color: '#636363'
-                          // color: !this.state.isEmailLogin ? '#fff' : '#636363'
+                          // color: '#636363'
+                          color: !this.state.isEmailLogin ? '#636363' : '#fff'
                         }}
                       >
                         {words.loginwithemail}
@@ -402,30 +391,19 @@ class PhoneScreen extends React.Component<any, any> {
                         flex: 1,
                         backgroundColor: this.state.isEmailLogin
                           ? '#eee'
-                          : '#fff',
+                          : '#636363',
+
                         borderBottomLeftRadius: 10,
                         borderBottomRightRadius: 10,
                         alignItems: 'center',
                         justifyContent: 'center',
                         height: 30
-                        // borderBottomColor: '#aaa',
-                        // borderBottomWidth: 1,
-                        // borderLeftColor: '#aaa',
-                        // borderLeftWidth: 1,
-                        // borderRightColor: '#aaa',
-                        // borderRightWidth: 1,
-
-                        // borderTopWidth: 1,
-                        // borderTopColor: this.state.isEmailLogin
-                        //   ? '#aaa'
-                        //   : '#fff'
                       }}
                     >
                       <Text
                         style={{
                           fontSize: 12,
-                          color: '#636363'
-                          // color: this.state.isEmailLogin ? '#fff' : '#636363'
+                          color: this.state.isEmailLogin ? '#636363' : '#fff'
                         }}
                       >
                         {words.loginwithmobile}

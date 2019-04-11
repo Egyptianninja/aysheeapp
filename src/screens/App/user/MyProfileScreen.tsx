@@ -33,6 +33,7 @@ import {
   rtlos
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
+import { code } from '../../../store/getStore';
 const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 240;
@@ -332,7 +333,7 @@ class MyProfileScreen extends React.Component<any, any> {
         <View
           style={{
             padding: 10,
-            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+            flexDirection: 'row',
             height: HEADER_HEIGHT - 100
           }}
         >
@@ -347,7 +348,6 @@ class MyProfileScreen extends React.Component<any, any> {
             {!user.name && (
               <Text
                 style={{
-                  fontFamily: 'cairo-regular',
                   fontSize: 16
                 }}
               >
@@ -357,7 +357,6 @@ class MyProfileScreen extends React.Component<any, any> {
             {user.name && (
               <Text
                 style={{
-                  fontFamily: 'cairo-regular',
                   fontSize: 18
                 }}
               >
@@ -366,24 +365,24 @@ class MyProfileScreen extends React.Component<any, any> {
             )}
             <Text
               style={{
-                fontFamily: 'cairo-regular',
                 fontSize: 14,
                 color: '#777'
               }}
             >
-              {user.about ? user.about.substring(0, 70) : ''}
+              {user.about ? user.about.substring(0, 50) : ''}
             </Text>
 
             <View
               style={{
-                flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between'
               }}
             >
               <TouchableOpacity
                 onPress={() => {
-                  this.props.navigation.navigate('EditProfileScreen');
+                  this.props.navigation.navigate('EditProfileScreen', {
+                    title: words.editprofile
+                  });
                 }}
                 style={{
                   paddingTop: 5,
@@ -404,7 +403,6 @@ class MyProfileScreen extends React.Component<any, any> {
                 >
                   <Text
                     style={{
-                      fontFamily: 'cairo-regular',
                       fontSize: 12,
                       paddingHorizontal: 8
                     }}
@@ -419,14 +417,24 @@ class MyProfileScreen extends React.Component<any, any> {
                   />
                 </View>
               </TouchableOpacity>
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  fontSize: 14
-                }}
-              >
-                + {user.phone}
-              </Text>
+              {user.phone && (
+                <Text
+                  style={{
+                    fontSize: 14
+                  }}
+                >
+                  + {user.phone}
+                </Text>
+              )}
+              {user.email && (
+                <Text
+                  style={{
+                    fontSize: 14
+                  }}
+                >
+                  {user.email}
+                </Text>
+              )}
             </View>
           </View>
         </View>
@@ -446,6 +454,7 @@ class MyProfileScreen extends React.Component<any, any> {
         >
           <TouchableOpacity
             onPress={() => call(callargs)}
+            disabled={!user.phone}
             style={{
               flex: 1,
               justifyContent: 'center',
@@ -546,15 +555,17 @@ class MyProfileScreen extends React.Component<any, any> {
         horizontal
         style={{
           height: 50,
-          flexDirection: 'row',
           backgroundColor: '#fff',
           borderColor: '#ddd',
           borderWidth: 1
         }}
         contentContainerStyle={{
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          minWidth: width,
+          flexDirection: rtlos() === 2 ? 'row-reverse' : 'row'
         }}
+        showsHorizontalScrollIndicator={false}
       >
         <TouchableOpacity
           style={{
@@ -563,21 +574,35 @@ class MyProfileScreen extends React.Component<any, any> {
             justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 2,
-            backgroundColor: tab === 1 ? '#eee' : '#fff'
+            backgroundColor: tab === 1 ? '#eee' : '#fff',
+            paddingHorizontal: 5
           }}
           onPress={() => {
             this.setState({ rest: { islive: true }, tab: 1 });
           }}
         >
-          <Text
-            style={{
-              fontFamily: 'cairo-regular',
-              color: tab === 1 ? maincolor : '#000',
-              fontSize: 16
-            }}
+          <View
+            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
           >
-            {words.ads} ({user.onlineqty})
-          </Text>
+            <Text
+              style={{
+                color: tab === 1 ? maincolor : '#000',
+                fontSize: 16
+              }}
+            >
+              {words.ads}
+            </Text>
+            <Text
+              style={{
+                color: '#00B77C',
+                fontSize: 12,
+                padding: 5,
+                bottom: 10
+              }}
+            >
+              {user.onlineqty}
+            </Text>
+          </View>
         </TouchableOpacity>
 
         {isshop && (
@@ -589,7 +614,8 @@ class MyProfileScreen extends React.Component<any, any> {
               alignItems: 'center',
               marginHorizontal: 2,
               // marginRight: 9,
-              backgroundColor: tab === 2 ? '#eee' : '#fff'
+              backgroundColor: tab === 2 ? '#eee' : '#fff',
+              paddingHorizontal: 5
             }}
             onPress={() => {
               this.setState({
@@ -598,15 +624,28 @@ class MyProfileScreen extends React.Component<any, any> {
               });
             }}
           >
-            <Text
-              style={{
-                fontFamily: 'cairo-regular',
-                color: tab === 2 ? maincolor : '#000',
-                fontSize: 16
-              }}
+            <View
+              style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
             >
-              {words.offers} ({user.offersqty})
-            </Text>
+              <Text
+                style={{
+                  color: tab === 2 ? maincolor : '#000',
+                  fontSize: 16
+                }}
+              >
+                {words.offers}
+              </Text>
+              <Text
+                style={{
+                  color: '#00B77C',
+                  fontSize: 12,
+                  padding: 5,
+                  bottom: 10
+                }}
+              >
+                {user.offersqty}
+              </Text>
+            </View>
           </TouchableOpacity>
         )}
         <TouchableOpacity
@@ -616,7 +655,8 @@ class MyProfileScreen extends React.Component<any, any> {
             justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 2,
-            backgroundColor: tab === 3 ? '#eee' : '#fff'
+            backgroundColor: tab === 3 ? '#eee' : '#fff',
+            paddingHorizontal: 5
           }}
           onPress={() => {
             this.setState({
@@ -625,15 +665,28 @@ class MyProfileScreen extends React.Component<any, any> {
             });
           }}
         >
-          <Text
-            style={{
-              fontFamily: 'cairo-regular',
-              color: tab === 3 ? maincolor : '#000',
-              fontSize: 16
-            }}
+          <View
+            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
           >
-            {words.infrontpage} ({user.frontqty})
-          </Text>
+            <Text
+              style={{
+                color: tab === 3 ? maincolor : '#000',
+                fontSize: 16
+              }}
+            >
+              {words.infrontpage}
+            </Text>
+            <Text
+              style={{
+                color: '#00B77C',
+                fontSize: 12,
+                padding: 5,
+                bottom: 10
+              }}
+            >
+              {user.frontqty}
+            </Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -642,7 +695,8 @@ class MyProfileScreen extends React.Component<any, any> {
             justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 2,
-            backgroundColor: tab === 4 ? '#eee' : '#fff'
+            backgroundColor: tab === 4 ? '#eee' : '#fff',
+            paddingHorizontal: 5
           }}
           onPress={() => {
             this.setState({
@@ -651,15 +705,28 @@ class MyProfileScreen extends React.Component<any, any> {
             });
           }}
         >
-          <Text
-            style={{
-              fontFamily: 'cairo-regular',
-              color: tab === 3 ? maincolor : '#000',
-              fontSize: 16
-            }}
+          <View
+            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
           >
-            {words.unpublished} ({user.offlineqty})
-          </Text>
+            <Text
+              style={{
+                color: tab === 4 ? maincolor : '#000',
+                fontSize: 16
+              }}
+            >
+              {words.unpublished}
+            </Text>
+            <Text
+              style={{
+                color: '#00B77C',
+                fontSize: 12,
+                padding: 5,
+                bottom: 10
+              }}
+            >
+              {user.offlineqty}
+            </Text>
+          </View>
         </TouchableOpacity>
       </ScrollView>
     );
@@ -687,7 +754,8 @@ class MyProfileScreen extends React.Component<any, any> {
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
-    const callargs = { number: user.phone, prompt: false };
+    const phone = user.phone ? user.phone.replace(code(), '') : null;
+    const callargs = { number: phone, prompt: false };
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -817,11 +885,11 @@ export default connect(
   })(
     graphql(deletePost, {
       name: 'deletePost',
-      options: { refetchQueries: ['getMyPosts'] }
+      options: { refetchQueries: ['getUserPosts'] }
     })(
       graphql(editClassifieds, {
         name: 'editClassifieds',
-        options: { refetchQueries: ['getMyPosts'] }
+        options: { refetchQueries: ['getUserPosts'] }
       })(MyProfileScreen)
     )
   )

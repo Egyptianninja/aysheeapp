@@ -325,7 +325,7 @@ class EditProfileScreen extends React.Component<any, any> {
                     rtl={isRTL}
                     name="color"
                     color={values.color}
-                    label={word.color}
+                    label={word.profilecolor}
                     value={values.color}
                     onChange={setFieldValue}
                     onTouch={setFieldTouched}

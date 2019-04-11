@@ -7,6 +7,7 @@ export default gql`
     $categoryId: Int
     $trueLocation: LocationInput
     $distance: Int
+    $maxPrice: Int
     $sortType: Int
   ) {
     search(
@@ -14,6 +15,7 @@ export default gql`
       cursor: $cursor
       trueLocation: $trueLocation
       distance: $distance
+      maxPrice: $maxPrice
       categoryId: $categoryId
       sortType: $sortType
     ) {

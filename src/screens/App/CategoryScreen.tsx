@@ -355,6 +355,7 @@ class CategoryScreen extends React.Component<any, any> {
         {this.state.rest.sortType === 3 && (
           <MultiLocations
             isMapModalVisible={this.state.isMapModalVisible}
+            navigation={this.props.navigation}
             hideMapModal={this.hideMapModal}
             showMapModal={this.showMapModal}
             latitude={this.userlocation.lat}
@@ -362,6 +363,9 @@ class CategoryScreen extends React.Component<any, any> {
             posts={this.posts}
             width={width}
             height={height}
+            word={words}
+            lang={lang}
+            isRTL={isRTL}
           />
         )}
         <Menu

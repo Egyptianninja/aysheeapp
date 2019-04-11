@@ -100,7 +100,7 @@ class FilterModal extends React.Component<any, any> {
               Platform.OS === 'android' ? 40 : Constants.statusBarHeight + 40,
             bottom: 45,
             margin: 0,
-            width: 300,
+            width: 310,
             height: height - (Constants.statusBarHeight + 40 + 49),
             borderTopLeftRadius: rtlos() === 3 ? undefined : 15,
             borderBottomLeftRadius: rtlos() === 3 ? undefined : 15,

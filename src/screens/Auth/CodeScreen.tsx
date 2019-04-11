@@ -294,7 +294,11 @@ class CodeScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={50}
                   />
-                  <View style={{ flexDirection: 'row' }}>
+                  <View
+                    style={{
+                      flexDirection: rtlos() === 2 ? 'row-reverse' : 'row'
+                    }}
+                  >
                     <Button
                       background="#fff"
                       disabled={this.state.codeInterval > 0 ? true : false}
@@ -320,7 +324,8 @@ class CodeScreen extends React.Component<any, any> {
               style={{
                 height: 40,
                 width: width - 40,
-                flexDirection: 'row',
+                flexDirection: rtlos() === 2 ? 'row-reverse' : 'row',
+
                 justifyContent: 'center',
                 alignItems: 'center'
               }}

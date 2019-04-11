@@ -53,16 +53,17 @@ export const ProfileStack = createStackNavigator(
 
     EditProfileScreen: {
       screen: EditProfileScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <Header
-            navigation={navigation}
-            // title={navigation.getParam('title')}
-            title="Edit Profile"
-          />
-        ),
-        headerBackTitle: null
-      })
+      navigationOptions: ({ navigation }: any) => {
+        return {
+          header: (
+            <Header
+              navigation={navigation}
+              title={navigation.getParam('title')}
+            />
+          ),
+          headerBackTitle: null
+        };
+      }
     },
     ItemScreen: {
       screen: ItemScreen,

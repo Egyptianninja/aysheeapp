@@ -31,6 +31,8 @@ import {
   rtlos
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
+import { ScrollView } from 'react-native-gesture-handler';
+import { code } from '../../../store/getStore';
 const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 240;
@@ -250,31 +252,365 @@ class ProfileScreen extends React.Component<any, any> {
     }
   };
 
+  renderQuery = ({ variables, isRTL, words, lang }: any) => {
+    return (
+      <Query
+        query={getUserPosts}
+        variables={variables}
+        fetchPolicy="network-only"
+      >
+        {({ loading, error, data, fetchMore, refetch }) => {
+          if (loading) {
+            return <Loading />;
+          }
+          if (error || !data.getUserPosts.posts) {
+            return <Noresult title="error" top={HEADER_HEIGHT} />;
+          }
+          const postsQuery = data.getUserPosts.posts;
+          if (postsQuery && postsQuery.length === 0) {
+            return (
+              <Noresult
+                isRTL={isRTL}
+                title={words.noresults}
+                top={HEADER_HEIGHT}
+              />
+            );
+          }
+          const rPosts = readyUserPosts(
+            postsQuery,
+            isTablet() ? 400 : 200,
+            79,
+            lang
+          );
+          return (
+            <MasonryList
+              ref={(ref: any) => {
+                this.flatListRef = ref;
+              }}
+              onScroll={Animated.event([
+                { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+              ])}
+              scrollEventThrottle={16}
+              onRefresh={() => refetch()}
+              onEndReached={() =>
+                this.getNextPosts(data, fetchMore, 'getUserPosts')
+              }
+              contentContainerStyle={{
+                marginTop: HEADER_HEIGHT,
+                paddingBottom: 160
+              }}
+              refreshing={this.state.refreshing}
+              data={rPosts}
+              renderItem={({ item }: any) => (
+                <ItemViewSmall
+                  post={item}
+                  navigation={this.props.navigation}
+                  selectePost={this.selectePost}
+                  favoritePost={this.props.favoritePost}
+                  showMenuModal={this.showMenuModal}
+                  word={words}
+                  lang={lang}
+                  isRTL={isRTL}
+                />
+              )}
+              getHeightForItem={({ item }: any) => item.height}
+              numColumns={2}
+              keyExtractor={(item: any) => item.id}
+              removeClippedSubviews={true}
+              windowSize={21}
+              disableVirtualization={false}
+              onEndReachedThreshold={0.5}
+            />
+          );
+        }}
+      </Query>
+    );
+  };
+
+  renderHeader = ({ user, callargs, maincolor }: any) => {
+    return (
+      <View style={{ height: HEADER_HEIGHT - 50 }}>
+        <View
+          style={{
+            padding: 10,
+            flexDirection: 'row',
+            height: HEADER_HEIGHT - 100
+          }}
+        >
+          <AvatarCircle user={user} size={PROFILE_IMAGE_HEIGHT} />
+          <View
+            style={{
+              marginHorizontal: 10,
+              zIndex: 10,
+              alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
+            }}
+          >
+            {!user.name && (
+              <Text
+                style={{
+                  fontSize: 16
+                }}
+              >
+                {user.uniquename}
+              </Text>
+            )}
+            {user.name && (
+              <Text
+                style={{
+                  fontSize: 18
+                }}
+              >
+                {user.name}
+              </Text>
+            )}
+            <Text
+              style={{
+                fontSize: 14,
+                color: '#777'
+              }}
+            >
+              {user.about ? user.about.substring(0, 50) : ''}
+            </Text>
+
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              {user.phone && (
+                <Text
+                  style={{
+                    fontSize: 14
+                  }}
+                >
+                  + {user.phone}
+                </Text>
+              )}
+              {user.email && (
+                <Text
+                  style={{
+                    fontSize: 14
+                  }}
+                >
+                  {user.email}
+                </Text>
+              )}
+            </View>
+          </View>
+        </View>
+        <View
+          style={{
+            // position: 'absolute',
+            width,
+            // top: topPaddingIcons,
+            height: 50,
+            zIndex: 100,
+            // backgroundColor: 'red',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            paddingHorizontal: 10
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => call(callargs)}
+            disabled={!user.phone}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 5,
+              paddingVertical: 5
+            }}
+          >
+            <Ionicons name="ios-call" size={31} color={maincolor} />
+          </TouchableOpacity>
+          <View
+            style={{
+              height: 30,
+              borderLeftColor: '#ddd',
+              borderLeftWidth: 1
+            }}
+          />
+          <TouchableOpacity
+            onPress={() =>
+              user.email ? Linking.openURL(`mailto: ${user.email}`) : null
+            }
+            disabled={!user.email}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 5,
+
+              paddingVertical: 5
+            }}
+          >
+            <Ionicons
+              name="ios-mail"
+              size={31}
+              color={!user.email ? '#aaa' : maincolor}
+            />
+          </TouchableOpacity>
+          <View
+            style={{
+              height: 30,
+              borderLeftColor: '#ddd',
+              borderLeftWidth: 1
+            }}
+          />
+          <TouchableOpacity
+            onPress={() =>
+              user.website ? Linking.openURL(`http://${user.website}`) : null
+            }
+            disabled={!user.website}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 5,
+
+              paddingVertical: 5
+            }}
+          >
+            <Ionicons
+              name="ios-globe"
+              size={31}
+              color={!user.website ? '#aaa' : maincolor}
+            />
+          </TouchableOpacity>
+          <View
+            style={{
+              height: 30,
+              borderLeftColor: '#ddd',
+              borderLeftWidth: 1
+            }}
+          />
+          <TouchableOpacity
+            onPress={() => this.showMapModal()}
+            disabled={!user.location}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 5,
+
+              paddingVertical: 5
+            }}
+          >
+            <Ionicons
+              name="ios-map"
+              size={31}
+              color={!user.location ? '#aaa' : maincolor}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  renderTabs = ({ tab, maincolor, words, user, isshop }: any) => {
+    return (
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          minWidth: width,
+          height: 40,
+          flexDirection: rtlos() === 2 ? 'row-reverse' : 'row'
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            flex: 1,
+            padding: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginHorizontal: 5,
+            backgroundColor: tab === 1 ? '#eee' : '#fff',
+            paddingHorizontal: 5
+          }}
+          onPress={() => {
+            this.setState({ rest: { islive: true }, tab: 1 });
+          }}
+        >
+          <View
+            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
+          >
+            <Text
+              style={{
+                color: tab === 1 ? maincolor : '#000',
+                fontSize: 16
+              }}
+            >
+              {words.ads}
+            </Text>
+            <Text
+              style={{
+                color: '#00B77C',
+                fontSize: 12,
+                padding: 5,
+                bottom: 10
+              }}
+            >
+              {user.onlineqty}
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        {isshop && (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              padding: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginHorizontal: 2,
+              backgroundColor: tab === 2 ? '#eee' : '#fff',
+              paddingHorizontal: 5
+            }}
+            onPress={() => {
+              this.setState({
+                rest: { islive: true, isoffer: true },
+                tab: 2
+              });
+            }}
+          >
+            <View
+              style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
+            >
+              <Text
+                style={{
+                  color: tab === 2 ? maincolor : '#000',
+                  fontSize: 16
+                }}
+              >
+                {words.offers}
+              </Text>
+              <Text
+                style={{
+                  color: '#00B77C',
+                  fontSize: 12,
+                  padding: 5,
+                  bottom: 10
+                }}
+              >
+                {user.offersqty}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
+  };
+
   render() {
     const { lang, words, isRTL } = this.props;
 
     const headerHeight = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_HEIGHT],
-      outputRange: [HEADER_HEIGHT, -1],
-      extrapolate: 'clamp'
-    });
-    const topPaddingIcons = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_HEIGHT],
-      outputRange: [HEADER_HEIGHT - 100, -100],
-      extrapolate: 'clamp'
-    });
-    const topPaddinTab = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_HEIGHT],
-      outputRange: [HEADER_HEIGHT - 50, -50],
-      extrapolate: 'clamp'
-    });
-
-    const imageMarginTop = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_HEIGHT],
-      outputRange: [
-        HEADER_HEIGHT / 2.3 - PROFILE_IMAGE_HEIGHT,
-        -HEADER_HEIGHT / 2.3 - PROFILE_IMAGE_HEIGHT
-      ],
+      outputRange: [0, -HEADER_HEIGHT],
       extrapolate: 'clamp'
     });
 
@@ -291,7 +627,8 @@ class ProfileScreen extends React.Component<any, any> {
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
-    const callargs = { number: user.phone, prompt: false };
+    const phone = user.phone ? user.phone.replace(code(), '') : null;
+    const callargs = { number: phone, prompt: false };
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -367,377 +704,37 @@ class ProfileScreen extends React.Component<any, any> {
         <Animated.View
           style={{
             position: 'absolute',
+            marginTop: headerHeight,
             top: 0,
             left: 0,
             right: 0,
             backgroundColor: '#fff',
-            height: headerHeight,
-            zIndex: 200,
-            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
+            zIndex: 200
           }}
         >
-          <Animated.View
-            style={{
-              marginTop: imageMarginTop,
-              marginHorizontal: 10
-            }}
-          >
-            <AvatarCircle user={user} size={PROFILE_IMAGE_HEIGHT} />
-          </Animated.View>
-          <Animated.View
-            style={{
-              marginTop: imageMarginTop,
-              marginLeft: 10,
-              zIndex: 10,
-              alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start'
-            }}
-          >
-            {!user.name && (
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  fontSize: 16
-                }}
-              >
-                {user.uniquename}
-              </Text>
-            )}
-            {user.name && (
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  fontSize: 18
-                }}
-              >
-                {user.name}
-              </Text>
-            )}
-            <Text
-              style={{
-                fontFamily: 'cairo-regular',
-                fontSize: 14,
-                color: '#777'
-              }}
-            >
-              {user.about}
-            </Text>
-            {ismyaccount && (
-              <TouchableOpacity
-                onPress={() => {
-                  this.props.navigation.navigate('EditProfileScreen');
-                }}
-                style={{
-                  paddingTop: 5,
-                  paddingBottom: 10,
-                  paddingRight: 10
-                }}
-              >
-                <View
-                  style={{
-                    marginTop: 5,
-                    borderColor: '#ddd',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-around'
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: 'cairo-regular',
-                      fontSize: 12,
-                      paddingHorizontal: 10
-                    }}
-                  >
-                    {words.editprofile}
-                  </Text>
-                  <Ionicons
-                    style={{ paddingRight: 10 }}
-                    name="md-person"
-                    size={24}
-                    color="#000"
-                  />
-                </View>
-              </TouchableOpacity>
-            )}
-          </Animated.View>
-          <Animated.View
-            style={{
-              position: 'absolute',
-              width,
-              top: topPaddingIcons,
-              height: 50,
-              zIndex: 100,
-              // backgroundColor: 'red',
-              flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              paddingHorizontal: 10
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => call(callargs)}
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 5,
-                paddingVertical: 5
-              }}
-            >
-              <Ionicons name="ios-call" size={31} color={maincolor} />
-            </TouchableOpacity>
-            <View
-              style={{
-                height: 30,
-                borderLeftColor: '#ddd',
-                borderLeftWidth: 1
-              }}
-            />
-            <TouchableOpacity
-              onPress={() =>
-                user.email ? Linking.openURL(`mailto: ${user.email}`) : null
-              }
-              disabled={!user.email}
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 5,
-
-                paddingVertical: 5
-              }}
-            >
-              <Ionicons
-                name="ios-mail"
-                size={31}
-                color={!user.email ? '#aaa' : maincolor}
-              />
-            </TouchableOpacity>
-            <View
-              style={{
-                height: 30,
-                borderLeftColor: '#ddd',
-                borderLeftWidth: 1
-              }}
-            />
-            <TouchableOpacity
-              onPress={() =>
-                user.website ? Linking.openURL(`http://${user.website}`) : null
-              }
-              disabled={!user.website}
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 5,
-
-                paddingVertical: 5
-              }}
-            >
-              <Ionicons
-                name="ios-globe"
-                size={31}
-                color={!user.website ? '#aaa' : maincolor}
-              />
-            </TouchableOpacity>
-            <View
-              style={{
-                height: 30,
-                borderLeftColor: '#ddd',
-                borderLeftWidth: 1
-              }}
-            />
-            <TouchableOpacity
-              onPress={() => this.showMapModal()}
-              disabled={!user.location}
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 5,
-
-                paddingVertical: 5
-              }}
-            >
-              <Ionicons
-                name="ios-map"
-                size={31}
-                color={!user.location ? '#aaa' : maincolor}
-              />
-            </TouchableOpacity>
-          </Animated.View>
-          <Animated.View
-            style={{
-              position: 'absolute',
-              width,
-              top: topPaddinTab,
-              left: 0,
-              height: 50,
-              zIndex: 300,
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'row',
-              backgroundColor: '#fff',
-              borderColor: '#ddd',
-              borderWidth: 1
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                padding: 5,
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginHorizontal: 2,
-                backgroundColor: tab === 1 ? '#eee' : '#fff'
-              }}
-              onPress={() => {
-                this.setState({ rest: { islive: true }, tab: 1 });
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: 'cairo-regular',
-                  color: tab === 1 ? maincolor : '#000',
-                  fontSize: 16
-                }}
-              >
-                {words.ads} ({user.onlineqty})
-              </Text>
-            </TouchableOpacity>
-
-            {isshop && (
-              <TouchableOpacity
-                style={{
-                  flex: 1,
-                  padding: 5,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginHorizontal: 2,
-                  // marginRight: 9,
-                  backgroundColor: tab === 2 ? '#eee' : '#fff'
-                }}
-                onPress={() => {
-                  this.setState({
-                    rest: { islive: true, isoffer: true },
-                    tab: 2
-                  });
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: 'cairo-regular',
-                    color: tab === 2 ? maincolor : '#000',
-                    fontSize: 16
-                  }}
-                >
-                  {words.offers} ({user.offersqty})
-                </Text>
-              </TouchableOpacity>
-            )}
-            {ismyaccount && (
-              <TouchableOpacity
-                style={{
-                  flex: 1,
-                  padding: 5,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginHorizontal: 2,
-                  // marginRight: 9,
-                  backgroundColor: tab === 3 ? '#eee' : '#fff'
-                }}
-                onPress={() => {
-                  this.setState({
-                    rest: { islive: false },
-                    tab: 3
-                  });
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: 'cairo-regular',
-                    color: tab === 3 ? maincolor : '#000',
-                    fontSize: 16
-                  }}
-                >
-                  {words.unpublished} ({user.offlineqty})
-                </Text>
-              </TouchableOpacity>
-            )}
-          </Animated.View>
+          {this.renderHeader({
+            user,
+            words,
+            callargs,
+            maincolor
+          })}
+          {this.renderTabs({
+            tab,
+            maincolor,
+            words,
+            user,
+            isshop
+          })}
         </Animated.View>
 
-        <Query
-          query={getUserPosts}
-          variables={{ userId: user._id, ...this.state.rest }}
-        >
-          {({ loading, error, data, fetchMore, refetch }) => {
-            if (loading) {
-              return <Loading />;
-            }
-            if (error || !data.getUserPosts.posts) {
-              return <Noresult title="error" top={HEADER_HEIGHT} />;
-            }
-            const postsQuery = data.getUserPosts.posts;
-            if (postsQuery && postsQuery.length === 0) {
-              return (
-                <Noresult
-                  isRTL={isRTL}
-                  title={words.noresults}
-                  top={HEADER_HEIGHT}
-                />
-              );
-            }
-            const rPosts = readyUserPosts(
-              postsQuery,
-              isTablet() ? 400 : 200,
-              79,
-              lang
-            );
-            return (
-              <MasonryList
-                ref={(ref: any) => {
-                  this.flatListRef = ref;
-                }}
-                onScroll={Animated.event([
-                  { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
-                ])}
-                scrollEventThrottle={16}
-                onRefresh={() => refetch()}
-                onEndReached={() =>
-                  this.getNextPosts(data, fetchMore, 'getUserPosts')
-                }
-                contentContainerStyle={{
-                  marginTop: HEADER_HEIGHT,
-                  paddingBottom: 160
-                }}
-                refreshing={this.state.refreshing}
-                data={rPosts}
-                renderItem={({ item }: any) => (
-                  <ItemViewSmall
-                    post={item}
-                    navigation={this.props.navigation}
-                    selectePost={this.selectePost}
-                    favoritePost={this.props.favoritePost}
-                    showMenuModal={this.showMenuModal}
-                    word={words}
-                    lang={lang}
-                    isRTL={isRTL}
-                  />
-                )}
-                getHeightForItem={({ item }: any) => item.height}
-                numColumns={2}
-                keyExtractor={(item: any) => item.id}
-                removeClippedSubviews={true}
-                windowSize={21}
-                disableVirtualization={false}
-                onEndReachedThreshold={0.5}
-              />
-            );
-          }}
-        </Query>
+        <View style={{ flex: 1, width, borderStartColor: 'blue' }}>
+          {this.renderQuery({
+            variables: { userId: user._id, ...this.state.rest },
+            isRTL,
+            words,
+            lang
+          })}
+        </View>
       </View>
     );
   }
@@ -761,11 +758,11 @@ export default connect(
   })(
     graphql(deletePost, {
       name: 'deletePost',
-      options: { refetchQueries: ['getMyPosts'] }
+      options: { refetchQueries: ['getUserPosts'] }
     })(
       graphql(editClassifieds, {
         name: 'editClassifieds',
-        options: { refetchQueries: ['getMyPosts'] }
+        options: { refetchQueries: ['getUserPosts'] }
       })(ProfileScreen)
     )
   )

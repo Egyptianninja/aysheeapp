@@ -30,7 +30,8 @@ export const MenuIcon = ({ showMenuModal, post }: any) => (
           flex: 1,
           width: '100%',
           height: '100%',
-          resizeMode: 'contain'
+          resizeMode: 'contain',
+          tintColor: '#777'
         }}
         source={icon}
       />

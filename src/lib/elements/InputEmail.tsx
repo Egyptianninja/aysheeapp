@@ -33,10 +33,12 @@ class InputEmail extends React.PureComponent<any, any> {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 10,
-            borderRadius: 25,
+            borderRadius: 26,
             // borderTopLeftRadius: 25,
             // borderTopRightRadius: 25,
-            backgroundColor: '#fff'
+            backgroundColor: '#fff',
+            borderColor: '#ddd',
+            borderWidth: 1
           }}
         >
           <TextInput
@@ -44,7 +46,7 @@ class InputEmail extends React.PureComponent<any, any> {
             placeholder="emailaddress@gmail.com"
             placeholderTextColor="#ddd"
             onBlur={this.handleTouch}
-            selectionColor={'#fff'}
+            selectionColor={'#aaa'}
             // autoFocus
             style={[
               {

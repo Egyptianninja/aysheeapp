@@ -28,8 +28,10 @@ class InputCode extends React.PureComponent<any, any> {
             alignItems: 'center',
             justifyContent: 'center',
             marginVertical: 20,
-            borderRadius: 25,
-            backgroundColor: '#fff'
+            borderRadius: 26,
+            backgroundColor: '#fff',
+            borderColor: '#ddd',
+            borderWidth: 1
           }}
         >
           <TextInput
