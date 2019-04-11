@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Platform, Text, TouchableOpacity, View, Image } from 'react-native';
 import { getUserLocation, rtlos } from '../../../utils';
 import LoadingTiny from '../../Common/LoadingTiny';
+import { images } from '../../../load';
 
 export default class FilterOption extends React.Component<any, any> {
   constructor(props: any) {
@@ -22,6 +23,8 @@ export default class FilterOption extends React.Component<any, any> {
       isRTL,
       icon
     } = this.props;
+
+    const src = icon ? images[`b${itemData.id}`] : undefined;
 
     return (
       <TouchableOpacity
@@ -96,7 +99,7 @@ export default class FilterOption extends React.Component<any, any> {
                 <LoadingTiny />
               </View>
             )}
-          {itemData.icon && (
+          {icon && (
             <View
               style={{
                 top: 5,
@@ -110,7 +113,7 @@ export default class FilterOption extends React.Component<any, any> {
                   width: '100%',
                   height: '100%'
                 }}
-                source={itemData.icon}
+                source={src}
               />
             </View>
           )}

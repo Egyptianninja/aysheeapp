@@ -36,19 +36,6 @@ export default class FilterSelect extends React.Component<any, any> {
     this.setState({ label });
   };
   renderOptions = (data: any, selected: any) => {
-    let buckets;
-    if (data.name === 'brandId') {
-      buckets = data.buckets.map((buck: any) => {
-        const iconFunc = icons.brands.filter((ic: any) => ic.id === buck.id);
-        const icon = iconFunc ? iconFunc[0].icon() : null;
-        return {
-          ...buck,
-          icon
-        };
-      });
-    } else {
-      buckets = data.buckets;
-    }
     return (
       <React.Fragment>
         {!this.props.sort && selected && (
@@ -103,7 +90,7 @@ export default class FilterSelect extends React.Component<any, any> {
             </View>
           </TouchableOpacity>
         )}
-        {buckets.map((da: any) => {
+        {data.buckets.map((da: any) => {
           return (
             <FilterOption
               isRTL={this.props.isRTL}
@@ -113,6 +100,7 @@ export default class FilterSelect extends React.Component<any, any> {
               onChange={this.props.onChange}
               width={width}
               itemData={da}
+              icon={data.name === 'brandId'}
               {...this.props}
             />
           );

@@ -1,6 +1,7 @@
 import { Platform } from 'expo-core';
 import * as React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { images } from '../../../load';
 
 export const Option = ({
   itemData,
@@ -11,8 +12,9 @@ export const Option = ({
   isRTL,
   onSelectBrand,
   onSelecteOption,
-  initSearch
+  icon
 }: any) => {
+  const src = images[`b${itemData.id}`];
   return (
     <TouchableOpacity
       onPress={() => {
@@ -57,7 +59,7 @@ export const Option = ({
           isRTL && Platform.OS !== 'android' ? 'row-reverse' : 'row'
       }}
     >
-      {itemData.icon && (
+      {icon && (
         <View
           style={{
             width: 40,
@@ -70,7 +72,7 @@ export const Option = ({
               width: '100%',
               height: '100%'
             }}
-            source={itemData.icon}
+            source={src}
           />
         </View>
       )}

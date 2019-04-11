@@ -11,7 +11,7 @@ export function cacheImages(imgs: any) {
   });
 }
 
-export const images = {
+export const images: any = {
   homeicon: require('../../assets/icons/tab/home.png'),
   homeiconout: require('../../assets/icons/tab/home-out.png'),
   searchicon: require('../../assets/icons/tab/search.png'),
