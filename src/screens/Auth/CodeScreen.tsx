@@ -247,9 +247,20 @@ class CodeScreen extends React.Component<any, any> {
             }}
           >
             <Logo size={120} />
-            <Text style={{ fontSize: 20, color: '#636363', fontWeight: '300' }}>
-              +{this.state.phone}
-            </Text>
+            {this.state.phone && (
+              <Text
+                style={{ fontSize: 20, color: '#636363', fontWeight: '300' }}
+              >
+                +{this.state.phone}
+              </Text>
+            )}
+            {this.state.email && (
+              <Text
+                style={{ fontSize: 20, color: '#636363', fontWeight: '300' }}
+              >
+                {this.state.email}
+              </Text>
+            )}
           </View>
           <KeyboardAvoidingView
             style={{
