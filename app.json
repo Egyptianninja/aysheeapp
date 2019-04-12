@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ishee",
-    "version": "1.5.0",
+    "version": "1.4.1",
     "description": "Modern Classified Ads Portal",
     "slug": "ishee",
     "privacy": "public",
@@ -40,7 +40,7 @@
     },
     "android": {
       "package": "com.ishee.emadjumaah",
-      "versionCode": 5
+      "versionCode": 4
     },
     "notification": {
       "icon": "./assets/nicon.png",
