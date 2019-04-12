@@ -424,8 +424,7 @@ const styles = StyleSheet.create({
   },
   btnTextStyle: {
     color: '#7678ED',
-    fontSize: 16,
-    fontFamily: 'cairo-regular'
+    fontSize: 16
   }
 });
 

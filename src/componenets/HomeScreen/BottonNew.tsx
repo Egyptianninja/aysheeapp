@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    fontFamily: 'cairo-regular',
     fontSize: 12
   }
 });

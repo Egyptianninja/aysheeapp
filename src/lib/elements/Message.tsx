@@ -107,8 +107,7 @@ const styles = StyleSheet.create({
   },
   btnTextStyle: {
     color: '#fff',
-    fontSize: 16,
-    fontFamily: 'cairo-regular'
+    fontSize: 16
   }
 });
 

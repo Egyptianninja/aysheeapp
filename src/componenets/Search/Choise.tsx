@@ -26,7 +26,6 @@ export const Choise = ({
       <Text
         style={{
           fontSize: iconsize > 60 ? 22 : 16,
-          fontFamily: 'cairo-regular',
           textAlign: 'right',
           paddingHorizontal: 10,
           color: '#000'

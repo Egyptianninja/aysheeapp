@@ -120,7 +120,6 @@ export default class FilterOption extends React.Component<any, any> {
           <Text
             style={{
               fontSize: 16,
-              fontFamily: 'cairo-regular',
               paddingHorizontal: 10,
               alignSelf:
                 isRTL && Platform.OS !== 'android' ? 'flex-end' : 'flex-start'

@@ -458,7 +458,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 5,
     marginBottom: 10,
-    fontFamily: 'cairo-regular',
     color: '#777'
   },
   btnStyle: {
@@ -480,8 +479,7 @@ const styles = StyleSheet.create({
   },
   btnTextStyle: {
     color: '#7678ED',
-    fontSize: 18,
-    fontFamily: 'cairo-regular'
+    fontSize: 18
   }
 });
 

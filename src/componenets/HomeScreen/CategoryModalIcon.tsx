@@ -52,7 +52,6 @@ const CategoryModalIcon = ({
           color: '#171717',
           paddingTop: 5,
           textAlign: 'center',
-          // fontFamily: 'cairo-regular',
           fontSize: 12
         }}
       >
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    fontFamily: 'cairo-regular',
     fontSize: 12
   }
 });

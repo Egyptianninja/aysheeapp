@@ -40,7 +40,6 @@ const ShopItem = ({ user, navigation, width, words }: any) => {
           {!user.name && (
             <Text
               style={{
-                fontFamily: 'cairo-regular',
                 fontSize: 16
               }}
             >
@@ -50,7 +49,6 @@ const ShopItem = ({ user, navigation, width, words }: any) => {
           {user.name && (
             <Text
               style={{
-                fontFamily: 'cairo-regular',
                 fontSize: 16
               }}
             >
@@ -59,7 +57,6 @@ const ShopItem = ({ user, navigation, width, words }: any) => {
           )}
           <Text
             style={{
-              fontFamily: 'cairo-regular',
               fontSize: 14,
               color: '#777'
             }}
@@ -79,7 +76,6 @@ const ShopItem = ({ user, navigation, width, words }: any) => {
           <Text
             style={{
               color: user.color,
-              fontFamily: 'cairo-regular',
               paddingLeft: 40,
               fontSize: 12
             }}
@@ -89,7 +85,6 @@ const ShopItem = ({ user, navigation, width, words }: any) => {
           <Text
             style={{
               color: user.color,
-              fontFamily: 'cairo-regular',
               paddingLeft: 20,
               fontSize: 12
             }}

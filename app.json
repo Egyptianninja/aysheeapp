@@ -33,7 +33,9 @@
           "uber",
           "waze"
         ],
-        "NSCameraUsageDescription": "This app uses the camera to take photos of products."
+        "NSCameraUsageDescription": "Enable ishee to access camera roll to take and upload photos for your profile or products list",
+        "NSPhotoLibraryUsageDescription": "Enable ishee to access your photos and upload selected ones to show them in your profile or products list",
+        "NSLocationWhenInUseUsageDescription": "Turn on location services to share your product's location and enable search products around you"
       }
     },
     "android": {

@@ -119,7 +119,6 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               color: '#171717',
               textAlign: 'center',
-              // fontFamily: 'cairo-regular',
               fontSize: 14
             }}
           >
@@ -221,7 +220,6 @@ export default class CategoriesModal extends React.Component<any, any> {
             style={{
               color: '#636363',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
               fontSize: 18
             }}
           >

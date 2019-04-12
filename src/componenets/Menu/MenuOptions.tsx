@@ -64,7 +64,6 @@ export default class MenuOption extends React.Component<any, any> {
           <Text
             style={{
               fontSize: 18,
-              fontFamily: 'cairo-regular',
               textAlign: isRTL ? 'right' : 'left',
               paddingHorizontal: 10
             }}

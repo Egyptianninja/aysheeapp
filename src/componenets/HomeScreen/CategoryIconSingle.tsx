@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
   textView: {},
   text: {
     textAlign: 'center',
-    fontFamily: 'cairo-regular',
     fontSize: 12
   }
 });

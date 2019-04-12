@@ -111,7 +111,6 @@ export default class CategoriesSlide extends React.Component<any, any> {
             style={{
               color: '#171717',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
               fontSize: 14
             }}
           >
@@ -121,7 +120,6 @@ export default class CategoriesSlide extends React.Component<any, any> {
             style={{
               color: '#171717',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
               fontSize: 14
             }}
           >
@@ -217,7 +215,6 @@ export default class CategoriesSlide extends React.Component<any, any> {
             style={{
               color: '#171717',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
               fontSize: 18
             }}
           >

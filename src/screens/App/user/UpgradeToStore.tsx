@@ -488,8 +488,7 @@ const styles = StyleSheet.create({
   },
   btnTextStyle: {
     color: '#7678ED',
-    fontSize: 18,
-    fontFamily: 'cairo-regular'
+    fontSize: 18
   }
 });
 

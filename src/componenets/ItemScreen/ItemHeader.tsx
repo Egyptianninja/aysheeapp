@@ -57,7 +57,6 @@ const ItemHeader = ({ title, navigation }: any) => {
         >
           <Text
             style={{
-              fontFamily: 'cairo-regular',
               fontSize: 20,
               color: '#373737'
             }}

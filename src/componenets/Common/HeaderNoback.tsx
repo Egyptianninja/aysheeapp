@@ -26,7 +26,6 @@ const HeaderNoBack = ({ navigation, title }: any) => {
       >
         <Text
           style={{
-            fontFamily: 'cairo-regular',
             fontSize: 18,
             color: '#636363'
           }}

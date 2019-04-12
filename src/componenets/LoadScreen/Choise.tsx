@@ -26,7 +26,6 @@ export const Choise = ({ country, city, action, width }: any) => {
       <Text
         style={{
           fontSize: 18,
-          fontFamily: 'cairo-regular',
           textAlign: 'right',
           paddingHorizontal: 10,
           color: '#000'

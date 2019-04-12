@@ -9,7 +9,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
+  KeyboardAvoidingView
 } from 'react-native';
 import Modal from 'react-native-modal';
 import * as Yup from 'yup';
@@ -29,6 +30,7 @@ import {
   UserLocation
 } from '../../utils';
 import LoadingTiny from '../Common/LoadingTiny';
+import { Constants } from 'expo';
 
 const { width, height } = Dimensions.get('window');
 
@@ -234,7 +236,6 @@ export default class Edit extends React.Component<any, any> {
             style={{
               color: '#fff',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
               fontSize: 20
             }}
           >
@@ -252,7 +253,6 @@ export default class Edit extends React.Component<any, any> {
             style={{
               color: '#fff',
               textAlign: 'center',
-              fontFamily: 'cairo-regular',
               fontSize: 18
             }}
           >
@@ -279,24 +279,27 @@ export default class Edit extends React.Component<any, any> {
           }
         : null;
     return (
+      // <KeyboardAvoidingView behavior="padding" enabled>
       <Modal
         isVisible={this.state.isEditModalVisible}
         onBackdropPress={() => this.props.hideEditModal()}
         onBackButtonPress={() => this.props.hideEditModal()}
-        backdropOpacity={0.8}
+        backdropOpacity={0.3}
         useNativeDriver={true}
         animationIn="slideInUp"
         animationOut="slideOutDown"
         hideModalContentWhileAnimating={true}
         style={{ margin: 0 }}
       >
-        <View
+        <KeyboardAvoidingView
+          behavior="padding"
+          enabled
           style={{
             backgroundColor: '#eee',
             position: 'absolute',
             bottom: 0,
             margin: 0,
-            height: height - 100,
+            height: height - (Constants.statusBarHeight + 40),
             width,
             justifyContent: 'space-around',
             alignItems: 'center'
@@ -900,7 +903,8 @@ export default class Edit extends React.Component<any, any> {
               )}
             />
           </ScrollView>
-        </View>
+          <View style={{ height: 20 }} />
+        </KeyboardAvoidingView>
       </Modal>
     );
   }
@@ -958,7 +962,6 @@ const styles = StyleSheet.create({
   },
   btnTextStyle: {
     color: '#7678ED',
-    fontSize: 18,
-    fontFamily: 'cairo-regular'
+    fontSize: 18
   }
 });

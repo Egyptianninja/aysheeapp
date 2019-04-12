@@ -53,7 +53,6 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
       >
         <Text
           style={{
-            fontFamily: 'cairo-regular',
             fontSize: 18,
             color: '#636363'
           }}

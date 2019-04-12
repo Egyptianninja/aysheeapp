@@ -134,7 +134,6 @@ const Option = ({
         <Text
           style={{
             fontSize: 18,
-            fontFamily: 'cairo-regular',
             textAlign: isRTL ? 'right' : 'left',
             paddingHorizontal: 10
           }}

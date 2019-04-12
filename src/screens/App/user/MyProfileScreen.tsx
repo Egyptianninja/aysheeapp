@@ -374,7 +374,7 @@ class MyProfileScreen extends React.Component<any, any> {
 
             <View
               style={{
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 justifyContent: 'space-between'
               }}
             >

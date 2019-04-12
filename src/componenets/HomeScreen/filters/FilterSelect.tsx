@@ -78,7 +78,6 @@ export default class FilterSelect extends React.Component<any, any> {
               <Text
                 style={{
                   fontSize: 16,
-                  fontFamily: 'cairo-regular',
                   textAlign:
                     this.props.isRTL && Platform.OS !== 'android'
                       ? 'right'
@@ -167,8 +166,7 @@ export default class FilterSelect extends React.Component<any, any> {
                   ? '#aaa'
                   : '#555',
               fontSize: this.props.sort ? 12 : isRTL ? 14 : 16,
-              fontWeight: selected ? 'bold' : '300',
-              fontFamily: 'cairo-regular'
+              fontWeight: selected ? 'bold' : '300'
             }}
           >
             {selected
@@ -220,7 +218,6 @@ export default class FilterSelect extends React.Component<any, any> {
               <Text
                 style={{
                   fontSize: 20,
-                  fontFamily: 'cairo-regular',
                   color: '#fff'
                 }}
               >

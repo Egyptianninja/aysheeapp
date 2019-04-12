@@ -582,7 +582,6 @@ class ItemView extends React.Component<any, any> {
           >
             <Text
               style={{
-                fontFamily: 'cairo-regular',
                 fontSize: 20,
                 color: '#636363'
               }}
