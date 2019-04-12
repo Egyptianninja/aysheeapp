@@ -9,10 +9,8 @@ import {
   ProfileStack,
   SearchStack
 } from './appTabStacks';
-import { TouchableOpacity, Dimensions } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import CategoryButton from '../../componenets/HomeScreen/categoryButton';
-const { width } = Dimensions.get('window');
+import ImageIconNotify from '../../componenets/Common/ImageIconNotify';
 let AppTabNavigation: any;
 if (rtlos() === 3) {
   AppTabNavigation = createBottomTabNavigator(
@@ -208,14 +206,13 @@ if (rtlos() === 3) {
             navigationOptions.tabBarVisible = false;
           } else {
             navigationOptions.tabBarIcon = ({ focused, tintColor }: any) => (
-              <ImageIcon
+              <ImageIconNotify
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
                 left={30}
                 focused={focused}
                 tintColor={tintColor}
-                notification={false}
               />
             );
           }

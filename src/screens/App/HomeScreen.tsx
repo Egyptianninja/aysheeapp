@@ -19,7 +19,8 @@ import getTimeLine from '../../graphql/query/getTimeLine';
 import {
   addPermission,
   showModal,
-  hideModal
+  hideModal,
+  addNotification
 } from '../../store/actions/globActions';
 import { delQuery, setBuckets } from '../../store/actions/postActions';
 import { updateQty } from '../../store/actions/userAtions';
@@ -50,6 +51,8 @@ class HomeScreen extends React.Component<any, any> {
   scrollValue = 0;
   NAVBAR_HEIGHT = 96;
   TAB_BAR_HEIGHT = 49;
+  subs: any;
+  notify: any;
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
@@ -89,7 +92,7 @@ class HomeScreen extends React.Component<any, any> {
     };
   }
 
-  async componentDidMount() {
+  addPushNotification = async () => {
     if (!this.props.permissions.NOTIFICATIONS) {
       if (this.props.isAuthenticated) {
         const pushToken = await registerForPushNotificationsAsync();
@@ -106,6 +109,17 @@ class HomeScreen extends React.Component<any, any> {
         }
       }
     }
+  };
+
+  async componentDidMount() {
+    this.subs = [
+      this.props.navigation.addListener('didFocus', () => {
+        this.addPushNotification();
+      }),
+      this.props.navigation.addListener('willBlur', () => {
+        //
+      })
+    ];
     this.state.scrollAnim.addListener(({ value }: any) => {
       const diff = value - this.scrollValue;
       this.scrollValue = value;
@@ -117,17 +131,16 @@ class HomeScreen extends React.Component<any, any> {
     this.state.offsetAnim.addListener(({ value }: any) => {
       this.offsetValue = value;
     });
-    Notifications.addListener(this.handleNotification);
+    this.notify = Notifications.addListener(this.handleNotification);
     this.props.navigation.setParams({ handleHome: this.handleHome });
     this.props.navigation.setParams({ addItem: this.addItem });
-    this.props.navigation.setParams({
-      clearNotification: this.clearNotification
-    });
   }
 
   componentWillUnmount() {
     this.state.scrollAnim.removeAllListeners();
     this.state.offsetAnim.removeAllListeners();
+    this.subs.forEach((sub: any) => sub.remove());
+    this.notify.removeAllListeners();
   }
 
   _onScrollEndDrag = () => {
@@ -275,7 +288,7 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleNotification = async (notification: any) => {
-    this.props.navigation.setParams({ notification: true });
+    this.props.addNotification();
     if (notification.origin === 'received') {
       await this.setState({ notification });
       this.showNotificationModal();
@@ -689,7 +702,15 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(
   mapStateToProps,
-  { setBuckets, updateQty, delQuery, addPermission, showModal, hideModal }
+  {
+    setBuckets,
+    updateQty,
+    delQuery,
+    addPermission,
+    showModal,
+    hideModal,
+    addNotification
+  }
 )(
   graphql(refreshToken, {
     name: 'refreshToken'

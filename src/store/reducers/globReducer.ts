@@ -6,7 +6,9 @@ import {
   SET_RECENT_LOCATION,
   SET_SUB_BRANDS,
   SHOW_MODAL,
-  HIDE_MODAL
+  HIDE_MODAL,
+  ADD_NOTIFICATION,
+  INIT_NOTIFICATIONS
 } from '../types';
 
 const initialState = {
@@ -19,7 +21,8 @@ const initialState = {
   subBrands: '',
   permissions: {},
   recentLocation: {},
-  showModal: false
+  showModal: false,
+  notifications: 0
 };
 
 export default function(state = initialState, action: any) {
@@ -56,6 +59,16 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         subBrands: action.subBrands
+      };
+    case ADD_NOTIFICATION:
+      return {
+        ...state,
+        notifications: state.notifications + 1
+      };
+    case INIT_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: 0
       };
     case ADD_PERMISSION:
       return {

@@ -6,17 +6,34 @@ import { connect } from 'react-redux';
 import { Loading, Noresult, NotificationItem } from '../../componenets';
 import { AuthRequire } from '../../componenets/User/AuthRequire';
 import getMyNotifications from '../../graphql/query/getMyNotifications';
+import { initNotifications } from '../../store/actions/globActions';
 import { getDBNextPosts } from '../../utils';
 
 class NotificationsScreen extends React.Component<any, any> {
   flatListRef: any;
   getDBNextPosts: any;
+  subs: any;
   constructor(p: any) {
     super(p);
     this.getDBNextPosts = debounce(getDBNextPosts, 100);
     this.state = {
       refreshing: false
     };
+  }
+
+  componentDidMount() {
+    this.subs = [
+      this.props.navigation.addListener('didFocus', () => {
+        this.props.initNotifications();
+      }),
+      this.props.navigation.addListener('willBlur', () => {
+        //
+      })
+    ];
+  }
+
+  componentWillUnmount() {
+    this.subs.forEach((sub: any) => sub.remove());
   }
 
   renderAuthRequire = () => {
@@ -134,4 +151,7 @@ const mapStateToProps = (state: any) => ({
   isAuthenticated: state.user.isAuthenticated
 });
 
-export default connect(mapStateToProps)(NotificationsScreen);
+export default connect(
+  mapStateToProps,
+  { initNotifications }
+)(NotificationsScreen);

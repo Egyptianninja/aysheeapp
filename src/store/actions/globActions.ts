@@ -6,7 +6,9 @@ import {
   SET_RECENT_LOCATION,
   SET_SUB_BRANDS,
   SHOW_MODAL,
-  HIDE_MODAL
+  HIDE_MODAL,
+  ADD_NOTIFICATION,
+  INIT_NOTIFICATIONS
 } from '../types';
 
 export function setLanguage(language: any, languageName: string, isRTL: any) {
@@ -60,5 +62,16 @@ export function setRecentLocation({ location, expiresAt }: any) {
     type: SET_RECENT_LOCATION,
     location,
     expiresAt
+  };
+}
+
+export function addNotification() {
+  return {
+    type: ADD_NOTIFICATION
+  };
+}
+export function initNotifications() {
+  return {
+    type: INIT_NOTIFICATIONS
   };
 }
