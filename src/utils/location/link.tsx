@@ -110,7 +110,9 @@ export default class Link extends Component<any, any> {
             />
             <Ionicons name="ios-car" size={30} color="#fff" />
             <Text style={styles.welcome}>{word.drivetolocation}</Text>
-            {this.state.loadinLocation && <LoadingTiny />}
+            {this.state.loadinLocation && (
+              <LoadingTiny size={15} color="#fff" />
+            )}
           </TouchableOpacity>
         </View>
       </View>

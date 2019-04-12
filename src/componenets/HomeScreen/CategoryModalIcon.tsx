@@ -19,13 +19,13 @@ const CategoryModalIcon = ({
       }}
       style={{
         paddingHorizontal: 10,
-        paddingVertical: 10
+        paddingVertical: 5
       }}
     >
       <View
         style={{
-          width: (width - 20) / 4 - 25,
-          height: (width - 20) / 4 - 25,
+          width: (width - 20) / 4 - 20,
+          height: (width - 20) / 4 - 20,
           justifyContent: 'center',
           alignItems: 'center',
           alignSelf: 'center',
@@ -33,14 +33,6 @@ const CategoryModalIcon = ({
           borderRadius: 8,
           borderColor: '#ddd',
           borderWidth: 1
-          // shadowColor: '#555',
-          // shadowOffset: {
-          //   width: 0,
-          //   height: 5
-          // },
-          // shadowOpacity: 0.4,
-          // shadowRadius: 5,
-          // elevation: 5
         }}
       >
         <Image
@@ -61,10 +53,10 @@ const CategoryModalIcon = ({
           paddingTop: 5,
           textAlign: 'center',
           // fontFamily: 'cairo-regular',
-          fontSize: 10
+          fontSize: 12
         }}
       >
-        {item.name}
+        {item.name.substring(0, 10)}
       </Text>
     </TouchableOpacity>
   );

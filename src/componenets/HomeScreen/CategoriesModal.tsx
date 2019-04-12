@@ -1,4 +1,5 @@
 import { Platform } from 'expo-core';
+import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import {
   Dimensions,
@@ -12,6 +13,7 @@ import Modal from 'react-native-modal';
 import { icons, images } from '../../load';
 import CategoryModalIcon from './CategoryModalIcon';
 import { Constants } from 'expo';
+import { rtlos } from '../../utils';
 
 const { width, height } = Dimensions.get('window');
 
@@ -34,13 +36,13 @@ export default class CategoriesModal extends React.Component<any, any> {
 
   renderOfferShop = () => {
     return (
-      <View>
+      <View style={{ marginBottom: 10 }}>
         <View
           style={{
             width,
             height: 70,
             flexDirection: 'row',
-            marginTop: 10
+            marginVertical: 5
           }}
         >
           <TouchableOpacity
@@ -184,35 +186,29 @@ export default class CategoriesModal extends React.Component<any, any> {
         style={{
           flexDirection: 'row',
           width,
-          height: 40,
-          backgroundColor: '#A7A9F3',
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15
+          height: 40 + Constants.statusBarHeight,
+          backgroundColor: '#f3f3f3',
+          paddingTop: Constants.statusBarHeight,
+          borderBottomColor: '#ddd',
+          borderBottomWidth: 1
+          // borderTopLeftRadius: 15,
+          // borderTopRightRadius: 15
         }}
       >
         <TouchableOpacity
           onPress={() => this.props.hideCategoriesModal()}
           style={{
             position: 'absolute',
-            top: 0,
-            zIndex: 10,
-            width: 60,
-            height: 40,
-            borderRadius: 16,
-            justifyContent: 'center',
-            alignItems: 'center'
+            left: rtlos() === 3 ? -15 : 0,
+            top: Platform.OS === 'android' ? 22 : 18,
+            alignItems: 'center',
+            paddingVertical: 7,
+            paddingLeft: 15,
+            paddingRight: 20,
+            zIndex: 120
           }}
         >
-          <Text
-            style={{
-              color: '#fff',
-              textAlign: 'center',
-              fontSize: Platform.OS === 'android' ? 30 : 18,
-              paddingHorizontal: 15
-            }}
-          >
-            ⤬
-          </Text>
+          <Ionicons name="ios-arrow-back" size={30} color="#636363" />
         </TouchableOpacity>
         <View
           style={{
@@ -223,10 +219,10 @@ export default class CategoriesModal extends React.Component<any, any> {
         >
           <Text
             style={{
-              color: '#fff',
+              color: '#636363',
               textAlign: 'center',
               fontFamily: 'cairo-regular',
-              fontSize: 15
+              fontSize: 18
             }}
           >
             {title}
@@ -253,7 +249,7 @@ export default class CategoriesModal extends React.Component<any, any> {
           style={{
             position: 'absolute',
             bottom: 0,
-            height: height - (Constants.statusBarHeight + 40),
+            height,
             width,
             justifyContent: 'space-around',
             alignItems: 'center'
@@ -262,9 +258,8 @@ export default class CategoriesModal extends React.Component<any, any> {
           {this.renderHeader(this.props.word.allcategories)}
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{ paddingTop: 10, backgroundColor: '#fff' }}
+            style={{ backgroundColor: '#fff' }}
             contentContainerStyle={{
-              paddingBottom: 30,
               backgroundColor: '#fff'
             }}
           >
@@ -278,8 +273,7 @@ export default class CategoriesModal extends React.Component<any, any> {
               {this.renderOfferShop()}
               <View
                 style={{
-                  width,
-                  paddingTop: 10
+                  width
                 }}
               >
                 {this.renderCategoryRow(0, 4)}

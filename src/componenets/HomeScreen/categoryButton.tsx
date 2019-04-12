@@ -24,9 +24,9 @@ class CategoryButton extends React.Component<any, any> {
         onPress={() => this.props.showModal()}
       >
         <Ionicons
-          style={{ top: Platform.OS === 'android' ? undefined : 2, left: 0 }}
-          name="md-apps"
-          size={36}
+          style={{ top: Platform.OS === 'android' ? undefined : 2, left: 1 }}
+          name="ios-apps"
+          size={31}
           color="#f3f3f3"
         />
       </TouchableOpacity>
