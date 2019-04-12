@@ -198,7 +198,8 @@ export default class CategoriesModal extends React.Component<any, any> {
           onPress={() => this.props.hideCategoriesModal()}
           style={{
             position: 'absolute',
-            left: rtlos() === 3 ? -15 : 0,
+            left: rtlos() === 3 ? undefined : 0,
+            right: rtlos() === 3 ? -5 : undefined,
             top: Platform.OS === 'android' ? 22 : 18,
             alignItems: 'center',
             paddingVertical: 7,

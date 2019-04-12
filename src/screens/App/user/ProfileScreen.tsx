@@ -333,7 +333,7 @@ class ProfileScreen extends React.Component<any, any> {
         <View
           style={{
             padding: 10,
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             height: HEADER_HEIGHT - 100
           }}
         >

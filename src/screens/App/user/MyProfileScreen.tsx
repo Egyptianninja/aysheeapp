@@ -333,7 +333,7 @@ class MyProfileScreen extends React.Component<any, any> {
         <View
           style={{
             padding: 10,
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             height: HEADER_HEIGHT - 100
           }}
         >
@@ -374,7 +374,7 @@ class MyProfileScreen extends React.Component<any, any> {
 
             <View
               style={{
-                alignItems: 'flex-start',
+                alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start',
                 justifyContent: 'space-between'
               }}
             >
@@ -386,8 +386,7 @@ class MyProfileScreen extends React.Component<any, any> {
                 }}
                 style={{
                   paddingTop: 5,
-                  paddingBottom: 10,
-                  left: -5
+                  paddingBottom: 10
                 }}
               >
                 <View
