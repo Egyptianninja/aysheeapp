@@ -7,9 +7,6 @@ class ImageIconNotify extends React.Component<any, any> {
   scale = new Animated.Value(1);
 
   componentDidUpdate() {
-    if (this.props.notifications === 0) {
-      console.log('me');
-    }
     this.iconSpringUp();
   }
 
