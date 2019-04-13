@@ -2,6 +2,7 @@ export const appcolors = [
   '#7678ED',
   '#00B77C',
   '#E85255',
+  '#ff9a58',
   '#FBBC93',
   '#5658AD',
   '#8E90F0',

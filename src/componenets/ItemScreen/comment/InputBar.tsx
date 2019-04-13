@@ -30,19 +30,17 @@ export default class InputBar extends React.Component<any, any> {
             style={{
               padding: 10,
               marginHorizontal: 5,
-
-              borderLeftWidth: isArabic(this.props.replay.body) ? undefined : 3,
-              borderLeftColor: isArabic(this.props.replay.body)
-                ? undefined
-                : '#555',
-              borderRightWidth: isArabic(this.props.replay.body)
-                ? 3
-                : undefined,
-              borderRightColor: isArabic(this.props.replay.body)
-                ? '#555'
-                : undefined
+              borderTopColor: '#ddd',
+              borderTopWidth: 1,
+              borderLeftWidth: rtlos() === 3 ? undefined : 3,
+              borderLeftColor: rtlos() === 3 ? undefined : '#555',
+              borderRightWidth: rtlos() === 3 ? 3 : undefined,
+              borderRightColor: rtlos() === 3 ? '#555' : undefined
             }}
           >
+            <TouchableOpacity onPress={() => this.props.closeReplay()}>
+              <Ionicons name="ios-close-circle" size={33} color="#7678ED" />
+            </TouchableOpacity>
             <Text
               style={{
                 textAlign:
@@ -64,17 +62,6 @@ export default class InputBar extends React.Component<any, any> {
             >
               {this.props.replay.body}
             </Text>
-            <TouchableOpacity
-              style={{
-                position: 'absolute',
-                left: isArabic(this.props.replay.body) ? 10 : undefined,
-                right: isArabic(this.props.replay.body) ? undefined : 10,
-                top: 10
-              }}
-              onPress={() => this.props.closeReplay()}
-            >
-              <Ionicons name="ios-close-circle" size={33} color="#7678ED" />
-            </TouchableOpacity>
           </View>
         )}
         <View style={styles.inputBar}>

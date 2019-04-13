@@ -3,7 +3,7 @@ import { Notifications } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { Animated, Dimensions, View } from 'react-native';
+import { Animated, Dimensions, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemViewSmall';
@@ -134,6 +134,15 @@ class HomeScreen extends React.Component<any, any> {
     this.notify = Notifications.addListener(this.handleNotification);
     this.props.navigation.setParams({ handleHome: this.handleHome });
     this.props.navigation.setParams({ addItem: this.addItem });
+
+    if (Platform.OS === 'android') {
+      Notifications.createChannelAndroidAsync('comments', {
+        name: 'Comments',
+        priority: 'max',
+        sound: true,
+        vibrate: [0, 250, 250, 250]
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -142,6 +151,32 @@ class HomeScreen extends React.Component<any, any> {
     this.subs.forEach((sub: any) => sub.remove());
     this.notify.removeAllListeners();
   }
+
+  handleNotification = async (notification: any) => {
+    await this.setState({ notification });
+    const { title, body, channelId, priority } = notification;
+    Notifications.presentLocalNotificationAsync({
+      title,
+      body,
+      android: {
+        channelId,
+        priority
+      }
+    });
+
+    this.props.addNotification();
+    if (notification.origin === 'received') {
+      this.showNotificationModal();
+    } else {
+      const postId = notification.data.postId;
+      this.props.navigation.navigate('ItemScreen', {
+        postId,
+        word: this.props.words,
+        lang: this.props.lang,
+        isRTL: this.props.isRTL
+      });
+    }
+  };
 
   _onScrollEndDrag = () => {
     this.scrollEndTimer = setTimeout(this._onMomentumScrollEnd, 250);
@@ -283,22 +318,6 @@ class HomeScreen extends React.Component<any, any> {
       this.props.navigation.navigate('PhoneScreen', {
         add: true,
         origin: 'home'
-      });
-    }
-  };
-
-  handleNotification = async (notification: any) => {
-    this.props.addNotification();
-    if (notification.origin === 'received') {
-      await this.setState({ notification });
-      this.showNotificationModal();
-    } else {
-      const postId = notification.data.postId;
-      this.props.navigation.navigate('ItemScreen', {
-        postId,
-        word: this.props.words,
-        lang: this.props.lang,
-        isRTL: this.props.isRTL
       });
     }
   };
