@@ -3,6 +3,7 @@ import { Constants } from 'expo';
 import * as React from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { rtlos } from '../../utils';
+import { isIphoneX } from '../../utils/platform/iphonex';
 
 const Header = ({ navigation, title, showFilterModal }: any) => {
   return (
@@ -24,7 +25,7 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
         style={{
           position: 'absolute',
           left: rtlos() === 3 ? -15 : 0,
-          top: Platform.OS === 'android' ? 22 : 18,
+          top: isIphoneX() ? 40 : Platform.OS === 'android' ? 22 : 18,
           alignItems: 'center',
           paddingVertical: 7,
           paddingLeft: 5,
@@ -65,7 +66,7 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
         style={{
           position: 'absolute',
           right: 0,
-          top: 22,
+          top: isIphoneX() ? 42 : Platform.OS === 'android' ? 22 : 18,
           alignItems: 'center',
           padding: 5,
           paddingLeft: 20,

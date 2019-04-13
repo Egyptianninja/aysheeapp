@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-export const AuthRequire = ({ navigation }: any) => {
+export const AuthRequire = ({ navigation, origin }: any) => {
   return (
     <View
       style={{
@@ -32,7 +32,7 @@ export const AuthRequire = ({ navigation }: any) => {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate('PhoneScreen', {
-            origin: 'profile'
+            origin
           })
         }
         style={{

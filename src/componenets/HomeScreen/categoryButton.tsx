@@ -5,13 +5,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { showModal } from '../../store/actions/globActions';
 import { Platform } from 'expo-core';
+import { isIphoneX } from '../../utils';
 class CategoryButton extends React.Component<any, any> {
   render() {
     return (
       <TouchableOpacity
         style={{
           position: 'absolute',
-          bottom: 20,
+          bottom: isIphoneX() ? 50 : 20,
           left: width / 2 - 24,
           zIndex: 100,
           backgroundColor: 'rgba(118, 120, 237, 0.9)',

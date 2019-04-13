@@ -38,7 +38,8 @@ import {
   Message,
   onShare,
   rtlos,
-  StyleSheet
+  StyleSheet,
+  isIphoneX
 } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
@@ -592,7 +593,7 @@ class ItemView extends React.Component<any, any> {
           <View
             style={{
               position: 'absolute',
-              top: 23,
+              top: isIphoneX() ? 43 : 23,
               right: 2
             }}
           >

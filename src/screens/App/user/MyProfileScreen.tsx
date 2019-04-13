@@ -733,7 +733,9 @@ class MyProfileScreen extends React.Component<any, any> {
 
   render() {
     if (!this.props.isAuthenticated) {
-      return <AuthRequire navigation={this.props.navigation} />;
+      return (
+        <AuthRequire navigation={this.props.navigation} origin="profile" />
+      );
     }
 
     const { lang, words, isRTL } = this.props;

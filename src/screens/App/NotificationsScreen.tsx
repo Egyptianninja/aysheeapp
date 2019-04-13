@@ -82,7 +82,10 @@ class NotificationsScreen extends React.Component<any, any> {
     return (
       <View style={{ flex: 1 }}>
         {!this.props.isAuthenticated && (
-          <AuthRequire navigation={this.props.navigation} />
+          <AuthRequire
+            navigation={this.props.navigation}
+            origin="notification"
+          />
         )}
         {this.props.isAuthenticated && (
           <Query

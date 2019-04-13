@@ -49,8 +49,6 @@ class MultiLocations extends React.Component<any, any> {
     const { posts } = this.props;
     const filterPosts = posts.filter((post: any) => post.trueLocation);
     const markers = filterPosts.map((post: any) => {
-      console.log(post);
-
       return {
         id: post.id,
         post,

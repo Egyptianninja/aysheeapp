@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import * as React from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
-import { rtlos } from '../../utils';
+import { rtlos, isIphoneX } from '../../utils';
 
 const Header = ({ navigation, title, backhome }: any) => {
   return (
@@ -26,7 +26,7 @@ const Header = ({ navigation, title, backhome }: any) => {
         style={{
           position: 'absolute',
           left: rtlos() === 3 ? -15 : 0,
-          top: Platform.OS === 'android' ? 22 : 18,
+          top: isIphoneX() ? 42 : Platform.OS === 'android' ? 22 : 18,
           alignItems: 'center',
           padding: 7,
           paddingRight: 15,
