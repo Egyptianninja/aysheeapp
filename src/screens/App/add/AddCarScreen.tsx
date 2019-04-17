@@ -24,21 +24,23 @@ import {
   RadioButton,
   Select
 } from '../../../lib';
-import { updateQty } from '../../../store/actions/userAtions';
 import {
   getCurrency,
   getPureNumber,
   isArabic,
-  Message,
   StyleSheet,
   uploadPhotos,
   UserLocation
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
 
+import { updateUser } from '../../../store/actions/userAtions';
+import updateMyQty from '../../../graphql/mutation/updateMyQty';
+
 const { width } = Dimensions.get('window');
 
 class AddCarScreen extends React.Component<any, any> {
+  timer: any;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -51,6 +53,9 @@ class AddCarScreen extends React.Component<any, any> {
       message: null,
       screen: null
     };
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   showMessageModal = async () => {
@@ -92,6 +97,17 @@ class AddCarScreen extends React.Component<any, any> {
       isRTL: this.props.isRTL,
       imgqty: this.state.images.length
     });
+  };
+
+  updateItemsQty = () => {
+    this.timer = setTimeout(async () => {
+      const res = await this.props.updateMyQty({});
+      if (res.data.updateMyQty.ok) {
+        const { data } = res.data.updateMyQty;
+        await this.props.updateUser(data);
+      }
+      this.showMessageModal();
+    }, 2000);
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -160,10 +176,8 @@ class AddCarScreen extends React.Component<any, any> {
     });
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      await this.props.updateQty('online', 1);
+      this.updateItemsQty();
       this.updateProgressBar(1 / (3 + this.state.images.length));
-
-      this.showMessageModal();
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -622,14 +636,18 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(
   mapStateToProps,
-  { updateQty }
+  { updateUser }
 )(
   graphql(addClassifiedMutation, {
-    name: 'addClassifiedMutation',
-    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+    name: 'addClassifiedMutation'
   })(
     graphql(notificationSub, {
       name: 'notificationSub'
-    })(AddCarScreen)
+    })(
+      graphql(updateMyQty, {
+        name: 'updateMyQty',
+        options: { refetchQueries: ['getUserPosts', 'getTimeLine'] }
+      })(AddCarScreen)
+    )
   )
 );

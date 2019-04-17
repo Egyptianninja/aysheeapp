@@ -36,10 +36,10 @@ import {
   ImageViewer,
   ItemLocation,
   Message,
-  onShare,
   rtlos,
   StyleSheet,
-  isIphoneX
+  isIphoneX,
+  handleOnMenuModal
 } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
@@ -64,6 +64,7 @@ class ItemView extends React.Component<any, any> {
   scrollView: any;
   scrollOffset: any;
   scrollViewHeight: any;
+  timer: any;
 
   childRef: any = React.createRef();
   state = {
@@ -118,6 +119,7 @@ class ItemView extends React.Component<any, any> {
     this.keyboardDidHideListener.remove();
     this.keyboardWillShowListener.remove();
     this.keyboardWillHideListener.remove();
+    clearTimeout(this.timer);
   }
 
   showMenuModal = () => {
@@ -167,15 +169,13 @@ class ItemView extends React.Component<any, any> {
   };
 
   deletePost = async () => {
-    await this.props.deletePost({
+    const res = await this.props.deletePost({
       variables: {
         postId: this.props.post.id
       }
     });
-    if (this.props.post.isoffer) {
-      await this.props.updateQty('offers', -1);
-    } else {
-      await this.props.updateQty('online', -1);
+    if (res.data.deletePost.ok) {
+      this.updateItemsQty();
     }
     this.hideCheckMessageModal();
   };
@@ -184,117 +184,35 @@ class ItemView extends React.Component<any, any> {
     this.hideCheckMessageModal();
   };
 
+  updateItemsQty = (message?: any) => {
+    this.timer = setTimeout(async () => {
+      const res = await this.props.updateMyQty({});
+      if (res.data.updateMyQty.ok) {
+        const { data } = res.data.updateMyQty;
+        await this.props.updateUser(data);
+      }
+      this.showMessageModal({ message });
+    }, 2000);
+  };
+
   handleOnMenuModalHide = async () => {
-    if (!this.state.hideMenuData || !this.state.hideMenuData.menuId) {
-      return;
-    }
     const { menuId } = this.state.hideMenuData;
     const { post, postId, word } = this.props;
-    if (menuId === 1) {
-      if (!this.props.isAuthenticated) {
-        this.showMessageModal({ message: 'you have to login!' });
-      } else {
-        await this.props.favoritePost({
-          variables: { postId }
-        });
-        this.showMessageModal({
-          message: word.successadded
-        });
-      }
-    } else if (menuId === 2) {
-      await this.props.unFavoritePost({
-        variables: { postId }
-      });
-      this.showMessageModal({
-        message: word.removeedtovafavorites
-      });
-    } else if (menuId === 3) {
-      const message = `
-      ${post.title}
-
-      ${post.body}
-
-      ${post.price}`;
-      onShare(message, this.hideMenuModal);
-    } else if (menuId === 4) {
-      if (!this.props.isAuthenticated) {
-        this.showMessageModal({ message: 'you have to login!' });
-      } else {
-        this.showReportModal();
-      }
-    } else if (menuId === 5) {
-      if (post.updates) {
-        this.props.editClassifieds({
-          variables: {
-            postId: post.id,
-            updates: post.updates + 1
-          }
-        });
-      } else {
-        this.props.editClassifieds({
-          variables: {
-            postId,
-            updates: 1
-          }
-        });
-      }
-
-      this.showMessageModal({
-        message: word.adrefreshed
-      });
-    } else if (menuId === 6) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          islive: true
-        }
-      });
-      if (post.isoffer) {
-        this.props.updateQty('offers', 1);
-      } else {
-        this.props.updateQty('online', 1);
-      }
-      this.props.updateQty('offline', -1);
-      this.showMessageModal({
-        message: word.adpublished
-      });
-    } else if (menuId === 7) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          islive: false
-        }
-      });
-      if (post.isoffer) {
-        this.props.updateQty('offers', -1);
-      } else {
-        this.props.updateQty('online', -1);
-      }
-      this.props.updateQty('offline', 1);
-      this.showMessageModal({
-        message: word.adunpupished
-      });
-    } else if (menuId === 8) {
-      this.showEditModal();
-    } else if (menuId === 9) {
-      this.showCheckMessageModal();
-    } else if (menuId === 10) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          isfront: true
-        }
-      });
-      this.props.updateQty('front', 1);
-    } else if (menuId === 11) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          isfront: false
-        }
-      });
-      this.props.updateQty('front', -1);
-    }
+    handleOnMenuModal({
+      menuId,
+      postId,
+      post,
+      words: word,
+      isAuthenticated: this.props.isAuthenticated,
+      showMessageModal: this.showMessageModal,
+      favoritePost: this.props.favoritePost,
+      unFavoritePost: this.props.unFavoritePost,
+      showReportModal: this.showReportModal,
+      editClassifieds: this.props.editClassifieds,
+      updateItemsQty: this.updateItemsQty,
+      showEditModal: this.showEditModal,
+      showCheckMessageModal: this.showCheckMessageModal
+    });
   };
 
   keyboardWillShow(e: any) {

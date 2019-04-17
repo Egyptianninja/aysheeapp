@@ -64,7 +64,8 @@ class LoadScreen extends React.Component<any, any> {
           {
             flex: 1,
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            backgroundColor: '#f3f3f3'
           }
         ]}
       >

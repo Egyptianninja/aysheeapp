@@ -510,6 +510,8 @@ export default {
     infrontpage: 'الصفحة الرئيسية',
     availablemarket: 'الاسواق المتاحة',
     appwillrestart: 'سيتم اعادة تشغيل البرنامج',
+    frontadded: 'تمت اضافة الاعلان للصفحة الرئيسية',
+    frontremoved: 'تمت ازالة الاعلان من الصفحة الرئيسية',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

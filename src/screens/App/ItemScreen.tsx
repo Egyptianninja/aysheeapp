@@ -11,6 +11,9 @@ import favoritePost from '../../graphql/mutation/favoritePost';
 import unFavoritePost from '../../graphql/mutation/unFavoritePost';
 import getPost from '../../graphql/query/getPost';
 import { readyPost } from '../../utils';
+import updateMyQty from '../../graphql/mutation/updateMyQty';
+import { updateUser } from '../../store/actions/userAtions';
+
 class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
     header: null
@@ -49,6 +52,8 @@ class ItemScreen extends React.Component<any, any> {
           unFavoritePost={this.props.unFavoritePost}
           user={this.props.user}
           isAuthenticated={this.props.isAuthenticated}
+          updateUser={this.props.updateUser}
+          updateMyQty={this.props.updateMyQty}
         />
       );
     } else {
@@ -94,6 +99,8 @@ class ItemScreen extends React.Component<any, any> {
                 unFavoritePost={this.props.unFavoritePost}
                 user={this.props.user}
                 isAuthenticated={this.props.isAuthenticated}
+                updateUser={this.props.updateUser}
+                updateMyQty={this.props.updateMyQty}
               />
             );
           }}
@@ -110,7 +117,10 @@ const mapStateToProps = (state: any) => ({
   isAuthenticated: state.user.isAuthenticated
 });
 
-export default connect(mapStateToProps)(
+export default connect(
+  mapStateToProps,
+  { updateUser }
+)(
   graphql(createComment, {
     name: 'createComment'
   })(
@@ -123,13 +133,16 @@ export default connect(mapStateToProps)(
         options: { refetchQueries: ['getMyFavoritePosts'] }
       })(
         graphql(editClassifieds, {
-          name: 'editClassifieds',
-          options: { refetchQueries: ['getMyPosts'] }
+          name: 'editClassifieds'
         })(
           graphql(deletePost, {
-            name: 'deletePost',
-            options: { refetchQueries: ['getMyPosts'] }
-          })(ItemScreen)
+            name: 'deletePost'
+          })(
+            graphql(updateMyQty, {
+              name: 'updateMyQty',
+              options: { refetchQueries: ['getUserPosts'] }
+            })(ItemScreen)
+          )
         )
       )
     )

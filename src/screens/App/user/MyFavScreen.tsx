@@ -14,7 +14,8 @@ import {
   isTablet,
   Message,
   onShare,
-  readyUserPosts
+  readyUserPosts,
+  handleOnMenuModal
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
 
@@ -83,107 +84,21 @@ class MyFavScreen extends React.Component<any, any> {
       return;
     }
     const { menuId, postId, post } = this.state.hideMenuData;
-    if (menuId === 1) {
-      if (!this.props.isAuthenticated) {
-        this.showMessageModal({ message: 'you have to login!' });
-      } else {
-        await this.props.favoritePost({
-          variables: { postId }
-        });
-        this.showMessageModal({
-          message: this.props.words.successadded
-        });
-      }
-    } else if (menuId === 2) {
-      await this.props.unFavoritePost({
-        variables: { postId }
-      });
-      this.showMessageModal({
-        message: this.props.words.removeedtovafavorites
-      });
-    } else if (menuId === 3) {
-      const message = `
-      ${post.title}
-
-      ${post.body}
-
-      ${post.price}`;
-      onShare(message, this.hideMenuModal);
-    } else if (menuId === 4) {
-      if (!this.props.isAuthenticated) {
-        this.showMessageModal({ message: 'you have to login!' });
-      } else {
-        this.showReportModal();
-      }
-    } else if (menuId === 5) {
-      if (post.updates) {
-        this.props.editClassifieds({
-          variables: {
-            postId: post.id,
-            updates: post.updates + 1
-          }
-        });
-      } else {
-        this.props.editClassifieds({
-          variables: {
-            postId,
-            updates: 1
-          }
-        });
-      }
-
-      this.showMessageModal({
-        message: this.props.words.adrefreshed
-      });
-    } else if (menuId === 6) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          islive: true
-        }
-      });
-      if (post.isoffer) {
-        this.props.updateQty('offers', 1);
-      } else {
-        this.props.updateQty('online', 1);
-      }
-      this.props.updateQty('offline', -1);
-      this.showMessageModal({
-        message: this.props.words.adpublished
-      });
-    } else if (menuId === 7) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          islive: false
-        }
-      });
-      if (post.isoffer) {
-        this.props.updateQty('offers', -1);
-      } else {
-        this.props.updateQty('online', -1);
-      }
-      this.props.updateQty('offline', 1);
-      this.showMessageModal({
-        message: this.props.words.adunpupished
-      });
-    } else if (menuId === 10) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          isfront: true
-        }
-      });
-      this.props.updateQty('front', 1);
-    } else if (menuId === 11) {
-      this.props.editClassifieds({
-        variables: {
-          postId,
-          isfront: false
-        }
-      });
-      this.props.updateQty('front', -1);
-    }
+    handleOnMenuModal({
+      menuId,
+      postId,
+      post,
+      words: this.props.words,
+      isAuthenticated: this.props.isAuthenticated,
+      showMessageModal: this.showMessageModal,
+      favoritePost: this.props.favoritePost,
+      unFavoritePost: this.props.unFavoritePost,
+      showReportModal: this.showReportModal,
+      editClassifieds: this.props.editClassifieds,
+      updateItemsQty: () => null,
+      showEditModal: () => null,
+      showCheckMessageModal: () => null
+    });
   };
 
   render() {

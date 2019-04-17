@@ -292,8 +292,8 @@ class Drawer extends React.Component<any, any> {
             <Text
               style={{
                 color: '#171717',
-                fontSize: 16,
-                fontFamily: lng === 'ar' ? 'cairo-light' : 'comfortaa-Regular'
+                fontSize: 16
+                // fontFamily: lng === 'ar' ? 'cairo-light' : 'comfortaa-Regular'
               }}
             >
               {menu.name}

@@ -18,7 +18,6 @@ import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 import { Button, CheckBox, Group, Input, SelectDate } from '../../../lib';
-import { updateQty } from '../../../store/actions/userAtions';
 import {
   getCameraRollPermission,
   getPureNumber,
@@ -31,10 +30,12 @@ import {
   UserLocation
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
-
+import { updateUser } from '../../../store/actions/userAtions';
+import updateMyQty from '../../../graphql/mutation/updateMyQty';
 const { width } = Dimensions.get('window');
 
 class AddServiceScreen extends React.Component<any, any> {
+  timer: any;
   state = {
     selectedImage: null,
     isMessageVisible: false,
@@ -42,6 +43,10 @@ class AddServiceScreen extends React.Component<any, any> {
     image: null,
     bar: 0
   };
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
 
   showMessageModal = async () => {
     this.setState({ isMessageVisible: true });
@@ -75,6 +80,17 @@ class AddServiceScreen extends React.Component<any, any> {
 
   updateProgressBar = (value: any) => {
     this.setState({ bar: this.state.bar + value });
+  };
+
+  updateItemsQty = () => {
+    this.timer = setTimeout(async () => {
+      const res = await this.props.updateMyQty({});
+      if (res.data.updateMyQty.ok) {
+        const { data } = res.data.updateMyQty;
+        await this.props.updateUser(data);
+      }
+      this.showMessageModal();
+    }, 2000);
   };
 
   handleSubmit = async (values: any, bag: any) => {
@@ -118,10 +134,8 @@ class AddServiceScreen extends React.Component<any, any> {
 
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / 3);
-      await this.props.updateQty('offers', 1);
+      this.updateItemsQty();
       this.updateProgressBar(1 / 3);
-
-      this.showMessageModal();
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
@@ -452,14 +466,18 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(
   mapStateToProps,
-  { updateQty }
+  { updateUser }
 )(
   graphql(addClassifiedMutation, {
-    name: 'addClassifiedMutation',
-    options: { refetchQueries: ['getTimeLine', 'getMyPosts'] }
+    name: 'addClassifiedMutation'
   })(
     graphql(notificationSub, {
       name: 'notificationSub'
-    })(AddServiceScreen)
+    })(
+      graphql(updateMyQty, {
+        name: 'updateMyQty',
+        options: { refetchQueries: ['getUserPosts', 'getTimeLine'] }
+      })(AddServiceScreen)
+    )
   )
 );

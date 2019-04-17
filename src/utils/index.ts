@@ -6,7 +6,8 @@ import {
   getTimeLineBuckets,
   readyPost,
   readyPosts,
-  readyUserPosts
+  readyUserPosts,
+  handleOnMenuModal
 } from './apollo';
 import BottomDrawer from './bottomDrawar';
 import { call, getPureNumber } from './call';
@@ -54,10 +55,12 @@ import DotIndicator from './loading';
 import DotIndicatorSmall from './loading/small';
 import { getUserLocation, ItemLocation, UserLocation } from './location';
 import Message from './message';
+import LoadingLodal from './message/LoadingModal';
 import { registerForPushNotificationsAsync } from './notifications';
 import { isIphoneX, isTablet } from './platform/device';
 import { onShare } from './share';
 import { since } from './since';
+import { shareTemplate } from './share/template';
 export {
   StyleSheet,
   uploadPhoto,
@@ -115,5 +118,8 @@ export {
   rtlos,
   BottomDrawer,
   getCameraRollPermission,
-  getCameraPermission
+  getCameraPermission,
+  shareTemplate,
+  handleOnMenuModal,
+  LoadingLodal
 };

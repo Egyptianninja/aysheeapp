@@ -510,6 +510,8 @@ export default {
     infrontpage: 'Front Page',
     availablemarket: 'Available Market‎s',
     appwillrestart: 'ishee app will be restarted',
+    frontadded: 'Added to Front page',
+    frontremoved: 'Removed from Front page',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

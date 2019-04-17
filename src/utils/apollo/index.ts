@@ -1,4 +1,5 @@
 import { getNamedAggs, getTimeLineBuckets } from './buckets';
+import { handleOnMenuModal } from './menu';
 import {
   getDBNextPosts,
   getNewPosts,
@@ -16,5 +17,6 @@ export {
   getNewPosts,
   readyPosts,
   readyPost,
-  readyUserPosts
+  readyUserPosts,
+  handleOnMenuModal
 };

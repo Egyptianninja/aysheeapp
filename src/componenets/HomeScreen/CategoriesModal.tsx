@@ -14,6 +14,7 @@ import { icons, images } from '../../load';
 import CategoryModalIcon from './CategoryModalIcon';
 import { Constants } from 'expo';
 import { rtlos } from '../../utils';
+import { isIphoneX } from '../../utils/platform/iphonex';
 
 const { width, height } = Dimensions.get('window');
 
@@ -190,8 +191,6 @@ export default class CategoriesModal extends React.Component<any, any> {
           paddingTop: Constants.statusBarHeight,
           borderBottomColor: '#ddd',
           borderBottomWidth: 1
-          // borderTopLeftRadius: 15,
-          // borderTopRightRadius: 15
         }}
       >
         <TouchableOpacity
@@ -200,7 +199,7 @@ export default class CategoriesModal extends React.Component<any, any> {
             position: 'absolute',
             left: rtlos() === 3 ? undefined : 0,
             right: rtlos() === 3 ? -5 : undefined,
-            top: Platform.OS === 'android' ? 22 : 18,
+            top: isIphoneX() ? 42 : Platform.OS === 'android' ? 22 : 18,
             alignItems: 'center',
             paddingVertical: 7,
             paddingLeft: 15,
