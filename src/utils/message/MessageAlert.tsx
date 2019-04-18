@@ -2,6 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import Modal from 'react-native-modal';
+import { Loading, LoadingSmall } from '../../componenets';
+import LoadingTiny from '../../componenets/Common/LoadingTiny';
 
 export default class MessageAlert extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -15,7 +17,8 @@ export default class MessageAlert extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      isMessageVisible: false
+      isMessageVisible: false,
+      loading: true
     };
   }
 
@@ -25,12 +28,16 @@ export default class MessageAlert extends React.Component<any, any> {
   render() {
     const { hideMessageModal, onMessageModalHide } = this.props;
     if (this.state.isMessageVisible) {
-      this.timer = setTimeout(() => {
-        hideMessageModal();
-        if (onMessageModalHide) {
-          onMessageModalHide();
-        }
-      }, 1000);
+      setTimeout(() => {
+        this.setState({ loading: false });
+        this.timer = setTimeout(() => {
+          hideMessageModal();
+          if (onMessageModalHide) {
+            onMessageModalHide();
+          }
+          this.setState({ loading: true });
+        }, 1000);
+      }, 2500);
     }
 
     const { message, icon, isRTL, height, iconColor } = this.props;
@@ -43,44 +50,58 @@ export default class MessageAlert extends React.Component<any, any> {
         hideModalContentWhileAnimating={true}
         style={{ justifyContent: 'flex-end', margin: 0 }}
       >
-        <View
-          style={{
-            height,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#eee'
-          }}
-        >
+        {this.state.loading && (
           <View
             style={{
-              position: 'absolute',
-              right: isRTL ? undefined : 20,
-              left: isRTL ? 20 : undefined,
-              top: 30,
-              width: 40,
-              height: 40,
+              height,
+              justifyContent: 'center',
               alignItems: 'center',
-              justifyContent: 'center'
+              backgroundColor: '#f3f3f3'
             }}
           >
-            <Ionicons
-              name={icon}
-              size={36}
-              color={iconColor ? iconColor : '#7678ED'}
-            />
+            <LoadingSmall />
           </View>
+        )}
+        {!this.state.loading && (
           <View
             style={{
-              alignSelf: isRTL ? 'flex-end' : 'flex-start',
-              paddingHorizontal: 10,
-              paddingLeft: 25,
-              alignItems: 'flex-start',
-              marginBottom: 10
+              height,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#eee'
             }}
           >
-            <Text style={{ fontSize: 16, fontWeight: '400' }}>{message}</Text>
+            <View
+              style={{
+                position: 'absolute',
+                right: isRTL ? undefined : 20,
+                left: isRTL ? 20 : undefined,
+                top: 30,
+                width: 40,
+                height: 40,
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <Ionicons
+                name={icon}
+                size={36}
+                color={iconColor ? iconColor : '#7678ED'}
+              />
+            </View>
+            <View
+              style={{
+                alignSelf: isRTL ? 'flex-end' : 'flex-start',
+                paddingHorizontal: 10,
+                paddingLeft: 25,
+                alignItems: 'flex-start',
+                marginBottom: 10
+              }}
+            >
+              <Text style={{ fontSize: 16, fontWeight: '400' }}>{message}</Text>
+            </View>
           </View>
-        </View>
+        )}
       </Modal>
     );
   }

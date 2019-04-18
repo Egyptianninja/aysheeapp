@@ -357,13 +357,13 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   updateItemsQty = (message?: any) => {
+    this.showMessageModal({ message });
     this.timer = setTimeout(async () => {
       const res = await this.props.updateMyQty({});
       if (res.data.updateMyQty.ok) {
         const { data } = res.data.updateMyQty;
         await this.props.updateUser(data);
       }
-      this.showMessageModal({ message });
     }, 2000);
   };
 
