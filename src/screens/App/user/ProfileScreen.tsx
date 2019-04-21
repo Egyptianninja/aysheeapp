@@ -303,23 +303,27 @@ class ProfileScreen extends React.Component<any, any> {
                 justifyContent: 'space-between'
               }}
             >
-              {user.phone && (
-                <Text
-                  style={{
-                    fontSize: 14
-                  }}
-                >
-                  + {user.phone}
-                </Text>
-              )}
-              {user.email && (
-                <Text
-                  style={{
-                    fontSize: 14
-                  }}
-                >
-                  {user.email}
-                </Text>
+              {user.showcontact !== false && (
+                <View>
+                  {user.phone && (
+                    <Text
+                      style={{
+                        fontSize: 14
+                      }}
+                    >
+                      + {user.phone}
+                    </Text>
+                  )}
+                  {user.email && (
+                    <Text
+                      style={{
+                        fontSize: 14
+                      }}
+                    >
+                      {user.email}
+                    </Text>
+                  )}
+                </View>
               )}
             </View>
           </View>

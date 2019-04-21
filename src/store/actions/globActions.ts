@@ -8,7 +8,8 @@ import {
   SHOW_MODAL,
   HIDE_MODAL,
   ADD_NOTIFICATION,
-  INIT_NOTIFICATIONS
+  INIT_NOTIFICATIONS,
+  SHOW_CONTACT
 } from '../types';
 
 export function setLanguage(language: any, languageName: string, isRTL: any) {
@@ -73,5 +74,11 @@ export function addNotification() {
 export function initNotifications() {
   return {
     type: INIT_NOTIFICATIONS
+  };
+}
+export function showContact(status: any) {
+  return {
+    type: SHOW_CONTACT,
+    status
   };
 }

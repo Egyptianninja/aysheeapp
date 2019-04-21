@@ -9,6 +9,8 @@ export default gql`
         uniquename
         phone
         email
+        passcode
+        showcontact
         addressEmail
         name
         about

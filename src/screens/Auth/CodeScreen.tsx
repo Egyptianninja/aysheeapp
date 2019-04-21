@@ -174,10 +174,12 @@ class CodeScreen extends React.Component<any, any> {
       if (res.data.smsLoginWithCode.ok) {
         const { token, data } = res.data.smsLoginWithCode;
         const isstore = data.isstore;
+        const passcode = data.passcode;
         await AsyncStorage.setItem('aysheetoken', token);
         const name = this.props.navigation.getParam('name');
         const phone = this.props.navigation.getParam('phone');
         const email = this.props.navigation.getParam('email');
+        await AsyncStorage.setItem('passcode', passcode.toString());
         await AsyncStorage.setItem('name', name);
         if (phone) {
           await AsyncStorage.setItem('phone', phone);

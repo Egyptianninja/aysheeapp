@@ -151,7 +151,6 @@ class HomeScreen extends React.Component<any, any> {
     this.state.scrollAnim.removeAllListeners();
     this.state.offsetAnim.removeAllListeners();
     this.subs.forEach((sub: any) => sub.remove());
-    this.notify.removeAllListeners();
     clearTimeout(this.timer);
   }
 

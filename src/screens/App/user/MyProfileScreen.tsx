@@ -23,7 +23,9 @@ import updateMyQty from '../../../graphql/mutation/updateMyQty';
 import editClassifieds from '../../../graphql/mutation/editClassifieds';
 import favoritePost from '../../../graphql/mutation/favoritePost';
 import getUserPosts from '../../../graphql/query/getUserPosts';
+import showMyContact from '../../../graphql/mutation/showMyContact';
 import { updateUser } from '../../../store/actions/userAtions';
+import { showContact } from '../../../store/actions/globActions';
 import {
   call,
   getNextPosts,
@@ -35,6 +37,7 @@ import {
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
 import { code } from '../../../store/getStore';
+import { Group, CheckBox } from '../../../lib';
 const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 240;
@@ -257,6 +260,35 @@ class MyProfileScreen extends React.Component<any, any> {
       <View style={{ height: HEADER_HEIGHT - 50 }}>
         <View
           style={{
+            position: 'absolute',
+            top: 5,
+            left: rtlos() === 3 ? 5 : undefined,
+            right: rtlos() === 3 ? undefined : 5,
+            zIndex: 100
+          }}
+        >
+          <Group
+            color="#444"
+            size={24}
+            nostyle={true}
+            onChange={() => {
+              this.props.showContact(!this.props.showcontact);
+              this.props.showMyContact({
+                variables: { showcontact: !this.props.showcontact }
+              });
+            }}
+            rtl={this.props.isRTL}
+          >
+            <CheckBox
+              name="iswarranty"
+              label={words.showcontact}
+              value={this.props.showcontact}
+              selected={this.props.showcontact === true}
+            />
+          </Group>
+        </View>
+        <View
+          style={{
             padding: 10,
             flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             height: HEADER_HEIGHT - 100
@@ -341,23 +373,27 @@ class MyProfileScreen extends React.Component<any, any> {
                   />
                 </View>
               </TouchableOpacity>
-              {user.phone && (
-                <Text
-                  style={{
-                    fontSize: 14
-                  }}
-                >
-                  + {user.phone}
-                </Text>
-              )}
-              {user.email && (
-                <Text
-                  style={{
-                    fontSize: 14
-                  }}
-                >
-                  {user.email}
-                </Text>
+              {user.showcontact && (
+                <View>
+                  {user.phone && (
+                    <Text
+                      style={{
+                        fontSize: 14
+                      }}
+                    >
+                      + {user.phone}
+                    </Text>
+                  )}
+                  {user.email && (
+                    <Text
+                      style={{
+                        fontSize: 14
+                      }}
+                    >
+                      {user.email}
+                    </Text>
+                  )}
+                </View>
               )}
             </View>
           </View>
@@ -498,6 +534,46 @@ class MyProfileScreen extends React.Component<any, any> {
             justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 2,
+            backgroundColor: tab === 3 ? '#eee' : '#fff',
+            paddingHorizontal: 5
+          }}
+          onPress={() => {
+            this.setState({
+              rest: { islive: true, isfront: true },
+              tab: 3
+            });
+          }}
+        >
+          <View
+            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
+          >
+            <Text
+              style={{
+                color: tab === 3 ? maincolor : '#000',
+                fontSize: 16
+              }}
+            >
+              {words.infrontpage}
+            </Text>
+            <Text
+              style={{
+                color: '#00B77C',
+                fontSize: 12,
+                padding: 5,
+                bottom: 10
+              }}
+            >
+              {user.frontqty}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            flex: 1,
+            padding: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginHorizontal: 2,
             backgroundColor: tab === 1 ? '#eee' : '#fff',
             paddingHorizontal: 5
           }}
@@ -514,7 +590,7 @@ class MyProfileScreen extends React.Component<any, any> {
                 fontSize: 16
               }}
             >
-              {words.ads}
+              {words.onlineposts}
             </Text>
             <Text
               style={{
@@ -525,6 +601,46 @@ class MyProfileScreen extends React.Component<any, any> {
               }}
             >
               {user.onlineqty}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            flex: 1,
+            padding: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginHorizontal: 2,
+            backgroundColor: tab === 4 ? '#eee' : '#fff',
+            paddingHorizontal: 5
+          }}
+          onPress={() => {
+            this.setState({
+              rest: { islive: false },
+              tab: 4
+            });
+          }}
+        >
+          <View
+            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
+          >
+            <Text
+              style={{
+                color: tab === 4 ? maincolor : '#000',
+                fontSize: 16
+              }}
+            >
+              {words.offlineposts}
+            </Text>
+            <Text
+              style={{
+                color: '#00B77C',
+                fontSize: 12,
+                padding: 5,
+                bottom: 10
+              }}
+            >
+              {user.offlineqty}
             </Text>
           </View>
         </TouchableOpacity>
@@ -572,86 +688,6 @@ class MyProfileScreen extends React.Component<any, any> {
             </View>
           </TouchableOpacity>
         )}
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            padding: 5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginHorizontal: 2,
-            backgroundColor: tab === 3 ? '#eee' : '#fff',
-            paddingHorizontal: 5
-          }}
-          onPress={() => {
-            this.setState({
-              rest: { islive: true, isfront: true },
-              tab: 3
-            });
-          }}
-        >
-          <View
-            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
-          >
-            <Text
-              style={{
-                color: tab === 3 ? maincolor : '#000',
-                fontSize: 16
-              }}
-            >
-              {words.infrontpage}
-            </Text>
-            <Text
-              style={{
-                color: '#00B77C',
-                fontSize: 12,
-                padding: 5,
-                bottom: 10
-              }}
-            >
-              {user.frontqty}
-            </Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            padding: 5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginHorizontal: 2,
-            backgroundColor: tab === 4 ? '#eee' : '#fff',
-            paddingHorizontal: 5
-          }}
-          onPress={() => {
-            this.setState({
-              rest: { islive: false },
-              tab: 4
-            });
-          }}
-        >
-          <View
-            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
-          >
-            <Text
-              style={{
-                color: tab === 4 ? maincolor : '#000',
-                fontSize: 16
-              }}
-            >
-              {words.unpublished}
-            </Text>
-            <Text
-              style={{
-                color: '#00B77C',
-                fontSize: 12,
-                padding: 5,
-                bottom: 10
-              }}
-            >
-              {user.offlineqty}
-            </Text>
-          </View>
-        </TouchableOpacity>
       </ScrollView>
     );
   };
@@ -798,12 +834,13 @@ const mapStateToProps = (state: any) => ({
   user: state.user.user,
   isRTL: state.glob.isRTL,
   lang: state.glob.languageName,
-  words: state.glob.language.words
+  words: state.glob.language.words,
+  showcontact: state.glob.showcontact
 });
 
 export default connect(
   mapStateToProps,
-  { updateUser }
+  { updateUser, showContact }
 )(
   graphql(favoritePost, {
     name: 'favoritePost',
@@ -818,7 +855,11 @@ export default connect(
         graphql(updateMyQty, {
           name: 'updateMyQty',
           options: { refetchQueries: ['getUserPosts', 'getTimeLine'] }
-        })(MyProfileScreen)
+        })(
+          graphql(showMyContact, {
+            name: 'showMyContact'
+          })(MyProfileScreen)
+        )
       )
     )
   )

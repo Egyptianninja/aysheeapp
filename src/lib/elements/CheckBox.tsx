@@ -40,7 +40,8 @@ const CheckBox = (props: any) => {
             alignSelf:
               rtl && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
             color: labelColor,
-            marginHorizontal: 10
+            marginHorizontal: 10,
+            top: 5
           }}
         >
           {label}

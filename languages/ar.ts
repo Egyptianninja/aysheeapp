@@ -507,11 +507,12 @@ export default {
     other: 'اخرى',
     apply: 'تطبيق',
     clear: 'مسح',
-    infrontpage: 'الصفحة الرئيسية',
+    infrontpage: 'منشورات الصفحة الرئيسية',
     availablemarket: 'الاسواق المتاحة',
     appwillrestart: 'سيتم اعادة تشغيل البرنامج',
     frontadded: 'تمت اضافة الاعلان للصفحة الرئيسية',
     frontremoved: 'تمت ازالة الاعلان من الصفحة الرئيسية',
+    showcontact: 'اظهار وسيلة التواصل',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

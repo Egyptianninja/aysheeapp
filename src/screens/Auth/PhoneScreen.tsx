@@ -133,13 +133,16 @@ class PhoneScreen extends React.Component<any, any> {
     const directstore = this.props.navigation.getParam('directstore');
     const add = this.props.navigation.getParam('add');
     const origin = this.props.navigation.getParam('origin');
+    const storedpasscode = await AsyncStorage.getItem('passcode');
+
+    const passcode = Number(storedpasscode);
     try {
       const { phone, email } = values;
 
       if (this.state.isEmailLogin) {
         if (email === this.state.localeEmail) {
           const res = await this.props.smsLoginWithPhone({
-            variables: { email }
+            variables: { email, passcode }
           });
           if (res.data.smsLoginWithPhone.ok) {
             const { token, data } = res.data.smsLoginWithPhone;
@@ -157,6 +160,8 @@ class PhoneScreen extends React.Component<any, any> {
               isstore
             });
             this.props.navigation.navigate(rout.screen, { title: rout.title });
+          } else if (!res.data.smsLoginWithPhone.ok) {
+            bag.setErrors({ email: res.data.smsLoginWithPhone.error });
           }
         } else {
           const res = await this.props.smsRequestCode({
@@ -182,7 +187,7 @@ class PhoneScreen extends React.Component<any, any> {
               origin
             });
           } else {
-            bag.setErrors({ phone: res.data.smsRequestCode.error });
+            bag.setErrors({ email: res.data.smsRequestCode.error });
           }
           bag.setSubmitting(false);
         }
@@ -190,7 +195,7 @@ class PhoneScreen extends React.Component<any, any> {
         const phoneNumber = `${this.props.code}${phone}`;
         if (phoneNumber === this.state.localePhone) {
           const res = await this.props.smsLoginWithPhone({
-            variables: { phone: phoneNumber }
+            variables: { phone: phoneNumber, passcode }
           });
           if (res.data.smsLoginWithPhone.ok) {
             const { token, data } = res.data.smsLoginWithPhone;
@@ -208,6 +213,8 @@ class PhoneScreen extends React.Component<any, any> {
               isstore
             });
             this.props.navigation.navigate(rout.screen, { title: rout.title });
+          } else {
+            bag.setErrors({ phone: res.data.smsLoginWithPhone.error });
           }
         } else {
           const res = await this.props.smsRequestCode({

@@ -1,7 +1,13 @@
-import { DEL_QUERY, GET_BUCKETS, SET_QUERY } from '../types';
+import {
+  DEL_QUERY,
+  GET_BUCKETS,
+  SET_QUERY,
+  GET_CONTROL_BUCKETS
+} from '../types';
 
 const initialState = {
   buckets: null,
+  controlbuckets: null,
   query: ''
 };
 
@@ -11,6 +17,11 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         buckets: action.buckets
+      };
+    case GET_CONTROL_BUCKETS:
+      return {
+        ...state,
+        controlbuckets: action.controlbuckets
       };
     case SET_QUERY:
       return {

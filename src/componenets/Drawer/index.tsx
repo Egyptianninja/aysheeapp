@@ -27,6 +27,7 @@ import {
   login,
   logout,
   phoneRemoved,
+  emailRemoved,
   updateUser
 } from '../../store/actions/userAtions';
 import {
@@ -238,6 +239,7 @@ class Drawer extends React.Component<any, any> {
         AsyncStorage.removeItem('aysheetoken');
         this.props.logout();
         this.props.phoneRemoved();
+        this.props.emailRemoved();
         const response = await this.props.refreshToken({
           variables: { country, city }
         });
@@ -476,6 +478,26 @@ class Drawer extends React.Component<any, any> {
           )}
 
           {this.renderMenu(menus, lang)}
+          {this.props.isAuthenticated && this.props.user.isadmin && (
+            <TouchableOpacity
+              onPress={async () => {
+                this.props.navigation.navigate('Control');
+              }}
+              style={{
+                padding: 10,
+                flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+                justifyContent: 'flex-start',
+                alignItems: 'center'
+              }}
+            >
+              <Ionicons
+                style={{ paddingHorizontal: 10 }}
+                name="ios-cog"
+                size={30}
+              />
+              <Text>Control</Text>
+            </TouchableOpacity>
+          )}
         </ScrollView>
         <Modal
           isVisible={this.state.isModalVisible}
@@ -555,6 +577,7 @@ const mapDispatchToProps = (dispatch: any) =>
       logout,
       updateUser,
       phoneRemoved,
+      emailRemoved,
       initApp
     },
     dispatch

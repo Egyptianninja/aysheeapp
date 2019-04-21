@@ -452,8 +452,8 @@ export default {
     namenotvalid: 'Not valid name',
     noresults: 'No results',
     sort: 'Sort',
-    onlineposts: 'Online Posts',
-    offlineposts: 'Offline Posts',
+    onlineposts: 'Online',
+    offlineposts: 'Offline',
     replay: 'Replay',
     moreads: 'ads',
     favorites: 'Favorites',
@@ -512,6 +512,7 @@ export default {
     appwillrestart: 'ishee app will be restarted',
     frontadded: 'Added to Front page',
     frontremoved: 'Removed from Front page',
+    showcontact: 'Show Contact',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

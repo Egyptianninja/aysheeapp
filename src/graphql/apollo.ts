@@ -10,7 +10,11 @@ import { AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import secrets from '../constants/secrets';
 import { store } from '../store';
-import { logout, phoneRemoved } from '../store/actions/userAtions';
+import {
+  logout,
+  phoneRemoved,
+  emailRemoved
+} from '../store/actions/userAtions';
 
 // const host = 'http://192.168.100.22:4000/';
 // const uri = 'http://192.168.100.22:4000/';
@@ -20,6 +24,7 @@ import { logout, phoneRemoved } from '../store/actions/userAtions';
 
 const host = secrets.host;
 const uri = secrets.uri;
+
 const httpLink = createHttpLink({
   uri: host
 });
@@ -46,8 +51,13 @@ const logoutLink = onError(({ graphQLErrors }) => {
       if (message === 'auth code error') {
         store.dispatch(logout());
         AsyncStorage.removeItem('aysheetoken');
+        AsyncStorage.removeItem('phone');
+        AsyncStorage.removeItem('email');
+        AsyncStorage.removeItem('name');
+        AsyncStorage.removeItem('passcode');
         store.dispatch(phoneRemoved());
-        NavigationActions.navigate({ routeName: 'HomeScreen' });
+        store.dispatch(emailRemoved());
+        // NavigationActions.navigate({ routeName: 'HomeScreen' });
       }
     });
   }

@@ -7,7 +7,8 @@ import {
   readyPost,
   readyPosts,
   readyUserPosts,
-  handleOnMenuModal
+  handleOnMenuModal,
+  getControlBuckets
 } from './apollo';
 import BottomDrawer from './bottomDrawar';
 import { call, getPureNumber } from './call';
@@ -121,5 +122,6 @@ export {
   getCameraPermission,
   shareTemplate,
   handleOnMenuModal,
-  LoadingLodal
+  LoadingLodal,
+  getControlBuckets
 };

@@ -34,6 +34,9 @@ export default gql`
       data {
         _id
         uniquename
+        isadmin
+        passcode
+        showcontact
         phone
         email
         addressEmail

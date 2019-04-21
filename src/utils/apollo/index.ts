@@ -1,4 +1,4 @@
-import { getNamedAggs, getTimeLineBuckets } from './buckets';
+import { getNamedAggs, getTimeLineBuckets, getControlBuckets } from './buckets';
 import { handleOnMenuModal } from './menu';
 import {
   getDBNextPosts,
@@ -18,5 +18,6 @@ export {
   readyPosts,
   readyPost,
   readyUserPosts,
-  handleOnMenuModal
+  handleOnMenuModal,
+  getControlBuckets
 };

@@ -8,7 +8,8 @@ import {
   SHOW_MODAL,
   HIDE_MODAL,
   ADD_NOTIFICATION,
-  INIT_NOTIFICATIONS
+  INIT_NOTIFICATIONS,
+  SHOW_CONTACT
 } from '../types';
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
   permissions: {},
   recentLocation: {},
   showModal: false,
-  notifications: 0
+  notifications: 0,
+  showcontact: true
 };
 
 export default function(state = initialState, action: any) {
@@ -49,6 +51,11 @@ export default function(state = initialState, action: any) {
       return {
         ...state,
         showModal: true
+      };
+    case SHOW_CONTACT:
+      return {
+        ...state,
+        showcontact: action.status
       };
     case HIDE_MODAL:
       return {

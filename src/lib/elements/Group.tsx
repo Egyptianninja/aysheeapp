@@ -10,24 +10,28 @@ const Group = (props: any) => {
   );
   return (
     <View
-      style={{
-        width: props.column ? width - 80 : width - 40,
-        alignItems: props.rtl
-          ? 'flex-end'
-          : props.column
-          ? 'flex-start'
-          : 'center',
-        flexDirection: props.column
-          ? 'column'
-          : props.rtl && Platform.OS !== 'android'
-          ? 'row-reverse'
-          : 'row',
-        marginVertical: 5,
-        padding: 10,
-        borderColor: '#eee',
-        borderWidth: 1,
-        borderRadius: 5
-      }}
+      style={[
+        props.nostyle
+          ? {}
+          : {
+              width: props.column ? width - 80 : width - 40,
+              alignItems: props.rtl
+                ? 'flex-end'
+                : props.column
+                ? 'flex-start'
+                : 'center',
+              flexDirection: props.column
+                ? 'column'
+                : props.rtl && Platform.OS !== 'android'
+                ? 'row-reverse'
+                : 'row',
+              marginVertical: 5,
+              padding: 10,
+              borderColor: '#eee',
+              borderWidth: 1,
+              borderRadius: 5
+            }
+      ]}
     >
       {childrenWithProps}
     </View>

@@ -213,6 +213,105 @@ export const getOtherBuckets = (store: any, data: any, query: any) => {
   });
   return readyAggs;
 };
+export const getControlBuckets = (store: any, data: any, query: any) => {
+  const aggs = data[query].aggs.filter((agg: any) => agg.buckets.length > 0);
+
+  const lang = store.languageName();
+  const readyAggs = aggs.map((agg: any) => {
+    if (agg.name === 'categoryId') {
+      return getNamedAggs(
+        store,
+        'category',
+        agg,
+        'categoryId',
+        lang,
+        'Category'
+      );
+    }
+    if (agg.name === 'country') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key,
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: 'Country'
+      };
+    }
+    if (agg.name === 'city') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key,
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: 'City'
+      };
+    }
+    if (agg.name === 'ispublish') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key === '0' ? 'Unpublish' : 'Publish',
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: 'Publish'
+      };
+    } else if (agg.name === 'islive') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key === '0' ? 'Offline' : 'Online',
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: 'Online'
+      };
+    } else if (agg.name === 'isoffer') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key === '0' ? 'Ad' : 'Offer',
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: 'Offer'
+      };
+    } else if (agg.name === 'isfront') {
+      const namedBucket = agg.buckets.map((bk: any) => {
+        return {
+          id: bk.key,
+          name: bk.key === '0' ? 'Categories' : 'Front',
+          qty: bk.doc_count
+        };
+      });
+      return {
+        name: agg.name,
+        buckets: namedBucket,
+        label: 'Front'
+      };
+    }
+  });
+  return readyAggs;
+};
 
 export const getNamedAggs = (
   store: any,
