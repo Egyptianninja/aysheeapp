@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as React from 'react';
+import { StackActions } from 'react-navigation';
 import { graphql } from 'react-apollo';
 import {
   AsyncStorage,
@@ -191,13 +192,20 @@ class CodeScreen extends React.Component<any, any> {
         await this.props.login(token, data);
         await this.props.initTime();
         await this.props.initCode();
-        const rout = this.getDestinationRout({
-          directstore,
-          add,
-          origin,
-          isstore
-        });
-        this.props.navigation.navigate(rout.screen, { title: rout.title });
+        if (origin === 'post') {
+          const popAction = StackActions.pop({
+            n: 2
+          });
+          this.props.navigation.dispatch(popAction);
+        } else {
+          const rout = this.getDestinationRout({
+            directstore,
+            add,
+            origin,
+            isstore
+          });
+          this.props.navigation.navigate(rout.screen, { title: rout.title });
+        }
       } else {
         if (res.data.smsLoginWithCode.ok === false) {
           const nowTime = Math.floor(new Date().getTime() / 1000);

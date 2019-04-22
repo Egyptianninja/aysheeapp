@@ -47,7 +47,7 @@ class InputCode extends React.PureComponent<any, any> {
                 textAlign: 'center',
                 borderRadius: 25,
                 letterSpacing: 1,
-                fontSize: 40,
+                fontSize: 34,
                 color: '#636363',
                 fontWeight: '300'
               }

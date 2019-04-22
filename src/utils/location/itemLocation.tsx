@@ -26,8 +26,8 @@ export default class ItemLocation extends React.Component<any, any> {
           onPress={() => this.animateToCenter()}
           style={{
             position: 'absolute',
-            right: rtlos() === 3 ? undefined : 8,
-            left: rtlos() === 3 ? 8 : undefined,
+            left: rtlos() === 3 ? undefined : 8,
+            right: rtlos() === 3 ? 8 : undefined,
             top: 5,
             zIndex: 100
           }}
@@ -63,7 +63,7 @@ export default class ItemLocation extends React.Component<any, any> {
               style={{
                 width: 50,
                 height: 50,
-                borderRadius: 25,
+                borderRadius: 26,
                 backgroundColor: 'rgba(223, 57, 66,0.1)',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    borderColor: '#D9DAFA',
-    borderWidth: 2,
+    // borderColor: '#D9DAFA',
+    // borderWidth: 2,
     overflow: 'hidden'
   }
 });

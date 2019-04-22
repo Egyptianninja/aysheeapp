@@ -348,6 +348,7 @@ class ItemView extends React.Component<any, any> {
       fav,
       live,
       word,
+      lang,
       isRTL,
       postId,
       isAuthenticated
@@ -729,27 +730,30 @@ class ItemView extends React.Component<any, any> {
                 title={post.title}
               />
             )}
-            <View
-              style={{
-                marginHorizontal: 20,
-                marginTop: 20,
-                marginBottom: 5,
-                alignItems:
-                  isRTL && Platform.OS !== 'android'
-                    ? 'flex-end'
-                    : 'flex-start',
-                justifyContent: 'center'
-              }}
-            >
-              <Text
+            {this.props.isAuthenticated && (
+              <View
                 style={{
-                  fontSize: 16,
-                  color: '#aaa'
+                  marginHorizontal: 20,
+                  marginTop: 20,
+                  marginBottom: 5,
+                  alignItems:
+                    isRTL && Platform.OS !== 'android'
+                      ? 'flex-end'
+                      : 'flex-start',
+                  justifyContent: 'center'
                 }}
               >
-                {word.comments}
-              </Text>
-            </View>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: '#aaa'
+                  }}
+                >
+                  {word.comments}
+                </Text>
+              </View>
+            )}
+
             <View
               style={{
                 flex: 1,
@@ -828,7 +832,27 @@ class ItemView extends React.Component<any, any> {
                   />
                 )}
               </Query>
+              {!this.props.isAuthenticated && (
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('PhoneScreen', {
+                      origin: 'post'
+                    })
+                  }
+                >
+                  <Text
+                    style={{
+                      paddingHorizontal: 20,
+                      fontSize: 14,
+                      color: '#7678ED'
+                    }}
+                  >
+                    login to comment
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
+
             {this.props.isAuthenticated && (
               <InputBar
                 onSendPressed={(postID: any) => {

@@ -124,6 +124,7 @@ class AddServiceScreen extends React.Component<any, any> {
         body,
         photos: photo ? [photo] : null,
         isoffer: true,
+        isfront: true,
         isrtl,
         start,
         end,

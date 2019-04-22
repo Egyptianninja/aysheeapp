@@ -22,7 +22,8 @@ import {
   PhoneScreen,
   ProfileScreen,
   ShopsScreen,
-  UpgradeToStore
+  UpgradeToStore,
+  ContactScreen
 } from '../../../screens';
 
 export const HomeStack = createStackNavigator(
@@ -174,6 +175,19 @@ export const HomeStack = createStackNavigator(
 
     ShopsScreen: {
       screen: ShopsScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <Header
+            navigation={navigation}
+            title={navigation.getParam('title')}
+          />
+        ),
+        headerBackTitle: null
+      })
+    },
+
+    ContactScreen: {
+      screen: ContactScreen,
       navigationOptions: ({ navigation }: any) => ({
         header: (
           <Header

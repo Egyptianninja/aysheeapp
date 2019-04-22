@@ -513,6 +513,7 @@ export default {
     frontadded: 'Added to Front page',
     frontremoved: 'Removed from Front page',
     showcontact: 'Show Contact',
+    helpcenter: 'Help Center',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

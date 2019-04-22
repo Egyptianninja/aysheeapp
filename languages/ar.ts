@@ -513,6 +513,7 @@ export default {
     frontadded: 'تمت اضافة الاعلان للصفحة الرئيسية',
     frontremoved: 'تمت ازالة الاعلان من الصفحة الرئيسية',
     showcontact: 'اظهار وسيلة التواصل',
+    helpcenter: 'مركز المساعدة',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

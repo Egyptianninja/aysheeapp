@@ -22,6 +22,7 @@ import UpgradeToStore from './App/user/UpgradeToStore';
 import CodeScreen from './Auth/CodeScreen';
 import PhoneScreen from './Auth/PhoneScreen';
 import LoadScreen from './Load/LoadScreen';
+import ContactScreen from './App/ContactScreen';
 
 export {
   HomeScreen,
@@ -47,5 +48,6 @@ export {
   MyProfileScreen,
   ShopsScreen,
   SearchScreen,
-  CategoryScreen
+  CategoryScreen,
+  ContactScreen
 };

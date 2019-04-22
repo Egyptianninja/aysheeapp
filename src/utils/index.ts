@@ -62,6 +62,7 @@ import { isIphoneX, isTablet } from './platform/device';
 import { onShare } from './share';
 import { since } from './since';
 import { shareTemplate } from './share/template';
+import { distance } from './location/distance';
 export {
   StyleSheet,
   uploadPhoto,
@@ -123,5 +124,6 @@ export {
   shareTemplate,
   handleOnMenuModal,
   LoadingLodal,
-  getControlBuckets
+  getControlBuckets,
+  distance
 };

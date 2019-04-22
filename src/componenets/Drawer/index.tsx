@@ -231,6 +231,10 @@ class Drawer extends React.Component<any, any> {
         return this.props.navigation.navigate('MyFavScreen', {
           title: this.props.words.favorites
         });
+      case 7:
+        return this.props.navigation.navigate('ContactScreen', {
+          title: this.props.words.helpcenter
+        });
 
       case 8: {
         // TODO: uncomment to logout from all

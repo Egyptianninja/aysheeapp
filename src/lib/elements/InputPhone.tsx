@@ -60,7 +60,7 @@ class InputPhone extends React.PureComponent<any, any> {
           >
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 18,
                 color: '#fff'
               }}
             >

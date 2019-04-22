@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, View } from 'react-native';
 import { images } from '../../load';
-const Logo = ({ size = 150 }) => (
+const Logo = ({ size = 150, tintColor }: any) => (
   <View
     style={{
       justifyContent: 'center',
@@ -20,7 +20,8 @@ const Logo = ({ size = 150 }) => (
         style={{
           flex: 1,
           width: '100%',
-          height: '100%'
+          height: '100%',
+          tintColor
         }}
         source={images.namelogofull}
       />

@@ -103,7 +103,8 @@ if (rtlos() === 3) {
             routeName === 'ChoiseScreen' ||
             routeName === 'PhoneScreen' ||
             routeName === 'CameraScreen' ||
-            routeName === 'CodeScreen'
+            routeName === 'CodeScreen' ||
+            routeName === 'ContactScreen'
           ) {
             navigationOptions.tabBarVisible = false;
           } else {
@@ -151,7 +152,8 @@ if (rtlos() === 3) {
             routeName === 'ChoiseScreen' ||
             routeName === 'PhoneScreen' ||
             routeName === 'CameraScreen' ||
-            routeName === 'CodeScreen'
+            routeName === 'CodeScreen' ||
+            routeName === 'ContactScreen'
           ) {
             navigationOptions.tabBarVisible = false;
           } else {

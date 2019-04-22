@@ -153,13 +153,19 @@ class PhoneScreen extends React.Component<any, any> {
             await this.props.login(token, data);
             await this.props.initTime();
             await this.props.initCode();
-            const rout = this.getDestinationRout({
-              directstore,
-              add,
-              origin,
-              isstore
-            });
-            this.props.navigation.navigate(rout.screen, { title: rout.title });
+            if (origin === 'post') {
+              this.props.navigation.goBack();
+            } else {
+              const rout = this.getDestinationRout({
+                directstore,
+                add,
+                origin,
+                isstore
+              });
+              this.props.navigation.navigate(rout.screen, {
+                title: rout.title
+              });
+            }
           } else if (!res.data.smsLoginWithPhone.ok) {
             bag.setErrors({ email: res.data.smsLoginWithPhone.error });
           }
