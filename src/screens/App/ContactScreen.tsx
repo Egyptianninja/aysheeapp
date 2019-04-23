@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Logo } from '../../componenets';
 import { Linking } from 'expo';
+
 const ContactScreen = () => {
   return (
     <View

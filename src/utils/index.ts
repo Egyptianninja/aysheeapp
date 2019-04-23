@@ -63,6 +63,7 @@ import { onShare } from './share';
 import { since } from './since';
 import { shareTemplate } from './share/template';
 import { distance } from './location/distance';
+import { uuidGenerator, uuidv4 } from './uuid';
 export {
   StyleSheet,
   uploadPhoto,
@@ -125,5 +126,7 @@ export {
   handleOnMenuModal,
   LoadingLodal,
   getControlBuckets,
-  distance
+  distance,
+  uuidGenerator,
+  uuidv4
 };
