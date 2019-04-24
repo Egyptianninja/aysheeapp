@@ -13,6 +13,7 @@ class ImageModal extends React.PureComponent<any, any> {
   };
 
   render() {
+    const qty = this.props.qty;
     return (
       <Modal
         isVisible={this.props.isPhotoModalVisible}
@@ -25,7 +26,7 @@ class ImageModal extends React.PureComponent<any, any> {
       >
         <View style={{ flex: 1 }}>
           <ImageBrowser
-            max={6 - this.props.imgqty}
+            max={qty - this.props.imgqty}
             callback={this.props.imageBrowserCallback}
           />
         </View>

@@ -43,6 +43,13 @@ export default gql`
         tel
         fax
         mob
+        branches {
+          name
+          location {
+            lat
+            lon
+          }
+        }
         location {
           lon
           lat

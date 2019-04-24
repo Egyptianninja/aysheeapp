@@ -149,7 +149,7 @@ class PhotoView extends React.Component<any, any> {
                   borderRadius: 5,
                   borderColor: main ? '#00B77C' : undefined,
                   borderWidth: main ? 5 : 0,
-                  opacity: i > 5 ? 0.2 : 1
+                  opacity: this.props.qty > 6 ? 1 : i > 5 ? 0.2 : 1
                 }}
               >
                 <Image
@@ -198,20 +198,26 @@ class PhotoView extends React.Component<any, any> {
         >
           <ImageAlbumPicker
             imgqty={this.state.images.length}
-            // label={word.photos}
+            qty={this.props.qty}
             sublabel={word.subphotos}
             returnData={returnData}
             width={SCREEN_WIDTH}
           />
-          <View style={{ height: '90%', width: 3, backgroundColor: '#eee' }} />
-          <PhotoPicker
-            imgqty={this.state.images.length}
-            icon="ios-camera"
-            // label={word.photos}
-            pickImage={pickCameraImage}
-            width={SCREEN_WIDTH}
-            sublabel={word.subphotos}
-          />
+          {!this.props.album && (
+            <React.Fragment>
+              <View
+                style={{ height: '90%', width: 3, backgroundColor: '#eee' }}
+              />
+              <PhotoPicker
+                imgqty={this.state.images.length}
+                icon="ios-camera"
+                // label={word.photos}
+                pickImage={pickCameraImage}
+                width={SCREEN_WIDTH}
+                sublabel={word.subphotos}
+              />
+            </React.Fragment>
+          )}
         </View>
         {this.state.images.length > 0 && this.renderImages()}
         <Modal

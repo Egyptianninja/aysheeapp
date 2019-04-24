@@ -94,6 +94,12 @@ export default {
       name: 'مواد غذائية',
       nameGlob: 'مواد غذائية, Food, Food'
     },
+    {
+      id: 20,
+      sort: -1,
+      name: 'مطاعم',
+      nameGlob: 'مطاعم, Restaurants, Restaurants'
+    },
     { id: 99, sort: 19, name: 'اخرى', nameGlob: 'اخرى, Other, Other' }
   ],
   kind: [
@@ -514,6 +520,7 @@ export default {
     frontremoved: 'تمت ازالة الاعلان من الصفحة الرئيسية',
     showcontact: 'اظهار وسيلة التواصل',
     helpcenter: 'مركز المساعدة',
+    addbranches: 'اضافة فروع',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

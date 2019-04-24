@@ -21,6 +21,7 @@ export const icons = {
     { id: 16, icon: () => images.icon13 },
     { id: 17, icon: () => images.icon14 },
     { id: 18, icon: () => images.icon15 },
+    { id: 20, icon: () => images.icon20 },
     { id: 99, icon: () => images.icon18 }
   ],
   brands: [

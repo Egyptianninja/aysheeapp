@@ -6,7 +6,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
-  View
+  View,
+  Text
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
@@ -25,18 +26,20 @@ import {
   Message,
   pickImageWithoutUpload,
   StyleSheet,
-  uploadPickedImage,
-  UserLocation
+  uploadPickedImage
 } from '../../../utils';
-const { width } = Dimensions.get('window');
+import BranchesModal from '../../../componenets/ProfileScreen/BranchesModal';
+const { width, height } = Dimensions.get('window');
 
 class UpgradeToStore extends React.Component<any, any> {
   timer: any;
   state = {
     selectedImage: null,
     isShowMessage: false,
+    isMapModalVisible: false,
     location: null,
     avatar: null,
+    branches: [],
     bar: 0
   };
 
@@ -72,6 +75,13 @@ class UpgradeToStore extends React.Component<any, any> {
   hideMessage = () => {
     this.setState({ isShowMessage: false });
   };
+  showMapModal = async () => {
+    this.setState({ isMapModalVisible: true });
+  };
+  hideMapModal = () => {
+    this.setState({ isMapModalVisible: false });
+  };
+
   getCurrentLocation = (location: any) => {
     this.setState({ location });
   };
@@ -80,28 +90,32 @@ class UpgradeToStore extends React.Component<any, any> {
     this.setState({ bar: this.state.bar + value });
   };
 
+  addLocations = (markers: any) => {
+    const branches = markers.map((marker: any) => {
+      return {
+        name: marker.name,
+        location: {
+          lat: marker.coordinate.latitude,
+          lon: marker.coordinate.longitude
+        }
+      };
+    });
+    this.setState({ branches });
+  };
+
   handleSubmit = async (values: any, bag: any) => {
     const {
       name,
       about,
       color,
-      addressEmail,
       website,
+      addressEmail,
       addressCountry,
       addressCity,
       tel,
       fax,
-      mob,
-      location
+      mob
     } = values;
-    const loc: any = location ? this.state.location : null;
-    let trueLocation = null;
-    if (loc) {
-      trueLocation = {
-        lat: loc.coords.latitude,
-        lon: loc.coords.longitude
-      };
-    }
     const avatar = this.state.avatar
       ? await uploadPickedImage(this.state.avatar, 400, 0.8, false)
       : null;
@@ -119,7 +133,7 @@ class UpgradeToStore extends React.Component<any, any> {
         tel,
         fax,
         mob,
-        location: trueLocation
+        branches: this.state.branches
       }
     });
 
@@ -139,7 +153,6 @@ class UpgradeToStore extends React.Component<any, any> {
     const word = this.props.words;
     const { user, isRTL } = this.props;
     const avatar: any = this.state.avatar;
-
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <Message
@@ -160,14 +173,19 @@ class UpgradeToStore extends React.Component<any, any> {
                 name: user.name ? user.name : '',
                 about: user.about ? user.about : '',
                 color: user.color ? user.color : colors[0],
-                email: user.email ? user.email : '',
                 website: user.website ? user.website : '',
+                addressEmail: user.addressEmail
+                  ? user.addressEmail
+                  : user.email
+                  ? user.email
+                  : '',
                 addressCountry: user.addressCountry ? user.addressCountry : '',
                 addressCity: user.addressCity ? user.addressCity : '',
                 tel: user.tel ? user.tel : '',
                 fax: user.fax ? user.fax : '',
-                mob: user.mob ? user.mob : '',
-                location: false
+                mob: user.mob ? user.mob : ''
+                // location: false,
+                // branches: false
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -186,7 +204,8 @@ class UpgradeToStore extends React.Component<any, any> {
                   .max(50)
                   .required(word.isrequire),
                 fax: Yup.string().max(50),
-                mob: Yup.string().max(50)
+                mob: Yup.string().max(50),
+                branches: Yup.boolean().oneOf([true], 'Must have main branch')
               })}
               render={({
                 values,
@@ -373,27 +392,66 @@ class UpgradeToStore extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
-                  <Group
-                    color="#444"
-                    size={24}
-                    onChange={setFieldValue}
-                    rtl={isRTL}
+
+                  <TouchableOpacity
+                    onPress={() => this.setState({ isMapModalVisible: true })}
+                    style={{
+                      backgroundColor: '#fff',
+                      padding: 10,
+                      alignSelf: 'flex-start',
+                      marginHorizontal: 35,
+                      marginTop: 20,
+                      borderRadius: 20,
+                      borderColor: '#7678ED',
+                      borderWidth: 1
+                    }}
                   >
-                    <CheckBox
-                      name="location"
-                      label={word.location}
-                      msg={word.locationmsg}
-                      value={values.location}
-                      selected={values.location}
-                    />
-                  </Group>
-                  {values.location && !this.state.location && <LoadingTiny />}
-                  {values.location && (
-                    <UserLocation
+                    <Text style={{ color: '#7678ED' }}>Add Locations</Text>
+                  </TouchableOpacity>
+                  {this.state.isMapModalVisible && (
+                    <BranchesModal
+                      isMapModalVisible={this.state.isMapModalVisible}
                       getCurrentLocation={this.getCurrentLocation}
+                      hideMapModal={this.hideMapModal}
+                      addLocations={this.addLocations}
+                      branches={this.state.branches}
                       width={width}
+                      height={height}
                     />
                   )}
+                  <View
+                    style={{
+                      flex: 1,
+                      width: width - 70,
+                      marginHorizontal: 35,
+                      marginTop: 10
+                    }}
+                  >
+                    {this.state.branches.map((branch: any) => (
+                      <View
+                        style={{
+                          paddingHorizontal: 10,
+
+                          paddingTop: 15,
+                          paddingBottom: 5,
+                          width: width - 70,
+                          borderBottomColor: '#ddd',
+                          borderBottomWidth: 1
+                        }}
+                        key={branch.name}
+                      >
+                        <Text
+                          style={{
+                            alignSelf: this.props.isRTL
+                              ? 'flex-end'
+                              : 'flex-start'
+                          }}
+                        >
+                          {branch.name}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
                   <Button
                     isRTL={isRTL}
                     background="#fff"
@@ -403,7 +461,7 @@ class UpgradeToStore extends React.Component<any, any> {
                     disabled={
                       !isValid ||
                       isSubmitting ||
-                      (values.location && !this.state.location)
+                      this.state.branches.length === 0
                     }
                     onPress={handleSubmit}
                   />

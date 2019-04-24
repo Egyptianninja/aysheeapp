@@ -38,6 +38,12 @@ export default gql`
           lon
         }
         userId
+        userName
+        userAvatar
+        userAbout
+        branch
+        status
+        groupId
         updatedAt
       }
       error

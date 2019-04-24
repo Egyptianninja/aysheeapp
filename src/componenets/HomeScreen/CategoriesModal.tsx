@@ -166,6 +166,9 @@ export default class CategoriesModal extends React.Component<any, any> {
   };
 
   renderCategoryRow = (start: any, end: any) => {
+    const categories = this.props.categories.filter(
+      (cat: any) => cat.id !== 20
+    );
     return (
       <View
         style={{
@@ -175,7 +178,7 @@ export default class CategoriesModal extends React.Component<any, any> {
           paddingHorizontal: 10
         }}
       >
-        {this.renderCategories(this.props.categories.slice(start, end))}
+        {this.renderCategories(categories.slice(start, end))}
       </View>
     );
   };

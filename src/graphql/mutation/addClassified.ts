@@ -9,6 +9,12 @@ export default gql`
     $isfront: Boolean
     $start: Date
     $end: Date
+    $branch: String
+    $status: Int
+    $groupId: String
+    $userName: String
+    $userAvatar: String
+    $userAbout: String
     $kind: NameInput
     $isrtl: Boolean
     $photos: [String]
@@ -52,6 +58,12 @@ export default gql`
       isfront: $isfront
       start: $start
       end: $end
+      branch: $branch
+      status: $status
+      groupId: $groupId
+      userName: $userName
+      userAvatar: $userAvatar
+      userAbout: $userAbout
       kind: $kind
       isrtl: $isrtl
       photos: $photos

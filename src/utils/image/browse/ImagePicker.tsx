@@ -65,6 +65,7 @@ class ImagePicker extends React.PureComponent<any, any> {
         />
         <ImageModal
           imgqty={this.props.imgqty}
+          qty={this.props.qty}
           imageBrowserCallback={this.imageBrowserCallback}
           isPhotoModalVisible={this.state.isPhotoModalVisible}
         />

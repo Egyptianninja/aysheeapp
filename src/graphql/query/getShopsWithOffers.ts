@@ -22,6 +22,13 @@ export default gql`
       tel
       fax
       mob
+      branches {
+        name
+        location {
+          lat
+          lon
+        }
+      }
       location {
         lat
         lon
@@ -41,6 +48,13 @@ export default gql`
           lon
         }
         userId
+        userName
+        userAvatar
+        userAbout
+        branch
+        status
+        groupId
+        updatedAt
       }
     }
   }

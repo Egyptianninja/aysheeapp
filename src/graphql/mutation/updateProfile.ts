@@ -14,6 +14,7 @@ export default gql`
     $fax: String
     $mob: String
     $location: LocationInput
+    $branches: [BranchInput]
   ) {
     updateProfile(
       name: $name
@@ -28,6 +29,7 @@ export default gql`
       fax: $fax
       mob: $mob
       location: $location
+      branches: $branches
     ) {
       ok
       message
@@ -64,6 +66,13 @@ export default gql`
         tel
         fax
         mob
+        branches {
+          name
+          location {
+            lat
+            lon
+          }
+        }
         location {
           lon
           lat

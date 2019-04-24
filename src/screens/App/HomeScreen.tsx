@@ -32,7 +32,8 @@ import {
   Message,
   readyPosts,
   registerForPushNotificationsAsync,
-  handleOnMenuModal
+  handleOnMenuModal,
+  uuidv4
 } from '../../utils';
 import MessageAlert from '../../utils/message/MessageAlert';
 import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
@@ -391,7 +392,6 @@ class HomeScreen extends React.Component<any, any> {
   render() {
     const { clampedScroll, rest } = this.state;
     const { lang, words, query, isRTL } = this.props;
-
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id

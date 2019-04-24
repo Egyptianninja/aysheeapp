@@ -1,20 +1,15 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
 import {
   Dimensions,
-  Image,
   KeyboardAvoidingView,
   ScrollView,
-  Text,
-  TouchableWithoutFeedback,
   View
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
-import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 import { Button, CheckBox, Group, Input, SelectDate } from '../../../lib';
@@ -22,16 +17,16 @@ import {
   getCameraRollPermission,
   getPureNumber,
   isArabic,
-  Message,
   pickImageWithoutUpload,
-  rtlos,
   StyleSheet,
-  uploadPickedImage,
-  UserLocation
+  uuidv4,
+  getOfferStatus,
+  uploadPhotos
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
 import { updateUser } from '../../../store/actions/userAtions';
 import updateMyQty from '../../../graphql/mutation/updateMyQty';
+import PhotoView from '../../../componenets/Add/PhotoView';
 const { width } = Dimensions.get('window');
 
 class AddServiceScreen extends React.Component<any, any> {
@@ -40,13 +35,33 @@ class AddServiceScreen extends React.Component<any, any> {
     selectedImage: null,
     isMessageVisible: false,
     location: null,
-    image: null,
+    images: [],
+    branches: [],
+    selectedBranches: [],
     bar: 0
   };
 
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
+  componentDidMount() {
+    this.setState({
+      branches: this.props.user.branches,
+      selectedBranches: this.props.user.branches
+    });
+  }
+
+  selectBranch = (branch: any) => {
+    const selected: any = this.state.selectedBranches;
+    if (selected.includes(branch)) {
+      this.setState({
+        selectedBranches: selected.filter((sel: any) => sel !== branch)
+      });
+    } else {
+      selected.push(branch);
+      this.setState({ selectedBranches: selected });
+    }
+  };
 
   showMessageModal = async () => {
     this.setState({ isMessageVisible: true });
@@ -93,60 +108,83 @@ class AddServiceScreen extends React.Component<any, any> {
     }, 2000);
   };
 
+  returnData = (imgs: any) => {
+    const stateImages = this.state.images;
+    const images = [...stateImages, ...imgs];
+    this.setState({ images });
+  };
+  updateImagesList = (images: any) => {
+    this.setState({ images });
+  };
+
   handleSubmit = async (values: any, bag: any) => {
-    const { title, body, startend, location, phone } = values;
+    const { title, body, startend, phone } = values;
+    const { name, about, avatar } = this.props.user;
+    const selectedBranches: any = this.state.selectedBranches;
+    const groupId = uuidv4();
     const isrtl = isArabic(title);
 
-    const photo = this.state.image
-      ? await uploadPickedImage(this.state.image, 1080, 0.8)
-      : null;
+    let photos: any;
+    if (this.state.images.length > 0) {
+      photos = await uploadPhotos(
+        this.state.images,
+        this.state.selectedImage,
+        this.updateProgressBar
+      );
+    }
 
     const start = new Date(Object.keys(startend.name[0])[0]);
     const end = new Date(
       Object.keys(startend.name[startend.name.length - 1])[0]
     );
-
-    const loc: any = location ? this.state.location : null;
-    let trueLocation = null;
-
-    if (loc) {
-      trueLocation = {
-        lat: loc.coords.latitude,
-        lon: loc.coords.longitude
-      };
-    }
+    const status = getOfferStatus({ start, end });
 
     this.updateProgressBar(1 / 3);
+    if (selectedBranches.length === 0) {
+      bag.setErrors({ title: 'you should select branch' });
+      return;
+    }
+    selectedBranches.map(async (branch: any) => {
+      const res = await this.props.addClassifiedMutation({
+        variables: {
+          title,
+          body,
+          photos,
+          isoffer: true,
+          isfront: true,
+          isrtl,
+          start,
+          end,
+          status,
+          groupId,
+          userName: name,
+          userAvatar: avatar,
+          userAbout: about,
+          branch: branch.name,
+          trueLocation: {
+            lat: branch.location.lat,
+            lon: branch.location.lon
+          },
+          phone
+        }
+      });
 
-    const res = await this.props.addClassifiedMutation({
-      variables: {
-        title,
-        body,
-        photos: photo ? [photo] : null,
-        isoffer: true,
-        isfront: true,
-        isrtl,
-        start,
-        end,
-        trueLocation,
-        phone
+      if (res.data.createPost.ok) {
+        this.updateProgressBar(1 / 3);
+        this.updateProgressBar(1 / 3);
+      }
+      if (!res.data.createPost.ok) {
+        bag.setErrors({ title: res.data.createPost.error });
       }
     });
-
-    if (res.data.createPost.ok) {
-      this.updateProgressBar(1 / 3);
-      this.updateItemsQty();
-      this.updateProgressBar(1 / 3);
-    }
-    if (!res.data.createPost.ok) {
-      bag.setErrors({ title: res.data.createPost.error });
-    }
+    this.updateItemsQty();
     bag.setSubmitting(false);
   };
   render() {
     const word = this.props.words;
     const { isRTL } = this.props;
-    const image: any = this.state.image;
+    const selectedBranches: any = this.state.selectedBranches;
+
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <MessageAlert
@@ -172,8 +210,7 @@ class AddServiceScreen extends React.Component<any, any> {
                 phone: this.props.user.phone
                   ? getPureNumber(this.props.user.phone)
                   : '',
-                photo: '',
-                location: false
+                photos: ''
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -183,7 +220,6 @@ class AddServiceScreen extends React.Component<any, any> {
                 body: Yup.string()
                   .max(1000)
                   .required('Required'),
-                photo: Yup.string().required('Required'),
                 startend: Yup.object().required('Required'),
                 phone: Yup.string()
                   .max(25)
@@ -232,75 +268,18 @@ class AddServiceScreen extends React.Component<any, any> {
                     height={100}
                   />
 
-                  {!this.state.image && (
-                    <React.Fragment>
-                      <Text
-                        style={[
-                          styles.labelStyle,
-                          {
-                            paddingHorizontal: 45,
-                            alignSelf:
-                              rtlos() === 3
-                                ? 'flex-start'
-                                : isRTL
-                                ? 'flex-end'
-                                : 'flex-start'
-                          }
-                        ]}
-                      >
-                        {word.selectphoto}
-                      </Text>
-                      <TouchableWithoutFeedback
-                        onPress={() => this.onPhotoUpload(setFieldValue)}
-                      >
-                        <View
-                          style={{
-                            width: width - 60,
-                            backgroundColor: '#fff',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginVertical: 10,
-                            height: 100,
-                            borderRadius: 20
-                          }}
-                        >
-                          <Ionicons
-                            name="ios-images"
-                            size={50}
-                            color="#8E90F0"
-                          />
-                          <Text
-                            style={{
-                              fontSize: 30,
-                              position: 'absolute',
-                              top: 15,
-                              right: 110,
-                              color: '#8E90F0'
-                            }}
-                          >
-                            +
-                          </Text>
-                        </View>
-                      </TouchableWithoutFeedback>
-                    </React.Fragment>
-                  )}
-                  {image && (
-                    <TouchableWithoutFeedback
-                      onPress={() => this.onPhotoUpload(setFieldValue)}
-                    >
-                      <Image
-                        source={{ uri: image.uri }}
-                        style={{
-                          flex: 1,
-                          width: width - 60,
-                          height: (image.height / image.width) * (width - 60),
-                          resizeMode: 'cover',
-                          borderRadius: 20,
-                          marginTop: 20
-                        }}
-                      />
-                    </TouchableWithoutFeedback>
-                  )}
+                  <PhotoView
+                    width={width}
+                    word={word}
+                    isRTL={isRTL}
+                    images={this.state.images}
+                    selectedImage={this.state.selectedImage}
+                    returnData={this.returnData}
+                    album={true}
+                    qty={30}
+                    updateImagesList={this.updateImagesList}
+                    hendleSelectedImage={this.hendleSelectedImage}
+                  />
                   <View
                     style={{
                       flex: 1,
@@ -342,21 +321,22 @@ class AddServiceScreen extends React.Component<any, any> {
                     onChange={setFieldValue}
                     rtl={isRTL}
                   >
-                    <CheckBox
-                      name="location"
-                      msg={word.locationmsg}
-                      label={word.location}
-                      value={values.location}
-                      selected={values.location}
-                    />
+                    <View style={{ flexDirection: 'column' }}>
+                      {this.props.user.branches.map(
+                        (branch: any, index: any) => (
+                          <CheckBox
+                            key={index}
+                            name="location"
+                            index={index}
+                            branch={branch}
+                            selectBranch={this.selectBranch}
+                            label={branch.name}
+                            selected={selectedBranches.includes(branch)}
+                          />
+                        )
+                      )}
+                    </View>
                   </Group>
-                  {values.location && !this.state.location && <LoadingTiny />}
-                  {values.location && (
-                    <UserLocation
-                      getCurrentLocation={this.getCurrentLocation}
-                      width={width}
-                    />
-                  )}
 
                   <Button
                     isRTL={isRTL}
@@ -368,7 +348,7 @@ class AddServiceScreen extends React.Component<any, any> {
                     disabled={
                       !isValid ||
                       isSubmitting ||
-                      (values.location && !this.state.location)
+                      this.state.selectedBranches.length === 0
                     }
                   />
                   {isSubmitting && (

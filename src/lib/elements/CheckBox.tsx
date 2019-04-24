@@ -13,7 +13,10 @@ const CheckBox = (props: any) => {
     name,
     value,
     rtl,
-    msg
+    msg,
+    updateState,
+    branch,
+    selectBranch
   } = props;
 
   return (
@@ -24,7 +27,15 @@ const CheckBox = (props: any) => {
         flexDirection: rtl && Platform.OS !== 'android' ? 'row-reverse' : 'row'
       }}
       onPress={() => {
-        props.onChange(name, !value);
+        if (value) {
+          props.onChange(name, !value);
+        }
+        if (updateState) {
+          updateState(!value);
+        }
+        if (branch) {
+          selectBranch(branch);
+        }
       }}
     >
       {!selected && (
@@ -41,7 +52,7 @@ const CheckBox = (props: any) => {
               rtl && Platform.OS !== 'android' ? 'flex-end' : 'flex-start',
             color: labelColor,
             marginHorizontal: 10,
-            top: 5
+            top: 7
           }}
         >
           {label}

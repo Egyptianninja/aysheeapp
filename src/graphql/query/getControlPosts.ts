@@ -99,6 +99,12 @@ export default gql`
 
         updates
         userId
+        userName
+        userAvatar
+        userAbout
+        branch
+        status
+        groupId
         updatedAt
       }
       error

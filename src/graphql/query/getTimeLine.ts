@@ -139,6 +139,12 @@ export default gql`
         isfront
         updates
         userId
+        userName
+        userAvatar
+        userAbout
+        branch
+        status
+        groupId
         updatedAt
       }
       error

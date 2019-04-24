@@ -90,6 +90,12 @@ export default gql`
         color
         sort
         updates
+        userName
+        userAvatar
+        userAbout
+        branch
+        status
+        groupId
         updatedAt
       }
       error

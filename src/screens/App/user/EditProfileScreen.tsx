@@ -6,7 +6,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
-  View
+  View,
+  Text
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
@@ -29,22 +30,36 @@ import {
   UserLocation
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
-const { width } = Dimensions.get('window');
+import BranchesModal from '../../../componenets/ProfileScreen/BranchesModal';
+const { width, height } = Dimensions.get('window');
 
 class EditProfileScreen extends React.Component<any, any> {
   state = {
     selectedImage: null,
     isMessageVisible: false,
+    isMapModalVisible: false,
     location: null,
     avatar: null,
+    branches: [],
     bar: 0
   };
+
+  componentDidMount() {
+    this.setState({ branches: this.props.user.branches });
+  }
 
   showMessageModal = async () => {
     this.setState({ isMessageVisible: true });
   };
   hideMessageModal = () => {
     this.setState({ isMessageVisible: false });
+  };
+
+  showMapModal = async () => {
+    this.setState({ isMapModalVisible: true });
+  };
+  hideMapModal = () => {
+    this.setState({ isMapModalVisible: false });
   };
 
   onAvatarUpload = async (setFieldValue: any) => {
@@ -64,6 +79,19 @@ class EditProfileScreen extends React.Component<any, any> {
 
   updateProgressBar = (value: any) => {
     this.setState({ bar: this.state.bar + value });
+  };
+
+  addLocations = (markers: any) => {
+    const branches = markers.map((marker: any) => {
+      return {
+        name: marker.name,
+        location: {
+          lat: marker.coordinate.latitude,
+          lon: marker.coordinate.longitude
+        }
+      };
+    });
+    this.setState({ branches });
   };
 
   validSchema = ({ word, isstore }: any) => {
@@ -110,17 +138,9 @@ class EditProfileScreen extends React.Component<any, any> {
       addressCity,
       tel,
       fax,
-      mob,
-      location
+      mob
     } = values;
-    const loc: any = location ? this.state.location : null;
-    let trueLocation = null;
-    if (loc) {
-      trueLocation = {
-        lat: loc.coords.latitude,
-        lon: loc.coords.longitude
-      };
-    }
+
     const avatar = this.state.avatar
       ? await uploadPickedImage(this.state.avatar, 400, 0.8, false)
       : null;
@@ -138,7 +158,7 @@ class EditProfileScreen extends React.Component<any, any> {
         tel: isstore ? tel : undefined,
         fax: isstore ? fax : undefined,
         mob,
-        location: isstore ? trueLocation : undefined
+        branches: this.state.branches
       }
     });
 
@@ -188,7 +208,11 @@ class EditProfileScreen extends React.Component<any, any> {
                 name: user.name ? user.name : '',
                 about: user.about ? user.about : '',
                 color: user.color ? user.color : colors[0],
-                addressEmail: user.email ? user.email : '',
+                addressEmail: user.addressEmail
+                  ? user.addressEmail
+                  : user.email
+                  ? user.email
+                  : '',
                 website: user.website ? user.website : '',
                 addressCountry: user.addressCountry ? user.addressCountry : '',
                 addressCity: user.addressCity ? user.addressCity : '',
@@ -394,30 +418,67 @@ class EditProfileScreen extends React.Component<any, any> {
 
                   {isstore && (
                     <React.Fragment>
-                      <Group
-                        color="#444"
-                        size={24}
-                        onChange={setFieldValue}
-                        rtl={isRTL}
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({ isMapModalVisible: true })
+                        }
+                        style={{
+                          backgroundColor: '#fff',
+                          padding: 10,
+                          alignSelf: 'flex-start',
+                          marginHorizontal: 35,
+                          marginTop: 20,
+                          borderRadius: 20,
+                          borderColor: '#7678ED',
+                          borderWidth: 1
+                        }}
                       >
-                        <CheckBox
-                          name="location"
-                          label={word.location}
-                          msg={word.locationmsg}
-                          value={values.location}
-                          selected={values.location}
-                        />
-                      </Group>
-
-                      {values.location && !this.state.location && (
-                        <LoadingTiny />
-                      )}
-                      {values.location && (
-                        <UserLocation
+                        <Text style={{ color: '#7678ED' }}>Add Locations</Text>
+                      </TouchableOpacity>
+                      {this.state.isMapModalVisible && (
+                        <BranchesModal
+                          isMapModalVisible={this.state.isMapModalVisible}
                           getCurrentLocation={this.getCurrentLocation}
+                          hideMapModal={this.hideMapModal}
+                          addLocations={this.addLocations}
+                          branches={this.state.branches}
                           width={width}
+                          height={height}
                         />
                       )}
+                      <View
+                        style={{
+                          flex: 1,
+                          width: width - 70,
+                          marginHorizontal: 35,
+                          marginTop: 10
+                        }}
+                      >
+                        {this.state.branches.map((branch: any) => (
+                          <View
+                            style={{
+                              paddingHorizontal: 10,
+
+                              paddingTop: 15,
+                              paddingBottom: 5,
+                              width: width - 70,
+                              borderBottomColor: '#ddd',
+                              borderBottomWidth: 1
+                            }}
+                            key={branch.name}
+                          >
+                            <Text
+                              style={{
+                                alignSelf: this.props.isRTL
+                                  ? 'flex-end'
+                                  : 'flex-start'
+                              }}
+                            >
+                              {branch.name}
+                            </Text>
+                          </View>
+                        ))}
+                      </View>
                     </React.Fragment>
                   )}
                   <Button
@@ -427,9 +488,8 @@ class EditProfileScreen extends React.Component<any, any> {
                     textStyle={styles.btnTextStyle}
                     title={word.save}
                     disabled={
-                      !isValid ||
                       isSubmitting ||
-                      (values.location && !this.state.location)
+                      (isstore && this.state.branches.length === 0)
                     }
                     onPress={handleSubmit}
                   />

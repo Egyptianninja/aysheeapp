@@ -90,6 +90,12 @@ export default {
       nameGlob: 'حيوانات اليفة, Animals, Animals'
     },
     { id: 18, sort: 14, name: 'Food', nameGlob: 'مواد غذائية, Food, Food' },
+    {
+      id: 20,
+      sort: -1,
+      name: 'Restaurants',
+      nameGlob: 'مطاعم, Restaurants, Restaurants'
+    },
     { id: 99, sort: 19, name: 'Other', nameGlob: 'اخرى, Other, Other' }
   ],
   kind: [
@@ -514,6 +520,7 @@ export default {
     frontremoved: 'Removed from Front page',
     showcontact: 'Show Contact',
     helpcenter: 'Help Center',
+    addbranches: 'Add Branches',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

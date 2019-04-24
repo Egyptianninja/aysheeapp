@@ -64,6 +64,7 @@ import { since } from './since';
 import { shareTemplate } from './share/template';
 import { distance } from './location/distance';
 import { uuidGenerator, uuidv4 } from './uuid';
+import { getOfferStatus } from './date';
 export {
   StyleSheet,
   uploadPhoto,
@@ -128,5 +129,6 @@ export {
   getControlBuckets,
   distance,
   uuidGenerator,
-  uuidv4
+  uuidv4,
+  getOfferStatus
 };
