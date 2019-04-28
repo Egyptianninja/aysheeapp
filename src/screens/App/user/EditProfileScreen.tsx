@@ -45,7 +45,18 @@ class EditProfileScreen extends React.Component<any, any> {
   };
 
   componentDidMount() {
-    this.setState({ branches: this.props.user.branches });
+    if (this.props.user.branches) {
+      const branches = this.props.user.branches.map((branch: any) => {
+        return {
+          name: branch.name,
+          location: {
+            lat: branch.location.lat,
+            lon: branch.location.lon
+          }
+        };
+      });
+      this.setState({ branches });
+    }
   }
 
   showMessageModal = async () => {

@@ -330,7 +330,6 @@ class Edit extends React.Component<any, any> {
     const { word, isRTL, post } = this.props;
     const { categoryId } = post;
     const selectedBranches: any = this.state.selectedBranches;
-    console.log('selectedBranches', selectedBranches);
 
     const period = post.isoffer ? this.periodBuild(post) : null;
     return (
