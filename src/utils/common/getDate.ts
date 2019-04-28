@@ -17,6 +17,23 @@ Date.prototype.getMonthName = function() {
   ];
   return monthNames[this.getMonth()];
 };
+Date.prototype.getMonthNumber = function() {
+  const monthNames = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12'
+  ];
+  return monthNames[this.getMonth()];
+};
 
 export const getDate = (date: any, type = 'short') => {
   const newDate = new Date(date);

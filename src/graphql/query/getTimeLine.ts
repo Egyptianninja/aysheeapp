@@ -135,16 +135,33 @@ export default gql`
           lat
           lon
         }
+        locations {
+          name
+          location {
+            lat
+            lon
+          }
+        }
+        location {
+          lat
+          lon
+        }
         islive
         isfront
+        isoffer
+        start
+        end
+        status
         updates
         userId
         userName
+        userUniquename
         userAvatar
         userAbout
         branch
         status
         groupId
+        likes
         updatedAt
       }
       error

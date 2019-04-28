@@ -521,6 +521,7 @@ export default {
     showcontact: 'اظهار وسيلة التواصل',
     helpcenter: 'مركز المساعدة',
     addbranches: 'اضافة فروع',
+    brancheslocations: 'اضافة موقع الفروع',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

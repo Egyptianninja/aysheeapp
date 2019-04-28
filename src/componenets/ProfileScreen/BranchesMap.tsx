@@ -217,7 +217,7 @@ export default class BranchesMap extends React.Component<any, any> {
               onPress={this.handlePress}
               mapType={mapType}
               showsUserLocation={true}
-              userLocationAnnotationTitle="Your location"
+              userLocationAnnotationTitle="My location"
             >
               {this.state.markers.map((marker: any) => {
                 return (
@@ -364,7 +364,7 @@ export default class BranchesMap extends React.Component<any, any> {
           hideModalContentWhileAnimating={true}
           animationIn="slideInDown"
           animationOut="slideOutUp"
-          onSwipe={() => this.hideNameModal()}
+          onSwipeComplete={() => this.hideNameModal()}
           swipeDirection="down"
           style={{ margin: 0 }}
         >

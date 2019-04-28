@@ -34,6 +34,7 @@ import MessageAlert from '../../../utils/message/MessageAlert';
 import updateMyQty from '../../../graphql/mutation/updateMyQty';
 import { updateUser } from '../../../store/actions/userAtions';
 import { code } from '../../../store/getStore';
+import getUser from '../../../graphql/query/getUser';
 const { width, height } = Dimensions.get('window');
 
 const HEADER_HEIGHT = 240;
@@ -184,7 +185,7 @@ class ProfileScreen extends React.Component<any, any> {
         variables={variables}
         fetchPolicy="network-only"
       >
-        {({ loading, error, data, fetchMore, refetch }) => {
+        {({ loading, error, data, fetchMore, refetch }: any) => {
           if (loading) {
             return <Loading />;
           }
@@ -544,6 +545,7 @@ class ProfileScreen extends React.Component<any, any> {
     });
 
     const paramUser = this.props.navigation.getParam('user');
+    const paramUserId = this.props.navigation.getParam('userId');
     const ismyaccount = this.props.isAuthenticated
       ? paramUser._id === this.props.user._id
       : null;
@@ -558,114 +560,240 @@ class ProfileScreen extends React.Component<any, any> {
       : null;
     const phone = user.phone ? user.phone.replace(code(), '') : null;
     const callargs = { number: phone, prompt: false };
-    return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Menu
-          post={this.state.modalPost}
-          favoritePost={this.props.favoritePost}
-          isMenuModalVisible={this.state.isMenuModalVisible}
-          hideMenuModal={this.hideMenuModal}
-          showReportModal={this.showReportModal}
-          showMessageModal={this.showMessageModal}
-          editClassifieds={this.props.editClassifieds}
-          showEditModal={this.showEditModal}
-          showCheckMessageModal={this.showCheckMessageModal}
-          handleOnMenuModalHide={this.handleOnMenuModalHide}
-          postId={postId}
-          word={words}
-          isRTL={isRTL}
-          isAuthenticated={this.props.isAuthenticated}
-          user={this.props.user}
-        />
-        {this.state.isEditModalVisible && (
-          <Edit
-            isEditModalVisible={this.state.isEditModalVisible}
-            editClassifieds={this.props.editClassifieds}
-            hideEditModal={this.hideEditModal}
+    if (paramUserId) {
+      return (
+        <Query query={getUser} variables={{ userId: paramUserId }}>
+          {({ loading, error, data }: any) => {
+            if (loading) {
+              return <Loading />;
+            }
+            if (error) {
+              return <Text>{error}</Text>;
+            }
+            const userData = data.getUser;
+            return (
+              <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <Menu
+                  post={this.state.modalPost}
+                  favoritePost={this.props.favoritePost}
+                  isMenuModalVisible={this.state.isMenuModalVisible}
+                  hideMenuModal={this.hideMenuModal}
+                  showReportModal={this.showReportModal}
+                  showMessageModal={this.showMessageModal}
+                  editClassifieds={this.props.editClassifieds}
+                  showEditModal={this.showEditModal}
+                  showCheckMessageModal={this.showCheckMessageModal}
+                  handleOnMenuModalHide={this.handleOnMenuModalHide}
+                  postId={postId}
+                  word={words}
+                  isRTL={isRTL}
+                  isAuthenticated={this.props.isAuthenticated}
+                  user={this.props.user}
+                />
+                {this.state.isEditModalVisible && (
+                  <Edit
+                    isEditModalVisible={this.state.isEditModalVisible}
+                    editClassifieds={this.props.editClassifieds}
+                    hideEditModal={this.hideEditModal}
+                    showMessageModal={this.showMessageModal}
+                    word={words}
+                    isRTL={isRTL}
+                    postId={postId}
+                    post={this.state.modalPost}
+                  />
+                )}
+                <Report
+                  isReportModalVisible={this.state.isReportModalVisible}
+                  hideReportModal={this.hideReportModal}
+                  word={words}
+                  isRTL={isRTL}
+                />
+                <MessageAlert
+                  isMessageVisible={this.state.isMessageVisible}
+                  hideMessageModal={this.hideMessageModal}
+                  message={this.state.message}
+                  screen={this.state.screen}
+                  icon="ios-checkmark-circle"
+                  isRTL={isRTL}
+                  height={120}
+                />
+                <Message
+                  isVisible={this.state.isCheckMessaheVisible}
+                  onCheckMessageModalHide={this.onCheckMessageModalHide}
+                  body={words.deleteareyousure}
+                  icon="ios-information-circle"
+                  width={width}
+                  okbtnTitle={words.yes}
+                  cancelbtnTitle={words.cancel}
+                  okAction={this.deletePost}
+                  cancelAction={this.canceldeletePost}
+                  isRTL={isRTL}
+                  iconColor="#E85255"
+                  height={200}
+                />
+                {userData.location &&
+                  userData.location.lat &&
+                  userData.location.lon && (
+                    <MapModal
+                      isMapModalVisible={this.state.isMapModalVisible}
+                      hideMapModal={this.hideMapModal}
+                      lat={userData.location.lat}
+                      lon={userData.location.lon}
+                      title={userData.name}
+                      width={width}
+                      height={height}
+                    />
+                  )}
+
+                <Animated.View
+                  style={{
+                    position: 'absolute',
+                    marginTop: headerHeight,
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    backgroundColor: '#fff',
+                    zIndex: 200
+                  }}
+                >
+                  {this.renderHeader({
+                    user: userData,
+                    words,
+                    callargs,
+                    maincolor
+                  })}
+                  {this.renderTabs({
+                    tab,
+                    maincolor,
+                    words,
+                    user: userData,
+                    isshop
+                  })}
+                </Animated.View>
+
+                <View style={{ flex: 1, width, borderStartColor: 'blue' }}>
+                  {this.renderQuery({
+                    variables: { userId: userData._id, ...this.state.rest },
+                    isRTL,
+                    words,
+                    lang
+                  })}
+                </View>
+              </View>
+            );
+          }}
+        </Query>
+      );
+    } else {
+      return (
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+          <Menu
+            post={this.state.modalPost}
+            favoritePost={this.props.favoritePost}
+            isMenuModalVisible={this.state.isMenuModalVisible}
+            hideMenuModal={this.hideMenuModal}
+            showReportModal={this.showReportModal}
             showMessageModal={this.showMessageModal}
+            editClassifieds={this.props.editClassifieds}
+            showEditModal={this.showEditModal}
+            showCheckMessageModal={this.showCheckMessageModal}
+            handleOnMenuModalHide={this.handleOnMenuModalHide}
+            postId={postId}
             word={words}
             isRTL={isRTL}
-            postId={postId}
-            post={this.state.modalPost}
+            isAuthenticated={this.props.isAuthenticated}
+            user={this.props.user}
           />
-        )}
-        <Report
-          isReportModalVisible={this.state.isReportModalVisible}
-          hideReportModal={this.hideReportModal}
-          word={words}
-          isRTL={isRTL}
-        />
-        <MessageAlert
-          isMessageVisible={this.state.isMessageVisible}
-          hideMessageModal={this.hideMessageModal}
-          message={this.state.message}
-          screen={this.state.screen}
-          icon="ios-checkmark-circle"
-          isRTL={isRTL}
-          height={120}
-        />
-        <Message
-          isVisible={this.state.isCheckMessaheVisible}
-          onCheckMessageModalHide={this.onCheckMessageModalHide}
-          body={words.deleteareyousure}
-          icon="ios-information-circle"
-          width={width}
-          okbtnTitle={words.yes}
-          cancelbtnTitle={words.cancel}
-          okAction={this.deletePost}
-          cancelAction={this.canceldeletePost}
-          isRTL={isRTL}
-          iconColor="#E85255"
-          height={200}
-        />
-        {user.location && user.location.lat && user.location.lon && (
-          <MapModal
-            isMapModalVisible={this.state.isMapModalVisible}
-            hideMapModal={this.hideMapModal}
-            lat={user.location.lat}
-            lon={user.location.lon}
-            title={user.name}
+          {this.state.isEditModalVisible && (
+            <Edit
+              isEditModalVisible={this.state.isEditModalVisible}
+              editClassifieds={this.props.editClassifieds}
+              hideEditModal={this.hideEditModal}
+              showMessageModal={this.showMessageModal}
+              word={words}
+              isRTL={isRTL}
+              postId={postId}
+              post={this.state.modalPost}
+            />
+          )}
+          <Report
+            isReportModalVisible={this.state.isReportModalVisible}
+            hideReportModal={this.hideReportModal}
+            word={words}
+            isRTL={isRTL}
+          />
+          <MessageAlert
+            isMessageVisible={this.state.isMessageVisible}
+            hideMessageModal={this.hideMessageModal}
+            message={this.state.message}
+            screen={this.state.screen}
+            icon="ios-checkmark-circle"
+            isRTL={isRTL}
+            height={120}
+          />
+          <Message
+            isVisible={this.state.isCheckMessaheVisible}
+            onCheckMessageModalHide={this.onCheckMessageModalHide}
+            body={words.deleteareyousure}
+            icon="ios-information-circle"
             width={width}
-            height={height}
+            okbtnTitle={words.yes}
+            cancelbtnTitle={words.cancel}
+            okAction={this.deletePost}
+            cancelAction={this.canceldeletePost}
+            isRTL={isRTL}
+            iconColor="#E85255"
+            height={200}
           />
-        )}
+          {user.location && user.location.lat && user.location.lon && (
+            <MapModal
+              isMapModalVisible={this.state.isMapModalVisible}
+              hideMapModal={this.hideMapModal}
+              lat={user.location.lat}
+              lon={user.location.lon}
+              title={user.name}
+              width={width}
+              height={height}
+            />
+          )}
 
-        <Animated.View
-          style={{
-            position: 'absolute',
-            marginTop: headerHeight,
-            top: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: '#fff',
-            zIndex: 200
-          }}
-        >
-          {this.renderHeader({
-            user,
-            words,
-            callargs,
-            maincolor
-          })}
-          {this.renderTabs({
-            tab,
-            maincolor,
-            words,
-            user,
-            isshop
-          })}
-        </Animated.View>
+          <Animated.View
+            style={{
+              position: 'absolute',
+              marginTop: headerHeight,
+              top: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: '#fff',
+              zIndex: 200
+            }}
+          >
+            {this.renderHeader({
+              user,
+              words,
+              callargs,
+              maincolor
+            })}
+            {this.renderTabs({
+              tab,
+              maincolor,
+              words,
+              user,
+              isshop
+            })}
+          </Animated.View>
 
-        <View style={{ flex: 1, width, borderStartColor: 'blue' }}>
-          {this.renderQuery({
-            variables: { userId: user._id, ...this.state.rest },
-            isRTL,
-            words,
-            lang
-          })}
+          <View style={{ flex: 1, width, borderStartColor: 'blue' }}>
+            {this.renderQuery({
+              variables: { userId: user._id, ...this.state.rest },
+              isRTL,
+              words,
+              lang
+            })}
+          </View>
         </View>
-      </View>
-    );
+      );
+    }
   }
 }
 const mapStateToProps = (state: any) => ({
@@ -694,7 +822,11 @@ export default connect(
         graphql(updateMyQty, {
           name: 'updateMyQty',
           options: { refetchQueries: ['getUserPosts'] }
-        })(ProfileScreen)
+        })(
+          graphql(getUser, {
+            name: 'getUser'
+          })(ProfileScreen)
+        )
       )
     )
   )

@@ -9,7 +9,10 @@ import {
   HIDE_MODAL,
   ADD_NOTIFICATION,
   INIT_NOTIFICATIONS,
-  SHOW_CONTACT
+  SHOW_CONTACT,
+  ADD_FAV,
+  ADD_LIKE,
+  SAVE_FAV
 } from '../types';
 
 const initialState = {
@@ -24,7 +27,10 @@ const initialState = {
   recentLocation: {},
   showModal: false,
   notifications: 0,
-  showcontact: true
+  showcontact: true,
+  favs: [],
+  likes: [],
+  favoorites: []
 };
 
 export default function(state = initialState, action: any) {
@@ -93,6 +99,58 @@ export default function(state = initialState, action: any) {
           expiresAt: action.expiresAt
         }
       };
+
+    case ADD_FAV:
+      const favlist: any = state.favs;
+      if (favlist.includes(action.postId)) {
+        return {
+          ...state,
+          favs: state.favs.filter((fav: any) => fav !== action.postId)
+        };
+      } else {
+        if (state.favs.length > 100) {
+          state.favs.shift();
+        }
+        return {
+          ...state,
+          favs: [...state.favs, action.postId]
+        };
+      }
+    case SAVE_FAV:
+      const favooriteslist: any = state.favoorites.map((fav: any) => fav.id);
+      if (favooriteslist.includes(action.post.id)) {
+        return {
+          ...state,
+          favoorites: state.favoorites.filter(
+            (fav: any) => fav.id !== action.post.id
+          )
+        };
+      } else {
+        if (state.favoorites.length > 100) {
+          state.favoorites.shift();
+        }
+        return {
+          ...state,
+          favoorites: [...state.favoorites, action.post]
+        };
+      }
+
+    case ADD_LIKE:
+      const likelist: any = state.likes;
+      if (likelist.includes(action.postId)) {
+        return {
+          ...state,
+          likes: state.likes.filter((like: any) => like !== action.postId)
+        };
+      } else {
+        if (state.likes.length > 100) {
+          state.likes.shift();
+        }
+        return {
+          ...state,
+          likes: [...state.likes, action.postId]
+        };
+      }
 
     default:
       return state;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { rtlos } from '../../utils';
 
 const PriceView = ({
   price,
@@ -8,8 +9,7 @@ const PriceView = ({
   saleObject,
   furntObject,
   warrantyObject,
-  words,
-  ardroid
+  words
 }: any) => {
   const newtype =
     newObject.value === true
@@ -37,14 +37,14 @@ const PriceView = ({
     <View
       style={{
         paddingVertical: 15,
-        flexDirection: ardroid ? 'row-reverse' : 'row',
+        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
         justifyContent: 'space-between',
         borderBottomColor: '#ddd',
         borderBottomWidth: 1,
         alignItems: 'center'
       }}
     >
-      <View style={{ flexDirection: ardroid ? 'row-reverse' : 'row' }}>
+      <View style={{ flexDirection: rtlos() === 3 ? 'row-reverse' : 'row' }}>
         <Text
           style={{
             color: '#26A65B',
@@ -67,7 +67,7 @@ const PriceView = ({
           {currency}
         </Text>
       </View>
-      <View style={{ flexDirection: ardroid ? 'row-reverse' : 'row' }}>
+      <View style={{ flexDirection: rtlos() === 3 ? 'row-reverse' : 'row' }}>
         {newtype && (
           <View style={styles.botton}>
             <Text style={styles.txt}>{newtype}</Text>

@@ -114,6 +114,16 @@ const getFinalRatio = (photos: any) => {
   }
 };
 
+const prepareImagesURIs = (photos: any, imageSize: any) => {
+  return photos.map((photo: any) => {
+    return {
+      url: `http://res.cloudinary.com/${
+        secrets.upload.CLOUD_NAME
+      }/image/upload/w_${imageSize}/${photo.substring(0, 20)}`
+    };
+  });
+};
+
 export const readyPosts = (
   posts: any,
   imageSize: number,
@@ -129,9 +139,15 @@ export const readyPosts = (
             secrets.upload.CLOUD_NAME
           }/image/upload/w_${imageSize}/${post.photos[0].substring(0, 20)}`
         : undefined;
+    const uris =
+      post.photos.length > 0
+        ? prepareImagesURIs(post.photos, imageSize)
+        : undefined;
+
     const time = since(post.updatedAt, lang);
 
-    const subTitle = post.title.substring(0, 17);
+    const subTitle = post.title.substring(0, 20);
+    const subBody = post.body.substring(0, 40);
     const imageWidth = Math.ceil(width / 2 - 17);
     const imageHeight =
       post.photos.length > 0 ? Math.ceil(imageWidth * ratio) : imageWidth * 0.5;
@@ -149,8 +165,10 @@ export const readyPosts = (
       height,
       ratio: ratio > 3 ? 3 : ratio,
       subTitle,
+      subBody,
       time,
       uri,
+      uris,
       imageWidth,
       imageHeight,
       brand,

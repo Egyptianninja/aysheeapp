@@ -18,13 +18,7 @@ export default class PulseIndicator extends PureComponent<any, any> {
     size: PropTypes.number
   };
 
-  constructor(props: any) {
-    super(props);
-
-    this.renderComponent = this.renderComponent.bind(this);
-  }
-
-  renderComponent({ index, count, progress }: any) {
+  renderComponent = ({ index, count, progress }: any) => {
     const { size, color } = this.props;
 
     const pulseStyle = {
@@ -51,7 +45,7 @@ export default class PulseIndicator extends PureComponent<any, any> {
         <Animated.View style={pulseStyle} />
       </Animated.View>
     );
-  }
+  };
 
   render() {
     const { style, size: width, size: height, ...props } = this.props;

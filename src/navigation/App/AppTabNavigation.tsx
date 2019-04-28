@@ -57,7 +57,7 @@ if (rtlos() === 3) {
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
-                right={30}
+                // right={30}
                 focused={focused}
                 tintColor={tintColor}
                 notification={false}
@@ -67,14 +67,14 @@ if (rtlos() === 3) {
           return navigationOptions;
         }
       },
-      categories: {
-        screen: SearchStack,
-        navigationOptions: ({ navigation }: any) => ({
-          tabBarButtonComponent: () => {
-            return <CategoryButton />;
-          }
-        })
-      },
+      // categories: {
+      //   screen: SearchStack,
+      //   navigationOptions: ({ navigation }: any) => ({
+      //     tabBarButtonComponent: () => {
+      //       return <CategoryButton />;
+      //     }
+      //   })
+      // },
       Search: {
         screen: SearchStack,
         navigationOptions: {
@@ -83,7 +83,7 @@ if (rtlos() === 3) {
               icon={images.searchicon}
               iconout={images.searchiconout}
               size={32}
-              left={30}
+              // left={30}
               focused={focused}
               tintColor={tintColor}
             />
@@ -179,21 +179,21 @@ if (rtlos() === 3) {
               icon={images.searchicon}
               iconout={images.searchiconout}
               size={32}
-              right={30}
+              // right={30}
               focused={focused}
               tintColor={tintColor}
             />
           )
         }
       },
-      categories: {
-        screen: SearchStack,
-        navigationOptions: ({ navigation }: any) => ({
-          tabBarButtonComponent: () => {
-            return <CategoryButton />;
-          }
-        })
-      },
+      // categories: {
+      //   screen: SearchStack,
+      //   navigationOptions: ({ navigation }: any) => ({
+      //     tabBarButtonComponent: () => {
+      //       return <CategoryButton />;
+      //     }
+      //   })
+      // },
 
       Notification: {
         screen: NotificationStack,
@@ -212,7 +212,7 @@ if (rtlos() === 3) {
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
-                left={30}
+                // left={30}
                 focused={focused}
                 tintColor={tintColor}
               />

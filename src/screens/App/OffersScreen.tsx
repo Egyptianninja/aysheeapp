@@ -97,7 +97,7 @@ class OffersScreen extends Component<any, any> {
           variables={{}}
           fetchPolicy="network-only"
         >
-          {({ loading, error, data, fetchMore, refetch }) => {
+          {({ loading, error, data, fetchMore, refetch }: any) => {
             if (loading) {
               return <Loading />;
             }

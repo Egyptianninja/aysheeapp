@@ -10,9 +10,12 @@ export default gql`
     $start: Date
     $end: Date
     $branch: String
+    $trueLocation: LocationInput
+    $locations: [LocationNameInput]
     $status: Int
     $groupId: String
     $userName: String
+    $userUniquename: String
     $userAvatar: String
     $userAbout: String
     $kind: NameInput
@@ -26,7 +29,6 @@ export default gql`
     $iswarranty: Boolean
     $addressCity: String
     $addressArea: String
-    $trueLocation: LocationInput
     $isforman: Boolean
     $isjobreq: Boolean
     $isservicereq: Boolean
@@ -62,6 +64,7 @@ export default gql`
       status: $status
       groupId: $groupId
       userName: $userName
+      userUniquename: $userUniquename
       userAvatar: $userAvatar
       userAbout: $userAbout
       kind: $kind
@@ -76,6 +79,7 @@ export default gql`
       addressCity: $addressCity
       addressArea: $addressArea
       trueLocation: $trueLocation
+      locations: $locations
       isforman: $isforman
       isjobreq: $isjobreq
       isservicereq: $isservicereq

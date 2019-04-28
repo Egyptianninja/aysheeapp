@@ -28,3 +28,6 @@ export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const INIT_NOTIFICATIONS = 'INIT_NOTIFICATIONS';
 export const GET_CONTROL_BUCKETS = 'GET_CONTROL_BUCKETS';
 export const SHOW_CONTACT = 'SHOW_CONTACT';
+export const ADD_FAV = 'ADD_FAV';
+export const SAVE_FAV = 'SAVE_FAV';
+export const ADD_LIKE = 'ADD_LIKE';

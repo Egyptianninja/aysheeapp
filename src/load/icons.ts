@@ -151,9 +151,9 @@ export const icons = {
     { id: 1, icon: 'ios-briefcase', size: 28 },
     { id: 2, icon: 'ios-person', size: 28 },
     { id: 3, icon: 'ios-add', size: 30 },
-    { id: 4, icon: 'ios-bookmark', size: 28 },
+    { id: 4, icon: 'ios-add', size: 28 },
     { id: 5, icon: 'ios-calendar', size: 28 },
-    { id: 6, icon: 'ios-heart', size: 28 },
+    { id: 6, icon: 'ios-bookmark', size: 28 },
     { id: 7, icon: 'ios-help-circle', size: 28 },
     { id: 8, icon: 'ios-exit', size: 28 }
   ],

@@ -262,7 +262,7 @@ class Drawer extends React.Component<any, any> {
       ? isstore
         ? [2, 3, 4, 5, 6, 7, 8]
         : [1, 2, 3, 5, 6, 7, 8]
-      : [0, 1, 3, 7];
+      : [0, 1, 3, 6, 7];
     const usermenu = menus.filter((mnu: any) => items.includes(mnu.id));
 
     return usermenu.map((menu: any) => {

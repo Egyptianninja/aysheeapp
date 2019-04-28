@@ -682,7 +682,7 @@ class ItemView extends React.Component<any, any> {
                 })}
               {!myItem && (
                 <Query query={getUser} variables={{ userId: post.userId }}>
-                  {({ loading, error, data }) => {
+                  {({ loading, error, data }: any) => {
                     if (loading) {
                       return <Loading />;
                     }
@@ -769,7 +769,7 @@ class ItemView extends React.Component<any, any> {
                 variables={{ postId }}
                 fetchPolicy="network-only"
               >
-                {({ subscribeToMore, fetchMore, ...result }) => (
+                {({ subscribeToMore, fetchMore, ...result }: any) => (
                   <ItemComment
                     {...result}
                     updateCursor={this.updateCursor}
@@ -786,7 +786,7 @@ class ItemView extends React.Component<any, any> {
                       subscribeToMore({
                         document: commentAdded,
                         variables: { postId },
-                        updateQuery: (prev, { subscriptionData }) => {
+                        updateQuery: (prev: any, { subscriptionData }: any) => {
                           if (!subscriptionData.data) {
                             return prev;
                           }

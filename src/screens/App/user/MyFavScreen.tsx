@@ -102,12 +102,74 @@ class MyFavScreen extends React.Component<any, any> {
   };
 
   render() {
-    const { lang, words, isRTL } = this.props;
+    const { lang, words, isRTL, isAuthenticated, favoorites } = this.props;
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
+
+    if (!isAuthenticated) {
+      return (
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+          <Menu
+            post={this.state.modalPost}
+            unFavoritePost={this.props.unFavoritePost}
+            isMenuModalVisible={this.state.isMenuModalVisible}
+            isAuthenticated={this.props.isAuthenticated}
+            hideMenuModal={this.hideMenuModal}
+            showReportModal={this.showReportModal}
+            showMessageModal={this.showMessageModal}
+            handleOnMenuModalHide={this.handleOnMenuModalHide}
+            postId={postId}
+            word={words}
+            isRTL={isRTL}
+            fav={true}
+            user={this.props.user}
+          />
+          <Report
+            isReportModalVisible={this.state.isReportModalVisible}
+            hideReportModal={this.hideReportModal}
+            word={words}
+            isRTL={isRTL}
+          />
+          <MessageAlert
+            isMessageVisible={this.state.isMessageVisible}
+            hideMessageModal={this.hideMessageModal}
+            message={this.state.message}
+            screen={this.state.screen}
+            icon="ios-checkmark-circle"
+            isRTL={isRTL}
+            height={120}
+          />
+          <MasonryList
+            onRefresh={() => null}
+            refreshing={this.state.refreshing}
+            data={favoorites}
+            renderItem={({ item }: any) => (
+              <ItemViewSmall
+                post={item}
+                unFavoritePost={this.props.unFavoritePost}
+                navigation={this.props.navigation}
+                showMenuModal={this.showMenuModal}
+                selectePost={this.selectePost}
+                word={words}
+                lang={lang}
+                isRTL={isRTL}
+              />
+            )}
+            getHeightForItem={({ item }: any) => item.height}
+            numColumns={2}
+            keyExtractor={(item: any) => item.id}
+            removeClippedSubviews={true}
+            windowSize={21}
+            onEndReachedThreshold={5}
+            maxToRenderPerBatch={20}
+            disableVirtualization={false}
+          />
+        </View>
+      );
+    }
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Menu
@@ -140,12 +202,13 @@ class MyFavScreen extends React.Component<any, any> {
           isRTL={isRTL}
           height={120}
         />
+
         <Query
           query={getMyFavoritePosts}
           variables={{ cursor: 0 }}
           fetchPolicy="network-only"
         >
-          {({ loading, error, data, fetchMore, refetch }) => {
+          {({ loading, error, data, fetchMore, refetch }: any) => {
             if (loading) {
               return <Loading />;
             }
@@ -212,7 +275,8 @@ const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
   isRTL: state.glob.isRTL,
   words: state.glob.language.words,
-  user: state.user.user
+  user: state.user.user,
+  favoorites: state.glob.favoorites
 });
 
 export default connect(mapStateToProps)(

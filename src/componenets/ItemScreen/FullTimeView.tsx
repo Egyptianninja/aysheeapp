@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { rtlos } from '../../utils';
 
-const FullTimeView = ({ fulltimeObject, words, ardroid }: any) => {
+const FullTimeView = ({ fulltimeObject, words }: any) => {
   const fulltimetype =
     fulltimeObject.value === true
       ? words.fullTime
@@ -13,14 +14,14 @@ const FullTimeView = ({ fulltimeObject, words, ardroid }: any) => {
     <View
       style={{
         paddingVertical: 15,
-        flexDirection: ardroid ? 'row-reverse' : 'row',
+        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
         justifyContent: 'flex-end',
         borderBottomColor: '#ddd',
         borderBottomWidth: 1,
         alignItems: 'center'
       }}
     >
-      <View style={{ flexDirection: ardroid ? 'row-reverse' : 'row' }}>
+      <View style={{ flexDirection: rtlos() === 3 ? 'row-reverse' : 'row' }}>
         {fulltimetype && (
           <View style={styles.botton}>
             <Text style={styles.txt}>{fulltimetype}</Text>

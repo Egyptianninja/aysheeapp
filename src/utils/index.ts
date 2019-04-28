@@ -59,7 +59,7 @@ import Message from './message';
 import LoadingLodal from './message/LoadingModal';
 import { registerForPushNotificationsAsync } from './notifications';
 import { isIphoneX, isTablet } from './platform/device';
-import { onShare } from './share';
+import { onShare, onShareSimple } from './share';
 import { since } from './since';
 import { shareTemplate } from './share/template';
 import { distance } from './location/distance';
@@ -86,6 +86,7 @@ export {
   arabicToNum,
   registerForPushNotificationsAsync,
   onShare,
+  onShareSimple,
   UserLocation,
   ItemLocation,
   getPureNumber,

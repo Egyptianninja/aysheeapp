@@ -521,6 +521,7 @@ export default {
     showcontact: 'Show Contact',
     helpcenter: 'Help Center',
     addbranches: 'Add Branches',
+    brancheslocations: 'Branches Locations',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

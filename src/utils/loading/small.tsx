@@ -19,13 +19,7 @@ export default class DotIndicatorSmall extends React.PureComponent<any, any> {
     size: PropTypes.number
   };
 
-  constructor(props: any) {
-    super(props);
-
-    this.renderComponent = this.renderComponent.bind(this);
-  }
-
-  renderComponent({ index, count, progress }: any) {
+  renderComponent = ({ index, count, progress }: any) => {
     const { size, color }: any = this.props;
 
     const style = {
@@ -52,7 +46,7 @@ export default class DotIndicatorSmall extends React.PureComponent<any, any> {
     };
 
     return <Animated.View style={style} {...{ key: index }} />;
-  }
+  };
 
   render() {
     const { style, ...props } = this.props;

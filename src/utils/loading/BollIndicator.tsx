@@ -17,13 +17,7 @@ export default class BallIndicator extends PureComponent<any, any> {
     size: PropTypes.number
   };
 
-  constructor(props: any) {
-    super(props);
-
-    this.renderComponent = this.renderComponent.bind(this);
-  }
-
-  renderComponent({ index, count, progress }: any) {
+  renderComponent = ({ index, count, progress }: any) => {
     const { size, color: backgroundColor } = this.props;
     const angle = (index * 360) / count;
 
@@ -69,7 +63,7 @@ export default class BallIndicator extends PureComponent<any, any> {
         <Animated.View style={ballStyle} />
       </Animated.View>
     );
-  }
+  };
 
   render() {
     const { style, size: width, size: height, ...props } = this.props;

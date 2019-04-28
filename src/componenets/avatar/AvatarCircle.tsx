@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Image, Text, View } from 'react-native';
 import { nameToColor } from '../../utils';
 
-export const AvatarCircle = ({ user, size, image }: any) => {
+export const AvatarCircle = ({ user, size, image, bwidth = 2 }: any) => {
   const dburi = user.avatar
     ? `http://res.cloudinary.com/arflon/image/upload/w_${100}/${user.avatar}`
     : null;
@@ -11,6 +11,7 @@ export const AvatarCircle = ({ user, size, image }: any) => {
 
   const letter = !dburi ? name.substring(0, 1).toUpperCase() : null;
   const uri = image ? image.uri : dburi ? dburi : false;
+  const bw = 4 * bwidth;
   return (
     <React.Fragment>
       {!uri && (
@@ -20,7 +21,7 @@ export const AvatarCircle = ({ user, size, image }: any) => {
             height: size,
             borderRadius: size / 2,
             borderColor: color,
-            borderWidth: 2,
+            borderWidth: bwidth,
             backgroundColor: '#fff',
             justifyContent: 'center',
             alignItems: 'center'
@@ -28,9 +29,9 @@ export const AvatarCircle = ({ user, size, image }: any) => {
         >
           <View
             style={{
-              width: size - 8,
-              height: size - 8,
-              borderRadius: (size - 8) / 2,
+              width: size - bw,
+              height: size - bw,
+              borderRadius: (size - bw) / 2,
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: color
@@ -46,8 +47,8 @@ export const AvatarCircle = ({ user, size, image }: any) => {
             width: size,
             height: size,
             borderRadius: size / 2,
-            borderColor: color,
-            borderWidth: 2,
+            borderColor: '#373737',
+            borderWidth: bwidth,
             backgroundColor: '#fff',
             justifyContent: 'center',
             alignItems: 'center'
@@ -55,9 +56,9 @@ export const AvatarCircle = ({ user, size, image }: any) => {
         >
           <Image
             style={{
-              height: size - 8,
-              width: size - 8,
-              borderRadius: (size - 8) / 2
+              height: size - bw,
+              width: size - bw,
+              borderRadius: (size - bw) / 2
             }}
             source={{ uri }}
           />

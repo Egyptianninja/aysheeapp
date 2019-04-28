@@ -261,7 +261,7 @@ export default class Select extends React.Component<any, any> {
               keyExtractor={(item: any) => `${item.id}`}
               // removeClippedSubviews={true}
               disableVirtualization={true}
-              onEndReachedThreshold={0.5}
+              onEndReachedThreshold={5}
               maxToRenderPerBatch={20}
             />
           </View>

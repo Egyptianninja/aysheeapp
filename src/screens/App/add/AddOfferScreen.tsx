@@ -12,14 +12,21 @@ import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
-import { Button, CheckBox, Group, Input, SelectDate } from '../../../lib';
+import {
+  Button,
+  CheckBox,
+  Group,
+  Input,
+  SelectDate,
+  Select,
+  RadioButton
+} from '../../../lib';
 import {
   getCameraRollPermission,
   getPureNumber,
   isArabic,
   pickImageWithoutUpload,
   StyleSheet,
-  uuidv4,
   getOfferStatus,
   uploadPhotos
 } from '../../../utils';
@@ -27,9 +34,10 @@ import MessageAlert from '../../../utils/message/MessageAlert';
 import { updateUser } from '../../../store/actions/userAtions';
 import updateMyQty from '../../../graphql/mutation/updateMyQty';
 import PhotoView from '../../../componenets/Add/PhotoView';
+import AddLocation from '../../../utils/location/addLocation';
 const { width } = Dimensions.get('window');
 
-class AddServiceScreen extends React.Component<any, any> {
+class AddOfferScreen extends React.Component<any, any> {
   timer: any;
   state = {
     selectedImage: null,
@@ -41,14 +49,15 @@ class AddServiceScreen extends React.Component<any, any> {
     bar: 0
   };
 
+  componentDidMount() {
+    if (this.props.user.isstore) {
+      this.setState({
+        branches: this.props.user.branches
+      });
+    }
+  }
   componentWillUnmount() {
     clearTimeout(this.timer);
-  }
-  componentDidMount() {
-    this.setState({
-      branches: this.props.user.branches,
-      selectedBranches: this.props.user.branches
-    });
   }
 
   selectBranch = (branch: any) => {
@@ -116,13 +125,53 @@ class AddServiceScreen extends React.Component<any, any> {
   updateImagesList = (images: any) => {
     this.setState({ images });
   };
+  resetLocation = (name: any) => {
+    if (name === 'singleLocation') {
+      this.setState({ location: null });
+    } else if (name === 'branchLocations') {
+      this.setState({ selectedBranches: [] });
+    }
+  };
+
+  getLocations = ({ stateLocation, selectedBranches, title }: any) => {
+    let oneLocation: any = null;
+    if (stateLocation) {
+      oneLocation = {
+        name: title,
+        location: {
+          lat: stateLocation.coords.latitude,
+          lon: stateLocation.coords.longitude
+        }
+      };
+    }
+
+    const branchLocations =
+      selectedBranches.length > 0
+        ? selectedBranches.map((branch: any) => {
+            return {
+              name: branch.name,
+              location: {
+                lat: branch.location.lat,
+                lon: branch.location.lon
+              }
+            };
+          })
+        : null;
+    if (oneLocation) {
+      return [oneLocation];
+    } else if (branchLocations) {
+      return branchLocations;
+    } else {
+      return undefined;
+    }
+  };
 
   handleSubmit = async (values: any, bag: any) => {
-    const { title, body, startend, phone } = values;
-    const { name, about, avatar } = this.props.user;
-    const selectedBranches: any = this.state.selectedBranches;
-    const groupId = uuidv4();
+    const { title, body, startend, phone, category } = values;
     const isrtl = isArabic(title);
+
+    const { name, about, avatar, uniquename } = this.props.user;
+    const selectedBranches: any = this.state.selectedBranches;
 
     let photos: any;
     if (this.state.images.length > 0) {
@@ -140,51 +189,54 @@ class AddServiceScreen extends React.Component<any, any> {
     const status = getOfferStatus({ start, end });
 
     this.updateProgressBar(1 / 3);
-    if (selectedBranches.length === 0) {
-      bag.setErrors({ title: 'you should select branch' });
+    if (selectedBranches.length === 0 && !this.state.location) {
+      bag.setErrors({ title: 'you should select location' });
       return;
     }
-    selectedBranches.map(async (branch: any) => {
-      const res = await this.props.addClassifiedMutation({
-        variables: {
-          title,
-          body,
-          photos,
-          isoffer: true,
-          isfront: true,
-          isrtl,
-          start,
-          end,
-          status,
-          groupId,
-          userName: name,
-          userAvatar: avatar,
-          userAbout: about,
-          branch: branch.name,
-          trueLocation: {
-            lat: branch.location.lat,
-            lon: branch.location.lon
-          },
-          phone
-        }
-      });
 
-      if (res.data.createPost.ok) {
-        this.updateProgressBar(1 / 3);
-        this.updateProgressBar(1 / 3);
-      }
-      if (!res.data.createPost.ok) {
-        bag.setErrors({ title: res.data.createPost.error });
+    const locations = this.getLocations({
+      stateLocation: this.state.location,
+      selectedBranches,
+      title: values.title
+    });
+
+    const res = await this.props.addClassifiedMutation({
+      variables: {
+        title,
+        body,
+        category,
+        kind: undefined,
+        service: undefined,
+        photos,
+        isoffer: true,
+        isfront: true,
+        isrtl,
+        start,
+        end,
+        status,
+        userName: name,
+        userUniquename: uniquename,
+        userAvatar: avatar,
+        userAbout: about,
+        locations,
+        phone
       }
     });
-    this.updateItemsQty();
-    bag.setSubmitting(false);
+
+    if (res.data.createPost.ok) {
+      this.updateProgressBar(1 / 3);
+      this.updateProgressBar(1 / 3);
+      bag.setSubmitting(false);
+      this.updateItemsQty();
+    }
+    if (!res.data.createPost.ok) {
+      bag.setErrors({ title: res.data.createPost.error });
+    }
   };
   render() {
     const word = this.props.words;
     const { isRTL } = this.props;
     const selectedBranches: any = this.state.selectedBranches;
-
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <MessageAlert
@@ -206,11 +258,14 @@ class AddServiceScreen extends React.Component<any, any> {
               initialValues={{
                 title: '',
                 body: '',
+                category: '',
                 startend: '',
                 phone: this.props.user.phone
                   ? getPureNumber(this.props.user.phone)
                   : '',
-                photos: ''
+                photos: '',
+                branchLocations: false,
+                singleLocation: true
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -267,6 +322,16 @@ class AddServiceScreen extends React.Component<any, any> {
                     multiline={true}
                     height={100}
                   />
+                  <Select
+                    words={this.props.words}
+                    required
+                    isRTL={isRTL}
+                    name="category"
+                    data={this.props.category}
+                    label={word.category}
+                    value={values.category}
+                    onChange={setFieldValue}
+                  />
 
                   <PhotoView
                     width={width}
@@ -321,22 +386,60 @@ class AddServiceScreen extends React.Component<any, any> {
                     onChange={setFieldValue}
                     rtl={isRTL}
                   >
-                    <View style={{ flexDirection: 'column' }}>
-                      {this.props.user.branches.map(
-                        (branch: any, index: any) => (
-                          <CheckBox
-                            key={index}
-                            name="location"
-                            index={index}
-                            branch={branch}
-                            selectBranch={this.selectBranch}
-                            label={branch.name}
-                            selected={selectedBranches.includes(branch)}
-                          />
-                        )
-                      )}
-                    </View>
+                    <CheckBox
+                      name="singleLocation"
+                      label={word.location}
+                      value={values.singleLocation}
+                      selected={values.singleLocation}
+                      resetLocation={this.resetLocation}
+                    />
+                    <CheckBox
+                      name="branchLocations"
+                      label={word.brancheslocations}
+                      value={values.branchLocations}
+                      selected={values.branchLocations}
+                      resetLocation={this.resetLocation}
+                    />
                   </Group>
+                  {values.branchLocations && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={isRTL}
+                    >
+                      <View
+                        style={{
+                          flexDirection: 'column',
+                          marginHorizontal: 15,
+                          borderLeftColor: '#ddd',
+                          borderLeftWidth: 2
+                        }}
+                      >
+                        {this.props.user.branches.map(
+                          (branch: any, index: any) => (
+                            <CheckBox
+                              key={index}
+                              name="location"
+                              index={index}
+                              branch={branch}
+                              selectBranch={this.selectBranch}
+                              label={branch.name}
+                              selected={selectedBranches.includes(branch)}
+                            />
+                          )
+                        )}
+                      </View>
+                    </Group>
+                  )}
+                  {values.singleLocation && (
+                    <AddLocation
+                      getCurrentLocation={this.getCurrentLocation}
+                      onChange={setFieldValue}
+                      width={width}
+                      title={values.title}
+                    />
+                  )}
 
                   <Button
                     isRTL={isRTL}
@@ -348,7 +451,8 @@ class AddServiceScreen extends React.Component<any, any> {
                     disabled={
                       !isValid ||
                       isSubmitting ||
-                      this.state.selectedBranches.length === 0
+                      (this.state.selectedBranches.length === 0 &&
+                        !this.state.location)
                     }
                   />
                   {isSubmitting && (
@@ -438,6 +542,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: any) => ({
   service: state.glob.language.service,
+  category: state.glob.language.category,
   lang: state.glob.languageName,
   isRTL: state.glob.isRTL,
   words: state.glob.language.words,
@@ -458,7 +563,7 @@ export default connect(
       graphql(updateMyQty, {
         name: 'updateMyQty',
         options: { refetchQueries: ['getUserPosts', 'getTimeLine'] }
-      })(AddServiceScreen)
+      })(AddOfferScreen)
     )
   )
 );

@@ -23,6 +23,7 @@ export function setQuery(query: any) {
     query
   };
 }
+
 export function delQuery() {
   return {
     type: DEL_QUERY

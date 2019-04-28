@@ -7,7 +7,7 @@ export default class BodyView extends React.Component<any, any> {
     fav: false
   };
   render() {
-    const { title, body, time, isrtl, ardroid } = this.props;
+    const { title, body, time, isrtl } = this.props;
     return (
       <View
         style={{
@@ -17,7 +17,7 @@ export default class BodyView extends React.Component<any, any> {
       >
         <View
           style={{
-            flexDirection: isrtl && !ardroid ? 'row-reverse' : 'row',
+            flexDirection: isrtl && rtlos() !== 3 ? 'row-reverse' : 'row',
             justifyContent: 'space-between'
           }}
         >

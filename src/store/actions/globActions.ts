@@ -9,7 +9,10 @@ import {
   HIDE_MODAL,
   ADD_NOTIFICATION,
   INIT_NOTIFICATIONS,
-  SHOW_CONTACT
+  SHOW_CONTACT,
+  ADD_FAV,
+  ADD_LIKE,
+  SAVE_FAV
 } from '../types';
 
 export function setLanguage(language: any, languageName: string, isRTL: any) {
@@ -80,5 +83,25 @@ export function showContact(status: any) {
   return {
     type: SHOW_CONTACT,
     status
+  };
+}
+
+export function addFav(postId: any) {
+  return {
+    type: ADD_FAV,
+    postId
+  };
+}
+export function saveFav(post: any) {
+  return {
+    type: SAVE_FAV,
+    post
+  };
+}
+
+export function addLike(postId: any) {
+  return {
+    type: ADD_LIKE,
+    postId
   };
 }

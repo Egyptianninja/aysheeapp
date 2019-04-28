@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { ImageManipulator } from 'expo';
+import { ImageManipulator, Overlay } from 'expo';
 import * as React from 'react';
 import {
   Dimensions,
@@ -88,7 +88,7 @@ class PhotoView extends React.Component<any, any> {
           flex: 1,
           width: SCREEN_WIDTH - 40,
           flexWarp: 'warp',
-          flexDirection: 'row',
+          // flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'flex-start',
           flexWrap: 'wrap'
@@ -96,11 +96,26 @@ class PhotoView extends React.Component<any, any> {
       >
         {this.state.images.map((img: any, i: any) => {
           const uri = img.file ? img.file : img.uri;
-          const size = (SCREEN_WIDTH - 70) / 3;
+          const size = 80;
+          // const size = (SCREEN_WIDTH - 70) / 3;
           const main = uri === this.state.selectedImage;
 
           return (
-            <View key={uri}>
+            <View key={uri} style={{ flexDirection: 'row' }}>
+              <View>
+                <Text
+                  style={{
+                    position: 'absolute',
+                    top: 20,
+                    right: 20,
+                    fontSize: 30,
+                    fontWeight: 'bold',
+                    color: '#ccc'
+                  }}
+                >
+                  {i + 1}
+                </Text>
+              </View>
               <TouchableOpacity
                 onPress={() => {
                   const currentImage: any = this.state.images[i];
@@ -143,13 +158,14 @@ class PhotoView extends React.Component<any, any> {
                   this.toggleModal();
                 }}
                 style={{
-                  width: size,
+                  width: size * 2,
                   height: size,
                   margin: 5,
-                  borderRadius: 5,
+                  borderRadius: 7,
                   borderColor: main ? '#00B77C' : undefined,
                   borderWidth: main ? 5 : 0,
-                  opacity: this.props.qty > 6 ? 1 : i > 5 ? 0.2 : 1
+                  opacity: this.props.qty > 6 ? 1 : i > 5 ? 0.2 : 1,
+                  overflow: 'hidden'
                 }}
               >
                 <Image

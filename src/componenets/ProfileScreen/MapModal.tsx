@@ -38,7 +38,6 @@ class MapModal extends React.Component<any, any> {
           style={{
             backgroundColor: '#f3f3f3',
             position: 'absolute',
-            margin: 0,
             width,
             height
           }}

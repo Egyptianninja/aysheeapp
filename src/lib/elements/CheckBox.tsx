@@ -16,7 +16,8 @@ const CheckBox = (props: any) => {
     msg,
     updateState,
     branch,
-    selectBranch
+    selectBranch,
+    resetLocation
   } = props;
 
   return (
@@ -27,9 +28,26 @@ const CheckBox = (props: any) => {
         flexDirection: rtl && Platform.OS !== 'android' ? 'row-reverse' : 'row'
       }}
       onPress={() => {
-        if (value) {
+        if (value || value === false) {
           props.onChange(name, !value);
+          if (value === true && resetLocation) {
+            if (name === 'singleLocation') {
+              resetLocation('singleLocation');
+            } else if (name === 'branchLocations') {
+              resetLocation('branchLocations');
+            }
+          }
+          if (value === false) {
+            if (name === 'singleLocation') {
+              props.onChange('branchLocations', false);
+              resetLocation('branchLocations');
+            } else if (name === 'branchLocations') {
+              props.onChange('singleLocation', false);
+              resetLocation('singleLocation');
+            }
+          }
         }
+
         if (updateState) {
           updateState(!value);
         }

@@ -23,6 +23,7 @@ export default gql`
     $addressArea: String
     $iswarranty: Boolean
     $trueLocation: LocationInput
+    $locations: [LocationNameInput]
     $isforman: Boolean
     $isjobreq: Boolean
     $isservicereq: Boolean
@@ -68,6 +69,7 @@ export default gql`
       addressArea: $addressArea
       iswarranty: $iswarranty
       trueLocation: $trueLocation
+      locations: $locations
       isforman: $isforman
       isjobreq: $isjobreq
       isservicereq: $isservicereq

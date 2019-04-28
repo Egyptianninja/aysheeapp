@@ -44,7 +44,7 @@ class NotificationModal extends React.Component<any, any> {
         hideModalContentWhileAnimating={true}
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        onSwipe={() => this.props.hideNotificationModal()}
+        onSwipeComplete={() => this.props.hideNotificationModal()}
         swipeDirection="down"
         style={{ justifyContent: 'flex-end', margin: 0 }}
       >

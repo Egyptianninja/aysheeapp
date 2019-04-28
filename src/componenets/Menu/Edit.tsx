@@ -1,14 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as React from 'react';
+import { connect } from 'react-redux';
 import {
   Dimensions,
-  Image,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
   KeyboardAvoidingView
 } from 'react-native';
@@ -25,16 +24,14 @@ import {
 import {
   getCameraRollPermission,
   isArabic,
-  pickImageWithoutUpload,
-  uploadPickedImage,
-  UserLocation
+  pickImageWithoutUpload
 } from '../../utils';
-import LoadingTiny from '../Common/LoadingTiny';
 import { Constants } from 'expo';
+import AddLocation from '../../utils/location/addLocation';
 
 const { width, height } = Dimensions.get('window');
 
-export default class Edit extends React.Component<any, any> {
+class Edit extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
     if (nextProps.isEditModalVisible !== prevState.isEditModalVisible) {
       return { isEditModalVisible: nextProps.isEditModalVisible };
@@ -66,9 +63,39 @@ export default class Edit extends React.Component<any, any> {
     this.state = {
       isEditModalVisible: false,
       location: null,
-      image: null
+      branches: [],
+      selectedBranches: []
     };
   }
+
+  componentDidMount() {
+    if (this.props.user.isstore) {
+      this.setState({
+        branches: this.props.user.branches
+      });
+    }
+    if (this.props.post.locations && this.props.post.locations.length > 0) {
+      const selectedNmaes = this.props.post.locations.map(
+        (loc: any) => loc.name
+      );
+      const selectedBranches = this.props.user.branches.filter((branch: any) =>
+        selectedNmaes.includes(branch.name)
+      );
+      this.setState({ selectedBranches });
+    }
+  }
+
+  selectBranch = (branch: any) => {
+    const selected: any = this.state.selectedBranches;
+    if (selected.includes(branch)) {
+      this.setState({
+        selectedBranches: selected.filter((sel: any) => sel !== branch)
+      });
+    } else {
+      selected.push(branch);
+      this.setState({ selectedBranches: selected });
+    }
+  };
 
   getCurrentLocation = (location: any) => {
     this.setState({ location });
@@ -85,7 +112,50 @@ export default class Edit extends React.Component<any, any> {
     }
   };
 
+  resetLocation = (name: any) => {
+    if (name === 'singleLocation') {
+      this.setState({ location: null });
+    } else if (name === 'branchLocations') {
+      this.setState({ selectedBranches: [] });
+    }
+  };
+
+  getLocations = ({ stateLocation, selectedBranches, title }: any) => {
+    let oneLocation: any = null;
+    if (stateLocation) {
+      oneLocation = {
+        name: title,
+        location: {
+          lat: stateLocation.coords.latitude,
+          lon: stateLocation.coords.longitude
+        }
+      };
+    }
+
+    const branchLocations =
+      selectedBranches.length > 0
+        ? selectedBranches.map((branch: any) => {
+            return {
+              name: branch.name,
+              location: {
+                lat: branch.location.lat,
+                lon: branch.location.lon
+              }
+            };
+          })
+        : null;
+    if (oneLocation) {
+      return [oneLocation];
+    } else if (branchLocations) {
+      return branchLocations;
+    } else {
+      return undefined;
+    }
+  };
+
   handleSubmit = async (values: any, bag: any) => {
+    const selectedBranches: any = this.state.selectedBranches;
+
     const {
       price,
       title,
@@ -110,21 +180,15 @@ export default class Edit extends React.Component<any, any> {
       isfullTime,
       education,
       experience,
-      salary,
-      location
+      salary
     } = values;
-    const photo = this.state.image
-      ? await uploadPickedImage(this.state.image, 1080, 0.8)
-      : null;
+
     const isrtl = isArabic(title);
-    const loc: any = location ? this.state.location : null;
-    let trueLocation = values.trueLocation;
-    if (loc) {
-      trueLocation = {
-        lat: loc.coords.latitude,
-        lon: loc.coords.longitude
-      };
-    }
+    const locations = this.getLocations({
+      stateLocation: this.state.location,
+      selectedBranches,
+      title: values.title
+    });
     const start = startend
       ? new Date(Object.keys(startend.name[0])[0])
       : undefined;
@@ -139,11 +203,10 @@ export default class Edit extends React.Component<any, any> {
         body,
         start,
         end,
-        photos: photo ? [photo] : undefined,
         isrtl,
         price: price ? Number(price) : undefined,
         phone: phone ? phone : undefined,
-        trueLocation: trueLocation ? trueLocation : undefined,
+        locations,
         isnew: isnew || isnew === false ? isnew : undefined,
         issale: issale || issale === false ? issale : undefined,
         iswarranty: iswarranty || iswarranty === false ? iswarranty : undefined,
@@ -266,20 +329,11 @@ export default class Edit extends React.Component<any, any> {
   render() {
     const { word, isRTL, post } = this.props;
     const { categoryId } = post;
-    const image: any = this.state.image;
+    const selectedBranches: any = this.state.selectedBranches;
+    console.log('selectedBranches', selectedBranches);
+
     const period = post.isoffer ? this.periodBuild(post) : null;
-    const photo =
-      post.isoffer && post.photos.length > 0
-        ? {
-            uri: `http://res.cloudinary.com/arflon/image/upload/w_400/${post.photos[0].substring(
-              0,
-              20
-            )}`,
-            ratio: Number(post.photos[0].substring(21, 26))
-          }
-        : null;
     return (
-      // <KeyboardAvoidingView behavior="padding" enabled>
       <Modal
         isVisible={this.state.isEditModalVisible}
         onBackdropPress={() => this.props.hideEditModal()}
@@ -367,7 +421,13 @@ export default class Edit extends React.Component<any, any> {
                 education: post.education,
                 experience: post.experience,
                 salary: post.salary ? post.salary.toString() : post.salary,
-                location: false
+                branchLocations:
+                  this.props.user.isstore &&
+                  this.props.post.locations &&
+                  this.props.post.locations.length > 0,
+                singleLocation:
+                  !this.props.user.isstore &&
+                  this.state.selectedBranches.length > 0
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -422,80 +482,6 @@ export default class Edit extends React.Component<any, any> {
                   />
                   {post.isoffer && (
                     <React.Fragment>
-                      {!image && !photo && (
-                        <React.Fragment>
-                          <Text
-                            style={[
-                              styles.labelStyle,
-                              { alignSelf: 'flex-end', paddingRight: 35 }
-                            ]}
-                          >
-                            {word.selectphoto}
-                          </Text>
-                          <TouchableWithoutFeedback
-                            onPress={() => this.onPhotoUpload(setFieldValue)}
-                          >
-                            <View
-                              style={{
-                                width: width - 50,
-                                backgroundColor: '#eee',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                marginVertical: 10,
-                                height: 120,
-                                borderRadius: 8
-                              }}
-                            >
-                              <Ionicons
-                                name="ios-camera"
-                                size={46}
-                                color="#5658AD"
-                              />
-                            </View>
-                          </TouchableWithoutFeedback>
-                        </React.Fragment>
-                      )}
-                      <View
-                        style={{
-                          justifyContent: 'center',
-                          alignItems: 'center'
-                        }}
-                      >
-                        {!image && photo && (
-                          <TouchableWithoutFeedback
-                            onPress={() => this.onPhotoUpload(setFieldValue)}
-                          >
-                            <Image
-                              source={{ uri: photo.uri }}
-                              style={{
-                                flex: 1,
-                                width: width - 50,
-                                height: photo.ratio * (width - 50),
-                                resizeMode: 'cover',
-                                borderRadius: 8
-                              }}
-                            />
-                          </TouchableWithoutFeedback>
-                        )}
-                        {image && (
-                          <TouchableWithoutFeedback
-                            onPress={() => this.onPhotoUpload(setFieldValue)}
-                          >
-                            <Image
-                              source={{ uri: image.uri }}
-                              style={{
-                                flex: 1,
-                                width: width - 50,
-                                height:
-                                  (image.height / image.width) * (width - 50),
-                                resizeMode: 'cover',
-                                borderRadius: 8
-                              }}
-                            />
-                          </TouchableWithoutFeedback>
-                        )}
-                      </View>
-
                       <View
                         style={{
                           flex: 1,
@@ -856,25 +842,76 @@ export default class Edit extends React.Component<any, any> {
                       </Group>
                     </React.Fragment>
                   )}
-                  <Group
-                    color="#444"
-                    size={24}
-                    onChange={setFieldValue}
-                    rtl={isRTL}
-                  >
-                    <CheckBox
-                      name="location"
-                      msg={word.locationmsg}
-                      label={word.location}
-                      value={values.location}
-                      selected={values.location}
-                    />
-                  </Group>
-                  {values.location && !this.state.location && <LoadingTiny />}
-                  {values.location && (
-                    <UserLocation
+                  {!this.props.user.isstore && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={isRTL}
+                    >
+                      <CheckBox
+                        name="singleLocation"
+                        label={word.location}
+                        value={values.singleLocation}
+                        selected={values.singleLocation}
+                        resetLocation={this.resetLocation}
+                      />
+                    </Group>
+                  )}
+                  {this.props.user.isstore && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={isRTL}
+                    >
+                      <CheckBox
+                        name="branchLocations"
+                        label={word.brancheslocations}
+                        value={values.branchLocations}
+                        selected={values.branchLocations}
+                        resetLocation={this.resetLocation}
+                      />
+                    </Group>
+                  )}
+
+                  {values.branchLocations && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={isRTL}
+                    >
+                      <View
+                        style={{
+                          flexDirection: 'column',
+                          marginHorizontal: 15,
+                          borderLeftColor: '#ddd',
+                          borderLeftWidth: 2
+                        }}
+                      >
+                        {this.props.user.branches.map(
+                          (branch: any, index: any) => (
+                            <CheckBox
+                              key={index}
+                              name="location"
+                              index={index}
+                              branch={branch}
+                              selectBranch={this.selectBranch}
+                              label={branch.name}
+                              selected={selectedBranches.includes(branch)}
+                            />
+                          )
+                        )}
+                      </View>
+                    </Group>
+                  )}
+                  {values.singleLocation && (
+                    <AddLocation
                       getCurrentLocation={this.getCurrentLocation}
+                      onChange={setFieldValue}
                       width={width}
+                      title={values.title}
                     />
                   )}
                   <View
@@ -891,11 +928,7 @@ export default class Edit extends React.Component<any, any> {
                       textStyle={styles.btnTextStyle}
                       title={word.submit}
                       onPress={handleSubmit}
-                      disabled={
-                        !isValid ||
-                        isSubmitting ||
-                        (values.location && !this.state.location)
-                      }
+                      // disabled={!isValid || isSubmitting}
                       loading={isSubmitting}
                     />
                   </View>
@@ -909,6 +942,13 @@ export default class Edit extends React.Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => ({
+  user: state.user.user
+});
+
+export default connect(mapStateToProps)(Edit);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

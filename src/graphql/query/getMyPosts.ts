@@ -44,9 +44,6 @@ export default gql`
         rooms
         bathrooms
         isfurnishered
-        islive
-        isoffer
-        isfront
 
         categoryId
         category
@@ -76,23 +73,50 @@ export default gql`
         education
         experience
         salary
-        trueLocation {
-          lat
-          lon
-        }
-
         year
         km
         color
         sort
+        trueLocation {
+          lat
+          lon
+        }
+        locations {
+          name
+          location {
+            lat
+            lon
+          }
+        }
+        location {
+          lat
+          lon
+        }
+        locations {
+          name
+          location {
+            lat
+            lon
+          }
+        }
+        islive
+        isfront
+        isoffer
+        start
+        end
+        status
         updates
+        userId
         userName
+        userUniquename
         userAvatar
         userAbout
         branch
         status
         groupId
+        likes
         updatedAt
+      }
       }
       error
     }

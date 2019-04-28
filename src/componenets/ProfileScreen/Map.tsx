@@ -1,22 +1,26 @@
 import { Ionicons } from '@expo/vector-icons';
+
 import { MapView } from 'expo';
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import Drive from '../../utils/location/drive';
 
-const { Marker }: any = MapView;
+const { Marker, Callout }: any = MapView;
 
 export default class Map extends React.Component<any, any> {
   map: any;
+  mymarker: any;
   state = {
     mapType: 'standard'
   };
+
   renderBack = () => {
     return (
       <TouchableOpacity
         onPress={() => this.props.hideMapModal()}
         style={{
           position: 'absolute',
-          top: 34,
+          top: 44,
           left: 5,
           zIndex: 160,
           width: 34,
@@ -98,7 +102,7 @@ export default class Map extends React.Component<any, any> {
         style={{
           position: 'absolute',
           right: 10,
-          top: 34,
+          top: 44,
           zIndex: 180
         }}
       >
@@ -134,6 +138,7 @@ export default class Map extends React.Component<any, any> {
           ref={mapView => {
             this.map = mapView;
           }}
+          onLayout={() => this.mymarker.showCallout()}
           style={{
             flex: 1,
             width,
@@ -145,7 +150,6 @@ export default class Map extends React.Component<any, any> {
             latitudeDelta: 0.0062,
             longitudeDelta: 0.0041
           }}
-          // showsUserLocation={true}
           mapType={mapType}
         >
           <Marker
@@ -154,29 +158,40 @@ export default class Map extends React.Component<any, any> {
               longitude
             }}
             title={title}
-            description={body}
+            ref={(markerView: any) => {
+              this.mymarker = markerView;
+            }}
           >
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: 'rgba(223, 57, 66,0.1)',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderColor: 'rgba(223, 57, 66, 0.5)',
-                borderWidth: 1
-              }}
+            <Callout
+            // tooltip={true}
             >
               <View
                 style={{
-                  width: 10,
-                  height: 10,
+                  flexDirection: 'row',
+                  backgroundColor: '#fff',
                   borderRadius: 5,
-                  backgroundColor: 'rgba(223, 57, 66, 1)'
+                  // height: 44,
+                  justifyContent: 'center',
+                  alignItems: 'center'
                 }}
-              />
-            </View>
+              >
+                <Drive
+                  hideMapModal={this.props.hideMapModal}
+                  latitude={latitude}
+                  longitude={longitude}
+                />
+                <View
+                  style={{
+                    width: 150,
+                    height: 40,
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <Text style={{ textAlign: 'center' }}>{title}</Text>
+                </View>
+              </View>
+            </Callout>
           </Marker>
         </MapView>
       </View>

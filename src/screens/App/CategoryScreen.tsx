@@ -357,12 +357,12 @@ class CategoryScreen extends React.Component<any, any> {
         <Query
           query={getCategoryPosts}
           variables={{ ...rest }}
-          onCompleted={data => {
+          onCompleted={(data:any) => {
             const buckets = getTimeLineBuckets(rest.categoryId, store, data);
             this.props.setBuckets(buckets);
           }}
         >
-          {({ loading, error, data, fetchMore, refetch }) => {
+          {({ loading, error, data, fetchMore, refetch }:any) => {
             if (loading) {
               return <HomeLoading categoryId={rest.categoryId} />;
             }

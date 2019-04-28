@@ -11,21 +11,15 @@ import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import PhotoView from '../../../componenets/Add/PhotoView';
-import LoadingTiny from '../../../componenets/Common/LoadingTiny';
 import addClassifiedMutation from '../../../graphql/mutation/addClassified';
 import notificationSub from '../../../graphql/mutation/notificationSub';
 import { Button, CheckBox, Group, Input, RadioButton } from '../../../lib';
-import {
-  isArabic,
-  Message,
-  StyleSheet,
-  uploadPhotos,
-  UserLocation
-} from '../../../utils';
+import { isArabic, StyleSheet, uploadPhotos, uuidv4 } from '../../../utils';
 import { getPureNumber } from '../../../utils/call';
 import MessageAlert from '../../../utils/message/MessageAlert';
 import { updateUser } from '../../../store/actions/userAtions';
 import updateMyQty from '../../../graphql/mutation/updateMyQty';
+import AddLocation from '../../../utils/location/addLocation';
 const { width } = Dimensions.get('window');
 
 class AddJobScreen extends React.Component<any, any> {
@@ -35,7 +29,27 @@ class AddJobScreen extends React.Component<any, any> {
     isMessageVisible: false,
     location: null,
     images: [],
+    branches: [],
+    selectedBranches: [],
     bar: 0
+  };
+  componentDidMount() {
+    if (this.props.user.isstore) {
+      this.setState({
+        branches: this.props.user.branches
+      });
+    }
+  }
+  selectBranch = (branch: any) => {
+    const selected: any = this.state.selectedBranches;
+    if (selected.includes(branch)) {
+      this.setState({
+        selectedBranches: selected.filter((sel: any) => sel !== branch)
+      });
+    } else {
+      selected.push(branch);
+      this.setState({ selectedBranches: selected });
+    }
   };
 
   componentWillUnmount() {
@@ -93,7 +107,52 @@ class AddJobScreen extends React.Component<any, any> {
     }, 2000);
   };
 
+  resetLocation = (name: any) => {
+    if (name === 'singleLocation') {
+      this.setState({ location: null });
+    } else if (name === 'branchLocations') {
+      this.setState({ selectedBranches: [] });
+    }
+  };
+
+  getLocations = ({ stateLocation, selectedBranches, title }: any) => {
+    let oneLocation: any = null;
+    if (stateLocation) {
+      oneLocation = {
+        name: title,
+        location: {
+          lat: stateLocation.coords.latitude,
+          lon: stateLocation.coords.longitude
+        }
+      };
+    }
+
+    const branchLocations =
+      selectedBranches.length > 0
+        ? selectedBranches.map((branch: any) => {
+            return {
+              name: branch.name,
+              location: {
+                lat: branch.location.lat,
+                lon: branch.location.lon
+              }
+            };
+          })
+        : null;
+    if (oneLocation) {
+      return [oneLocation];
+    } else if (branchLocations) {
+      return branchLocations;
+    } else {
+      return undefined;
+    }
+  };
+
   handleSubmit = async (values: any, bag: any) => {
+    const { name, about, avatar, uniquename } = this.props.user;
+    const selectedBranches: any = this.state.selectedBranches;
+    const groupId = uuidv4();
+
     let photos;
     if (this.state.images.length > 0) {
       photos = await uploadPhotos(
@@ -110,23 +169,17 @@ class AddJobScreen extends React.Component<any, any> {
       body,
       isjobreq,
       phone,
-
       isfullTime,
-
       experience,
-      salary,
-      location
+      salary
     } = values;
     const isrtl = isArabic(title);
-    const loc: any = location ? this.state.location : null;
-    let trueLocation = null;
+    const locations = this.getLocations({
+      stateLocation: this.state.location,
+      selectedBranches,
+      title: values.title
+    });
 
-    if (loc) {
-      trueLocation = {
-        lat: loc.coords.latitude,
-        lon: loc.coords.longitude
-      };
-    }
     this.updateProgressBar(1 / (3 + this.state.images.length));
     const res = await this.props.addClassifiedMutation({
       variables: {
@@ -134,6 +187,8 @@ class AddJobScreen extends React.Component<any, any> {
         body,
         isfront,
         category,
+        kind: undefined,
+        service: undefined,
         isjobreq,
         photos,
         isrtl,
@@ -141,23 +196,29 @@ class AddJobScreen extends React.Component<any, any> {
         isfullTime,
         experience,
         salary: Number(salary),
-        trueLocation
+        groupId,
+        userName: name,
+        userUniquename: uniquename,
+        userAvatar: avatar,
+        userAbout: about,
+        locations
       }
     });
 
     if (res.data.createPost.ok) {
       this.updateProgressBar(1 / (3 + this.state.images.length));
-      this.updateItemsQty();
+      bag.setSubmitting(false);
       this.updateProgressBar(1 / (3 + this.state.images.length));
+      this.updateItemsQty();
     }
     if (!res.data.createPost.ok) {
       bag.setErrors({ title: res.data.createPost.error });
     }
-    bag.setSubmitting(false);
   };
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
+    const selectedBranches: any = this.state.selectedBranches;
 
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -186,7 +247,8 @@ class AddJobScreen extends React.Component<any, any> {
                 isPartTime: false,
                 experience: '',
                 salary: '',
-                location: false
+                branchLocations: false,
+                singleLocation: false
               }}
               onSubmit={this.handleSubmit}
               validationSchema={Yup.object().shape({
@@ -345,18 +407,60 @@ class AddJobScreen extends React.Component<any, any> {
                     rtl={isRTL}
                   >
                     <CheckBox
-                      name="location"
+                      name="singleLocation"
                       label={word.location}
-                      msg={word.locationmsg}
-                      value={values.location}
-                      selected={values.location}
+                      value={values.singleLocation}
+                      selected={values.singleLocation}
+                      resetLocation={this.resetLocation}
                     />
+                    {this.props.user.isstore && (
+                      <CheckBox
+                        name="branchLocations"
+                        label={word.brancheslocations}
+                        value={values.branchLocations}
+                        selected={values.branchLocations}
+                        resetLocation={this.resetLocation}
+                      />
+                    )}
                   </Group>
-                  {values.location && !this.state.location && <LoadingTiny />}
-                  {values.location && (
-                    <UserLocation
+
+                  {values.branchLocations && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={isRTL}
+                    >
+                      <View
+                        style={{
+                          flexDirection: 'column',
+                          marginHorizontal: 15,
+                          borderLeftColor: '#ddd',
+                          borderLeftWidth: 2
+                        }}
+                      >
+                        {this.props.user.branches.map(
+                          (branch: any, index: any) => (
+                            <CheckBox
+                              key={index}
+                              name="location"
+                              index={index}
+                              branch={branch}
+                              selectBranch={this.selectBranch}
+                              label={branch.name}
+                              selected={selectedBranches.includes(branch)}
+                            />
+                          )
+                        )}
+                      </View>
+                    </Group>
+                  )}
+                  {values.singleLocation && (
+                    <AddLocation
                       getCurrentLocation={this.getCurrentLocation}
+                      onChange={setFieldValue}
                       width={width}
+                      title={values.title}
                     />
                   )}
                   <Button
@@ -366,11 +470,7 @@ class AddJobScreen extends React.Component<any, any> {
                     textStyle={styles.btnTextStyle}
                     title={word.submit}
                     onPress={handleSubmit}
-                    disabled={
-                      !isValid ||
-                      isSubmitting ||
-                      (values.location && !this.state.location)
-                    }
+                    disabled={!isValid || isSubmitting}
                   />
                   {isSubmitting && (
                     <View

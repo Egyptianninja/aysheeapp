@@ -61,7 +61,7 @@ export default class OfferAdChoise extends React.Component<any, any> {
         hideModalContentWhileAnimating={true}
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        onSwipe={() => this.props.hideOfferAdChoiseModal()}
+        onSwipeComplete={() => this.props.hideOfferAdChoiseModal()}
         swipeDirection="down"
         style={{ margin: 0 }}
       >

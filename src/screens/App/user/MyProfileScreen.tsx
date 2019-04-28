@@ -187,7 +187,7 @@ class MyProfileScreen extends React.Component<any, any> {
         variables={variables}
         fetchPolicy="network-only"
       >
-        {({ loading, error, data, fetchMore, refetch }) => {
+        {({ loading, error, data, fetchMore, refetch }: any) => {
           if (loading) {
             return <Loading />;
           }
