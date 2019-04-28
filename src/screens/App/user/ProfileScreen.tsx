@@ -122,7 +122,7 @@ class ProfileScreen extends React.Component<any, any> {
   onCheckMessageModalHide = () => {
     this.showMessageModal({ message: this.props.words.addeleted });
   };
-  showMapModal = async () => {
+  showMapModal = () => {
     this.setState({ isMapModalVisible: true });
   };
   hideMapModal = () => {
@@ -419,7 +419,7 @@ class ProfileScreen extends React.Component<any, any> {
           />
           <TouchableOpacity
             onPress={() => this.showMapModal()}
-            disabled={!user.location}
+            disabled={!user.branches || user.branches.length === 0}
             style={{
               flex: 1,
               justifyContent: 'center',
@@ -432,7 +432,11 @@ class ProfileScreen extends React.Component<any, any> {
             <Ionicons
               name="ios-map"
               size={31}
-              color={!user.location ? '#aaa' : maincolor}
+              color={
+                !user.branches || user.branches.length === 0
+                  ? '#aaa'
+                  : maincolor
+              }
             />
           </TouchableOpacity>
         </View>
@@ -546,20 +550,22 @@ class ProfileScreen extends React.Component<any, any> {
 
     const paramUser = this.props.navigation.getParam('user');
     const paramUserId = this.props.navigation.getParam('userId');
+
     const ismyaccount = this.props.isAuthenticated
-      ? paramUser._id === this.props.user._id
+      ? paramUserId
+        ? paramUserId === this.props.user._id
+        : paramUser._id === this.props.user._id
       : null;
     const user = ismyaccount ? this.props.user : paramUser;
     const { tab } = this.state;
-    const maincolor = user.color ? user.color : '#7678ED';
-    const isshop = user.isstore;
+    const maincolor = '#272727';
+
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
-    const phone = user.phone ? user.phone.replace(code(), '') : null;
-    const callargs = { number: phone, prompt: false };
+
     if (paramUserId) {
       return (
         <Query query={getUser} variables={{ userId: paramUserId }}>
@@ -571,6 +577,11 @@ class ProfileScreen extends React.Component<any, any> {
               return <Text>{error}</Text>;
             }
             const userData = data.getUser;
+            const isshop = userData.isstore;
+            const phone = userData.phone
+              ? userData.phone.replace(code(), '')
+              : null;
+            const callargs = { number: phone, prompt: false };
             return (
               <View style={{ flex: 1, backgroundColor: '#fff' }}>
                 <Menu
@@ -631,19 +642,16 @@ class ProfileScreen extends React.Component<any, any> {
                   iconColor="#E85255"
                   height={200}
                 />
-                {userData.location &&
-                  userData.location.lat &&
-                  userData.location.lon && (
-                    <MapModal
-                      isMapModalVisible={this.state.isMapModalVisible}
-                      hideMapModal={this.hideMapModal}
-                      lat={userData.location.lat}
-                      lon={userData.location.lon}
-                      title={userData.name}
-                      width={width}
-                      height={height}
-                    />
-                  )}
+
+                {userData.branches && userData.branches.length > 0 && (
+                  <MapModal
+                    isMapModalVisible={this.state.isMapModalVisible}
+                    hideMapModal={this.hideMapModal}
+                    itemLocations={userData.branches}
+                    width={width}
+                    height={height}
+                  />
+                )}
 
                 <Animated.View
                   style={{
@@ -685,6 +693,9 @@ class ProfileScreen extends React.Component<any, any> {
         </Query>
       );
     } else {
+      const isshop = user.isstore;
+      const phone = user.phone ? user.phone.replace(code(), '') : null;
+      const callargs = { number: phone, prompt: false };
       return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
           <Menu
@@ -745,18 +756,15 @@ class ProfileScreen extends React.Component<any, any> {
             iconColor="#E85255"
             height={200}
           />
-          {user.location && user.location.lat && user.location.lon && (
+          {user.branches && user.branches.length > 0 && (
             <MapModal
               isMapModalVisible={this.state.isMapModalVisible}
               hideMapModal={this.hideMapModal}
-              lat={user.location.lat}
-              lon={user.location.lon}
-              title={user.name}
+              itemLocations={user.branches}
               width={width}
               height={height}
             />
           )}
-
           <Animated.View
             style={{
               position: 'absolute',

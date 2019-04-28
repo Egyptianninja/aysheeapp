@@ -85,6 +85,7 @@ class HomeScreen extends React.Component<any, any> {
       rest: {},
       location: null,
       itemLocation: null,
+      itemLocations: null,
       loading: false,
       message: null
     };
@@ -247,8 +248,8 @@ class HomeScreen extends React.Component<any, any> {
     this.setState({ isOfferAdChoiseModalVisible: false });
   };
 
-  showMapModal = async ({ itemLocation, itemTitle }: any) => {
-    await this.setState({ itemLocation, itemTitle });
+  showMapModal = async ({ itemLocation, itemLocations, itemTitle }: any) => {
+    await this.setState({ itemLocation, itemLocations, itemTitle });
     this.setState({ isMapModalVisible: true });
   };
   hideMapModal = () => {
@@ -489,19 +490,17 @@ class HomeScreen extends React.Component<any, any> {
           word={words}
           removeAllFilters={this.removeAllFilters}
         />
-        {this.state.itemLocation &&
-          this.state.itemLocation.lat &&
-          this.state.itemLocation.lon && (
-            <MapModal
-              isMapModalVisible={this.state.isMapModalVisible}
-              hideMapModal={this.hideMapModal}
-              lat={this.state.itemLocation.lat}
-              lon={this.state.itemLocation.lon}
-              title={this.state.itemTitle}
-              width={width}
-              height={height}
-            />
-          )}
+        {(this.state.itemLocation || this.state.itemLocations) && (
+          <MapModal
+            isMapModalVisible={this.state.isMapModalVisible}
+            hideMapModal={this.hideMapModal}
+            itemLocation={this.state.itemLocation}
+            itemLocations={this.state.itemLocations}
+            title={this.state.itemTitle}
+            width={width}
+            height={height}
+          />
+        )}
 
         <Query
           query={getTimeLine}

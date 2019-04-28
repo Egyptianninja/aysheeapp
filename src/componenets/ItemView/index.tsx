@@ -11,7 +11,6 @@ import {
 } from '../../utils';
 import PhotoSliderHome from '../HomeScreen/PhotoSliderHome';
 import { AvatarCircle } from '../Avatar';
-// import Drive from '../../utils/location/drive';
 import { getproperties, getJobProperties } from '../ItemScreen';
 import { Details } from './Details';
 import SpringIcon from '../../componenets/Common/SpringIcon';
@@ -61,12 +60,12 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
         >
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('ProfileScreen', { user });
+              navigation.navigate('ProfileScreen', { userId: user.id, user });
             }}
           >
             <Text style={{ fontWeight: 'bold' }}>{user.name} </Text>
           </TouchableOpacity>
-          <Text>{user.about}</Text>
+          <Text>{user.about ? user.about.substring(0, 40) : ''}</Text>
           <Text
             style={{
               fontSize: 10,
@@ -131,7 +130,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
       id: post.userId
     };
     // TODO: change to location
-    const location = post.trueLocation;
+    const location = post.location;
+    const locations = post.locations;
     const liked = likes.includes(post.id);
     const faved = favs.includes(post.id);
     const dist =
@@ -153,36 +153,51 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
         }}
       >
         <View style={{ flexDirection: 'row' }}>
-          {location && dist && (
+          {(location || locations) && (
             <TouchableOpacity
               style={{
                 flex: 2,
                 flexDirection: 'row',
-                marginLeft: 10,
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
               onPress={() => {
                 showMapModal({
                   itemLocation: location,
+                  itemLocations: locations,
                   itemTitle: post.subTitle
                 });
               }}
             >
               <FontAwesome name="map-marker" size={33} color="#777" />
 
-              <Text
-                style={{
-                  top: 10,
-                  fontSize: 12,
-                  color: '#777',
-                  left: -2,
-                  letterSpacing: 1
-                }}
-              >
-                {dist.dist}
-                {dist.unit}
-              </Text>
+              {dist && (
+                <Text
+                  style={{
+                    top: 10,
+                    fontSize: 12,
+                    color: '#777',
+                    left: -2,
+                    letterSpacing: 1
+                  }}
+                >
+                  {dist.dist}
+                  {dist.unit}
+                </Text>
+              )}
+              {!dist && (
+                <Text
+                  style={{
+                    top: 10,
+                    fontSize: 12,
+                    color: '#777',
+                    left: -2,
+                    letterSpacing: 1
+                  }}
+                >
+                  Map
+                </Text>
+              )}
             </TouchableOpacity>
           )}
           <View style={{ flex: 8 }}>

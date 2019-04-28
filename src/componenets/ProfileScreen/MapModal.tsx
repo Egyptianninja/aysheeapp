@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import Modal from 'react-native-modal';
 import Map from './Map';
+import Maps from './Maps';
 
 class MapModal extends React.Component<any, any> {
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
@@ -21,7 +22,15 @@ class MapModal extends React.Component<any, any> {
   }
 
   render() {
-    const { lat, lon, title, hideMapModal, width, height } = this.props;
+    const {
+      title,
+      hideMapModal,
+      width,
+      height,
+      itemLocation,
+      itemLocations
+    } = this.props;
+
     return (
       <Modal
         isVisible={this.state.isMapModalVisible}
@@ -42,14 +51,25 @@ class MapModal extends React.Component<any, any> {
             height
           }}
         >
-          <Map
-            hideMapModal={hideMapModal}
-            latitude={lat}
-            longitude={lon}
-            title={title}
-            width={width}
-            height={height}
-          />
+          {itemLocation && (
+            <Map
+              hideMapModal={hideMapModal}
+              latitude={itemLocation.lat}
+              longitude={itemLocation.lon}
+              title={title}
+              width={width}
+              height={height}
+            />
+          )}
+          {itemLocations && (
+            <Maps
+              hideMapModal={hideMapModal}
+              itemLocations={itemLocations}
+              title={title}
+              width={width}
+              height={height}
+            />
+          )}
         </View>
       </Modal>
     );

@@ -47,6 +47,7 @@ import { renderUser } from '../User';
 import { MenuIconHeader } from './MenuIconHeader';
 import MessageAlert from '../../utils/message/MessageAlert';
 import { code } from '../../store/getStore';
+import Maps from '../ProfileScreen/Maps';
 
 const { width, height } = Dimensions.get('window');
 
@@ -716,20 +717,15 @@ class ItemView extends React.Component<any, any> {
                 data={jdata}
               />
             )}
-            {post.trueLocation && (
-              <ItemLocation
-                latitude={post.trueLocation.lat}
-                longitude={post.trueLocation.lon}
-                title={post.title}
+            {post.locations && (
+              <Maps
+                itemLocations={post.locations}
+                width={width - 40}
+                height={350}
+                notModal={true}
               />
             )}
-            {post.trueLocation && (
-              <Link
-                latitude={post.trueLocation.lat}
-                longitude={post.trueLocation.lon}
-                title={post.title}
-              />
-            )}
+
             {this.props.isAuthenticated && (
               <View
                 style={{

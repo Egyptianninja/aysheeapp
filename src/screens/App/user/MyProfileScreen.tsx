@@ -488,7 +488,7 @@ class MyProfileScreen extends React.Component<any, any> {
           />
           <TouchableOpacity
             onPress={() => this.showMapModal()}
-            disabled={!user.location}
+            disabled={!user.branches || user.branches.length === 0}
             style={{
               flex: 1,
               justifyContent: 'center',
@@ -501,7 +501,11 @@ class MyProfileScreen extends React.Component<any, any> {
             <Ionicons
               name="ios-map"
               size={31}
-              color={!user.location ? '#aaa' : maincolor}
+              color={
+                !user.branches || user.branches.length === 0
+                  ? '#aaa'
+                  : maincolor
+              }
             />
           </TouchableOpacity>
         </View>
@@ -778,13 +782,12 @@ class MyProfileScreen extends React.Component<any, any> {
           iconColor="#E85255"
           height={200}
         />
-        {user.location && user.location.lat && user.location.lon && (
+
+        {user.branches && user.branches.length > 0 && (
           <MapModal
             isMapModalVisible={this.state.isMapModalVisible}
             hideMapModal={this.hideMapModal}
-            lat={user.location.lat}
-            lon={user.location.lon}
-            title={user.name}
+            itemLocations={user.branches}
             width={width}
             height={height}
           />
