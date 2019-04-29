@@ -49,7 +49,6 @@ export default class ImageIcon extends React.Component<any, any> {
       notification
     }: any = this.props;
     this.scaleStyle = { transform: [{ scale: this.scale }] };
-
     return (
       <Animated.View
         style={[

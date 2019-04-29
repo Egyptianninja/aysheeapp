@@ -122,7 +122,7 @@ class HomeScreen extends React.Component<any, any> {
     ];
 
     this.notify = Notifications.addListener(this.handleNotification);
-    this.props.navigation.setParams({ handleHome: this.handleHome });
+    this.props.navigation.setParams({ handleHome: this.handleTop });
     this.props.navigation.setParams({ addItem: this.addItem });
 
     if (Platform.OS === 'android') {
@@ -272,7 +272,8 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleTop = () => {
-    this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
+    // this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
+    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
   };
 
   handleHome = () => {

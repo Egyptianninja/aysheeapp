@@ -143,6 +143,8 @@ if (rtlos() === 3) {
         screen: HomeStack,
         navigationOptions: ({ navigation }: any) => {
           const { routeName } = navigation.state.routes[navigation.state.index];
+          const params = navigation.state.routes[0].params;
+
           const navigationOptions: any = {};
 
           if (
@@ -167,7 +169,24 @@ if (rtlos() === 3) {
               />
             );
           }
+          navigationOptions.tabBarOnPress = () => {
+            if (navigation.state.index === 0) {
+              const navigationInRoute = navigation.getChildNavigation(
+                navigation.state.routes[0].key
+              );
 
+              if (
+                !!navigationInRoute &&
+                navigationInRoute.isFocused() &&
+                !!navigationInRoute.state.params &&
+                !!navigationInRoute.state.params.handleHome
+              ) {
+                navigationInRoute.state.params.handleHome();
+              } else {
+                navigation.navigate(navigation.state.key);
+              }
+            }
+          };
           return navigationOptions;
         }
       },
