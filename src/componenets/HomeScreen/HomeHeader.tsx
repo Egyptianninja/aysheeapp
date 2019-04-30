@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import * as React from 'react';
 import { Image, Platform, TouchableOpacity, View } from 'react-native';
@@ -31,9 +31,9 @@ class HomeHeader extends React.Component<any, any> {
           styles.container,
           {
             flexDirection: this.ardroid ? 'row-reverse' : 'row',
-            backgroundColor: '#f3f3f3',
-            borderBottomWidth: 1,
-            borderBottomColor: '#ddd'
+            backgroundColor: '#f3f3f3'
+            // borderBottomWidth: 1,
+            // borderBottomColor: '#ddd'
           }
         ]}
       >
@@ -101,19 +101,20 @@ class HomeHeader extends React.Component<any, any> {
         </View>
         <View style={{ flex: 1.5 }}>
           <TouchableOpacity
-            onPress={() => {
-              const addItem = this.props.navigation.getParam('addItem');
-              addItem();
-            }}
+            onPress={() => this.props.showFollowModal()}
+            // onPress={() => {
+            //   const addItem = this.props.navigation.getParam('addItem');
+            //   addItem();
+            // }}
             style={{
               flex: 1,
-              top: rtlos() === 3 ? 2 : undefined,
+              top: 3,
               width: '100%',
               justifyContent: 'center',
               alignItems: 'center'
             }}
           >
-            <Ionicons name="ios-add" size={40} color="#636363" />
+            <AntDesign name="appstore-o" size={28} color="#636363" />
           </TouchableOpacity>
         </View>
       </View>

@@ -10,7 +10,7 @@ export default class BodyView extends React.Component<any, any> {
     return (
       <View
         style={{
-          paddingTop: 10,
+          // paddingTop: 10,
           paddingBottom: 15,
           justifyContent: 'space-between'
         }}
@@ -19,7 +19,7 @@ export default class BodyView extends React.Component<any, any> {
           <Text
             style={{
               fontSize: 14,
-              color: '#272727',
+              color: '#373737',
               writingDirection: isrtl ? 'rtl' : 'ltr'
             }}
           >

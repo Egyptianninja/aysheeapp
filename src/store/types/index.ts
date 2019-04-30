@@ -31,3 +31,4 @@ export const SHOW_CONTACT = 'SHOW_CONTACT';
 export const ADD_FAV = 'ADD_FAV';
 export const SAVE_FAV = 'SAVE_FAV';
 export const ADD_LIKE = 'ADD_LIKE';
+export const ADD_CATEGORYIDS = 'ADD_CATEGORYIDS';

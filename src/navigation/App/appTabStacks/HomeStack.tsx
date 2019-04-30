@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { Header } from '../../../componenets';
-import HomeHeader from '../../../componenets/HomeScreen/HomeHeader';
 import {
   AddCarScreen,
   AddClassifiedScreen,
@@ -30,14 +29,15 @@ export const HomeStack = createStackNavigator(
   {
     HomeScreen: {
       screen: HomeScreen,
-      navigationOptions: ({ navigation }: any) => ({
-        header: <HomeHeader navigation={navigation} />,
+      navigationOptions: () => ({
+        // header: <HomeHeader navigation={navigation} />,
+        header: null,
         headerBackTitle: null
       })
     },
     CategoryScreen: {
       screen: CategoryScreen,
-      navigationOptions: ({ navigation }: any) => ({
+      navigationOptions: () => ({
         header: null,
         headerBackTitle: null
       })
@@ -45,7 +45,7 @@ export const HomeStack = createStackNavigator(
 
     OffersScreen: {
       screen: OffersScreen,
-      navigationOptions: ({ navigation }: any) => ({
+      navigationOptions: () => ({
         headerBackTitle: null,
         tabBarVisible: false,
         drawerLockMode: 'locked-closed'
@@ -53,7 +53,7 @@ export const HomeStack = createStackNavigator(
     },
     ItemScreen: {
       screen: ItemScreen,
-      navigationOptions: ({ navigation }: any) => ({
+      navigationOptions: () => ({
         headerBackTitle: null
       })
     },

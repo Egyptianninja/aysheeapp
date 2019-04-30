@@ -12,7 +12,8 @@ import {
   SHOW_CONTACT,
   ADD_FAV,
   ADD_LIKE,
-  SAVE_FAV
+  SAVE_FAV,
+  ADD_CATEGORYIDS
 } from '../types';
 
 export function setLanguage(language: any, languageName: string, isRTL: any) {
@@ -103,5 +104,11 @@ export function addLike(postId: any) {
   return {
     type: ADD_LIKE,
     postId
+  };
+}
+export function addCategoryId(ids: any) {
+  return {
+    type: ADD_CATEGORYIDS,
+    ids
   };
 }

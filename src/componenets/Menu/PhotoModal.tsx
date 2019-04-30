@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Dimensions, View, TouchableOpacity } from 'react-native';
-import Modal from 'react-native-modal';
+import { Dimensions, View, TouchableOpacity, Modal } from 'react-native';
+// import Modal from 'react-native-modal';
 import { Constants } from 'expo';
 const { width, height } = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
@@ -25,22 +25,25 @@ export default class PhotoModal extends React.Component<any, any> {
   render() {
     return (
       <Modal
-        isVisible={this.state.isPhotoModalVisible}
-        onBackdropPress={() => this.props.hidePhotoModal()}
-        onBackButtonPress={() => this.props.hidePhotoModal()}
-        useNativeDriver={true}
-        hideModalContentWhileAnimating={true}
-        style={{ margin: 0 }}
+        visible={this.state.isPhotoModalVisible}
+        // onBackdropPress={() => this.props.hidePhotoModal()}
+        // onBackButtonPress={() => this.props.hidePhotoModal()}
+        // useNativeDriver={true}
+        // backdropOpacity={0}
+        transparent={true}
+        // hideModalContentWhileAnimating={true}
+        // style={{ margin: 0 }}
       >
         <ImageViewer
           imageUrls={[this.props.photo]}
           index={this.state.imageIndex}
           loadingRender={() => <LoadingView width={width} height={height} />}
           enableSwipeDown={true}
-          swipeDownThreshold={100}
-          flipThreshold={60}
+          swipeDownThreshold={16}
+          // flipThreshold={60}
           doubleClickInterval={240}
-          pageAnimateTime={180}
+          backgroundColor="rgba(0, 0, 0, 0.9)"
+          // pageAnimateTime={180}
           saveToLocalByLongPress={false}
           onSwipeDown={() => this.props.hidePhotoModal()}
           renderIndicator={() => <View />}

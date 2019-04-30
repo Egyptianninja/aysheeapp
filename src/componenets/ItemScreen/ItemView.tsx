@@ -717,7 +717,7 @@ class ItemView extends React.Component<any, any> {
                 data={jdata}
               />
             )}
-            {post.locations && (
+            {post.locations && post.locations.length > 0 && (
               <Maps
                 itemLocations={post.locations}
                 width={width - 40}

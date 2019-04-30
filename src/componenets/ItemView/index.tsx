@@ -63,9 +63,11 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
               navigation.navigate('ProfileScreen', { userId: user.id, user });
             }}
           >
-            <Text style={{ fontWeight: 'bold' }}>{user.name} </Text>
+            <Text style={{ fontWeight: 'bold' }}>
+              {user.name ? user.name.substring(0, 25) : user.uniquename}{' '}
+            </Text>
           </TouchableOpacity>
-          <Text>{user.about ? user.about.substring(0, 40) : ''}</Text>
+          <Text>{user.about ? user.about.substring(0, 35) : ''}</Text>
           <Text
             style={{
               fontSize: 10,
@@ -109,7 +111,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
       unFavoritePost,
       selectePost,
       showMapModal,
-      saveFav
+      saveFav,
+      showCommentsModal
     } = this.props;
     const pdata = getproperties(post);
     const jdata = getJobProperties(post);
@@ -127,6 +130,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
       name: post.userName,
       about: post.userAbout,
       avatar: post.userAvatar,
+      uniquename: post.userUniquename,
       id: post.userId
     };
     // TODO: change to location
@@ -153,10 +157,10 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
         }}
       >
         <View style={{ flexDirection: 'row' }}>
-          {(location || locations) && (
+          {(location || (locations && locations.length > 0)) && (
             <TouchableOpacity
               style={{
-                flex: 2,
+                flex: 3,
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'center'
@@ -189,19 +193,20 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 <Text
                   style={{
                     top: 10,
-                    fontSize: 12,
-                    color: '#777',
+                    fontSize: 10,
+                    color: '#797979',
                     left: -2,
                     letterSpacing: 1
                   }}
                 >
-                  Map
+                  {word.location}
                 </Text>
               )}
             </TouchableOpacity>
           )}
           <View style={{ flex: 8 }}>
-            {user.name && this.renderUser({ user, navigation, word, time })}
+            {user.uniquename &&
+              this.renderUser({ user, navigation, word, time })}
           </View>
         </View>
 
@@ -227,7 +232,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-around',
-              paddingBottom: 10
+              paddingBottom: 10,
+              paddingHorizontal: 20
             }}
           >
             <TouchableOpacity
@@ -253,7 +259,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
               <SpringIcon
                 icon="heart"
                 iconout="heart-o"
-                size={26}
+                size={24}
                 focused={liked}
                 tintColor={liked ? '#E85255' : '#999'}
               />
@@ -261,7 +267,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
               <Text
                 style={{
                   fontSize: 12,
-                  color: '#999',
+                  color: '#bbb',
                   position: 'absolute',
                   left: 26,
                   bottom: 0
@@ -270,12 +276,16 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 {this.state.postLikes}
               </Text>
             </TouchableOpacity>
-            <FontAwesome
-              style={{ top: -3 }}
-              name="comments-o"
-              size={30}
-              color="#999"
-            />
+            <TouchableOpacity
+              onPress={() => (isAuthenticated ? showCommentsModal(post) : null)}
+            >
+              <FontAwesome
+                style={{ top: -3 }}
+                name="comments-o"
+                size={27}
+                color="#bbb"
+              />
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={async () => {
                 const message = `
@@ -285,9 +295,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 await onShareSimple(message);
               }}
             >
-              <FontAwesome name="share-square-o" size={26} color="#999" />
+              <FontAwesome name="share-square-o" size={24} color="#bbb" />
             </TouchableOpacity>
-
             <TouchableOpacity
               onPress={() => {
                 addFav(post.id);
@@ -313,97 +322,108 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 icon="bookmark"
                 iconout="bookmark-o"
                 faved={true}
-                size={26}
+                size={24}
                 focused={faved}
-                tintColor={faved ? '#7678ED' : '#999'}
+                tintColor={faved ? '#7678ED' : '#bbb'}
               />
             </TouchableOpacity>
           </View>
           <View
             style={{
-              flex: 1,
-              flexDirection: 'row'
+              flex: 1
             }}
           >
-            <View style={{ flex: 2 }}>
-              {(price || price === 0) && (
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: '#26A65B',
-                      fontWeight: 'bold',
-                      opacity: 0.9,
-                      fontSize: 16
-                    }}
-                  >
-                    {price.toLocaleString('en')}
-                  </Text>
-                  <Text
-                    style={{
-                      color: '#777',
-                      paddingTop: 5,
-                      fontSize: 10,
-                      fontWeight: '200'
-                    }}
-                  >
-                    {' '}
-                    {currency}
-                  </Text>
-                </View>
-              )}
-              {post.isoffer && (
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center'
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: post.status === 2 ? '#26A65B' : '#363636',
-                      fontSize: 12,
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    {getDate(post.start)}
-                  </Text>
-                  <Text
-                    style={{
-                      color: post.status === 2 ? '#26A65B' : '#363636',
-                      fontSize: 12,
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    {getDate(post.end)}
-                  </Text>
-                </View>
-              )}
-            </View>
             <View
               style={{
-                flex: 7,
                 alignItems: 'flex-end',
                 paddingTop: 10
               }}
             >
-              <TouchableOpacity
-                onPress={() => {
-                  selectePost(post, word, this.props.lang, isRTL);
+              <View
+                style={{
+                  flex: 1,
+                  width: this.props.width - 30,
+                  flexDirection: 'row-reverse',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
                 }}
               >
-                <Text
-                  style={{ color: '#7678ED', fontSize: 14, fontWeight: 'bold' }}
+                <TouchableOpacity
+                  onPress={() => {
+                    selectePost(post, word, this.props.lang, isRTL);
+                  }}
                 >
-                  {subTitle}
-                </Text>
-              </TouchableOpacity>
-
+                  <Text
+                    style={{
+                      color: '#171717',
+                      fontSize: 14,
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    {subTitle}
+                  </Text>
+                </TouchableOpacity>
+                <View>
+                  {(price || price === 0) && (
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: '#26A65B',
+                          fontWeight: 'bold',
+                          opacity: 0.9,
+                          fontSize: 16
+                        }}
+                      >
+                        {price.toLocaleString('en')}
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#777',
+                          paddingTop: 5,
+                          fontSize: 10,
+                          fontWeight: '200'
+                        }}
+                      >
+                        {' '}
+                        {currency}
+                      </Text>
+                    </View>
+                  )}
+                  {post.isoffer && (
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: post.status === 2 ? '#26A65B' : '#373737',
+                          fontSize: 12,
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        {getDate(post.start)}
+                      </Text>
+                      <Text
+                        style={{
+                          color: post.status === 2 ? '#26A65B' : '#373737',
+                          fontSize: 12,
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        {getDate(post.end)}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              </View>
               {!this.state.viewDetails && (
                 <TouchableOpacity
                   onPress={() =>
@@ -413,16 +433,15 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 >
                   <Text
                     style={{
-                      color: '#555',
+                      color: '#373737',
                       fontSize: 14,
-                      textAlign: 'right',
-                      top: 5
+                      textAlign: 'right'
                     }}
                   >
                     {subBody}
                   </Text>
                   <FontAwesome
-                    style={{ paddingTop: 10, paddingHorizontal: 5 }}
+                    style={{ paddingTop: 2, paddingHorizontal: 5 }}
                     name="angle-down"
                     size={28}
                     color="#777"

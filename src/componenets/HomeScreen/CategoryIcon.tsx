@@ -2,15 +2,7 @@ import * as React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { StyleSheet } from '../../utils';
 
-const CategoryIcon = ({
-  item,
-  navigation,
-  icon,
-  addFilter,
-  removeAllFilters,
-  categoryId
-}: any) => {
-  const active = categoryId === item.id;
+const CategoryIcon = ({ item, navigation, icon }: any) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('CategoryScreen', { item })}
@@ -38,8 +30,6 @@ const CategoryIcon = ({
               height: 52,
               width: 52,
               borderRadius: 26,
-              // borderColor: '#7678ED',
-              // borderWidth: 2,
               overflow: 'hidden'
             }}
           >
@@ -79,8 +69,6 @@ const styles = StyleSheet.create({
     height: 52,
     width: 52,
     borderRadius: 26,
-    // borderColor: '#7678ED',
-    // borderWidth: 2,
     overflow: 'hidden'
   },
   imageView: {

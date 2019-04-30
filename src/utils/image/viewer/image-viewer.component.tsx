@@ -62,7 +62,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           // 显示动画
           Animated.timing(this.fadeAnim, {
             toValue: 1,
-            duration: 200
+            duration: 150
           }).start();
         }
       );
@@ -625,18 +625,6 @@ export default class ImageViewer extends React.Component<Props, State> {
         >
           {this!.props!.renderHeader!(this.state.currentShowIndex)}
 
-          <View style={this.styles.arrowLeftContainer}>
-            <TouchableWithoutFeedback onPress={this.goBack}>
-              <View>{this!.props!.renderArrowLeft!()}</View>
-            </TouchableWithoutFeedback>
-          </View>
-
-          <View style={this.styles.arrowRightContainer}>
-            <TouchableWithoutFeedback onPress={this.goNext}>
-              <View>{this!.props!.renderArrowRight!()}</View>
-            </TouchableWithoutFeedback>
-          </View>
-
           <Animated.View
             style={{
               ...this.styles.moveBox,
@@ -646,22 +634,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           >
             {ImageElements}
           </Animated.View>
-          {this!.props!.renderIndicator!(
-            (this.state.currentShowIndex || 0) + 1,
-            this.props.imageUrls.length
-          )}
 
-          {this.props.imageUrls[this.state.currentShowIndex || 0] &&
-            this.props.imageUrls[this.state.currentShowIndex || 0]
-              .originSizeKb &&
-            this.props.imageUrls[this.state.currentShowIndex || 0]
-              .originUrl && (
-              <View style={this.styles.watchOrigin}>
-                <TouchableOpacity style={this.styles.watchOriginTouchable}>
-                  <Text style={this.styles.watchOriginText}>查看原图(2M)</Text>
-                </TouchableOpacity>
-              </View>
-            )}
           <View
             style={[
               { bottom: 0, position: 'absolute', zIndex: 9 },

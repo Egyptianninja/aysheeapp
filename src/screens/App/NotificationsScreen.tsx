@@ -93,7 +93,7 @@ class NotificationsScreen extends React.Component<any, any> {
             variables={{ cursor: 0 }}
             fetchPolicy="network-only"
           >
-            {({ loading, error, data, fetchMore, refetch }) => {
+            {({ loading, error, data, fetchMore, refetch }: any) => {
               if (loading) {
                 return <Loading />;
               }

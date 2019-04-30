@@ -8,6 +8,7 @@ export default gql`
     $distance: Int
     $maxPrice: Int
     $categoryId: Int
+    $categoryIds: [Int]
     $kindId: Int
     $isoffer: Boolean
     $price: Int
@@ -41,6 +42,7 @@ export default gql`
       distance: $distance
       maxPrice: $maxPrice
       categoryId: $categoryId
+      categoryIds: $categoryIds
       kindId: $kindId
       isoffer: $isoffer
       price: $price

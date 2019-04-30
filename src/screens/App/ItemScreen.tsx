@@ -59,7 +59,7 @@ class ItemScreen extends React.Component<any, any> {
     } else {
       return (
         <Query query={getPost} variables={{ postId }}>
-          {({ loading, error, data }) => {
+          {({ loading, error, data }: any) => {
             if (loading) {
               return <Loading />;
             }

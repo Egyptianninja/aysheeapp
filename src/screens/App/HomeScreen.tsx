@@ -1,10 +1,18 @@
-import { Notifications } from 'expo';
+import { Notifications, Constants } from 'expo';
 import { debounce } from 'lodash';
 import * as React from 'react';
 import { graphql, Query } from 'react-apollo';
-import { FlatList, Dimensions, View, Platform } from 'react-native';
+import {
+  FlatList,
+  Dimensions,
+  View,
+  Platform,
+  Text,
+  TouchableOpacity,
+  Animated
+} from 'react-native';
 import { connect } from 'react-redux';
-import { CategoriesScroll, HomeLoading, Noresult } from '../../componenets';
+import { HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemView';
 import {
   Edit,
@@ -21,6 +29,7 @@ import favoritePost from '../../graphql/mutation/favoritePost';
 import unFavoritePost from '../../graphql/mutation/unFavoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import refreshToken from '../../graphql/mutation/refreshToken';
+import createComment from '../../graphql/mutation/createComment';
 import getTimeLine from '../../graphql/query/getTimeLine';
 import dislikePost from '../../graphql/mutation/dislikePost';
 import likePost from '../../graphql/mutation/likePost';
@@ -31,7 +40,8 @@ import {
   addNotification,
   addFav,
   saveFav,
-  addLike
+  addLike,
+  addCategoryId
 } from '../../store/actions/globActions';
 import { delQuery, setBuckets } from '../../store/actions/postActions';
 import { updateUser } from '../../store/actions/userAtions';
@@ -42,22 +52,32 @@ import {
   readyPosts,
   registerForPushNotificationsAsync,
   handleOnMenuModal,
-  getUserLocation
+  getUserLocation,
+  rtlos
 } from '../../utils';
 import MessageAlert from '../../utils/message/MessageAlert';
-import CategoriesModal from '../../componenets/HomeScreen/CategoriesModal';
 import updateMyQty from '../../graphql/mutation/updateMyQty';
 import LoadingTiny from '../../componenets/Common/LoadingTiny';
 import MapModal from '../../componenets/ProfileScreen/MapModal';
+import Comments from '../../componenets/ItemView/Comments';
+import FollowModal from '../../componenets/HomeScreen/FollowModal';
+import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 
 const { width, height } = Dimensions.get('window');
+
+const AnimatedListView = Animated.createAnimatedComponent(FlatList);
+
 class HomeScreen extends React.Component<any, any> {
   static navigationOptions = { header: null };
 
   catScrollHome: any;
   flatListRef: any;
   getNextPosts: any;
+  scrollEndTimer: any;
+  clampedScrollValue = 0;
   scrollValue = 0;
+  offsetValue = 0;
+  NAVBAR_HEIGHT = 40;
   subs: any;
   notify: any;
   timer: any;
@@ -65,6 +85,8 @@ class HomeScreen extends React.Component<any, any> {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
 
+    const scrollAnim = new Animated.Value(0);
+    const offsetAnim = new Animated.Value(0);
     this.state = {
       isMenuModalVisible: false,
       isReportModalVisible: false,
@@ -76,18 +98,34 @@ class HomeScreen extends React.Component<any, any> {
       isOfferAdChoiseModalVisible: false,
       isPhotoModalVisible: false,
       isMapModalVisible: false,
+      isCommentsModalVisible: false,
+      isFollowModalVisible: false,
       photo: null,
       modalPost: null,
       pressed: null,
       refreshing: false,
       notification: null,
       query: null,
+      scrollAnim,
+      offsetAnim,
       rest: {},
       location: null,
       itemLocation: null,
       itemLocations: null,
       loading: false,
-      message: null
+      message: null,
+      clampedScroll: Animated.diffClamp(
+        Animated.add(
+          scrollAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+            extrapolateLeft: 'clamp'
+          }),
+          offsetAnim
+        ),
+        0,
+        this.NAVBAR_HEIGHT
+      )
     };
   }
 
@@ -111,7 +149,7 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   async componentDidMount() {
-    this.getLocation();
+    // this.getLocation();
     this.subs = [
       this.props.navigation.addListener('didFocus', () => {
         this.addPushNotification();
@@ -120,6 +158,18 @@ class HomeScreen extends React.Component<any, any> {
         //
       })
     ];
+
+    this.state.scrollAnim.addListener(({ value }: any) => {
+      const diff = value - this.scrollValue;
+      this.scrollValue = value;
+      this.clampedScrollValue = Math.min(
+        Math.max(this.clampedScrollValue + diff, 0),
+        this.NAVBAR_HEIGHT
+      );
+    });
+    this.state.offsetAnim.addListener(({ value }: any) => {
+      this.offsetValue = value;
+    });
 
     this.notify = Notifications.addListener(this.handleNotification);
     this.props.navigation.setParams({ handleHome: this.handleTop });
@@ -136,19 +186,49 @@ class HomeScreen extends React.Component<any, any> {
   }
 
   componentWillUnmount() {
+    this.state.scrollAnim.removeAllListeners();
+    this.state.offsetAnim.removeAllListeners();
     this.subs.forEach((sub: any) => sub.remove());
     clearTimeout(this.timer);
   }
 
+  _onScrollEndDrag = () => {
+    this.scrollEndTimer = setTimeout(this._onMomentumScrollEnd, 250);
+  };
+
+  _onMomentumScrollBegin = () => {
+    clearTimeout(this.scrollEndTimer);
+  };
+
+  _onMomentumScrollEnd = () => {
+    const toValue =
+      this.scrollValue > this.NAVBAR_HEIGHT &&
+      this.clampedScrollValue > this.NAVBAR_HEIGHT / 2
+        ? this.offsetValue + this.NAVBAR_HEIGHT
+        : this.offsetValue - this.NAVBAR_HEIGHT;
+
+    Animated.timing(this.state.offsetAnim, {
+      toValue,
+      duration: 350,
+      useNativeDriver: true
+    }).start();
+  };
+
   getLocation = async () => {
+    this.setState({ loading: true });
     const location = await getUserLocation();
-    this.setState({
-      location: {
-        lat: location.coords.latitude,
-        lon: location.coords.longitude
-      },
-      loading: false
-    });
+    if (location) {
+      this.setState({
+        location: {
+          lat: location.coords.latitude,
+          lon: location.coords.longitude
+        },
+        loading: false
+      });
+      return true;
+    } else {
+      return false;
+    }
   };
 
   handleNotification = async (notification: any) => {
@@ -256,6 +336,20 @@ class HomeScreen extends React.Component<any, any> {
     this.setState({ isMapModalVisible: false, itemLocation: null });
   };
 
+  showCommentsModal = async (post: any) => {
+    await this.setState({ modalPost: post });
+    this.setState({ isCommentsModalVisible: true });
+  };
+  hideCommentsModal = () => {
+    this.setState({ isCommentsModalVisible: false, modalPost: null });
+  };
+  showFollowModal = () => {
+    this.setState({ isFollowModalVisible: true });
+  };
+  hideFollowModal = () => {
+    this.setState({ isFollowModalVisible: false });
+  };
+
   deletePost = async () => {
     const res = await this.props.deletePost({
       variables: {
@@ -272,8 +366,8 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   handleTop = () => {
-    // this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
-    this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
+    this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
+    // this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
   };
 
   handleHome = () => {
@@ -317,18 +411,41 @@ class HomeScreen extends React.Component<any, any> {
     this.props.navigation.setParams({ notification: false });
   };
 
-  addFilter = (itemKind: any, value: any) => {
-    this.setState({ rest: { ...this.state.rest, [itemKind]: value } });
+  addFilter = async (itemKind: any, value: any) => {
     if (itemKind === 'sortType' && value === 3) {
-      this.setState({ loadinLocation: true });
+      const loc = await this.getLocation();
+      if (loc) {
+        this.setState({
+          rest: {
+            ...this.state.rest,
+            [itemKind]: value,
+            trueLocation: this.state.location
+          }
+        });
+      }
+    } else if (itemKind === 'sortType' && value === 1) {
+      const filters = this.state.rest;
+      delete filters.trueLocation;
+      const updatedfilters = { ...filters, [itemKind]: value };
+      this.setState({ rest: updatedfilters });
+    } else {
+      this.setState({ rest: { ...this.state.rest, [itemKind]: value } });
     }
   };
   removeFilter = (itemKind: any) => {
     const filters = this.state.rest;
-    delete filters[itemKind];
-    this.setState({
-      rest: filters
-    });
+    if (itemKind === 'sortType') {
+      delete filters[itemKind];
+      delete filters.trueLocation;
+      this.setState({
+        rest: filters
+      });
+    } else {
+      delete filters[itemKind];
+      this.setState({
+        rest: filters
+      });
+    }
   };
   removeAllFilters = () => {
     this.setState({
@@ -379,17 +496,270 @@ class HomeScreen extends React.Component<any, any> {
     });
   };
 
+  addOfferFilter = (value: any) => {
+    const offerinrest = this.state.rest.isoffer === true;
+    if (value === true) {
+      if (offerinrest) {
+        return;
+      } else {
+        this.addFilter('isoffer', true);
+      }
+    } else if (value === false) {
+      if (offerinrest) {
+        this.removeFilter('isoffer');
+      } else {
+        return;
+      }
+    }
+  };
+
+  renderSubHeader = () => {
+    const near = this.state.rest.sortType === 3;
+    const time = this.state.rest.sortType === 1;
+    const isoffer = this.state.rest.isoffer === true;
+    return (
+      <View
+        style={{
+          height: 40,
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          backgroundColor: '#F3F3F3',
+          width
+        }}
+      >
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            marginHorizontal: 10,
+            flex: 1
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: 10,
+              padding: 4,
+              borderTopLeftRadius: 10,
+              borderBottomLeftRadius: 10,
+              borderWidth: 1,
+              borderColor: '#ccc',
+              backgroundColor: time || !near ? '#373737' : '#f9f9f9'
+            }}
+            onPress={() =>
+              time
+                ? this.removeFilter('sortType')
+                : this.addFilter('sortType', 1)
+            }
+            disabled={time || !near}
+          >
+            <Text
+              style={{
+                fontSize: 13,
+                color: time || !near ? '#f9f9f9' : '#373737'
+              }}
+            >
+              الاحدث
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: 10,
+              padding: 4,
+              borderTopRightRadius: 10,
+              borderBottomRightRadius: 10,
+              borderWidth: 1,
+              borderColor: '#ccc',
+              backgroundColor: near ? '#373737' : '#f9f9f9'
+            }}
+            onPress={() =>
+              near
+                ? this.removeFilter('sortType')
+                : this.addFilter('sortType', 3)
+            }
+            disabled={near}
+          >
+            <Text style={{ fontSize: 13, color: near ? '#f9f9f9' : '#373737' }}>
+              الاقرب
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'flex-end',
+            justifyContent: 'center'
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              borderRadius: 10,
+              borderWidth: 1,
+              minWidth: 80,
+              borderColor: '#ccc',
+              marginHorizontal: 10,
+              paddingHorizontal: 10,
+              padding: 4,
+              backgroundColor: isoffer ? '#373737' : '#f9f9f9',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            // onPress={() => this.showFollowModal()}
+            onPress={() =>
+              isoffer
+                ? this.removeFilter('isoffer')
+                : this.addFilter('isoffer', true)
+            }
+          >
+            <Text
+              style={{ color: isoffer ? '#f9f9f9' : '#373737', fontSize: 14 }}
+            >
+              العروض فقط
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  renderTimeLineQuery = ({ variables, lang, isRTL, words }: any) => {
+    return (
+      <Query
+        query={getTimeLine}
+        variables={{ ...variables, ...this.state.rest }}
+      >
+        {({ loading, error, data, fetchMore, refetch }: any) => {
+          if (loading) {
+            return <HomeLoading />;
+          }
+          if (error) {
+            return <Noresult title="error" />;
+          }
+          const postsQuery =
+            data.getTimeLine && data.getTimeLine.posts
+              ? data.getTimeLine.posts
+              : [];
+
+          const posts =
+            postsQuery.length > 0
+              ? readyPosts(postsQuery, isTablet() ? 800 : 600, 79, lang)
+              : postsQuery;
+
+          return (
+            <AnimatedListView
+              data={posts}
+              ref={(ref: any) => {
+                this.flatListRef = ref;
+              }}
+              scrollEventThrottle={16}
+              contentContainerStyle={{
+                paddingTop: 40,
+                paddingBottom: 160
+              }}
+              onScroll={Animated.event(
+                [
+                  {
+                    nativeEvent: {
+                      contentOffset: { y: this.state.scrollAnim }
+                    }
+                  }
+                ],
+                { useNativeDriver: true }
+              )}
+              style={{ flex: 1 }}
+              showsVerticalScrollIndicator={false}
+              onRefresh={() => refetch()}
+              refreshing={this.state.refreshing}
+              onEndReached={async () => {
+                this.getNextPosts(data, fetchMore, 'getTimeLine');
+              }}
+              renderItem={({ item }: any) => (
+                <ItemViewSmall
+                  post={item}
+                  pressed={this.state.pressed}
+                  navigation={this.props.navigation}
+                  showMenuModal={this.showMenuModal}
+                  showCommentsModal={this.showCommentsModal}
+                  showPhotoModal={this.showPhotoModal}
+                  selectePost={this.selectePost}
+                  word={this.props.words}
+                  isRTL={isRTL}
+                  lang={lang}
+                  mylocation={this.state.location}
+                  addFav={this.props.addFav}
+                  addLike={this.props.addLike}
+                  saveFav={this.props.saveFav}
+                  likes={this.props.likes}
+                  favoorites={this.props.favoorites}
+                  isAuthenticated={this.props.isAuthenticated}
+                  favs={this.props.favs}
+                  likePost={this.props.likePost}
+                  dislikePost={this.props.dislikePost}
+                  favoritePost={this.props.favoritePost}
+                  unFavoritePost={this.props.unFavoritePost}
+                  showMapModal={this.showMapModal}
+                  width={width}
+                />
+              )}
+              ListHeaderComponent={() => {
+                if (!data.getTimeLine || !data.getTimeLine.posts) {
+                  setTimeout(() => {
+                    refetch();
+                  }, 1000);
+                  return (
+                    <View
+                      style={{
+                        flex: 1,
+                        height: height - 100,
+                        width,
+                        bottom: 0
+                      }}
+                    >
+                      <HomeLoading />
+                    </View>
+                  );
+                } else if (posts.length === 0) {
+                  return <Noresult title={words.noresults} />;
+                } else {
+                  return <View />;
+                }
+              }}
+              numColumns={1}
+              keyExtractor={(item: any) => item.id}
+              onEndReachedThreshold={5}
+              removeClippedSubviews={true}
+              disableVirtualization={false}
+            />
+          );
+        }}
+      </Query>
+    );
+  };
+
   render() {
-    const { rest } = this.state;
     const { lang, words, isRTL } = this.props;
     const postId = this.state.modalPost
       ? this.state.modalPost.id
         ? this.state.modalPost.id
         : this.state.modalPost._id
       : null;
+    const navbarTranslate = this.state.clampedScroll.interpolate({
+      inputRange: [0, this.NAVBAR_HEIGHT],
+      outputRange: [0, -this.NAVBAR_HEIGHT],
+      extrapolate: 'clamp'
+    });
 
     if (this.state.loading) {
-      return <LoadingTiny size={40} />;
+      return (
+        <React.Fragment>
+          <HomeHeader
+            showFollowModal={this.showFollowModal}
+            navigation={this.props.navigation}
+          />
+          <LoadingTiny size={40} />
+        </React.Fragment>
+      );
     }
 
     return (
@@ -422,6 +792,21 @@ class HomeScreen extends React.Component<any, any> {
           isAuthenticated={this.props.isAuthenticated}
           user={this.props.user}
         />
+        {this.state.modalPost && (
+          <Comments
+            post={this.state.modalPost}
+            favoritePost={this.props.favoritePost}
+            createComment={this.props.createComment}
+            isCommentsModalVisible={this.state.isCommentsModalVisible}
+            hideCommentsModal={this.hideCommentsModal}
+            postId={postId}
+            word={words}
+            isRTL={isRTL}
+            isAuthenticated={this.props.isAuthenticated}
+            user={this.props.user}
+            lang={this.props.lang}
+          />
+        )}
         <PhotoModal
           photo={this.state.photo}
           favoritePost={this.props.favoritePost}
@@ -435,6 +820,20 @@ class HomeScreen extends React.Component<any, any> {
           word={words}
           isRTL={isRTL}
           user={this.props.user}
+        />
+        <FollowModal
+          isFollowModalVisible={this.state.isFollowModalVisible}
+          hideFollowModal={this.hideFollowModal}
+          word={words}
+          isRTL={isRTL}
+          user={this.props.user}
+          removeFilter={this.removeFilter}
+          addFilter={this.addFilter}
+          categories={this.props.categories}
+          addCategoryId={this.props.addCategoryId}
+          categoryIds={this.props.categoryIds}
+          addOfferFilter={this.addOfferFilter}
+          navigation={this.props.navigation}
         />
 
         {this.state.isEditModalVisible && (
@@ -481,16 +880,7 @@ class HomeScreen extends React.Component<any, any> {
           iconColor="#E85255"
           height={200}
         />
-        <CategoriesModal
-          isCategoriesModalVisible={this.props.isShowModal}
-          hideCategoriesModal={this.hideCategoriesModal}
-          categories={this.props.categories}
-          isRTL={this.props.isRTL}
-          navigation={this.props.navigation}
-          addFilter={this.addFilter}
-          word={words}
-          removeAllFilters={this.removeAllFilters}
-        />
+
         {(this.state.itemLocation || this.state.itemLocations) && (
           <MapModal
             isMapModalVisible={this.state.isMapModalVisible}
@@ -502,101 +892,35 @@ class HomeScreen extends React.Component<any, any> {
             height={height}
           />
         )}
-
-        <Query
-          query={getTimeLine}
-          variables={{
-            ...rest
-            // trueLocation: this.state.location,
-            // sortType: 3
+        <HomeHeader
+          showFollowModal={this.showFollowModal}
+          navigation={this.props.navigation}
+        />
+        <Animated.View
+          style={{
+            zIndex: 100,
+            position: 'absolute',
+            top: Constants.statusBarHeight + 40,
+            left: 0,
+            right: 0,
+            height: this.NAVBAR_HEIGHT,
+            transform: [{ translateY: navbarTranslate }],
+            minHeight: this.NAVBAR_HEIGHT,
+            borderBottomWidth: 1,
+            borderBottomColor: '#eee'
           }}
         >
-          {({ loading, error, data, fetchMore, refetch }: any) => {
-            if (loading) {
-              return <HomeLoading categoryId={rest.categoryId} />;
-            }
-            if (error) {
-              return <Noresult title="error" top={100} />;
-            }
-            const postsQuery = data.getTimeLine.posts;
-            const posts =
-              postsQuery.length > 0
-                ? readyPosts(postsQuery, isTablet() ? 800 : 600, 79, lang)
-                : postsQuery;
-
-            return (
-              <FlatList
-                data={posts}
-                ref={(ref: any) => {
-                  this.flatListRef = ref;
-                }}
-                scrollEventThrottle={16}
-                contentContainerStyle={{
-                  paddingBottom: 160
-                }}
-                showsVerticalScrollIndicator={false}
-                onRefresh={() => refetch()}
-                refreshing={this.state.refreshing}
-                onEndReached={async () => {
-                  this.getNextPosts(data, fetchMore, 'getTimeLine');
-                }}
-                renderItem={({ item }: any) => (
-                  <ItemViewSmall
-                    post={item}
-                    pressed={this.state.pressed}
-                    navigation={this.props.navigation}
-                    showMenuModal={this.showMenuModal}
-                    showPhotoModal={this.showPhotoModal}
-                    selectePost={this.selectePost}
-                    word={this.props.words}
-                    isRTL={isRTL}
-                    lang={lang}
-                    mylocation={this.state.location}
-                    addFav={this.props.addFav}
-                    addLike={this.props.addLike}
-                    saveFav={this.props.saveFav}
-                    likes={this.props.likes}
-                    favoorites={this.props.favoorites}
-                    isAuthenticated={this.props.isAuthenticated}
-                    favs={this.props.favs}
-                    likePost={this.props.likePost}
-                    dislikePost={this.props.dislikePost}
-                    favoritePost={this.props.favoritePost}
-                    unFavoritePost={this.props.unFavoritePost}
-                    showMapModal={this.showMapModal}
-                  />
-                )}
-                ListHeaderComponent={() => {
-                  if (posts.length === 0) {
-                    return <Noresult title={words.noresults} />;
-                  } else {
-                    // return <View />;
-                    // TODO:
-                    return (
-                      <CategoriesScroll
-                        setHome={(click: any) => (this.catScrollHome = click)}
-                        isRTL={isRTL}
-                        currentCategory={this.state.rest.categoryId}
-                        showCategoriesModal={this.showCategoriesModal}
-                        addFilter={this.addFilter}
-                        removeFilter={this.removeFilter}
-                        removeAllFilters={this.removeAllFilters}
-                        removeAllCategoryFilters={this.removeAllCategoryFilters}
-                        navigation={this.props.navigation}
-                        rest={this.state.rest}
-                      />
-                    );
-                  }
-                }}
-                numColumns={1}
-                keyExtractor={(item: any) => item.id}
-                onEndReachedThreshold={5}
-                removeClippedSubviews={true}
-                disableVirtualization={false}
-              />
-            );
-          }}
-        </Query>
+          {this.renderSubHeader()}
+        </Animated.View>
+        {this.renderTimeLineQuery({
+          variables:
+            this.props.categoryIds.length > 0
+              ? { categoryIds: this.props.categoryIds }
+              : {},
+          isRTL,
+          lang,
+          words
+        })}
       </View>
     );
   }
@@ -615,7 +939,8 @@ const mapStateToProps = (state: any) => ({
   isShowModal: state.glob.showModal,
   likes: state.glob.likes,
   favs: state.glob.favs,
-  favoorites: state.glob.favoorites
+  favoorites: state.glob.favoorites,
+  categoryIds: state.glob.categoryIds
 });
 
 export default connect(
@@ -630,7 +955,8 @@ export default connect(
     updateUser,
     addFav,
     saveFav,
-    addLike
+    addLike,
+    addCategoryId
   }
 )(
   graphql(refreshToken, {
@@ -664,7 +990,11 @@ export default connect(
                   })(
                     graphql(unFavoritePost, {
                       name: 'unFavoritePost'
-                    })(HomeScreen)
+                    })(
+                      graphql(createComment, {
+                        name: 'createComment'
+                      })(HomeScreen)
+                    )
                   )
                 )
               )

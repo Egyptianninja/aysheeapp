@@ -146,8 +146,8 @@ export const readyPosts = (
 
     const time = since(post.updatedAt, lang);
 
-    const subTitle = post.title.substring(0, 20);
-    const subBody = post.body.substring(0, 40);
+    const subTitle = post.title.substring(0, 25);
+    const subBody = post.body.substring(0, 80);
     const imageWidth = Math.ceil(width / 2 - 17);
     const imageHeight =
       post.photos.length > 0 ? Math.ceil(imageWidth * ratio) : imageWidth * 0.5;

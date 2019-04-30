@@ -61,7 +61,7 @@ class MapModal extends React.Component<any, any> {
               height={height}
             />
           )}
-          {itemLocations && (
+          {itemLocations && !itemLocation && (
             <Maps
               hideMapModal={hideMapModal}
               itemLocations={itemLocations}

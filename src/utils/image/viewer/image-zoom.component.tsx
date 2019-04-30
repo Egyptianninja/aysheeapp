@@ -1,7 +1,14 @@
-import * as React from "react";
-import { Animated, LayoutChangeEvent, PanResponder, PanResponderInstance, StyleSheet, View } from "react-native";
-import styles from "./image-zoom.style";
-import { ICenterOn, Props, State } from "./image-zoom.type";
+import * as React from 'react';
+import {
+  Animated,
+  LayoutChangeEvent,
+  PanResponder,
+  PanResponderInstance,
+  StyleSheet,
+  View
+} from 'react-native';
+import styles from './image-zoom.style';
+import { ICenterOn, Props, State } from './image-zoom.type';
 
 export default class ImageViewer extends React.Component<Props, State> {
   public static defaultProps = new Props();
@@ -166,7 +173,7 @@ export default class ImageViewer extends React.Component<Props, State> {
                   this.scale;
               }
 
-              this.imageDidMove("centerOn");
+              this.imageDidMove('centerOn');
 
               Animated.parallel([
                 Animated.timing(this.animatedScale, {
@@ -446,7 +453,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           }
         }
 
-        this.imageDidMove("onPanResponderMove");
+        this.imageDidMove('onPanResponderMove');
       },
       onPanResponderRelease: (evt, gestureState) => {
         // 取消长按
@@ -597,7 +604,7 @@ export default class ImageViewer extends React.Component<Props, State> {
     // swipeDown 溢出量置空
     this.swipeDownOffset = 0;
 
-    this.imageDidMove("onPanResponderRelease");
+    this.imageDidMove('onPanResponderRelease');
   };
 
   public componentDidMount() {
@@ -660,7 +667,7 @@ export default class ImageViewer extends React.Component<Props, State> {
         duration
       })
     ]).start(() => {
-      this.imageDidMove("centerOn");
+      this.imageDidMove('centerOn');
     });
   }
 

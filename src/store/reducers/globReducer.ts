@@ -12,7 +12,8 @@ import {
   SHOW_CONTACT,
   ADD_FAV,
   ADD_LIKE,
-  SAVE_FAV
+  SAVE_FAV,
+  ADD_CATEGORYIDS
 } from '../types';
 
 const initialState = {
@@ -30,7 +31,30 @@ const initialState = {
   showcontact: true,
   favs: [],
   likes: [],
-  favoorites: []
+  favoorites: [],
+  categoryIds: [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    99
+  ]
 };
 
 export default function(state = initialState, action: any) {
@@ -151,6 +175,12 @@ export default function(state = initialState, action: any) {
           likes: [...state.likes, action.postId]
         };
       }
+
+    case ADD_CATEGORYIDS:
+      return {
+        ...state,
+        categoryIds: action.ids
+      };
 
     default:
       return state;

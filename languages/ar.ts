@@ -408,7 +408,7 @@ export default {
     price: 'السعر',
     currency: 'العملة',
     phone: 'رقم الهاتف',
-    location: 'الموقع الجغرافي',
+    location: 'الموقع',
     locationmsg: 'عند التعيين يتم تحديد موقعك الحالي كمرجع للاعلان',
 
     require: 'مطلوب',
