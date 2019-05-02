@@ -13,6 +13,9 @@ import getPost from '../../graphql/query/getPost';
 import { readyPost } from '../../utils';
 import updateMyQty from '../../graphql/mutation/updateMyQty';
 import { updateUser } from '../../store/actions/userAtions';
+import dislikePost from '../../graphql/mutation/dislikePost';
+import likePost from '../../graphql/mutation/likePost';
+import { addFav, saveFav, addLike } from '../../store/actions/globActions';
 
 class ItemScreen extends React.Component<any, any> {
   static navigationOptions = {
@@ -44,12 +47,19 @@ class ItemScreen extends React.Component<any, any> {
           fav={fav}
           myItem={myItem}
           live={live}
+          addLike={this.props.addLike}
+          likes={this.props.likes}
+          favs={this.props.favs}
+          dislikePost={this.props.dislikePost}
+          likePost={this.props.likePost}
+          addFav={this.props.addFav}
+          saveFav={this.props.saveFav}
+          unFavoritePost={this.props.unFavoritePost}
+          favoritePost={this.props.favoritePost}
           navigation={this.props.navigation}
           createComment={this.props.createComment}
           editClassifieds={this.props.editClassifieds}
           deletePost={this.props.deletePost}
-          favoritePost={this.props.favoritePost}
-          unFavoritePost={this.props.unFavoritePost}
           user={this.props.user}
           isAuthenticated={this.props.isAuthenticated}
           updateUser={this.props.updateUser}
@@ -91,12 +101,19 @@ class ItemScreen extends React.Component<any, any> {
                 fav={fav}
                 myItem={ismyItem}
                 live={live}
+                addLike={this.props.addLike}
+                likes={this.props.likes}
+                favs={this.props.favs}
+                dislikePost={this.props.dislikePost}
+                likePost={this.props.likePost}
+                addFav={this.props.addFav}
+                saveFav={this.props.saveFav}
+                unFavoritePost={this.props.unFavoritePost}
+                favoritePost={this.props.favoritePost}
                 editClassifieds={this.props.editClassifieds}
                 deletePost={this.props.deletePost}
                 navigation={this.props.navigation}
                 createComment={this.props.createComment}
-                favoritePost={this.props.favoritePost}
-                unFavoritePost={this.props.unFavoritePost}
                 user={this.props.user}
                 isAuthenticated={this.props.isAuthenticated}
                 updateUser={this.props.updateUser}
@@ -112,14 +129,19 @@ class ItemScreen extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => ({
   lang: state.glob.languageName,
+  isRTL: state.glob.isRTL,
   words: state.glob.language.words,
+  isAuthenticated: state.user.isAuthenticated,
   user: state.user.user,
-  isAuthenticated: state.user.isAuthenticated
+  likes: state.glob.likes,
+  favs: state.glob.favs,
+  favoorites: state.glob.favoorites,
+  categoryIds: state.glob.categoryIds
 });
 
 export default connect(
   mapStateToProps,
-  { updateUser }
+  { updateUser, addLike, addFav, saveFav }
 )(
   graphql(createComment, {
     name: 'createComment'
@@ -141,7 +163,15 @@ export default connect(
             graphql(updateMyQty, {
               name: 'updateMyQty',
               options: { refetchQueries: ['getUserPosts'] }
-            })(ItemScreen)
+            })(
+              graphql(dislikePost, {
+                name: 'dislikePost'
+              })(
+                graphql(likePost, {
+                  name: 'likePost'
+                })(ItemScreen)
+              )
+            )
           )
         )
       )

@@ -344,8 +344,10 @@ class ProfileScreen extends React.Component<any, any> {
           }}
         >
           <TouchableOpacity
-            onPress={() => call(callargs)}
-            disabled={!user.phone}
+            onPress={() => {
+              call(callargs);
+            }}
+            disabled={!user.phone && !user.mob}
             style={{
               flex: 1,
               justifyContent: 'center',
@@ -581,7 +583,10 @@ class ProfileScreen extends React.Component<any, any> {
             const phone = userData.phone
               ? userData.phone.replace(code(), '')
               : null;
-            const callargs = { number: phone, prompt: false };
+            const callargs = {
+              number: phone ? phone : userData.mob ? userData.mob : null,
+              prompt: false
+            };
             return (
               <View style={{ flex: 1, backgroundColor: '#fff' }}>
                 <Menu

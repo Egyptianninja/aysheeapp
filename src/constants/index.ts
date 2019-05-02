@@ -4,7 +4,7 @@ import { locationExpiryTiem } from './common';
 import { preview } from './image';
 import { codeTimes, smsTimes } from './login';
 import { telecode } from './telecode';
-import { areaUnits, currencyTypes } from './units';
+import { areaUnits, currencyTypes, categoryIds } from './units';
 export {
   brands,
   subBrands,
@@ -15,5 +15,6 @@ export {
   currencyTypes,
   areaUnits,
   colors,
-  locationExpiryTiem
+  locationExpiryTiem,
+  categoryIds
 };

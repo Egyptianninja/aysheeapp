@@ -35,8 +35,8 @@ export default class PhotoModal extends React.Component<any, any> {
         // style={{ margin: 0 }}
       >
         <ImageViewer
-          imageUrls={[this.props.photo]}
-          index={this.state.imageIndex}
+          imageUrls={this.props.photos}
+          index={this.props.photo}
           loadingRender={() => <LoadingView width={width} height={height} />}
           enableSwipeDown={true}
           swipeDownThreshold={16}

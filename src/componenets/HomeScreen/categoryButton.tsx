@@ -12,10 +12,9 @@ class CategoryButton extends React.Component<any, any> {
       <TouchableOpacity
         style={{
           position: 'absolute',
-          bottom: isIphoneX() ? 50 : 20,
+          bottom: isIphoneX() ? 32 : 0,
           left: width / 2 - 24,
           zIndex: 100,
-          backgroundColor: 'rgba(118, 120, 237, 0.9)',
           borderRadius: 25,
           width: 50,
           height: 50,
@@ -26,9 +25,9 @@ class CategoryButton extends React.Component<any, any> {
       >
         <Ionicons
           style={{ top: Platform.OS === 'android' ? undefined : 2, left: 1 }}
-          name="ios-apps"
-          size={31}
-          color="#f3f3f3"
+          name="ios-add"
+          size={40}
+          color="#777"
         />
       </TouchableOpacity>
     );

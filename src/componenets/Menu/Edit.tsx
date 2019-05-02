@@ -777,36 +777,6 @@ class Edit extends React.Component<any, any> {
                       />
                       <Input
                         rtl={isRTL}
-                        name="jobIndustry"
-                        label={word.jobindustry}
-                        value={values.jobIndustry}
-                        onChange={setFieldValue}
-                        onTouch={setFieldTouched}
-                        outerStyle={styles.outerStyle}
-                        innerStyle={styles.innerStyle}
-                        labelStyle={styles.labelStyle}
-                        error={touched.jobIndustry && errors.jobIndustry}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        height={40}
-                      />
-                      <Input
-                        rtl={isRTL}
-                        name="education"
-                        label={word.education}
-                        value={values.education}
-                        onChange={setFieldValue}
-                        onTouch={setFieldTouched}
-                        outerStyle={styles.outerStyle}
-                        innerStyle={styles.innerStyle}
-                        labelStyle={styles.labelStyle}
-                        error={touched.education && errors.education}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        height={40}
-                      />
-                      <Input
-                        rtl={isRTL}
                         name="experience"
                         label={word.experience}
                         value={values.experience}

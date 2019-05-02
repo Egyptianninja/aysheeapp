@@ -8,6 +8,7 @@ export default class MessageBubble extends React.Component<any, any> {
     const { message, lang, isRTL, width, words, isAuthenticated } = this.props;
     const rtl = isArabic(message.body);
     const time = since(message.updatedAt, lang);
+    const { user } = message;
 
     return (
       <View>
@@ -21,8 +22,10 @@ export default class MessageBubble extends React.Component<any, any> {
         >
           <TouchableOpacity
             onPress={() => {
+              this.props.hideCommentsModal();
               this.props.navigation.navigate('ProfileScreen', {
-                user: message.user
+                userId: user.id,
+                user
               });
             }}
           >
@@ -38,8 +41,10 @@ export default class MessageBubble extends React.Component<any, any> {
           <View style={styles.messageBubble}>
             <TouchableOpacity
               onPress={() => {
+                this.props.hideCommentsModal();
                 this.props.navigation.navigate('ProfileScreen', {
-                  user: message.user
+                  userId: user.id,
+                  user
                 });
               }}
             >
@@ -136,40 +141,60 @@ export default class MessageBubble extends React.Component<any, any> {
             {time}
           </Text>
           {isAuthenticated && (
-            <TouchableOpacity
-              onPress={() =>
-                this.props.replayComment({
-                  id: message.user._id,
-                  name: message.user.name
-                    ? message.user.name
-                    : message.user.uniquename,
-                  body: message.body
-                })
-              }
-              style={{
-                flexDirection:
-                  isRTL && Platform.OS !== 'android' ? 'row' : 'row-reverse'
-              }}
-            >
-              <Ionicons
-                name="ios-repeat"
-                size={24}
-                style={{ paddingHorizontal: 5 }}
-                color="#7678ED"
-              />
-              <Text
+            <View style={{ flexDirection: 'row' }}>
+              {this.props.user._id === message.user._id && (
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.deleteComment({
+                      variables: {
+                        commentId: message._id
+                      }
+                    })
+                  }
+                >
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      paddingHorizontal: 15,
+                      color: '#7678ED',
+                      textAlign:
+                        isRTL && Platform.OS !== 'android' ? 'right' : 'left'
+                    }}
+                  >
+                    {words.delete}
+                  </Text>
+                </TouchableOpacity>
+              )}
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.replayComment({
+                    id: message.user._id,
+                    name: message.user.name
+                      ? message.user.name
+                      : message.user.uniquename,
+                    body: message.body
+                  })
+                }
                 style={{
-                  fontSize: 14,
-                  paddingLeft: isRTL ? 5 : 10,
-                  paddingRight: isRTL ? 10 : 5,
-                  color: '#7678ED',
-                  textAlign:
-                    isRTL && Platform.OS !== 'android' ? 'right' : 'left'
+                  flexDirection:
+                    isRTL && Platform.OS !== 'android' ? 'row' : 'row-reverse'
                 }}
               >
-                {words.replay}
-              </Text>
-            </TouchableOpacity>
+                <Ionicons name="ios-repeat" size={24} color="#7678ED" />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    paddingLeft: isRTL ? 5 : 10,
+                    paddingRight: isRTL ? 10 : 5,
+                    color: '#7678ED',
+                    textAlign:
+                      isRTL && Platform.OS !== 'android' ? 'right' : 'left'
+                  }}
+                >
+                  {words.replay}
+                </Text>
+              </TouchableOpacity>
+            </View>
           )}
         </View>
 

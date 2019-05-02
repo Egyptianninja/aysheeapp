@@ -22,7 +22,8 @@ const renderChoices = (items: any, navigation: any, iconsize: any) => {
 };
 
 const ChoiseCategory = (props: any) => {
-  const categories = category().filter((cat: any) => cat.id !== 20);
+  // const categories = category().filter((cat: any) => cat.id !== 20);
+  const categories = category();
   return (
     <View
       style={{

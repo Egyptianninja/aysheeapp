@@ -341,7 +341,7 @@ class AddOfferScreen extends React.Component<any, any> {
                     selectedImage={this.state.selectedImage}
                     returnData={this.returnData}
                     album={true}
-                    qty={30}
+                    qty={20}
                     updateImagesList={this.updateImagesList}
                     hendleSelectedImage={this.hendleSelectedImage}
                   />

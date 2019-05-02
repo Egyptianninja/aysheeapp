@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { Constants } from 'expo';
 import * as React from 'react';
 import { Query } from 'react-apollo';
@@ -39,7 +39,8 @@ import {
   rtlos,
   StyleSheet,
   isIphoneX,
-  handleOnMenuModal
+  handleOnMenuModal,
+  onShareSimple
 } from '../../utils';
 import Link from '../../utils/location/link';
 import { Edit, Menu, Report } from '../Menu';
@@ -48,6 +49,7 @@ import { MenuIconHeader } from './MenuIconHeader';
 import MessageAlert from '../../utils/message/MessageAlert';
 import { code } from '../../store/getStore';
 import Maps from '../ProfileScreen/Maps';
+import SpringIcon from '../Common/SpringIcon';
 
 const { width, height } = Dimensions.get('window');
 
@@ -89,6 +91,7 @@ class ItemView extends React.Component<any, any> {
     opacity: 1,
     bottomPadding: 0,
     scrollEnabled: true,
+    postLikes: 0,
     hideMenuData: {
       menuId: null,
       postId: null,
@@ -113,6 +116,9 @@ class ItemView extends React.Component<any, any> {
       'keyboardWillHide',
       this.keyboardWillHide.bind(this)
     );
+  }
+  componentDidMount() {
+    this.setState({ postLikes: this.props.post.likes });
   }
 
   componentWillUnmount() {
@@ -371,6 +377,9 @@ class ItemView extends React.Component<any, any> {
       outputRange: [0, 1]
     });
 
+    const liked = this.props.likes.includes(post.id);
+    const faved = this.props.favs.includes(post.id);
+
     return (
       <View style={styles.container}>
         <Menu
@@ -619,6 +628,109 @@ class ItemView extends React.Component<any, any> {
                 </Text>
               </View>
             )}
+
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                paddingVertical: 10,
+                paddingHorizontal: 20
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.addLike(post.id);
+                  if (liked) {
+                    this.setState({ postLikes: this.state.postLikes - 1 });
+                    this.props.dislikePost({
+                      variables: {
+                        postId: post.id
+                      }
+                    });
+                  } else {
+                    this.setState({ postLikes: this.state.postLikes + 1 });
+                    this.props.likePost({
+                      variables: {
+                        postId: post.id
+                      }
+                    });
+                  }
+                }}
+              >
+                <SpringIcon
+                  icon="heart"
+                  iconout="heart-o"
+                  size={24}
+                  focused={liked}
+                  tintColor={liked ? '#E85255' : '#999'}
+                />
+
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: '#bbb',
+                    position: 'absolute',
+                    left: 26,
+                    bottom: 0
+                  }}
+                >
+                  {this.state.postLikes}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.childRef.current.getFocus()}
+              >
+                <FontAwesome
+                  style={{ top: -3 }}
+                  name="comments-o"
+                  size={27}
+                  color="#bbb"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={async () => {
+                  const message = `
+            ${post.title}
+            ${post.body}
+            ${post.price}`;
+                  await onShareSimple(message);
+                }}
+              >
+                <FontAwesome name="share-square-o" size={24} color="#bbb" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.addFav(post.id);
+                  this.props.saveFav(post);
+                  if (isAuthenticated) {
+                    if (faved) {
+                      this.props.unFavoritePost({
+                        variables: {
+                          postId: post.id
+                        }
+                      });
+                    } else {
+                      this.props.favoritePost({
+                        variables: {
+                          postId: post.id
+                        }
+                      });
+                    }
+                  }
+                }}
+              >
+                <SpringIcon
+                  icon="bookmark"
+                  iconout="bookmark-o"
+                  faved={true}
+                  size={24}
+                  focused={faved}
+                  tintColor={faved ? '#7678ED' : '#bbb'}
+                />
+              </TouchableOpacity>
+            </View>
+
             <View style={{ paddingHorizontal: 10 }}>
               {(post.isfullTime === true || post.isfullTime === false) && (
                 <FullTimeView

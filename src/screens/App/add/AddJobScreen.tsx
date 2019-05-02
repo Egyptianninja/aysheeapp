@@ -277,6 +277,7 @@ class AddJobScreen extends React.Component<any, any> {
                     width={width}
                     word={word}
                     isRTL={isRTL}
+                    qty={6}
                     images={this.state.images}
                     selectedImage={this.state.selectedImage}
                     returnData={this.returnData}
@@ -400,6 +401,22 @@ class AddJobScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
+                  {this.props.user.isstore && (
+                    <Group
+                      color="#444"
+                      size={24}
+                      onChange={setFieldValue}
+                      rtl={isRTL}
+                    >
+                      <CheckBox
+                        name="branchLocations"
+                        label={word.brancheslocations}
+                        value={values.branchLocations}
+                        selected={values.branchLocations}
+                        resetLocation={this.resetLocation}
+                      />
+                    </Group>
+                  )}
                   <Group
                     color="#444"
                     size={24}
@@ -413,15 +430,6 @@ class AddJobScreen extends React.Component<any, any> {
                       selected={values.singleLocation}
                       resetLocation={this.resetLocation}
                     />
-                    {this.props.user.isstore && (
-                      <CheckBox
-                        name="branchLocations"
-                        label={word.brancheslocations}
-                        value={values.branchLocations}
-                        selected={values.branchLocations}
-                        resetLocation={this.resetLocation}
-                      />
-                    )}
                   </Group>
 
                   {values.branchLocations && (

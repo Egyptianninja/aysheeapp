@@ -521,7 +521,13 @@ export default {
     showcontact: 'اظهار وسيلة التواصل',
     helpcenter: 'مركز المساعدة',
     addbranches: 'اضافة فروع',
-    brancheslocations: 'اضافة موقع الفروع',
+    brancheslocations: 'موقع الفروع',
+    latest: 'الاحدث',
+    nearby: 'الاقرب',
+    offersoly: 'العروض فقط',
+    lessprice: 'الأقل سعراً',
+    selectall: 'تحديد الكل',
+    deselectall: 'الغاء التحديد',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

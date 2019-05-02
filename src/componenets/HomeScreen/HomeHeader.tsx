@@ -102,19 +102,15 @@ class HomeHeader extends React.Component<any, any> {
         <View style={{ flex: 1.5 }}>
           <TouchableOpacity
             onPress={() => this.props.showFollowModal()}
-            // onPress={() => {
-            //   const addItem = this.props.navigation.getParam('addItem');
-            //   addItem();
-            // }}
             style={{
               flex: 1,
-              top: 3,
+              top: 1,
               width: '100%',
               justifyContent: 'center',
               alignItems: 'center'
             }}
           >
-            <AntDesign name="appstore-o" size={28} color="#636363" />
+            <AntDesign name="appstore1" size={27} color="#636363" />
           </TouchableOpacity>
         </View>
       </View>

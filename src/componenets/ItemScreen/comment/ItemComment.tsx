@@ -36,6 +36,8 @@ class ItemComment extends React.PureComponent<any, any> {
       messages.push(
         <MessageBubble
           navigation={this.props.navigation}
+          hideCommentsModal={this.props.hideCommentsModal}
+          deleteComment={this.props.deleteComment}
           isAuthenticated={this.props.isAuthenticated}
           user={this.props.user}
           words={this.props.words}

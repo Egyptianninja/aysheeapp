@@ -71,9 +71,11 @@ export default class Menu extends React.Component<any, any> {
           ? live === false
             ? [6, 8, 9]
             : isfront
-            ? [5, 7, 8, 9, 11]
-            : [5, 7, 8, 9, 10]
-          : fav
+            ? [5, 7, 8, 9]
+            : [5, 7, 8, 9]
+          : // ? [5, 7, 8, 9, 11]
+          // : [5, 7, 8, 9, 10]
+          fav
           ? [2, 3, 4]
           : [1, 3, 4]
         : [1, 3, 4]

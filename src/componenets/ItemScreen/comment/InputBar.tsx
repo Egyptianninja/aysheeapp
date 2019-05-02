@@ -21,8 +21,8 @@ export default class InputBar extends React.Component<any, any> {
       <View
         style={{
           width: '99%',
-          backgroundColor: '#fff',
-          paddingHorizontal: 5
+          backgroundColor: '#fff'
+          // paddingHorizontal: 5
         }}
       >
         {this.props.replay && this.props.replay.id && (
@@ -68,12 +68,13 @@ export default class InputBar extends React.Component<any, any> {
           <AutoInput
             style={[
               styles.textBox,
-              { textAlign: this.props.isRTL ? 'right' : 'left' }
+              { textAlign: isArabic(this.props.text) ? 'right' : 'left' }
             ]}
             ref={(ref: any) => {
               this.autogrowInput = ref;
             }}
             multiline={true}
+            // autoFocus={true}
             placeholder={this.props.placeholder}
             defaultHeight={36}
             onChangeText={(text: string) => {
@@ -91,9 +92,6 @@ export default class InputBar extends React.Component<any, any> {
               size={36}
               style={{
                 width: 30,
-                transform: this.props.isRTL
-                  ? [{ rotateY: '180deg' }]
-                  : undefined,
                 top: this.props.isRTL ? 3 : undefined
               }}
             />
@@ -106,8 +104,10 @@ export default class InputBar extends React.Component<any, any> {
 
 const styles = StyleSheet.create({
   inputBar: {
-    backgroundColor: '#fff',
-    flexDirection: rtlos() ? 'row-reverse' : 'row',
+    paddingTop: 5,
+    borderTopColor: '#eee',
+    borderTopWidth: 1,
+    flexDirection: 'row',
     justifyContent: 'space-between',
     paddingLeft: 10
     // paddingVertical: 10

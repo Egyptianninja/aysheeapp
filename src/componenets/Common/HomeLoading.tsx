@@ -10,7 +10,7 @@ const HomeLoading = ({ categoryId }: any) => {
     <View
       style={{
         position: 'absolute',
-        top: isfilter ? 100 : Constants.statusBarHeight + 40,
+        top: isfilter ? 100 : Constants.statusBarHeight + 80,
         left: 0,
         bottom: 0,
         right: 0,

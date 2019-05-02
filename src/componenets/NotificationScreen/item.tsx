@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  TouchableOpacity
+} from 'react-native';
 import { isArabic, rtlos, since } from '../../utils';
 import { AvatarCircle } from '../Avatar';
 
@@ -25,7 +30,10 @@ const Item = (props: any) => {
         borderRadius: 10
       }}
     >
-      <View
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('ProfileScreen', { userId: user.id, user });
+        }}
         style={{
           flexDirection: isRTL && rtlos() !== 3 ? 'row-reverse' : 'row',
           alignItems: 'center',
@@ -36,7 +44,7 @@ const Item = (props: any) => {
         <Text style={{ paddingHorizontal: 10, fontWeight: 'bold' }}>
           {user.name}
         </Text>
-      </View>
+      </TouchableOpacity>
 
       <TouchableWithoutFeedback
         onPress={() =>
@@ -90,7 +98,8 @@ const Item = (props: any) => {
         style={{
           position: 'absolute',
           top: 5,
-          right: 0
+          right: rtlos() === 2 ? undefined : 0,
+          left: rtlos() === 2 ? 0 : undefined
         }}
       >
         <Text

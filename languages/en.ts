@@ -522,6 +522,12 @@ export default {
     helpcenter: 'Help Center',
     addbranches: 'Add Branches',
     brancheslocations: 'Branches Locations',
+    latest: 'Latest',
+    nearby: 'Nearby',
+    offersoly: 'Offers',
+    lessprice: 'Price',
+    selectall: 'Select all',
+    deselectall: 'Deselect all',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

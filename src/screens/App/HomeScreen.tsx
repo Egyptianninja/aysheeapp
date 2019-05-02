@@ -30,6 +30,7 @@ import unFavoritePost from '../../graphql/mutation/unFavoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import createComment from '../../graphql/mutation/createComment';
+import deleteComment from '../../graphql/mutation/deleteComment';
 import getTimeLine from '../../graphql/query/getTimeLine';
 import dislikePost from '../../graphql/mutation/dislikePost';
 import likePost from '../../graphql/mutation/likePost';
@@ -101,19 +102,20 @@ class HomeScreen extends React.Component<any, any> {
       isCommentsModalVisible: false,
       isFollowModalVisible: false,
       photo: null,
+      photos: null,
       modalPost: null,
       pressed: null,
       refreshing: false,
       notification: null,
       query: null,
-      scrollAnim,
-      offsetAnim,
       rest: {},
       location: null,
       itemLocation: null,
       itemLocations: null,
       loading: false,
       message: null,
+      scrollAnim,
+      offsetAnim,
       clampedScroll: Animated.diffClamp(
         Animated.add(
           scrollAnim.interpolate({
@@ -127,6 +129,12 @@ class HomeScreen extends React.Component<any, any> {
         this.NAVBAR_HEIGHT
       )
     };
+  }
+
+  componentDidUpdate(prevProps: any) {
+    if (prevProps.isShowModal !== this.props.isShowModal) {
+      this.addItem();
+    }
   }
 
   addPushNotification = async () => {
@@ -274,11 +282,11 @@ class HomeScreen extends React.Component<any, any> {
       });
     }
   };
-  showPhotoModal = (photo: any) => {
-    this.setState({ isPhotoModalVisible: true, photo });
+  showPhotoModal = ({ photos, photo }: any) => {
+    this.setState({ isPhotoModalVisible: true, photos, photo });
   };
   hidePhotoModal = () => {
-    this.setState({ isPhotoModalVisible: false });
+    this.setState({ isPhotoModalVisible: false, photos: null, photo: null });
   };
   showEditModal = () => {
     this.setState({ isEditModalVisible: true });
@@ -514,6 +522,7 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   renderSubHeader = () => {
+    const { words } = this.props;
     const near = this.state.rest.sortType === 3;
     const time = this.state.rest.sortType === 1;
     const isoffer = this.state.rest.isoffer === true;
@@ -560,7 +569,7 @@ class HomeScreen extends React.Component<any, any> {
                 color: time || !near ? '#f9f9f9' : '#373737'
               }}
             >
-              الاحدث
+              {words.latest}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -581,7 +590,7 @@ class HomeScreen extends React.Component<any, any> {
             disabled={near}
           >
             <Text style={{ fontSize: 13, color: near ? '#f9f9f9' : '#373737' }}>
-              الاقرب
+              {words.nearby}
             </Text>
           </TouchableOpacity>
         </View>
@@ -615,7 +624,7 @@ class HomeScreen extends React.Component<any, any> {
             <Text
               style={{ color: isoffer ? '#f9f9f9' : '#373737', fontSize: 14 }}
             >
-              العروض فقط
+              {words.offersoly}
             </Text>
           </TouchableOpacity>
         </View>
@@ -686,7 +695,7 @@ class HomeScreen extends React.Component<any, any> {
                   word={this.props.words}
                   isRTL={isRTL}
                   lang={lang}
-                  mylocation={this.state.location}
+                  locSort={this.state.rest.sortType === 3}
                   addFav={this.props.addFav}
                   addLike={this.props.addLike}
                   saveFav={this.props.saveFav}
@@ -757,6 +766,7 @@ class HomeScreen extends React.Component<any, any> {
             showFollowModal={this.showFollowModal}
             navigation={this.props.navigation}
           />
+          {this.renderSubHeader()}
           <LoadingTiny size={40} />
         </React.Fragment>
       );
@@ -805,10 +815,13 @@ class HomeScreen extends React.Component<any, any> {
             isAuthenticated={this.props.isAuthenticated}
             user={this.props.user}
             lang={this.props.lang}
+            deleteComment={this.props.deleteComment}
+            navigation={this.props.navigation}
           />
         )}
         <PhotoModal
           photo={this.state.photo}
+          photos={this.state.photos}
           favoritePost={this.props.favoritePost}
           isPhotoModalVisible={this.state.isPhotoModalVisible}
           hidePhotoModal={this.hidePhotoModal}
@@ -993,7 +1006,12 @@ export default connect(
                     })(
                       graphql(createComment, {
                         name: 'createComment'
-                      })(HomeScreen)
+                      })(
+                        graphql(deleteComment, {
+                          name: 'deleteComment',
+                          options: { refetchQueries: ['getPostComments'] }
+                        })(HomeScreen)
+                      )
                     )
                   )
                 )

@@ -5,8 +5,6 @@ import { Query } from 'react-apollo';
 import {
   Animated,
   Dimensions,
-  Keyboard,
-  KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
@@ -15,11 +13,12 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 
-import { InputBar, ItemComment } from '../ItemScreen';
+// import InputBar from '../ItemScreen/comment/InputBarOld';
+import { ItemComment, InputBar } from '../ItemScreen';
 import getPostComments from '../../graphql/query/getPostComments';
 import commentAdded from '../../graphql/subscription/commentAdded';
 import { rtlos, StyleSheet, isIphoneX } from '../../utils';
-import MessageAlert from '../../utils/message/MessageAlert';
+import KeyboardSpacer from '../../lib/elements/KeyboardSpacer';
 
 const { width } = Dimensions.get('window');
 
@@ -63,29 +62,6 @@ class Comments extends React.Component<any, any> {
     bottomPadding: 0,
     scrollEnabled: true
   };
-
-  keyboardWillShow(e: any) {
-    const duration = Platform.OS === 'android' ? 100 : e.duration;
-    Animated.timing(this.state.keyboardHeight, {
-      duration: duration + 100,
-      toValue: e.endCoordinates.height
-    }).start();
-  }
-  keyboardWillHide(e: any) {
-    const duration = Platform.OS === 'android' ? 100 : e.duration;
-    Animated.timing(this.state.keyboardHeight, {
-      duration: duration + 100,
-      toValue: 0
-    }).start();
-  }
-
-  keyboardDidShow(e: any) {
-    this.scrollView.scrollToEnd();
-  }
-
-  keyboardDidHide(e: any) {
-    this.scrollView.scrollToEnd();
-  }
 
   async sendMessage({ postId, ownerId, postTitle, userName }: any) {
     if (this.state.inputBarText === '') {
@@ -136,12 +112,6 @@ class Comments extends React.Component<any, any> {
   getScrollLength = (w: any, h: any) => {
     this.scrollViewHeight = h;
   };
-  EnableScroll = () => {
-    this.setState({ scrollEnabled: true, opacity: 1 });
-  };
-  DisableScroll = () => {
-    this.setState({ scrollEnabled: false, opacity: 0 });
-  };
 
   hideModal = () => {
     this.setState({ isModelVisible: false });
@@ -153,6 +123,7 @@ class Comments extends React.Component<any, any> {
   replayComment = ({ id, name, body }: any) => {
     this.setState({ id, name, body });
     this.childRef.current.getFocus();
+    this.scrollView.scrollToEnd({ animated: true });
   };
 
   closeReplay = () => {
@@ -176,6 +147,12 @@ class Comments extends React.Component<any, any> {
         backdropOpacity={0.5}
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}
+        onModalShow={() => {
+          if (this.props.isAuthenticated) {
+            this.scrollView.scrollToEnd({ animated: true });
+            this.childRef.current.getFocus();
+          }
+        }}
         style={{ margin: 0 }}
       >
         <View style={styles.container}>
@@ -261,175 +238,173 @@ class Comments extends React.Component<any, any> {
               }}
             />
           </Animated.View>
-          <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding"
-            enabled
-          >
-            <ScrollView
-              keyboardShouldPersistTaps="handled"
-              onContentSizeChange={this.getScrollLength}
-              scrollEventThrottle={16}
-              showsVerticalScrollIndicator={false}
-              scrollEnabled={this.state.scrollEnabled}
-              contentContainerStyle={{
-                backgroundColor: '#fff',
-                paddingBottom: 30
-              }}
-              onScroll={Animated.event([
-                {
-                  nativeEvent: {
-                    contentOffset: { y: this.state.scrollY }
-                  }
+          <ScrollView
+            keyboardShouldPersistTaps="handled"
+            onContentSizeChange={this.getScrollLength}
+            scrollEventThrottle={16}
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={this.state.scrollEnabled}
+            contentContainerStyle={{
+              backgroundColor: '#fff',
+              paddingTop: 90,
+              width
+            }}
+            onScroll={Animated.event([
+              {
+                nativeEvent: {
+                  contentOffset: { y: this.state.scrollY }
                 }
-              ])}
-              ref={ref => {
-                this.scrollView = ref;
-              }}
+              }
+            ])}
+            ref={ref => {
+              this.scrollView = ref;
+            }}
+            style={{
+              backgroundColor: '#fff',
+              marginTop:
+                Platform.OS === 'android'
+                  ? Constants.statusBarHeight
+                  : undefined
+            }}
+          >
+            <View style={{ padding: 10 }}>
+              <Text style={{ textAlign: post.isrtl ? 'right' : 'left' }}>
+                {post.body}
+              </Text>
+            </View>
+            <View
               style={{
-                backgroundColor: '#eee',
-                marginTop:
-                  Platform.OS === 'android'
-                    ? Constants.statusBarHeight
-                    : undefined
+                marginHorizontal: 20,
+                marginTop: 20,
+                marginBottom: 5,
+                alignItems:
+                  isRTL && Platform.OS !== 'android'
+                    ? 'flex-end'
+                    : 'flex-start',
+                justifyContent: 'center'
               }}
             >
-              <View
+              <Text
                 style={{
-                  marginHorizontal: 20,
-                  marginTop: 20,
-                  marginBottom: 5,
-                  alignItems:
-                    isRTL && Platform.OS !== 'android'
-                      ? 'flex-end'
-                      : 'flex-start',
-                  justifyContent: 'center'
+                  fontSize: 16,
+                  color: '#aaa'
                 }}
               >
-                <Text
-                  style={{
-                    fontSize: 16,
-                    color: '#aaa'
-                  }}
-                >
-                  {word.comments}
-                </Text>
-              </View>
+                {word.comments}
+              </Text>
+            </View>
 
-              <View
-                style={{
-                  flex: 1,
-                  backgroundColor: '#fff',
-                  paddingHorizontal: 5,
-                  marginHorizontal: 10,
-                  borderRadius: 10,
-                  marginBottom: 10
-                }}
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: '#fff',
+                paddingHorizontal: 5,
+                marginHorizontal: 10,
+                borderRadius: 10,
+                marginBottom: 10
+              }}
+            >
+              <Query
+                query={getPostComments}
+                variables={{ postId }}
+                fetchPolicy="network-only"
               >
-                <Query
-                  query={getPostComments}
-                  variables={{ postId }}
-                  fetchPolicy="network-only"
-                >
-                  {({ subscribeToMore, fetchMore, ...result }: any) => (
-                    <ItemComment
-                      {...result}
-                      updateCursor={this.updateCursor}
-                      navigation={this.props.navigation}
-                      isAuthenticated={this.props.isAuthenticated}
-                      lang={this.props.lang}
-                      isRTL={this.props.isRTL}
-                      words={word}
-                      width={width}
-                      user={this.props.user}
-                      replayComment={this.replayComment}
-                      word={word}
-                      subscribeToNewComments={() =>
-                        subscribeToMore({
-                          document: commentAdded,
-                          variables: { postId },
-                          updateQuery: (
-                            prev: any,
-                            { subscriptionData }: any
-                          ) => {
-                            if (!subscriptionData.data) {
-                              return prev;
-                            }
-                            const newFeedItem =
-                              subscriptionData.data.commentAdded;
-                            return {
-                              ...prev,
-                              getPostComments: [
-                                ...prev.getPostComments,
-                                newFeedItem
-                              ]
-                            };
+                {({ subscribeToMore, fetchMore, ...result }: any) => (
+                  <ItemComment
+                    {...result}
+                    updateCursor={this.updateCursor}
+                    hideCommentsModal={this.props.hideCommentsModal}
+                    navigation={this.props.navigation}
+                    isAuthenticated={this.props.isAuthenticated}
+                    lang={this.props.lang}
+                    isRTL={this.props.isRTL}
+                    words={word}
+                    width={width}
+                    user={this.props.user}
+                    replayComment={this.replayComment}
+                    deleteComment={this.props.deleteComment}
+                    word={word}
+                    subscribeToNewComments={() =>
+                      subscribeToMore({
+                        document: commentAdded,
+                        variables: { postId },
+                        updateQuery: (prev: any, { subscriptionData }: any) => {
+                          if (!subscriptionData.data) {
+                            return prev;
                           }
-                        })
-                      }
-                      fetchMoreComments={() =>
-                        fetchMore({
-                          variables: {
-                            postId,
-                            cursor: this.state.cursor
-                          },
-                          updateQuery: (
-                            previousResult: any,
-                            { fetchMoreResult }: any
-                          ) => {
-                            if (
-                              !fetchMoreResult ||
-                              fetchMoreResult.getPostComments.length === 0
-                            ) {
-                              return previousResult;
-                            }
-                            const newComments = fetchMoreResult.getPostComments.reverse();
-                            return {
-                              ...previousResult,
-                              getPostComments: [
-                                ...previousResult.getPostComments,
-                                ...newComments
-                              ]
-                            };
+                          const newFeedItem =
+                            subscriptionData.data.commentAdded;
+                          return {
+                            ...prev,
+                            getPostComments: [
+                              ...prev.getPostComments,
+                              newFeedItem
+                            ]
+                          };
+                        }
+                      })
+                    }
+                    fetchMoreComments={() =>
+                      fetchMore({
+                        variables: {
+                          postId,
+                          cursor: this.state.cursor
+                        },
+                        updateQuery: (
+                          previousResult: any,
+                          { fetchMoreResult }: any
+                        ) => {
+                          if (
+                            !fetchMoreResult ||
+                            fetchMoreResult.getPostComments.length === 0
+                          ) {
+                            return previousResult;
                           }
-                        })
-                      }
-                    />
-                  )}
-                </Query>
-              </View>
+                          const newComments = fetchMoreResult.getPostComments.reverse();
+                          return {
+                            ...previousResult,
+                            getPostComments: [
+                              ...previousResult.getPostComments,
+                              ...newComments
+                            ]
+                          };
+                        }
+                      })
+                    }
+                  />
+                )}
+              </Query>
+            </View>
+          </ScrollView>
+          {this.props.isAuthenticated && (
+            <InputBar
+              onSendPressed={(postID: any) => {
+                this.sendMessage({
+                  postId: postID,
+                  ownerId: post.userId,
+                  postTitle: post.title,
+                  userName: this.props.user.name
+                    ? this.props.user.name
+                    : this.props.user.uniquename
+                });
+              }}
+              replay={{
+                id: this.state.id,
+                name: this.state.name,
+                body: this.state.body
+              }}
+              ref={this.childRef}
+              closeReplay={this.closeReplay}
+              onChangeText={(text: string) => this.onChangeInputBarText(text)}
+              text={this.state.inputBarText}
+              autoFocus={true}
+              postId={postId}
+              placeholder={word.writecomment}
+              isRTL={isRTL}
+            />
+          )}
 
-              {this.props.isAuthenticated && (
-                <InputBar
-                  onSendPressed={(postID: any) => {
-                    this.sendMessage({
-                      postId: postID,
-                      ownerId: post.userId,
-                      postTitle: post.title,
-                      userName: this.props.user.name
-                        ? this.props.user.name
-                        : this.props.user.uniquename
-                    });
-                  }}
-                  replay={{
-                    id: this.state.id,
-                    name: this.state.name,
-                    body: this.state.body
-                  }}
-                  ref={this.childRef}
-                  closeReplay={this.closeReplay}
-                  onChangeText={(text: string) =>
-                    this.onChangeInputBarText(text)
-                  }
-                  text={this.state.inputBarText}
-                  autoFocus={true}
-                  postId={postId}
-                  placeholder={word.writecomment}
-                  isRTL={isRTL}
-                />
-              )}
-            </ScrollView>
-          </KeyboardAvoidingView>
+          <KeyboardSpacer />
         </View>
       </Modal>
     );

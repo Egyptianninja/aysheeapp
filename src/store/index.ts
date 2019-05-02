@@ -36,7 +36,7 @@ export const store = createStore(
   enhancer(applyMiddleware(thunk))
 );
 export const persistor = persistStore(store, undefined, async () => {
-  const appVersion = '1.1.46';
+  const appVersion = '1.1.48';
   const localAppVersion = await AsyncStorage.getItem('appVersion');
   const languageName = store.getState().glob.languageName;
   const locale = getLocale();

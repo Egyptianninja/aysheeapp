@@ -81,6 +81,21 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     );
   };
 
+  getDistanceNumbers = (sort: any) => {
+    const inkm: any = Number(sort[0]).toFixed(2);
+    if (inkm > 1) {
+      return {
+        dist: inkm,
+        unit: 'km'
+      };
+    } else {
+      return {
+        dist: Math.ceil(inkm * 100) * 10,
+        unit: 'm'
+      };
+    }
+  };
+
   render() {
     const {
       post,
@@ -97,7 +112,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
       },
       word,
       navigation,
-      mylocation,
+      locSort,
       showPhotoModal,
       isAuthenticated,
       isRTL,
@@ -112,7 +127,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
       selectePost,
       showMapModal,
       saveFav,
-      showCommentsModal
+      showCommentsModal,
+      width
     } = this.props;
     const pdata = getproperties(post);
     const jdata = getJobProperties(post);
@@ -138,15 +154,10 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     const locations = post.locations;
     const liked = likes.includes(post.id);
     const faved = favs.includes(post.id);
+
     const dist =
-      location && mylocation
-        ? distance({
-            lat1: mylocation.lat,
-            lon1: mylocation.lon,
-            lat2: location.lat,
-            lon2: location.lon,
-            unit: 'm'
-          })
+      locSort && post.sort && post.sort.length > 0
+        ? this.getDistanceNumbers(post.sort)
         : null;
     return (
       <View
@@ -185,8 +196,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                     letterSpacing: 1
                   }}
                 >
-                  {dist.dist}
-                  {dist.unit}
+                  {dist.dist} {dist.unit}
                 </Text>
               )}
               {!dist && (
@@ -221,8 +231,19 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
           )}
 
           {!uri && (
-            <View style={styles.center}>
-              <Text style={{ fontSize: 16 }}>{subTitle}</Text>
+            <View
+              style={[
+                styles.center,
+                {
+                  width,
+                  height: width / 2,
+                  backgroundColor: '#A7A9F3'
+                }
+              ]}
+            >
+              <Text style={{ fontSize: 30, color: '#fff', fontWeight: 'bold' }}>
+                {subTitle}
+              </Text>
             </View>
           )}
         </View>
@@ -276,9 +297,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 {this.state.postLikes}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => (isAuthenticated ? showCommentsModal(post) : null)}
-            >
+            <TouchableOpacity onPress={() => showCommentsModal(post)}>
               <FontAwesome
                 style={{ top: -3 }}
                 name="comments-o"

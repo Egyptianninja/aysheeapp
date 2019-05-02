@@ -90,8 +90,21 @@ export default class PhotoSliderHome extends React.Component<any, any> {
             <TouchableWithoutFeedback
               style={{ flex: 1 }}
               onPress={() => {
+                const updatedPhotos = photos.map((photo: any) => {
+                  return {
+                    url: photo.url.replace('w_600', 'w_1080')
+                  };
+                });
+                const index = photos
+                  .map((photo: any, i: any) => {
+                    if (photo === item) {
+                      return i;
+                    }
+                  })
+                  .filter((x: any) => x)[0];
                 this.props.showPhotoModal({
-                  url: item.url.replace('w_400', 'w_1080')
+                  photos: updatedPhotos,
+                  photo: index
                 });
               }}
             >

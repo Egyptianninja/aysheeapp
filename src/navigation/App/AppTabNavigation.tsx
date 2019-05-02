@@ -198,21 +198,21 @@ if (rtlos() === 3) {
               icon={images.searchicon}
               iconout={images.searchiconout}
               size={32}
-              // right={30}
+              right={40}
               focused={focused}
               tintColor={tintColor}
             />
           )
         }
       },
-      // categories: {
-      //   screen: SearchStack,
-      //   navigationOptions: ({ navigation }: any) => ({
-      //     tabBarButtonComponent: () => {
-      //       return <CategoryButton />;
-      //     }
-      //   })
-      // },
+      add: {
+        screen: HomeStack,
+        navigationOptions: ({ navigation }: any) => ({
+          tabBarButtonComponent: () => {
+            return <CategoryButton />;
+          }
+        })
+      },
 
       Notification: {
         screen: NotificationStack,
@@ -231,7 +231,7 @@ if (rtlos() === 3) {
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
-                // left={30}
+                left={40}
                 focused={focused}
                 tintColor={tintColor}
               />
@@ -270,7 +270,7 @@ if (rtlos() === 3) {
     {
       initialRouteName: 'Home',
       tabBarOptions: {
-        activeTintColor: '#7678ED',
+        activeTintColor: '#373737',
         inactiveTintColor: '#636363',
         showLabel: false,
         style: {
