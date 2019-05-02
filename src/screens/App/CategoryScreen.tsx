@@ -403,7 +403,7 @@ class CategoryScreen extends React.Component<any, any> {
             return <HomeLoading />;
           }
           if (error) {
-            return <Noresult title="error" />;
+            return <Noresult top={100} title="network error" />;
           }
           const postsQuery =
             data.getCategoryPosts && data.getCategoryPosts.posts
@@ -489,7 +489,7 @@ class CategoryScreen extends React.Component<any, any> {
                     </View>
                   );
                 } else if (posts.length === 0) {
-                  return <Noresult title={words.noresults} />;
+                  return <Noresult top={100} title={words.noresults} />;
                 } else {
                   return <View />;
                 }
@@ -669,7 +669,7 @@ class CategoryScreen extends React.Component<any, any> {
     }
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#eee' }}>
         <FilterModal
           showFilterModal={this.showFilterModal}
           hideFilterModal={this.hideFilterModal}

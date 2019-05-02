@@ -12,9 +12,7 @@ import getMyFavoritePosts from '../../../graphql/query/getMyFavoritePosts';
 import {
   getDBNextPosts,
   isTablet,
-  Message,
-  onShare,
-  readyUserPosts,
+  readyPosts,
   handleOnMenuModal
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
@@ -220,12 +218,7 @@ class MyFavScreen extends React.Component<any, any> {
             if (posts && posts.length === 0) {
               return <Noresult />;
             }
-            const rPosts = readyUserPosts(
-              posts,
-              isTablet() ? 400 : 200,
-              79,
-              lang
-            );
+            const rPosts = readyPosts(posts, isTablet() ? 400 : 200, 79, lang);
 
             return (
               <MasonryList

@@ -31,7 +31,7 @@ import {
   getNextPosts,
   isTablet,
   Message,
-  readyUserPosts,
+  readyPosts,
   rtlos,
   handleOnMenuModal
 } from '../../../utils';
@@ -191,25 +191,19 @@ class MyProfileScreen extends React.Component<any, any> {
           if (loading) {
             return <Loading />;
           }
-          if (error || !data.getUserPosts.posts) {
-            return <Noresult title="error" top={HEADER_HEIGHT} />;
+          if (error) {
+            return <Noresult title="error" top={HEADER_HEIGHT + 20} />;
           }
-          const postsQuery = data.getUserPosts.posts;
-          if (postsQuery && postsQuery.length === 0) {
-            return (
-              <Noresult
-                isRTL={isRTL}
-                title={words.noresults}
-                top={HEADER_HEIGHT}
-              />
-            );
-          }
-          const rPosts = readyUserPosts(
-            postsQuery,
-            isTablet() ? 400 : 200,
-            79,
-            lang
-          );
+
+          const postsQuery =
+            data.getUserPosts && data.getUserPosts.posts
+              ? data.getUserPosts.posts
+              : [];
+
+          const rPosts =
+            postsQuery.length > 0
+              ? readyPosts(postsQuery, isTablet() ? 400 : 200, 79, lang)
+              : postsQuery;
           return (
             <MasonryList
               ref={(ref: any) => {
@@ -241,6 +235,29 @@ class MyProfileScreen extends React.Component<any, any> {
                   isRTL={isRTL}
                 />
               )}
+              ListHeaderComponent={() => {
+                if (!data.getUserPosts || !data.getUserPosts.posts) {
+                  setTimeout(() => {
+                    refetch();
+                  }, 1000);
+                  return (
+                    <View
+                      style={{
+                        flex: 1,
+                        height: height - 100,
+                        width,
+                        bottom: 0
+                      }}
+                    >
+                      <Loading />
+                    </View>
+                  );
+                } else if (rPosts.length === 0) {
+                  return <Noresult top={20} title={words.noresults} />;
+                } else {
+                  return <View />;
+                }
+              }}
               getHeightForItem={({ item }: any) => item.height}
               numColumns={2}
               keyExtractor={(item: any) => item.id}
@@ -519,13 +536,12 @@ class MyProfileScreen extends React.Component<any, any> {
         horizontal
         style={{
           height: 50,
-          backgroundColor: '#fff',
-          borderColor: '#ddd',
-          borderWidth: 1
+          backgroundColor: '#fff'
         }}
         contentContainerStyle={{
           alignItems: 'center',
           justifyContent: 'center',
+          marginHorizontal: 5,
           minWidth: width,
           flexDirection: rtlos() === 2 ? 'row-reverse' : 'row'
         }}
@@ -537,49 +553,12 @@ class MyProfileScreen extends React.Component<any, any> {
             padding: 5,
             justifyContent: 'center',
             alignItems: 'center',
-            marginHorizontal: 2,
-            backgroundColor: tab === 3 ? '#eee' : '#fff',
-            paddingHorizontal: 5
-          }}
-          onPress={() => {
-            this.setState({
-              rest: { islive: true, isfront: true },
-              tab: 3
-            });
-          }}
-        >
-          <View
-            style={{ flexDirection: rtlos() === 2 ? 'row-reverse' : 'row' }}
-          >
-            <Text
-              style={{
-                color: tab === 3 ? maincolor : '#000',
-                fontSize: 16
-              }}
-            >
-              {words.infrontpage}
-            </Text>
-            <Text
-              style={{
-                color: '#00B77C',
-                fontSize: 12,
-                padding: 5,
-                bottom: 10
-              }}
-            >
-              {user.frontqty}
-            </Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            padding: 5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginHorizontal: 2,
-            backgroundColor: tab === 1 ? '#eee' : '#fff',
-            paddingHorizontal: 5
+            backgroundColor: tab === 1 ? '#ddd' : '#fff',
+            borderRadius: 10,
+            paddingHorizontal: 5,
+            borderColor: '#ddd',
+            borderWidth: 1,
+            marginHorizontal: 5
           }}
           onPress={() => {
             this.setState({ rest: { islive: true }, tab: 1 });
@@ -614,9 +593,12 @@ class MyProfileScreen extends React.Component<any, any> {
             padding: 5,
             justifyContent: 'center',
             alignItems: 'center',
-            marginHorizontal: 2,
-            backgroundColor: tab === 4 ? '#eee' : '#fff',
-            paddingHorizontal: 5
+            backgroundColor: tab === 4 ? '#ddd' : '#fff',
+            borderRadius: 10,
+            paddingHorizontal: 5,
+            borderColor: '#ddd',
+            borderWidth: 1,
+            marginHorizontal: 5
           }}
           onPress={() => {
             this.setState({
@@ -656,10 +638,13 @@ class MyProfileScreen extends React.Component<any, any> {
               padding: 5,
               justifyContent: 'center',
               alignItems: 'center',
-              marginHorizontal: 2,
               // marginRight: 9,
-              backgroundColor: tab === 2 ? '#eee' : '#fff',
-              paddingHorizontal: 5
+              backgroundColor: tab === 2 ? '#ddd' : '#fff',
+              borderRadius: 10,
+              paddingHorizontal: 5,
+              borderColor: '#ddd',
+              borderWidth: 1,
+              marginHorizontal: 5
             }}
             onPress={() => {
               this.setState({

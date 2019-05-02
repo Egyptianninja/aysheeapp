@@ -881,6 +881,7 @@ class ItemView extends React.Component<any, any> {
                   <ItemComment
                     {...result}
                     updateCursor={this.updateCursor}
+                    deleteComment={this.props.deleteComment}
                     navigation={this.props.navigation}
                     isAuthenticated={this.props.isAuthenticated}
                     lang={this.props.lang}

@@ -25,8 +25,7 @@ import {
   getNextPosts,
   isTablet,
   Message,
-  onShare,
-  readyUserPosts,
+  readyPosts,
   rtlos,
   handleOnMenuModal
 } from '../../../utils';
@@ -189,25 +188,19 @@ class ProfileScreen extends React.Component<any, any> {
           if (loading) {
             return <Loading />;
           }
-          if (error || !data.getUserPosts.posts) {
-            return <Noresult title="error" top={HEADER_HEIGHT} />;
+          if (error) {
+            return <Noresult title="error" top={HEADER_HEIGHT + 20} />;
           }
-          const postsQuery = data.getUserPosts.posts;
-          if (postsQuery && postsQuery.length === 0) {
-            return (
-              <Noresult
-                isRTL={isRTL}
-                title={words.noresults}
-                top={HEADER_HEIGHT}
-              />
-            );
-          }
-          const rPosts = readyUserPosts(
-            postsQuery,
-            isTablet() ? 400 : 200,
-            79,
-            lang
-          );
+
+          const postsQuery =
+            data.getUserPosts && data.getUserPosts.posts
+              ? data.getUserPosts.posts
+              : [];
+
+          const rPosts =
+            postsQuery.length > 0
+              ? readyPosts(postsQuery, isTablet() ? 400 : 200, 79, lang)
+              : postsQuery;
           return (
             <MasonryList
               ref={(ref: any) => {
@@ -239,6 +232,29 @@ class ProfileScreen extends React.Component<any, any> {
                   isRTL={isRTL}
                 />
               )}
+              ListHeaderComponent={() => {
+                if (!data.getUserPosts || !data.getUserPosts.posts) {
+                  setTimeout(() => {
+                    refetch();
+                  }, 1000);
+                  return (
+                    <View
+                      style={{
+                        flex: 1,
+                        height: height - 100,
+                        width,
+                        bottom: 0
+                      }}
+                    >
+                      <Loading />
+                    </View>
+                  );
+                } else if (rPosts.length === 0) {
+                  return <Noresult top={20} title={words.noresults} />;
+                } else {
+                  return <View />;
+                }
+              }}
               getHeightForItem={({ item }: any) => item.height}
               numColumns={2}
               keyExtractor={(item: any) => item.id}
@@ -454,7 +470,9 @@ class ProfileScreen extends React.Component<any, any> {
           justifyContent: 'center',
           minWidth: width,
           height: 40,
-          flexDirection: rtlos() === 2 ? 'row-reverse' : 'row'
+          flexDirection: rtlos() === 2 ? 'row-reverse' : 'row',
+          paddingHorizontal: 5,
+          paddingTop: 5
         }}
       >
         <TouchableOpacity
@@ -464,7 +482,10 @@ class ProfileScreen extends React.Component<any, any> {
             justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 5,
-            backgroundColor: tab === 1 ? '#eee' : '#fff',
+            backgroundColor: tab === 1 ? '#ddd' : '#fff',
+            borderRadius: 10,
+            borderColor: '#ddd',
+            borderWidth: 1,
             paddingHorizontal: 5
           }}
           onPress={() => {
@@ -502,9 +523,12 @@ class ProfileScreen extends React.Component<any, any> {
               padding: 5,
               justifyContent: 'center',
               alignItems: 'center',
-              marginHorizontal: 2,
+              marginHorizontal: 5,
               backgroundColor: tab === 2 ? '#eee' : '#fff',
-              paddingHorizontal: 5
+              paddingHorizontal: 5,
+              borderRadius: 10,
+              borderColor: '#ddd',
+              borderWidth: 1
             }}
             onPress={() => {
               this.setState({

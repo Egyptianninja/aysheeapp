@@ -157,10 +157,14 @@ class HomeScreen extends React.Component<any, any> {
   };
 
   async componentDidMount() {
-    // this.getLocation();
     this.subs = [
       this.props.navigation.addListener('didFocus', () => {
         this.addPushNotification();
+        // this.flatListRef &&
+        //   this.flatListRef.getNode().scrollToOffset({
+        //     offset: this.state.offsetAnim + 1,
+        //     animated: true
+        //   });
       }),
       this.props.navigation.addListener('willBlur', () => {
         //
@@ -526,6 +530,7 @@ class HomeScreen extends React.Component<any, any> {
     const near = this.state.rest.sortType === 3;
     const time = this.state.rest.sortType === 1;
     const isoffer = this.state.rest.isoffer === true;
+
     return (
       <View
         style={{
@@ -643,7 +648,7 @@ class HomeScreen extends React.Component<any, any> {
             return <HomeLoading />;
           }
           if (error) {
-            return <Noresult title="error" />;
+            return <Noresult top={100} title="network error" />;
           }
           const postsQuery =
             data.getTimeLine && data.getTimeLine.posts
@@ -729,7 +734,7 @@ class HomeScreen extends React.Component<any, any> {
                     </View>
                   );
                 } else if (posts.length === 0) {
-                  return <Noresult title={words.noresults} />;
+                  return <Noresult top={100} title={words.noresults} />;
                 } else {
                   return <View />;
                 }

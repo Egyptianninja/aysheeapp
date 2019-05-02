@@ -9,6 +9,7 @@ import deletePost from '../../graphql/mutation/deletePost';
 import editClassifieds from '../../graphql/mutation/editClassifieds';
 import favoritePost from '../../graphql/mutation/favoritePost';
 import unFavoritePost from '../../graphql/mutation/unFavoritePost';
+import deleteComment from '../../graphql/mutation/deleteComment';
 import getPost from '../../graphql/query/getPost';
 import { readyPost } from '../../utils';
 import updateMyQty from '../../graphql/mutation/updateMyQty';
@@ -41,6 +42,7 @@ class ItemScreen extends React.Component<any, any> {
         <ItemView
           post={post}
           postId={post.id ? post.id : post._id}
+          deleteComment={this.props.deleteComment}
           word={word}
           isRTL={isRTL}
           lang={lang}
@@ -94,6 +96,7 @@ class ItemScreen extends React.Component<any, any> {
             return (
               <ItemView
                 post={getedPost}
+                deleteComment={this.props.deleteComment}
                 postId={getedPost.id}
                 word={word}
                 lang={lang}
@@ -169,7 +172,11 @@ export default connect(
               })(
                 graphql(likePost, {
                   name: 'likePost'
-                })(ItemScreen)
+                })(
+                  graphql(deleteComment, {
+                    name: 'deleteComment'
+                  })(ItemScreen)
+                )
               )
             )
           )
