@@ -79,6 +79,9 @@ export default class PhotoSliderHome extends React.Component<any, any> {
           data={photos}
           pagingEnabled
           horizontal
+          // contentContainerStyle={{
+          //   flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
+          // }}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={this.handlePageChange}
           onScroll={Animated.event([
@@ -123,9 +126,9 @@ export default class PhotoSliderHome extends React.Component<any, any> {
           // Performance settings
           removeClippedSubviews={true} // Unmount components when outside of window
           initialNumToRender={1} // Reduce initial render amount
-          maxToRenderPerBatch={2} // Reduce number in each render batch
+          maxToRenderPerBatch={1} // Reduce number in each render batch
           // maxToRenderPerBatch={100} // Increase time between renders
-          windowSize={3} // Reduce the window size
+          windowSize={7} // Reduce the window size
         />
         {photos.length > 1 && (
           <View

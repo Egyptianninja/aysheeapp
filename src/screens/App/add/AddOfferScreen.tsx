@@ -413,7 +413,8 @@ class AddOfferScreen extends React.Component<any, any> {
                           flexDirection: 'column',
                           marginHorizontal: 15,
                           borderLeftColor: '#ddd',
-                          borderLeftWidth: 2
+                          borderLeftWidth: 2,
+                          alignItems: 'flex-start'
                         }}
                       >
                         {this.props.user.branches.map(

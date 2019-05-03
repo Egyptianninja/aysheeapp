@@ -690,11 +690,11 @@ class ItemView extends React.Component<any, any> {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={async () => {
-                  const message = `
-            ${post.title}
-            ${post.body}
-            ${post.price}`;
-                  await onShareSimple(message);
+                  const title = post.title;
+                  const message = `${post.body}
+                  ${post.price}`;
+                  const url = post.uri ? post.uri : '';
+                  await onShareSimple({ title, message, url });
                 }}
               >
                 <FontAwesome name="share-square-o" size={24} color="#bbb" />

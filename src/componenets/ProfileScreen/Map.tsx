@@ -4,6 +4,7 @@ import { MapView } from 'expo';
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Drive from '../../utils/location/drive';
+import { rtlos } from '../../utils';
 
 const { Marker, Callout }: any = MapView;
 
@@ -21,7 +22,8 @@ export default class Map extends React.Component<any, any> {
         style={{
           position: 'absolute',
           top: 44,
-          left: 5,
+          left: rtlos() === 3 ? undefined : 5,
+          right: rtlos() === 3 ? 5 : undefined,
           zIndex: 160,
           width: 34,
           height: 34,
@@ -35,7 +37,7 @@ export default class Map extends React.Component<any, any> {
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
       >
         <Ionicons
-          style={{ left: 0, bottom: 3 }}
+          style={{ left: 0, bottom: rtlos() === 3 ? undefined : 3 }}
           name="ios-close"
           size={36}
           color="#fff"
@@ -51,7 +53,7 @@ export default class Map extends React.Component<any, any> {
           paddingHorizontal: 10,
           paddingVertical: 5,
           marginVertical: 10,
-          marginRight: 5,
+          marginHorizontal: 5,
           borderColor: '#fff',
           borderWidth: 2,
           borderRadius: 10,

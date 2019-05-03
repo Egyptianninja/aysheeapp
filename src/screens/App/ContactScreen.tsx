@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Logo } from '../../componenets';
 import { Linking } from 'expo';
+import { rtlos } from '../../utils';
 
 const ContactScreen = () => {
   return (
@@ -32,7 +33,7 @@ const ContactScreen = () => {
         <TouchableOpacity
           onPress={() => Linking.openURL('https://ishee.co')}
           style={{
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             alignItems: 'center',
             marginTop: 20
           }}
@@ -51,7 +52,11 @@ const ContactScreen = () => {
 
         <TouchableOpacity
           onPress={() => Linking.openURL('mailto: info@ishee.co')}
-          style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center' }}
+          style={{
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+            marginTop: 10,
+            alignItems: 'center'
+          }}
         >
           <Ionicons name="ios-mail" size={26} color="#777" />
           <Text
@@ -67,7 +72,7 @@ const ContactScreen = () => {
 
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             marginTop: 30,
             alignItems: 'center'
           }}

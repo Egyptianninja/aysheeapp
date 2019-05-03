@@ -598,20 +598,6 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       />
                     </Group>
                   )}
-                  <Group
-                    color="#444"
-                    size={24}
-                    onChange={setFieldValue}
-                    rtl={isRTL}
-                  >
-                    <CheckBox
-                      name="singleLocation"
-                      label={word.location}
-                      value={values.singleLocation}
-                      selected={values.singleLocation}
-                      resetLocation={this.resetLocation}
-                    />
-                  </Group>
 
                   {values.branchLocations && (
                     <Group
@@ -625,7 +611,8 @@ class AddClassifiedScreen extends React.Component<any, any> {
                           flexDirection: 'column',
                           marginHorizontal: 15,
                           borderLeftColor: '#ddd',
-                          borderLeftWidth: 2
+                          borderLeftWidth: 2,
+                          alignItems: 'flex-start'
                         }}
                       >
                         {this.props.user.branches.map(
@@ -644,6 +631,20 @@ class AddClassifiedScreen extends React.Component<any, any> {
                       </View>
                     </Group>
                   )}
+                  <Group
+                    color="#444"
+                    size={24}
+                    onChange={setFieldValue}
+                    rtl={isRTL}
+                  >
+                    <CheckBox
+                      name="singleLocation"
+                      label={word.location}
+                      value={values.singleLocation}
+                      selected={values.singleLocation}
+                      resetLocation={this.resetLocation}
+                    />
+                  </Group>
                   {values.singleLocation && (
                     <AddLocation
                       getCurrentLocation={this.getCurrentLocation}

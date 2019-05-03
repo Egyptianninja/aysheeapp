@@ -133,7 +133,7 @@ class AddLocation extends React.Component<any, any> {
             mapType={mapType}
             showsUserLocation={true}
             userLocationAnnotationTitle="My Location"
-            onPress={this.handlePress}
+            onLongPress={this.handlePress}
           >
             {this.state.marker &&
               (title && title !== '' ? (

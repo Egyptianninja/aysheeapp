@@ -2,13 +2,7 @@ import * as React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 
 import { Text, View, TouchableOpacity } from 'react-native';
-import {
-  rtlos,
-  StyleSheet,
-  getDate,
-  distance,
-  onShareSimple
-} from '../../utils';
+import { rtlos, StyleSheet, getDate, onShareSimple } from '../../utils';
 import PhotoSliderHome from '../HomeScreen/PhotoSliderHome';
 import { AvatarCircle } from '../Avatar';
 import { getproperties, getJobProperties } from '../ItemScreen';
@@ -41,7 +35,12 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
 
   renderUser = ({ user, navigation, word, time }: any) => {
     return (
-      <View style={{ flexDirection: 'row-reverse', paddingHorizontal: 10 }}>
+      <View
+        style={{
+          flexDirection: rtlos() === 3 ? 'row' : 'row-reverse',
+          paddingHorizontal: 10
+        }}
+      >
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('ProfileScreen', { userId: user.id, user });
@@ -55,7 +54,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
           style={{
             paddingHorizontal: 10,
             paddingTop: 10,
-            alignItems: 'flex-end'
+            alignItems: rtlos() === 3 ? 'flex-start' : 'flex-end'
           }}
         >
           <TouchableOpacity
@@ -167,12 +166,16 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
           backgroundColor: '#fff'
         }}
       >
-        <View style={{ flexDirection: 'row' }}>
+        <View
+          style={{
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
+          }}
+        >
           {(location || (locations && locations.length > 0)) && (
             <TouchableOpacity
               style={{
                 flex: 3,
-                flexDirection: 'row',
+                flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
@@ -250,7 +253,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
         <View style={{ padding: 10, paddingHorizontal: 15 }}>
           <View
             style={{
-              flexDirection: 'row',
+              flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
               alignItems: 'center',
               justifyContent: 'space-around',
               paddingBottom: 10,
@@ -290,7 +293,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                   fontSize: 12,
                   color: '#bbb',
                   position: 'absolute',
-                  left: 26,
+                  left: rtlos() === 3 ? undefined : 26,
+                  right: rtlos() === 3 ? 26 : undefined,
                   bottom: 0
                 }}
               >
@@ -307,11 +311,14 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={async () => {
-                const message = `
-            ${post.title}
-            ${post.body}
-            ${post.price}`;
-                await onShareSimple(message);
+                const message = post.price
+                  ? `${post.title}
+${post.body}
+${post.price}`
+                  : `${post.title}
+${post.body}`;
+                const url = post.uri ? post.uri : '';
+                await onShareSimple({ message, url });
               }}
             >
               <FontAwesome name="share-square-o" size={24} color="#bbb" />
@@ -354,7 +361,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
           >
             <View
               style={{
-                alignItems: 'flex-end',
+                alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start',
                 paddingTop: 10
               }}
             >
@@ -362,7 +369,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 style={{
                   flex: 1,
                   width: this.props.width - 30,
-                  flexDirection: 'row-reverse',
+                  flexDirection: rtlos() === 3 ? 'row' : 'row-reverse',
                   alignItems: 'center',
                   justifyContent: 'space-between'
                 }}
@@ -448,13 +455,16 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                   onPress={() =>
                     this.setState({ viewDetails: !this.state.viewDetails })
                   }
-                  style={{ alignItems: 'flex-end' }}
+                  style={{
+                    alignItems: rtlos() === 3 ? 'flex-start' : 'flex-end',
+                    alignSelf: rtlos() === 3 ? 'flex-start' : 'flex-end'
+                  }}
                 >
                   <Text
                     style={{
                       color: '#373737',
                       fontSize: 14,
-                      textAlign: 'right'
+                      textAlign: rtlos() === 3 ? 'left' : 'right'
                     }}
                   >
                     {subBody}

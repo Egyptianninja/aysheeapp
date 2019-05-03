@@ -8,11 +8,11 @@ import {
   TextInput,
   ScrollView
 } from 'react-native';
-import { getUserLocation, isIphoneX } from '../../utils';
+import { getUserLocation, isIphoneX, rtlos } from '../../utils';
 import Modal from 'react-native-modal';
 import LoadingTiny from '../Common/LoadingTiny';
 
-const { Marker }: any = MapView;
+const { Marker, Callout }: any = MapView;
 
 export default class BranchesMap extends React.Component<any, any> {
   map: any;
@@ -106,7 +106,8 @@ export default class BranchesMap extends React.Component<any, any> {
         style={{
           position: 'absolute',
           top: isIphoneX() ? 40 : 20,
-          left: 5,
+          left: rtlos() === 3 ? undefined : 5,
+          right: rtlos() === 3 ? 5 : undefined,
           zIndex: 160,
           width: 32,
           height: 32,
@@ -120,7 +121,7 @@ export default class BranchesMap extends React.Component<any, any> {
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
       >
         <Ionicons
-          style={{ left: 0, bottom: 1 }}
+          style={{ left: 0, bottom: rtlos() === 3 ? undefined : 1 }}
           name="ios-close"
           size={30}
           color="#fff"
@@ -157,7 +158,8 @@ export default class BranchesMap extends React.Component<any, any> {
         style={{
           position: 'absolute',
           flexDirection: 'row',
-          right: 0,
+          right: rtlos() === 3 ? undefined : 0,
+          left: rtlos() === 3 ? 0 : undefined,
           top: isIphoneX() ? 35 : 15,
           zIndex: 150
         }}
@@ -214,47 +216,76 @@ export default class BranchesMap extends React.Component<any, any> {
                 height,
                 width
               }}
-              onPress={this.handlePress}
+              onLongPress={this.handlePress}
               mapType={mapType}
               showsUserLocation={true}
               userLocationAnnotationTitle="My location"
             >
               {this.state.markers.map((marker: any) => {
                 return (
-                  <Marker key={marker.name} {...marker}>
-                    <View style={{ alignItems: 'center', bottom: 15 }}>
+                  <Marker
+                    key={marker.name}
+                    coordinate={marker.coordinate}
+                    title={marker.name}
+                  >
+                    <Callout>
                       <View
                         style={{
-                          bottom: 15,
-                          backgroundColor: '#7678ED',
-                          padding: 10,
-                          borderRadius: 10
+                          flexDirection: 'row',
+                          backgroundColor: '#fff',
+                          borderRadius: 5,
+                          justifyContent: 'center',
+                          alignItems: 'center'
                         }}
                       >
-                        <Text style={{ color: '#FFF', fontWeight: 'bold' }}>
-                          {marker.name}
-                        </Text>
+                        <View
+                          style={{
+                            paddingHorizontal: 10,
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          <Text style={{ textAlign: 'center' }}>
+                            {marker.name}
+                          </Text>
+                        </View>
                       </View>
-                      <View
-                        style={{
-                          bottom: 15,
-                          width: 0,
-                          height: 0,
-                          borderLeftColor: 'transparent',
-                          borderLeftWidth: 10,
-                          borderRightColor: 'transparent',
-                          borderRightWidth: 10,
-                          borderTopWidth: 30,
-                          borderTopColor: '#7678ED'
-                        }}
-                      />
-                    </View>
+                    </Callout>
                   </Marker>
+                  // <Marker key={marker.name} title={marker.name} {...marker}>
+                  //   <View style={{ alignItems: 'center', bottom: 15 }}>
+                  //     <View
+                  //       style={{
+                  //         bottom: 15,
+                  //         backgroundColor: '#7678ED',
+                  //         padding: 10,
+                  //         borderRadius: 10
+                  //       }}
+                  //     >
+                  //       <Text style={{ color: '#FFF', fontWeight: 'bold' }}>
+                  //         {marker.name}
+                  //       </Text>
+                  //     </View>
+                  //     <View
+                  //       style={{
+                  //         bottom: 15,
+                  //         width: 0,
+                  //         height: 0,
+                  //         borderLeftColor: 'transparent',
+                  //         borderLeftWidth: 10,
+                  //         borderRightColor: 'transparent',
+                  //         borderRightWidth: 10,
+                  //         borderTopWidth: 30,
+                  //         borderTopColor: '#7678ED'
+                  //       }}
+                  //     />
+                  //   </View>
+                  // </Marker>
                 );
               })}
               {this.state.marker && (
                 <Marker {...this.state.marker}>
-                  <View
+                  {/* <View
                     style={{
                       bottom: 15,
                       width: 0,
@@ -266,7 +297,7 @@ export default class BranchesMap extends React.Component<any, any> {
                       borderTopWidth: 30,
                       borderTopColor: '#7678ED'
                     }}
-                  />
+                  /> */}
                 </Marker>
               )}
             </MapView>
@@ -294,7 +325,7 @@ export default class BranchesMap extends React.Component<any, any> {
                   fontWeight: 'bold'
                 }}
               >
-                Submit
+                Done
               </Text>
             </TouchableOpacity>
             <ScrollView
@@ -429,7 +460,7 @@ export default class BranchesMap extends React.Component<any, any> {
                   }}
                   onPress={() => this.handleSubmit()}
                 >
-                  <Text style={{ color: '#fff', fontSize: 18 }}>Submit</Text>
+                  <Text style={{ color: '#fff', fontSize: 18 }}>Add</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{

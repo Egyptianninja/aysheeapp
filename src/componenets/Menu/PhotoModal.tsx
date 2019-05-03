@@ -26,6 +26,8 @@ export default class PhotoModal extends React.Component<any, any> {
     return (
       <Modal
         visible={this.state.isPhotoModalVisible}
+        onRequestClose={() => null}
+        // onRequestClose={() => this.props.hidePhotoModal()}
         // onBackdropPress={() => this.props.hidePhotoModal()}
         // onBackButtonPress={() => this.props.hidePhotoModal()}
         // useNativeDriver={true}

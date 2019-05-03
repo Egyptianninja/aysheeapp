@@ -64,7 +64,7 @@ class FollowModal extends React.Component<any, any> {
             <View
               key={cat.id}
               style={{
-                flexDirection: 'row-reverse',
+                flexDirection: rtlos() === 3 ? 'row' : 'row-reverse',
                 marginHorizontal: 10,
                 paddingHorizontal: 10,
                 paddingVertical: 7.5
@@ -79,7 +79,7 @@ class FollowModal extends React.Component<any, any> {
                 }}
                 style={{
                   justifyContent: 'center',
-                  alignItems: 'flex-end',
+                  alignItems: rtlos() === 3 ? 'flex-start' : 'flex-end',
                   flex: 2
                 }}
               >
@@ -95,7 +95,7 @@ class FollowModal extends React.Component<any, any> {
               <View
                 style={{
                   flex: 1,
-                  alignItems: 'flex-start',
+                  alignItems: rtlos() === 3 ? 'flex-end' : 'flex-start',
                   justifyContent: 'flex-start'
                 }}
               >
@@ -131,7 +131,9 @@ class FollowModal extends React.Component<any, any> {
 
   render() {
     const { categories, word } = this.props;
-    const full = this.state.categoryIds.sort() === categids.sort();
+    const full =
+      this.state.categoryIds.sort() === categids.sort() ||
+      this.state.categoryIds.length === 21;
 
     return (
       <Modal
@@ -169,7 +171,7 @@ class FollowModal extends React.Component<any, any> {
           <View
             style={{
               marginTop: Constants.statusBarHeight + 40,
-              flexDirection: 'row',
+              flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
               paddingHorizontal: 10,
               paddingRight: 15,
               justifyContent: 'space-between',

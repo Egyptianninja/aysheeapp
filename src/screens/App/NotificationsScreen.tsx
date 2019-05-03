@@ -85,6 +85,7 @@ class NotificationsScreen extends React.Component<any, any> {
           <AuthRequire
             navigation={this.props.navigation}
             origin="notification"
+            words={words}
           />
         )}
         {this.props.isAuthenticated && (

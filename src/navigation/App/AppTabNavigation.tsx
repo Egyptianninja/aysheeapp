@@ -57,7 +57,7 @@ if (rtlos() === 3) {
                 icon={images.notificationicon}
                 iconout={images.notificationiconout}
                 size={28}
-                // right={30}
+                right={40}
                 focused={focused}
                 tintColor={tintColor}
                 notification={false}
@@ -67,14 +67,15 @@ if (rtlos() === 3) {
           return navigationOptions;
         }
       },
-      // categories: {
-      //   screen: SearchStack,
-      //   navigationOptions: ({ navigation }: any) => ({
-      //     tabBarButtonComponent: () => {
-      //       return <CategoryButton />;
-      //     }
-      //   })
-      // },
+      add: {
+        screen: HomeStack,
+        navigationOptions: ({ navigation }: any) => ({
+          tabBarButtonComponent: () => {
+            return <CategoryButton />;
+          }
+        })
+      },
+
       Search: {
         screen: SearchStack,
         navigationOptions: {
@@ -83,7 +84,7 @@ if (rtlos() === 3) {
               icon={images.searchicon}
               iconout={images.searchiconout}
               size={32}
-              // left={30}
+              left={40}
               focused={focused}
               tintColor={tintColor}
             />
@@ -95,7 +96,6 @@ if (rtlos() === 3) {
         navigationOptions: ({ navigation }: any) => {
           const { routeName } = navigation.state.routes[navigation.state.index];
           const navigationOptions: any = {};
-
           if (
             routeName === 'OffersScreen' ||
             routeName.indexOf('Add') !== -1 ||
@@ -117,6 +117,26 @@ if (rtlos() === 3) {
                 tintColor={tintColor}
               />
             );
+          }
+          if (navigation.state.index === 0) {
+            navigationOptions.tabBarOnPress = () => {
+              if (navigation.state.index === 0) {
+                const navigationInRoute = navigation.getChildNavigation(
+                  navigation.state.routes[0].key
+                );
+
+                if (
+                  !!navigationInRoute &&
+                  navigationInRoute.isFocused() &&
+                  !!navigationInRoute.state.params &&
+                  !!navigationInRoute.state.params.handleHome
+                ) {
+                  navigationInRoute.state.params.handleHome();
+                } else {
+                  navigation.navigate(navigation.state.key);
+                }
+              }
+            };
           }
 
           return navigationOptions;

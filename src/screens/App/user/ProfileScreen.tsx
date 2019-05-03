@@ -216,7 +216,7 @@ class ProfileScreen extends React.Component<any, any> {
               }
               contentContainerStyle={{
                 marginTop: HEADER_HEIGHT,
-                paddingBottom: 160
+                paddingBottom: 250
               }}
               refreshing={this.state.refreshing}
               data={rPosts}
@@ -347,12 +347,9 @@ class ProfileScreen extends React.Component<any, any> {
         </View>
         <View
           style={{
-            // position: 'absolute',
             width,
-            // top: topPaddingIcons,
             height: 50,
             zIndex: 100,
-            // backgroundColor: 'red',
             flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
             justifyContent: 'space-around',
             alignItems: 'center',
@@ -372,7 +369,11 @@ class ProfileScreen extends React.Component<any, any> {
               paddingVertical: 5
             }}
           >
-            <Ionicons name="ios-call" size={31} color={maincolor} />
+            <Ionicons
+              name="ios-call"
+              size={31}
+              color={!user.phone && !user.mob ? '#aaa' : maincolor}
+            />
           </TouchableOpacity>
           <View
             style={{

@@ -516,7 +516,7 @@ class CategoryScreen extends React.Component<any, any> {
       <View
         style={{
           height: 40,
-          flexDirection: 'row',
+          flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
           backgroundColor: '#F3F3F3',
@@ -526,7 +526,7 @@ class CategoryScreen extends React.Component<any, any> {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'flex-start',
+            justifyContent: rtlos() === 3 ? 'flex-end' : 'flex-start',
             alignItems: 'center',
             marginHorizontal: 10,
             flex: 1
@@ -604,7 +604,7 @@ class CategoryScreen extends React.Component<any, any> {
         <View
           style={{
             flex: 1,
-            alignItems: 'flex-end',
+            alignItems: rtlos() === 3 ? 'flex-start' : 'flex-end',
             justifyContent: 'center'
           }}
         >

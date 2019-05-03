@@ -19,10 +19,12 @@ export const onShare = async (message: any, toggleModal: any) => {
     alert(error.message);
   }
 };
-export const onShareSimple = async (message: any) => {
+export const onShareSimple = async ({ title, message, url }: any) => {
   try {
     const result: any = await Share.share({
-      message
+      title,
+      message,
+      url
     });
   } catch (error) {
     alert(error.message);

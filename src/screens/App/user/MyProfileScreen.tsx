@@ -682,13 +682,16 @@ class MyProfileScreen extends React.Component<any, any> {
   };
 
   render() {
+    const { lang, words, isRTL } = this.props;
     if (!this.props.isAuthenticated) {
       return (
-        <AuthRequire navigation={this.props.navigation} origin="profile" />
+        <AuthRequire
+          navigation={this.props.navigation}
+          origin="profile"
+          words={words}
+        />
       );
     }
-
-    const { lang, words, isRTL } = this.props;
 
     const headerHeight = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_HEIGHT],

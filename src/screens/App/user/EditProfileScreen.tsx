@@ -27,7 +27,8 @@ import {
   pickImageWithoutUpload,
   StyleSheet,
   uploadPickedImage,
-  UserLocation
+  UserLocation,
+  rtlos
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
 import BranchesModal from '../../../componenets/ProfileScreen/BranchesModal';
@@ -478,15 +479,7 @@ class EditProfileScreen extends React.Component<any, any> {
                             }}
                             key={branch.name}
                           >
-                            <Text
-                              style={{
-                                alignSelf: this.props.isRTL
-                                  ? 'flex-end'
-                                  : 'flex-start'
-                              }}
-                            >
-                              {branch.name}
-                            </Text>
+                            <Text>{branch.name}</Text>
                           </View>
                         ))}
                       </View>

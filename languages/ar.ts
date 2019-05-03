@@ -528,6 +528,8 @@ export default {
     lessprice: 'الأقل سعراً',
     selectall: 'تحديد الكل',
     deselectall: 'الغاء التحديد',
+    continuetologin: 'تسجيل الدخول',
+    pleaselogin: 'يرجى تسجيل الدخول للمتابعة',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

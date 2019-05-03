@@ -528,6 +528,8 @@ export default {
     lessprice: 'Price',
     selectall: 'Select all',
     deselectall: 'Deselect all',
+    continuetologin: 'continue to login',
+    pleaselogin: 'Please login to your accout',
 
     popmenu: [
       { id: 1, sort: 3, name: 'Add to favorite' },

@@ -1,0 +1,615 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-05-02 22:28:51
+count workspace : /Users/emad/Projects/ayshee/app/ayshee
+total files : 603
+total code lines : 44524
+total comment lines : 928
+total blank lines : 2125
+
+.expo/packager-info.json, code is 10, comment is 0, blank is 0.
+.expo/settings.json, code is 7, comment is 0, blank is 0.
+.gitignore, code is 2, comment is 7, blank is 0.
+.watchmanconfig, code is 1, comment is 0, blank is 0.
+app.json, code is 55, comment is 0, blank is 4.
+App.tsx, code is 2, comment is 0, blank is 0.
+assets/fonts/Cairo-Black.ttf, it is a binary file.
+assets/fonts/Cairo-Bold.ttf, it is a binary file.
+assets/fonts/Cairo-Light.ttf, it is a binary file.
+assets/fonts/Cairo-Regular.ttf, it is a binary file.
+assets/fonts/Comfortaa-Bold.ttf, it is a binary file.
+assets/fonts/Comfortaa-Light.ttf, it is a binary file.
+assets/fonts/Comfortaa-Regular.ttf, it is a binary file.
+assets/fonts/Roboto-Bold.ttf, it is a binary file.
+assets/fonts/Roboto-Light.ttf, it is a binary file.
+assets/fonts/Roboto-Medium.ttf, it is a binary file.
+assets/fonts/Roboto-Regular.ttf, it is a binary file.
+assets/fonts/Roboto-Thin.ttf, it is a binary file.
+assets/fonts/VIPRawyRegular.otf, it is a binary file.
+assets/icon.png, it is a binary file.
+assets/icons/brands/0.png, it is a binary file.
+assets/icons/brands/1.png, it is a binary file.
+assets/icons/brands/10.png, it is a binary file.
+assets/icons/brands/11.png, it is a binary file.
+assets/icons/brands/12.png, it is a binary file.
+assets/icons/brands/13.png, it is a binary file.
+assets/icons/brands/14.png, it is a binary file.
+assets/icons/brands/15.png, it is a binary file.
+assets/icons/brands/16.png, it is a binary file.
+assets/icons/brands/17.png, it is a binary file.
+assets/icons/brands/18.png, it is a binary file.
+assets/icons/brands/19.png, it is a binary file.
+assets/icons/brands/2.png, it is a binary file.
+assets/icons/brands/20.png, it is a binary file.
+assets/icons/brands/21.png, it is a binary file.
+assets/icons/brands/22.png, it is a binary file.
+assets/icons/brands/23.png, it is a binary file.
+assets/icons/brands/24.png, it is a binary file.
+assets/icons/brands/25.png, it is a binary file.
+assets/icons/brands/26.png, it is a binary file.
+assets/icons/brands/27.png, it is a binary file.
+assets/icons/brands/28.png, it is a binary file.
+assets/icons/brands/29.png, it is a binary file.
+assets/icons/brands/3.png, it is a binary file.
+assets/icons/brands/30.png, it is a binary file.
+assets/icons/brands/31.png, it is a binary file.
+assets/icons/brands/32.png, it is a binary file.
+assets/icons/brands/33.png, it is a binary file.
+assets/icons/brands/34.png, it is a binary file.
+assets/icons/brands/35.png, it is a binary file.
+assets/icons/brands/36.png, it is a binary file.
+assets/icons/brands/37.png, it is a binary file.
+assets/icons/brands/38.png, it is a binary file.
+assets/icons/brands/39.png, it is a binary file.
+assets/icons/brands/4.png, it is a binary file.
+assets/icons/brands/40.png, it is a binary file.
+assets/icons/brands/41.png, it is a binary file.
+assets/icons/brands/42.png, it is a binary file.
+assets/icons/brands/43.png, it is a binary file.
+assets/icons/brands/44.png, it is a binary file.
+assets/icons/brands/45.png, it is a binary file.
+assets/icons/brands/46.png, it is a binary file.
+assets/icons/brands/47.png, it is a binary file.
+assets/icons/brands/48.png, it is a binary file.
+assets/icons/brands/5.png, it is a binary file.
+assets/icons/brands/50.png, it is a binary file.
+assets/icons/brands/51.png, it is a binary file.
+assets/icons/brands/52.png, it is a binary file.
+assets/icons/brands/53.png, it is a binary file.
+assets/icons/brands/54.png, it is a binary file.
+assets/icons/brands/55.png, it is a binary file.
+assets/icons/brands/56.png, it is a binary file.
+assets/icons/brands/57.png, it is a binary file.
+assets/icons/brands/58.png, it is a binary file.
+assets/icons/brands/59.png, it is a binary file.
+assets/icons/brands/6.png, it is a binary file.
+assets/icons/brands/60.png, it is a binary file.
+assets/icons/brands/61.png, it is a binary file.
+assets/icons/brands/62.png, it is a binary file.
+assets/icons/brands/63.png, it is a binary file.
+assets/icons/brands/64.png, it is a binary file.
+assets/icons/brands/65.png, it is a binary file.
+assets/icons/brands/66.png, it is a binary file.
+assets/icons/brands/67.png, it is a binary file.
+assets/icons/brands/68.png, it is a binary file.
+assets/icons/brands/69.png, it is a binary file.
+assets/icons/brands/7.png, it is a binary file.
+assets/icons/brands/70.png, it is a binary file.
+assets/icons/brands/71.png, it is a binary file.
+assets/icons/brands/72.png, it is a binary file.
+assets/icons/brands/73.png, it is a binary file.
+assets/icons/brands/74.png, it is a binary file.
+assets/icons/brands/75.png, it is a binary file.
+assets/icons/brands/76.png, it is a binary file.
+assets/icons/brands/77.png, it is a binary file.
+assets/icons/brands/78.png, it is a binary file.
+assets/icons/brands/79.png, it is a binary file.
+assets/icons/brands/8.png, it is a binary file.
+assets/icons/brands/80.png, it is a binary file.
+assets/icons/brands/81.png, it is a binary file.
+assets/icons/brands/82.png, it is a binary file.
+assets/icons/brands/83.png, it is a binary file.
+assets/icons/brands/84.png, it is a binary file.
+assets/icons/brands/85.png, it is a binary file.
+assets/icons/brands/86.png, it is a binary file.
+assets/icons/brands/87.png, it is a binary file.
+assets/icons/brands/88.png, it is a binary file.
+assets/icons/brands/89.png, it is a binary file.
+assets/icons/brands/9.png, it is a binary file.
+assets/icons/filtericons/Bathroom.png, it is a binary file.
+assets/icons/filtericons/Brand.png, it is a binary file.
+assets/icons/filtericons/City.png, it is a binary file.
+assets/icons/filtericons/Furniture.png, it is a binary file.
+assets/icons/filtericons/Kind.png, it is a binary file.
+assets/icons/filtericons/new-old.png, it is a binary file.
+assets/icons/filtericons/room.png, it is a binary file.
+assets/icons/filtericons/Sale-Buy.png, it is a binary file.
+assets/icons/filtericons/Sale-Rent.png, it is a binary file.
+assets/icons/filtericons/Servics.png, it is a binary file.
+assets/icons/filtericons/Servics2.png, it is a binary file.
+assets/icons/filtericons/Sort.png, it is a binary file.
+assets/icons/filtericons/Subbrand.png, it is a binary file.
+assets/icons/filtericons/Year.png, it is a binary file.
+assets/icons/flag/algeria.png, it is a binary file.
+assets/icons/flag/austria.png, it is a binary file.
+assets/icons/flag/bahrain.png, it is a binary file.
+assets/icons/flag/belgium.png, it is a binary file.
+assets/icons/flag/canada.png, it is a binary file.
+assets/icons/flag/croatia.png, it is a binary file.
+assets/icons/flag/egypt.png, it is a binary file.
+assets/icons/flag/emirates.png, it is a binary file.
+assets/icons/flag/england.png, it is a binary file.
+assets/icons/flag/france.png, it is a binary file.
+assets/icons/flag/germany.png, it is a binary file.
+assets/icons/flag/greece.png, it is a binary file.
+assets/icons/flag/indonesia.png, it is a binary file.
+assets/icons/flag/iran.png, it is a binary file.
+assets/icons/flag/iraq.png, it is a binary file.
+assets/icons/flag/italy.png, it is a binary file.
+assets/icons/flag/jordan.png, it is a binary file.
+assets/icons/flag/kuwait.png, it is a binary file.
+assets/icons/flag/lebanon.png, it is a binary file.
+assets/icons/flag/morocco.png, it is a binary file.
+assets/icons/flag/qatar.png, it is a binary file.
+assets/icons/flag/russia.png, it is a binary file.
+assets/icons/flag/saudi.png, it is a binary file.
+assets/icons/flag/spain.png, it is a binary file.
+assets/icons/flag/switzerland.png, it is a binary file.
+assets/icons/flag/syria-x.png, it is a binary file.
+assets/icons/flag/syria.png, it is a binary file.
+assets/icons/flag/turkey.png, it is a binary file.
+assets/icons/flag/uk.png, it is a binary file.
+assets/icons/flag/usa.png, it is a binary file.
+assets/icons/flag/yemen.png, it is a binary file.
+assets/icons/header/bell.png, it is a binary file.
+assets/icons/header/home.png, it is a binary file.
+assets/icons/header/home1.png, it is a binary file.
+assets/icons/header/home2.png, it is a binary file.
+assets/icons/header/menu.png, it is a binary file.
+assets/icons/header/namelogo.png, it is a binary file.
+assets/icons/header/namelogo1.png, it is a binary file.
+assets/icons/header/namelogo2.png, it is a binary file.
+assets/icons/header/namelogofull.png, it is a binary file.
+assets/icons/header/namelogowhite.png, it is a binary file.
+assets/icons/header/offers.png, it is a binary file.
+assets/icons/header/offersphoto.jpg, it is a binary file.
+assets/icons/header/points-menu.png, it is a binary file.
+assets/icons/header/pointsh.png, it is a binary file.
+assets/icons/header/pointshr.png, it is a binary file.
+assets/icons/header/pointshr2.png, it is a binary file.
+assets/icons/header/pointshr3.png, it is a binary file.
+assets/icons/header/pointsv-w.png, it is a binary file.
+assets/icons/header/pointsv.png, it is a binary file.
+assets/icons/header/pointsv2.png, it is a binary file.
+assets/icons/header/search.png, it is a binary file.
+assets/icons/header/shops.jpg, it is a binary file.
+assets/icons/main/art.jpg, it is a binary file.
+assets/icons/main/books.png, it is a binary file.
+assets/icons/main/bueaty.jpg, it is a binary file.
+assets/icons/main/bueaty.png, it is a binary file.
+assets/icons/main/building-material.png, it is a binary file.
+assets/icons/main/car.jpg, it is a binary file.
+assets/icons/main/car.png, it is a binary file.
+assets/icons/main/childreen-needs.jpg, it is a binary file.
+assets/icons/main/childreen-needs.png, it is a binary file.
+assets/icons/main/clothes.jpg, it is a binary file.
+assets/icons/main/clothes.png, it is a binary file.
+assets/icons/main/Find-Jobs.jpg, it is a binary file.
+assets/icons/main/food.jpg, it is a binary file.
+assets/icons/main/food.png, it is a binary file.
+assets/icons/main/furniture.png, it is a binary file.
+assets/icons/main/health-and-sport.png, it is a binary file.
+assets/icons/main/health-and-sport2.png, it is a binary file.
+assets/icons/main/home-electronics.png, it is a binary file.
+assets/icons/main/home-electronics2.png, it is a binary file.
+assets/icons/main/home-electronics3.png, it is a binary file.
+assets/icons/main/home.png, it is a binary file.
+assets/icons/main/job.jpg, it is a binary file.
+assets/icons/main/jop.png, it is a binary file.
+assets/icons/main/load.png, it is a binary file.
+assets/icons/main/looking-for-jop.png, it is a binary file.
+assets/icons/main/menu-icon.png, it is a binary file.
+assets/icons/main/menulogo.png, it is a binary file.
+assets/icons/main/mobile.jpg, it is a binary file.
+assets/icons/main/mobile.png, it is a binary file.
+assets/icons/main/mobile2.png, it is a binary file.
+assets/icons/main/music.jpg, it is a binary file.
+assets/icons/main/music.png, it is a binary file.
+assets/icons/main/navy.jpg, it is a binary file.
+assets/icons/main/navy.png, it is a binary file.
+assets/icons/main/no.png, it is a binary file.
+assets/icons/main/offer-services.jpg, it is a binary file.
+assets/icons/main/offer-services.png, it is a binary file.
+assets/icons/main/others.png, it is a binary file.
+assets/icons/main/pc-camera.png, it is a binary file.
+assets/icons/main/pets.png, it is a binary file.
+assets/icons/main/point-menu.png, it is a binary file.
+assets/icons/main/points.png, it is a binary file.
+assets/icons/main/pointsh.png, it is a binary file.
+assets/icons/main/realestate.jpg, it is a binary file.
+assets/icons/main/realestate.png, it is a binary file.
+assets/icons/main/request-service.jpg, it is a binary file.
+assets/icons/main/requist-services.png, it is a binary file.
+assets/icons/main/search-icon.png, it is a binary file.
+assets/icons/main/searchbook.png, it is a binary file.
+assets/icons/main/spar-parts.png, it is a binary file.
+assets/icons/main/spare-part.jpg, it is a binary file.
+assets/icons/main/Up.png, it is a binary file.
+assets/icons/other/dot.png, it is a binary file.
+assets/icons/tab/barcode-out.png, it is a binary file.
+assets/icons/tab/barcode.png, it is a binary file.
+assets/icons/tab/home-out.png, it is a binary file.
+assets/icons/tab/home.png, it is a binary file.
+assets/icons/tab/notifecation-out.png, it is a binary file.
+assets/icons/tab/notifecation.png, it is a binary file.
+assets/icons/tab/person-out.png, it is a binary file.
+assets/icons/tab/person.png, it is a binary file.
+assets/icons/tab/search-out.png, it is a binary file.
+assets/icons/tab/search.png, it is a binary file.
+assets/images/categories/offers.jpg, it is a binary file.
+assets/images/categories/shops.jpg, it is a binary file.
+assets/logo.png, it is a binary file.
+assets/nicon.png, it is a binary file.
+assets/splash.png, it is a binary file.
+assets/xlang/ar.txt, code is 280, comment is 0, blank is 0.
+assets/xlang/en.txt, code is 281, comment is 0, blank is 0.
+babel.config.js, code is 6, comment is 0, blank is 0.
+languages/ar.ts, code is 600, comment is 0, blank is 26.
+languages/en.ts, code is 599, comment is 0, blank is 27.
+languages/index.ts, code is 4, comment is 0, blank is 1.
+languages/tr.ts, code is 283, comment is 0, blank is 14.
+package.json, code is 64, comment is 0, blank is 0.
+src/componenets/Add/photoPicker.tsx, code is 48, comment is 0, blank is 1.
+src/componenets/Add/PhotoView.tsx, code is 320, comment is 3, blank is 5.
+src/componenets/Avatar/Avatar.tsx, code is 23, comment is 0, blank is 2.
+src/componenets/Avatar/AvatarCircle.tsx, code is 67, comment is 1, blank is 2.
+src/componenets/Avatar/index.ts, code is 3, comment is 0, blank is 1.
+src/componenets/Camera/PhotoSlider.tsx, code is 159, comment is 0, blank is 5.
+src/componenets/category/FilterModal.tsx, code is 213, comment is 0, blank is 9.
+src/componenets/category/FilterOption.tsx, code is 83, comment is 0, blank is 2.
+src/componenets/category/Header.tsx, code is 87, comment is 0, blank is 2.
+src/componenets/category/SortView.tsx, code is 54, comment is 0, blank is 6.
+src/componenets/ChoiseScreen/Choise.tsx, code is 79, comment is 0, blank is 1.
+src/componenets/ChoiseScreen/ChoiseCategory.tsx, code is 47, comment is 1, blank is 3.
+src/componenets/Common/BackIcon.tsx, code is 29, comment is 0, blank is 2.
+src/componenets/Common/Header.tsx, code is 66, comment is 0, blank is 2.
+src/componenets/Common/HeaderNoback.tsx, code is 39, comment is 0, blank is 1.
+src/componenets/Common/HomeLoading.tsx, code is 27, comment is 0, blank is 3.
+src/componenets/Common/ImageIcon.tsx, code is 85, comment is 0, blank is 6.
+src/componenets/Common/ImageIconNotify.tsx, code is 96, comment is 0, blank is 8.
+src/componenets/Common/index.ts, code is 22, comment is 0, blank is 1.
+src/componenets/Common/Loading.tsx, code is 11, comment is 2, blank is 2.
+src/componenets/Common/LoadingSmall.tsx, code is 9, comment is 2, blank is 2.
+src/componenets/Common/LoadingTiny.tsx, code is 6, comment is 0, blank is 2.
+src/componenets/Common/Logo.tsx, code is 31, comment is 0, blank is 1.
+src/componenets/Common/MessageModal.tsx, code is 48, comment is 0, blank is 2.
+src/componenets/Common/Noresult.tsx, code is 44, comment is 0, blank is 2.
+src/componenets/Common/SpringIcon.tsx, code is 48, comment is 0, blank is 7.
+src/componenets/Common/WhitLogo.tsx, code is 31, comment is 0, blank is 1.
+src/componenets/Drawer/index.tsx, code is 588, comment is 4, blank is 29.
+src/componenets/HomeScreen/BottonNew.tsx, code is 82, comment is 2, blank is 2.
+src/componenets/HomeScreen/CategoriesModal.tsx, code is 283, comment is 0, blank is 9.
+src/componenets/HomeScreen/CategoriesScroll.tsx, code is 179, comment is 2, blank is 13.
+src/componenets/HomeScreen/CategoriesSlide.tsx, code is 267, comment is 0, blank is 8.
+src/componenets/HomeScreen/categoryButton.tsx, code is 39, comment is 0, blank is 1.
+src/componenets/HomeScreen/CategoryIcon.tsx, code is 81, comment is 0, blank is 4.
+src/componenets/HomeScreen/CategoryIconSingle.tsx, code is 97, comment is 2, blank is 3.
+src/componenets/HomeScreen/CategoryModalIcon.tsx, code is 81, comment is 2, blank is 3.
+src/componenets/HomeScreen/filters/FilterIcon.tsx, code is 17, comment is 0, blank is 1.
+src/componenets/HomeScreen/filters/FilterOption.tsx, code is 131, comment is 0, blank is 3.
+src/componenets/HomeScreen/filters/FilterSelect.tsx, code is 250, comment is 1, blank is 8.
+src/componenets/HomeScreen/FollowModal.tsx, code is 263, comment is 1, blank is 10.
+src/componenets/HomeScreen/HeaderFilter.tsx, code is 922, comment is 8, blank is 7.
+src/componenets/HomeScreen/HomeDrawer.tsx, code is 464, comment is 36, blank is 26.
+src/componenets/HomeScreen/HomeHeader.tsx, code is 142, comment is 2, blank is 7.
+src/componenets/HomeScreen/index.ts, code is 2, comment is 0, blank is 1.
+src/componenets/HomeScreen/OffersIcon.tsx, code is 56, comment is 0, blank is 2.
+src/componenets/HomeScreen/PhotoSliderHome.tsx, code is 156, comment is 38, blank is 7.
+src/componenets/HomeScreen/SearchBox.tsx, code is 186, comment is 0, blank is 5.
+src/componenets/HomeScreen/SearchHeader.tsx, code is 61, comment is 0, blank is 4.
+src/componenets/index.ts, code is 57, comment is 0, blank is 1.
+src/componenets/ItemScreen/BodyView.tsx, code is 68, comment is 0, blank is 1.
+src/componenets/ItemScreen/comment/InputBar.tsx, code is 122, comment is 3, blank is 6.
+src/componenets/ItemScreen/comment/InputBarOld.tsx, code is 79, comment is 0, blank is 6.
+src/componenets/ItemScreen/comment/ItemComment.tsx, code is 79, comment is 0, blank is 6.
+src/componenets/ItemScreen/comment/ListComments.tsx, code is 40, comment is 0, blank is 2.
+src/componenets/ItemScreen/comment/MessageBubble.tsx, code is 215, comment is 2, blank is 3.
+src/componenets/ItemScreen/FullTimeView.tsx, code is 48, comment is 0, blank is 3.
+src/componenets/ItemScreen/getproperties.ts, code is 49, comment is 1, blank is 1.
+src/componenets/ItemScreen/index.ts, code is 23, comment is 0, blank is 0.
+src/componenets/ItemScreen/ItemHeader.tsx, code is 70, comment is 0, blank is 2.
+src/componenets/ItemScreen/ItemView.tsx, code is 974, comment is 2, blank is 36.
+src/componenets/ItemScreen/MenuIconHeader.tsx, code is 32, comment is 0, blank is 1.
+src/componenets/ItemScreen/PhotoSlider.tsx, code is 129, comment is 0, blank is 4.
+src/componenets/ItemScreen/PriceView.tsx, code is 110, comment is 0, blank is 2.
+src/componenets/ItemScreen/Properties.tsx, code is 66, comment is 0, blank is 2.
+src/componenets/ItemView/BodyView.tsx, code is 30, comment is 1, blank is 1.
+src/componenets/ItemView/Comments.tsx, code is 406, comment is 1, blank is 19.
+src/componenets/ItemView/CommentsModal.tsx, code is 0, comment is 0, blank is 0.
+src/componenets/ItemView/Details.tsx, code is 80, comment is 0, blank is 3.
+src/componenets/ItemView/FullTimeView.tsx, code is 48, comment is 0, blank is 3.
+src/componenets/ItemView/index.tsx, code is 487, comment is 1, blank is 15.
+src/componenets/ItemView/MenuIcon.tsx, code is 40, comment is 0, blank is 1.
+src/componenets/ItemView/PostImage.tsx, code is 29, comment is 0, blank is 0.
+src/componenets/ItemView/PriceView.tsx, code is 82, comment is 0, blank is 2.
+src/componenets/ItemView/Properties.tsx, code is 61, comment is 2, blank is 2.
+src/componenets/ItemViewOffer/index.tsx, code is 131, comment is 18, blank is 6.
+src/componenets/ItemViewOffer/MenuIcon.tsx, code is 40, comment is 0, blank is 1.
+src/componenets/ItemViewOffer/PostImage.tsx, code is 29, comment is 0, blank is 0.
+src/componenets/ItemViewSmall/index.tsx, code is 170, comment is 0, blank is 7.
+src/componenets/ItemViewSmall/MenuIcon.tsx, code is 39, comment is 0, blank is 1.
+src/componenets/ItemViewSmall/PostImage.tsx, code is 29, comment is 0, blank is 0.
+src/componenets/LoadScreen/Choise.tsx, code is 37, comment is 0, blank is 1.
+src/componenets/Menu/Edit.tsx, code is 942, comment is 2, blank is 32.
+src/componenets/Menu/index.tsx, code is 6, comment is 0, blank is 1.
+src/componenets/Menu/Menu.tsx, code is 109, comment is 3, blank is 2.
+src/componenets/Menu/MenuOptions.tsx, code is 74, comment is 1, blank is 2.
+src/componenets/Menu/OfferAdChoise.tsx, code is 139, comment is 1, blank is 6.
+src/componenets/Menu/PhotoModal.tsx, code is 54, comment is 9, blank is 2.
+src/componenets/Menu/Report.tsx, code is 276, comment is 0, blank is 12.
+src/componenets/NotificationScreen/item.tsx, code is 115, comment is 0, blank is 4.
+src/componenets/NotificationScreen/NotificationModal.tsx, code is 137, comment is 1, blank is 6.
+src/componenets/OffersScreen/index.ts, code is 2, comment is 0, blank is 0.
+src/componenets/OffersScreen/OfferPhoto.tsx, code is 90, comment is 0, blank is 0.
+src/componenets/OffersScreen/OffersSlider.tsx, code is 146, comment is 0, blank is 6.
+src/componenets/ProfileScreen/BranchesMap.tsx, code is 438, comment is 1, blank is 17.
+src/componenets/ProfileScreen/BranchesModal.tsx, code is 65, comment is 0, blank is 3.
+src/componenets/ProfileScreen/Map.tsx, code is 187, comment is 3, blank is 10.
+src/componenets/ProfileScreen/MapModal.tsx, code is 75, comment is 0, blank is 4.
+src/componenets/ProfileScreen/Maps.tsx, code is 209, comment is 0, blank is 12.
+src/componenets/Search/CategoryView.tsx, code is 15, comment is 0, blank is 2.
+src/componenets/Search/Choise.tsx, code is 69, comment is 1, blank is 1.
+src/componenets/Search/ChoiseCategory.tsx, code is 61, comment is 0, blank is 3.
+src/componenets/Search/index.ts, code is 3, comment is 0, blank is 1.
+src/componenets/Search/ItemViewSearch.tsx, code is 157, comment is 1, blank is 6.
+src/componenets/Search/PostImage.tsx, code is 28, comment is 0, blank is 0.
+src/componenets/Search/ResultView.tsx, code is 209, comment is 1, blank is 8.
+src/componenets/ShopsScreen/index.tsx, code is 98, comment is 0, blank is 2.
+src/componenets/User/AuthRequire.tsx, code is 60, comment is 0, blank is 2.
+src/componenets/User/index.tsx, code is 94, comment is 0, blank is 4.
+src/componenets/User/User.tsx, code is 61, comment is 1, blank is 3.
+src/constants/brands.ts, code is 936, comment is 0, blank is 2.
+src/constants/colors.ts, code is 71, comment is 0, blank is 3.
+src/constants/common.ts, code is 1, comment is 0, blank is 0.
+src/constants/image.ts, code is 3, comment is 0, blank is 1.
+src/constants/index.ts, code is 20, comment is 0, blank is 0.
+src/constants/login.ts, code is 2, comment is 0, blank is 0.
+src/constants/secrets.ts, code is 8, comment is 0, blank is 0.
+src/constants/telecode.ts, code is 227, comment is 0, blank is 0.
+src/constants/units.ts, code is 34, comment is 0, blank is 1.
+src/graphql/apollo.ts, code is 68, comment is 8, blank is 8.
+src/graphql/index.ts, code is 2, comment is 0, blank is 1.
+src/graphql/mutation/addAvatar.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/addClassified.ts, code is 110, comment is 0, blank is 1.
+src/graphql/mutation/addUniqueName.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/control/blockControlUser.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/control/publishControlPost.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/control/unblockControlUser.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/control/unpublishControlPost.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/createComment.ts, code is 30, comment is 0, blank is 1.
+src/graphql/mutation/createNotification.ts, code is 22, comment is 0, blank is 1.
+src/graphql/mutation/createReport.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/deleteComment.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/deletePost.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/dislikePost.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/editClassifieds.ts, code is 100, comment is 0, blank is 1.
+src/graphql/mutation/favoritePost.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/getMyCountry.ts, code is 9, comment is 0, blank is 1.
+src/graphql/mutation/isUniqueName.ts, code is 6, comment is 0, blank is 1.
+src/graphql/mutation/likePost.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/logoutFromAll.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/me.ts, code is 52, comment is 0, blank is 1.
+src/graphql/mutation/notificationSub.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/refreshToken.ts, code is 9, comment is 0, blank is 1.
+src/graphql/mutation/showMyContact.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/smsLoginWithCode.ts, code is 60, comment is 0, blank is 1.
+src/graphql/mutation/smsLoginWithPhone.ts, code is 55, comment is 0, blank is 1.
+src/graphql/mutation/smsRequestCode.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/unFavoritePost.ts, code is 10, comment is 0, blank is 1.
+src/graphql/mutation/updateMyQty.ts, code is 15, comment is 0, blank is 1.
+src/graphql/mutation/updatePost.ts, code is 94, comment is 0, blank is 1.
+src/graphql/mutation/updateProfile.ts, code is 83, comment is 0, blank is 1.
+src/graphql/mutation/upgradeToStore.ts, code is 83, comment is 0, blank is 1.
+src/graphql/query/getCategoryPosts.ts, code is 165, comment is 0, blank is 3.
+src/graphql/query/getControlPosts.ts, code is 125, comment is 0, blank is 3.
+src/graphql/query/getMyFavoritePosts.ts, code is 60, comment is 0, blank is 1.
+src/graphql/query/getMyNotifications.ts, code is 16, comment is 0, blank is 1.
+src/graphql/query/getMyPosts.ts, code is 121, comment is 0, blank is 3.
+src/graphql/query/getPost.ts, code is 62, comment is 0, blank is 1.
+src/graphql/query/getPostComments.ts, code is 35, comment is 0, blank is 1.
+src/graphql/query/getShops.ts, code is 37, comment is 0, blank is 1.
+src/graphql/query/getShopsWithOffers.ts, code is 69, comment is 0, blank is 1.
+src/graphql/query/getTimeLine.ts, code is 169, comment is 0, blank is 3.
+src/graphql/query/getUser.ts, code is 44, comment is 0, blank is 1.
+src/graphql/query/getUserPosts.ts, code is 122, comment is 0, blank is 3.
+src/graphql/query/search.ts, code is 119, comment is 0, blank is 3.
+src/graphql/subscription/commentAdded.ts, code is 35, comment is 0, blank is 1.
+src/index.tsx, code is 43, comment is 0, blank is 4.
+src/lib/android/PickerAndroid.tsx, code is 74, comment is 0, blank is 5.
+src/lib/elements/AutoInput.tsx, code is 50, comment is 0, blank is 7.
+src/lib/elements/Button.tsx, code is 40, comment is 0, blank is 2.
+src/lib/elements/CheckBox.tsx, code is 98, comment is 0, blank is 5.
+src/lib/elements/Comment.tsx, code is 37, comment is 0, blank is 3.
+src/lib/elements/Common/ErrorMessage.tsx, code is 13, comment is 0, blank is 2.
+src/lib/elements/Common/index.ts, code is 2, comment is 0, blank is 1.
+src/lib/elements/Common/LoadingView.tsx, code is 20, comment is 0, blank is 1.
+src/lib/elements/CountDown.tsx, code is 31, comment is 0, blank is 3.
+src/lib/elements/CountDownTimer.tsx, code is 104, comment is 0, blank is 7.
+src/lib/elements/FloatButton/ImageIcon.tsx, code is 25, comment is 0, blank is 2.
+src/lib/elements/FloatButton/index.tsx, code is 31, comment is 0, blank is 1.
+src/lib/elements/Group.tsx, code is 39, comment is 0, blank is 1.
+src/lib/elements/Input.tsx, code is 54, comment is 0, blank is 3.
+src/lib/elements/InputCode.tsx, code is 59, comment is 1, blank is 3.
+src/lib/elements/InputEmail.tsx, code is 63, comment is 3, blank is 3.
+src/lib/elements/InputName.tsx, code is 126, comment is 1, blank is 7.
+src/lib/elements/InputPhone.tsx, code is 87, comment is 4, blank is 5.
+src/lib/elements/KeyboardSpacer.tsx, code is 118, comment is 8, blank is 13.
+src/lib/elements/Logo.tsx, code is 17, comment is 0, blank is 3.
+src/lib/elements/Message.tsx, code is 112, comment is 0, blank is 2.
+src/lib/elements/Photo.tsx, code is 32, comment is 0, blank is 0.
+src/lib/elements/RadioButton.tsx, code is 47, comment is 0, blank is 3.
+src/lib/elements/Select/index.tsx, code is 263, comment is 1, blank is 8.
+src/lib/elements/Select/Option.tsx, code is 92, comment is 0, blank is 3.
+src/lib/elements/SelectDate.tsx, code is 100, comment is 0, blank is 3.
+src/lib/elements/Title.tsx, code is 29, comment is 0, blank is 2.
+src/lib/index.ts, code is 42, comment is 0, blank is 1.
+src/lib/ios/Picker.tsx, code is 76, comment is 0, blank is 5.
+src/lib/ios/Slider.tsx, code is 15, comment is 0, blank is 2.
+src/lib/ios/Switch.tsx, code is 103, comment is 0, blank is 6.
+src/load/fonts.ts, code is 12, comment is 0, blank is 1.
+src/load/icons.ts, code is 185, comment is 0, blank is 6.
+src/load/images.ts, code is 196, comment is 2, blank is 13.
+src/load/index.ts, code is 5, comment is 0, blank is 1.
+src/load/language.ts, code is 11, comment is 0, blank is 1.
+src/navigation/App/AppNavigation.tsx, code is 14, comment is 0, blank is 1.
+src/navigation/App/AppTabNavigation.tsx, code is 264, comment is 12, blank is 8.
+src/navigation/App/appTabStacks/HomeStack.tsx, code is 263, comment is 1, blank is 7.
+src/navigation/App/appTabStacks/index.ts, code is 5, comment is 0, blank is 1.
+src/navigation/App/appTabStacks/NotificationStack.tsx, code is 70, comment is 1, blank is 1.
+src/navigation/App/appTabStacks/ProfileStack.tsx, code is 96, comment is 1, blank is 3.
+src/navigation/App/appTabStacks/SearchStack.tsx, code is 71, comment is 1, blank is 3.
+src/navigation/Control/ControlStack.tsx, code is 48, comment is 0, blank is 0.
+src/navigation/index.ts, code is 10, comment is 0, blank is 2.
+src/navigation/Load/LoadNavigation.tsx, code is 10, comment is 0, blank is 1.
+src/screens/App/add/AddCarScreen.tsx, code is 736, comment is 0, blank is 27.
+src/screens/App/add/AddClassifiedScreen.tsx, code is 742, comment is 0, blank is 32.
+src/screens/App/add/AddJobScreen.tsx, code is 568, comment is 0, blank is 24.
+src/screens/App/add/AddOfferScreen.tsx, code is 542, comment is 0, blank is 27.
+src/screens/App/add/AddPartsScreen.tsx, code is 676, comment is 0, blank is 25.
+src/screens/App/add/AddRealEstateScreen.tsx, code is 703, comment is 0, blank is 26.
+src/screens/App/add/AddServiceScreen.tsx, code is 523, comment is 0, blank is 22.
+src/screens/App/CameraScreen.tsx, code is 480, comment is 4, blank is 23.
+src/screens/App/CategoryScreen.1.tsx, code is 489, comment is 6, blank is 19.
+src/screens/App/CategoryScreen.tsx, code is 852, comment is 0, blank is 32.
+src/screens/App/ChoiseScreen.tsx, code is 8, comment is 0, blank is 2.
+src/screens/App/ContactScreen.tsx, code is 101, comment is 0, blank is 6.
+src/screens/App/HomeScreen.1.tsx, code is 652, comment is 5, blank is 33.
+src/screens/App/HomeScreen.tsx, code is 977, comment is 9, blank is 44.
+src/screens/App/ItemScreen.tsx, code is 181, comment is 0, blank is 6.
+src/screens/App/NotificationsScreen.tsx, code is 151, comment is 1, blank is 8.
+src/screens/App/OffersScreen.tsx, code is 170, comment is 1, blank is 9.
+src/screens/App/SearchScreen.tsx, code is 80, comment is 0, blank is 6.
+src/screens/App/ShopsScreen.tsx, code is 78, comment is 7, blank is 4.
+src/screens/App/user/EditProfileScreen.tsx, code is 593, comment is 0, blank is 24.
+src/screens/App/user/MyFavScreen.tsx, code is 268, comment is 0, blank is 12.
+src/screens/App/user/MyProfileScreen.tsx, code is 825, comment is 5, blank is 28.
+src/screens/App/user/ProfileScreen.tsx, code is 835, comment is 4, blank is 32.
+src/screens/App/user/UpgradeToStore.tsx, code is 557, comment is 2, blank is 18.
+src/screens/Auth/CodeScreen.tsx, code is 443, comment is 1, blank is 15.
+src/screens/Auth/PhoneScreen.tsx, code is 512, comment is 3, blank is 17.
+src/screens/Control/ControlFilterScroll.tsx, code is 52, comment is 0, blank is 7.
+src/screens/Control/ControlScreen.tsx, code is 210, comment is 0, blank is 13.
+src/screens/Control/filters/FilterOption.tsx, code is 62, comment is 0, blank is 1.
+src/screens/Control/filters/FilterSelect.tsx, code is 180, comment is 0, blank is 6.
+src/screens/Control/HeaderFilter.tsx, code is 139, comment is 0, blank is 6.
+src/screens/Control/index.ts, code is 2, comment is 0, blank is 1.
+src/screens/Control/ItemViewSmall/index.tsx, code is 170, comment is 0, blank is 7.
+src/screens/Control/ItemViewSmall/MenuIcon.tsx, code is 39, comment is 0, blank is 1.
+src/screens/Control/ItemViewSmall/PostImage.tsx, code is 29, comment is 0, blank is 0.
+src/screens/Control/menu/Menu.tsx, code is 83, comment is 0, blank is 5.
+src/screens/Control/menu/MenuOptions.tsx, code is 78, comment is 0, blank is 2.
+src/screens/index.ts, code is 52, comment is 0, blank is 1.
+src/screens/Load/LoadScreen.tsx, code is 93, comment is 3, blank is 6.
+src/store/actions/globActions.ts, code is 107, comment is 0, blank is 7.
+src/store/actions/postActions.ts, code is 29, comment is 0, blank is 2.
+src/store/actions/userAtions.ts, code is 98, comment is 0, blank is 1.
+src/store/getStore.ts, code is 19, comment is 0, blank is 3.
+src/store/index.ts, code is 53, comment is 3, blank is 6.
+src/store/reducers/globReducer.ts, code is 161, comment is 0, blank is 6.
+src/store/reducers/index.ts, code is 10, comment is 0, blank is 1.
+src/store/reducers/postReducer.ts, code is 37, comment is 0, blank is 3.
+src/store/reducers/userReducer.ts, code is 148, comment is 0, blank is 2.
+src/store/types/index.ts, code is 34, comment is 0, blank is 0.
+src/utils/apollo/buckets.ts, code is 356, comment is 0, blank is 5.
+src/utils/apollo/fetchMore.ts, code is 311, comment is 4, blank is 24.
+src/utils/apollo/index.ts, code is 22, comment is 0, blank is 1.
+src/utils/apollo/menu.ts, code is 106, comment is 1, blank is 1.
+src/utils/array/index.ts, code is 11, comment is 0, blank is 3.
+src/utils/bottomDrawar/index.tsx, code is 139, comment is 36, blank is 24.
+src/utils/bottomDrawar/styles.ts, code is 20, comment is 0, blank is 3.
+src/utils/calendar/period.tsx, code is 145, comment is 2, blank is 7.
+src/utils/calendar/single.tsx, code is 61, comment is 0, blank is 5.
+src/utils/call/getPureNumber.ts, code is 16, comment is 1, blank is 3.
+src/utils/call/index.ts, code is 3, comment is 0, blank is 1.
+src/utils/call/makeCall.ts, code is 35, comment is 0, blank is 8.
+src/utils/camera/index.tsx, code is 41, comment is 0, blank is 6.
+src/utils/color/index.tsx, code is 114, comment is 0, blank is 9.
+src/utils/common/arabic.ts, code is 4, comment is 0, blank is 0.
+src/utils/common/color.ts, code is 8, comment is 0, blank is 1.
+src/utils/common/general.ts, code is 3, comment is 0, blank is 0.
+src/utils/common/getCountryCode.ts, code is 69, comment is 0, blank is 4.
+src/utils/common/getCurrency.ts, code is 13, comment is 0, blank is 1.
+src/utils/common/getDate.ts, code is 40, comment is 0, blank is 4.
+src/utils/common/getlang.ts, code is 46, comment is 0, blank is 3.
+src/utils/common/index.ts, code is 39, comment is 0, blank is 1.
+src/utils/common/orientation.tsx, code is 60, comment is 0, blank is 1.
+src/utils/common/parseJwt.ts, code is 44, comment is 0, blank is 10.
+src/utils/common/setTimeout.tsx, code is 14, comment is 0, blank is 2.
+src/utils/common/stylesheet.ts, code is 12, comment is 0, blank is 2.
+src/utils/common/zoomView.tsx, code is 115, comment is 6, blank is 11.
+src/utils/date/index.ts, code is 22, comment is 0, blank is 3.
+src/utils/image/browse/browseImage/ImageBrowser.tsx, code is 153, comment is 5, blank is 11.
+src/utils/image/browse/browseImage/ImageTile.tsx, code is 47, comment is 0, blank is 1.
+src/utils/image/browse/ImageModal.tsx, code is 34, comment is 0, blank is 4.
+src/utils/image/browse/ImagePicker.tsx, code is 73, comment is 0, blank is 7.
+src/utils/image/common/flipImage.ts, code is 4, comment is 0, blank is 1.
+src/utils/image/index.ts, code is 24, comment is 0, blank is 1.
+src/utils/image/Progressive/index.tsx, code is 49, comment is 0, blank is 3.
+src/utils/image/upload/index.ts, code is 132, comment is 2, blank is 8.
+src/utils/image/viewer/image-viewer.component.tsx, code is 572, comment is 87, blank is 77.
+src/utils/image/viewer/image-viewer.style.ts, code is 115, comment is 1, blank is 2.
+src/utils/image/viewer/image-viewer.type.ts, code is 107, comment is 145, blank is 40.
+src/utils/image/viewer/image-zoom.component.tsx, code is 527, comment is 122, blank is 87.
+src/utils/image/viewer/image-zoom.style.ts, code is 10, comment is 1, blank is 2.
+src/utils/image/viewer/image-zoom.type.ts, code is 62, comment is 95, blank is 31.
+src/utils/image/viewer/index.ts, code is 4, comment is 0, blank is 1.
+src/utils/index.ts, code is 135, comment is 0, blank is 0.
+src/utils/interval/getDateDistance.ts, code is 22, comment is 2, blank is 4.
+src/utils/interval/getSecondsDistance.ts, code is 18, comment is 2, blank is 1.
+src/utils/interval/getSendSmsInterval.ts, code is 35, comment is 6, blank is 3.
+src/utils/interval/index.ts, code is 5, comment is 0, blank is 1.
+src/utils/interval/notExpire.ts, code is 5, comment is 0, blank is 0.
+src/utils/loading/BollIndicator.tsx, code is 81, comment is 0, blank is 16.
+src/utils/loading/index.tsx, code is 60, comment is 0, blank is 10.
+src/utils/loading/Indicator.tsx, code is 89, comment is 0, blank is 26.
+src/utils/loading/PulseIndicator.tsx, code is 67, comment is 0, blank is 12.
+src/utils/loading/small.tsx, code is 59, comment is 1, blank is 10.
+src/utils/location/addLocation.tsx, code is 196, comment is 0, blank is 11.
+src/utils/location/distance.ts, code is 42, comment is 46, blank is 8.
+src/utils/location/drive.tsx, code is 81, comment is 0, blank is 4.
+src/utils/location/getUserLocation.tsx, code is 42, comment is 0, blank is 4.
+src/utils/location/index.tsx, code is 4, comment is 0, blank is 1.
+src/utils/location/itemLocation.tsx, code is 95, comment is 3, blank is 5.
+src/utils/location/link.tsx, code is 136, comment is 0, blank is 4.
+src/utils/location/LinkMap.tsx, code is 44, comment is 1, blank is 4.
+src/utils/location/MultiLocations.tsx, code is 365, comment is 16, blank is 15.
+src/utils/location/userLocation.tsx, code is 88, comment is 4, blank is 7.
+src/utils/message/Button.tsx, code is 41, comment is 0, blank is 2.
+src/utils/message/index.tsx, code is 126, comment is 0, blank is 2.
+src/utils/message/LoadingModal.tsx, code is 50, comment is 0, blank is 3.
+src/utils/message/MessageAlert.tsx, code is 104, comment is 0, blank is 4.
+src/utils/notifications/index.ts, code is 15, comment is 0, blank is 1.
+src/utils/payment/index.tsx, code is 27, comment is 0, blank is 2.
+src/utils/payment/stripe.tsx, code is 91, comment is 0, blank is 4.
+src/utils/platform/device.tsx, code is 27, comment is 0, blank is 6.
+src/utils/platform/iphonex.tsx, code is 11, comment is 0, blank is 4.
+src/utils/scroll/index.tsx, code is 509, comment is 20, blank is 35.
+src/utils/search/index.tsx, code is 6, comment is 0, blank is 0.
+src/utils/sensor/accelerometer.tsx, code is 79, comment is 3, blank is 7.
+src/utils/sensor/gyroscope.tsx, code is 99, comment is 0, blank is 13.
+src/utils/sensor/index.tsx, code is 12, comment is 0, blank is 3.
+src/utils/sensor/orientation.tsx, code is 51, comment is 0, blank is 7.
+src/utils/share/index.tsx, code is 28, comment is 0, blank is 2.
+src/utils/share/template.ts, code is 14, comment is 0, blank is 2.
+src/utils/since/constant.ts, code is 29, comment is 2, blank is 7.
+src/utils/since/fromNowAr.ts, code is 74, comment is 1, blank is 3.
+src/utils/since/fromNowEn.ts, code is 74, comment is 0, blank is 2.
+src/utils/since/index.ts, code is 13, comment is 0, blank is 2.
+src/utils/uuid/index.ts, code is 2, comment is 0, blank is 1.
+src/utils/uuid/uuidv4.ts, code is 33, comment is 0, blank is 1.
+tsconfig.json, code is 12, comment is 45, blank is 6.
+tslint.json, code is 19, comment is 0, blank is 0.
+types.d.ts, code is 15, comment is 0, blank is 0.
+===============================================================================

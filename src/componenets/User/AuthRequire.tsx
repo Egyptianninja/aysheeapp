@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-export const AuthRequire = ({ navigation, origin }: any) => {
+export const AuthRequire = ({ navigation, origin, words }: any) => {
   return (
     <View
       style={{
@@ -25,9 +25,7 @@ export const AuthRequire = ({ navigation, origin }: any) => {
       >
         <Ionicons name="md-person" size={110} color="#fff" />
       </View>
-      <Text style={{ marginTop: 40, color: '#777' }}>
-        Please login to your accout
-      </Text>
+      <Text style={{ marginTop: 40, color: '#777' }}>{words.pleaselogin}</Text>
 
       <TouchableOpacity
         onPress={() =>
@@ -54,7 +52,7 @@ export const AuthRequire = ({ navigation, origin }: any) => {
         }}
       >
         <Text style={{ color: '#7678ED', fontSize: 16 }}>
-          continue to login
+          {words.continuetologin}
         </Text>
       </TouchableOpacity>
     </View>

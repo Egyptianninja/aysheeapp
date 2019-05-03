@@ -67,7 +67,8 @@ const Header = ({ navigation, title, showFilterModal }: any) => {
           top: isIphoneX() ? 42 : Platform.OS === 'android' ? 22 : 18,
           alignItems: 'center',
           padding: 5,
-          paddingLeft: 20,
+          paddingLeft: rtlos() === 3 ? undefined : 20,
+          paddingRight: rtlos() === 3 ? 20 : undefined,
           zIndex: 120
         }}
       >

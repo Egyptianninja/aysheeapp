@@ -1,0 +1,3873 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "/Users/emad/Projects/ayshee/app/ayshee",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2019-05-02 22:28:51",
+            "filesum": 603,
+            "codesum": 44524,
+            "commentsum": 928,
+            "blanksum": 2125,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": ".expo/packager-info.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": ".expo/settings.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 7,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".watchmanconfig"
+                },
+                {
+                    "blank": 4,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "app.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "App.tsx"
+                },
+                {
+                    "filename": "assets/fonts/Cairo-Black.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Cairo-Bold.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Cairo-Light.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Cairo-Regular.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Comfortaa-Bold.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Comfortaa-Light.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Comfortaa-Regular.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Roboto-Bold.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Roboto-Light.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Roboto-Medium.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Roboto-Regular.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/Roboto-Thin.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/fonts/VIPRawyRegular.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/0.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/10.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/11.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/12.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/13.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/14.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/15.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/16.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/17.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/18.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/19.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/20.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/21.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/22.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/23.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/24.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/25.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/26.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/27.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/28.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/29.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/30.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/31.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/32.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/33.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/34.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/35.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/36.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/37.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/38.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/39.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/40.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/41.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/42.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/43.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/44.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/45.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/46.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/47.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/48.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/5.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/50.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/51.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/52.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/53.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/54.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/55.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/56.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/57.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/58.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/59.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/6.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/60.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/61.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/62.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/63.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/64.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/65.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/66.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/67.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/68.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/69.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/7.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/70.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/71.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/72.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/73.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/74.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/75.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/76.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/77.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/78.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/79.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/8.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/80.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/81.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/82.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/83.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/84.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/85.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/86.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/87.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/88.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/89.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/brands/9.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Bathroom.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Brand.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/City.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Furniture.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Kind.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/new-old.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/room.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Sale-Buy.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Sale-Rent.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Servics.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Servics2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Sort.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Subbrand.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/filtericons/Year.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/algeria.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/austria.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/bahrain.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/belgium.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/canada.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/croatia.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/egypt.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/emirates.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/england.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/france.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/germany.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/greece.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/indonesia.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/iran.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/iraq.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/italy.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/jordan.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/kuwait.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/lebanon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/morocco.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/qatar.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/russia.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/saudi.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/spain.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/switzerland.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/syria-x.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/syria.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/turkey.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/uk.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/usa.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/flag/yemen.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/bell.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/home.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/home1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/home2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/menu.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/namelogo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/namelogo1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/namelogo2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/namelogofull.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/namelogowhite.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/offers.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/offersphoto.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/points-menu.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/pointsh.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/pointshr.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/pointshr2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/pointshr3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/pointsv-w.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/pointsv.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/pointsv2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/search.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/header/shops.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/art.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/books.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/bueaty.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/bueaty.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/building-material.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/car.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/car.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/childreen-needs.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/childreen-needs.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/clothes.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/clothes.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/Find-Jobs.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/food.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/food.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/furniture.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/health-and-sport.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/health-and-sport2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/home-electronics.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/home-electronics2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/home-electronics3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/home.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/job.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/jop.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/load.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/looking-for-jop.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/menu-icon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/menulogo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/mobile.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/mobile.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/mobile2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/music.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/music.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/navy.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/navy.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/no.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/offer-services.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/offer-services.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/others.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/pc-camera.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/pets.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/point-menu.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/points.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/pointsh.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/realestate.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/realestate.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/request-service.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/requist-services.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/search-icon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/searchbook.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/spar-parts.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/spare-part.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/main/Up.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/other/dot.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/barcode-out.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/barcode.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/home-out.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/home.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/notifecation-out.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/notifecation.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/person-out.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/person.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/search-out.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/icons/tab/search.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/images/categories/offers.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/images/categories/shops.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/nicon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets/splash.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 280,
+                    "comment": 0,
+                    "filename": "assets/xlang/ar.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 281,
+                    "comment": 0,
+                    "filename": "assets/xlang/en.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "babel.config.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 600,
+                    "comment": 0,
+                    "filename": "languages/ar.ts"
+                },
+                {
+                    "blank": 27,
+                    "code": 599,
+                    "comment": 0,
+                    "filename": "languages/en.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "languages/index.ts"
+                },
+                {
+                    "blank": 14,
+                    "code": 283,
+                    "comment": 0,
+                    "filename": "languages/tr.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 1,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/componenets/Add/photoPicker.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 320,
+                    "comment": 3,
+                    "filename": "src/componenets/Add/PhotoView.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src/componenets/Avatar/Avatar.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 67,
+                    "comment": 1,
+                    "filename": "src/componenets/Avatar/AvatarCircle.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/componenets/Avatar/index.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 159,
+                    "comment": 0,
+                    "filename": "src/componenets/Camera/PhotoSlider.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 213,
+                    "comment": 0,
+                    "filename": "src/componenets/category/FilterModal.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 83,
+                    "comment": 0,
+                    "filename": "src/componenets/category/FilterOption.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 87,
+                    "comment": 0,
+                    "filename": "src/componenets/category/Header.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src/componenets/category/SortView.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "src/componenets/ChoiseScreen/Choise.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 47,
+                    "comment": 1,
+                    "filename": "src/componenets/ChoiseScreen/ChoiseCategory.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/BackIcon.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/Header.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/HeaderNoback.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/HomeLoading.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 85,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/ImageIcon.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 96,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/ImageIconNotify.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/index.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 11,
+                    "comment": 2,
+                    "filename": "src/componenets/Common/Loading.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 2,
+                    "filename": "src/componenets/Common/LoadingSmall.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/LoadingTiny.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/Logo.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/MessageModal.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/Noresult.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/SpringIcon.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src/componenets/Common/WhitLogo.tsx"
+                },
+                {
+                    "blank": 29,
+                    "code": 588,
+                    "comment": 4,
+                    "filename": "src/componenets/Drawer/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 82,
+                    "comment": 2,
+                    "filename": "src/componenets/HomeScreen/BottonNew.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 283,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/CategoriesModal.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 179,
+                    "comment": 2,
+                    "filename": "src/componenets/HomeScreen/CategoriesScroll.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 267,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/CategoriesSlide.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/categoryButton.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/CategoryIcon.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 97,
+                    "comment": 2,
+                    "filename": "src/componenets/HomeScreen/CategoryIconSingle.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 81,
+                    "comment": 2,
+                    "filename": "src/componenets/HomeScreen/CategoryModalIcon.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/filters/FilterIcon.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 131,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/filters/FilterOption.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 250,
+                    "comment": 1,
+                    "filename": "src/componenets/HomeScreen/filters/FilterSelect.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 263,
+                    "comment": 1,
+                    "filename": "src/componenets/HomeScreen/FollowModal.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 922,
+                    "comment": 8,
+                    "filename": "src/componenets/HomeScreen/HeaderFilter.tsx"
+                },
+                {
+                    "blank": 26,
+                    "code": 464,
+                    "comment": 36,
+                    "filename": "src/componenets/HomeScreen/HomeDrawer.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 142,
+                    "comment": 2,
+                    "filename": "src/componenets/HomeScreen/HomeHeader.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/index.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/OffersIcon.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 156,
+                    "comment": 38,
+                    "filename": "src/componenets/HomeScreen/PhotoSliderHome.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 186,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/SearchBox.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "src/componenets/HomeScreen/SearchHeader.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "src/componenets/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/BodyView.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 122,
+                    "comment": 3,
+                    "filename": "src/componenets/ItemScreen/comment/InputBar.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/comment/InputBarOld.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/comment/ItemComment.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/comment/ListComments.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 215,
+                    "comment": 2,
+                    "filename": "src/componenets/ItemScreen/comment/MessageBubble.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/FullTimeView.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 49,
+                    "comment": 1,
+                    "filename": "src/componenets/ItemScreen/getproperties.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/index.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/ItemHeader.tsx"
+                },
+                {
+                    "blank": 36,
+                    "code": 974,
+                    "comment": 2,
+                    "filename": "src/componenets/ItemScreen/ItemView.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/MenuIconHeader.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/PhotoSlider.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 110,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/PriceView.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemScreen/Properties.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 30,
+                    "comment": 1,
+                    "filename": "src/componenets/ItemView/BodyView.tsx"
+                },
+                {
+                    "blank": 19,
+                    "code": 406,
+                    "comment": 1,
+                    "filename": "src/componenets/ItemView/Comments.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemView/CommentsModal.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 80,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemView/Details.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemView/FullTimeView.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 487,
+                    "comment": 1,
+                    "filename": "src/componenets/ItemView/index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemView/MenuIcon.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemView/PostImage.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 82,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemView/PriceView.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 61,
+                    "comment": 2,
+                    "filename": "src/componenets/ItemView/Properties.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 131,
+                    "comment": 18,
+                    "filename": "src/componenets/ItemViewOffer/index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemViewOffer/MenuIcon.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemViewOffer/PostImage.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 170,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemViewSmall/index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemViewSmall/MenuIcon.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/componenets/ItemViewSmall/PostImage.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src/componenets/LoadScreen/Choise.tsx"
+                },
+                {
+                    "blank": 32,
+                    "code": 942,
+                    "comment": 2,
+                    "filename": "src/componenets/Menu/Edit.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/componenets/Menu/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 109,
+                    "comment": 3,
+                    "filename": "src/componenets/Menu/Menu.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 74,
+                    "comment": 1,
+                    "filename": "src/componenets/Menu/MenuOptions.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 139,
+                    "comment": 1,
+                    "filename": "src/componenets/Menu/OfferAdChoise.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 54,
+                    "comment": 9,
+                    "filename": "src/componenets/Menu/PhotoModal.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 276,
+                    "comment": 0,
+                    "filename": "src/componenets/Menu/Report.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 115,
+                    "comment": 0,
+                    "filename": "src/componenets/NotificationScreen/item.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 137,
+                    "comment": 1,
+                    "filename": "src/componenets/NotificationScreen/NotificationModal.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/componenets/OffersScreen/index.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 90,
+                    "comment": 0,
+                    "filename": "src/componenets/OffersScreen/OfferPhoto.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 146,
+                    "comment": 0,
+                    "filename": "src/componenets/OffersScreen/OffersSlider.tsx"
+                },
+                {
+                    "blank": 17,
+                    "code": 438,
+                    "comment": 1,
+                    "filename": "src/componenets/ProfileScreen/BranchesMap.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 65,
+                    "comment": 0,
+                    "filename": "src/componenets/ProfileScreen/BranchesModal.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 187,
+                    "comment": 3,
+                    "filename": "src/componenets/ProfileScreen/Map.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "src/componenets/ProfileScreen/MapModal.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 209,
+                    "comment": 0,
+                    "filename": "src/componenets/ProfileScreen/Maps.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src/componenets/Search/CategoryView.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 69,
+                    "comment": 1,
+                    "filename": "src/componenets/Search/Choise.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "src/componenets/Search/ChoiseCategory.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/componenets/Search/index.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 157,
+                    "comment": 1,
+                    "filename": "src/componenets/Search/ItemViewSearch.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src/componenets/Search/PostImage.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 209,
+                    "comment": 1,
+                    "filename": "src/componenets/Search/ResultView.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 98,
+                    "comment": 0,
+                    "filename": "src/componenets/ShopsScreen/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "src/componenets/User/AuthRequire.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 94,
+                    "comment": 0,
+                    "filename": "src/componenets/User/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 61,
+                    "comment": 1,
+                    "filename": "src/componenets/User/User.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 936,
+                    "comment": 0,
+                    "filename": "src/constants/brands.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "src/constants/colors.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src/constants/common.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/constants/image.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/constants/index.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/constants/login.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src/constants/secrets.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 227,
+                    "comment": 0,
+                    "filename": "src/constants/telecode.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/constants/units.ts"
+                },
+                {
+                    "blank": 8,
+                    "code": 68,
+                    "comment": 8,
+                    "filename": "src/graphql/apollo.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/graphql/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/addAvatar.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 110,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/addClassified.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/addUniqueName.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/control/blockControlUser.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/control/publishControlPost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/control/unblockControlUser.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/control/unpublishControlPost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/createComment.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/createNotification.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/createReport.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/deleteComment.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/deletePost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/dislikePost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 100,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/editClassifieds.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/favoritePost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/getMyCountry.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/isUniqueName.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/likePost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/logoutFromAll.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/me.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/notificationSub.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/refreshToken.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/showMyContact.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/smsLoginWithCode.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/smsLoginWithPhone.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/smsRequestCode.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/unFavoritePost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/updateMyQty.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 94,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/updatePost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 83,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/updateProfile.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 83,
+                    "comment": 0,
+                    "filename": "src/graphql/mutation/upgradeToStore.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 165,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getCategoryPosts.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 125,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getControlPosts.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getMyFavoritePosts.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getMyNotifications.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 121,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getMyPosts.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getPost.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getPostComments.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getShops.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getShopsWithOffers.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 169,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getTimeLine.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getUser.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 122,
+                    "comment": 0,
+                    "filename": "src/graphql/query/getUserPosts.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 119,
+                    "comment": 0,
+                    "filename": "src/graphql/query/search.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "src/graphql/subscription/commentAdded.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "src/index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 74,
+                    "comment": 0,
+                    "filename": "src/lib/android/PickerAndroid.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 50,
+                    "comment": 0,
+                    "filename": "src/lib/elements/AutoInput.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Button.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 98,
+                    "comment": 0,
+                    "filename": "src/lib/elements/CheckBox.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Comment.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Common/ErrorMessage.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Common/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Common/LoadingView.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src/lib/elements/CountDown.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 104,
+                    "comment": 0,
+                    "filename": "src/lib/elements/CountDownTimer.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/lib/elements/FloatButton/ImageIcon.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src/lib/elements/FloatButton/index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Group.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Input.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 59,
+                    "comment": 1,
+                    "filename": "src/lib/elements/InputCode.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 63,
+                    "comment": 3,
+                    "filename": "src/lib/elements/InputEmail.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 126,
+                    "comment": 1,
+                    "filename": "src/lib/elements/InputName.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 87,
+                    "comment": 4,
+                    "filename": "src/lib/elements/InputPhone.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 118,
+                    "comment": 8,
+                    "filename": "src/lib/elements/KeyboardSpacer.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Logo.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 112,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Message.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Photo.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "src/lib/elements/RadioButton.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 263,
+                    "comment": 1,
+                    "filename": "src/lib/elements/Select/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 92,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Select/Option.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 100,
+                    "comment": 0,
+                    "filename": "src/lib/elements/SelectDate.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/lib/elements/Title.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "src/lib/index.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 76,
+                    "comment": 0,
+                    "filename": "src/lib/ios/Picker.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src/lib/ios/Slider.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 103,
+                    "comment": 0,
+                    "filename": "src/lib/ios/Switch.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/load/fonts.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 185,
+                    "comment": 0,
+                    "filename": "src/load/icons.ts"
+                },
+                {
+                    "blank": 13,
+                    "code": 196,
+                    "comment": 2,
+                    "filename": "src/load/images.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/load/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/load/language.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src/navigation/App/AppNavigation.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 264,
+                    "comment": 12,
+                    "filename": "src/navigation/App/AppTabNavigation.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 263,
+                    "comment": 1,
+                    "filename": "src/navigation/App/appTabStacks/HomeStack.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/navigation/App/appTabStacks/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 70,
+                    "comment": 1,
+                    "filename": "src/navigation/App/appTabStacks/NotificationStack.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 96,
+                    "comment": 1,
+                    "filename": "src/navigation/App/appTabStacks/ProfileStack.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 71,
+                    "comment": 1,
+                    "filename": "src/navigation/App/appTabStacks/SearchStack.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src/navigation/Control/ControlStack.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/navigation/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/navigation/Load/LoadNavigation.tsx"
+                },
+                {
+                    "blank": 27,
+                    "code": 736,
+                    "comment": 0,
+                    "filename": "src/screens/App/add/AddCarScreen.tsx"
+                },
+                {
+                    "blank": 32,
+                    "code": 742,
+                    "comment": 0,
+                    "filename": "src/screens/App/add/AddClassifiedScreen.tsx"
+                },
+                {
+                    "blank": 24,
+                    "code": 568,
+                    "comment": 0,
+                    "filename": "src/screens/App/add/AddJobScreen.tsx"
+                },
+                {
+                    "blank": 27,
+                    "code": 542,
+                    "comment": 0,
+                    "filename": "src/screens/App/add/AddOfferScreen.tsx"
+                },
+                {
+                    "blank": 25,
+                    "code": 676,
+                    "comment": 0,
+                    "filename": "src/screens/App/add/AddPartsScreen.tsx"
+                },
+                {
+                    "blank": 26,
+                    "code": 703,
+                    "comment": 0,
+                    "filename": "src/screens/App/add/AddRealEstateScreen.tsx"
+                },
+                {
+                    "blank": 22,
+                    "code": 523,
+                    "comment": 0,
+                    "filename": "src/screens/App/add/AddServiceScreen.tsx"
+                },
+                {
+                    "blank": 23,
+                    "code": 480,
+                    "comment": 4,
+                    "filename": "src/screens/App/CameraScreen.tsx"
+                },
+                {
+                    "blank": 19,
+                    "code": 489,
+                    "comment": 6,
+                    "filename": "src/screens/App/CategoryScreen.1.tsx"
+                },
+                {
+                    "blank": 32,
+                    "code": 852,
+                    "comment": 0,
+                    "filename": "src/screens/App/CategoryScreen.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src/screens/App/ChoiseScreen.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "src/screens/App/ContactScreen.tsx"
+                },
+                {
+                    "blank": 33,
+                    "code": 652,
+                    "comment": 5,
+                    "filename": "src/screens/App/HomeScreen.1.tsx"
+                },
+                {
+                    "blank": 44,
+                    "code": 977,
+                    "comment": 9,
+                    "filename": "src/screens/App/HomeScreen.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 181,
+                    "comment": 0,
+                    "filename": "src/screens/App/ItemScreen.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 151,
+                    "comment": 1,
+                    "filename": "src/screens/App/NotificationsScreen.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 170,
+                    "comment": 1,
+                    "filename": "src/screens/App/OffersScreen.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 80,
+                    "comment": 0,
+                    "filename": "src/screens/App/SearchScreen.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 78,
+                    "comment": 7,
+                    "filename": "src/screens/App/ShopsScreen.tsx"
+                },
+                {
+                    "blank": 24,
+                    "code": 593,
+                    "comment": 0,
+                    "filename": "src/screens/App/user/EditProfileScreen.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 268,
+                    "comment": 0,
+                    "filename": "src/screens/App/user/MyFavScreen.tsx"
+                },
+                {
+                    "blank": 28,
+                    "code": 825,
+                    "comment": 5,
+                    "filename": "src/screens/App/user/MyProfileScreen.tsx"
+                },
+                {
+                    "blank": 32,
+                    "code": 835,
+                    "comment": 4,
+                    "filename": "src/screens/App/user/ProfileScreen.tsx"
+                },
+                {
+                    "blank": 18,
+                    "code": 557,
+                    "comment": 2,
+                    "filename": "src/screens/App/user/UpgradeToStore.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 443,
+                    "comment": 1,
+                    "filename": "src/screens/Auth/CodeScreen.tsx"
+                },
+                {
+                    "blank": 17,
+                    "code": 512,
+                    "comment": 3,
+                    "filename": "src/screens/Auth/PhoneScreen.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "src/screens/Control/ControlFilterScroll.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 210,
+                    "comment": 0,
+                    "filename": "src/screens/Control/ControlScreen.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "src/screens/Control/filters/FilterOption.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 180,
+                    "comment": 0,
+                    "filename": "src/screens/Control/filters/FilterSelect.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 139,
+                    "comment": 0,
+                    "filename": "src/screens/Control/HeaderFilter.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/screens/Control/index.ts"
+                },
+                {
+                    "blank": 7,
+                    "code": 170,
+                    "comment": 0,
+                    "filename": "src/screens/Control/ItemViewSmall/index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "src/screens/Control/ItemViewSmall/MenuIcon.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/screens/Control/ItemViewSmall/PostImage.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 83,
+                    "comment": 0,
+                    "filename": "src/screens/Control/menu/Menu.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 78,
+                    "comment": 0,
+                    "filename": "src/screens/Control/menu/MenuOptions.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "src/screens/index.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 93,
+                    "comment": 3,
+                    "filename": "src/screens/Load/LoadScreen.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 107,
+                    "comment": 0,
+                    "filename": "src/store/actions/globActions.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/store/actions/postActions.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 98,
+                    "comment": 0,
+                    "filename": "src/store/actions/userAtions.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "src/store/getStore.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 53,
+                    "comment": 3,
+                    "filename": "src/store/index.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 161,
+                    "comment": 0,
+                    "filename": "src/store/reducers/globReducer.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/store/reducers/index.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src/store/reducers/postReducer.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 148,
+                    "comment": 0,
+                    "filename": "src/store/reducers/userReducer.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/store/types/index.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 356,
+                    "comment": 0,
+                    "filename": "src/utils/apollo/buckets.ts"
+                },
+                {
+                    "blank": 24,
+                    "code": 311,
+                    "comment": 4,
+                    "filename": "src/utils/apollo/fetchMore.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/utils/apollo/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 106,
+                    "comment": 1,
+                    "filename": "src/utils/apollo/menu.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/utils/array/index.ts"
+                },
+                {
+                    "blank": 24,
+                    "code": 139,
+                    "comment": 36,
+                    "filename": "src/utils/bottomDrawar/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src/utils/bottomDrawar/styles.ts"
+                },
+                {
+                    "blank": 7,
+                    "code": 145,
+                    "comment": 2,
+                    "filename": "src/utils/calendar/period.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "src/utils/calendar/single.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 16,
+                    "comment": 1,
+                    "filename": "src/utils/call/getPureNumber.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/utils/call/index.ts"
+                },
+                {
+                    "blank": 8,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "src/utils/call/makeCall.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src/utils/camera/index.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 114,
+                    "comment": 0,
+                    "filename": "src/utils/color/index.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/utils/common/arabic.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src/utils/common/color.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/utils/common/general.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "src/utils/common/getCountryCode.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/utils/common/getCurrency.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/utils/common/getDate.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "src/utils/common/getlang.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "src/utils/common/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "src/utils/common/orientation.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src/utils/common/parseJwt.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src/utils/common/setTimeout.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/utils/common/stylesheet.ts"
+                },
+                {
+                    "blank": 11,
+                    "code": 115,
+                    "comment": 6,
+                    "filename": "src/utils/common/zoomView.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/utils/date/index.ts"
+                },
+                {
+                    "blank": 11,
+                    "code": 153,
+                    "comment": 5,
+                    "filename": "src/utils/image/browse/browseImage/ImageBrowser.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "src/utils/image/browse/browseImage/ImageTile.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src/utils/image/browse/ImageModal.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "src/utils/image/browse/ImagePicker.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/utils/image/common/flipImage.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "src/utils/image/index.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "src/utils/image/Progressive/index.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 132,
+                    "comment": 2,
+                    "filename": "src/utils/image/upload/index.ts"
+                },
+                {
+                    "blank": 77,
+                    "code": 572,
+                    "comment": 87,
+                    "filename": "src/utils/image/viewer/image-viewer.component.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 115,
+                    "comment": 1,
+                    "filename": "src/utils/image/viewer/image-viewer.style.ts"
+                },
+                {
+                    "blank": 40,
+                    "code": 107,
+                    "comment": 145,
+                    "filename": "src/utils/image/viewer/image-viewer.type.ts"
+                },
+                {
+                    "blank": 87,
+                    "code": 527,
+                    "comment": 122,
+                    "filename": "src/utils/image/viewer/image-zoom.component.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 1,
+                    "filename": "src/utils/image/viewer/image-zoom.style.ts"
+                },
+                {
+                    "blank": 31,
+                    "code": 62,
+                    "comment": 95,
+                    "filename": "src/utils/image/viewer/image-zoom.type.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/utils/image/viewer/index.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 135,
+                    "comment": 0,
+                    "filename": "src/utils/index.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 22,
+                    "comment": 2,
+                    "filename": "src/utils/interval/getDateDistance.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 2,
+                    "filename": "src/utils/interval/getSecondsDistance.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 35,
+                    "comment": 6,
+                    "filename": "src/utils/interval/getSendSmsInterval.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/utils/interval/index.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src/utils/interval/notExpire.ts"
+                },
+                {
+                    "blank": 16,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "src/utils/loading/BollIndicator.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "src/utils/loading/index.tsx"
+                },
+                {
+                    "blank": 26,
+                    "code": 89,
+                    "comment": 0,
+                    "filename": "src/utils/loading/Indicator.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "src/utils/loading/PulseIndicator.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 59,
+                    "comment": 1,
+                    "filename": "src/utils/loading/small.tsx"
+                },
+                {
+                    "blank": 11,
+                    "code": 196,
+                    "comment": 0,
+                    "filename": "src/utils/location/addLocation.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 42,
+                    "comment": 46,
+                    "filename": "src/utils/location/distance.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "src/utils/location/drive.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "src/utils/location/getUserLocation.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/utils/location/index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 95,
+                    "comment": 3,
+                    "filename": "src/utils/location/itemLocation.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 136,
+                    "comment": 0,
+                    "filename": "src/utils/location/link.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 44,
+                    "comment": 1,
+                    "filename": "src/utils/location/LinkMap.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 365,
+                    "comment": 16,
+                    "filename": "src/utils/location/MultiLocations.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 88,
+                    "comment": 4,
+                    "filename": "src/utils/location/userLocation.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src/utils/message/Button.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 126,
+                    "comment": 0,
+                    "filename": "src/utils/message/index.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 50,
+                    "comment": 0,
+                    "filename": "src/utils/message/LoadingModal.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 104,
+                    "comment": 0,
+                    "filename": "src/utils/message/MessageAlert.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src/utils/notifications/index.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src/utils/payment/index.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 91,
+                    "comment": 0,
+                    "filename": "src/utils/payment/stripe.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src/utils/platform/device.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/utils/platform/iphonex.tsx"
+                },
+                {
+                    "blank": 35,
+                    "code": 509,
+                    "comment": 20,
+                    "filename": "src/utils/scroll/index.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/utils/search/index.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 79,
+                    "comment": 3,
+                    "filename": "src/utils/sensor/accelerometer.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 99,
+                    "comment": 0,
+                    "filename": "src/utils/sensor/gyroscope.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/utils/sensor/index.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "src/utils/sensor/orientation.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src/utils/share/index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src/utils/share/template.ts"
+                },
+                {
+                    "blank": 7,
+                    "code": 29,
+                    "comment": 2,
+                    "filename": "src/utils/since/constant.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 74,
+                    "comment": 1,
+                    "filename": "src/utils/since/fromNowAr.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 74,
+                    "comment": 0,
+                    "filename": "src/utils/since/fromNowEn.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/utils/since/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src/utils/uuid/index.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src/utils/uuid/uuidv4.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 12,
+                    "comment": 45,
+                    "filename": "tsconfig.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "tslint.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "types.d.ts"
+                }
+            ]
+        }
+    ]
+}
