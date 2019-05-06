@@ -1,20 +1,14 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { DotIndicator } from '../../utils';
-import { Constants } from 'expo';
 
-const HomeLoading = ({ categoryId }: any) => {
-  const isfilter = categoryId;
-
+const HomeLoading = () => {
   return (
     <View
       style={{
-        position: 'absolute',
-        top: isfilter ? 100 : Constants.statusBarHeight + 80,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        zIndex: 100,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#fff'
       }}
     >

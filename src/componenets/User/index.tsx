@@ -20,8 +20,10 @@ export const renderUser = ({
         alignItems: 'center',
         backgroundColor: '#f1f1f1',
         padding: 10,
-        borderBottomLeftRadius: 35,
-        borderTopLeftRadius: 35
+        borderBottomLeftRadius: rtlos() === 3 ? undefined : 35,
+        borderTopLeftRadius: rtlos() === 3 ? undefined : 35,
+        borderBottomRightRadius: rtlos() === 3 ? 35 : undefined,
+        borderTopRightRadius: rtlos() === 3 ? 35 : undefined
       }}
     >
       <View style={{ flex: 2, flexDirection: ardroid ? 'row-reverse' : 'row' }}>

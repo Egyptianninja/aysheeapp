@@ -11,11 +11,17 @@ import SpringIcon from '../../componenets/Common/SpringIcon';
 export default class ItemViewSmall extends React.PureComponent<any, any> {
   state = {
     viewDetails: false,
-    postLikes: 0
+    postLikes: 0,
+    like: false,
+    fav: false
   };
 
   componentDidMount() {
-    this.setState({ postLikes: this.props.post.likes });
+    this.setState({
+      postLikes: this.props.post.likes,
+      like: this.props.likes.includes(this.props.post.id),
+      fav: this.props.favs.includes(this.props.post.id)
+    });
   }
 
   getTags = (data: any) => {
@@ -151,8 +157,11 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     // TODO: change to location
     const location = post.location;
     const locations = post.locations;
-    const liked = likes.includes(post.id);
-    const faved = favs.includes(post.id);
+    // const liked = likes.includes(post.id);
+    const liked = this.state.like;
+    const faved = this.state.fav;
+
+    // const faved = favs.includes(post.id);
 
     const dist =
       locSort && post.sort && post.sort.length > 0
@@ -161,7 +170,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     return (
       <View
         style={{
-          flex: 1,
+          // flex: 1,
           marginBottom: 8,
           backgroundColor: '#fff'
         }}
@@ -262,6 +271,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
           >
             <TouchableOpacity
               onPress={() => {
+                this.setState({ like: !this.state.like });
                 addLike(post.id);
                 if (liked) {
                   this.setState({ postLikes: this.state.postLikes - 1 });
@@ -279,6 +289,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                   });
                 }
               }}
+              hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
             >
               <SpringIcon
                 icon="heart"
@@ -301,7 +312,10 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 {this.state.postLikes}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => showCommentsModal(post)}>
+            <TouchableOpacity
+              onPress={() => showCommentsModal(post)}
+              hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+            >
               <FontAwesome
                 style={{ top: -3 }}
                 name="comments-o"
@@ -320,11 +334,13 @@ ${post.body}`;
                 const url = post.uri ? post.uri : '';
                 await onShareSimple({ message, url });
               }}
+              hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
             >
               <FontAwesome name="share-square-o" size={24} color="#bbb" />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
+                this.setState({ fav: !this.state.fav });
                 addFav(post.id);
                 saveFav(post);
                 if (isAuthenticated) {
@@ -343,6 +359,7 @@ ${post.body}`;
                   }
                 }
               }}
+              hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
             >
               <SpringIcon
                 icon="bookmark"

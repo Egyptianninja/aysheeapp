@@ -631,7 +631,7 @@ class ItemView extends React.Component<any, any> {
 
             <View
               style={{
-                flexDirection: 'row',
+                flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 paddingVertical: 10,
@@ -671,7 +671,8 @@ class ItemView extends React.Component<any, any> {
                     fontSize: 12,
                     color: '#bbb',
                     position: 'absolute',
-                    left: 26,
+                    left: rtlos() === 3 ? undefined : 26,
+                    right: rtlos() === 3 ? 26 : undefined,
                     bottom: 0
                   }}
                 >
@@ -755,7 +756,8 @@ class ItemView extends React.Component<any, any> {
                 <Text
                   style={{
                     position: 'absolute',
-                    left: 10,
+                    left: rtlos() === 3 ? undefined : 10,
+                    right: rtlos() === 3 ? 10 : undefined,
                     top: 0,
                     textAlign: 'left',
                     color: '#7678ED',

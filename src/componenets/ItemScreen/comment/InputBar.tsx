@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     borderTopColor: '#eee',
     borderTopWidth: 1,
-    flexDirection: 'row',
+    flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
     paddingLeft: 10
     // paddingVertical: 10

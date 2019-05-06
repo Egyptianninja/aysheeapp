@@ -40,7 +40,7 @@
     },
     "android": {
       "package": "com.ishee.emadjumaah",
-      "versionCode": 6
+      "versionCode": 151
     },
     "notification": {
       "icon": "./assets/nicon.png",

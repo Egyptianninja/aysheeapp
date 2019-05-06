@@ -1,6 +1,7 @@
 import { store } from './';
 
 export const user = () => store.getState().user;
+export const isAuthenticated = () => store.getState().user.isAuthenticated;
 export const languageName = () => store.getState().glob.languageName;
 export const country = () => store.getState().glob.country;
 export const code = () => store.getState().glob.code;

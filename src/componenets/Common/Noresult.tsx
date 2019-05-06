@@ -6,10 +6,10 @@ const Noresult = ({ title, isRTL, top, bgColor }: any) => (
     style={{
       flex: 1,
       marginTop: top ? top + 20 : 20,
-      backgroundColor: bgColor ? bgColor : '#fff',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      zIndex: 500
+      backgroundColor: bgColor ? bgColor : '#eee',
+      justifyContent: 'center',
+      alignItems: 'center'
+      // zIndex: 500
     }}
   >
     <View

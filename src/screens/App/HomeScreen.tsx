@@ -14,30 +14,20 @@ import {
 import { connect } from 'react-redux';
 import { HomeLoading, Noresult } from '../../componenets';
 import ItemViewSmall from '../../componenets/ItemView';
-import {
-  Edit,
-  Menu,
-  OfferAdChoise,
-  Report,
-  PhotoModal
-} from '../../componenets/Menu';
+import { PhotoModal } from '../../componenets/Menu';
 import NotificationModal from '../../componenets/NotificationScreen/NotificationModal';
-import createReport from '../../graphql/mutation/createReport';
-import deletePost from '../../graphql/mutation/deletePost';
-import editClassifieds from '../../graphql/mutation/editClassifieds';
+import getTimeLine from '../../graphql/query/getTimeLine';
+
 import favoritePost from '../../graphql/mutation/favoritePost';
 import unFavoritePost from '../../graphql/mutation/unFavoritePost';
 import notificationSub from '../../graphql/mutation/notificationSub';
 import refreshToken from '../../graphql/mutation/refreshToken';
 import createComment from '../../graphql/mutation/createComment';
 import deleteComment from '../../graphql/mutation/deleteComment';
-import getTimeLine from '../../graphql/query/getTimeLine';
 import dislikePost from '../../graphql/mutation/dislikePost';
 import likePost from '../../graphql/mutation/likePost';
 import {
   addPermission,
-  showModal,
-  hideModal,
   addNotification,
   addFav,
   saveFav,
@@ -45,23 +35,16 @@ import {
   addCategoryId
 } from '../../store/actions/globActions';
 import { delQuery, setBuckets } from '../../store/actions/postActions';
-import { updateUser } from '../../store/actions/userAtions';
 import {
   getNextPosts,
   isTablet,
-  Message,
   readyPosts,
   registerForPushNotificationsAsync,
-  handleOnMenuModal,
   getUserLocation,
   rtlos
 } from '../../utils';
-import MessageAlert from '../../utils/message/MessageAlert';
-import updateMyQty from '../../graphql/mutation/updateMyQty';
-import LoadingTiny from '../../componenets/Common/LoadingTiny';
 import MapModal from '../../componenets/ProfileScreen/MapModal';
 import Comments from '../../componenets/ItemView/Comments';
-import FollowModal from '../../componenets/HomeScreen/FollowModal';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
 
 const { width, height } = Dimensions.get('window');
@@ -89,18 +72,10 @@ class HomeScreen extends React.Component<any, any> {
     const scrollAnim = new Animated.Value(0);
     const offsetAnim = new Animated.Value(0);
     this.state = {
-      isMenuModalVisible: false,
-      isReportModalVisible: false,
-      isMessageVisible: false,
-      isEditModalVisible: false,
-      isCheckMessaheVisible: false,
-      isCategoriesModalVisible: false,
       isNotificationModalVisible: false,
-      isOfferAdChoiseModalVisible: false,
       isPhotoModalVisible: false,
       isMapModalVisible: false,
       isCommentsModalVisible: false,
-      isFollowModalVisible: false,
       photo: null,
       photos: null,
       modalPost: null,
@@ -129,12 +104,6 @@ class HomeScreen extends React.Component<any, any> {
         this.NAVBAR_HEIGHT
       )
     };
-  }
-
-  componentDidUpdate(prevProps: any) {
-    if (prevProps.isShowModal !== this.props.isShowModal) {
-      this.addItem();
-    }
   }
 
   addPushNotification = async () => {
@@ -185,7 +154,6 @@ class HomeScreen extends React.Component<any, any> {
 
     this.notify = Notifications.addListener(this.handleNotification);
     this.props.navigation.setParams({ handleHome: this.handleTop });
-    this.props.navigation.setParams({ addItem: this.addItem });
 
     if (Platform.OS === 'android') {
       Notifications.createChannelAndroidAsync('comments', {
@@ -269,75 +237,18 @@ class HomeScreen extends React.Component<any, any> {
     }
   };
 
-  showMenuModal = (post: any) => {
-    this.setState({ isMenuModalVisible: true, modalPost: post });
-  };
-  hideMenuModal = (payload?: any) => {
-    if (payload) {
-      const { menuId, postId, post } = payload;
-      this.setState({
-        isMenuModalVisible: false,
-        hideMenuData: { menuId, postId, post }
-      });
-    } else {
-      this.setState({
-        isMenuModalVisible: false,
-        hideMenuData: null
-      });
-    }
-  };
   showPhotoModal = ({ photos, photo }: any) => {
     this.setState({ isPhotoModalVisible: true, photos, photo });
   };
   hidePhotoModal = () => {
     this.setState({ isPhotoModalVisible: false, photos: null, photo: null });
   };
-  showEditModal = () => {
-    this.setState({ isEditModalVisible: true });
-  };
-  hideEditModal = () => {
-    this.setState({ isEditModalVisible: false });
-  };
-  showReportModal = () => {
-    this.setState({ isReportModalVisible: true });
-  };
-  hideReportModal = () => {
-    this.setState({ isReportModalVisible: false });
-  };
-  showMessageModal = async ({ message }: any) => {
-    await this.setState({ message });
-    this.setState({ isMessageVisible: true });
-  };
-  hideMessageModal = () => {
-    this.setState({ isMessageVisible: false, message: null });
-  };
-  showCheckMessageModal = async () => {
-    this.setState({ isCheckMessaheVisible: true });
-  };
-  hideCheckMessageModal = () => {
-    this.setState({ isCheckMessaheVisible: false });
-  };
-  onCheckMessageModalHide = () => {
-    this.showMessageModal({ message: this.props.words.addeleted });
-  };
-  showCategoriesModal = () => {
-    this.props.showModal();
-  };
-  hideCategoriesModal = () => {
-    this.props.hideModal();
-  };
+
   showNotificationModal = () => {
     this.setState({ isNotificationModalVisible: true });
   };
   hideNotificationModal = () => {
     this.setState({ isNotificationModalVisible: false });
-  };
-
-  showOfferAdChoiseModal = () => {
-    this.setState({ isOfferAdChoiseModalVisible: true });
-  };
-  hideOfferAdChoiseModal = () => {
-    this.setState({ isOfferAdChoiseModalVisible: false });
   };
 
   showMapModal = async ({ itemLocation, itemLocations, itemTitle }: any) => {
@@ -355,68 +266,10 @@ class HomeScreen extends React.Component<any, any> {
   hideCommentsModal = () => {
     this.setState({ isCommentsModalVisible: false, modalPost: null });
   };
-  showFollowModal = () => {
-    this.setState({ isFollowModalVisible: true });
-  };
-  hideFollowModal = () => {
-    this.setState({ isFollowModalVisible: false });
-  };
-
-  deletePost = async () => {
-    const res = await this.props.deletePost({
-      variables: {
-        postId: this.state.modalPost.id
-      }
-    });
-    if (res.data.deletePost.ok) {
-      this.updateItemsQty();
-    }
-    this.hideCheckMessageModal();
-  };
-  canceldeletePost = async () => {
-    this.hideCheckMessageModal();
-  };
 
   handleTop = () => {
     this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
     // this.flatListRef.scrollToOffset({ animated: true, offset: 0 });
-  };
-
-  handleHome = () => {
-    if (this.state.rest.categoryId) {
-      if (this.scrollValue > 0) {
-        this.flatListRef
-          .getNode()
-          .scrollToOffset({ offset: 0, animated: true });
-      } else {
-        this.catScrollHome();
-      }
-    } else {
-      if (this.scrollValue > 0) {
-        this.flatListRef
-          .getNode()
-          .scrollToOffset({ offset: 0, animated: true });
-      } else {
-        this.removeAllFilters();
-      }
-    }
-  };
-
-  addItem = () => {
-    if (this.props.isAuthenticated) {
-      if (this.props.user.isstore) {
-        this.showOfferAdChoiseModal();
-      } else {
-        this.props.navigation.navigate('ChoiseScreen', {
-          title: this.props.words.addnewad
-        });
-      }
-    } else {
-      this.props.navigation.navigate('PhoneScreen', {
-        add: true,
-        origin: 'home'
-      });
-    }
   };
 
   clearNotification = () => {
@@ -475,39 +328,6 @@ class HomeScreen extends React.Component<any, any> {
     this.props.navigation.navigate('ItemScreen', { post, word, lang, isRTL });
   };
 
-  updateItemsQty = (message?: any) => {
-    this.showMessageModal({ message });
-    this.timer = setTimeout(async () => {
-      const res = await this.props.updateMyQty({});
-      if (res.data.updateMyQty.ok) {
-        const { data } = res.data.updateMyQty;
-        await this.props.updateUser(data);
-      }
-    }, 2000);
-  };
-
-  handleOnMenuModalHide = async () => {
-    if (!this.state.hideMenuData || !this.state.hideMenuData.menuId) {
-      return;
-    }
-    const { menuId, postId, post } = this.state.hideMenuData;
-    handleOnMenuModal({
-      menuId,
-      postId,
-      post,
-      words: this.props.words,
-      isAuthenticated: this.props.isAuthenticated,
-      showMessageModal: this.showMessageModal,
-      favoritePost: this.props.favoritePost,
-      unFavoritePost: this.props.unFavoritePost,
-      showReportModal: this.showReportModal,
-      editClassifieds: this.props.editClassifieds,
-      updateItemsQty: this.updateItemsQty,
-      showEditModal: this.showEditModal,
-      showCheckMessageModal: this.showCheckMessageModal
-    });
-  };
-
   addOfferFilter = (value: any) => {
     const offerinrest = this.state.rest.isoffer === true;
     if (value === true) {
@@ -544,8 +364,8 @@ class HomeScreen extends React.Component<any, any> {
       >
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: rtlos() === 3 ? 'flex-end' : 'flex-start',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+            justifyContent: 'flex-start',
             alignItems: 'center',
             marginHorizontal: 10,
             flex: 1
@@ -555,8 +375,10 @@ class HomeScreen extends React.Component<any, any> {
             style={{
               paddingHorizontal: 10,
               padding: 4,
-              borderTopLeftRadius: 10,
-              borderBottomLeftRadius: 10,
+              borderTopLeftRadius: rtlos() === 3 ? undefined : 10,
+              borderBottomLeftRadius: rtlos() === 3 ? undefined : 10,
+              borderTopRightRadius: rtlos() === 3 ? 10 : undefined,
+              borderBottomRightRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
               backgroundColor: time || !near ? '#373737' : '#f9f9f9'
@@ -581,8 +403,10 @@ class HomeScreen extends React.Component<any, any> {
             style={{
               paddingHorizontal: 10,
               padding: 4,
-              borderTopRightRadius: 10,
-              borderBottomRightRadius: 10,
+              borderTopRightRadius: rtlos() === 3 ? undefined : 10,
+              borderBottomRightRadius: rtlos() === 3 ? undefined : 10,
+              borderTopLeftRadius: rtlos() === 3 ? 10 : undefined,
+              borderBottomLeftRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
               backgroundColor: near ? '#373737' : '#f9f9f9'
@@ -648,7 +472,11 @@ class HomeScreen extends React.Component<any, any> {
             return <HomeLoading />;
           }
           if (error) {
-            return <Noresult top={100} title="network error" />;
+            return <Noresult title="network error" />;
+          }
+          if (!data.getTimeLine || !data.getTimeLine.posts) {
+            refetch();
+            return <HomeLoading />;
           }
           const postsQuery =
             data.getTimeLine && data.getTimeLine.posts
@@ -668,7 +496,7 @@ class HomeScreen extends React.Component<any, any> {
               }}
               scrollEventThrottle={16}
               contentContainerStyle={{
-                paddingTop: 40,
+                paddingTop: this.NAVBAR_HEIGHT,
                 paddingBottom: 160
               }}
               onScroll={Animated.event(
@@ -693,7 +521,6 @@ class HomeScreen extends React.Component<any, any> {
                   post={item}
                   pressed={this.state.pressed}
                   navigation={this.props.navigation}
-                  showMenuModal={this.showMenuModal}
                   showCommentsModal={this.showCommentsModal}
                   showPhotoModal={this.showPhotoModal}
                   selectePost={this.selectePost}
@@ -717,24 +544,8 @@ class HomeScreen extends React.Component<any, any> {
                 />
               )}
               ListHeaderComponent={() => {
-                if (!data.getTimeLine || !data.getTimeLine.posts) {
-                  setTimeout(() => {
-                    refetch();
-                  }, 1000);
-                  return (
-                    <View
-                      style={{
-                        flex: 1,
-                        height: height - 100,
-                        width,
-                        bottom: 0
-                      }}
-                    >
-                      <HomeLoading />
-                    </View>
-                  );
-                } else if (posts.length === 0) {
-                  return <Noresult top={100} title={words.noresults} />;
+                if (posts.length === 0) {
+                  return <Noresult title={words.noresults} />;
                 } else {
                   return <View />;
                 }
@@ -764,19 +575,6 @@ class HomeScreen extends React.Component<any, any> {
       extrapolate: 'clamp'
     });
 
-    if (this.state.loading) {
-      return (
-        <React.Fragment>
-          <HomeHeader
-            showFollowModal={this.showFollowModal}
-            navigation={this.props.navigation}
-          />
-          {this.renderSubHeader()}
-          <LoadingTiny size={40} />
-        </React.Fragment>
-      );
-    }
-
     return (
       <View style={{ flex: 1, backgroundColor: '#eee' }}>
         {this.state.isNotificationModalVisible && (
@@ -790,23 +588,6 @@ class HomeScreen extends React.Component<any, any> {
             isRTL={isRTL}
           />
         )}
-        <Menu
-          post={this.state.modalPost}
-          favoritePost={this.props.favoritePost}
-          isMenuModalVisible={this.state.isMenuModalVisible}
-          hideMenuModal={this.hideMenuModal}
-          showReportModal={this.showReportModal}
-          showMessageModal={this.showMessageModal}
-          editClassifieds={this.props.editClassifieds}
-          showEditModal={this.showEditModal}
-          showCheckMessageModal={this.showCheckMessageModal}
-          handleOnMenuModalHide={this.handleOnMenuModalHide}
-          postId={postId}
-          word={words}
-          isRTL={isRTL}
-          isAuthenticated={this.props.isAuthenticated}
-          user={this.props.user}
-        />
         {this.state.modalPost && (
           <Comments
             post={this.state.modalPost}
@@ -831,73 +612,6 @@ class HomeScreen extends React.Component<any, any> {
           isPhotoModalVisible={this.state.isPhotoModalVisible}
           hidePhotoModal={this.hidePhotoModal}
         />
-        <OfferAdChoise
-          isOfferAdChoiseModalVisible={this.state.isOfferAdChoiseModalVisible}
-          hideOfferAdChoiseModal={this.hideOfferAdChoiseModal}
-          navigation={this.props.navigation}
-          word={words}
-          isRTL={isRTL}
-          user={this.props.user}
-        />
-        <FollowModal
-          isFollowModalVisible={this.state.isFollowModalVisible}
-          hideFollowModal={this.hideFollowModal}
-          word={words}
-          isRTL={isRTL}
-          user={this.props.user}
-          removeFilter={this.removeFilter}
-          addFilter={this.addFilter}
-          categories={this.props.categories}
-          addCategoryId={this.props.addCategoryId}
-          categoryIds={this.props.categoryIds}
-          addOfferFilter={this.addOfferFilter}
-          navigation={this.props.navigation}
-        />
-
-        {this.state.isEditModalVisible && (
-          <Edit
-            isEditModalVisible={this.state.isEditModalVisible}
-            editClassifieds={this.props.editClassifieds}
-            hideEditModal={this.hideEditModal}
-            showMessageModal={this.showMessageModal}
-            word={words}
-            isRTL={isRTL}
-            postId={postId}
-            post={this.state.modalPost}
-          />
-        )}
-        <Report
-          isReportModalVisible={this.state.isReportModalVisible}
-          showMessageModal={this.showMessageModal}
-          hideReportModal={this.hideReportModal}
-          createReport={this.props.createReport}
-          post={this.state.modalPost}
-          word={words}
-          isRTL={isRTL}
-        />
-        <MessageAlert
-          isMessageVisible={this.state.isMessageVisible}
-          hideMessageModal={this.hideMessageModal}
-          message={this.state.message}
-          screen={this.state.screen}
-          icon="ios-checkmark-circle"
-          isRTL={isRTL}
-          height={120}
-        />
-        <Message
-          isVisible={this.state.isCheckMessaheVisible}
-          body={words.deleteareyousure}
-          icon="ios-information-circle"
-          width={width}
-          okbtnTitle={words.yes}
-          cancelbtnTitle={words.cancel}
-          okAction={this.deletePost}
-          cancelAction={this.canceldeletePost}
-          onCheckMessageModalHide={this.onCheckMessageModalHide}
-          isRTL={isRTL}
-          iconColor="#E85255"
-          height={200}
-        />
 
         {(this.state.itemLocation || this.state.itemLocations) && (
           <MapModal
@@ -911,8 +625,16 @@ class HomeScreen extends React.Component<any, any> {
           />
         )}
         <HomeHeader
-          showFollowModal={this.showFollowModal}
           navigation={this.props.navigation}
+          word={words}
+          isRTL={isRTL}
+          user={this.props.user}
+          removeFilter={this.removeFilter}
+          addFilter={this.addFilter}
+          categories={this.props.categories}
+          addCategoryId={this.props.addCategoryId}
+          categoryIds={this.props.categoryIds}
+          addOfferFilter={this.addOfferFilter}
         />
         <Animated.View
           style={{
@@ -930,15 +652,18 @@ class HomeScreen extends React.Component<any, any> {
         >
           {this.renderSubHeader()}
         </Animated.View>
-        {this.renderTimeLineQuery({
-          variables:
-            this.props.categoryIds.length > 0
-              ? { categoryIds: this.props.categoryIds }
-              : {},
-          isRTL,
-          lang,
-          words
-        })}
+        {this.state.loading && <HomeLoading />}
+
+        {!this.state.loading &&
+          this.renderTimeLineQuery({
+            variables:
+              this.props.categoryIds.length > 0
+                ? { categoryIds: this.props.categoryIds }
+                : {},
+            isRTL,
+            lang,
+            words
+          })}
       </View>
     );
   }
@@ -953,8 +678,6 @@ const mapStateToProps = (state: any) => ({
   isAuthenticated: state.user.isAuthenticated,
   user: state.user.user,
   pushToken: state.user.pushToken,
-  query: state.post.query,
-  isShowModal: state.glob.showModal,
   likes: state.glob.likes,
   favs: state.glob.favs,
   favoorites: state.glob.favoorites,
@@ -967,10 +690,7 @@ export default connect(
     setBuckets,
     delQuery,
     addPermission,
-    showModal,
-    hideModal,
     addNotification,
-    updateUser,
     addFav,
     saveFav,
     addLike,
@@ -987,39 +707,22 @@ export default connect(
       graphql(notificationSub, {
         name: 'notificationSub'
       })(
-        graphql(deletePost, {
-          name: 'deletePost'
+        graphql(likePost, {
+          name: 'likePost'
         })(
-          graphql(editClassifieds, {
-            name: 'editClassifieds'
+          graphql(dislikePost, {
+            name: 'dislikePost'
           })(
-            graphql(createReport, {
-              name: 'createReport'
+            graphql(unFavoritePost, {
+              name: 'unFavoritePost'
             })(
-              graphql(updateMyQty, {
-                name: 'updateMyQty',
-                options: { refetchQueries: ['getUserPosts', 'getTimeLine'] }
+              graphql(createComment, {
+                name: 'createComment'
               })(
-                graphql(likePost, {
-                  name: 'likePost'
-                })(
-                  graphql(dislikePost, {
-                    name: 'dislikePost'
-                  })(
-                    graphql(unFavoritePost, {
-                      name: 'unFavoritePost'
-                    })(
-                      graphql(createComment, {
-                        name: 'createComment'
-                      })(
-                        graphql(deleteComment, {
-                          name: 'deleteComment',
-                          options: { refetchQueries: ['getPostComments'] }
-                        })(HomeScreen)
-                      )
-                    )
-                  )
-                )
+                graphql(deleteComment, {
+                  name: 'deleteComment',
+                  options: { refetchQueries: ['getPostComments'] }
+                })(HomeScreen)
               )
             )
           )

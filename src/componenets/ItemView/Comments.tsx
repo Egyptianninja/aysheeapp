@@ -375,6 +375,26 @@ class Comments extends React.Component<any, any> {
                 )}
               </Query>
             </View>
+            {!this.props.isAuthenticated && (
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.hideCommentsModal();
+                  this.props.navigation.navigate('PhoneScreen', {
+                    origin: 'post'
+                  });
+                }}
+              >
+                <Text
+                  style={{
+                    paddingHorizontal: 20,
+                    fontSize: 14,
+                    color: '#7678ED'
+                  }}
+                >
+                  login to comment
+                </Text>
+              </TouchableOpacity>
+            )}
           </ScrollView>
           {this.props.isAuthenticated && (
             <InputBar

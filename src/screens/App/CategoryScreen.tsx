@@ -405,6 +405,10 @@ class CategoryScreen extends React.Component<any, any> {
           if (error) {
             return <Noresult top={100} title="network error" />;
           }
+          if (!data.getCategoryPosts || !data.getCategoryPosts.posts) {
+            refetch();
+            return <HomeLoading />;
+          }
           const postsQuery =
             data.getCategoryPosts && data.getCategoryPosts.posts
               ? data.getCategoryPosts.posts
@@ -472,24 +476,8 @@ class CategoryScreen extends React.Component<any, any> {
                 />
               )}
               ListHeaderComponent={() => {
-                if (!data.getCategoryPosts || !data.getCategoryPosts.posts) {
-                  setTimeout(() => {
-                    refetch();
-                  }, 1000);
-                  return (
-                    <View
-                      style={{
-                        flex: 1,
-                        height: height - 100,
-                        width,
-                        bottom: 0
-                      }}
-                    >
-                      <HomeLoading />
-                    </View>
-                  );
-                } else if (posts.length === 0) {
-                  return <Noresult top={100} title={words.noresults} />;
+                if (posts.length === 0) {
+                  return <Noresult title={words.noresults} />;
                 } else {
                   return <View />;
                 }
@@ -525,8 +513,8 @@ class CategoryScreen extends React.Component<any, any> {
       >
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: rtlos() === 3 ? 'flex-end' : 'flex-start',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+            justifyContent: 'flex-start',
             alignItems: 'center',
             marginHorizontal: 10,
             flex: 1
@@ -536,8 +524,10 @@ class CategoryScreen extends React.Component<any, any> {
             style={{
               paddingHorizontal: 10,
               padding: 4,
-              borderTopLeftRadius: 10,
-              borderBottomLeftRadius: 10,
+              borderTopLeftRadius: rtlos() === 3 ? undefined : 10,
+              borderBottomLeftRadius: rtlos() === 3 ? undefined : 10,
+              borderTopRightRadius: rtlos() === 3 ? 10 : undefined,
+              borderBottomRightRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
               backgroundColor: time || (!near && !price) ? '#373737' : '#f9f9f9'
@@ -581,8 +571,10 @@ class CategoryScreen extends React.Component<any, any> {
             style={{
               paddingHorizontal: 10,
               padding: 4,
-              borderTopRightRadius: 10,
-              borderBottomRightRadius: 10,
+              borderTopRightRadius: rtlos() === 3 ? undefined : 10,
+              borderBottomRightRadius: rtlos() === 3 ? undefined : 10,
+              borderTopLeftRadius: rtlos() === 3 ? 10 : undefined,
+              borderBottomLeftRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
               backgroundColor: price ? '#373737' : '#f9f9f9'
@@ -653,20 +645,6 @@ class CategoryScreen extends React.Component<any, any> {
       outputRange: [0, -this.NAVBAR_HEIGHT],
       extrapolate: 'clamp'
     });
-
-    if (this.state.loading) {
-      return (
-        <React.Fragment>
-          <Header
-            navigation={this.props.navigation}
-            title={this.props.navigation.getParam('item').name}
-            showFilterModal={this.showFilterModal}
-          />
-          {this.renderSubHeader()}
-          <LoadingTiny size={40} />
-        </React.Fragment>
-      );
-    }
 
     return (
       <View style={{ flex: 1, backgroundColor: '#eee' }}>
@@ -799,13 +777,15 @@ class CategoryScreen extends React.Component<any, any> {
         >
           {this.renderSubHeader()}
         </Animated.View>
+        {this.state.loading && <HomeLoading />}
 
-        {this.renderCategoryQuery({
-          variables: rest,
-          lang,
-          isRTL,
-          words
-        })}
+        {!this.state.loading &&
+          this.renderCategoryQuery({
+            variables: rest,
+            lang,
+            isRTL,
+            words
+          })}
       </View>
     );
   }

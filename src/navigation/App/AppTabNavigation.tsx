@@ -71,7 +71,7 @@ if (rtlos() === 3) {
         screen: HomeStack,
         navigationOptions: ({ navigation }: any) => ({
           tabBarButtonComponent: () => {
-            return <CategoryButton />;
+            return <CategoryButton navigation={navigation} />;
           }
         })
       },
@@ -229,7 +229,7 @@ if (rtlos() === 3) {
         screen: HomeStack,
         navigationOptions: ({ navigation }: any) => ({
           tabBarButtonComponent: () => {
-            return <CategoryButton />;
+            return <CategoryButton navigation={navigation} />;
           }
         })
       },

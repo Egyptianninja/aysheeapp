@@ -5,6 +5,7 @@ import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { icons } from '../../load';
 import { rtlos, StyleSheet } from '../../utils';
+import FollowModal from './FollowModal';
 const mainmenu = icons.mainmenu.icon();
 const namelogo = icons.namelogo.icon();
 
@@ -20,7 +21,8 @@ class HomeHeader extends React.Component<any, any> {
   }
 
   state = {
-    notification: false
+    notification: false,
+    isFollowModalVisible: false
   };
   ardroid = Platform.OS === 'android' && this.props.lang === 'ar';
 
@@ -101,7 +103,7 @@ class HomeHeader extends React.Component<any, any> {
         </View>
         <View style={{ flex: 1.5 }}>
           <TouchableOpacity
-            onPress={() => this.props.showFollowModal()}
+            onPress={() => this.setState({ isFollowModalVisible: true })}
             style={{
               flex: 1,
               top: 1,
@@ -113,6 +115,20 @@ class HomeHeader extends React.Component<any, any> {
             <AntDesign name="appstore1" size={27} color="#636363" />
           </TouchableOpacity>
         </View>
+        <FollowModal
+          isFollowModalVisible={this.state.isFollowModalVisible}
+          hideFollowModal={() => this.setState({ isFollowModalVisible: false })}
+          word={this.props.words}
+          isRTL={this.props.isRTL}
+          user={this.props.user}
+          removeFilter={this.props.removeFilter}
+          addFilter={this.props.addFilter}
+          categories={this.props.categories}
+          addCategoryId={this.props.addCategoryId}
+          categoryIds={this.props.categoryIds}
+          addOfferFilter={this.props.addOfferFilter}
+          navigation={this.props.navigation}
+        />
       </View>
     );
   }
