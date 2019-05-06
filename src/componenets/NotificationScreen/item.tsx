@@ -16,7 +16,6 @@ const Item = (props: any) => {
   return (
     <View
       style={{
-        flex: 1,
         justifyContent: 'center',
         alignItems:
           rtlos() === 3 ? 'flex-start' : isRTL ? 'flex-end' : 'flex-start',

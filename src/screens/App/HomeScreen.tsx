@@ -510,7 +510,6 @@ class HomeScreen extends React.Component<any, any> {
                 { useNativeDriver: true }
               )}
               style={{ flex: 1 }}
-              showsVerticalScrollIndicator={false}
               onRefresh={() => refetch()}
               refreshing={this.state.refreshing}
               onEndReached={async () => {

@@ -92,6 +92,7 @@ class ItemView extends React.Component<any, any> {
     bottomPadding: 0,
     scrollEnabled: true,
     postLikes: 0,
+    commentsQty: 0,
     hideMenuData: {
       menuId: null,
       postId: null,
@@ -118,7 +119,10 @@ class ItemView extends React.Component<any, any> {
     );
   }
   componentDidMount() {
-    this.setState({ postLikes: this.props.post.likes });
+    this.setState({
+      postLikes: this.props.post.likes,
+      commentsQty: this.props.post.commentsQty
+    });
   }
 
   componentWillUnmount() {
@@ -676,7 +680,7 @@ class ItemView extends React.Component<any, any> {
                     bottom: 0
                   }}
                 >
-                  {this.state.postLikes}
+                  {this.state.postLikes < 1 ? '' : this.state.postLikes}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -688,6 +692,18 @@ class ItemView extends React.Component<any, any> {
                   size={27}
                   color="#bbb"
                 />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: '#bbb',
+                    position: 'absolute',
+                    left: rtlos() === 3 ? undefined : 30,
+                    right: rtlos() === 3 ? 30 : undefined,
+                    bottom: 2
+                  }}
+                >
+                  {this.state.commentsQty < 1 ? '' : this.state.commentsQty}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={async () => {

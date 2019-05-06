@@ -13,7 +13,12 @@ import {
   ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
-import { AvatarCircle, Loading, Noresult } from '../../../componenets';
+import {
+  AvatarCircle,
+  Loading,
+  Noresult,
+  HomeLoading
+} from '../../../componenets';
 import ItemViewSmall from '../../../componenets/ItemViewSmall';
 import { Edit, Menu, Report } from '../../../componenets/Menu';
 import MapModal from '../../../componenets/ProfileScreen/MapModal';
@@ -189,10 +194,14 @@ class MyProfileScreen extends React.Component<any, any> {
       >
         {({ loading, error, data, fetchMore, refetch }: any) => {
           if (loading) {
-            return <Loading />;
+            return <HomeLoading />;
           }
           if (error) {
-            return <Noresult title="error" top={HEADER_HEIGHT + 20} />;
+            return <Noresult title="network error" bgColor="#fff" />;
+          }
+          if (!data.getUserPosts || !data.getUserPosts.posts) {
+            refetch();
+            return <HomeLoading />;
           }
 
           const postsQuery =
@@ -236,24 +245,8 @@ class MyProfileScreen extends React.Component<any, any> {
                 />
               )}
               ListHeaderComponent={() => {
-                if (!data.getUserPosts || !data.getUserPosts.posts) {
-                  setTimeout(() => {
-                    refetch();
-                  }, 1000);
-                  return (
-                    <View
-                      style={{
-                        flex: 1,
-                        height: height - 100,
-                        width,
-                        bottom: 0
-                      }}
-                    >
-                      <Loading />
-                    </View>
-                  );
-                } else if (rPosts.length === 0) {
-                  return <Noresult top={20} title={words.noresults} />;
+                if (rPosts.length === 0) {
+                  return <Noresult title={words.noresults} bgColor="#fff" />;
                 } else {
                   return <View />;
                 }

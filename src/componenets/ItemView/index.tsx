@@ -12,6 +12,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
   state = {
     viewDetails: false,
     postLikes: 0,
+    commentsQty: 0,
     like: false,
     fav: false
   };
@@ -20,7 +21,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     this.setState({
       postLikes: this.props.post.likes,
       like: this.props.likes.includes(this.props.post.id),
-      fav: this.props.favs.includes(this.props.post.id)
+      fav: this.props.favs.includes(this.props.post.id),
+      commentsQty: this.props.post.commentsQty
     });
   }
 
@@ -167,6 +169,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
       locSort && post.sort && post.sort.length > 0
         ? this.getDistanceNumbers(post.sort)
         : null;
+
     return (
       <View
         style={{
@@ -301,15 +304,15 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
 
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 14,
                   color: '#bbb',
                   position: 'absolute',
-                  left: rtlos() === 3 ? undefined : 26,
-                  right: rtlos() === 3 ? 26 : undefined,
-                  bottom: 0
+                  left: rtlos() === 3 ? undefined : 28,
+                  right: rtlos() === 3 ? 28 : undefined,
+                  bottom: 2
                 }}
               >
-                {this.state.postLikes}
+                {this.state.postLikes < 1 ? '' : this.state.postLikes}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -322,6 +325,18 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 size={27}
                 color="#bbb"
               />
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: '#bbb',
+                  position: 'absolute',
+                  left: rtlos() === 3 ? undefined : 30,
+                  right: rtlos() === 3 ? 30 : undefined,
+                  bottom: 2
+                }}
+              >
+                {this.state.commentsQty < 1 ? '' : this.state.commentsQty}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={async () => {

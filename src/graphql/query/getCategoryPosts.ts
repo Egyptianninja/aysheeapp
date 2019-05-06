@@ -160,6 +160,7 @@ export default gql`
         status
         groupId
         likes
+        commentsQty
         updatedAt
       }
       error
