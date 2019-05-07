@@ -140,7 +140,7 @@ export default class Map extends React.Component<any, any> {
           ref={mapView => {
             this.map = mapView;
           }}
-          onLayout={() => this.mymarker.showCallout()}
+          onMapReady={() => this.mymarker.showCallout()}
           style={{
             flex: 1,
             width,
