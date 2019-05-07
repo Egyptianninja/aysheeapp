@@ -68,10 +68,11 @@ class HomeScreen extends React.Component<any, any> {
   subs: any;
   notify: any;
   timer: any;
+  nonNativeScroll = new Animated.Value(0);
+
   constructor(props: any) {
     super(props);
     this.getNextPosts = debounce(getNextPosts, 100);
-
     const scrollAnim = new Animated.Value(0);
     const offsetAnim = new Animated.Value(0);
     this.state = {
@@ -136,11 +137,12 @@ class HomeScreen extends React.Component<any, any> {
     this.subs = [
       this.props.navigation.addListener('didFocus', () => {
         this.addPushNotification();
-        // this.flatListRef &&
-        //   this.flatListRef.getNode().scrollToOffset({
-        //     offset: this.state.offsetAnim + 1,
-        //     animated: true
-        //   });
+
+        this.flatListRef &&
+          this.flatListRef.getNode().scrollToOffset({
+            offset: this.scrollValue + 1,
+            animated: false
+          });
       }),
       this.props.navigation.addListener('willBlur', () => {
         //
