@@ -152,6 +152,7 @@ export const readyPosts = (
     const imageHeight =
       post.photos.length > 0 ? Math.ceil(imageWidth * ratio) : imageWidth * 0.5;
     const height = Math.ceil(imageHeight) + textHeight;
+    const branch = post.branch ? post.branch.substr(27) : null;
     const {
       brand,
       subBrand,
@@ -176,7 +177,8 @@ export const readyPosts = (
       eBrand,
       kind,
       realestate,
-      service
+      service,
+      branch
     };
   });
 };

@@ -9,7 +9,9 @@ import {
   Platform,
   Text,
   TouchableOpacity,
-  Animated
+  Animated,
+  Modal,
+  Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import { HomeLoading, Noresult } from '../../componenets';
@@ -46,6 +48,7 @@ import {
 import MapModal from '../../componenets/ProfileScreen/MapModal';
 import Comments from '../../componenets/ItemView/Comments';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
+import { images } from '../../load';
 
 const { width, height } = Dimensions.get('window');
 
@@ -88,7 +91,11 @@ class HomeScreen extends React.Component<any, any> {
       itemLocation: null,
       itemLocations: null,
       loading: false,
+      modalVisible: true,
       message: null,
+      nearbyActive: false,
+      latestActive: true,
+      offersActive: false,
       scrollAnim,
       offsetAnim,
       clampedScroll: Animated.diffClamp(
@@ -347,10 +354,6 @@ class HomeScreen extends React.Component<any, any> {
 
   renderSubHeader = () => {
     const { words } = this.props;
-    const near = this.state.rest.sortType === 3;
-    const time = this.state.rest.sortType === 1;
-    const isoffer = this.state.rest.isoffer === true;
-
     return (
       <View
         style={{
@@ -381,19 +384,18 @@ class HomeScreen extends React.Component<any, any> {
               borderBottomRightRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
-              backgroundColor: time || !near ? '#373737' : '#f9f9f9'
+              backgroundColor: this.state.latestActive ? '#373737' : '#f9f9f9'
             }}
-            onPress={() =>
-              time
-                ? this.removeFilter('sortType')
-                : this.addFilter('sortType', 1)
-            }
-            disabled={time || !near}
+            onPress={() => {
+              this.setState({ latestActive: true, nearbyActive: false });
+              this.addFilter('sortType', 1);
+            }}
+            disabled={this.state.latestActive}
           >
             <Text
               style={{
                 fontSize: 13,
-                color: time || !near ? '#f9f9f9' : '#373737'
+                color: this.state.latestActive ? '#f9f9f9' : '#373737'
               }}
             >
               {words.latest}
@@ -409,16 +411,20 @@ class HomeScreen extends React.Component<any, any> {
               borderBottomLeftRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
-              backgroundColor: near ? '#373737' : '#f9f9f9'
+              backgroundColor: this.state.nearbyActive ? '#373737' : '#f9f9f9'
             }}
-            onPress={() =>
-              near
-                ? this.removeFilter('sortType')
-                : this.addFilter('sortType', 3)
-            }
-            disabled={near}
+            onPress={() => {
+              this.setState({ latestActive: false, nearbyActive: true });
+              this.addFilter('sortType', 3);
+            }}
+            disabled={this.state.nearbyActive}
           >
-            <Text style={{ fontSize: 13, color: near ? '#f9f9f9' : '#373737' }}>
+            <Text
+              style={{
+                fontSize: 13,
+                color: this.state.nearbyActive ? '#f9f9f9' : '#373737'
+              }}
+            >
               {words.nearby}
             </Text>
           </TouchableOpacity>
@@ -439,21 +445,37 @@ class HomeScreen extends React.Component<any, any> {
               marginHorizontal: 10,
               paddingHorizontal: 10,
               padding: 4,
-              backgroundColor: isoffer ? '#373737' : '#f9f9f9',
+              backgroundColor: this.state.offersActive ? '#373737' : '#f9f9f9',
               alignItems: 'center',
               justifyContent: 'center'
             }}
             // onPress={() => this.showFollowModal()}
-            onPress={() =>
-              isoffer
+            onPress={() => {
+              const act = this.state.offersActive;
+              this.setState({ offersActive: !this.state.offersActive });
+              act
                 ? this.removeFilter('isoffer')
-                : this.addFilter('isoffer', true)
-            }
+                : this.addFilter('isoffer', true);
+            }}
           >
             <Text
-              style={{ color: isoffer ? '#f9f9f9' : '#373737', fontSize: 14 }}
+              style={{
+                color: this.state.offersActive ? '#f9f9f9' : '#373737',
+                fontSize: 14
+              }}
             >
               {words.offersoly}
+            </Text>
+            <Text
+              style={{
+                position: 'absolute',
+                right: 8,
+                top: 0,
+                color: '#f9f9f9',
+                fontSize: 12
+              }}
+            >
+              x
             </Text>
           </TouchableOpacity>
         </View>
@@ -466,6 +488,7 @@ class HomeScreen extends React.Component<any, any> {
       <Query
         query={getTimeLine}
         variables={{ ...variables, ...this.state.rest }}
+        onCompleted={() => this.setState({ modalVisible: false })}
       >
         {({ loading, error, data, fetchMore, refetch }: any) => {
           if (loading) {
@@ -635,6 +658,29 @@ class HomeScreen extends React.Component<any, any> {
           categoryIds={this.props.categoryIds}
           addOfferFilter={this.addOfferFilter}
         />
+        <Modal
+          animationType="none"
+          transparent={false}
+          visible={this.state.modalVisible}
+        >
+          <View
+            style={[
+              {
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#f3f3f3'
+              }
+            ]}
+          >
+            <Image
+              source={images.load}
+              style={{ flex: 1 }}
+              resizeMode="contain"
+              fadeDuration={0}
+            />
+          </View>
+        </Modal>
         <Animated.View
           style={{
             zIndex: 100,

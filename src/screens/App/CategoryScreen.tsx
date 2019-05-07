@@ -103,6 +103,11 @@ class CategoryScreen extends React.Component<any, any> {
       query: null,
       rest: { categoryId: 1 },
       message: null,
+      latestActive: true,
+      nearbyActive: false,
+      priceActive: false,
+      offersActive: false,
+
       scrollAnim,
       offsetAnim,
       clampedScroll: Animated.diffClamp(
@@ -170,51 +175,6 @@ class CategoryScreen extends React.Component<any, any> {
   hideFilterModal = () => {
     this.setState({ isFilterModalVisible: false });
   };
-  showMenuModal = (post: any) => {
-    this.setState({ isMenuModalVisible: true, modalPost: post });
-  };
-  hideMenuModal = (payload: any) => {
-    if (payload) {
-      const { menuId, postId, post } = payload;
-      this.setState({
-        isMenuModalVisible: false,
-        hideMenuData: { menuId, postId, post }
-      });
-    } else {
-      this.setState({
-        isMenuModalVisible: false,
-        hideMenuData: null
-      });
-    }
-  };
-  showEditModal = () => {
-    this.setState({ isEditModalVisible: true });
-  };
-  hideEditModal = () => {
-    this.setState({ isEditModalVisible: false });
-  };
-  showReportModal = () => {
-    this.setState({ isReportModalVisible: true });
-  };
-  hideReportModal = () => {
-    this.setState({ isReportModalVisible: false });
-  };
-  showMessageModal = async ({ message }: any) => {
-    await this.setState({ message });
-    this.setState({ isMessageVisible: true });
-  };
-  hideMessageModal = () => {
-    this.setState({ isMessageVisible: false, message: null, screen: null });
-  };
-  showCheckMessageModal = async () => {
-    this.setState({ isCheckMessaheVisible: true });
-  };
-  hideCheckMessageModal = () => {
-    this.setState({ isCheckMessaheVisible: false });
-  };
-  onCheckMessageModalHide = () => {
-    this.showMessageModal({ message: this.props.words.addeleted });
-  };
 
   showMapModal = async () => {
     this.setState({ isMapModalVisible: true });
@@ -233,54 +193,6 @@ class CategoryScreen extends React.Component<any, any> {
   };
   hideItemMapModal = () => {
     this.setState({ isItemMapModalVisible: false, itemLocation: null });
-  };
-
-  deletePost = async () => {
-    const res = await this.props.deletePost({
-      variables: {
-        postId: this.state.modalPost.id
-      }
-    });
-    if (res.data.deletePost.ok) {
-      this.updateItemsQty();
-    }
-    this.hideCheckMessageModal();
-  };
-  canceldeletePost = async () => {
-    this.hideCheckMessageModal();
-  };
-
-  updateItemsQty = (message?: any) => {
-    this.showMessageModal({ message });
-    this.timer = setTimeout(async () => {
-      const res = await this.props.updateMyQty({});
-      if (res.data.updateMyQty.ok) {
-        const { data } = res.data.updateMyQty;
-        await this.props.updateUser(data);
-      }
-    }, 2000);
-  };
-
-  handleOnMenuModalHide = async () => {
-    if (!this.state.hideMenuData || !this.state.hideMenuData.menuId) {
-      return;
-    }
-    const { menuId, postId, post } = this.state.hideMenuData;
-    handleOnMenuModal({
-      menuId,
-      postId,
-      post,
-      words: this.props.words,
-      isAuthenticated: this.props.isAuthenticated,
-      showMessageModal: this.showMessageModal,
-      favoritePost: this.props.favoritePost,
-      unFavoritePost: this.props.unFavoritePost,
-      showReportModal: this.showReportModal,
-      editClassifieds: this.props.editClassifieds,
-      updateItemsQty: this.updateItemsQty,
-      showEditModal: this.showEditModal,
-      showCheckMessageModal: this.showCheckMessageModal
-    });
   };
 
   handleTop = () => {
@@ -452,7 +364,6 @@ class CategoryScreen extends React.Component<any, any> {
                   post={item}
                   pressed={this.state.pressed}
                   navigation={this.props.navigation}
-                  showMenuModal={this.showMenuModal}
                   showCommentsModal={this.showCommentsModal}
                   showPhotoModal={this.showPhotoModal}
                   selectePost={this.selectePost}
@@ -496,10 +407,13 @@ class CategoryScreen extends React.Component<any, any> {
 
   renderSubHeader = () => {
     const { words } = this.props;
-    const near = this.state.rest.sortType === 3;
-    const price = this.state.rest.sortType === 2;
-    const time = this.state.rest.sortType === 1;
-    const isoffer = this.state.rest.isoffer === true;
+    const {
+      latestActive,
+      nearbyActive,
+      priceActive,
+      offersActive
+    } = this.state;
+
     return (
       <View
         style={{
@@ -530,19 +444,22 @@ class CategoryScreen extends React.Component<any, any> {
               borderBottomRightRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
-              backgroundColor: time || (!near && !price) ? '#373737' : '#f9f9f9'
+              backgroundColor: latestActive ? '#373737' : '#f9f9f9'
             }}
-            onPress={() =>
-              time || (!near && !price)
-                ? this.removeFilter('sortType')
-                : this.addFilter('sortType', 1)
-            }
-            disabled={time}
+            onPress={() => {
+              this.setState({
+                latestActive: true,
+                nearbyActive: false,
+                priceActive: false
+              });
+              this.addFilter('sortType', 1);
+            }}
+            disabled={latestActive}
           >
             <Text
               style={{
                 fontSize: 13,
-                color: time || (!near && !price) ? '#f9f9f9' : '#373737'
+                color: latestActive ? '#f9f9f9' : '#373737'
               }}
             >
               {words.latest}
@@ -554,16 +471,24 @@ class CategoryScreen extends React.Component<any, any> {
               padding: 4,
               borderWidth: 1,
               borderColor: '#ccc',
-              backgroundColor: near ? '#373737' : '#f9f9f9'
+              backgroundColor: nearbyActive ? '#373737' : '#f9f9f9'
             }}
-            onPress={() =>
-              near
-                ? this.removeFilter('sortType')
-                : this.addFilter('sortType', 3)
-            }
-            disabled={near}
+            onPress={() => {
+              this.setState({
+                latestActive: false,
+                nearbyActive: true,
+                priceActive: false
+              });
+              this.addFilter('sortType', 3);
+            }}
+            disabled={nearbyActive}
           >
-            <Text style={{ fontSize: 13, color: near ? '#f9f9f9' : '#373737' }}>
+            <Text
+              style={{
+                fontSize: 13,
+                color: nearbyActive ? '#f9f9f9' : '#373737'
+              }}
+            >
               {words.nearby}
             </Text>
           </TouchableOpacity>
@@ -577,17 +502,23 @@ class CategoryScreen extends React.Component<any, any> {
               borderBottomLeftRadius: rtlos() === 3 ? 10 : undefined,
               borderWidth: 1,
               borderColor: '#ccc',
-              backgroundColor: price ? '#373737' : '#f9f9f9'
+              backgroundColor: priceActive ? '#373737' : '#f9f9f9'
             }}
-            onPress={() =>
-              price
-                ? this.removeFilter('sortType')
-                : this.addFilter('sortType', 2)
-            }
-            disabled={price}
+            onPress={() => {
+              this.setState({
+                latestActive: false,
+                nearbyActive: false,
+                priceActive: true
+              });
+              this.addFilter('sortType', 2);
+            }}
+            disabled={priceActive}
           >
             <Text
-              style={{ fontSize: 13, color: price ? '#f9f9f9' : '#373737' }}
+              style={{
+                fontSize: 13,
+                color: priceActive ? '#f9f9f9' : '#373737'
+              }}
             >
               {words.lessprice}
             </Text>
@@ -609,20 +540,36 @@ class CategoryScreen extends React.Component<any, any> {
               marginHorizontal: 10,
               paddingHorizontal: 10,
               padding: 4,
-              backgroundColor: isoffer ? '#373737' : '#f9f9f9',
+              backgroundColor: offersActive ? '#373737' : '#f9f9f9',
               alignItems: 'center',
               justifyContent: 'center'
             }}
-            onPress={() =>
-              isoffer
+            onPress={() => {
+              const act = offersActive;
+              this.setState({ offersActive: !this.state.offersActive });
+              act
                 ? this.removeFilter('isoffer')
-                : this.addFilter('isoffer', true)
-            }
+                : this.addFilter('isoffer', true);
+            }}
           >
             <Text
-              style={{ color: isoffer ? '#f9f9f9' : '#373737', fontSize: 14 }}
+              style={{
+                color: offersActive ? '#f9f9f9' : '#373737',
+                fontSize: 14
+              }}
             >
               {words.offersoly}
+            </Text>
+            <Text
+              style={{
+                position: 'absolute',
+                right: 8,
+                top: 0,
+                color: '#f9f9f9',
+                fontSize: 12
+              }}
+            >
+              x
             </Text>
           </TouchableOpacity>
         </View>
@@ -671,67 +618,7 @@ class CategoryScreen extends React.Component<any, any> {
             height={height}
           />
         )}
-        <Menu
-          post={this.state.modalPost}
-          favoritePost={this.props.favoritePost}
-          isMenuModalVisible={this.state.isMenuModalVisible}
-          hideMenuModal={this.hideMenuModal}
-          showReportModal={this.showReportModal}
-          showMessageModal={this.showMessageModal}
-          editClassifieds={this.props.editClassifieds}
-          showEditModal={this.showEditModal}
-          showCheckMessageModal={this.showCheckMessageModal}
-          handleOnMenuModalHide={this.handleOnMenuModalHide}
-          postId={postId}
-          word={words}
-          isRTL={isRTL}
-          isAuthenticated={this.props.isAuthenticated}
-          user={this.props.user}
-        />
-        {this.state.isEditModalVisible && (
-          <Edit
-            isEditModalVisible={this.state.isEditModalVisible}
-            editClassifieds={this.props.editClassifieds}
-            hideEditModal={this.hideEditModal}
-            showMessageModal={this.showMessageModal}
-            word={words}
-            isRTL={isRTL}
-            postId={postId}
-            post={this.state.modalPost}
-          />
-        )}
-        <Report
-          isReportModalVisible={this.state.isReportModalVisible}
-          showMessageModal={this.showMessageModal}
-          hideReportModal={this.hideReportModal}
-          createReport={this.props.createReport}
-          post={this.state.modalPost}
-          word={words}
-          isRTL={isRTL}
-        />
-        <MessageAlert
-          isMessageVisible={this.state.isMessageVisible}
-          hideMessageModal={this.hideMessageModal}
-          message={this.state.message}
-          screen={this.state.screen}
-          icon="ios-checkmark-circle"
-          isRTL={isRTL}
-          height={120}
-        />
-        <Message
-          isVisible={this.state.isCheckMessaheVisible}
-          onCheckMessageModalHide={this.onCheckMessageModalHide}
-          body={words.deleteareyousure}
-          icon="ios-information-circle"
-          width={width}
-          okbtnTitle={words.yes}
-          cancelbtnTitle={words.cancel}
-          okAction={this.deletePost}
-          cancelAction={this.canceldeletePost}
-          isRTL={isRTL}
-          iconColor="#E85255"
-          height={200}
-        />
+
         {this.state.modalPost && (
           <Comments
             post={this.state.modalPost}
@@ -808,10 +695,6 @@ export default connect(
   {
     setBuckets,
     delQuery,
-    addPermission,
-    showModal,
-    hideModal,
-    addNotification,
     updateUser,
     addFav,
     saveFav,

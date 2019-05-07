@@ -115,7 +115,8 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
         uri,
         uris,
         price,
-        currency
+        currency,
+        branch
       },
       word,
       navigation,
@@ -195,10 +196,22 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
                 showMapModal({
                   itemLocation: location,
                   itemLocations: locations,
-                  itemTitle: post.subTitle
+                  itemTitle: branch
                 });
               }}
             >
+              <Text
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  right: rtlos() === 3 ? 10 : undefined,
+                  left: rtlos() === 3 ? undefined : 10,
+                  fontSize: 12,
+                  color: '#999'
+                }}
+              >
+                {branch}
+              </Text>
               <FontAwesome name="map-marker" size={33} color="#777" />
 
               {dist && (
