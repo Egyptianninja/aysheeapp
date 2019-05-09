@@ -461,7 +461,7 @@ export default {
     onlineposts: 'الاعلانات المنشورة',
     offlineposts: 'الاعلانات غير المنشورة',
     replay: 'اكتب رداً',
-    moreads: 'اعلان',
+    moreads: 'اعلانات',
     favorites: 'المفضلة',
     addedtovafavorites: 'تم اضافة الاعلان الى المفضلة',
     removeedtovafavorites: 'تم ازالة الاعلان من المفضلة',
@@ -530,6 +530,7 @@ export default {
     deselectall: 'الغاء التحديد',
     continuetologin: 'تسجيل الدخول',
     pleaselogin: 'يرجى تسجيل الدخول للمتابعة',
+    more: 'اخرى',
 
     popmenu: [
       { id: 1, sort: 3, name: 'اضافة الى المفضلة' },

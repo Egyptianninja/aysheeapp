@@ -152,7 +152,9 @@ export const readyPosts = (
     const imageHeight =
       post.photos.length > 0 ? Math.ceil(imageWidth * ratio) : imageWidth * 0.5;
     const height = Math.ceil(imageHeight) + textHeight;
-    const branch = post.branch ? post.branch.substr(27) : null;
+    const isBranch = post.branch && post.branch.substring(24, 27) === '___';
+    const branch = isBranch ? post.branch.substr(27) : null;
+    const origbranch = post.branch;
     const {
       brand,
       subBrand,
@@ -178,7 +180,8 @@ export const readyPosts = (
       kind,
       realestate,
       service,
-      branch
+      branch,
+      origbranch
     };
   });
 };

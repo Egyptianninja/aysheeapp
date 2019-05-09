@@ -4,11 +4,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { rtlos, StyleSheet, getDate, onShareSimple } from '../../utils';
 import PhotoSliderHome from '../HomeScreen/PhotoSliderHome';
-import { AvatarCircle } from '../Avatar';
 import { getproperties, getJobProperties } from '../ItemScreen';
 import { Details } from './Details';
-import SpringIcon from '../../componenets/Common/SpringIcon';
-export default class ItemViewSmall extends React.PureComponent<any, any> {
+import SpringIcon from '../Common/SpringIcon';
+export default class SwiperView extends React.PureComponent<any, any> {
   state = {
     viewDetails: false,
     postLikes: 0,
@@ -41,68 +40,6 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     };
   };
 
-  renderUser = ({ user, navigation, word, time }: any) => {
-    return (
-      <View
-        style={{
-          flexDirection: rtlos() === 3 ? 'row' : 'row-reverse',
-          paddingHorizontal: 10
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('ProfileScreen', { userId: user.id, user });
-          }}
-          style={{ paddingVertical: 10 }}
-        >
-          <AvatarCircle user={user} size={44} bwidth={1} />
-        </TouchableOpacity>
-
-        <View
-          style={{
-            paddingHorizontal: 10,
-            paddingTop: 10,
-            alignItems: rtlos() === 3 ? 'flex-start' : 'flex-end'
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('ProfileScreen', { userId: user.id, user });
-            }}
-          >
-            <Text style={{ fontWeight: 'bold' }}>
-              {user.name ? user.name.substring(0, 25) : user.uniquename}{' '}
-            </Text>
-          </TouchableOpacity>
-          <Text>{user.about ? user.about.substring(0, 35) : ''}</Text>
-          <Text
-            style={{
-              fontSize: 10,
-              color: '#777'
-            }}
-          >
-            {time}
-          </Text>
-        </View>
-      </View>
-    );
-  };
-
-  getDistanceNumbers = (sort: any) => {
-    const inkm: any = Number(sort[0]).toFixed(2);
-    if (inkm > 1) {
-      return {
-        dist: inkm,
-        unit: 'km'
-      };
-    } else {
-      return {
-        dist: Math.ceil(inkm * 100) * 10,
-        unit: 'm'
-      };
-    }
-  };
-
   render() {
     const {
       post,
@@ -111,17 +48,12 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
         imageHeight,
         subTitle,
         subBody,
-        time,
         uri,
         uris,
         price,
-        currency,
-        branch,
-        origbranch
+        currency
       },
       word,
-      navigation,
-      locSort,
       showPhotoModal,
       isAuthenticated,
       isRTL,
@@ -132,11 +64,9 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
       favoritePost,
       unFavoritePost,
       selectePost,
-      showMapModal,
       saveFav,
       showCommentsModal,
-      width,
-      showBranchModal
+      width
     } = this.props;
     const pdata = getproperties(post);
     const jdata = getJobProperties(post);
@@ -149,133 +79,22 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     } = this.getTags(pdata);
 
     const ratio = imageHeight / imageWidth;
-    const fratio = ratio > 1 ? 1 : ratio;
-    const user = {
-      name: post.userName,
-      about: post.userAbout,
-      avatar: post.userAvatar,
-      uniquename: post.userUniquename,
-      id: post.userId
-    };
-    const location = post.location;
-    const locations = post.locations;
     const liked = this.state.like;
     const faved = this.state.fav;
-
-    const dist =
-      locSort && post.sort && post.sort.length > 0
-        ? this.getDistanceNumbers(post.sort)
-        : null;
-    const inneriPostsTotal = post.innerPosts ? post.innerPosts : null;
-    const qty =
-      inneriPostsTotal > 1 ? `(${inneriPostsTotal} ${word.moreads}) ` : '';
-    const branchname = branch ? branch : null;
 
     return (
       <View
         style={{
-          marginBottom: 8,
+          marginBottom: 10,
           backgroundColor: '#fff'
         }}
       >
-        {branchname && (
-          <TouchableOpacity
-            style={{
-              position: 'absolute',
-              left: 10,
-              top: 5,
-              zIndex: 100,
-              alignItems: 'center',
-              flexDirection: rtlos() === 3 ? 'row' : 'row-reverse'
-            }}
-            onPress={() => {
-              showBranchModal({ origbranch, branch });
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 12,
-                color: '#7678ED'
-              }}
-            >
-              {branchname}
-            </Text>
-            <Text
-              style={{
-                fontSize: 9,
-                color: '#777',
-                paddingHorizontal: 3
-              }}
-            >
-              {qty}
-            </Text>
-          </TouchableOpacity>
-        )}
-        <View
-          style={{
-            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row'
-          }}
-        >
-          {(location || (locations && locations.length > 0)) && (
-            <TouchableOpacity
-              style={{
-                flex: 3,
-                top: 20,
-                height: 40,
-                flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              onPress={() => {
-                showMapModal({
-                  itemLocation: location,
-                  itemLocations: locations,
-                  itemTitle: branch
-                });
-              }}
-            >
-              <FontAwesome name="map-marker" size={33} color="#777" />
-
-              {dist && (
-                <Text
-                  style={{
-                    top: 10,
-                    fontSize: 12,
-                    color: '#777',
-                    left: -2,
-                    letterSpacing: 1
-                  }}
-                >
-                  {dist.dist} {dist.unit}
-                </Text>
-              )}
-              {!dist && (
-                <Text
-                  style={{
-                    top: 10,
-                    fontSize: 10,
-                    color: '#797979',
-                    left: -2,
-                    letterSpacing: 1
-                  }}
-                >
-                  {word.location}
-                </Text>
-              )}
-            </TouchableOpacity>
-          )}
-          <View style={{ flex: 8 }}>
-            {user.uniquename &&
-              this.renderUser({ user, navigation, word, time })}
-          </View>
-        </View>
-
         <View style={styles.interContainer}>
           {uris && uris.length > 0 && (
             <PhotoSliderHome
               photos={uris}
               showPhotoModal={showPhotoModal}
-              ratio={fratio}
+              ratio={ratio}
               showModal={() => null}
             />
           )}

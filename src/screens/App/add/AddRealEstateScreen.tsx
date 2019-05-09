@@ -237,6 +237,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
         price: Number(price),
         currency: currency.name,
         groupId,
+        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,

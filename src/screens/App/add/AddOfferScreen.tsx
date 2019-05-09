@@ -28,7 +28,8 @@ import {
   pickImageWithoutUpload,
   StyleSheet,
   getOfferStatus,
-  uploadPhotos
+  uploadPhotos,
+  uuidv4
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
 import { updateUser } from '../../../store/actions/userAtions';
@@ -169,6 +170,7 @@ class AddOfferScreen extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const { title, body, startend, phone, category } = values;
     const isrtl = isArabic(title);
+    const groupId = uuidv4();
 
     const { name, about, avatar, uniquename } = this.props.user;
     const selectedBranches: any = this.state.selectedBranches;
@@ -214,6 +216,8 @@ class AddOfferScreen extends React.Component<any, any> {
         start,
         end,
         status,
+        groupId,
+        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,

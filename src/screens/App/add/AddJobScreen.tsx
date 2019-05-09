@@ -197,6 +197,7 @@ class AddJobScreen extends React.Component<any, any> {
         experience,
         salary: Number(salary),
         groupId,
+        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,

@@ -243,6 +243,7 @@ class AddClassifiedScreen extends React.Component<any, any> {
           : iswarranty,
         phone,
         groupId,
+        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,

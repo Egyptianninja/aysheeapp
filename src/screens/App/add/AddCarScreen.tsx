@@ -28,7 +28,8 @@ import {
   getPureNumber,
   isArabic,
   StyleSheet,
-  uploadPhotos
+  uploadPhotos,
+  uuidv4
 } from '../../../utils';
 import MessageAlert from '../../../utils/message/MessageAlert';
 
@@ -174,6 +175,7 @@ class AddCarScreen extends React.Component<any, any> {
   handleSubmit = async (values: any, bag: any) => {
     const { name, about, avatar, uniquename } = this.props.user;
     const selectedBranches: any = this.state.selectedBranches;
+    const groupId = uuidv4();
 
     let photos: any;
     if (this.state.images.length > 0) {
@@ -230,6 +232,8 @@ class AddCarScreen extends React.Component<any, any> {
         brand,
         subBrand: subBrand === '' ? undefined : subBrand,
         kind,
+        groupId,
+        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,

@@ -194,6 +194,7 @@ class AddServiceScreen extends React.Component<any, any> {
         phone,
         service,
         groupId,
+        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,

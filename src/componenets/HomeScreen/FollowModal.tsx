@@ -150,7 +150,6 @@ class FollowModal extends React.Component<any, any> {
         animationOut="slideOutRight"
         hideModalContentWhileAnimating={true}
         onModalHide={() => {
-          this.props.addOfferFilter(this.state.offers);
           this.props.addCategoryId(this.state.categoryIds);
         }}
         style={{ flex: 1, margin: 0 }}

@@ -228,6 +228,7 @@ class AddPartsScreen extends React.Component<any, any> {
         brand,
         subBrand: subBrand === '' ? undefined : subBrand,
         groupId,
+        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,

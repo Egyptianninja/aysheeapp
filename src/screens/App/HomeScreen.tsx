@@ -48,6 +48,7 @@ import {
 import MapModal from '../../componenets/ProfileScreen/MapModal';
 import Comments from '../../componenets/ItemView/Comments';
 import HomeHeader from '../../componenets/HomeScreen/HomeHeader';
+import BranchModal from '../../componenets/HomeScreen/BranchModal';
 import { images } from '../../load';
 
 const { width, height } = Dimensions.get('window');
@@ -94,6 +95,8 @@ class HomeScreen extends React.Component<any, any> {
       loading: false,
       modalVisible: true,
       message: null,
+      branch: null,
+      branchTitle: null,
       nearbyActive: false,
       latestActive: true,
       offersActive: false,
@@ -275,6 +278,17 @@ class HomeScreen extends React.Component<any, any> {
   hideCommentsModal = () => {
     this.setState({ isCommentsModalVisible: false, modalPost: null });
   };
+  showBranchModal = async ({ origbranch, branch }: any) => {
+    await this.setState({ branch: origbranch, branchTitle: branch });
+    this.setState({ isBranchModalVisible: true });
+  };
+  hideBranchModal = () => {
+    this.setState({
+      isBranchModalVisible: false,
+      branch: null,
+      branchTitle: null
+    });
+  };
 
   handleTop = () => {
     this.flatListRef.getNode().scrollToOffset({ offset: 0, animated: true });
@@ -442,7 +456,7 @@ class HomeScreen extends React.Component<any, any> {
             style={{
               borderRadius: 10,
               borderWidth: 1,
-              minWidth: 80,
+              minWidth: 100,
               borderColor: '#ccc',
               marginHorizontal: 10,
               paddingHorizontal: 10,
@@ -565,6 +579,7 @@ class HomeScreen extends React.Component<any, any> {
                   unFavoritePost={this.props.unFavoritePost}
                   showMapModal={this.showMapModal}
                   width={width}
+                  showBranchModal={this.showBranchModal}
                 />
               )}
               ListHeaderComponent={() => {
@@ -598,7 +613,6 @@ class HomeScreen extends React.Component<any, any> {
       outputRange: [0, -this.NAVBAR_HEIGHT],
       extrapolate: 'clamp'
     });
-
     return (
       <View style={{ flex: 1, backgroundColor: '#eee' }}>
         {this.state.isNotificationModalVisible && (
@@ -646,6 +660,34 @@ class HomeScreen extends React.Component<any, any> {
             title={this.state.itemTitle}
             width={width}
             height={height}
+          />
+        )}
+        {this.state.branch && (
+          <BranchModal
+            branch={this.state.branch}
+            branchTitle={this.state.branchTitle}
+            rest={this.state.rest}
+            hideBranchModal={this.hideBranchModal}
+            categoryIds={this.props.categoryIds}
+            isBranchModalVisible={this.state.isBranchModalVisible}
+            width={width}
+            height={height}
+            navigation={this.props.navigation}
+            words={this.props.words}
+            isRTL={isRTL}
+            lang={lang}
+            addFav={this.props.addFav}
+            addLike={this.props.addLike}
+            saveFav={this.props.saveFav}
+            likes={this.props.likes}
+            favoorites={this.props.favoorites}
+            isAuthenticated={this.props.isAuthenticated}
+            favs={this.props.favs}
+            likePost={this.props.likePost}
+            dislikePost={this.props.dislikePost}
+            favoritePost={this.props.favoritePost}
+            unFavoritePost={this.props.unFavoritePost}
+            showPhotoModal={this.showPhotoModal}
           />
         )}
         <HomeHeader

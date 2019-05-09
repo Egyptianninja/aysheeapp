@@ -1,7 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query getTimeLine(
+  query getBranchItems(
+    $branch: String!
     $query: String
     $cursor: [Float]
     $trueLocation: LocationInput
@@ -35,7 +36,8 @@ export default gql`
     $eBrandId: Int
     $bathrooms: Int
   ) {
-    getTimeLine(
+    getBranchItems(
+      branch: $branch
       query: $query
       cursor: $cursor
       trueLocation: $trueLocation
@@ -132,7 +134,6 @@ export default gql`
         year
         km
         color
-        sort
         trueLocation {
           lat
           lon
