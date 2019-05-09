@@ -1,7 +1,9 @@
 import { debounce } from 'lodash';
+import { Ionicons } from '@expo/vector-icons';
+
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import { FlatList, View, TouchableOpacity, Text } from 'react-native';
+import { FlatList, View, TouchableOpacity, Text, Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import { HomeLoading, Noresult } from '..';
 import getBranchItems from '../../graphql/query/getBranchItems';
@@ -46,26 +48,16 @@ class BranchModal extends React.Component<any, any> {
           onPress={() => this.props.hideBranchModal()}
           style={{
             position: 'absolute',
-            top: 5,
+            top: Platform.OS === 'android' ? 5 : undefined,
             left: 8,
             zIndex: 10,
             width: 32,
             height: 32,
-            borderRadius: 16,
             justifyContent: 'center',
             alignItems: 'center'
-            // backgroundColor: 'rgba(255, 255, 255, 0.1)'
           }}
         >
-          <Text
-            style={{
-              color: '#fff',
-              textAlign: 'center',
-              fontSize: 20
-            }}
-          >
-            ⤬
-          </Text>
+          <Ionicons name="ios-close" size={40} color="#fff" />
         </TouchableOpacity>
         <View
           style={{

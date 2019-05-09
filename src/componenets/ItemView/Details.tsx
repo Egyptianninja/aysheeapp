@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import FullTimeView from './FullTimeView';
 import PriceView from './PriceView';
 import BodyView from './BodyView';
 import Properties from './Properties';
-import { getDate } from '../../utils';
+import { getDate, call, rtlos } from '../../utils';
+import { code } from '../../store/getStore';
 
 export const Details = (props: any) => {
   const {
@@ -19,6 +21,8 @@ export const Details = (props: any) => {
     pdata,
     jdata
   } = props;
+  const phone = post.phone.replace(code(), '');
+  const callargs = { number: phone, prompt: false };
   return (
     <View>
       <BodyView
@@ -78,6 +82,45 @@ export const Details = (props: any) => {
           data={jdata}
         />
       )}
+      <View
+        style={{
+          flex: 1,
+          alignItems: rtlos() === 3 ? 'flex-start' : 'flex-end',
+          justifyContent: 'center',
+          paddingBottom: 10
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => call(callargs)}
+          style={{
+            width: 85,
+            height: 34,
+            borderRadius: 18,
+            justifyContent: 'center',
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            flexDirection: rtlos() === 3 ? 'row-reverse' : 'row',
+            borderWidth: 1,
+            borderColor: '#9B9CF1'
+          }}
+        >
+          <Ionicons
+            name="ios-call"
+            size={26}
+            style={{ paddingRight: 10 }}
+            color="#9B9CF1"
+          />
+
+          <Text
+            style={{
+              fontSize: 14,
+              color: '#9B9CF1'
+            }}
+          >
+            {word.calladvertiser}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

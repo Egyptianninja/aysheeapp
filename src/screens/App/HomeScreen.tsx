@@ -93,7 +93,8 @@ class HomeScreen extends React.Component<any, any> {
       itemLocation: null,
       itemLocations: null,
       loading: false,
-      modalVisible: true,
+      // modalVisible: Platform.OS === 'android' ? false : true,
+      modalVisible: false,
       message: null,
       branch: null,
       branchTitle: null,
@@ -175,6 +176,9 @@ class HomeScreen extends React.Component<any, any> {
         vibrate: [0, 250, 250, 250]
       });
     }
+    setTimeout(() => {
+      this.setState({ modalVisible: false });
+    }, 1000);
   }
 
   componentWillUnmount() {
@@ -710,7 +714,12 @@ class HomeScreen extends React.Component<any, any> {
           <View
             style={[
               {
-                flex: 1,
+                width,
+                height,
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: '#f3f3f3'

@@ -170,7 +170,7 @@ export default class SwiperView extends React.PureComponent<any, any> {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => showCommentsModal(post)}
+              onPress={() => null}
               hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
             >
               <FontAwesome
@@ -260,11 +260,7 @@ ${post.body}`;
                   justifyContent: 'space-between'
                 }}
               >
-                <TouchableOpacity
-                  onPress={() => {
-                    selectePost(post, word, this.props.lang, isRTL);
-                  }}
-                >
+                <TouchableOpacity onPress={() => null}>
                   <Text
                     style={{
                       color: '#171717',
