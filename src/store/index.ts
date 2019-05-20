@@ -30,7 +30,7 @@ if (__DEV__) {
   enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 }
 
-export const store = createStore(
+export const store: any = createStore(
   persistedReducer,
   initialState,
   enhancer(applyMiddleware(thunk))

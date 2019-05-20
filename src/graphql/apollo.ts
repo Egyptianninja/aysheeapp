@@ -19,8 +19,8 @@ import {
 // const host = 'http://192.168.100.22:4000/';
 // const uri = 'http://192.168.100.22:4000/';
 
-const host = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.host;
-const uri = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.uri;
+// const host = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.host;
+// const uri = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.uri;
 
 // const host = __DEV__ ? 'http://192.168.0.199:4000/' : secrets.host;
 // const uri = __DEV__ ? 'http://192.168.0.199:4000/' : secrets.uri;
@@ -28,8 +28,8 @@ const uri = __DEV__ ? 'http://192.168.100.22:4000/' : secrets.uri;
 // const host = __DEV__ ? 'http://172.20.10.12:4000/' : secrets.host;
 // const uri = __DEV__ ? 'http://172.20.10.12:4000/' : secrets.uri;
 
-// const host = secrets.host;
-// const uri = secrets.uri;
+const host = secrets.host;
+const uri = secrets.uri;
 
 const httpLink = createHttpLink({
   uri: host

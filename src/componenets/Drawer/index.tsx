@@ -222,7 +222,7 @@ class Drawer extends React.Component<any, any> {
           });
         }
       case 4:
-        return this.props.navigation.navigate('AddOfferScreen');
+      // return this.props.navigation.navigate('AddOfferScreen');
       case 5:
         return this.props.navigation.navigate('MyProfileScreen', {
           user: this.props.user
@@ -256,13 +256,8 @@ class Drawer extends React.Component<any, any> {
 
   renderMenu = (menus: any, lng: any) => {
     const { isAuthenticated } = this.props;
-    const isstore = isAuthenticated ? this.props.user.isstore : null;
 
-    const items = isAuthenticated
-      ? isstore
-        ? [2, 3, 4, 5, 6, 7, 8]
-        : [1, 2, 3, 5, 6, 7, 8]
-      : [0, 1, 3, 6, 7];
+    const items = isAuthenticated ? [2, 3, 5, 6, 7, 8] : [0, 3, 6, 7];
     const usermenu = menus.filter((mnu: any) => items.includes(mnu.id));
 
     return usermenu.map((menu: any) => {

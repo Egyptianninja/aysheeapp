@@ -149,7 +149,7 @@ export default class ItemViewSmall extends React.PureComponent<any, any> {
     } = this.getTags(pdata);
 
     const ratio = imageHeight / imageWidth;
-    const fratio = ratio > 1 ? 1 : ratio;
+    const fratio = ratio > 1.25 ? 1.25 : ratio;
     const user = {
       name: post.userName,
       about: post.userAbout,

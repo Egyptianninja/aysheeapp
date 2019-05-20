@@ -57,28 +57,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
     isMessageVisible: false,
     location: null,
     images: [],
-    branches: [],
-    selectedBranches: [],
     bar: 0
-  };
-
-  componentDidMount() {
-    if (this.props.user.isstore) {
-      this.setState({
-        branches: this.props.user.branches
-      });
-    }
-  }
-  selectBranch = (branch: any) => {
-    const selected: any = this.state.selectedBranches;
-    if (selected.includes(branch)) {
-      this.setState({
-        selectedBranches: selected.filter((sel: any) => sel !== branch)
-      });
-    } else {
-      selected.push(branch);
-      this.setState({ selectedBranches: selected });
-    }
   };
 
   componentWillUnmount() {
@@ -144,7 +123,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
     }
   };
 
-  getLocations = ({ stateLocation, selectedBranches, title }: any) => {
+  getLocations = ({ stateLocation, title }: any) => {
     let oneLocation: any = null;
     if (stateLocation) {
       oneLocation = {
@@ -156,22 +135,8 @@ class AddRealEstateScreen extends React.Component<any, any> {
       };
     }
 
-    const branchLocations =
-      selectedBranches.length > 0
-        ? selectedBranches.map((branch: any) => {
-            return {
-              name: branch.name,
-              location: {
-                lat: branch.location.lat,
-                lon: branch.location.lon
-              }
-            };
-          })
-        : null;
     if (oneLocation) {
       return [oneLocation];
-    } else if (branchLocations) {
-      return branchLocations;
     } else {
       return undefined;
     }
@@ -179,7 +144,6 @@ class AddRealEstateScreen extends React.Component<any, any> {
 
   handleSubmit = async (values: any, bag: any) => {
     const { name, about, avatar, uniquename } = this.props.user;
-    const selectedBranches: any = this.state.selectedBranches;
     const groupId = uuidv4();
 
     let photos: any;
@@ -210,7 +174,6 @@ class AddRealEstateScreen extends React.Component<any, any> {
     const isrtl = isArabic(title);
     const locations = this.getLocations({
       stateLocation: this.state.location,
-      selectedBranches,
       title: values.title
     });
 
@@ -237,7 +200,6 @@ class AddRealEstateScreen extends React.Component<any, any> {
         price: Number(price),
         currency: currency.name,
         groupId,
-        branch: selectedBranches.length > 0 ? name : undefined,
         userName: name,
         userUniquename: uniquename,
         userAvatar: avatar,
@@ -259,7 +221,6 @@ class AddRealEstateScreen extends React.Component<any, any> {
   render() {
     const word = this.props.words;
     const { user, isRTL } = this.props;
-    const selectedBranches: any = this.state.selectedBranches;
 
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -539,55 +500,7 @@ class AddRealEstateScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
-                  {this.props.user.isstore && (
-                    <Group
-                      color="#444"
-                      size={24}
-                      onChange={setFieldValue}
-                      rtl={isRTL}
-                    >
-                      <CheckBox
-                        name="branchLocations"
-                        label={word.brancheslocations}
-                        value={values.branchLocations}
-                        selected={values.branchLocations}
-                        resetLocation={this.resetLocation}
-                      />
-                    </Group>
-                  )}
 
-                  {values.branchLocations && (
-                    <Group
-                      color="#444"
-                      size={24}
-                      onChange={setFieldValue}
-                      rtl={isRTL}
-                    >
-                      <View
-                        style={{
-                          flexDirection: 'column',
-                          marginHorizontal: 15,
-                          borderLeftColor: '#ddd',
-                          borderLeftWidth: 2,
-                          alignItems: 'flex-start'
-                        }}
-                      >
-                        {this.props.user.branches.map(
-                          (branch: any, index: any) => (
-                            <CheckBox
-                              key={index}
-                              name="location"
-                              index={index}
-                              branch={branch}
-                              selectBranch={this.selectBranch}
-                              label={branch.name}
-                              selected={selectedBranches.includes(branch)}
-                            />
-                          )
-                        )}
-                      </View>
-                    </Group>
-                  )}
                   <Group
                     color="#444"
                     size={24}

@@ -32,20 +32,23 @@ class CategoryButton extends React.Component<any, any> {
           }}
           onPress={() => {
             if (auth) {
-              if (usr.user.isstore) {
-                this.setState({ isOfferAdChoiseModalVisible: true });
-              } else {
-                this.props.navigation.navigate('ChoiseScreen', {
-                  title: words().addnewad
-                });
-              }
+              // if (usr.user.isstore) {
+              //   this.setState({ isOfferAdChoiseModalVisible: true });
+              // } else {
+              //   this.props.navigation.navigate('ChoiseScreen', {
+              //     title: words().addnewad
+              //   });
+              // }
+              this.props.navigation.navigate('ChoiseScreen', {
+                title: words().addnewad
+              });
             } else {
               this.props.navigation.navigate('PhoneScreen', {
                 add: true,
                 origin: 'home'
               });
             }
-            this.props.showModal();
+            // this.props.showModal();
           }}
         >
           <Ionicons

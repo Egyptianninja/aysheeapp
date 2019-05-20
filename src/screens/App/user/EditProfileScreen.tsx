@@ -41,7 +41,6 @@ class EditProfileScreen extends React.Component<any, any> {
     isMapModalVisible: false,
     location: null,
     avatar: null,
-    branches: [],
     bar: 0
   };
 
@@ -169,8 +168,7 @@ class EditProfileScreen extends React.Component<any, any> {
         addressCity,
         tel: isstore ? tel : undefined,
         fax: isstore ? fax : undefined,
-        mob,
-        branches: this.state.branches
+        mob
       }
     });
 
@@ -427,74 +425,13 @@ class EditProfileScreen extends React.Component<any, any> {
                     keyboardType="number-pad"
                     height={40}
                   />
-
-                  {isstore && (
-                    <React.Fragment>
-                      <TouchableOpacity
-                        onPress={() =>
-                          this.setState({ isMapModalVisible: true })
-                        }
-                        style={{
-                          backgroundColor: '#fff',
-                          padding: 10,
-                          alignSelf: 'flex-start',
-                          marginHorizontal: 35,
-                          marginTop: 20,
-                          borderRadius: 20,
-                          borderColor: '#7678ED',
-                          borderWidth: 1
-                        }}
-                      >
-                        <Text style={{ color: '#7678ED' }}>Add Locations</Text>
-                      </TouchableOpacity>
-                      {this.state.isMapModalVisible && (
-                        <BranchesModal
-                          isMapModalVisible={this.state.isMapModalVisible}
-                          getCurrentLocation={this.getCurrentLocation}
-                          hideMapModal={this.hideMapModal}
-                          addLocations={this.addLocations}
-                          branches={this.state.branches}
-                          width={width}
-                          height={height}
-                        />
-                      )}
-                      <View
-                        style={{
-                          flex: 1,
-                          width: width - 70,
-                          marginHorizontal: 35,
-                          marginTop: 10
-                        }}
-                      >
-                        {this.state.branches.map((branch: any) => (
-                          <View
-                            style={{
-                              paddingHorizontal: 10,
-
-                              paddingTop: 15,
-                              paddingBottom: 5,
-                              width: width - 70,
-                              borderBottomColor: '#ddd',
-                              borderBottomWidth: 1
-                            }}
-                            key={branch.name}
-                          >
-                            <Text>{branch.name}</Text>
-                          </View>
-                        ))}
-                      </View>
-                    </React.Fragment>
-                  )}
                   <Button
                     isRTL={isRTL}
                     background="#fff"
                     style={styles.btnStyle}
                     textStyle={styles.btnTextStyle}
                     title={word.save}
-                    disabled={
-                      isSubmitting ||
-                      (isstore && this.state.branches.length === 0)
-                    }
+                    disabled={isSubmitting}
                     onPress={handleSubmit}
                   />
                   {isSubmitting && (

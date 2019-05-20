@@ -455,50 +455,7 @@ class HomeScreen extends React.Component<any, any> {
             alignItems: rtlos() === 3 ? 'flex-start' : 'flex-end',
             justifyContent: 'center'
           }}
-        >
-          <TouchableOpacity
-            style={{
-              borderRadius: 10,
-              borderWidth: 1,
-              minWidth: 100,
-              borderColor: '#ccc',
-              marginHorizontal: 10,
-              paddingHorizontal: 10,
-              padding: 4,
-              backgroundColor: this.state.offersActive ? '#373737' : '#f9f9f9',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            // onPress={() => this.showFollowModal()}
-            onPress={() => {
-              const act = this.state.offersActive;
-              this.setState({ offersActive: !this.state.offersActive });
-              act
-                ? this.removeFilter('isoffer')
-                : this.addFilter('isoffer', true);
-            }}
-          >
-            <Text
-              style={{
-                color: this.state.offersActive ? '#f9f9f9' : '#373737',
-                fontSize: 14
-              }}
-            >
-              {words.offersoly}
-            </Text>
-            <Text
-              style={{
-                position: 'absolute',
-                right: 8,
-                top: 0,
-                color: '#f9f9f9',
-                fontSize: 12
-              }}
-            >
-              x
-            </Text>
-          </TouchableOpacity>
-        </View>
+        />
       </View>
     );
   };
